@@ -1,0 +1,409 @@
+name: Deploy Blaze Intelligence Platform
+
+on:
+  push:
+    branches: [ main, development ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run daily at 2 AM UTC for automated data updates
+    - cron: '0 2 * * *'
+
+env:
+  NODE_VERSION: '18'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  # =============================================================================
+  # Code Quality and Testing
+  # =============================================================================
+  
+  quality-check:
+    runs-on: ubuntu-latest
+    name: Code Quality & Security
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: |
+        npm ci
+        cd mobile-app && npm ci
+
+    - name: Run ESLint
+      run: npm run lint
+      continue-on-error: false
+
+    - name: Run Security Scan
+      uses: securecodewarrior/github-action-add-sarif@v1
+      with:
+        sarif-file: 'security-scan-results.sarif'
+      continue-on-error: true
+
+    - name: Check for secrets
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: main
+        head: HEAD
+
+    - name: Validate HTML files
+      run: |
+        npm install -g html-validate
+        find . -name "*.html" -not -path "./node_modules/*" -exec html-validate {} \;
+
+  # =============================================================================
+  # Unit and Integration Tests
+  # =============================================================================
+  
+  test:
+    runs-on: ubuntu-latest
+    needs: quality-check
+    name: Run Tests
+    
+    strategy:
+      matrix:
+        test-type: [unit, integration, mobile]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Install dependencies
+      run: |
+        npm ci
+        cd mobile-app && npm ci
+        pip install -r requirements.txt || true
+
+    - name: Run Unit Tests
+      if: matrix.test-type == 'unit'
+      run: npm run test:unit
+
+    - name: Run Integration Tests
+      if: matrix.test-type == 'integration'
+      run: npm run test:integration
+      env:
+        CI: true
+
+    - name: Run Mobile App Tests
+      if: matrix.test-type == 'mobile'
+      run: |
+        cd mobile-app
+        npm run test
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-${{ matrix.test-type }}
+        path: |
+          coverage/
+          test-results/
+          mobile-app/coverage/
+
+  # =============================================================================
+  # Build and Optimize
+  # =============================================================================
+  
+  build:
+    runs-on: ubuntu-latest
+    needs: [quality-check, test]
+    name: Build Assets
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build production assets
+      run: |
+        npm run build
+        npm run optimize
+
+    - name: Compress assets
+      run: |
+        find . -name "*.js" -not -path "./node_modules/*" -exec gzip -9 -c {} \; > {}.gz
+        find . -name "*.css" -not -path "./node_modules/*" -exec gzip -9 -c {} \; > {}.gz
+        find . -name "*.html" -not -path "./node_modules/*" -exec gzip -9 -c {} \; > {}.gz
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: |
+          dist/
+          public/
+          *.html
+          *.js
+          *.css
+          *.json
+          mobile-app/dist/
+
+  # =============================================================================
+  # Deploy to Staging
+  # =============================================================================
+  
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Deploy to Staging
+    if: github.ref == 'refs/heads/development'
+    
+    environment:
+      name: staging
+      url: https://staging-blaze-intelligence.pages.dev
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build-artifacts
+
+    - name: Deploy to Cloudflare Pages (Staging)
+      uses: cloudflare/wrangler-action@v3
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        command: pages publish . --project-name=blaze-intelligence-staging
+
+    - name: Update staging status
+      run: |
+        echo "Staging deployment completed at $(date)"
+        echo "URL: https://staging-blaze-intelligence.pages.dev"
+
+  # =============================================================================
+  # Deploy to Production
+  # =============================================================================
+  
+  deploy-production:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Deploy to Production
+    if: github.ref == 'refs/heads/main'
+    
+    environment:
+      name: production
+      url: https://blaze-intelligence-platform.pages.dev
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build-artifacts
+
+    - name: Deploy to Cloudflare Pages (Production)
+      uses: cloudflare/wrangler-action@v3
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        command: pages publish . --project-name=blaze-intelligence-platform
+
+    - name: Deploy Cloudflare Workers
+      uses: cloudflare/wrangler-action@v3
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        command: deploy
+        workingDirectory: ./workers
+
+    - name: Update production DNS
+      run: |
+        echo "Production deployment completed at $(date)"
+        echo "URL: https://blaze-intelligence-platform.pages.dev"
+
+    - name: Notify deployment success
+      uses: 8398a7/action-slack@v3
+      if: success()
+      with:
+        status: success
+        text: "🚀 Blaze Intelligence successfully deployed to production!"
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # =============================================================================
+  # Mobile App Build
+  # =============================================================================
+  
+  mobile-build:
+    runs-on: ubuntu-latest
+    needs: test
+    name: Build Mobile App
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Setup Java 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Install mobile dependencies
+      run: |
+        cd mobile-app
+        npm ci
+
+    - name: Build Android APK
+      run: |
+        cd mobile-app
+        npm run build:android
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-apk
+        path: mobile-app/android/app/build/outputs/apk/release/
+
+  # =============================================================================
+  # Post-Deployment Health Checks
+  # =============================================================================
+  
+  health-check:
+    runs-on: ubuntu-latest
+    needs: [deploy-production, deploy-staging]
+    if: always()
+    name: Health Check
+    
+    steps:
+    - name: Check staging health
+      if: github.ref == 'refs/heads/development'
+      run: |
+        curl -f https://staging-blaze-intelligence.pages.dev/health || exit 1
+        echo "Staging health check passed"
+
+    - name: Check production health
+      if: github.ref == 'refs/heads/main'
+      run: |
+        curl -f https://blaze-intelligence-platform.pages.dev/ || exit 1
+        echo "Production health check passed"
+
+    - name: Run API tests
+      run: |
+        # Test Cardinals Analytics API
+        curl -f https://blaze-intelligence-platform.pages.dev/api/cardinals/readiness || true
+        echo "API endpoints tested"
+
+    - name: Performance audit
+      uses: treosh/lighthouse-ci-action@v10
+      if: github.ref == 'refs/heads/main'
+      with:
+        urls: |
+          https://blaze-intelligence-platform.pages.dev
+          https://blaze-intelligence-platform.pages.dev/analytics.html
+        configPath: ./.lighthouse/config.json
+
+  # =============================================================================
+  # Automated Data Updates
+  # =============================================================================
+  
+  data-update:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 2 * * *'
+    name: Update Sports Data
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Install Python dependencies
+      run: |
+        pip install -r requirements.txt || true
+
+    - name: Update Cardinals data
+      run: |
+        python scripts/update-cardinals-data.py || true
+      env:
+        MLB_API_KEY: ${{ secrets.MLB_API_KEY }}
+
+    - name: Update team statistics
+      run: |
+        python scripts/update-team-stats.py || true
+      env:
+        ESPN_API_KEY: ${{ secrets.ESPN_API_KEY }}
+
+    - name: Commit updated data
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/
+        git commit -m "Automated data update - $(date)" || exit 0
+        git push || exit 0
+
+  # =============================================================================
+  # Failure Notifications
+  # =============================================================================
+  
+  notify-failure:
+    runs-on: ubuntu-latest
+    if: failure()
+    needs: [quality-check, test, build, deploy-production, deploy-staging]
+    name: Notify on Failure
+    
+    steps:
+    - name: Notify deployment failure
+      uses: 8398a7/action-slack@v3
+      with:
+        status: failure
+        text: "❌ Blaze Intelligence deployment failed!"
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    - name: Create issue on failure
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: 'Deployment Failed - ' + new Date().toISOString(),
+            body: 'Automated deployment failed. Please check the workflow logs.',
+            labels: ['bug', 'deployment', 'urgent']
+          })

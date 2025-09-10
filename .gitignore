@@ -1,0 +1,384 @@
+# Blaze Intelligence .gitignore
+
+# =============================================================================
+# Environment and Configuration
+# =============================================================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Secrets and API Keys
+secrets.json
+config/secrets/
+.secrets/
+*.key
+*.pem
+*.p12
+*.crt
+
+# =============================================================================
+# Node.js
+# =============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+.nyc_output/
+
+# Grunt intermediate storage
+.grunt/
+
+# Bower dependency directory
+bower_components/
+
+# node-waf configuration
+.lock-wscript
+
+# =============================================================================
+# Build and Distribution
+# =============================================================================
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.parcel-cache/
+.temp/
+tmp/
+
+# Generated files
+*.generated.*
+*.min.js
+*.min.css
+*.bundle.js
+*.bundle.css
+
+# =============================================================================
+# Development Tools
+# =============================================================================
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-*
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+
+# =============================================================================
+# Operating System
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# =============================================================================
+# Logs and Monitoring
+# =============================================================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Application logs
+app.log
+error.log
+access.log
+debug.log
+*.log.*
+
+# PM2 logs
+.pm2/
+
+# =============================================================================
+# Database
+# =============================================================================
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+data/
+database/
+*.sql.backup
+
+# =============================================================================
+# Cache and Temporary Files
+# =============================================================================
+.cache/
+.tmp/
+.temp/
+tmp/
+temp/
+
+# ESLint cache
+.eslintcache
+
+# Prettier cache
+.prettiercache
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Webpack cache
+.webpack/
+
+# Optional REPL history
+.node_repl_history
+
+# =============================================================================
+# Testing
+# =============================================================================
+coverage/
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+*.cover
+*.py,cover
+.hypothesis/
+
+# Jest
+.jest/
+jest-results.xml
+junit.xml
+
+# =============================================================================
+# AI and ML Models
+# =============================================================================
+models/
+*.pkl
+*.h5
+*.ckpt
+*.pb
+checkpoints/
+tensorboard_logs/
+
+# =============================================================================
+# Sports Data
+# =============================================================================
+data/raw/
+data/processed/
+data/cache/
+*.csv.bak
+*.json.bak
+sports-data/
+analytics-cache/
+
+# Large data files
+*.parquet
+*.h5
+*.hdf5
+
+# =============================================================================
+# Deployment and CI/CD
+# =============================================================================
+.vercel/
+.netlify/
+.firebase/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+.docker/
+
+# Kubernetes
+*.kubeconfig
+
+# =============================================================================
+# Mobile App Specific
+# =============================================================================
+
+# React Native
+mobile-app/node_modules/
+mobile-app/ios/build/
+mobile-app/android/build/
+mobile-app/android/app/build/
+mobile-app/.expo/
+mobile-app/dist/
+
+# iOS
+mobile-app/ios/Pods/
+mobile-app/ios/*.xcworkspace
+mobile-app/ios/*.xcuserdata/
+
+# Android
+mobile-app/android/.gradle/
+mobile-app/android/local.properties
+mobile-app/android/keystore.properties
+mobile-app/android/app/release/
+
+# =============================================================================
+# Security and Credentials
+# =============================================================================
+credentials/
+certificates/
+keys/
+*.p12
+*.mobileprovision
+keystore.jks
+*.keystore
+
+# SSH keys
+id_rsa
+id_rsa.pub
+known_hosts
+
+# GPG keys
+*.gpg
+*.asc
+
+# =============================================================================
+# Performance and Analytics
+# =============================================================================
+benchmark-results/
+performance-logs/
+profiling/
+flame-graphs/
+
+# =============================================================================
+# Documentation Generation
+# =============================================================================
+docs/build/
+site/
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# =============================================================================
+# Package Managers
+# =============================================================================
+.pnp/
+.pnp.js
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# =============================================================================
+# Cloudflare Specific
+# =============================================================================
+.wrangler/
+wrangler.toml.bak
+.dev.vars
+worker-configuration.json
+
+# =============================================================================
+# Backup Files
+# =============================================================================
+*.bak
+*.backup
+*.old
+*.orig
+*~
+
+# =============================================================================
+# Custom Application Files
+# =============================================================================
+
+# Blaze Intelligence specific
+blaze-config.local.json
+analytics-results/
+user-data/
+session-data/
+
+# MCP Server data
+mcp-cache/
+cardinals-cache/
+
+# AI model outputs
+ai-outputs/
+generated-reports/
+analysis-cache/
+
+# Video analysis cache
+video-cache/
+processed-videos/
+thumbnails-cache/
+
+# =============================================================================
+# Local Development Override
+# =============================================================================
+.local/
+local-config/
+dev-overrides/
