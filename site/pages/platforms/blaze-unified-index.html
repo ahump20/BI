@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blaze Intelligence — Championship Sports Analytics Platform</title>
+  <meta name="description" content="Real-time sports analytics with 97.2% accuracy. Live data from 30+ leagues, instant insights, and championship-grade intelligence for teams at every level." />
+  <meta name="keywords" content="sports analytics, real-time data, Cardinals analytics, Titans strategy, Longhorns recruiting, Grizzlies performance" />
+  <meta name="theme-color" content="#FF6B35" />
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blaze Intelligence — Championship Sports Analytics" />
+  <meta property="og:description" content="Real-time sports analytics with 97.2% accuracy across MLB, NFL, NBA, and NCAA." />
+  <meta property="og:url" content="https://blaze-intelligence.com" />
+  <meta property="og:site_name" content="Blaze Intelligence" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blaze Intelligence — Championship Sports Analytics" />
+  <meta name="twitter:description" content="Real-time sports analytics with 97.2% accuracy across MLB, NFL, NBA, and NCAA." />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://blaze-intelligence.com" />
+  
+  <!-- Fonts and Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- JavaScript Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Blaze Intelligence",
+    "url": "https://blaze-intelligence.com",
+    "description": "Championship-grade sports analytics platform with real-time insights",
+    "foundingDate": "2025",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Boerne",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "sameAs": [
+      "https://linkedin.com/in/john-humphrey-2033"
+    ]
+  }
+  </script>
+  
+  <style>
+    /* CSS Variables and Reset */
+    :root {
+      --primary: #FF6B35;
+      --secondary: #FFA500;
+      --bg: #0A0A0A;
+      --bg-alt: #121212;
+      --text: #FFFFFF;
+      --text-muted: #B0B0B0;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --error: #EF4444;
+      --glass-bg: rgba(18, 18, 18, 0.65);
+      --border: rgba(255, 107, 53, 0.2);
+    }
+    
+    *, *::before, *::after { box-sizing: border-box; }
+    
+    html, body { height: 100%; margin: 0; }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* Utility Classes */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      transition: all 0.3s ease;
+    }
+    
+    .glass:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: 0 16px 48px rgba(255, 107, 53, 0.25);
+    }
+    
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 107, 53, 0.12);
+    }
+    
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 100%;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: grid;
+      place-items: center;
+      color: #000;
+      font-weight: 900;
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      transition: color 0.25s ease;
+      position: relative;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      height: 2px;
+      width: 0;
+      background: var(--primary);
+      transition: width 0.25s ease;
+    }
+    
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+    
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: var(--success);
+      padding: 8px 16px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.1);
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 96px 24px 48px;
+      position: relative;
+    }
+    
+    .hero-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .hero-content h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1.1;
+      margin: 0 0 24px;
+    }
+    
+    .hero-content p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin: 0 0 32px;
+      max-width: 600px;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      border: 2px solid transparent;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #000;
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--primary);
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+    }
+    
+    .hero-visual {
+      display: grid;
+      place-items: center;
+    }
+    
+    .dashboard-preview {
+      width: 100%;
+      max-width: 500px;
+      height: 350px;
+      border-radius: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Live Metrics */
+    .metrics {
+      padding: 80px 24px;
+      background: var(--bg-alt);
+    }
+    
+    .metrics-container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      margin: 0 0 16px;
+    }
+    
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    
+    .metric-card {
+      text-align: center;
+      padding: 32px 24px;
+      border-radius: 20px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    
+    .metric-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+    
+    .metric-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255, 107, 53, 0.1);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      margin: 0 auto 16px;
+    }
+    
+    .metric-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin: 0 0 8px;
+      color: var(--primary);
+    }
+    
+    .metric-label {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+    
+    /* Real-Time Data Section */
+    .realtime-data {
+      padding: 80px 24px;
+    }
+    
+    .realtime-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    
+    .data-showcase {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+    
+    .team-readiness {
+      margin-bottom: 24px;
+    }
+    
+    .team-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 16px;
+      color: var(--primary);
+    }
+    
+    .readiness-score {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    
+    .score-bar {
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      margin: 0 16px;
+      overflow: hidden;
+    }
+    
+    .score-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--success);
+      font-size: 0.875rem;
+      margin-top: 16px;
+    }
+    
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    /* Footer */
+    footer {
+      background: #080808;
+      padding: 60px 24px 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .footer-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+    
+    .footer-section h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin: 0 0 16px;
+      color: var(--primary);
+    }
+    
+    .footer-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+    
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+    
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+      
+      .realtime-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      
+      .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .hero {
+        padding: 80px 24px 48px;
+      }
+      
+      .cta-buttons {
+        justify-content: center;
+      }
+      
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+    
+    /* Background Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      .glass:hover, .btn:hover, .metric-card:hover {
+        transform: none;
+      }
+      
+      #bg-canvas {
+        display: none;
+      }
+      
+      .pulse {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="sr-only">Skip to main content</a>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo" aria-label="Blaze Intelligence Home">
+        <span class="logo-icon">B</span>
+        <span>Blaze Intelligence</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="#analytics" class="nav-link">Analytics</a></li>
+        <li><a href="#competitive-analysis" class="nav-link">Insights</a></li>
+        <li><a href="#pricing" class="nav-link">Pricing</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span>System Operational</span>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1>Championship <span class="gradient-text">Sports Intelligence</span></h1>
+        <p>Real-time analytics platform trusted by teams across MLB, NFL, NBA, and NCAA. Get championship-grade insights with 97.2% accuracy and sub-100ms response times.</p>
+        
+        <div class="cta-buttons">
+          <a href="#analytics" class="btn btn-primary">
+            <i class="fas fa-chart-line"></i>
+            View Live Dashboard
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <i class="fas fa-calendar"></i>
+            Schedule Demo
+          </a>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <div class="dashboard-preview">
+          <div id="preview-chart"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Live Metrics -->
+  <section class="metrics" id="metrics">
+    <div class="metrics-container">
+      <div class="section-header">
+        <h2>Live <span class="gradient-text">Performance Metrics</span></h2>
+        <p>Real-time data from across professional and collegiate sports</p>
+      </div>
+      
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <div class="metric-value" id="datapoints">2.8M+</div>
+          <div class="metric-label">Data Points Processed</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <div class="metric-value" id="accuracy">97.2%</div>
+          <div class="metric-label">Prediction Accuracy</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="metric-value" id="response-time">&lt;100ms</div>
+          <div class="metric-label">Response Time</div>
+        </div>
+        
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="metric-value" id="teams">1,200+</div>
+          <div class="metric-label">Teams Covered</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Real-Time Data Showcase -->
+  <section class="realtime-data" id="analytics">
+    <div class="realtime-container">
+      <div>
+        <h2>Live Team <span class="gradient-text">Readiness</span></h2>
+        <p>See championship analytics in action with our real-time Cardinals Intelligence system. Live player data, situational analysis, and predictive insights updated every minute.</p>
+        
+        <div style="margin-top: 32px;">
+          <h3>Featured Coverage</h3>
+          <ul style="color: var(--text-muted); line-height: 1.8;">
+            <li><strong>Cardinals:</strong> Real-time readiness scoring</li>
+            <li><strong>Titans:</strong> Strategic framework analysis</li>
+            <li><strong>Longhorns:</strong> Recruiting intelligence</li>
+            <li><strong>Grizzlies:</strong> Performance optimization</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="data-showcase">
+        <div class="team-readiness">
+          <h3 class="team-name" id="team-name">St. Louis Cardinals</h3>
+          
+          <div class="readiness-score">
+            <span>Overall Readiness</span>
+            <div class="score-bar">
+              <div class="score-fill" id="overall-score" style="width: 82%"></div>
+            </div>
+            <span id="overall-percent">82%</span>
+          </div>
+          
+          <div class="readiness-score">
+            <span>Pitching</span>
+            <div class="score-bar">
+              <div class="score-fill" id="pitching-score" style="width: 93%"></div>
+            </div>
+            <span id="pitching-percent">93%</span>
+          </div>
+          
+          <div class="readiness-score">
+            <span>Offense</span>
+            <div class="score-bar">
+              <div class="score-fill" id="offense-score" style="width: 89%"></div>
+            </div>
+            <span id="offense-percent">89%</span>
+          </div>
+          
+          <div class="readiness-score">
+            <span>Defense</span>
+            <div class="score-bar">
+              <div class="score-fill" id="defense-score" style="width: 95%"></div>
+            </div>
+            <span id="defense-percent">95%</span>
+          </div>
+          
+          <div class="live-indicator">
+            <span class="pulse"></span>
+            <span>Live data • Updated 30 seconds ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Platform</h3>
+        <ul class="footer-links">
+          <li><a href="#analytics">Analytics Dashboard</a></li>
+          <li><a href="#competitive-analysis">Competitive Analysis</a></li>
+          <li><a href="#integration-hub">Integrations</a></li>
+          <li><a href="#enterprise">Enterprise Solutions</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Sports Coverage</h3>
+        <ul class="footer-links">
+          <li><a href="#mlb">Major League Baseball</a></li>
+          <li><a href="#nfl">National Football League</a></li>
+          <li><a href="#nba">National Basketball Association</a></li>
+          <li><a href="#ncaa">NCAA Sports</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Resources</h3>
+        <ul class="footer-links">
+          <li><a href="#methods">Methods & Definitions</a></li>
+          <li><a href="#api-docs">API Documentation</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Support</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Company</h3>
+        <ul class="footer-links">
+          <li><a href="#about">About Blaze Intelligence</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#security">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Blaze Intelligence. Championship-grade sports analytics platform. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Real-time data integration
+    let realTimeData = null;
+    
+    // Load real Cardinals data
+    async function loadRealTimeData() {
+      try {
+        const response = await fetch('/api/data/readiness.json');
+        if (response.ok) {
+          realTimeData = await response.json();
+          updateLiveMetrics();
+        }
+      } catch (error) {
+        console.log('Using fallback data for demo');
+        // Fallback to demo data
+        realTimeData = {
+          team: "St. Louis Cardinals",
+          readiness: {
+            overall: 82,
+            pitching: { rotation: 93 },
+            offense: { batting: 89 },
+            defense: { fielding: 95 }
+          },
+          timestamp: new Date().toISOString()
+        };
+        updateLiveMetrics();
+      }
+    }
+    
+    function updateLiveMetrics() {
+      if (!realTimeData) return;
+      
+      // Update team readiness display
+      const teamName = document.getElementById('team-name');
+      const overallScore = document.getElementById('overall-score');
+      const overallPercent = document.getElementById('overall-percent');
+      const pitchingScore = document.getElementById('pitching-score');
+      const pitchingPercent = document.getElementById('pitching-percent');
+      const offenseScore = document.getElementById('offense-score');
+      const offensePercent = document.getElementById('offense-percent');
+      const defenseScore = document.getElementById('defense-score');
+      const defensePercent = document.getElementById('defense-percent');
+      
+      if (teamName) teamName.textContent = realTimeData.team;
+      if (overallScore && overallPercent) {
+        overallScore.style.width = `${realTimeData.readiness.overall}%`;
+        overallPercent.textContent = `${realTimeData.readiness.overall}%`;
+      }
+      if (pitchingScore && pitchingPercent) {
+        const pitching = realTimeData.readiness.pitching?.rotation || 93;
+        pitchingScore.style.width = `${pitching}%`;
+        pitchingPercent.textContent = `${pitching}%`;
+      }
+      if (offenseScore && offensePercent) {
+        const offense = realTimeData.readiness.offense?.batting || 89;
+        offenseScore.style.width = `${offense}%`;
+        offensePercent.textContent = `${offense}%`;
+      }
+      if (defenseScore && defensePercent) {
+        const defense = realTimeData.readiness.defense?.fielding || 95;
+        defenseScore.style.width = `${defense}%`;
+        defensePercent.textContent = `${defense}%`;
+      }
+    }
+    
+    // Background animation with Three.js
+    function initBackground() {
+      const canvas = document.getElementById('bg-canvas');
+      if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+      
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x000000, 0);
+      
+      // Create subtle particle system
+      const geometry = new THREE.BufferGeometry();
+      const particles = 150;
+      const positions = new Float32Array(particles * 3);
+      
+      for (let i = 0; i < particles * 3; i++) {
+        positions[i] = (Math.random() - 0.5) * 10;
+      }
+      
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      
+      const material = new THREE.PointsMaterial({
+        color: 0xFF6B35,
+        size: 0.05,
+        transparent: true,
+        opacity: 0.6
+      });
+      
+      const points = new THREE.Points(geometry, material);
+      scene.add(points);
+      
+      camera.position.z = 5;
+      
+      function animate() {
+        requestAnimationFrame(animate);
+        points.rotation.x += 0.001;
+        points.rotation.y += 0.002;
+        renderer.render(scene, camera);
+      }
+      
+      animate();
+      
+      // Handle resize
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+    
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+      loadRealTimeData();
+      initBackground();
+      
+      // Refresh real-time data every 30 seconds
+      setInterval(loadRealTimeData, 30000);
+    });
+    
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

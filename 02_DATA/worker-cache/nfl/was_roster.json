@@ -1,0 +1,20 @@
+{
+  "team": {
+    "id": "WAS",
+    "name": "Commanders",
+    "city": "Washington",
+    "conference": "NFC",
+    "division": "East",
+    "standing": {}
+  },
+  "roster": [],
+  "metrics": {
+    "totalPlayers": 0,
+    "avgChampionReadiness": 0,
+    "avgCognitiveLeverage": 0,
+    "avgNilTrustScore": 0,
+    "topPerformers": [],
+    "positionGroups": {}
+  },
+  "timestamp": "2025-08-28T06:10:17.969Z"
+}

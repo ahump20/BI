@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-08-24T14:23:25.172109",
+  "system_status": "operational",
+  "data": {
+    "total_players": 3,
+    "total_teams": 3,
+    "leagues": [
+      "NCAA",
+      "NFL",
+      "MLB"
+    ],
+    "elite_prospects": 0
+  },
+  "havf": {
+    "average_score": 74.4,
+    "top_prospect": 81.9,
+    "distribution": {
+      "elite": 0,
+      "excellent": 1,
+      "good": 1,
+      "average": 1,
+      "developing": 0
+    }
+  },
+  "readiness": {
+    "sports_covered": 3,
+    "avg_readiness": 60.2
+  }
+}

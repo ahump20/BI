@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Blaze Intelligence</title>
+    <meta name="description" content="Learn about Blaze Intelligence - Where Cognitive Performance Meets Quarterly Performance">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="js/blaze-three-visuals.js" defer></script>
+    
+    <style>
+        body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .glass-nav { background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 255, 255, 0.2); }
+        .hero-3d-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .value-card { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(15px); border: 1px solid rgba(255, 140, 0, 0.2); border-radius: 1rem; padding: 2rem; transition: all 0.3s; }
+        .value-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(255, 140, 0, 0.2); }
+        .stat-number { font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, #FF8C00, #BF5700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+    
+    <!-- Analytics & Testing -->
+    <script src="js/analytics-config.js"></script>
+    <script src="js/ab-testing.js" defer></script>
+    <script src="js/sentry-config.js"></script>
+</head>
+<body>
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="/" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+                <span class="ml-3 text-xs text-slate-500 bg-slate-800 px-2 py-1 rounded-full">v2.0</span>
+            </div>
+            <ul class="hidden lg:flex items-center space-x-6">
+                <li><a href="/platform" class="text-slate-300 hover:text-white">🚀 Platform</a></li>
+                <li><a href="/labs" class="text-slate-300 hover:text-white">⚡ Labs</a></li>
+                <li><a href="/portfolio" class="text-slate-300 hover:text-white">🏆 Portfolio</a></li>
+                <li><a href="/insights" class="text-slate-300 hover:text-white">📊 Insights</a></li>
+                <li><a href="/about" class="text-orange-400 font-bold">👨‍💼 About</a></li>
+                <li><a href="/#contact" class="text-slate-300 hover:text-white">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen pt-24">
+        <div id="about-hero-3d" class="hero-3d-container"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4">
+            <!-- Hero Content -->
+            <div class="text-center mb-16">
+                <h1 class="text-6xl md:text-7xl font-black mb-6">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-cyan-400">
+                        THE INTELLIGENCE STORY
+                    </span>
+                </h1>
+                <p class="text-2xl text-slate-300 max-w-3xl mx-auto mb-4">
+                    Where Cognitive Performance Meets Quarterly Performance
+                </p>
+                <div class="text-lg text-slate-400 font-medium tracking-wide">
+                    <span class="text-red-400">MEMPHIS</span> grit + <span class="text-orange-400">TEXAS</span> vision + <span class="text-cyan-400">AUSTIN</span> innovation
+                </div>
+            </div>
+
+            <!-- Mission Statement -->
+            <div class="max-w-4xl mx-auto mb-16">
+                <div class="value-card">
+                    <h2 class="text-3xl font-bold text-cyan-400 mb-4">The Championship Intelligence Mission</h2>
+                    <p class="text-lg text-slate-300 leading-relaxed mb-6">
+                        "To weaponize pattern recognition for championship performance. Every organization deserves intelligence systems that think like champions, prepare like professionals, and execute like legends."
+                    </p>
+                    <p class="text-slate-400 leading-relaxed">
+                        Born from the convergence of <strong class="text-red-400">Memphis grit</strong> (relentless work ethic), <strong class="text-orange-400">Texas vision</strong> (championship scalability), and <strong class="text-cyan-400">Austin innovation</strong> (cutting-edge technology). Blaze Intelligence transforms every data point into competitive advantage across MLB, NFL, NBA, NCAA, and youth sports.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Stats -->
+            <div class="grid md:grid-cols-4 gap-6 mb-16">
+                <div class="text-center">
+                    <p class="stat-number">Comprehensive datasets</p>
+                    <p class="text-slate-400">Data Points Analyzed</p>
+                </div>
+                <div class="text-center">
+                    <p class="stat-number">Digital Combine algorithms</p>
+                    <p class="text-slate-400">Prediction Accuracy</p>
+                </div>
+                <div class="text-center">
+                    <p class="stat-number"><100ms</p>
+                    <p class="text-slate-400">Response Time</p>
+                </div>
+                <div class="text-center">
+                    <p class="stat-number">24/7</p>
+                    <p class="text-slate-400">Live Analytics</p>
+                </div>
+            </div>
+
+            <!-- Core Values -->
+            <div class="mb-16">
+                <h2 class="text-4xl font-bold text-center text-cyan-400 mb-12">Core Values</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="value-card">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center mb-4">
+                            <i data-lucide="target" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-orange-400 mb-3">Precision</h3>
+                        <p class="text-slate-300">Every data point matters. We deliver insights with championship-level accuracy, ensuring your decisions are backed by irrefutable evidence.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg flex items-center justify-center mb-4">
+                            <i data-lucide="zap" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-cyan-400 mb-3">Speed</h3>
+                        <p class="text-slate-300">In sports, milliseconds matter. Our real-time analytics engine processes millions of data points instantly, keeping you ahead of the competition.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mb-4">
+                            <i data-lucide="shield-check" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-400 mb-3">Integrity</h3>
+                        <p class="text-slate-300">Trust is earned through transparency. We provide clear methodologies, honest assessments, and stand behind every metric we deliver.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- League Coverage -->
+            <div class="mb-16">
+                <h2 class="text-4xl font-bold text-center text-cyan-400 mb-12">Comprehensive League Coverage</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="value-card">
+                        <h3 class="text-2xl font-bold text-red-400 mb-4">Major League Baseball</h3>
+                        <p class="text-slate-300 mb-3">Complete coverage of all 30 MLB teams with advanced sabermetrics, Statcast data, and predictive modeling.</p>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• American League (15 teams)</li>
+                            <li>• National League (15 teams)</li>
+                            <li>• Minor League affiliates</li>
+                            <li>• International prospects (Latin America, Japan, Korea)</li>
+                        </ul>
+                    </div>
+                    <div class="value-card">
+                        <h3 class="text-2xl font-bold text-blue-400 mb-4">National Football League</h3>
+                        <p class="text-slate-300 mb-3">Full NFL analytics across all 32 teams with Next Gen Stats integration and performance metrics.</p>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• AFC (16 teams)</li>
+                            <li>• NFC (16 teams)</li>
+                            <li>• Combine metrics</li>
+                            <li>• Draft analysis</li>
+                        </ul>
+                    </div>
+                    <div class="value-card">
+                        <h3 class="text-2xl font-bold text-purple-400 mb-4">National Basketball Association</h3>
+                        <p class="text-slate-300 mb-3">Comprehensive NBA coverage for all 30 teams with advanced player tracking and efficiency metrics.</p>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Eastern Conference (15 teams)</li>
+                            <li>• Western Conference (15 teams)</li>
+                            <li>• G-League integration</li>
+                            <li>• International scouting</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 mt-8">
+                    <div class="value-card">
+                        <h3 class="text-2xl font-bold text-orange-400 mb-4">NCAA Athletics</h3>
+                        <p class="text-slate-300 mb-3">Division I football and basketball analytics across all conferences.</p>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Power 5 Conferences</li>
+                            <li>• Group of 5 Conferences</li>
+                            <li>• March Madness predictions</li>
+                            <li>• Bowl game analytics</li>
+                            <li>• Recruiting rankings integration</li>
+                        </ul>
+                    </div>
+                    <div class="value-card">
+                        <h3 class="text-2xl font-bold text-green-400 mb-4">Youth & High School Sports</h3>
+                        <p class="text-slate-300 mb-3">Comprehensive youth sports coverage and development analytics.</p>
+                        <ul class="text-sm text-slate-400 space-y-1">
+                            <li>• Youth tournament results analysis</li>
+                            <li>• High school football (MaxPreps)</li>
+                            <li>• Select/Travel team analytics</li>
+                            <li>• Player development tracking</li>
+                            <li>• College recruitment metrics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technology Stack -->
+            <div class="mb-16">
+                <h2 class="text-4xl font-bold text-center text-cyan-400 mb-12">Our Technology</h2>
+                <div class="value-card">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-bold text-orange-400 mb-4">Vision AI Platform</h3>
+                            <ul class="space-y-3 text-slate-300">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Biomechanical analysis with skeletal tracking</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Micro-expression detection (1/25th second)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Character & grit assessment algorithms</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-cyan-400 mb-4">Analytics Engine</h3>
+                            <ul class="space-y-3 text-slate-300">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Real-time data processing (<100ms latency)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Predictive modeling with Digital Combine algorithms</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-400 mt-0.5"></i>
+                                    <span>Multi-sport integration (MLB, NFL, NBA, NCAA)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center pb-20">
+                <h2 class="text-3xl font-bold text-white mb-6">Ready to Transform Your Team?</h2>
+                <p class="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">
+                    Join the elite organizations using Blaze Intelligence to dominate their competition
+                </p>
+                <a href="/contact.html" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-lg hover:scale-105 transition-transform">
+                    Start Your Championship Journey <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            if (typeof blazeVisuals !== 'undefined') {
+                blazeVisuals.initHeroHeader('about-hero-3d', { 
+                    particleCount: 2000, 
+                    interactive: true 
+                });
+            }
+        });
+    </script>
+</body>
+</html>

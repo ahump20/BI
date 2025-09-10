@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Blaze Player (with HAV-F)",
+  "type": "object",
+  "required": ["player_id", "name", "sport", "team_id", "position"],
+  "properties": {
+    "player_id": { "type": "string" },
+    "name": { "type": "string" },
+    "sport": { "type": "string" },
+    "league": { "type": ["string","null"] },
+    "team_id": { "type": "string" },
+    "position": { "type": "string" },
+    "bio": {
+      "type": "object",
+      "properties": {
+        "dob": { "type": ["string","null"], "format": "date" },
+        "height_cm": { "type": ["number","null"] },
+        "weight_kg": { "type": ["number","null"] },
+        "class_year": { "type": ["string","null"] }
+      },
+      "additionalProperties": false
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "season": { "type": "string" },
+        "perfs": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": false
+    },
+    "projections": {
+      "type": "object",
+      "properties": {
+        "season": { "type": "string" },
+        "model": { "type": ["string","null"] },
+        "values": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": false
+    },
+    "nil_profile": {
+      "type": ["object", "null"],
+      "properties": {
+        "valuation_usd": { "type": ["number","null"] },
+        "engagement_rate": { "type": ["number","null"] },
+        "followers_total": { "type": ["integer","null"] },
+        "deals_last_90d": { "type": ["integer","null"] },
+        "deal_value_90d_usd": { "type": ["number","null"] },
+        "search_index": { "type": ["number","null"] },
+        "local_popularity_index": { "type": ["number","null"] }
+      },
+      "additionalProperties": false
+    },
+    "biometrics": {
+      "type": ["object", "null"],
+      "properties": {
+        "hrv_rmssd_ms": { "type": ["number","null"] },
+        "reaction_ms": { "type": ["number","null"] },
+        "gsr_microsiemens": { "type": ["number","null"] },
+        "sleep_hours": { "type": ["number","null"] }
+      },
+      "additionalProperties": false
+    },
+    "hav_f": {
+      "type": "object",
+      "properties": {
+        "champion_readiness": { "type": ["number","null"], "minimum": 0, "maximum": 100 },
+        "cognitive_leverage": { "type": ["number","null"], "minimum": 0, "maximum": 100 },
+        "nil_trust_score":    { "type": ["number","null"], "minimum": 0, "maximum": 100 },
+        "last_computed_at": { "type": ["string","null"], "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "updated_at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,54 @@
+{
+  "players": [
+    {
+      "id": "HS-TEX-williams",
+      "name": "Marcus Williams",
+      "team_id": "HS-TEX-WESTLAKE",
+      "position": "QB",
+      "dob": "2006-11-08",
+      "height_cm": 188,
+      "weight_kg": 89,
+      "class_year": "2025",
+      "stats": {
+        "passing_yards": 2845,
+        "passing_tds": 28,
+        "rushing_yards": 485,
+        "rushing_tds": 8,
+        "total_yards": 3330,
+        "total_tds": 36
+      },
+      "projections": {
+        "college_interest": 15,
+        "star_rating": 4
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 61.4,
+        "reaction_ms": 145.2,
+        "gsr_microsiemens": 3.1,
+        "sleep_hours": 8.3
+      }
+    },
+    {
+      "id": "HS-TEX-johnson",
+      "name": "David Johnson",
+      "team_id": "HS-TEX-ALLEN",
+      "position": "RB",
+      "dob": "2007-02-14",
+      "height_cm": 185,
+      "weight_kg": 92,
+      "class_year": "2026",
+      "stats": {
+        "rushing_yards": 1850,
+        "rushing_tds": 24,
+        "receiving_yards": 145,
+        "receiving_tds": 2,
+        "total_yards": 1995,
+        "total_tds": 26
+      },
+      "projections": {
+        "college_interest": 8,
+        "star_rating": 3
+      }
+    }
+  ]
+}

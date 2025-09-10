@@ -1,0 +1,164 @@
+{
+  "team": "Baltimore Orioles",
+  "code": "BAL",
+  "division": "AL East",
+  "players": [
+    {
+      "name": "Alex Jackson",
+      "position": "C",
+      "jersey_number": "70",
+      "age": null,
+      "experience": 0,
+      "2024_stats": {
+        "avg": 0.283679731148881,
+        "hr": 23,
+        "rbi": 24,
+        "war_est": 5.394831684861048,
+        "wpa": 1.503768418369055
+      },
+      "2025_projection": {
+        "notes": "Projected starter with upside"
+      },
+      "NIL_profile": null,
+      "biometrics": {
+        "hrv_ms": 73.0033058879225,
+        "sleep_hours": 7.296475381861947,
+        "resting_hr": 68.70442408092073,
+        "reaction_ms": 298.4286007560839,
+        "gsr_microsiemens": 2.8931942598241855
+      },
+      "affiliation": "Baltimore Orioles (MLB)",
+      "champion_readiness": 79,
+      "cognitive_leverage": 14,
+      "nil_trust_score": null
+    },
+    {
+      "name": "Cade Povich",
+      "position": "P",
+      "jersey_number": "37",
+      "age": null,
+      "experience": 0,
+      "2024_stats": {
+        "avg": 0.26423150653526095,
+        "hr": 32,
+        "rbi": 74,
+        "war_est": 7.5302597257383805,
+        "wpa": 3.5683258344624393
+      },
+      "2025_projection": {
+        "notes": "Projected starter with upside"
+      },
+      "NIL_profile": null,
+      "biometrics": {
+        "hrv_ms": 65.63248579835636,
+        "sleep_hours": 8.43186692716851,
+        "resting_hr": 51.44121581668355,
+        "reaction_ms": 269.3738749452342,
+        "gsr_microsiemens": 0.4218284563365804
+      },
+      "affiliation": "Baltimore Orioles (MLB)",
+      "champion_readiness": 85.6,
+      "cognitive_leverage": 39.8,
+      "nil_trust_score": null
+    },
+    {
+      "name": "Coby Mayo",
+      "position": "1B",
+      "jersey_number": "16",
+      "age": null,
+      "experience": 0,
+      "2024_stats": {
+        "avg": 0.29174835453163733,
+        "hr": 21,
+        "rbi": 71,
+        "war_est": 7.882967723018133,
+        "wpa": 0.19176782657456926
+      },
+      "2025_projection": {
+        "notes": "Projected starter with upside"
+      },
+      "NIL_profile": null,
+      "biometrics": {
+        "hrv_ms": 53.532148324071755,
+        "sleep_hours": 7.9018680889626935,
+        "resting_hr": 65.92031597239979,
+        "reaction_ms": 264.1533112951881,
+        "gsr_microsiemens": 4.3801996477863145
+      },
+      "affiliation": "Baltimore Orioles (MLB)",
+      "champion_readiness": 78.1,
+      "cognitive_leverage": 24.7,
+      "nil_trust_score": null
+    },
+    {
+      "name": "Colton Cowser",
+      "position": "LF",
+      "jersey_number": "17",
+      "age": null,
+      "experience": 0,
+      "2024_stats": {
+        "avg": 0.3049609635397595,
+        "hr": 36,
+        "rbi": 41,
+        "war_est": 6.1109135205720655,
+        "wpa": 1.4628085927578285
+      },
+      "2025_projection": {
+        "notes": "Projected starter with upside"
+      },
+      "NIL_profile": {
+        "total_followers": 2859,
+        "eng_rate": 0.03732581915256516,
+        "deals_last_90d": 4,
+        "deal_value_90d_usd": 72052,
+        "search_index": 2,
+        "local_popularity_index": 76
+      },
+      "biometrics": {
+        "hrv_ms": 54.2541067500806,
+        "sleep_hours": 7.84458849303002,
+        "resting_hr": 57.51960491871471,
+        "reaction_ms": 247.02685499876281,
+        "gsr_microsiemens": 3.1151494555282877
+      },
+      "affiliation": "Baltimore Orioles (MLB)",
+      "champion_readiness": 79.7,
+      "cognitive_leverage": 40.2,
+      "nil_trust_score": 16.5
+    },
+    {
+      "name": "Corbin Martin",
+      "position": "P",
+      "jersey_number": "48",
+      "age": null,
+      "experience": 0,
+      "2024_stats": {
+        "avg": 0.26707013606464913,
+        "hr": 2,
+        "rbi": 25,
+        "war_est": 3.3198253847603336,
+        "wpa": 3.53631772173509
+      },
+      "2025_projection": {
+        "notes": "Projected starter with upside"
+      },
+      "NIL_profile": null,
+      "biometrics": {
+        "hrv_ms": 62.02098486434545,
+        "sleep_hours": 8.478514216259061,
+        "resting_hr": 59.628727181695965,
+        "reaction_ms": 291.4304525735314,
+        "gsr_microsiemens": 4.151979846975897
+      },
+      "affiliation": "Baltimore Orioles (MLB)",
+      "champion_readiness": 83.4,
+      "cognitive_leverage": 10.9,
+      "nil_trust_score": null
+    }
+  ],
+  "team_metrics": {
+    "avg_champion_readiness": 81.2,
+    "avg_cognitive_leverage": 25.9,
+    "roster_size": 5
+  }
+}

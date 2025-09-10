@@ -1,0 +1,78 @@
+name = "blaze-vision-ai-gateway"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Production environment
+[env.production]
+account_id = "a12cb329d84130460eed99b816e4d0d3"
+route = "api.blaze-vision-ai.com/*"
+
+# Staging environment
+[env.staging]
+account_id = "a12cb329d84130460eed99b816e4d0d3"
+route = "api-staging.blaze-vision-ai.com/*"
+
+# Development environment (default)
+# account_id = "a12cb329d84130460eed99b816e4d0d3"
+
+# Durable Object migrations
+[[migrations]]
+tag = "v1"
+new_classes = ["SessionDurableObject", "BaselineTracker"]
+
+# Durable Objects
+[[durable_objects.bindings]]
+name = "SESSION_STORAGE"
+class_name = "SessionDurableObject"
+
+[[durable_objects.bindings]]
+name = "BASELINE_TRACKER"
+class_name = "BaselineTracker"
+
+# KV Storage for caching
+[[kv_namespaces]]
+binding = "VISION_CACHE"
+id = "2bb1b1aebb164d5aad9b2333704cf5c4"
+preview_id = "5c72488593e3429d8e81ea157afc4383"
+
+# R2 Storage for clips and consent
+[[r2_buckets]]
+binding = "VISION_STORAGE"
+bucket_name = "blaze-vision-clips"
+
+# Queue for streaming analytics
+[[queues.producers]]
+binding = "FEATURE_QUEUE"
+queue = "vision-features"
+
+[[queues.consumers]]
+queue = "vision-features"
+max_batch_size = 50
+max_batch_timeout = 5
+
+# Environment Variables (set via wrangler secret)
+# REDIS_URL - Redis connection for hot path
+# POSTGRES_URL - TimescaleDB for warm storage  
+# JWT_SECRET - Session tokens
+# ANTHROPIC_API_KEY - AI processing (if needed)
+
+# Cron triggers for cleanup (disabled for initial deployment)
+# [[triggers.crons]]
+# cron = "0 2 * * *"  # Daily at 2 AM UTC
+# script_name = "cleanup-expired-sessions"
+
+# D1 Database for analytics
+[[d1_databases]]
+binding = "DB"
+database_name = "blaze-vision-analytics"
+database_id = "d66cbc04-ca92-44f0-af72-c2f639bfdb2d"
+
+# Analytics
+[observability]
+enabled = true
+
+# Resource limits
+[limits]
+cpu_ms = 30000      # 30 seconds max
+memory_mb = 1024    # 1GB memory limit

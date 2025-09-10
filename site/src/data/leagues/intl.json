@@ -1,0 +1,170 @@
+{
+  "league": "International",
+  "generated_at": "2025-08-24T19:43:23.453498Z",
+  "players": [
+    {
+      "player_id": "KBO-KIM-KIWOOM",
+      "name": "Kim Ha-seong",
+      "sport": "Baseball",
+      "league": "KBO",
+      "team_id": "KBO-KIWOOM",
+      "position": "SS",
+      "bio": {
+        "dob": "1995-09-19",
+        "height_cm": 175,
+        "weight_kg": 73,
+        "class_year": null
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "avg": 0.318,
+          "hr": 30,
+          "rbi": 109,
+          "sb": 23,
+          "ops": 0.965,
+          "war": 6.8
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "mlb_posting_fee": 9500000,
+          "contract_value": 28000000,
+          "mlb_war": 4.2
+        }
+      },
+      "nil_profile": null,
+      "biometrics": {
+        "hrv_rmssd_ms": 68,
+        "reaction_ms": 212,
+        "gsr_microsiemens": 3.1,
+        "sleep_hours": 7.8
+      },
+      "hav_f": {
+        "champion_readiness": 64.8,
+        "cognitive_leverage": 52.6,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:23.452853Z"
+      },
+      "meta": {
+        "sources": [
+          "KBO",
+          "NPB",
+          "Latin American Scouts"
+        ],
+        "updated_at": "2025-08-24T19:43:23.452853Z"
+      }
+    },
+    {
+      "player_id": "NPB-YAMAMOTO-BUFFALOES",
+      "name": "Yoshinobu Yamamoto",
+      "sport": "Baseball",
+      "league": "NPB",
+      "team_id": "NPB-ORIX",
+      "position": "RHP",
+      "bio": {
+        "dob": "1998-08-17",
+        "height_cm": 178,
+        "weight_kg": 82,
+        "class_year": null
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "era": 1.21,
+          "k9": 11.9,
+          "bb9": 1.8,
+          "wins": 16,
+          "saves": 0,
+          "war": 7.2
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "mlb_posting_fee": 15000000,
+          "contract_value": 175000000,
+          "mlb_war": 5.8
+        }
+      },
+      "nil_profile": null,
+      "biometrics": {
+        "hrv_rmssd_ms": 85,
+        "reaction_ms": 178,
+        "gsr_microsiemens": 2.2,
+        "sleep_hours": 8.5
+      },
+      "hav_f": {
+        "champion_readiness": 70.5,
+        "cognitive_leverage": 79.0,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:23.452853Z"
+      },
+      "meta": {
+        "sources": [
+          "KBO",
+          "NPB",
+          "Latin American Scouts"
+        ],
+        "updated_at": "2025-08-24T19:43:23.452853Z"
+      }
+    },
+    {
+      "player_id": "LAT-RODRIGUEZ-VENEZUELA",
+      "name": "Jackson Rodriguez",
+      "sport": "Baseball",
+      "league": "Venezuelan",
+      "team_id": "LAT-CARACAS",
+      "position": "OF",
+      "bio": {
+        "dob": "2005-01-15",
+        "height_cm": 188,
+        "weight_kg": 85,
+        "class_year": null
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "avg": 0.342,
+          "hr": 12,
+          "rbi": 58,
+          "sb": 31,
+          "ops": 0.928
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "signing_bonus": 2800000,
+          "mlb_debut": 2027,
+          "prospect_grade": 60
+        }
+      },
+      "nil_profile": null,
+      "biometrics": {
+        "hrv_rmssd_ms": 98,
+        "reaction_ms": 145,
+        "gsr_microsiemens": 1.3,
+        "sleep_hours": 9.0
+      },
+      "hav_f": {
+        "champion_readiness": 72.1,
+        "cognitive_leverage": 99.5,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:23.452853Z"
+      },
+      "meta": {
+        "sources": [
+          "KBO",
+          "NPB",
+          "Latin American Scouts"
+        ],
+        "updated_at": "2025-08-24T19:43:23.452853Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+# Blaze Intelligence Production Configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blaze-intelligence-config
+data:
+  # Environment settings
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "INFO"
+  
+  # Rate limiting (requests per second)
+  MLB_RATE_LIMIT: "1.0"
+  NFL_RATE_LIMIT: "0.5"
+  NCAA_RATE_LIMIT: "1.0"
+  NBA_RATE_LIMIT: "0.6"
+  INTL_RATE_LIMIT: "1.0"
+  NIL_RATE_LIMIT: "2.0"
+  
+  # Data retention
+  DATA_RETENTION_DAYS: "30"
+  BACKUP_RETENTION_DAYS: "90"
+  
+  # Monitoring
+  HEALTH_CHECK_INTERVAL: "300"  # 5 minutes
+  METRICS_COLLECTION: "enabled"
+  ERROR_REPORTING: "enabled"
+  
+  # Focus teams (for priority processing)
+  FOCUS_TEAMS: "MLB-STL,NFL-TEN,NCAA-TEX,NBA-MEM"

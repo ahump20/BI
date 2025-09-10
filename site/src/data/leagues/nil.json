@@ -1,0 +1,190 @@
+{
+  "league": "NIL",
+  "generated_at": "2025-08-24T19:43:23.451213Z",
+  "players": [
+    {
+      "player_id": "NIL-WILLIAMS-LSU",
+      "name": "Jayden Daniels",
+      "sport": "Football",
+      "league": "NCAA",
+      "team_id": "NCAA-LSU",
+      "position": "QB",
+      "bio": {
+        "dob": "2000-12-18",
+        "height_cm": 191,
+        "weight_kg": 88,
+        "class_year": "Senior"
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "pass_yards": 3812,
+          "pass_td": 40,
+          "int": 4,
+          "rush_yards": 1134,
+          "rush_td": 10,
+          "qbr": 95.2
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "nil_growth_rate": 0.285,
+          "brand_value_12m": 4200000,
+          "deal_velocity": 0.82
+        }
+      },
+      "nil_profile": {
+        "valuation_usd": 3800000,
+        "engagement_rate": 0.078,
+        "followers_total": 875000,
+        "deals_last_90d": 12,
+        "deal_value_90d_usd": 485000,
+        "search_index": 96,
+        "local_popularity_index": 98
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 85,
+        "reaction_ms": 172,
+        "gsr_microsiemens": 1.9,
+        "sleep_hours": 8.2
+      },
+      "hav_f": {
+        "champion_readiness": 71.0,
+        "cognitive_leverage": 83.0,
+        "nil_trust_score": 40.5,
+        "last_computed_at": "2025-08-24T19:43:23.450764Z"
+      },
+      "meta": {
+        "sources": [
+          "NIL Database",
+          "Social Media Analytics"
+        ],
+        "updated_at": "2025-08-24T19:43:23.450764Z"
+      }
+    },
+    {
+      "player_id": "NIL-CLARK-IOWA",
+      "name": "Caitlin Clark",
+      "sport": "Basketball",
+      "league": "NCAA",
+      "team_id": "NCAA-IOWA",
+      "position": "PG",
+      "bio": {
+        "dob": "2002-01-22",
+        "height_cm": 183,
+        "weight_kg": 70,
+        "class_year": "Senior"
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "ppg": 31.8,
+          "rpg": 7.2,
+          "apg": 8.9,
+          "fg_pct": 0.462,
+          "three_pt_pct": 0.378
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "nil_growth_rate": 0.425,
+          "brand_value_12m": 5800000,
+          "deal_velocity": 0.95
+        }
+      },
+      "nil_profile": {
+        "valuation_usd": 4500000,
+        "engagement_rate": 0.095,
+        "followers_total": 1250000,
+        "deals_last_90d": 18,
+        "deal_value_90d_usd": 680000,
+        "search_index": 98,
+        "local_popularity_index": 96
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 92,
+        "reaction_ms": 155,
+        "gsr_microsiemens": 1.6,
+        "sleep_hours": 8.5
+      },
+      "hav_f": {
+        "champion_readiness": 72.5,
+        "cognitive_leverage": 95.0,
+        "nil_trust_score": 40.7,
+        "last_computed_at": "2025-08-24T19:43:23.450764Z"
+      },
+      "meta": {
+        "sources": [
+          "NIL Database",
+          "Social Media Analytics"
+        ],
+        "updated_at": "2025-08-24T19:43:23.450764Z"
+      }
+    },
+    {
+      "player_id": "NIL-SKUBAL-VANDY",
+      "name": "Kumar Rocker",
+      "sport": "Baseball",
+      "league": "NCAA",
+      "team_id": "NCAA-VANDY",
+      "position": "RHP",
+      "bio": {
+        "dob": "1999-11-22",
+        "height_cm": 196,
+        "weight_kg": 102,
+        "class_year": "Junior"
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "era": 2.73,
+          "k9": 13.5,
+          "bb9": 3.1,
+          "wins": 11,
+          "saves": 0
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "nil_growth_rate": 0.185,
+          "brand_value_12m": 850000,
+          "deal_velocity": 0.45
+        }
+      },
+      "nil_profile": {
+        "valuation_usd": 650000,
+        "engagement_rate": 0.042,
+        "followers_total": 125000,
+        "deals_last_90d": 4,
+        "deal_value_90d_usd": 85000,
+        "search_index": 72,
+        "local_popularity_index": 68
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 78,
+        "reaction_ms": 198,
+        "gsr_microsiemens": 2.4,
+        "sleep_hours": 8.0
+      },
+      "hav_f": {
+        "champion_readiness": 68.5,
+        "cognitive_leverage": 64.9,
+        "nil_trust_score": 26.6,
+        "last_computed_at": "2025-08-24T19:43:23.450764Z"
+      },
+      "meta": {
+        "sources": [
+          "NIL Database",
+          "Social Media Analytics"
+        ],
+        "updated_at": "2025-08-24T19:43:23.450764Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@blaze/capture-sdk",
+  "version": "1.0.0",
+  "description": "Web SDK for real-time face and pose capture with MediaPipe",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": ["dist/**"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts"
+  },
+  "dependencies": {
+    "@mediapipe/face_landmarker": "^0.5.0",
+    "@mediapipe/pose": "^0.5.0",
+    "@mediapipe/tasks-vision": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/webrtc": "^0.0.30",
+    "eslint": "^8.0.0",
+    "tsup": "^7.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^0.34.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  }
+}

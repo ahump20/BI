@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --blaze-orange: #BF5700;
+    --blaze-blue: #9BCBEB;
+    --blaze-navy: #002244;
+    --blaze-teal: #00B2A9;
+    --cardinal-red: #C41E3A;
+    --titans-navy: #002244;
+    --longhorns-orange: #BF5700;
+    --grizzlies-blue: #5D76A9;
+    
+    --background: 250 250 250;
+    --foreground: 54 69 79;
+    --primary: 191 87 0;
+    --primary-foreground: 250 250 250;
+    --secondary: 155 203 235;
+    --secondary-foreground: 0 34 68;
+    --accent: 0 178 169;
+    --accent-foreground: 250 250 250;
+    --muted: 229 228 226;
+    --muted-foreground: 54 69 79;
+    --border: 229 228 226;
+    
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 20 20 20;
+    --foreground: 229 228 226;
+    --primary: 255 106 0;
+    --primary-foreground: 20 20 20;
+    --secondary: 126 184 219;
+    --secondary-foreground: 250 250 250;
+    --accent: 0 178 169;
+    --accent-foreground: 250 250 250;
+    --muted: 54 69 79;
+    --muted-foreground: 229 228 226;
+    --border: 54 69 79;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Neue Haas Grotesk Display', 'Inter', sans-serif;
+    font-weight: bold;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .blaze-gradient {
+    @apply bg-gradient-to-r from-blaze-orange via-blaze-orange-light to-blaze-blue;
+  }
+
+  .data-card {
+    @apply bg-white dark:bg-graphite rounded-lg shadow-lg p-6 border border-platinum dark:border-graphite;
+  }
+
+  .stat-value {
+    @apply text-3xl font-bold font-mono text-blaze-orange dark:text-blaze-orange-light;
+  }
+
+  .team-badge {
+    @apply inline-flex items-center justify-center px-3 py-1 rounded-full text-sm font-semibold;
+  }
+
+  .team-badge-cardinals {
+    @apply bg-cardinal text-white;
+  }
+
+  .team-badge-titans {
+    @apply bg-titans text-white;
+  }
+
+  .team-badge-longhorns {
+    @apply bg-longhorns text-white;
+  }
+
+  .team-badge-grizzlies {
+    @apply bg-grizzlies text-white;
+  }
+
+  .animate-data-pulse {
+    animation: dataPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes dataPulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glassmorphic {
+    @apply backdrop-blur-md bg-white/10 dark:bg-black/10 border border-white/20 dark:border-black/20;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, var(--blaze-orange) 0%, var(--blaze-blue) 100%);
+  }
+
+  .data-glow {
+    box-shadow: 0 0 30px rgba(155, 203, 235, 0.5);
+  }
+
+  .blaze-shadow {
+    box-shadow: 0 4px 14px 0 rgba(191, 87, 0, 0.25);
+  }
+}

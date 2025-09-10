@@ -1,0 +1,164 @@
+{
+  "team": "Boston Red Sox",
+  "code": "BOS",
+  "division": "AL East",
+  "players": [
+    {
+      "name": "Alex Bregman",
+      "position": "3B",
+      "jersey_number": "2",
+      "age": null,
+      "experience": 0,
+      "2024_stats": {
+        "avg": 0.2650747310392882,
+        "hr": 14,
+        "rbi": 79,
+        "war_est": 1.1221440254897637,
+        "wpa": 0.2269439129124411
+      },
+      "2025_projection": {
+        "notes": "Projected starter with upside"
+      },
+      "NIL_profile": null,
+      "biometrics": {
+        "hrv_ms": 55.559351589382615,
+        "sleep_hours": 7.7789097258357724,
+        "resting_hr": 67.51451570974888,
+        "reaction_ms": 285.5754813619484,
+        "gsr_microsiemens": 0.0628365390974095
+      },
+      "affiliation": "Boston Red Sox (MLB)",
+      "champion_readiness": 62.1,
+      "cognitive_leverage": 29.5,
+      "nil_trust_score": null
+    },
+    {
+      "name": "Aroldis Chapman",
+      "position": "P",
+      "jersey_number": "44",
+      "age": null,
+      "experience": 0,
+      "2024_stats": {
+        "avg": 0.340235760768274,
+        "hr": 10,
+        "rbi": 51,
+        "war_est": 7.569913094074591,
+        "wpa": 3.985050466736473
+      },
+      "2025_projection": {
+        "notes": "Projected starter with upside"
+      },
+      "NIL_profile": null,
+      "biometrics": {
+        "hrv_ms": 61.97305041059241,
+        "sleep_hours": 8.246568529755782,
+        "resting_hr": 69.12757403919062,
+        "reaction_ms": 282.384712692821,
+        "gsr_microsiemens": 2.3290558556429874
+      },
+      "affiliation": "Boston Red Sox (MLB)",
+      "champion_readiness": 80.6,
+      "cognitive_leverage": 23.6,
+      "nil_trust_score": null
+    },
+    {
+      "name": "Brayan Bello",
+      "position": "P",
+      "jersey_number": "66",
+      "age": null,
+      "experience": 0,
+      "2024_stats": {
+        "avg": 0.302070976820992,
+        "hr": 17,
+        "rbi": 18,
+        "war_est": 7.604144750472058,
+        "wpa": 3.568234516771473
+      },
+      "2025_projection": {
+        "notes": "Projected starter with upside"
+      },
+      "NIL_profile": null,
+      "biometrics": {
+        "hrv_ms": 67.906939382089,
+        "sleep_hours": 7.926785632350903,
+        "resting_hr": 69.08567699350522,
+        "reaction_ms": 210.26801217406242,
+        "gsr_microsiemens": 2.713141080267473
+      },
+      "affiliation": "Boston Red Sox (MLB)",
+      "champion_readiness": 80.5,
+      "cognitive_leverage": 66.6,
+      "nil_trust_score": null
+    },
+    {
+      "name": "Brennan Bernardino",
+      "position": "P",
+      "jersey_number": "83",
+      "age": null,
+      "experience": 0,
+      "2024_stats": {
+        "avg": 0.2998444668589925,
+        "hr": 18,
+        "rbi": 55,
+        "war_est": 2.0033976934396325,
+        "wpa": 2.708736128283128
+      },
+      "2025_projection": {
+        "notes": "Projected starter with upside"
+      },
+      "NIL_profile": null,
+      "biometrics": {
+        "hrv_ms": 80.93695253733671,
+        "sleep_hours": 7.507914703775771,
+        "resting_hr": 56.09742413623575,
+        "reaction_ms": 274.408023844536,
+        "gsr_microsiemens": 3.1065049383134715
+      },
+      "affiliation": "Boston Red Sox (MLB)",
+      "champion_readiness": 84,
+      "cognitive_leverage": 29.1,
+      "nil_trust_score": null
+    },
+    {
+      "name": "Carlos Narváez",
+      "position": "C",
+      "jersey_number": "75",
+      "age": null,
+      "experience": 0,
+      "2024_stats": {
+        "avg": 0.3423995590760507,
+        "hr": 21,
+        "rbi": 86,
+        "war_est": 2.7865028456763596,
+        "wpa": 2.604938570455527
+      },
+      "2025_projection": {
+        "notes": "Projected starter with upside"
+      },
+      "NIL_profile": {
+        "total_followers": 160706,
+        "eng_rate": 0.020933954559214055,
+        "deals_last_90d": 4,
+        "deal_value_90d_usd": 15297,
+        "search_index": 82,
+        "local_popularity_index": 12
+      },
+      "biometrics": {
+        "hrv_ms": 59.455570256983215,
+        "sleep_hours": 8.562654295505236,
+        "resting_hr": 66.1046723279903,
+        "reaction_ms": 204.00583887468255,
+        "gsr_microsiemens": 0.5859517175373663
+      },
+      "affiliation": "Boston Red Sox (MLB)",
+      "champion_readiness": 81.9,
+      "cognitive_leverage": 77.1,
+      "nil_trust_score": 17.3
+    }
+  ],
+  "team_metrics": {
+    "avg_champion_readiness": 77.8,
+    "avg_cognitive_leverage": 45.2,
+    "roster_size": 5
+  }
+}

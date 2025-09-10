@@ -1,0 +1,193 @@
+{
+  "team": "Memphis Grizzlies",
+  "league": "NBA",
+  "data_timestamp": "2025-08-24T15:11:26.455523",
+  "player_count": 5,
+  "players": [
+    {
+      "player_id": "nba_mem_nba_griz_0",
+      "name": "Ja Morant",
+      "sport": "basketball",
+      "league": "NBA",
+      "team_id": "nba_mem",
+      "team_name": "Memphis Grizzlies",
+      "position": "PG",
+      "jersey_number": "12",
+      "height": "6-2",
+      "weight": "200",
+      "age": 24,
+      "experience_years": 3,
+      "school": "Unknown",
+      "stats": {
+        "season": "2024-25",
+        "games_played": 0,
+        "points_per_game": 0.0,
+        "rebounds_per_game": 0.0,
+        "assists_per_game": 0.0,
+        "field_goal_percentage": 0.0,
+        "three_point_percentage": 0.0,
+        "free_throw_percentage": 0.0,
+        "minutes_per_game": 0.0
+      },
+      "havf_scores": {
+        "champion_readiness": 35.0,
+        "cognitive_leverage": 30,
+        "nil_trust_score": 35
+      },
+      "metadata": {
+        "last_updated": "2025-08-24T15:11:21.438581",
+        "data_source": "nba_stats_api",
+        "agent_version": "1.0"
+      }
+    },
+    {
+      "player_id": "nba_mem_nba_griz_1",
+      "name": "Jaren Jackson Jr.",
+      "sport": "basketball",
+      "league": "NBA",
+      "team_id": "nba_mem",
+      "team_name": "Memphis Grizzlies",
+      "position": "PF",
+      "jersey_number": "13",
+      "height": "6-2",
+      "weight": "200",
+      "age": 24,
+      "experience_years": 3,
+      "school": "Unknown",
+      "stats": {
+        "season": "2024-25",
+        "games_played": 0,
+        "points_per_game": 0.0,
+        "rebounds_per_game": 0.0,
+        "assists_per_game": 0.0,
+        "field_goal_percentage": 0.0,
+        "three_point_percentage": 0.0,
+        "free_throw_percentage": 0.0,
+        "minutes_per_game": 0.0
+      },
+      "havf_scores": {
+        "champion_readiness": 35.0,
+        "cognitive_leverage": 30,
+        "nil_trust_score": 35
+      },
+      "metadata": {
+        "last_updated": "2025-08-24T15:11:22.444355",
+        "data_source": "nba_stats_api",
+        "agent_version": "1.0"
+      }
+    },
+    {
+      "player_id": "nba_mem_nba_griz_2",
+      "name": "Desmond Bane",
+      "sport": "basketball",
+      "league": "NBA",
+      "team_id": "nba_mem",
+      "team_name": "Memphis Grizzlies",
+      "position": "SG",
+      "jersey_number": "22",
+      "height": "6-2",
+      "weight": "200",
+      "age": 24,
+      "experience_years": 3,
+      "school": "Unknown",
+      "stats": {
+        "season": "2024-25",
+        "games_played": 0,
+        "points_per_game": 0.0,
+        "rebounds_per_game": 0.0,
+        "assists_per_game": 0.0,
+        "field_goal_percentage": 0.0,
+        "three_point_percentage": 0.0,
+        "free_throw_percentage": 0.0,
+        "minutes_per_game": 0.0
+      },
+      "havf_scores": {
+        "champion_readiness": 35.0,
+        "cognitive_leverage": 30,
+        "nil_trust_score": 35
+      },
+      "metadata": {
+        "last_updated": "2025-08-24T15:11:23.446728",
+        "data_source": "nba_stats_api",
+        "agent_version": "1.0"
+      }
+    },
+    {
+      "player_id": "nba_mem_nba_griz_3",
+      "name": "Marcus Smart",
+      "sport": "basketball",
+      "league": "NBA",
+      "team_id": "nba_mem",
+      "team_name": "Memphis Grizzlies",
+      "position": "PG",
+      "jersey_number": "36",
+      "height": "6-2",
+      "weight": "200",
+      "age": 24,
+      "experience_years": 3,
+      "school": "Unknown",
+      "stats": {
+        "season": "2024-25",
+        "games_played": 0,
+        "points_per_game": 0.0,
+        "rebounds_per_game": 0.0,
+        "assists_per_game": 0.0,
+        "field_goal_percentage": 0.0,
+        "three_point_percentage": 0.0,
+        "free_throw_percentage": 0.0,
+        "minutes_per_game": 0.0
+      },
+      "havf_scores": {
+        "champion_readiness": 35.0,
+        "cognitive_leverage": 30,
+        "nil_trust_score": 35
+      },
+      "metadata": {
+        "last_updated": "2025-08-24T15:11:24.451956",
+        "data_source": "nba_stats_api",
+        "agent_version": "1.0"
+      }
+    },
+    {
+      "player_id": "nba_mem_nba_griz_4",
+      "name": "Jaylen Wells",
+      "sport": "basketball",
+      "league": "NBA",
+      "team_id": "nba_mem",
+      "team_name": "Memphis Grizzlies",
+      "position": "SF",
+      "jersey_number": "0",
+      "height": "6-2",
+      "weight": "200",
+      "age": 24,
+      "experience_years": 3,
+      "school": "Unknown",
+      "stats": {
+        "season": "2024-25",
+        "games_played": 0,
+        "points_per_game": 0.0,
+        "rebounds_per_game": 0.0,
+        "assists_per_game": 0.0,
+        "field_goal_percentage": 0.0,
+        "three_point_percentage": 0.0,
+        "free_throw_percentage": 0.0,
+        "minutes_per_game": 0.0
+      },
+      "havf_scores": {
+        "champion_readiness": 35.0,
+        "cognitive_leverage": 30,
+        "nil_trust_score": 35
+      },
+      "metadata": {
+        "last_updated": "2025-08-24T15:11:25.453044",
+        "data_source": "nba_stats_api",
+        "agent_version": "1.0"
+      }
+    }
+  ],
+  "summary": {
+    "avg_champion_readiness": 35.0,
+    "avg_cognitive_leverage": 30.0,
+    "avg_nil_trust": 35.0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "teams": [
+    {
+      "team_id": "NCAA-TEX",
+      "name": "Texas Longhorns",
+      "readiness_score": 0,
+      "status": "red",
+      "components": {
+        "overall_health": 100,
+        "recent_form": 50,
+        "team_quality": 81.9
+      },
+      "leverage": 50,
+      "players": {
+        "total": 1,
+        "available": 1,
+        "stars": 1
+      },
+      "next_game": null,
+      "trend": "stable"
+    }
+  ],
+  "averageReadiness": 0,
+  "topTeams": [
+    {
+      "team_id": "NCAA-TEX",
+      "name": "Texas Longhorns",
+      "readiness_score": 0,
+      "status": "red",
+      "components": {
+        "overall_health": 100,
+        "recent_form": 50,
+        "team_quality": 81.9
+      },
+      "leverage": 50,
+      "players": {
+        "total": 1,
+        "available": 1,
+        "stars": 1
+      },
+      "next_game": null,
+      "trend": "stable"
+    }
+  ],
+  "bottomTeams": [
+    {
+      "team_id": "NCAA-TEX",
+      "name": "Texas Longhorns",
+      "readiness_score": 0,
+      "status": "red",
+      "components": {
+        "overall_health": 100,
+        "recent_form": 50,
+        "team_quality": 81.9
+      },
+      "leverage": 50,
+      "players": {
+        "total": 1,
+        "available": 1,
+        "stars": 1
+      },
+      "next_game": null,
+      "trend": "stable"
+    }
+  ]
+}

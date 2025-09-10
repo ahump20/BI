@@ -1,0 +1,60 @@
+name = "blaze-intelligence-production"
+main = "worker-unified-gateway.js"
+compatibility_date = "2024-08-28"
+pages_build_output_dir = "frontend"
+
+[env.production]
+[env.production.vars]
+ENVIRONMENT = "production"
+API_VERSION = "v4.0"
+ENABLE_VISION_AI = "true"
+ENABLE_AUTO_REFRESH = "true"
+ENABLE_WEBHOOKS = "true"
+
+# KV Namespaces
+[[env.production.kv_namespaces]]
+binding = "ANALYTICS_KV"
+id = "30fde31341b147f8aa5c0817aa34c9e0"
+
+[[env.production.kv_namespaces]]
+binding = "BLAZE_DATA"
+id = "a1ec5c41cd3d4660a4175bcc440d01d9"
+
+[[env.production.kv_namespaces]]
+binding = "CACHE"
+id = "a53c3726fc3044be82e79d2d1e371d26"
+
+[[env.production.kv_namespaces]]
+binding = "CARDINALS_KV"
+id = "1a7834aefae94192a9fc3ccc1ce0965a"
+
+[[env.production.kv_namespaces]]
+binding = "YOUTH_TXHS_CACHE"
+id = "b884d8eb60454eed879d36c8863cf513"
+
+[[env.production.kv_namespaces]]
+binding = "VISION_CACHE"
+id = "2bb1b1aebb164d5aad9b2333704cf5c4"
+
+[[env.production.kv_namespaces]]
+binding = "SESSIONS"
+id = "44bb17e8a3cb463a8331f4d11d7ed63d"
+
+[[env.production.kv_namespaces]]
+binding = "CONTACT_MESSAGES"
+id = "76ce2d9dda7b48ae84ea61afa9ddf79d"
+
+# R2 Buckets
+[[env.production.r2_buckets]]
+binding = "MEDIA_BUCKET"
+bucket_name = "blaze-media"
+
+[[env.production.r2_buckets]]
+binding = "DATA_BUCKET"
+bucket_name = "blaze-youth-data"
+
+[triggers]
+crons = ["0 */10 * * *"]
+
+[observability]
+enabled = true

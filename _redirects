@@ -1,60 +1,53 @@
-# Cloudflare Pages Redirects Configuration
-# Production-ready routing for Blaze Ranch Analytics
+# Blaze Intelligence - Cloudflare Pages Redirects Configuration
+# Pattern Recognition Weaponized™
 
-# Root redirects
-/ /blaze-ranch-production.html 200
-/index /blaze-ranch-production.html 200
-/home /blaze-ranch-production.html 200
+# Fix integrated platform redirect issue
+/integrated-platform.html /integrated-platform/ 200
+/integrated-platform /integrated-platform.html 200
 
-# Legacy URL support
-/blaze-intelligence-enhanced.html /blaze-ranch-production.html 301
-/enhanced /blaze-ranch-production.html 301
-/portal /blaze-ranch-production.html 301
+# Standard redirects for clean URLs
+/intelligence-os.html /intelligence-os 301
+/championship-os.html /championship-os 301
 
-# Team-specific pages
-/cardinals /blaze-ranch-production.html#teams 200
-/titans /blaze-ranch-production.html#teams 200  
-/longhorns /blaze-ranch-production.html#teams 200
-/grizzlies /blaze-ranch-production.html#teams 200
+# Root domain redirects
+/index /index.html 200
+/ /index.html 200
 
-# Analytics sections
-/analytics /blaze-ranch-production.html#analytics 200
-/scores /blaze-ranch-production.html#scores 200
-/insights /blaze-ranch-production.html#insights 200
-/data /blaze-ranch-production.html#analytics 200
+# API and documentation redirects  
+/api /api-docs.html 301
+/docs /api-docs.html 301
 
-# API routes (preserve for future backend)
-/api/teams/* /api/teams/:splat 200
-/api/scores/* /api/scores/:splat 200
-/api/feed/* /api/feed/:splat 200
+# Contact form redirects
+/contact /contact.html 200
+/get-started /contact.html 301
 
-# Static assets with fallbacks
-/assets/* /assets/:splat 200
-/images/* /images/:splat 200
-/fonts/* /fonts/:splat 200
-/textures/* /textures/:splat 200
+# Enterprise solutions redirects
+/solutions /enterprise.html 301
+/business /enterprise.html 301
 
-# JavaScript modules
-/js/* /:splat 200
-/scripts/* /:splat 200
-/modules/* /:splat 200
+# Pricing and analysis redirects
+/price /pricing 200
+/competitive /competitive-analysis.html 301
+/analysis /competitive-analysis.html 301
 
-# Handle missing files
-/favicon.ico /assets/favicon.ico 200
-/robots.txt /robots.txt 200
-/sitemap.xml /sitemap.xml 200
+# Command center and integration redirects
+/command /apex-command-center.html 301
+/center /apex-command-center.html 301
+/integrations /integration-hub.html 301
+/hub /integration-hub.html 301
 
-# Error pages
-/404 /blaze-ranch-production.html 200
-/error /blaze-ranch-production.html 200
+# Sports-specific redirects
+/baseball /swing-engine.html 301
+/swing /swing-engine.html 301
+/canvas /canvas-landing.html 301
 
-# Development and admin redirects
-/admin/* /blaze-ranch-production.html 401
-/dev/* /blaze-ranch-production.html 401
-/test/* /blaze-ranch-production.html 401
+# Fallback for old URLs
+/home /index.html 301
+/dashboard /index.html 301
 
-# External link handling (for analytics)
-/track/* https://analytics.blaze-intelligence-platform.pages.dev/:splat 302
-
-# Fallback - all other routes to main page
-/* /blaze-ranch-production.html 200
+# Security headers and optimizations
+/*    X-Frame-Options: DENY
+/*    X-Content-Type-Options: nosniff  
+/*    X-XSS-Protection: 1; mode=block
+/*    Referrer-Policy: strict-origin-when-cross-origin
+/*    Cache-Control: public, max-age=300

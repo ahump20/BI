@@ -1,6 +1,18 @@
 # Blaze Intelligence .gitignore
 
 # =============================================================================
+# System Files
+# =============================================================================
+.DS_Store
+.CFUserTextEncoding
+.Trash/
+.bash_history
+.zsh_history
+.python_history
+.lesshst
+.viminfo
+
+# =============================================================================
 # Environment and Configuration
 # =============================================================================
 .env
@@ -8,6 +20,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env.example
+.mcp_env
 *.env
 
 # Secrets and API Keys
@@ -103,7 +117,6 @@ tmp/
 # =============================================================================
 
 # macOS
-.DS_Store
 .AppleDouble
 .LSOverride
 Icon?
@@ -135,6 +148,34 @@ $RECYCLE.BIN/
 *~
 .directory
 .Trash-*
+
+# =============================================================================
+# Cache and Temporary Files
+# =============================================================================
+.cache/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+.tmp/
+.temp/
+tmp/
+temp/
+
+# ESLint cache
+.eslintcache
+
+# Prettier cache
+.prettiercache
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Webpack cache
+.webpack/
+
+# Optional REPL history
+.node_repl_history
 
 # =============================================================================
 # Logs and Monitoring
@@ -173,30 +214,6 @@ debug.log
 data/
 database/
 *.sql.backup
-
-# =============================================================================
-# Cache and Temporary Files
-# =============================================================================
-.cache/
-.tmp/
-.temp/
-tmp/
-temp/
-
-# ESLint cache
-.eslintcache
-
-# Prettier cache
-.prettiercache
-
-# TypeScript cache
-*.tsbuildinfo
-
-# Webpack cache
-.webpack/
-
-# Optional REPL history
-.node_repl_history
 
 # =============================================================================
 # Testing
@@ -240,7 +257,6 @@ analytics-cache/
 
 # Large data files
 *.parquet
-*.h5
 *.hdf5
 
 # =============================================================================
@@ -297,6 +313,10 @@ keys/
 *.mobileprovision
 keystore.jks
 *.keystore
+.ssh/
+.aws/
+.kube/
+.wrangler/
 
 # SSH keys
 id_rsa
@@ -308,32 +328,51 @@ known_hosts
 *.asc
 
 # =============================================================================
-# Performance and Analytics
+# Backup Files
 # =============================================================================
-benchmark-results/
-performance-logs/
-profiling/
-flame-graphs/
+*.bak
+*.backup
+*.old
+*.orig
+*~
+*.tmp
+*.temp
+tmp.json
+*_backup.*
+*_old.*
+ARCHIVED_*/
+BACKUP_*/
+OLD_*/
+*cleanup*.log
+*cleanup*.md
 
 # =============================================================================
-# Documentation Generation
+# Compressed Files
 # =============================================================================
-docs/build/
-site/
-_site/
-.jekyll-cache/
-.jekyll-metadata
+*.tar.gz
+*.zip
 
 # =============================================================================
-# Package Managers
+# Python Environments
 # =============================================================================
-.pnp/
-.pnp.js
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
+blaze_venv/
+anaconda_projects/
+multipy/
+
+# =============================================================================
+# Application Directories  
+# =============================================================================
+Library/
+Applications/
+Desktop/
+Documents/
+Downloads/
+Movies/
+Music/
+Pictures/
+Public/
+Sites/
+Notebooks/
 
 # =============================================================================
 # Cloudflare Specific
@@ -342,15 +381,6 @@ _site/
 wrangler.toml.bak
 .dev.vars
 worker-configuration.json
-
-# =============================================================================
-# Backup Files
-# =============================================================================
-*.bak
-*.backup
-*.old
-*.orig
-*~
 
 # =============================================================================
 # Custom Application Files
@@ -382,3 +412,23 @@ thumbnails-cache/
 .local/
 local-config/
 dev-overrides/
+
+# =============================================================================
+# Keep Important Project Files
+# =============================================================================
+!ingestion/
+!analytics/
+!biometrics/
+!reporting/
+!vision/
+!data/
+!schemas/
+!tests/
+!deploy/
+!reports/
+!*.py
+!*.md
+!*.json
+!*.html
+!*.js
+!run_*.py

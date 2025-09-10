@@ -1,0 +1,80 @@
+{
+  "players": [
+    {
+      "id": "NCAA-TEX-ewers",
+      "name": "Quinn Ewers",
+      "team_id": "NCAA-TEX",
+      "position": "QB",
+      "sport": "Football",
+      "dob": "2003-07-15",
+      "height_cm": 191,
+      "weight_kg": 95,
+      "class_year": "2025",
+      "stats": {
+        "passing_yards": 3479,
+        "passing_tds": 31,
+        "rushing_yards": 156,
+        "rushing_tds": 3,
+        "total_yards": 3635,
+        "total_tds": 34
+      },
+      "projections": {
+        "nfl_draft_round": 1,
+        "nfl_readiness": 85
+      },
+      "nil_profile": {
+        "valuation_usd": 1250000,
+        "engagement_rate": 0.048,
+        "followers_total": 285000,
+        "deals_last_90d": 12,
+        "deal_value_90d_usd": 185000,
+        "search_index": 78.5,
+        "local_popularity_index": 92.1
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 64.2,
+        "reaction_ms": 142.8,
+        "gsr_microsiemens": 2.6,
+        "sleep_hours": 8.1
+      }
+    },
+    {
+      "id": "NCAA-TEX-blue",
+      "name": "Jaydon Blue",
+      "team_id": "NCAA-TEX",
+      "position": "RB",
+      "sport": "Football",
+      "dob": "2004-03-22",
+      "height_cm": 180,
+      "weight_kg": 86,
+      "class_year": "2026",
+      "stats": {
+        "rushing_yards": 1208,
+        "rushing_tds": 15,
+        "receiving_yards": 234,
+        "receiving_tds": 2,
+        "total_yards": 1442,
+        "total_tds": 17
+      },
+      "projections": {
+        "nfl_draft_round": 2,
+        "nfl_readiness": 72
+      },
+      "nil_profile": {
+        "valuation_usd": 425000,
+        "engagement_rate": 0.035,
+        "followers_total": 125000,
+        "deals_last_90d": 8,
+        "deal_value_90d_usd": 65000,
+        "search_index": 65.8,
+        "local_popularity_index": 85.3
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 59.7,
+        "reaction_ms": 138.5,
+        "gsr_microsiemens": 2.8,
+        "sleep_hours": 7.9
+      }
+    }
+  ]
+}

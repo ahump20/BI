@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Championship Operations Center</title>
+    
+    <!-- Three.js for 3D Hero -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --primary-dark: #E85A2C;
+            --secondary: #1E3A8A;
+            --accent: #10B981;
+            --dark-bg: #0F172A;
+            --card-bg: #1E293B;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --border: #334155;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --gradient-1: linear-gradient(135deg, #FF6B35 0%, #F97316 100%);
+            --gradient-2: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Three.js Hero Section */
+        #hero-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Animated Grid Background */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.1;
+            background-image: 
+                linear-gradient(var(--primary) 1px, transparent 1px),
+                linear-gradient(90deg, var(--primary) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 10s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1.5rem 0;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 107, 53, 0.6); }
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .status-badge {
+            background: var(--gradient-1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            animation: status-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes status-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            animation: fade-in-up 0.8s ease-out 0.2s both;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .metric-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .metric-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .metric-change.positive {
+            color: var(--success);
+        }
+
+        .metric-change.negative {
+            color: var(--error);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Dashboard Sections */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-badge {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+            transition: all 0.2s;
+        }
+
+        .data-row:hover {
+            background: rgba(255, 107, 53, 0.05);
+            padding-left: 0.5rem;
+        }
+
+        .data-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .data-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            margin-top: 1rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(51, 65, 85, 0.5);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-1);
+            border-radius: 4px;
+            transition: width 1s ease-out;
+            animation: progress-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes progress-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Charts Container */
+        .chart-container {
+            height: 300px;
+            margin-top: 1.5rem;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.5);
+            padding: 1rem;
+            position: relative;
+        }
+
+        /* Action Buttons */
+        .action-section {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .action-btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .action-btn.secondary {
+            background: var(--gradient-2);
+        }
+
+        /* Real-time Indicator */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: live-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes live-pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #0F172A;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-title {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-background"></div>
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🔥</div>
+                <div class="logo-text">Blaze Intelligence</div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#analytics" class="nav-link">Analytics</a>
+                <a href="#operations" class="nav-link">Operations</a>
+                <a href="#intelligence" class="nav-link">Intelligence</a>
+                <a href="#reports" class="nav-link">Reports</a>
+                <div class="status-badge">LIVE SYSTEM</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Championship Operations Center</h1>
+            <p class="hero-subtitle">Where Cognitive Performance Meets Quarterly Performance</p>
+            <div class="live-indicator">
+                <span class="live-dot"></span>
+                <span>Real-time Analytics Active</span>
+            </div>
+        </section>
+
+        <!-- Key Metrics -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon">📊</div>
+                    <div class="metric-change positive">↑ 12.5%</div>
+                </div>
+                <div class="metric-value">94.6%</div>
+                <div class="metric-label">Pattern Recognition Accuracy</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-change positive">↑ 8.3%</div>
+                </div>
+                <div class="metric-value"><100ms</div>
+                <div class="metric-label">Decision Velocity</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon">🎯</div>
+                    <div class="metric-change positive">↑ 15.7%</div>
+                </div>
+                <div class="metric-value">2.8M+</div>
+                <div class="metric-label">Data Points Analyzed</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <div class="metric-icon">💰</div>
+                    <div class="metric-change positive">↑ 23.4%</div>
+                </div>
+                <div class="metric-value">67-80%</div>
+                <div class="metric-label">Cost Savings vs Competitors</div>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- MLB Analytics -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span>⚾</span>
+                        Cardinals Analytics
+                    </h3>
+                    <span class="card-badge">LIVE</span>
+                </div>
+                
+                <div class="data-table">
+                    <div class="data-row">
+                        <span class="data-label">Readiness Score</span>
+                        <span class="data-value">87.3%</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Leverage Index</span>
+                        <span class="data-value">1.42</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Win Probability</span>
+                        <span class="data-value">72.6%</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">HAVF Score</span>
+                        <span class="data-value">8.7/10</span>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <span class="progress-label">Season Performance</span>
+                        <span class="progress-value">87%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 87%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NFL Analytics -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span>🏈</span>
+                        Titans Intelligence
+                    </h3>
+                    <span class="card-badge">UPDATING</span>
+                </div>
+                
+                <div class="data-table">
+                    <div class="data-row">
+                        <span class="data-label">Offensive Efficiency</span>
+                        <span class="data-value">6.2 YPP</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Defensive DVOA</span>
+                        <span class="data-value">-12.3%</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Special Teams Rank</span>
+                        <span class="data-value">#8</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Injury Impact</span>
+                        <span class="data-value">Low</span>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <span class="progress-label">Playoff Probability</span>
+                        <span class="progress-value">76%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 76%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NCAA Analytics -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span>🤘</span>
+                        Longhorns Analytics
+                    </h3>
+                    <span class="card-badge">ACTIVE</span>
+                </div>
+                
+                <div class="data-table">
+                    <div class="data-row">
+                        <span class="data-label">Recruiting Rank</span>
+                        <span class="data-value">#3 National</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">SP+ Rating</span>
+                        <span class="data-value">27.8</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">FPI Score</span>
+                        <span class="data-value">92.3</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">NIL Valuation</span>
+                        <span class="data-value">$4.2M</span>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <span class="progress-label">Championship Odds</span>
+                        <span class="progress-value">84%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 84%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NBA Analytics -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span>🏀</span>
+                        Grizzlies Performance
+                    </h3>
+                    <span class="card-badge">REAL-TIME</span>
+                </div>
+                
+                <div class="data-table">
+                    <div class="data-row">
+                        <span class="data-label">Net Rating</span>
+                        <span class="data-value">+7.3</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Pace</span>
+                        <span class="data-value">101.2</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">True Shooting %</span>
+                        <span class="data-value">58.6%</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">Defensive Rating</span>
+                        <span class="data-value">108.4</span>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <span class="progress-label">Playoff Seed Projection</span>
+                        <span class="progress-value">91%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 91%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vision AI Section -->
+        <div class="dashboard-card" style="margin-bottom: 2rem;">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <span>🎥</span>
+                    Vision AI Coaching Platform
+                </h3>
+                <span class="card-badge">BETA</span>
+            </div>
+            
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Advanced biomechanical analysis with micro-expression detection for character assessment
+            </p>
+
+            <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="metric-card" style="padding: 1rem;">
+                    <div class="metric-value" style="font-size: 1.5rem;">98.2%</div>
+                    <div class="metric-label">Biomechanics Accuracy</div>
+                </div>
+                <div class="metric-card" style="padding: 1rem;">
+                    <div class="metric-value" style="font-size: 1.5rem;">87.6%</div>
+                    <div class="metric-label">Micro-Expression Detection</div>
+                </div>
+                <div class="metric-card" style="padding: 1rem;">
+                    <div class="metric-value" style="font-size: 1.5rem;">92.3%</div>
+                    <div class="metric-label">Character Assessment</div>
+                </div>
+                <div class="metric-card" style="padding: 1rem;">
+                    <div class="metric-value" style="font-size: 1.5rem;">15ms</div>
+                    <div class="metric-label">Response Time</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Block Example -->
+        <div class="dashboard-card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <span>💻</span>
+                    Integration Example
+                </h3>
+            </div>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-title">Blaze Intelligence API</span>
+                    <button class="copy-btn" onclick="copyCode()">Copy</button>
+                </div>
+                <pre style="color: #94A3B8; margin: 0;">
+<span style="color: #F472B6;">const</span> <span style="color: #A5F3FC;">blazeClient</span> = <span style="color: #F472B6;">new</span> <span style="color: #C084FC;">BlazeIntelligence</span>({
+  <span style="color: #A5F3FC;">apiKey</span>: <span style="color: #A5F3FC;">'YOUR_API_KEY'</span>,
+  <span style="color: #A5F3FC;">team</span>: <span style="color: #A5F3FC;">'Cardinals'</span>,
+  <span style="color: #A5F3FC;">modules</span>: [<span style="color: #A5F3FC;">'analytics'</span>, <span style="color: #A5F3FC;">'visionAI'</span>, <span style="color: #A5F3FC;">'patterns'</span>]
+});
+
+<span style="color: #64748B;">// Real-time pattern recognition</span>
+<span style="color: #F472B6;">const</span> <span style="color: #A5F3FC;">analysis</span> = <span style="color: #F472B6;">await</span> blazeClient.<span style="color: #C084FC;">analyze</span>({
+  <span style="color: #A5F3FC;">type</span>: <span style="color: #A5F3FC;">'performance'</span>,
+  <span style="color: #A5F3FC;">timeframe</span>: <span style="color: #A5F3FC;">'realtime'</span>,
+  <span style="color: #A5F3FC;">metrics</span>: [<span style="color: #A5F3FC;">'readiness'</span>, <span style="color: #A5F3FC;">'leverage'</span>, <span style="color: #A5F3FC;">'probability'</span>]
+});
+
+console.<span style="color: #C084FC;">log</span>(<span style="color: #A5F3FC;">`Decision confidence: ${analysis.confidence}%`</span>);
+                </pre>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-section">
+            <button class="action-btn" onclick="launchAnalytics()">
+                🚀 Launch Full Analytics
+            </button>
+            <button class="action-btn secondary" onclick="exportData()">
+                📊 Export Data
+            </button>
+            <button class="action-btn secondary" onclick="viewReports()">
+                📈 View Reports
+            </button>
+            <button class="action-btn" onclick="startVisionAI()">
+                🎥 Start Vision AI
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Three.js Hero Animation
+        let scene, camera, renderer;
+        let particles, particleSystem;
+
+        function initThreeJS() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: document.getElementById('hero-canvas'),
+                alpha: true,
+                antialias: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // Create particle system
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+            const colors = [];
+
+            for (let i = 0; i < 2000; i++) {
+                vertices.push(
+                    Math.random() * 2000 - 1000,
+                    Math.random() * 2000 - 1000,
+                    Math.random() * 2000 - 1000
+                );
+
+                const color = new THREE.Color();
+                color.setHSL(0.03 + Math.random() * 0.1, 0.7, 0.5);
+                colors.push(color.r, color.g, color.b);
+            }
+
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 3,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+
+            particleSystem = new THREE.Points(geometry, material);
+            scene.add(particleSystem);
+
+            camera.position.z = 500;
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            particleSystem.rotation.x += 0.0005;
+            particleSystem.rotation.y += 0.001;
+
+            renderer.render(scene, camera);
+        }
+
+        // Initialize Three.js on load
+        window.addEventListener('load', initThreeJS);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (camera && renderer) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        });
+
+        // Animate progress bars on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressFill = entry.target.querySelector('.progress-fill');
+                    if (progressFill) {
+                        const width = progressFill.style.width;
+                        progressFill.style.width = '0';
+                        setTimeout(() => {
+                            progressFill.style.width = width;
+                        }, 100);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.progress-container').forEach(container => {
+            progressObserver.observe(container);
+        });
+
+        // Action button functions
+        function launchAnalytics() {
+            console.log('Launching full analytics suite...');
+            showNotification('Analytics Dashboard Initializing...', 'success');
+        }
+
+        function exportData() {
+            console.log('Exporting data...');
+            showNotification('Preparing data export...', 'info');
+        }
+
+        function viewReports() {
+            console.log('Loading reports...');
+            showNotification('Loading championship reports...', 'info');
+        }
+
+        function startVisionAI() {
+            console.log('Starting Vision AI...');
+            showNotification('Vision AI Platform launching...', 'success');
+        }
+
+        function copyCode() {
+            const codeBlock = document.querySelector('.code-block pre');
+            const textArea = document.createElement('textarea');
+            textArea.value = codeBlock.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            event.target.textContent = 'Copied!';
+            setTimeout(() => {
+                event.target.textContent = 'Copy';
+            }, 2000);
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                background: ${type === 'success' ? 'var(--success)' : 'var(--primary)'};
+                color: white;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Add slide animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Simulate real-time data updates
+        setInterval(() => {
+            // Update random metrics
+            const metrics = document.querySelectorAll('.data-value');
+            const randomMetric = metrics[Math.floor(Math.random() * metrics.length)];
+            
+            // Add pulse animation
+            randomMetric.style.animation = 'pulse-glow 0.5s ease-out';
+            setTimeout(() => {
+                randomMetric.style.animation = '';
+            }, 500);
+        }, 5000);
+    </script>
+</body>
+</html>

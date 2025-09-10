@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://blaze-intelligence.pages.dev/sitemap.xml
+
+# Blaze Intelligence Analytics Platform
+# Championship-level sports intelligence

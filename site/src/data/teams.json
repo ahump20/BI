@@ -1,0 +1,34 @@
+{
+  "generated_at": "2025-08-24T19:23:47.062511Z",
+  "teams": [
+    {
+      "team_id": "MLB-STL",
+      "league": "MLB",
+      "players_count": 5,
+      "avg_readiness": 40.0
+    },
+    {
+      "team_id": "NFL-TEN",
+      "league": "NFL",
+      "players_count": 3,
+      "avg_readiness": 82.1
+    }
+  ],
+  "analytics": {
+    "totalTeams": 2,
+    "totalPlayers": 8,
+    "totalLeagues": 2,
+    "leagueBreakdown": [
+      {
+        "league": "MLB",
+        "teams_count": 1,
+        "players_count": 5
+      },
+      {
+        "league": "NFL",
+        "teams_count": 1,
+        "players_count": 3
+      }
+    ]
+  }
+}

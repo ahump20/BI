@@ -1,0 +1,56 @@
+{
+  "frameworks": {
+    "decisionVelocityModel": {
+      "name": "Decision Velocity Model™",
+      "description": "Measures cognitive processing speed from stimulus to response to identify performance bottlenecks",
+      "applications": [
+        "Team management",
+        "Player development",
+        "Strategic planning"
+      ],
+      "methodology": "Quantifies decision-making speed and efficiency across organizational levels",
+      "scoring": "1-10 scale based on information processing, execution speed, and outcome quality"
+    },
+    "patternRecognitionHierarchy": {
+      "name": "Pattern Recognition Hierarchy™",
+      "description": "Deconstructs how elite performers filter signal from noise in data-saturated environments",
+      "levels": [
+        "Surface Detection - Basic pattern identification",
+        "Contextual Mapping - Environmental factor integration",
+        "Predictive Modeling - Future outcome projection",
+        "Adaptive Evolution - Continuous learning integration"
+      ],
+      "applications": [
+        "Competitive analysis",
+        "Talent evaluation",
+        "Strategic forecasting"
+      ]
+    },
+    "cognitiveLoadDistribution": {
+      "name": "Cognitive Load Distribution™",
+      "description": "Examines how champions allocate mental resources under pressure and information overload",
+      "components": [
+        "Task Prioritization - Resource allocation optimization",
+        "Automation Level - Routine decision streamlining",
+        "Recovery Management - Mental fatigue prevention"
+      ],
+      "applications": [
+        "Organizational efficiency",
+        "Performance sustainability",
+        "Strategic focus"
+      ]
+    }
+  },
+  "implementation": {
+    "assessment": "Comprehensive organizational analysis using all three frameworks",
+    "reporting": "Detailed scorecards with actionable recommendations",
+    "monitoring": "Ongoing performance tracking and optimization"
+  },
+  "contact": {
+    "company": "Blaze Intelligence",
+    "founder": "Austin Humphrey",
+    "email": "ahump20@outlook.com",
+    "phone": "(210) 273-5538",
+    "tagline": "Every stat tells a story, every game builds a legacy"
+  }
+}

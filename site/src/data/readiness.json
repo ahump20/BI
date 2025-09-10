@@ -1,0 +1,217 @@
+{
+  "timestamp": "2025-09-03T12:40:00.606Z",
+  "sports": {
+    "MLB": {
+      "teams": [
+        {
+          "team_id": "MLB-STL",
+          "name": "St. Louis Cardinals",
+          "readiness_score": 65,
+          "status": "yellow",
+          "components": {
+            "recent_performance": 50,
+            "player_availability": 100,
+            "matchup_history": 50,
+            "momentum": 50,
+            "rest_factor": 75
+          },
+          "leverage": 50,
+          "players": {
+            "total": 1,
+            "available": 1,
+            "stars": 0
+          },
+          "next_game": null,
+          "trend": "stable"
+        }
+      ],
+      "averageReadiness": 65,
+      "topTeams": [
+        {
+          "team_id": "MLB-STL",
+          "name": "St. Louis Cardinals",
+          "readiness_score": 65,
+          "status": "yellow",
+          "components": {
+            "recent_performance": 50,
+            "player_availability": 100,
+            "matchup_history": 50,
+            "momentum": 50,
+            "rest_factor": 75
+          },
+          "leverage": 50,
+          "players": {
+            "total": 1,
+            "available": 1,
+            "stars": 0
+          },
+          "next_game": null,
+          "trend": "stable"
+        }
+      ],
+      "bottomTeams": [
+        {
+          "team_id": "MLB-STL",
+          "name": "St. Louis Cardinals",
+          "readiness_score": 65,
+          "status": "yellow",
+          "components": {
+            "recent_performance": 50,
+            "player_availability": 100,
+            "matchup_history": 50,
+            "momentum": 50,
+            "rest_factor": 75
+          },
+          "leverage": 50,
+          "players": {
+            "total": 1,
+            "available": 1,
+            "stars": 0
+          },
+          "next_game": null,
+          "trend": "stable"
+        }
+      ]
+    },
+    "NFL": {
+      "teams": [
+        {
+          "team_id": "NFL-TEN",
+          "name": "Tennessee Titans",
+          "readiness_score": 64,
+          "status": "yellow",
+          "components": {
+            "injury_report": 100,
+            "divisional_matchup": 50,
+            "home_field": 25,
+            "rest_advantage": 50,
+            "playoff_implications": 50
+          },
+          "leverage": 50,
+          "players": {
+            "total": 1,
+            "available": 1,
+            "stars": 0
+          },
+          "next_game": null,
+          "trend": "stable"
+        }
+      ],
+      "averageReadiness": 64,
+      "topTeams": [
+        {
+          "team_id": "NFL-TEN",
+          "name": "Tennessee Titans",
+          "readiness_score": 64,
+          "status": "yellow",
+          "components": {
+            "injury_report": 100,
+            "divisional_matchup": 50,
+            "home_field": 25,
+            "rest_advantage": 50,
+            "playoff_implications": 50
+          },
+          "leverage": 50,
+          "players": {
+            "total": 1,
+            "available": 1,
+            "stars": 0
+          },
+          "next_game": null,
+          "trend": "stable"
+        }
+      ],
+      "bottomTeams": [
+        {
+          "team_id": "NFL-TEN",
+          "name": "Tennessee Titans",
+          "readiness_score": 64,
+          "status": "yellow",
+          "components": {
+            "injury_report": 100,
+            "divisional_matchup": 50,
+            "home_field": 25,
+            "rest_advantage": 50,
+            "playoff_implications": 50
+          },
+          "leverage": 50,
+          "players": {
+            "total": 1,
+            "available": 1,
+            "stars": 0
+          },
+          "next_game": null,
+          "trend": "stable"
+        }
+      ]
+    },
+    "NCAA-FB": {
+      "teams": [
+        {
+          "team_id": "NCAA-TEX",
+          "name": "Texas Longhorns",
+          "readiness_score": 0,
+          "status": "red",
+          "components": {
+            "overall_health": 100,
+            "recent_form": 50,
+            "team_quality": 81.9
+          },
+          "leverage": 50,
+          "players": {
+            "total": 1,
+            "available": 1,
+            "stars": 1
+          },
+          "next_game": null,
+          "trend": "stable"
+        }
+      ],
+      "averageReadiness": 0,
+      "topTeams": [
+        {
+          "team_id": "NCAA-TEX",
+          "name": "Texas Longhorns",
+          "readiness_score": 0,
+          "status": "red",
+          "components": {
+            "overall_health": 100,
+            "recent_form": 50,
+            "team_quality": 81.9
+          },
+          "leverage": 50,
+          "players": {
+            "total": 1,
+            "available": 1,
+            "stars": 1
+          },
+          "next_game": null,
+          "trend": "stable"
+        }
+      ],
+      "bottomTeams": [
+        {
+          "team_id": "NCAA-TEX",
+          "name": "Texas Longhorns",
+          "readiness_score": 0,
+          "status": "red",
+          "components": {
+            "overall_health": 100,
+            "recent_form": 50,
+            "team_quality": 81.9
+          },
+          "leverage": 50,
+          "players": {
+            "total": 1,
+            "available": 1,
+            "stars": 1
+          },
+          "next_game": null,
+          "trend": "stable"
+        }
+      ]
+    }
+  },
+  "featured": [],
+  "alerts": []
+}

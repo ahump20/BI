@@ -1,0 +1,387 @@
+{
+  "version": "2.0.0",
+  "generated_at": "2025-08-24T14:23:24.876302",
+  "teams": [
+    {
+      "team_id": "MLB-STL",
+      "name": "St. Louis Cardinals",
+      "full_name": "St. Louis Cardinals",
+      "sport": "MLB",
+      "league": "MLB",
+      "division": "NL Central",
+      "location": {
+        "city": "St. Louis",
+        "state": "Missouri",
+        "country": "USA",
+        "venue": "Busch Stadium",
+        "timezone": "America/Chicago"
+      },
+      "season_2024": {
+        "wins": 83,
+        "losses": 79,
+        "ties": 0,
+        "win_pct": 0.512,
+        "playoff_seed": null
+      },
+      "roster": [
+        {
+          "player_id": "MLB-STL-0001",
+          "name": "Paul Goldschmidt",
+          "sport": "MLB",
+          "league": "MLB",
+          "team_id": "MLB-STL",
+          "position": "1B",
+          "jersey_number": "46",
+          "bio": {
+            "dob": "1987-09-10",
+            "birthplace": "Wilmington, Delaware",
+            "height_cm": 191,
+            "weight_kg": 98,
+            "handedness": "R"
+          },
+          "stats_2024": {
+            "games_played": 154,
+            "mlb": {
+              "avg": 0.245,
+              "obp": 0.302,
+              "slg": 0.414,
+              "ops": 0.716,
+              "hr": 22,
+              "rbi": 65,
+              "war": 1.8
+            }
+          },
+          "hav_f": {
+            "champion_readiness": 67.4,
+            "cognitive_leverage": 71.2,
+            "nil_trust_score": 45.8,
+            "composite_score": 62.3,
+            "percentile_rank": 72,
+            "trend": "stable",
+            "computed_at": "2025-08-24T14:23:24.876282"
+          },
+          "injury_status": {
+            "current_status": "healthy"
+          },
+          "meta": {
+            "sources": [
+              "MLB Stats API",
+              "Baseball Savant"
+            ],
+            "updated_at": "2025-08-24T14:23:24.876285",
+            "external_ids": {
+              "mlbam_id": "502671"
+            }
+          }
+        }
+      ],
+      "analytics": {
+        "team_havf_avg": 72.4,
+        "offense_rating": 98.2,
+        "defense_rating": 91.7
+      },
+      "meta": {
+        "sources": [
+          "MLB Stats API"
+        ],
+        "updated_at": "2025-08-24T14:23:24.876252"
+      }
+    },
+    {
+      "team_id": "NFL-TEN",
+      "name": "Tennessee Titans",
+      "full_name": "Tennessee Titans",
+      "sport": "NFL",
+      "league": "NFL",
+      "division": "AFC South",
+      "location": {
+        "city": "Nashville",
+        "state": "Tennessee",
+        "country": "USA",
+        "venue": "Nissan Stadium",
+        "timezone": "America/Chicago"
+      },
+      "season_2024": {
+        "wins": 3,
+        "losses": 14,
+        "ties": 0,
+        "win_pct": 0.176
+      },
+      "roster": [
+        {
+          "player_id": "NFL-TEN-0001",
+          "name": "Derrick Henry",
+          "sport": "NFL",
+          "league": "NFL",
+          "team_id": "NFL-TEN",
+          "position": "RB",
+          "jersey_number": "22",
+          "bio": {
+            "dob": "1994-01-04",
+            "birthplace": "Yulee, Florida",
+            "height_cm": 191,
+            "weight_kg": 113,
+            "college": "Alabama"
+          },
+          "stats_2024": {
+            "games_played": 17,
+            "nfl": {
+              "rushing_yards": 1167,
+              "rushing_tds": 12,
+              "receiving_yards": 273,
+              "receiving_tds": 1
+            }
+          },
+          "hav_f": {
+            "champion_readiness": 89.7,
+            "cognitive_leverage": 65.3,
+            "nil_trust_score": 78.4,
+            "composite_score": 79.1,
+            "percentile_rank": 91,
+            "trend": "rising",
+            "computed_at": "2025-08-24T14:23:24.876290"
+          },
+          "meta": {
+            "sources": [
+              "ESPN NFL API"
+            ],
+            "updated_at": "2025-08-24T14:23:24.876292"
+          }
+        }
+      ],
+      "meta": {
+        "sources": [
+          "ESPN NFL API"
+        ],
+        "updated_at": "2025-08-24T14:23:24.876274"
+      }
+    },
+    {
+      "team_id": "NCAA-TEX",
+      "name": "Texas Longhorns",
+      "full_name": "University of Texas Longhorns",
+      "sport": "NCAA-FB",
+      "league": "NCAA",
+      "division": "SEC",
+      "location": {
+        "city": "Austin",
+        "state": "Texas",
+        "country": "USA",
+        "venue": "Darrell K Royal Stadium",
+        "timezone": "America/Chicago"
+      },
+      "roster": [
+        {
+          "player_id": "NCAA-TEX-0001",
+          "name": "Quinn Ewers",
+          "sport": "NCAA-FB",
+          "league": "NCAA",
+          "team_id": "NCAA-TEX",
+          "position": "QB",
+          "jersey_number": "3",
+          "bio": {
+            "dob": "2003-05-15",
+            "birthplace": "Southlake, Texas",
+            "height_cm": 191,
+            "weight_kg": 93,
+            "class_year": "Junior"
+          },
+          "stats_2024": {
+            "games_played": 11,
+            "ncaa": {
+              "passing_yards": 2665,
+              "passing_tds": 25,
+              "completion_pct": 65.8,
+              "passer_rating": 141.3
+            }
+          },
+          "nil_profile": {
+            "valuation_usd": 1200000,
+            "valuation_source": "On3",
+            "social_followers": {
+              "instagram": 287000,
+              "twitter": 94000,
+              "total": 381000
+            },
+            "engagement_rate": 4.2
+          },
+          "hav_f": {
+            "champion_readiness": 75.8,
+            "cognitive_leverage": 82.4,
+            "nil_trust_score": 91.2,
+            "composite_score": 81.9,
+            "percentile_rank": 94,
+            "trend": "rising",
+            "computed_at": "2025-08-24T14:23:24.876296"
+          },
+          "recruiting": {
+            "stars": 5,
+            "national_rank": 1,
+            "position_rank": 1
+          },
+          "meta": {
+            "sources": [
+              "ESPN College API",
+              "On3"
+            ],
+            "updated_at": "2025-08-24T14:23:24.876298"
+          }
+        }
+      ],
+      "meta": {
+        "sources": [
+          "ESPN College API"
+        ],
+        "updated_at": "2025-08-24T14:23:24.876277"
+      }
+    }
+  ],
+  "players": [
+    {
+      "player_id": "MLB-STL-0001",
+      "name": "Paul Goldschmidt",
+      "sport": "MLB",
+      "league": "MLB",
+      "team_id": "MLB-STL",
+      "position": "1B",
+      "jersey_number": "46",
+      "bio": {
+        "dob": "1987-09-10",
+        "birthplace": "Wilmington, Delaware",
+        "height_cm": 191,
+        "weight_kg": 98,
+        "handedness": "R"
+      },
+      "stats_2024": {
+        "games_played": 154,
+        "mlb": {
+          "avg": 0.245,
+          "obp": 0.302,
+          "slg": 0.414,
+          "ops": 0.716,
+          "hr": 22,
+          "rbi": 65,
+          "war": 1.8
+        }
+      },
+      "hav_f": {
+        "champion_readiness": 67.4,
+        "cognitive_leverage": 71.2,
+        "nil_trust_score": 45.8,
+        "composite_score": 62.3,
+        "percentile_rank": 72,
+        "trend": "stable",
+        "computed_at": "2025-08-24T14:23:24.876282"
+      },
+      "injury_status": {
+        "current_status": "healthy"
+      },
+      "meta": {
+        "sources": [
+          "MLB Stats API",
+          "Baseball Savant"
+        ],
+        "updated_at": "2025-08-24T14:23:24.876285",
+        "external_ids": {
+          "mlbam_id": "502671"
+        }
+      }
+    },
+    {
+      "player_id": "NFL-TEN-0001",
+      "name": "Derrick Henry",
+      "sport": "NFL",
+      "league": "NFL",
+      "team_id": "NFL-TEN",
+      "position": "RB",
+      "jersey_number": "22",
+      "bio": {
+        "dob": "1994-01-04",
+        "birthplace": "Yulee, Florida",
+        "height_cm": 191,
+        "weight_kg": 113,
+        "college": "Alabama"
+      },
+      "stats_2024": {
+        "games_played": 17,
+        "nfl": {
+          "rushing_yards": 1167,
+          "rushing_tds": 12,
+          "receiving_yards": 273,
+          "receiving_tds": 1
+        }
+      },
+      "hav_f": {
+        "champion_readiness": 89.7,
+        "cognitive_leverage": 65.3,
+        "nil_trust_score": 78.4,
+        "composite_score": 79.1,
+        "percentile_rank": 91,
+        "trend": "rising",
+        "computed_at": "2025-08-24T14:23:24.876290"
+      },
+      "meta": {
+        "sources": [
+          "ESPN NFL API"
+        ],
+        "updated_at": "2025-08-24T14:23:24.876292"
+      }
+    },
+    {
+      "player_id": "NCAA-TEX-0001",
+      "name": "Quinn Ewers",
+      "sport": "NCAA-FB",
+      "league": "NCAA",
+      "team_id": "NCAA-TEX",
+      "position": "QB",
+      "jersey_number": "3",
+      "bio": {
+        "dob": "2003-05-15",
+        "birthplace": "Southlake, Texas",
+        "height_cm": 191,
+        "weight_kg": 93,
+        "class_year": "Junior"
+      },
+      "stats_2024": {
+        "games_played": 11,
+        "ncaa": {
+          "passing_yards": 2665,
+          "passing_tds": 25,
+          "completion_pct": 65.8,
+          "passer_rating": 141.3
+        }
+      },
+      "nil_profile": {
+        "valuation_usd": 1200000,
+        "valuation_source": "On3",
+        "social_followers": {
+          "instagram": 287000,
+          "twitter": 94000,
+          "total": 381000
+        },
+        "engagement_rate": 4.2
+      },
+      "hav_f": {
+        "champion_readiness": 75.8,
+        "cognitive_leverage": 82.4,
+        "nil_trust_score": 91.2,
+        "composite_score": 81.9,
+        "percentile_rank": 94,
+        "trend": "rising",
+        "computed_at": "2025-08-24T14:23:24.876296"
+      },
+      "recruiting": {
+        "stars": 5,
+        "national_rank": 1,
+        "position_rank": 1
+      },
+      "meta": {
+        "sources": [
+          "ESPN College API",
+          "On3"
+        ],
+        "updated_at": "2025-08-24T14:23:24.876298"
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "timestamp": "2025-08-24T14:43:31.420608",
+  "overall_status": "degraded",
+  "checks": {
+    "data_freshness": {
+      "status": "healthy",
+      "issues": [],
+      "leagues": {
+        "ncaa": {
+          "file_age_hours": 0.0,
+          "players_count": 2,
+          "generated_at": "2025-08-24T19:43:23.448889Z",
+          "status": "healthy"
+        },
+        "mlb": {
+          "file_age_hours": 0.0,
+          "players_count": 5,
+          "generated_at": "2025-08-24T19:43:19.931111Z",
+          "status": "healthy"
+        },
+        "nil": {
+          "file_age_hours": 0.0,
+          "players_count": 3,
+          "generated_at": "2025-08-24T19:43:23.451213Z",
+          "status": "healthy"
+        },
+        "hs": {
+          "file_age_hours": 0.0,
+          "players_count": 2,
+          "generated_at": "2025-08-24T19:43:23.449872Z",
+          "status": "healthy"
+        },
+        "nfl": {
+          "file_age_hours": 0.0,
+          "players_count": 3,
+          "generated_at": "2025-08-24T19:43:23.448078Z",
+          "status": "healthy"
+        },
+        "intl": {
+          "file_age_hours": 0.0,
+          "players_count": 3,
+          "generated_at": "2025-08-24T19:43:23.453498Z",
+          "status": "healthy"
+        }
+      }
+    },
+    "api_availability": {
+      "status": "degraded",
+      "issues": [
+        "nfl API returned 404",
+        "ncaa API returned 401"
+      ],
+      "apis": {
+        "mlb": {
+          "status_code": 200,
+          "response_time_ms": 400.0,
+          "status": "healthy"
+        },
+        "nfl": {
+          "status_code": 404,
+          "response_time_ms": 181.0,
+          "status": "degraded"
+        },
+        "ncaa": {
+          "status_code": 401,
+          "response_time_ms": 238.4,
+          "status": "degraded"
+        }
+      }
+    },
+    "hav_f_metrics": {
+      "status": "healthy",
+      "issues": [],
+      "metrics": {
+        "total_players": 10,
+        "focus_players": 10,
+        "ready_players": 2,
+        "monitor_players": 3,
+        "caution_players": 5,
+        "invalid_metrics": 0
+      }
+    },
+    "system_resources": {
+      "status": "degraded",
+      "issues": [
+        "High CPU usage: 99.0%",
+        "High disk usage: 90.4%"
+      ],
+      "resources": {
+        "cpu_percent": 99.0,
+        "memory_percent": 77.0,
+        "disk_percent": 90.4
+      }
+    }
+  }
+}

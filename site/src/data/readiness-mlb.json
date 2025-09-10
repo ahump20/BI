@@ -1,0 +1,72 @@
+{
+  "teams": [
+    {
+      "team_id": "MLB-STL",
+      "name": "St. Louis Cardinals",
+      "readiness_score": 65,
+      "status": "yellow",
+      "components": {
+        "recent_performance": 50,
+        "player_availability": 100,
+        "matchup_history": 50,
+        "momentum": 50,
+        "rest_factor": 75
+      },
+      "leverage": 50,
+      "players": {
+        "total": 1,
+        "available": 1,
+        "stars": 0
+      },
+      "next_game": null,
+      "trend": "stable"
+    }
+  ],
+  "averageReadiness": 65,
+  "topTeams": [
+    {
+      "team_id": "MLB-STL",
+      "name": "St. Louis Cardinals",
+      "readiness_score": 65,
+      "status": "yellow",
+      "components": {
+        "recent_performance": 50,
+        "player_availability": 100,
+        "matchup_history": 50,
+        "momentum": 50,
+        "rest_factor": 75
+      },
+      "leverage": 50,
+      "players": {
+        "total": 1,
+        "available": 1,
+        "stars": 0
+      },
+      "next_game": null,
+      "trend": "stable"
+    }
+  ],
+  "bottomTeams": [
+    {
+      "team_id": "MLB-STL",
+      "name": "St. Louis Cardinals",
+      "readiness_score": 65,
+      "status": "yellow",
+      "components": {
+        "recent_performance": 50,
+        "player_availability": 100,
+        "matchup_history": 50,
+        "momentum": 50,
+        "rest_factor": 75
+      },
+      "leverage": 50,
+      "players": {
+        "total": 1,
+        "available": 1,
+        "stars": 0
+      },
+      "next_game": null,
+      "trend": "stable"
+    }
+  ]
+}

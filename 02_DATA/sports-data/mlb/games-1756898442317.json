@@ -1,0 +1,15 @@
+{
+  "sport": "MLB",
+  "dataType": "games",
+  "timestamp": 1756898442317,
+  "recordCount": 1,
+  "data": [
+    {
+      "id": "de7762fc-8d0c-4601-8b0b-d7ede14d7d50",
+      "homeTeam": {},
+      "awayTeam": {},
+      "processed_at": 1756898442316,
+      "source": "MLB:MLB Stats API"
+    }
+  ]
+}

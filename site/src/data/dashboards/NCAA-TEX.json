@@ -1,0 +1,36 @@
+{
+  "team_id": "NCAA-TEX",
+  "name": "Texas Longhorns",
+  "sport": "NCAA-FB",
+  "timestamp": "2025-09-03T12:40:00.606Z",
+  "current_readiness": {
+    "score": 0,
+    "status": "red",
+    "trend": "stable",
+    "percentile": 0
+  },
+  "components": {
+    "overall_health": 100,
+    "recent_form": 50,
+    "team_quality": 81.9
+  },
+  "leverage": {
+    "current_game": 50,
+    "season_average": 50,
+    "next_5_games": []
+  },
+  "players": {
+    "total": 1,
+    "available": 1,
+    "stars": 1
+  },
+  "recommendations": [],
+  "historical": {
+    "last_30_days": [
+      0
+    ],
+    "average": 0,
+    "peak": 0,
+    "trough": 0
+  }
+}

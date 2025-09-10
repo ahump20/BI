@@ -1,0 +1,82 @@
+{
+  "players": [
+    {
+      "id": "MLB-STL-goldschmidt",
+      "name": "Paul Goldschmidt",
+      "team_id": "MLB-STL",
+      "position": "1B",
+      "dob": "1987-09-10",
+      "height_cm": 191,
+      "weight_kg": 99,
+      "stats": {
+        "avg": 0.278,
+        "hr": 22,
+        "wpa": 1.8,
+        "war": 2.1
+      },
+      "projections": {
+        "avg": 0.265,
+        "hr": 18,
+        "war": 1.8
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 55.2,
+        "reaction_ms": 165.5,
+        "gsr_microsiemens": 3.1,
+        "sleep_hours": 7.5
+      }
+    },
+    {
+      "id": "MLB-STL-arenado",
+      "name": "Nolan Arenado",
+      "team_id": "MLB-STL",
+      "position": "3B",
+      "dob": "1991-04-16",
+      "height_cm": 188,
+      "weight_kg": 95,
+      "stats": {
+        "avg": 0.272,
+        "hr": 16,
+        "wpa": 1.2,
+        "war": 1.7
+      },
+      "projections": {
+        "avg": 0.275,
+        "hr": 20,
+        "war": 2.2
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 62.8,
+        "reaction_ms": 158.2,
+        "gsr_microsiemens": 2.8,
+        "sleep_hours": 8.0
+      }
+    },
+    {
+      "id": "MLB-STL-helsley",
+      "name": "Ryan Helsley",
+      "team_id": "MLB-STL",
+      "position": "RP",
+      "dob": "1994-07-18",
+      "height_cm": 185,
+      "weight_kg": 91,
+      "stats": {
+        "k_9": 11.2,
+        "era": 2.04,
+        "fip": 2.15,
+        "war": 2.8
+      },
+      "projections": {
+        "k_9": 10.8,
+        "era": 2.30,
+        "war": 2.5
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 48.5,
+        "reaction_ms": 172.1,
+        "gsr_microsiemens": 4.2,
+        "sleep_hours": 7.2
+      }
+    }
+  ]
+}

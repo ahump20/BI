@@ -1,0 +1,70 @@
+{
+  "lastUpdated": "2025-08-23T03:41:38.721Z",
+  "methodology": "Blaze Intelligence Proprietary Scoring System",
+  "teams": {
+    "cardinals": {
+      "name": "St. Louis Cardinals",
+      "league": "MLB",
+      "blazeScore": 84.2,
+      "tier": "competitive",
+      "championshipProbability": 12.8,
+      "organizationalHealth": 87.5,
+      "keyMetrics": {
+        "decisionVelocity": 8.2,
+        "patternRecognition": 8.7,
+        "cognitiveLoad": 7.8
+      }
+    },
+    "titans": {
+      "name": "Tennessee Titans",
+      "league": "NFL",
+      "blazeScore": 76.8,
+      "tier": "rebuilding",
+      "playoffProbability": 25.3,
+      "organizationalHealth": 72.1,
+      "keyMetrics": {
+        "decisionVelocity": 7.1,
+        "patternRecognition": 7.8,
+        "cognitiveLoad": 8
+      }
+    },
+    "longhorns": {
+      "name": "Texas Longhorns",
+      "league": "NCAA Football",
+      "blazeScore": 89.1,
+      "tier": "championship",
+      "championshipProbability": 18.5,
+      "organizationalHealth": 91.2,
+      "keyMetrics": {
+        "decisionVelocity": 8.9,
+        "patternRecognition": 9.1,
+        "cognitiveLoad": 8.7
+      }
+    },
+    "grizzlies": {
+      "name": "Memphis Grizzlies",
+      "league": "NBA",
+      "blazeScore": 82.5,
+      "tier": "playoff",
+      "playoffProbability": 68.4,
+      "organizationalHealth": 84.7,
+      "keyMetrics": {
+        "decisionVelocity": 8.1,
+        "patternRecognition": 8.4,
+        "cognitiveLoad": 8.3
+      }
+    }
+  },
+  "tierDefinitions": {
+    "championship": "90+ Blaze Score - Elite tier with championship probability >15%",
+    "competitive": "80-89 Blaze Score - Strong tier with playoff probability >40%",
+    "playoff": "70-79 Blaze Score - Developing tier with playoff probability 30-70%",
+    "rebuilding": "60-69 Blaze Score - Rebuilding tier focusing on foundation development"
+  },
+  "contact": {
+    "analyst": "Austin Humphrey",
+    "email": "ahump20@outlook.com",
+    "phone": "(210) 273-5538",
+    "company": "Blaze Intelligence"
+  }
+}

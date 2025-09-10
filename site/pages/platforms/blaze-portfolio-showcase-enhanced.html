@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Elite Sports Analytics Portfolio</title>
+    <meta name="description" content="Blaze Intelligence - Revolutionary sports analytics platform featuring real-time data, AI-powered insights, and elite performance tracking for Cardinals, Titans, Longhorns, and Grizzlies.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FF6B35'/%3E%3Ctext x='50' y='70' font-size='60' fill='white' text-anchor='middle' font-weight='bold'%3EB%3C/text%3E%3C/svg%3E">
+    
+    <style>
+        :root {
+            --blaze-orange: #FF6B35;
+            --blaze-burnt: #CC5500;
+            --blaze-dark: #0A0A0A;
+            --blaze-darker: #1A1A1A;
+            --blaze-white: #FFFFFF;
+            --blaze-gray: #9CA3AF;
+            --blaze-light-gray: #E5E7EB;
+            --gradient-orange: linear-gradient(135deg, #FF6B35 0%, #CC5500 100%);
+            --gradient-dark: linear-gradient(180deg, #0A0A0A 0%, #1A1A1A 100%);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.4);
+            --shadow-glow: 0 0 40px rgba(255,107,53,0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--blaze-dark);
+            color: var(--blaze-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--blaze-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
+            border-top-color: var(--blaze-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .nav-header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-orange);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--blaze-white);
+            font-size: 24px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--blaze-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--blaze-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--blaze-orange);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--gradient-orange);
+            color: var(--blaze-white);
+            padding: 0.75rem 1.75rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 60px rgba(255,107,53,0.6);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #heroCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--blaze-orange);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--blaze-orange), var(--blaze-burnt));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 2rem);
+            color: var(--blaze-light-gray);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--blaze-gray);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-orange);
+            color: var(--blaze-white);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 60px rgba(255,107,53,0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--blaze-orange);
+            border: 2px solid var(--blaze-orange);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--gradient-dark);
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--blaze-orange);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--blaze-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .stat-badge {
+            position: absolute;
+            top: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            background: var(--blaze-orange);
+            color: var(--blaze-dark);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--blaze-orange);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--blaze-white);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--blaze-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--blaze-darker);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            position: relative;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            border-color: var(--blaze-orange);
+        }
+
+        .project-visual {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), transparent);
+        }
+
+        .project-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .project-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--blaze-orange);
+            color: var(--blaze-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .project-info {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--blaze-white);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--blaze-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--blaze-orange);
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .project-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--blaze-orange);
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--blaze-gray);
+            text-transform: uppercase;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid var(--blaze-orange);
+            border-radius: 12px;
+            color: var(--blaze-orange);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            background: var(--blaze-orange);
+            color: var(--blaze-dark);
+        }
+
+        .project-link.primary {
+            background: var(--blaze-orange);
+            color: var(--blaze-dark);
+        }
+
+        .project-link.primary:hover {
+            background: var(--blaze-burnt);
+            border-color: var(--blaze-burnt);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--blaze-darker), rgba(255, 107, 53, 0.05));
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: rgba(26, 26, 26, 0.5);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--blaze-orange);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-orange);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--blaze-gray);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), transparent);
+        }
+
+        .cta-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--blaze-white);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            color: var(--blaze-gray);
+            margin-bottom: 3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--blaze-dark);
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+            padding: 3rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--blaze-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--blaze-orange);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 107, 53, 0.1);
+            text-align: center;
+            color: var(--blaze-gray);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--blaze-orange);
+            transition: all 0.3s;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--blaze-darker);
+                flex-direction: column;
+                justify-content: center;
+                transition: right 0.3s;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .projects-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .project-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring" style="animation-delay: -0.3s"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-header" id="navHeader">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">B</div>
+                <div class="logo-text">Blaze Intelligence</div>
+            </a>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#analytics" class="nav-link">Analytics</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="https://blaze-intelligence.com" class="nav-cta">Live Platform</a>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">🔥 Elite Sports Analytics Platform</div>
+            <h1 class="hero-title">Blaze Intelligence</h1>
+            <p class="hero-subtitle">Where Cognitive Performance Meets Quarterly Performance</p>
+            <p class="hero-description">
+                Revolutionary AI-powered sports analytics delivering real-time insights, 
+                predictive modeling, and championship-level intelligence for Cardinals, 
+                Titans, Longhorns, and Grizzlies organizations.
+            </p>
+            <div class="hero-actions">
+                <a href="#projects" class="btn btn-primary">
+                    View Portfolio <span>→</span>
+                </a>
+                <a href="https://blaze-intelligence.com/demo" class="btn btn-secondary">
+                    Live Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stats-container">
+            <div class="stat-card">
+                <span class="stat-value" data-target="2.8">0</span>
+                <span class="stat-label">Million+ Data Points</span>
+                <span class="stat-badge">LIVE</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" data-target="94.6">0</span>
+                <span class="stat-label">% Accuracy Rate</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" data-target="100">0</span>
+                <span class="stat-label">ms Response Time</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" data-target="99.9">0</span>
+                <span class="stat-label">% Uptime SLA</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" data-target="4">0</span>
+                <span class="stat-label">Elite Teams</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" data-target="75">0</span>
+                <span class="stat-label">% Cost Savings</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="section-header">
+            <div class="section-badge">Portfolio</div>
+            <h2 class="section-title">Championship-Level Projects</h2>
+            <p class="section-subtitle">
+                Production-ready systems powering professional sports organizations 
+                with cutting-edge analytics and real-time intelligence.
+            </p>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Vision AI Platform -->
+            <div class="project-card">
+                <div class="project-visual">
+                    <canvas class="project-canvas" id="visionCanvas"></canvas>
+                    <div class="project-status">DEPLOYED</div>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Blaze Vision AI</h3>
+                    <p class="project-description">
+                        Computer vision platform analyzing biomechanics, micro-expressions, 
+                        and character traits. Delivers real-time coaching feedback with 
+                        neural pattern recognition for elite athlete development.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">TensorFlow.js</span>
+                        <span class="feature-tag">WebRTC</span>
+                        <span class="feature-tag">Three.js</span>
+                        <span class="feature-tag">Edge ML</span>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">60fps</span>
+                            <span class="metric-label">Processing</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">96.2%</span>
+                            <span class="metric-label">Accuracy</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value"><50ms</span>
+                            <span class="metric-label">Latency</span>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://blaze-intelligence.com/vision" class="project-link primary">Launch App</a>
+                        <a href="https://github.com/blazeintel/vision-ai" class="project-link">View Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cardinals Analytics Hub -->
+            <div class="project-card">
+                <div class="project-visual">
+                    <canvas class="project-canvas" id="cardinalsCanvas"></canvas>
+                    <div class="project-status">LIVE</div>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Cardinals Command Center</h3>
+                    <p class="project-description">
+                        Real-time MLB analytics dashboard featuring predictive modeling, 
+                        player readiness scores, and strategic leverage calculations. 
+                        Integrated with Statcast and Perfect Game data feeds.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">React</span>
+                        <span class="feature-tag">D3.js</span>
+                        <span class="feature-tag">WebSocket</span>
+                        <span class="feature-tag">Redis</span>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">2.8M+</span>
+                            <span class="metric-label">Data Points</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Live</span>
+                            <span class="metric-label">Updates</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">24/7</span>
+                            <span class="metric-label">Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://cardinals.blaze-intelligence.com" class="project-link primary">View Dashboard</a>
+                        <a href="/api/cardinals" class="project-link">API Docs</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multiplayer Infrastructure -->
+            <div class="project-card">
+                <div class="project-visual">
+                    <canvas class="project-canvas" id="multiplayerCanvas"></canvas>
+                    <div class="project-status">SCALED</div>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Edge Multiplayer System</h3>
+                    <p class="project-description">
+                        Cloudflare Workers-based infrastructure supporting 10,000+ 
+                        concurrent connections. Features Durable Objects for state 
+                        management and anti-cheat validation at the edge.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">Cloudflare</span>
+                        <span class="feature-tag">WebSocket</span>
+                        <span class="feature-tag">Durable Objects</span>
+                        <span class="feature-tag">TypeScript</span>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">10K+</span>
+                            <span class="metric-label">Concurrent</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value"><30ms</span>
+                            <span class="metric-label">Global Latency</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">99.99%</span>
+                            <span class="metric-label">Uptime</span>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://workers.blaze-intelligence.com" class="project-link primary">Deploy Guide</a>
+                        <a href="https://github.com/blazeintel/edge-multiplayer" class="project-link">Source Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NIL Valuation Engine -->
+            <div class="project-card">
+                <div class="project-visual">
+                    <canvas class="project-canvas" id="nilCanvas"></canvas>
+                    <div class="project-status">BETA</div>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">NIL Valuation Platform</h3>
+                    <p class="project-description">
+                        AI-powered NIL valuation system analyzing performance metrics, 
+                        social reach, and market dynamics. Provides real-time valuations 
+                        for college athletes across football and basketball.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">Python</span>
+                        <span class="feature-tag">FastAPI</span>
+                        <span class="feature-tag">ML Pipeline</span>
+                        <span class="feature-tag">PostgreSQL</span>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">5K+</span>
+                            <span class="metric-label">Athletes</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Daily</span>
+                            <span class="metric-label">Updates</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">92%</span>
+                            <span class="metric-label">Accuracy</span>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://nil.blaze-intelligence.com" class="project-link primary">Access Platform</a>
+                        <a href="/api/nil/docs" class="project-link">API Reference</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perfect Game Integration -->
+            <div class="project-card">
+                <div class="project-visual">
+                    <canvas class="project-canvas" id="perfectGameCanvas"></canvas>
+                    <div class="project-status">ACTIVE</div>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Youth Baseball Pipeline</h3>
+                    <p class="project-description">
+                        Comprehensive youth baseball analytics integrating Perfect Game 
+                        showcase data, travel team statistics, and development tracking 
+                        for elite prospects from 14U through college commitment.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">Next.js</span>
+                        <span class="feature-tag">Supabase</span>
+                        <span class="feature-tag">Chart.js</span>
+                        <span class="feature-tag">Vercel</span>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">25K+</span>
+                            <span class="metric-label">Players</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">500+</span>
+                            <span class="metric-label">Teams</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Real-time</span>
+                            <span class="metric-label">Updates</span>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://youth.blaze-intelligence.com" class="project-link primary">Scout Portal</a>
+                        <a href="/showcase" class="project-link">Live Showcase</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics API -->
+            <div class="project-card">
+                <div class="project-visual">
+                    <canvas class="project-canvas" id="apiCanvas"></canvas>
+                    <div class="project-status">v2.0</div>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Blaze Analytics API</h3>
+                    <p class="project-description">
+                        Enterprise-grade REST and GraphQL APIs delivering sports analytics, 
+                        real-time data streams, and predictive models. Powers mobile apps, 
+                        dashboards, and third-party integrations.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">Node.js</span>
+                        <span class="feature-tag">GraphQL</span>
+                        <span class="feature-tag">OpenAPI</span>
+                        <span class="feature-tag">OAuth2</span>
+                    </div>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">10M+</span>
+                            <span class="metric-label">Requests/Day</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value"><100ms</span>
+                            <span class="metric-label">P95 Latency</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">99.9%</span>
+                            <span class="metric-label">SLA</span>
+                        </div>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://api.blaze-intelligence.com" class="project-link primary">API Portal</a>
+                        <a href="/api/playground" class="project-link">GraphQL Playground</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="section-header">
+                <div class="section-badge">Capabilities</div>
+                <h2 class="section-title">Enterprise Features</h2>
+                <p class="section-subtitle">
+                    Professional-grade infrastructure designed for championship organizations
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Real-Time Analytics</h3>
+                    <p class="feature-description">
+                        Sub-100ms data processing with live updates across all platforms. 
+                        WebSocket streams deliver instant insights during games and training.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">AI-Powered Intelligence</h3>
+                    <p class="feature-description">
+                        Advanced machine learning models analyzing patterns, predicting 
+                        outcomes, and identifying opportunities competitors miss.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Precision Tracking</h3>
+                    <p class="feature-description">
+                        Military-grade accuracy in performance metrics, biomechanical 
+                        analysis, and character assessment through computer vision.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Edge Computing</h3>
+                    <p class="feature-description">
+                        Global CDN with 200+ edge locations ensuring <30ms latency 
+                        worldwide. Cloudflare Workers process data at the edge.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3 class="feature-title">Enterprise Security</h3>
+                    <p class="feature-description">
+                        SOC 2 Type II compliant infrastructure with end-to-end encryption, 
+                        OAuth2 authentication, and role-based access control.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Mobile-First Design</h3>
+                    <p class="feature-description">
+                        Native iOS/Android apps and PWAs deliver full functionality 
+                        on any device. Offline-first architecture ensures reliability.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-container">
+            <h2 class="cta-title">Ready to Dominate?</h2>
+            <p class="cta-description">
+                Join elite organizations leveraging Blaze Intelligence for 
+                championship-level performance and 67-80% cost savings.
+            </p>
+            <div class="hero-actions">
+                <a href="https://blaze-intelligence.com/contact" class="btn btn-primary">
+                    Schedule Demo <span>→</span>
+                </a>
+                <a href="https://blaze-intelligence.com/pricing" class="btn btn-secondary">
+                    View Pricing
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo-icon">B</div>
+                    <div>
+                        <div class="logo-text">Blaze Intelligence</div>
+                        <p style="color: var(--blaze-gray); margin-top: 0.5rem;">
+                            Where cognitive performance meets quarterly performance
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4 style="color: var(--blaze-white); margin-bottom: 1rem;">Products</h4>
+                <div class="footer-links">
+                    <a href="https://blaze-intelligence.com/vision" class="footer-link">Vision AI</a>
+                    <a href="https://blaze-intelligence.com/analytics" class="footer-link">Analytics Hub</a>
+                    <a href="https://blaze-intelligence.com/api" class="footer-link">Developer API</a>
+                    <a href="https://blaze-intelligence.com/mobile" class="footer-link">Mobile Apps</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4 style="color: var(--blaze-white); margin-bottom: 1rem;">Teams</h4>
+                <div class="footer-links">
+                    <a href="https://cardinals.blaze-intelligence.com" class="footer-link">Cardinals</a>
+                    <a href="https://titans.blaze-intelligence.com" class="footer-link">Titans</a>
+                    <a href="https://longhorns.blaze-intelligence.com" class="footer-link">Longhorns</a>
+                    <a href="https://grizzlies.blaze-intelligence.com" class="footer-link">Grizzlies</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4 style="color: var(--blaze-white); margin-bottom: 1rem;">Contact</h4>
+                <div class="footer-links">
+                    <a href="mailto:ahump20@outlook.com" class="footer-link">ahump20@outlook.com</a>
+                    <a href="tel:+12102735538" class="footer-link">(210) 273-5538</a>
+                    <a href="https://blaze-intelligence.com" class="footer-link">blaze-intelligence.com</a>
+                    <a href="https://linkedin.com/in/john-humphrey-2033" class="footer-link">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Blaze Intelligence. All rights reserved. | Austin Humphrey</p>
+        </div>
+    </footer>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <script>
+        // Blaze Intelligence Portfolio - Enhanced Version
+        
+        class BlazePortfolioEnhanced {
+            constructor() {
+                this.scenes = {};
+                this.renderers = {};
+                this.cameras = {};
+                this.animationFrames = {};
+                this.particles = {};
+                
+                this.init();
+            }
+            
+            init() {
+                this.setupHeroScene();
+                this.setupProjectScenes();
+                this.setupInteractions();
+                this.initAnimations();
+                this.initCounters();
+                
+                // Hide loading screen
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').classList.add('hidden');
+                }, 1500);
+            }
+            
+            setupHeroScene() {
+                const canvas = document.getElementById('heroCanvas');
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(
+                    75, 
+                    window.innerWidth / window.innerHeight, 
+                    0.1, 
+                    1000
+                );
+                
+                const renderer = new THREE.WebGLRenderer({ 
+                    canvas, 
+                    alpha: true,
+                    antialias: true
+                });
+                
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                
+                camera.position.z = 30;
+                
+                // Create particle system
+                this.createParticleSystem(scene);
+                
+                // Create floating sports elements
+                this.createSportsElements(scene);
+                
+                // Create network connections
+                this.createNetworkMesh(scene);
+                
+                // Add lighting
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+                scene.add(ambientLight);
+                
+                const pointLight = new THREE.PointLight(0xff6b35, 2);
+                pointLight.position.set(10, 10, 10);
+                scene.add(pointLight);
+                
+                this.scenes.hero = scene;
+                this.cameras.hero = camera;
+                this.renderers.hero = renderer;
+            }
+            
+            createParticleSystem(scene) {
+                const particleCount = 2000;
+                const geometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(particleCount * 3);
+                const colors = new Float32Array(particleCount * 3);
+                
+                for (let i = 0; i < particleCount * 3; i += 3) {
+                    positions[i] = (Math.random() - 0.5) * 100;
+                    positions[i + 1] = (Math.random() - 0.5) * 100;
+                    positions[i + 2] = (Math.random() - 0.5) * 100;
+                    
+                    const color = Math.random() > 0.5 ? 
+                        new THREE.Color(0xff6b35) : 
+                        new THREE.Color(0xcc5500);
+                    
+                    colors[i] = color.r;
+                    colors[i + 1] = color.g;
+                    colors[i + 2] = color.b;
+                }
+                
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                
+                const material = new THREE.PointsMaterial({
+                    size: 0.5,
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.8,
+                    blending: THREE.AdditiveBlending
+                });
+                
+                const particles = new THREE.Points(geometry, material);
+                scene.add(particles);
+                
+                this.particles.hero = particles;
+            }
+            
+            createSportsElements(scene) {
+                // Baseball
+                const baseballGeometry = new THREE.SphereGeometry(1, 16, 16);
+                const baseballMaterial = new THREE.MeshPhongMaterial({
+                    color: 0xffffff,
+                    emissive: 0xff6b35,
+                    emissiveIntensity: 0.2
+                });
+                const baseball = new THREE.Mesh(baseballGeometry, baseballMaterial);
+                baseball.position.set(15, 5, -10);
+                baseball.userData = { sport: 'baseball', speed: 0.01 };
+                scene.add(baseball);
+                
+                // Football
+                const footballGeometry = new THREE.CapsuleGeometry(0.6, 1.5, 8, 16);
+                const footballMaterial = new THREE.MeshPhongMaterial({
+                    color: 0x8b4513,
+                    emissive: 0xff6b35,
+                    emissiveIntensity: 0.1
+                });
+                const football = new THREE.Mesh(footballGeometry, footballMaterial);
+                football.position.set(-10, -5, -15);
+                football.rotation.z = Math.PI / 2;
+                football.userData = { sport: 'football', speed: 0.015 };
+                scene.add(football);
+                
+                // Basketball
+                const basketballGeometry = new THREE.SphereGeometry(1.2, 32, 32);
+                const basketballMaterial = new THREE.MeshPhongMaterial({
+                    color: 0xff6b35,
+                    emissive: 0xff6b35,
+                    emissiveIntensity: 0.3
+                });
+                const basketball = new THREE.Mesh(basketballGeometry, basketballMaterial);
+                basketball.position.set(-15, 10, -20);
+                basketball.userData = { sport: 'basketball', speed: 0.02 };
+                scene.add(basketball);
+                
+                // Data cube representing analytics
+                const dataGeometry = new THREE.BoxGeometry(2, 2, 2);
+                const dataMaterial = new THREE.MeshPhongMaterial({
+                    color: 0x00ff00,
+                    emissive: 0xff6b35,
+                    emissiveIntensity: 0.2,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                const dataCube = new THREE.Mesh(dataGeometry, dataMaterial);
+                dataCube.position.set(10, -10, -25);
+                dataCube.userData = { sport: 'data', speed: 0.025 };
+                scene.add(dataCube);
+            }
+            
+            createNetworkMesh(scene) {
+                const nodeCount = 20;
+                const nodes = [];
+                
+                for (let i = 0; i < nodeCount; i++) {
+                    const nodeGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+                    const nodeMaterial = new THREE.MeshBasicMaterial({
+                        color: 0xff6b35,
+                        transparent: true,
+                        opacity: 0.6
+                    });
+                    
+                    const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
+                    node.position.set(
+                        (Math.random() - 0.5) * 50,
+                        (Math.random() - 0.5) * 50,
+                        (Math.random() - 0.5) * 50
+                    );
+                    
+                    nodes.push(node);
+                    scene.add(node);
+                }
+                
+                // Connect random nodes
+                for (let i = 0; i < nodeCount / 2; i++) {
+                    const idx1 = Math.floor(Math.random() * nodeCount);
+                    const idx2 = Math.floor(Math.random() * nodeCount);
+                    
+                    if (idx1 !== idx2) {
+                        const points = [nodes[idx1].position, nodes[idx2].position];
+                        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                        const material = new THREE.LineBasicMaterial({
+                            color: 0xff6b35,
+                            transparent: true,
+                            opacity: 0.2
+                        });
+                        
+                        const line = new THREE.Line(geometry, material);
+                        scene.add(line);
+                    }
+                }
+            }
+            
+            setupProjectScenes() {
+                const projectCanvases = [
+                    { id: 'visionCanvas', type: 'vision' },
+                    { id: 'cardinalsCanvas', type: 'cardinals' },
+                    { id: 'multiplayerCanvas', type: 'multiplayer' },
+                    { id: 'nilCanvas', type: 'nil' },
+                    { id: 'perfectGameCanvas', type: 'perfectgame' },
+                    { id: 'apiCanvas', type: 'api' }
+                ];
+                
+                projectCanvases.forEach(canvas => {
+                    this.createProjectScene(canvas);
+                });
+            }
+            
+            createProjectScene(canvasData) {
+                const canvas = document.getElementById(canvasData.id);
+                if (!canvas) return;
+                
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(
+                    75,
+                    canvas.clientWidth / canvas.clientHeight,
+                    0.1,
+                    1000
+                );
+                
+                const renderer = new THREE.WebGLRenderer({
+                    canvas,
+                    alpha: true,
+                    antialias: true
+                });
+                
+                renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+                camera.position.z = 10;
+                
+                // Add specific content based on project type
+                switch(canvasData.type) {
+                    case 'vision':
+                        this.createVisionScene(scene);
+                        break;
+                    case 'cardinals':
+                        this.createCardinalsScene(scene);
+                        break;
+                    case 'multiplayer':
+                        this.createMultiplayerScene(scene);
+                        break;
+                    case 'nil':
+                        this.createNILScene(scene);
+                        break;
+                    case 'perfectgame':
+                        this.createPerfectGameScene(scene);
+                        break;
+                    case 'api':
+                        this.createAPIScene(scene);
+                        break;
+                }
+                
+                this.scenes[canvasData.id] = scene;
+                this.cameras[canvasData.id] = camera;
+                this.renderers[canvasData.id] = renderer;
+            }
+            
+            createVisionScene(scene) {
+                // Create wireframe human figure
+                const bodyGeometry = new THREE.CylinderGeometry(1, 1, 4, 8);
+                const wireframeMaterial = new THREE.MeshBasicMaterial({
+                    color: 0xff6b35,
+                    wireframe: true
+                });
+                
+                const body = new THREE.Mesh(bodyGeometry, wireframeMaterial);
+                scene.add(body);
+                
+                // Add tracking points
+                for (let i = 0; i < 10; i++) {
+                    const pointGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+                    const pointMaterial = new THREE.MeshBasicMaterial({
+                        color: 0x00ff00,
+                        transparent: true,
+                        opacity: 0.8
+                    });
+                    
+                    const point = new THREE.Mesh(pointGeometry, pointMaterial);
+                    point.position.set(
+                        Math.cos(i / 10 * Math.PI * 2) * 2,
+                        (Math.random() - 0.5) * 4,
+                        Math.sin(i / 10 * Math.PI * 2) * 2
+                    );
+                    
+                    point.userData = { phase: i / 10 * Math.PI * 2 };
+                    scene.add(point);
+                }
+            }
+            
+            createCardinalsScene(scene) {
+                // Create baseball diamond
+                const diamondGeometry = new THREE.PlaneGeometry(8, 8);
+                const diamondMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x2d5016,
+                    transparent: true,
+                    opacity: 0.6
+                });
+                
+                const diamond = new THREE.Mesh(diamondGeometry, diamondMaterial);
+                diamond.rotation.x = -Math.PI / 2;
+                diamond.rotation.z = Math.PI / 4;
+                scene.add(diamond);
+                
+                // Add bases
+                const basePositions = [[3, 0, 0], [0, 0, -3], [-3, 0, 0], [0, 0, 3]];
+                basePositions.forEach(pos => {
+                    const baseGeometry = new THREE.BoxGeometry(0.5, 0.1, 0.5);
+                    const baseMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+                    const base = new THREE.Mesh(baseGeometry, baseMaterial);
+                    base.position.set(...pos);
+                    scene.add(base);
+                });
+                
+                // Animated baseball
+                const ballGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+                const ballMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+                const ball = new THREE.Mesh(ballGeometry, ballMaterial);
+                ball.position.y = 2;
+                ball.userData = { type: 'baseball' };
+                scene.add(ball);
+            }
+            
+            createMultiplayerScene(scene) {
+                // Central server node
+                const serverGeometry = new THREE.OctahedronGeometry(1);
+                const serverMaterial = new THREE.MeshBasicMaterial({
+                    color: 0xff6b35,
+                    wireframe: true
+                });
+                const server = new THREE.Mesh(serverGeometry, serverMaterial);
+                scene.add(server);
+                
+                // Client nodes
+                const clientCount = 8;
+                for (let i = 0; i < clientCount; i++) {
+                    const angle = (i / clientCount) * Math.PI * 2;
+                    const radius = 4;
+                    
+                    const clientGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+                    const clientMaterial = new THREE.MeshBasicMaterial({
+                        color: 0x00ff00,
+                        transparent: true,
+                        opacity: 0.8
+                    });
+                    
+                    const client = new THREE.Mesh(clientGeometry, clientMaterial);
+                    client.position.set(
+                        Math.cos(angle) * radius,
+                        0,
+                        Math.sin(angle) * radius
+                    );
+                    
+                    client.userData = { angle, radius };
+                    scene.add(client);
+                    
+                    // Connection lines
+                    const points = [new THREE.Vector3(0, 0, 0), client.position];
+                    const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+                    const lineMaterial = new THREE.LineBasicMaterial({
+                        color: 0xff6b35,
+                        transparent: true,
+                        opacity: 0.5
+                    });
+                    
+                    const line = new THREE.Line(lineGeometry, lineMaterial);
+                    scene.add(line);
+                }
+            }
+            
+            createNILScene(scene) {
+                // Create dollar sign
+                const dollarShape = new THREE.Shape();
+                dollarShape.moveTo(0, -2);
+                dollarShape.lineTo(0, 2);
+                
+                const dollarGeometry = new THREE.ShapeGeometry(dollarShape);
+                const dollarMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x00ff00,
+                    side: THREE.DoubleSide
+                });
+                
+                const dollar = new THREE.Mesh(dollarGeometry, dollarMaterial);
+                scene.add(dollar);
+                
+                // Add floating value indicators
+                for (let i = 0; i < 5; i++) {
+                    const barGeometry = new THREE.BoxGeometry(0.5, 1 + Math.random() * 3, 0.5);
+                    const barMaterial = new THREE.MeshBasicMaterial({
+                        color: new THREE.Color().setHSL(i * 0.2, 0.8, 0.6)
+                    });
+                    
+                    const bar = new THREE.Mesh(barGeometry, barMaterial);
+                    bar.position.set((i - 2) * 1.5, 0, 0);
+                    bar.userData = { originalHeight: bar.scale.y };
+                    scene.add(bar);
+                }
+            }
+            
+            createPerfectGameScene(scene) {
+                // Create baseball field layout
+                const fieldGeometry = new THREE.CircleGeometry(5, 32);
+                const fieldMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x2d5016,
+                    transparent: true,
+                    opacity: 0.5
+                });
+                
+                const field = new THREE.Mesh(fieldGeometry, fieldMaterial);
+                field.rotation.x = -Math.PI / 2;
+                scene.add(field);
+                
+                // Add player positions
+                for (let i = 0; i < 9; i++) {
+                    const playerGeometry = new THREE.ConeGeometry(0.3, 0.8, 8);
+                    const playerMaterial = new THREE.MeshBasicMaterial({
+                        color: 0xff6b35
+                    });
+                    
+                    const player = new THREE.Mesh(playerGeometry, playerMaterial);
+                    const angle = (i / 9) * Math.PI * 2;
+                    player.position.set(
+                        Math.cos(angle) * 3,
+                        0.4,
+                        Math.sin(angle) * 3
+                    );
+                    
+                    player.userData = { position: i };
+                    scene.add(player);
+                }
+            }
+            
+            createAPIScene(scene) {
+                // Create API endpoint nodes
+                const endpoints = [
+                    { name: 'GET', color: 0x00ff00 },
+                    { name: 'POST', color: 0x0080ff },
+                    { name: 'PUT', color: 0xffff00 },
+                    { name: 'DELETE', color: 0xff0000 }
+                ];
+                
+                endpoints.forEach((endpoint, index) => {
+                    const nodeGeometry = new THREE.BoxGeometry(1.5, 1, 0.5);
+                    const nodeMaterial = new THREE.MeshBasicMaterial({
+                        color: endpoint.color,
+                        transparent: true,
+                        opacity: 0.8
+                    });
+                    
+                    const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
+                    node.position.set((index - 1.5) * 2, 0, 0);
+                    node.userData = { endpoint: endpoint.name };
+                    scene.add(node);
+                });
+                
+                // Add data flow particles
+                const particleCount = 50;
+                const particleGeometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(particleCount * 3);
+                
+                for (let i = 0; i < particleCount * 3; i += 3) {
+                    positions[i] = (Math.random() - 0.5) * 8;
+                    positions[i + 1] = (Math.random() - 0.5) * 4;
+                    positions[i + 2] = (Math.random() - 0.5) * 4;
+                }
+                
+                particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                
+                const particleMaterial = new THREE.PointsMaterial({
+                    color: 0xff6b35,
+                    size: 0.1,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                
+                const particles = new THREE.Points(particleGeometry, particleMaterial);
+                scene.add(particles);
+                this.particles[scene.id] = particles;
+            }
+            
+            initAnimations() {
+                const animate = () => {
+                    requestAnimationFrame(animate);
+                    
+                    const time = Date.now() * 0.001;
+                    
+                    // Animate hero scene
+                    if (this.scenes.hero) {
+                        const scene = this.scenes.hero;
+                        
+                        // Rotate particles
+                        if (this.particles.hero) {
+                            this.particles.hero.rotation.y = time * 0.05;
+                        }
+                        
+                        // Animate sports elements
+                        scene.children.forEach(child => {
+                            if (child.userData.sport) {
+                                child.rotation.x = time * child.userData.speed;
+                                child.rotation.y = time * child.userData.speed * 1.5;
+                                child.position.y = child.position.y + Math.sin(time * 2) * 0.01;
+                            }
+                        });
+                        
+                        this.renderers.hero.render(scene, this.cameras.hero);
+                    }
+                    
+                    // Animate project scenes
+                    Object.keys(this.scenes).forEach(key => {
+                        if (key !== 'hero') {
+                            const scene = this.scenes[key];
+                            const camera = this.cameras[key];
+                            const renderer = this.renderers[key];
+                            
+                            if (!scene || !camera || !renderer) return;
+                            
+                            // Scene-specific animations
+                            scene.children.forEach(child => {
+                                if (child.userData.type === 'baseball') {
+                                    child.position.x = Math.sin(time * 2) * 3;
+                                    child.position.z = Math.cos(time * 2) * 3;
+                                }
+                                
+                                if (child.userData.phase !== undefined) {
+                                    child.position.y = Math.sin(time + child.userData.phase) * 2;
+                                }
+                                
+                                if (child.userData.angle !== undefined) {
+                                    const newAngle = child.userData.angle + time * 0.5;
+                                    child.position.x = Math.cos(newAngle) * child.userData.radius;
+                                    child.position.z = Math.sin(newAngle) * child.userData.radius;
+                                }
+                                
+                                if (child.userData.originalHeight) {
+                                    child.scale.y = child.userData.originalHeight * (0.8 + Math.sin(time * 2 + child.position.x) * 0.2);
+                                }
+                                
+                                if (child.userData.endpoint) {
+                                    child.rotation.y = Math.sin(time * 2) * 0.2;
+                                }
+                                
+                                if (child.userData.position !== undefined) {
+                                    child.position.y = 0.4 + Math.sin(time * 3 + child.userData.position) * 0.2;
+                                }
+                            });
+                            
+                            // Rotate entire scenes slowly
+                            scene.rotation.y = time * 0.1;
+                            
+                            renderer.render(scene, camera);
+                        }
+                    });
+                };
+                
+                animate();
+            }
+            
+            initCounters() {
+                const observerOptions = {
+                    threshold: 0.5,
+                    rootMargin: '0px'
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const counters = entry.target.querySelectorAll('.stat-value[data-target]');
+                            counters.forEach(counter => {
+                                this.animateCounter(counter);
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                
+                const statsBar = document.querySelector('.stats-bar');
+                if (statsBar) {
+                    observer.observe(statsBar);
+                }
+            }
+            
+            animateCounter(element) {
+                const target = parseFloat(element.dataset.target);
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        element.textContent = current.toFixed(1);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        if (target === 2.8) {
+                            element.textContent = '2.8M+';
+                        } else if (target === 100) {
+                            element.textContent = '<100';
+                        } else if (target === 75) {
+                            element.textContent = '67-80';
+                        } else {
+                            element.textContent = target % 1 === 0 ? target : target.toFixed(1);
+                        }
+                    }
+                };
+                
+                updateCounter();
+            }
+            
+            setupInteractions() {
+                // Scroll effects
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY;
+                    const navHeader = document.getElementById('navHeader');
+                    
+                    if (scrollY > 50) {
+                        navHeader.classList.add('scrolled');
+                    } else {
+                        navHeader.classList.remove('scrolled');
+                    }
+                });
+                
+                // Mobile menu
+                const mobileToggle = document.getElementById('mobileToggle');
+                const navMenu = document.getElementById('navMenu');
+                
+                if (mobileToggle && navMenu) {
+                    mobileToggle.addEventListener('click', () => {
+                        navMenu.classList.toggle('active');
+                    });
+                }
+                
+                // Smooth scrolling
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(anchor.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                });
+                
+                // Window resize
+                window.addEventListener('resize', () => {
+                    this.handleResize();
+                });
+                
+                // Project card hover
+                document.querySelectorAll('.project-card').forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        const canvas = card.querySelector('canvas');
+                        if (canvas) {
+                            canvas.style.transform = 'scale(1.05)';
+                        }
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        const canvas = card.querySelector('canvas');
+                        if (canvas) {
+                            canvas.style.transform = 'scale(1)';
+                        }
+                    });
+                });
+            }
+            
+            handleResize() {
+                // Resize hero scene
+                if (this.cameras.hero && this.renderers.hero) {
+                    this.cameras.hero.aspect = window.innerWidth / window.innerHeight;
+                    this.cameras.hero.updateProjectionMatrix();
+                    this.renderers.hero.setSize(window.innerWidth, window.innerHeight);
+                }
+                
+                // Resize project scenes
+                Object.keys(this.scenes).forEach(key => {
+                    if (key !== 'hero') {
+                        const canvas = document.getElementById(key);
+                        if (canvas && this.cameras[key] && this.renderers[key]) {
+                            this.cameras[key].aspect = canvas.clientWidth / canvas.clientHeight;
+                            this.cameras[key].updateProjectionMatrix();
+                            this.renderers[key].setSize(canvas.clientWidth, canvas.clientHeight);
+                        }
+                    }
+                });
+            }
+        }
+        
+        // Initialize on load
+        let portfolio;
+        window.addEventListener('DOMContentLoaded', () => {
+            portfolio = new BlazePortfolioEnhanced();
+        });
+        
+        // Export for external use
+        window.BlazePortfolioEnhanced = BlazePortfolioEnhanced;
+    </script>
+</body>
+</html>

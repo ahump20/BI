@@ -1,0 +1,4778 @@
+{
+  "league": "NFL",
+  "season": 2025,
+  "teams": [
+    {
+      "team": {
+        "id": "BUF",
+        "name": "Bills",
+        "city": "Buffalo",
+        "conference": "AFC",
+        "division": "East",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "BUF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.119Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "BUF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.119Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "BUF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.119Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "BUF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.119Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "BUF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.119Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "BUF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.119Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "MIA",
+        "name": "Dolphins",
+        "city": "Miami",
+        "conference": "AFC",
+        "division": "East",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "MIA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.432Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "MIA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.432Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "MIA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.432Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "MIA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.432Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "MIA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.432Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "MIA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.432Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "NE",
+        "name": "Patriots",
+        "city": "New England",
+        "conference": "AFC",
+        "division": "East",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "NE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "NYJ",
+        "name": "Jets",
+        "city": "New York",
+        "conference": "AFC",
+        "division": "East",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "NYJ",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.970Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NYJ",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.970Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NYJ",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.970Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NYJ",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.970Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NYJ",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.970Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NYJ",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:18.970Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "BAL",
+        "name": "Ravens",
+        "city": "Baltimore",
+        "conference": "AFC",
+        "division": "North",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "BAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.300Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "BAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.300Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "BAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.300Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "BAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.300Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "BAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.300Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "BAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.300Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "CIN",
+        "name": "Bengals",
+        "city": "Cincinnati",
+        "conference": "AFC",
+        "division": "North",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "CIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.535Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.535Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.535Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.535Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.535Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.535Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "CLE",
+        "name": "Browns",
+        "city": "Cleveland",
+        "conference": "AFC",
+        "division": "North",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "CLE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.851Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CLE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.851Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CLE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.851Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CLE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.851Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CLE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.851Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CLE",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.851Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "PIT",
+        "name": "Steelers",
+        "city": "Pittsburgh",
+        "conference": "AFC",
+        "division": "North",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "PIT",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.968Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "PIT",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.968Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "PIT",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.968Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "PIT",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.968Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "PIT",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.968Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "PIT",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:19.968Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "HOU",
+        "name": "Texans",
+        "city": "Houston",
+        "conference": "AFC",
+        "division": "South",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "HOU",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.177Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "HOU",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.177Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "HOU",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.177Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "HOU",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.177Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "HOU",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.177Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "HOU",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.177Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "IND",
+        "name": "Colts",
+        "city": "Indianapolis",
+        "conference": "AFC",
+        "division": "South",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "IND",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.492Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "IND",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.492Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "IND",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.492Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "IND",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.492Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "IND",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.492Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "IND",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.492Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "JAX",
+        "name": "Jaguars",
+        "city": "Jacksonville",
+        "conference": "AFC",
+        "division": "South",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "JAX",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.589Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "JAX",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.589Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "JAX",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.589Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "JAX",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.589Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "JAX",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.589Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "JAX",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:20.589Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "TEN",
+        "name": "Titans",
+        "city": "Tennessee",
+        "conference": "AFC",
+        "division": "South",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "TEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.022Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "TEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.022Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "TEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.022Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "TEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.022Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "TEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.022Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "TEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.022Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "DEN",
+        "name": "Broncos",
+        "city": "Denver",
+        "conference": "AFC",
+        "division": "West",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "DEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.171Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.171Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.171Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.171Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.171Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DEN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.171Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "KC",
+        "name": "Chiefs",
+        "city": "Kansas City",
+        "conference": "AFC",
+        "division": "West",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "KC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.563Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "KC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.563Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "KC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.563Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "KC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.563Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "KC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.563Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "KC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.563Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "LV",
+        "name": "Raiders",
+        "city": "Las Vegas",
+        "conference": "AFC",
+        "division": "West",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "LV",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.900Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LV",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.900Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LV",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.900Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LV",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.900Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LV",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.900Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LV",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:21.900Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "LAC",
+        "name": "Chargers",
+        "city": "Los Angeles",
+        "conference": "AFC",
+        "division": "West",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "LAC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.039Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LAC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.039Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LAC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.039Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LAC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.039Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LAC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.039Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LAC",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.039Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "DAL",
+        "name": "Cowboys",
+        "city": "Dallas",
+        "conference": "NFC",
+        "division": "East",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "DAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.195Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.195Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.195Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.195Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.195Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DAL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.195Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "NYG",
+        "name": "Giants",
+        "city": "New York",
+        "conference": "NFC",
+        "division": "East",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "NYG",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.594Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NYG",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.594Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NYG",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.594Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NYG",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.594Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NYG",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.594Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NYG",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.594Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "PHI",
+        "name": "Eagles",
+        "city": "Philadelphia",
+        "conference": "NFC",
+        "division": "East",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "PHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.710Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "PHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.710Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "PHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.710Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "PHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.710Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "PHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.710Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "PHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:22.710Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "WAS",
+        "name": "Commanders",
+        "city": "Washington",
+        "conference": "NFC",
+        "division": "East",
+        "standing": {}
+      },
+      "roster": [],
+      "metrics": {
+        "totalPlayers": 0,
+        "avgChampionReadiness": 0,
+        "avgCognitiveLeverage": 0,
+        "avgNilTrustScore": 0,
+        "topPerformers": [],
+        "positionGroups": {}
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "CHI",
+        "name": "Bears",
+        "city": "Chicago",
+        "conference": "NFC",
+        "division": "North",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "CHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.262Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.262Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.262Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.262Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.262Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CHI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.262Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "DET",
+        "name": "Lions",
+        "city": "Detroit",
+        "conference": "NFC",
+        "division": "North",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "DET",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.409Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DET",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.409Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DET",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.409Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DET",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.409Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DET",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.409Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "DET",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.409Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "GB",
+        "name": "Packers",
+        "city": "Green Bay",
+        "conference": "NFC",
+        "division": "North",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "GB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.620Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "GB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.620Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "GB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.620Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "GB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.620Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "GB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.620Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "GB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.620Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "MIN",
+        "name": "Vikings",
+        "city": "Minnesota",
+        "conference": "NFC",
+        "division": "North",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "MIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.908Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "MIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.909Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "MIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.909Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "MIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.909Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "MIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.909Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "MIN",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:23.909Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "ATL",
+        "name": "Falcons",
+        "city": "Atlanta",
+        "conference": "NFC",
+        "division": "South",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "ATL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.207Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "ATL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.207Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "ATL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.207Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "ATL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.207Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "ATL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.207Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "ATL",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.207Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "CAR",
+        "name": "Panthers",
+        "city": "Carolina",
+        "conference": "NFC",
+        "division": "South",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "CAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.304Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.304Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.304Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.304Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.304Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "CAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.304Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "NO",
+        "name": "Saints",
+        "city": "New Orleans",
+        "conference": "NFC",
+        "division": "South",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "NO",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NO",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NO",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NO",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NO",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "NO",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:24.861Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "TB",
+        "name": "Buccaneers",
+        "city": "Tampa Bay",
+        "conference": "NFC",
+        "division": "South",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "TB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.220Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "TB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.220Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "TB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.220Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "TB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.220Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "TB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.220Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "TB",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.220Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "ARI",
+        "name": "Cardinals",
+        "city": "Arizona",
+        "conference": "NFC",
+        "division": "West",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "ARI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.371Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "ARI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.371Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "ARI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.371Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "ARI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.371Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "ARI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.371Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "ARI",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.371Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "LAR",
+        "name": "Rams",
+        "city": "Los Angeles",
+        "conference": "NFC",
+        "division": "West",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "LAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.559Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.559Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.559Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.559Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.559Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "LAR",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.559Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "SF",
+        "name": "49ers",
+        "city": "San Francisco",
+        "conference": "NFC",
+        "division": "West",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "SF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.914Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "SF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.914Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "SF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.914Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "SF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.914Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "SF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.914Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "SF",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:25.914Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    },
+    {
+      "team": {
+        "id": "SEA",
+        "name": "Seahawks",
+        "city": "Seattle",
+        "conference": "NFC",
+        "division": "West",
+        "standing": {}
+      },
+      "roster": [
+        {
+          "name": "undefined undefined",
+          "team": "SEA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:26.117Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "SEA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:26.117Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "SEA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:26.117Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "SEA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:26.117Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "SEA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:26.117Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        },
+        {
+          "name": "undefined undefined",
+          "team": "SEA",
+          "position": "N/A",
+          "jerseyNumber": "N/A",
+          "experience": 0,
+          "stats": {
+            "fetched": "2025-08-28T06:10:26.117Z"
+          },
+          "havf": {
+            "championReadiness": 0.35,
+            "cognitiveLeverage": 0.3,
+            "nilTrustScore": 0.55,
+            "composite": 0.4
+          }
+        }
+      ],
+      "metrics": {
+        "totalPlayers": 6,
+        "avgChampionReadiness": 0.35,
+        "avgCognitiveLeverage": 0.3,
+        "avgNilTrustScore": 0.55,
+        "topPerformers": [
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          },
+          {
+            "name": "undefined undefined",
+            "position": "N/A",
+            "composite": 0.4
+          }
+        ],
+        "positionGroups": {
+          "N/A": {
+            "count": 6,
+            "avgComposite": 0.4
+          }
+        }
+      },
+      "timestamp": "2025-08-28T06:10:17.969Z"
+    }
+  ],
+  "summary": {
+    "totalTeams": 32,
+    "totalPlayers": 186,
+    "conferences": {
+      "AFC": 16,
+      "NFC": 16
+    },
+    "lastUpdate": "2025-08-28T06:10:17.969Z"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "player": "Austin Humphrey",
+  "year": 2008,
+  "team": "College Baseball",
+  "position": "Multiple",
+  "stats": {
+    "gamesPlayed": 45,
+    "battingAverage": 0.312,
+    "onBasePercentage": 0.385,
+    "rbis": 28,
+    "runs": 32,
+    "hits": 56,
+    "doubles": 12,
+    "triples": 3,
+    "homeRuns": 4,
+    "stolenBases": 8,
+    "fieldingPercentage": 0.965
+  },
+  "achievements": [
+    "Team leadership role",
+    "Consistent performance under pressure",
+    "Strong analytical approach to game strategy",
+    "Excellent team collaboration",
+    "Disciplined training regimen"
+  ],
+  "transferableSkills": [
+    "Performance optimization",
+    "Data-driven decision making",
+    "Pressure management",
+    "Team leadership",
+    "Strategic thinking",
+    "Competitive analysis",
+    "Systematic approach to improvement"
+  ]
+}

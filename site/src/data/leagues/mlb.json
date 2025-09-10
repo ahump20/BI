@@ -1,0 +1,216 @@
+{
+  "league": "MLB",
+  "generated_at": "2025-08-24T19:43:19.931111Z",
+  "players": [
+    {
+      "player_id": "MLB-STL-alec-burleson",
+      "name": "Alec Burleson",
+      "sport": "MLB",
+      "league": "MLB",
+      "team_id": "MLB-STL",
+      "position": "1B",
+      "bio": {
+        "dob": null,
+        "height_cm": null,
+        "weight_kg": null,
+        "class_year": null
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "avg": 0.269,
+          "hr": 21,
+          "rbi": 78,
+          "k": 76
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {}
+      },
+      "nil_profile": null,
+      "biometrics": null,
+      "hav_f": {
+        "champion_readiness": 40.0,
+        "cognitive_leverage": 25.0,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:19.930908Z"
+      },
+      "meta": {
+        "sources": [
+          "Statcast",
+          "Baseball Savant"
+        ],
+        "updated_at": "2025-08-24T19:43:19.930908Z"
+      }
+    },
+    {
+      "player_id": "MLB-STL-andre-granillo",
+      "name": "Andre Granillo",
+      "sport": "MLB",
+      "league": "MLB",
+      "team_id": "MLB-STL",
+      "position": "P",
+      "bio": {
+        "dob": null,
+        "height_cm": null,
+        "weight_kg": null,
+        "class_year": null
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {}
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {}
+      },
+      "nil_profile": null,
+      "biometrics": null,
+      "hav_f": {
+        "champion_readiness": 40.0,
+        "cognitive_leverage": 25.0,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:19.930908Z"
+      },
+      "meta": {
+        "sources": [
+          "Statcast",
+          "Baseball Savant"
+        ],
+        "updated_at": "2025-08-24T19:43:19.930908Z"
+      }
+    },
+    {
+      "player_id": "MLB-STL-andre-pallante",
+      "name": "Andre Pallante",
+      "sport": "MLB",
+      "league": "MLB",
+      "team_id": "MLB-STL",
+      "position": "P",
+      "bio": {
+        "dob": null,
+        "height_cm": null,
+        "weight_kg": null,
+        "class_year": null
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "avg": 0.24,
+          "hr": 8,
+          "era": 3.78,
+          "k": 94
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {}
+      },
+      "nil_profile": null,
+      "biometrics": null,
+      "hav_f": {
+        "champion_readiness": 40.0,
+        "cognitive_leverage": 25.0,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:19.930908Z"
+      },
+      "meta": {
+        "sources": [
+          "Statcast",
+          "Baseball Savant"
+        ],
+        "updated_at": "2025-08-24T19:43:19.930908Z"
+      }
+    },
+    {
+      "player_id": "MLB-STL-garrett-hampson",
+      "name": "Garrett Hampson",
+      "sport": "MLB",
+      "league": "MLB",
+      "team_id": "MLB-STL",
+      "position": "2B",
+      "bio": {
+        "dob": null,
+        "height_cm": null,
+        "weight_kg": null,
+        "class_year": null
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "avg": 0.23,
+          "hr": 0,
+          "rbi": 16,
+          "k": 59
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {}
+      },
+      "nil_profile": null,
+      "biometrics": null,
+      "hav_f": {
+        "champion_readiness": 40.0,
+        "cognitive_leverage": 25.0,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:19.930908Z"
+      },
+      "meta": {
+        "sources": [
+          "Statcast",
+          "Baseball Savant"
+        ],
+        "updated_at": "2025-08-24T19:43:19.930908Z"
+      }
+    },
+    {
+      "player_id": "MLB-STL-iv\u00e1n-herrera",
+      "name": "Iv\u00e1n Herrera",
+      "sport": "MLB",
+      "league": "MLB",
+      "team_id": "MLB-STL",
+      "position": "C",
+      "bio": {
+        "dob": null,
+        "height_cm": null,
+        "weight_kg": null,
+        "class_year": null
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "avg": 0.301,
+          "hr": 5,
+          "rbi": 27,
+          "k": 53
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {}
+      },
+      "nil_profile": null,
+      "biometrics": null,
+      "hav_f": {
+        "champion_readiness": 40.0,
+        "cognitive_leverage": 25.0,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:19.930908Z"
+      },
+      "meta": {
+        "sources": [
+          "Statcast",
+          "Baseball Savant"
+        ],
+        "updated_at": "2025-08-24T19:43:19.930908Z"
+      }
+    }
+  ]
+}

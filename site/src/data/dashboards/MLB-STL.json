@@ -1,0 +1,38 @@
+{
+  "team_id": "MLB-STL",
+  "name": "St. Louis Cardinals",
+  "sport": "MLB",
+  "timestamp": "2025-09-03T12:40:00.606Z",
+  "current_readiness": {
+    "score": 65,
+    "status": "yellow",
+    "trend": "stable",
+    "percentile": 0
+  },
+  "components": {
+    "recent_performance": 50,
+    "player_availability": 100,
+    "matchup_history": 50,
+    "momentum": 50,
+    "rest_factor": 75
+  },
+  "leverage": {
+    "current_game": 50,
+    "season_average": 50,
+    "next_5_games": []
+  },
+  "players": {
+    "total": 1,
+    "available": 1,
+    "stars": 0
+  },
+  "recommendations": [],
+  "historical": {
+    "last_30_days": [
+      65
+    ],
+    "average": 65,
+    "peak": 65,
+    "trough": 65
+  }
+}

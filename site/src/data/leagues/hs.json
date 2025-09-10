@@ -1,0 +1,105 @@
+{
+  "league": "HS-FB",
+  "generated_at": "2025-08-24T19:43:23.449872Z",
+  "players": [
+    {
+      "player_id": "HS-TEX-williams",
+      "name": "Marcus Williams",
+      "sport": "HS-FB",
+      "league": "Texas High School Football",
+      "team_id": "HS-TEX-WESTLAKE",
+      "position": "QB",
+      "bio": {
+        "dob": "2006-11-08",
+        "height_cm": 188,
+        "weight_kg": 89,
+        "class_year": "2025"
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "passing_yards": 2845,
+          "passing_tds": 28,
+          "rushing_yards": 485,
+          "rushing_tds": 8,
+          "total_yards": 3330,
+          "total_tds": 36
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "college_interest": 15,
+          "star_rating": 4
+        }
+      },
+      "nil_profile": null,
+      "biometrics": {
+        "hrv_rmssd_ms": 61.4,
+        "reaction_ms": 145.2,
+        "gsr_microsiemens": 3.1,
+        "sleep_hours": 8.3
+      },
+      "hav_f": {
+        "champion_readiness": 89.1,
+        "cognitive_leverage": 88.2,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:23.449794Z"
+      },
+      "meta": {
+        "sources": [
+          "Texas HS Football Data"
+        ],
+        "updated_at": "2025-08-24T19:43:23.449794Z"
+      }
+    },
+    {
+      "player_id": "HS-TEX-johnson",
+      "name": "David Johnson",
+      "sport": "HS-FB",
+      "league": "Texas High School Football",
+      "team_id": "HS-TEX-ALLEN",
+      "position": "RB",
+      "bio": {
+        "dob": "2007-02-14",
+        "height_cm": 185,
+        "weight_kg": 92,
+        "class_year": "2026"
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "rushing_yards": 1850,
+          "rushing_tds": 24,
+          "receiving_yards": 145,
+          "receiving_tds": 2,
+          "total_yards": 1995,
+          "total_tds": 26
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "college_interest": 8,
+          "star_rating": 3
+        }
+      },
+      "nil_profile": null,
+      "biometrics": null,
+      "hav_f": {
+        "champion_readiness": 75.0,
+        "cognitive_leverage": 25.0,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:23.449794Z"
+      },
+      "meta": {
+        "sources": [
+          "Texas HS Football Data"
+        ],
+        "updated_at": "2025-08-24T19:43:23.449794Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "team_id": "NFL-TEN",
+  "name": "Tennessee Titans",
+  "sport": "NFL",
+  "timestamp": "2025-09-03T12:40:00.606Z",
+  "current_readiness": {
+    "score": 64,
+    "status": "yellow",
+    "trend": "stable",
+    "percentile": 0
+  },
+  "components": {
+    "injury_report": 100,
+    "divisional_matchup": 50,
+    "home_field": 25,
+    "rest_advantage": 50,
+    "playoff_implications": 50
+  },
+  "leverage": {
+    "current_game": 50,
+    "season_average": 50,
+    "next_5_games": []
+  },
+  "players": {
+    "total": 1,
+    "available": 1,
+    "stars": 0
+  },
+  "recommendations": [
+    {
+      "component": "home_field",
+      "severity": "warning",
+      "action": "Review and address component deficiencies"
+    }
+  ],
+  "historical": {
+    "last_30_days": [
+      64
+    ],
+    "average": 64,
+    "peak": 64,
+    "trough": 64
+  }
+}

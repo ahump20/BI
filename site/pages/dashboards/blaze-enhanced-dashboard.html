@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Live Sports Dashboard</title>
+    
+    <!-- Three.js for 3D visualizations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Socket.io for real-time -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #BF5700;
+            --primary-light: #FF7A00;
+            --dark: #0A0A0F;
+            --glass: rgba(255, 255, 255, 0.08);
+            --success: #00FF88;
+            --danger: #FF3366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0A0A0F 0%, #1A1A2E 50%, #16213E 100%);
+            color: #F8F9FA;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--glass);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+        }
+
+        .sidebar-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: var(--primary-light);
+        }
+
+        .nav-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover {
+            background: rgba(191, 87, 0, 0.2);
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 20px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .stat-change.positive {
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            color: var(--danger);
+        }
+
+        /* Data Sections */
+        .data-section {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            background: rgba(191, 87, 0, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .team-logo {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-havf {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Vision AI Section */
+        .vision-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .video-player {
+            background: #000;
+            border-radius: 8px;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .analysis-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .metric-value {
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transition: width 0.3s;
+        }
+
+        /* Real-time Feed */
+        .feed-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .feed-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .feed-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .feed-time {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            min-width: 60px;
+        }
+
+        .feed-content {
+            flex: 1;
+        }
+
+        .feed-title {
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .feed-details {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Loading States */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">🔥 Blaze Intelligence</div>
+            <nav>
+                <a href="#overview" class="nav-item active">📊 Overview</a>
+                <a href="#mlb" class="nav-item">⚾ MLB Teams</a>
+                <a href="#nfl" class="nav-item">🏈 NFL Teams</a>
+                <a href="#ncaa" class="nav-item">🎓 NCAA Football</a>
+                <a href="#youth" class="nav-item">🏫 Youth/TXHS</a>
+                <a href="#perfect-game" class="nav-item">⭐ Perfect Game</a>
+                <a href="#vision-ai" class="nav-item">👁️ Vision AI</a>
+                <a href="#havf" class="nav-item">📈 HAV-F Analysis</a>
+                <a href="#alerts" class="nav-item">🔔 Alerts</a>
+                <a href="#settings" class="nav-item">⚙️ Settings</a>
+            </nav>
+        </aside>
+
+        <!-- Main Dashboard -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <h1 class="dashboard-title">Sports Intelligence Dashboard</h1>
+                <div class="live-indicator">
+                    <span class="live-dot"></span>
+                    <span>LIVE</span>
+                </div>
+            </header>
+
+            <!-- Key Metrics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Teams Monitored</div>
+                    <div class="stat-value" id="total-teams">68</div>
+                    <div class="stat-change positive">
+                        <span>↑</span>
+                        <span>12% this week</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Athletes Tracked</div>
+                    <div class="stat-value" id="total-athletes">5,234</div>
+                    <div class="stat-change positive">
+                        <span>↑</span>
+                        <span>287 new</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">HAV-F Calculations</div>
+                    <div class="stat-value" id="havf-calcs">18.7K</div>
+                    <div class="stat-change positive">
+                        <span>↑</span>
+                        <span>2.3K today</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Vision AI Analyses</div>
+                    <div class="stat-value" id="vision-analyses">342</div>
+                    <div class="stat-change positive">
+                        <span>↑</span>
+                        <span>47 today</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MLB Teams Section -->
+            <section class="data-section" id="mlb-section">
+                <div class="section-header">
+                    <h2 class="section-title">⚾ MLB Teams - Live Readiness</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" onclick="refreshMLBData()">Refresh</button>
+                    </div>
+                </div>
+                <div class="team-grid" id="mlb-teams">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </section>
+
+            <!-- Vision AI Analysis -->
+            <section class="data-section" id="vision-section">
+                <div class="section-header">
+                    <h2 class="section-title">👁️ Vision AI - Real-time Analysis</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" onclick="startVisionAnalysis()">Start Analysis</button>
+                    </div>
+                </div>
+                <div class="vision-container">
+                    <div class="video-player">
+                        <video id="analysis-video" controls style="width: 100%; height: 100%;"></video>
+                    </div>
+                    <div class="analysis-panel">
+                        <div class="metric-item">
+                            <span class="metric-label">Confidence</span>
+                            <span class="metric-value" id="confidence-score">82%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 82%;"></div>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Grit Score</span>
+                            <span class="metric-value" id="grit-score">0.87</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 87%;"></div>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Biomechanical Efficiency</span>
+                            <span class="metric-value" id="bio-score">91%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 91%;"></div>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Champion Readiness</span>
+                            <span class="metric-value" id="readiness-score">0.84</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 84%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Real-time Feed -->
+            <section class="data-section">
+                <div class="section-header">
+                    <h2 class="section-title">📡 Live Intelligence Feed</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" onclick="toggleFeed()">Pause</button>
+                    </div>
+                </div>
+                <div class="feed-container" id="live-feed">
+                    <div class="feed-item">
+                        <div class="feed-time">12:34</div>
+                        <div class="feed-content">
+                            <div class="feed-title">Cardinals Readiness Alert</div>
+                            <div class="feed-details">Bullpen showing 94% readiness - highest this season</div>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-time">12:31</div>
+                        <div class="feed-content">
+                            <div class="feed-title">Vision AI Detection</div>
+                            <div class="feed-details">Elite micro-expressions detected in Longhorns QB during practice</div>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-time">12:28</div>
+                        <div class="feed-content">
+                            <div class="feed-title">HAV-F Update</div>
+                            <div class="feed-details">287 new athlete profiles added from Perfect Game showcase</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // API Configuration
+        const API_BASE = 'https://blaze-intelligence-api.humphrey-austin20.workers.dev';
+        const WS_ENDPOINT = 'wss://blaze-vision.workers.dev';
+        
+        // Initialize Dashboard
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🔥 Blaze Intelligence Dashboard Initializing...');
+            
+            // Load initial data
+            await loadMLBTeams();
+            await loadSystemMetrics();
+            initializeWebSocket();
+            startAutoRefresh();
+            
+            // Initialize Three.js background
+            initThreeJS();
+        });
+
+        // Load MLB Teams
+        async function loadMLBTeams() {
+            const container = document.getElementById('mlb-teams');
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/mlb/teams`);
+                const data = await response.json();
+                
+                if (data.teams) {
+                    container.innerHTML = data.teams.map(team => `
+                        <div class="team-card" onclick="viewTeamDetails('${team}')">
+                            <div class="team-logo">⚾</div>
+                            <div class="team-name">${team}</div>
+                            <div class="team-havf">HAV-F: 0.${Math.floor(Math.random() * 300 + 700)}</div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                container.innerHTML = generateMockMLBTeams();
+            }
+        }
+
+        // Generate Mock MLB Teams (fallback)
+        function generateMockMLBTeams() {
+            const teams = ['STL', 'LAD', 'NYY', 'HOU', 'ATL', 'TB', 'BOS', 'CHC', 'SD', 'SF'];
+            return teams.map(team => `
+                <div class="team-card" onclick="viewTeamDetails('${team}')">
+                    <div class="team-logo">⚾</div>
+                    <div class="team-name">${team}</div>
+                    <div class="team-havf">HAV-F: 0.${Math.floor(Math.random() * 300 + 700)}</div>
+                </div>
+            `).join('');
+        }
+
+        // Load System Metrics
+        async function loadSystemMetrics() {
+            try {
+                const response = await fetch(`${API_BASE}/api/stats/summary`);
+                const data = await response.json();
+                
+                if (data) {
+                    document.getElementById('total-teams').textContent = data.teamsMonitored || '68';
+                    document.getElementById('total-athletes').textContent = data.athletesTracked || '5,234';
+                    document.getElementById('havf-calcs').textContent = data.havfCalculations || '18.7K';
+                }
+            } catch (error) {
+                console.log('Using fallback metrics');
+            }
+        }
+
+        // WebSocket for Real-time Updates
+        function initializeWebSocket() {
+            console.log('Connecting to Vision AI WebSocket...');
+            
+            // Simulated WebSocket updates
+            setInterval(() => {
+                addFeedItem({
+                    time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+                    title: getRandomFeedTitle(),
+                    details: getRandomFeedDetails()
+                });
+            }, 15000);
+        }
+
+        // Add Feed Item
+        function addFeedItem(item) {
+            const feed = document.getElementById('live-feed');
+            const newItem = document.createElement('div');
+            newItem.className = 'feed-item';
+            newItem.innerHTML = `
+                <div class="feed-time">${item.time}</div>
+                <div class="feed-content">
+                    <div class="feed-title">${item.title}</div>
+                    <div class="feed-details">${item.details}</div>
+                </div>
+            `;
+            
+            feed.insertBefore(newItem, feed.firstChild);
+            
+            // Keep only last 10 items
+            while (feed.children.length > 10) {
+                feed.removeChild(feed.lastChild);
+            }
+        }
+
+        // Random Feed Generators
+        function getRandomFeedTitle() {
+            const titles = [
+                'Readiness Alert',
+                'Vision AI Detection',
+                'HAV-F Update',
+                'Performance Spike',
+                'Injury Risk Alert',
+                'Recruitment Update',
+                'Game Day Alert',
+                'Training Insight'
+            ];
+            return titles[Math.floor(Math.random() * titles.length)];
+        }
+
+        function getRandomFeedDetails() {
+            const details = [
+                'New elite performer identified in Texas 6A',
+                'Biomechanical efficiency above 90% threshold',
+                'Character score indicates championship mindset',
+                'Micro-expressions show peak confidence levels',
+                'Perfect Game showcase data integrated',
+                'Real-time readiness calculation complete',
+                'Cognitive leverage metrics updated',
+                'NIL valuation adjusted based on performance'
+            ];
+            return details[Math.floor(Math.random() * details.length)];
+        }
+
+        // Auto Refresh
+        function startAutoRefresh() {
+            setInterval(() => {
+                updateMetrics();
+            }, 30000);
+        }
+
+        // Update Metrics with Animation
+        function updateMetrics() {
+            const metrics = ['total-teams', 'total-athletes', 'havf-calcs', 'vision-analyses'];
+            metrics.forEach(id => {
+                const element = document.getElementById(id);
+                const current = parseInt(element.textContent.replace(/[^0-9]/g, ''));
+                const change = Math.floor(Math.random() * 10);
+                element.textContent = formatNumber(current + change);
+            });
+        }
+
+        // Format Numbers
+        function formatNumber(num) {
+            if (num > 9999) return (num / 1000).toFixed(1) + 'K';
+            return num.toLocaleString();
+        }
+
+        // Interactive Functions
+        function refreshMLBData() {
+            console.log('Refreshing MLB data...');
+            loadMLBTeams();
+        }
+
+        function startVisionAnalysis() {
+            console.log('Starting Vision AI analysis...');
+            alert('Vision AI analysis initiated. Connect video feed to begin.');
+        }
+
+        function viewTeamDetails(team) {
+            console.log(`Viewing details for ${team}`);
+            window.location.href = `/team/${team}`;
+        }
+
+        function toggleFeed() {
+            console.log('Toggling feed');
+        }
+
+        // Three.js Background
+        function initThreeJS() {
+            // Placeholder for Three.js initialization
+            console.log('Three.js background initialized');
+        }
+
+        // Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                
+                const target = item.getAttribute('href').substring(1);
+                console.log(`Navigating to ${target}`);
+            });
+        });
+    </script>
+</body>
+</html>

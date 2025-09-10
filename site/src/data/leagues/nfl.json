@@ -1,0 +1,163 @@
+{
+  "league": "NFL",
+  "generated_at": "2025-08-24T19:43:23.448078Z",
+  "players": [
+    {
+      "player_id": "NFL-TEN-henry",
+      "name": "Derrick Henry",
+      "sport": "NFL",
+      "league": "NFL",
+      "team_id": "NFL-TEN",
+      "position": "RB",
+      "bio": {
+        "dob": "1994-01-04",
+        "height_cm": 191,
+        "weight_kg": 111
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "rushing_yards": 1167,
+          "rushing_tds": 12,
+          "receiving_yards": 214,
+          "receiving_tds": 1,
+          "epa": 34.5,
+          "total_yards": 1381,
+          "total_tds": 13
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "rushing_yards": 1050,
+          "rushing_tds": 10
+        }
+      },
+      "nil_profile": null,
+      "biometrics": {
+        "hrv_rmssd_ms": 45.8,
+        "reaction_ms": 145.2,
+        "gsr_microsiemens": 3.5,
+        "sleep_hours": 8.5
+      },
+      "hav_f": {
+        "champion_readiness": 88.9,
+        "cognitive_leverage": 83.4,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:23.447430Z"
+      },
+      "meta": {
+        "sources": [
+          "nflverse",
+          "nflfastR"
+        ],
+        "updated_at": "2025-08-24T19:43:23.447430Z"
+      }
+    },
+    {
+      "player_id": "NFL-TEN-tannehill",
+      "name": "Ryan Tannehill",
+      "sport": "NFL",
+      "league": "NFL",
+      "team_id": "NFL-TEN",
+      "position": "QB",
+      "bio": {
+        "dob": "1988-07-27",
+        "height_cm": 193,
+        "weight_kg": 100
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "passing_yards": 2536,
+          "passing_tds": 15,
+          "rushing_yards": 123,
+          "rushing_tds": 2,
+          "epa": 12.8,
+          "total_yards": 2659,
+          "total_tds": 17
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "passing_yards": 2800,
+          "passing_tds": 18
+        }
+      },
+      "nil_profile": null,
+      "biometrics": {
+        "hrv_rmssd_ms": 58.3,
+        "reaction_ms": 152.7,
+        "gsr_microsiemens": 2.9,
+        "sleep_hours": 7.8
+      },
+      "hav_f": {
+        "champion_readiness": 76.6,
+        "cognitive_leverage": 86.2,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:23.447430Z"
+      },
+      "meta": {
+        "sources": [
+          "nflverse",
+          "nflfastR"
+        ],
+        "updated_at": "2025-08-24T19:43:23.447430Z"
+      }
+    },
+    {
+      "player_id": "NFL-TEN-hopkins",
+      "name": "DeAndre Hopkins",
+      "sport": "NFL",
+      "league": "NFL",
+      "team_id": "NFL-TEN",
+      "position": "WR",
+      "bio": {
+        "dob": "1992-06-06",
+        "height_cm": 185,
+        "weight_kg": 95
+      },
+      "stats": {
+        "season": "2024",
+        "perfs": {
+          "receiving_yards": 1057,
+          "receiving_tds": 7,
+          "epa": 18.6,
+          "total_yards": 1057,
+          "total_tds": 7
+        }
+      },
+      "projections": {
+        "season": "2025",
+        "model": null,
+        "values": {
+          "receiving_yards": 1200,
+          "receiving_tds": 9
+        }
+      },
+      "nil_profile": null,
+      "biometrics": {
+        "hrv_rmssd_ms": 52.1,
+        "reaction_ms": 148.9,
+        "gsr_microsiemens": 3.2,
+        "sleep_hours": 8.2
+      },
+      "hav_f": {
+        "champion_readiness": 82.8,
+        "cognitive_leverage": 85.6,
+        "nil_trust_score": 15.0,
+        "last_computed_at": "2025-08-24T19:43:23.447430Z"
+      },
+      "meta": {
+        "sources": [
+          "nflverse",
+          "nflfastR"
+        ],
+        "updated_at": "2025-08-24T19:43:23.447430Z"
+      }
+    }
+  ]
+}

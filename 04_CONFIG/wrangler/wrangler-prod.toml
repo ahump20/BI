@@ -1,0 +1,7 @@
+name = "blaze-intelligence-api"
+main = "worker-production.js"
+compatibility_date = "2024-01-01"
+
+[env.production]
+name = "blaze-intelligence-api"
+vars = { ENVIRONMENT = "production" }

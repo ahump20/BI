@@ -1,0 +1,446 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Visual Intelligence Gallery - Blaze Intelligence">
+  <Navigation />
+  
+  <main class="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-20">
+      <div class="absolute inset-0 bg-gradient-to-r from-red-600/20 via-transparent to-blue-600/20"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <h1 class="text-5xl md:text-7xl font-bold text-center mb-6 bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500 bg-clip-text text-transparent">
+          Visual Intelligence Engine
+        </h1>
+        <p class="text-xl text-gray-300 text-center max-w-3xl mx-auto">
+          Championship-level visual analytics powered by AI. Transform raw performance data into impossible-to-ignore visual stories.
+        </p>
+      </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section class="py-16 px-4">
+      <div class="container mx-auto">
+        <div class="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-red-500/30">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-3xl font-bold text-white">Live Visual Generation</h2>
+            <span class="px-3 py-1 bg-red-600 text-white text-sm font-bold rounded-full animate-pulse">
+              LIVE
+            </span>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Input Panel -->
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">Athlete ID</label>
+                <input 
+                  type="text" 
+                  id="athleteId" 
+                  value="cardinals_goldschmidt"
+                  class="w-full px-4 py-2 bg-black/50 border border-gray-700 rounded-lg text-white focus:border-red-500 focus:outline-none"
+                />
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">Visual Type</label>
+                <select 
+                  id="visualType"
+                  class="w-full px-4 py-2 bg-black/50 border border-gray-700 rounded-lg text-white focus:border-red-500 focus:outline-none"
+                >
+                  <option value="evolution">Player Evolution Timeline</option>
+                  <option value="clutch">Clutch Moment Highlight</option>
+                  <option value="prediction">AI Performance Prediction</option>
+                  <option value="badge">Champion Dimension Badge</option>
+                </select>
+              </div>
+              
+              <div id="clutchOptions" class="hidden space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-400 mb-2">Clutch Score</label>
+                  <input 
+                    type="range" 
+                    id="clutchScore" 
+                    min="70" 
+                    max="99" 
+                    value="95"
+                    class="w-full"
+                  />
+                  <span id="clutchScoreValue" class="text-red-500 font-bold">95</span>
+                </div>
+              </div>
+              
+              <div id="badgeOptions" class="hidden space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-400 mb-2">Dimension</label>
+                  <select 
+                    id="dimension"
+                    class="w-full px-4 py-2 bg-black/50 border border-gray-700 rounded-lg text-white focus:border-red-500 focus:outline-none"
+                  >
+                    <option value='{"name":"Clutch Gene","color":"FF0000","icon":"fire"}'>Clutch Gene</option>
+                    <option value='{"name":"Killer Instinct","color":"8B0000","icon":"sword"}'>Killer Instinct</option>
+                    <option value='{"name":"Flow State","color":"00CED1","icon":"wave"}'>Flow State</option>
+                    <option value='{"name":"Mental Fortress","color":"4B0082","icon":"shield"}'>Mental Fortress</option>
+                    <option value='{"name":"Predator Mindset","color":"FF8C00","icon":"eye"}'>Predator Mindset</option>
+                    <option value='{"name":"Champion Aura","color":"FFD700","icon":"crown"}'>Champion Aura</option>
+                    <option value='{"name":"Winner DNA","color":"32CD32","icon":"dna"}'>Winner DNA</option>
+                    <option value='{"name":"Beast Mode","color":"DC143C","icon":"beast"}'>Beast Mode</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-400 mb-2">Score</label>
+                  <input 
+                    type="number" 
+                    id="badgeScore" 
+                    min="0" 
+                    max="99" 
+                    value="92"
+                    class="w-full px-4 py-2 bg-black/50 border border-gray-700 rounded-lg text-white focus:border-red-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+              
+              <button 
+                id="generateBtn"
+                class="w-full py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200"
+              >
+                Generate Visual
+              </button>
+            </div>
+            
+            <!-- Output Panel -->
+            <div class="bg-black/50 rounded-lg p-4 min-h-[400px] flex items-center justify-center">
+              <div id="visualOutput" class="w-full">
+                <div class="text-center text-gray-500">
+                  <svg class="w-24 h-24 mx-auto mb-4 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                  <p>Visual will appear here</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="py-16 px-4">
+      <div class="container mx-auto">
+        <h2 class="text-3xl font-bold text-white mb-8">Visual Gallery</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Evolution Card -->
+          <div class="visual-card group">
+            <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 transition-all duration-300">
+              <div class="aspect-video bg-gradient-to-br from-blue-900 to-purple-900 relative overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-6xl">📈</span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80">
+                  <span class="text-white font-bold">Player Evolution</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-xl font-bold text-white mb-2">Evolution Timeline</h3>
+                <p class="text-gray-400 text-sm">4-year progression with morphing effects and performance metrics</p>
+                <div class="mt-4 flex gap-2">
+                  <span class="px-2 py-1 bg-blue-900/50 text-blue-400 text-xs rounded">Morphing</span>
+                  <span class="px-2 py-1 bg-purple-900/50 text-purple-400 text-xs rounded">AI-Powered</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clutch Moment Card -->
+          <div class="visual-card group">
+            <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 transition-all duration-300">
+              <div class="aspect-video bg-gradient-to-br from-red-900 to-orange-900 relative overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-6xl">🔥</span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80">
+                  <span class="text-white font-bold">Clutch: 99</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-xl font-bold text-white mb-2">Clutch Moments</h3>
+                <p class="text-gray-400 text-sm">Dramatic 3D emphasis with biometric overlays and energy visualization</p>
+                <div class="mt-4 flex gap-2">
+                  <span class="px-2 py-1 bg-red-900/50 text-red-400 text-xs rounded">Real-time</span>
+                  <span class="px-2 py-1 bg-orange-900/50 text-orange-400 text-xs rounded">Biometrics</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prediction Card -->
+          <div class="visual-card group">
+            <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 transition-all duration-300">
+              <div class="aspect-video bg-gradient-to-br from-cyan-900 to-blue-900 relative overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-6xl">🔮</span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80">
+                  <span class="text-white font-bold">2026 Peak</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-xl font-bold text-white mb-2">AI Predictions</h3>
+                <p class="text-gray-400 text-sm">Ethereal holographic overlays with neural network visualization</p>
+                <div class="mt-4 flex gap-2">
+                  <span class="px-2 py-1 bg-cyan-900/50 text-cyan-400 text-xs rounded">Holographic</span>
+                  <span class="px-2 py-1 bg-blue-900/50 text-blue-400 text-xs rounded">Neural Net</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badge Card -->
+          <div class="visual-card group">
+            <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 transition-all duration-300">
+              <div class="aspect-video bg-gradient-to-br from-yellow-900 to-amber-900 relative overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-6xl">🏅</span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80">
+                  <span class="text-white font-bold">Champion Badges</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-xl font-bold text-white mb-2">3D Dimension Badges</h3>
+                <p class="text-gray-400 text-sm">Metallic emblems for each Champion Dimension with 3D effects</p>
+                <div class="mt-4 flex gap-2">
+                  <span class="px-2 py-1 bg-yellow-900/50 text-yellow-400 text-xs rounded">3D</span>
+                  <span class="px-2 py-1 bg-amber-900/50 text-amber-400 text-xs rounded">Metallic</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Stream Card -->
+          <div class="visual-card group">
+            <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 transition-all duration-300">
+              <div class="aspect-video bg-gradient-to-br from-green-900 to-emerald-900 relative overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-6xl">📡</span>
+                </div>
+                <div class="absolute top-4 right-4">
+                  <span class="px-2 py-1 bg-red-600 text-white text-xs font-bold rounded animate-pulse">LIVE</span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80">
+                  <span class="text-white font-bold">Live Overlays</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-xl font-bold text-white mb-2">Real-time Streaming</h3>
+                <p class="text-gray-400 text-sm">WebSocket-powered live overlays with biometric data at 30fps</p>
+                <div class="mt-4 flex gap-2">
+                  <span class="px-2 py-1 bg-green-900/50 text-green-400 text-xs rounded">WebSocket</span>
+                  <span class="px-2 py-1 bg-emerald-900/50 text-emerald-400 text-xs rounded">30fps</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Team Composite Card -->
+          <div class="visual-card group">
+            <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 transition-all duration-300">
+              <div class="aspect-video bg-gradient-to-br from-purple-900 to-pink-900 relative overflow-hidden">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-6xl">👥</span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80">
+                  <span class="text-white font-bold">Team Analysis</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-xl font-bold text-white mb-2">Team Composites</h3>
+                <p class="text-gray-400 text-sm">Full team visual analysis with individual and collective metrics</p>
+                <div class="mt-4 flex gap-2">
+                  <span class="px-2 py-1 bg-purple-900/50 text-purple-400 text-xs rounded">Composite</span>
+                  <span class="px-2 py-1 bg-pink-900/50 text-pink-400 text-xs rounded">Analytics</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 px-4 border-t border-gray-800">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-4xl font-bold text-red-500 mb-2">
+              <span id="generationSpeed">2</span>s
+            </div>
+            <p class="text-gray-400">Generation Speed</p>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-yellow-500 mb-2">
+              <span id="cacheHitRate">85</span>%
+            </div>
+            <p class="text-gray-400">Cache Hit Rate</p>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-blue-500 mb-2">
+              <span id="activeStreams">12</span>
+            </div>
+            <p class="text-gray-400">Active Streams</p>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-green-500 mb-2">
+              <span id="totalVisuals">1.2K</span>+
+            </div>
+            <p class="text-gray-400">Visuals Generated</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+  
+  <script>
+    // Visual type change handler
+    document.getElementById('visualType')?.addEventListener('change', (e) => {
+      const clutchOptions = document.getElementById('clutchOptions');
+      const badgeOptions = document.getElementById('badgeOptions');
+      
+      // Hide all options
+      clutchOptions?.classList.add('hidden');
+      badgeOptions?.classList.add('hidden');
+      
+      // Show relevant options
+      if (e.target.value === 'clutch') {
+        clutchOptions?.classList.remove('hidden');
+      } else if (e.target.value === 'badge') {
+        badgeOptions?.classList.remove('hidden');
+      }
+    });
+    
+    // Clutch score slider
+    document.getElementById('clutchScore')?.addEventListener('input', (e) => {
+      const value = document.getElementById('clutchScoreValue');
+      if (value) value.textContent = e.target.value;
+    });
+    
+    // Generate visual
+    document.getElementById('generateBtn')?.addEventListener('click', async () => {
+      const athleteId = document.getElementById('athleteId')?.value;
+      const visualType = document.getElementById('visualType')?.value;
+      const output = document.getElementById('visualOutput');
+      
+      if (!output) return;
+      
+      // Show loading
+      output.innerHTML = `
+        <div class="text-center">
+          <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-red-500"></div>
+          <p class="mt-4 text-gray-400">Generating visual...</p>
+        </div>
+      `;
+      
+      try {
+        let apiUrl = `https://blaze-intelligence.pages.dev/api/visuals/${visualType}`;
+        let body = { athleteId };
+        
+        // Add type-specific data
+        if (visualType === 'clutch') {
+          body.momentData = {
+            frameId: `moment_${Date.now()}`,
+            clutchScore: parseInt(document.getElementById('clutchScore')?.value || 95),
+            heartRate: 185,
+            gsrLevel: 'PEAK',
+            flowState: 'ACTIVE',
+            quarter: 'Q4',
+            timeRemaining: '2:35',
+            score: '98-95'
+          };
+        } else if (visualType === 'badge') {
+          const dimension = JSON.parse(document.getElementById('dimension')?.value || '{}');
+          const score = parseInt(document.getElementById('badgeScore')?.value || 92);
+          body = { dimension, score, athleteId };
+        } else if (visualType === 'prediction') {
+          body.predictionData = {
+            peakYear: 2026,
+            projectedEnigma: 95,
+            physicalPeak: '92%',
+            mentalPeak: '88%',
+            clutchFactor: '94%',
+            injuryRisk: '12%'
+          };
+        }
+        
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        
+        const data = await response.json();
+        
+        // Display result
+        if (data.url) {
+          output.innerHTML = `
+            <div class="space-y-4">
+              <img src="${data.url}" alt="Generated Visual" class="w-full rounded-lg" />
+              <div class="text-sm text-gray-400">
+                <p>Type: ${data.type}</p>
+                <p>Generated: ${new Date(data.generatedAt).toLocaleString()}</p>
+                <p>ID: ${data.id}</p>
+              </div>
+            </div>
+          `;
+        } else {
+          throw new Error(data.error || 'Failed to generate visual');
+        }
+      } catch (error) {
+        output.innerHTML = `
+          <div class="text-center text-red-500">
+            <svg class="w-24 h-24 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p>${error.message}</p>
+          </div>
+        `;
+      }
+    });
+    
+    // Animate stats on scroll
+    const animateValue = (elem, start, end, duration) => {
+      const range = end - start;
+      const increment = range / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= end) {
+          current = end;
+          clearInterval(timer);
+        }
+        elem.textContent = Math.round(current);
+      }, 16);
+    };
+    
+    // Intersection observer for stats animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateValue(document.getElementById('generationSpeed'), 0, 2, 1000);
+          animateValue(document.getElementById('cacheHitRate'), 0, 85, 1500);
+          animateValue(document.getElementById('activeStreams'), 0, 12, 1200);
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    
+    const statsSection = document.querySelector('.grid.grid-cols-2');
+    if (statsSection) observer.observe(statsSection);
+  </script>
+</Layout>

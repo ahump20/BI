@@ -1,0 +1,92 @@
+{
+  "players": [
+    {
+      "id": "NFL-TEN-henry",
+      "name": "Derrick Henry",
+      "team_id": "NFL-TEN",
+      "position": "RB",
+      "bio": {
+        "dob": "1994-01-04",
+        "height_cm": 191,
+        "weight_kg": 111
+      },
+      "stats": {
+        "rushing_yards": 1167,
+        "rushing_tds": 12,
+        "receiving_yards": 214,
+        "receiving_tds": 1,
+        "epa": 34.5,
+        "total_yards": 1381,
+        "total_tds": 13
+      },
+      "projections": {
+        "rushing_yards": 1050,
+        "rushing_tds": 10
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 45.8,
+        "reaction_ms": 145.2,
+        "gsr_microsiemens": 3.5,
+        "sleep_hours": 8.5
+      }
+    },
+    {
+      "id": "NFL-TEN-tannehill",
+      "name": "Ryan Tannehill",
+      "team_id": "NFL-TEN",
+      "position": "QB",
+      "bio": {
+        "dob": "1988-07-27",
+        "height_cm": 193,
+        "weight_kg": 100
+      },
+      "stats": {
+        "passing_yards": 2536,
+        "passing_tds": 15,
+        "rushing_yards": 123,
+        "rushing_tds": 2,
+        "epa": 12.8,
+        "total_yards": 2659,
+        "total_tds": 17
+      },
+      "projections": {
+        "passing_yards": 2800,
+        "passing_tds": 18
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 58.3,
+        "reaction_ms": 152.7,
+        "gsr_microsiemens": 2.9,
+        "sleep_hours": 7.8
+      }
+    },
+    {
+      "id": "NFL-TEN-hopkins",
+      "name": "DeAndre Hopkins",
+      "team_id": "NFL-TEN",
+      "position": "WR",
+      "bio": {
+        "dob": "1992-06-06",
+        "height_cm": 185,
+        "weight_kg": 95
+      },
+      "stats": {
+        "receiving_yards": 1057,
+        "receiving_tds": 7,
+        "epa": 18.6,
+        "total_yards": 1057,
+        "total_tds": 7
+      },
+      "projections": {
+        "receiving_yards": 1200,
+        "receiving_tds": 9
+      },
+      "biometrics": {
+        "hrv_rmssd_ms": 52.1,
+        "reaction_ms": 148.9,
+        "gsr_microsiemens": 3.2,
+        "sleep_hours": 8.2
+      }
+    }
+  ]
+}

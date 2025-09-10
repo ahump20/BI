@@ -1,0 +1,153 @@
+{
+  "team": {
+    "id": "NE",
+    "name": "Patriots",
+    "city": "New England",
+    "conference": "AFC",
+    "division": "East",
+    "standing": {}
+  },
+  "roster": [
+    {
+      "name": "undefined undefined",
+      "team": "NE",
+      "position": "N/A",
+      "jerseyNumber": "N/A",
+      "experience": 0,
+      "stats": {
+        "fetched": "2025-08-28T06:10:18.861Z"
+      },
+      "havf": {
+        "championReadiness": 0.35,
+        "cognitiveLeverage": 0.3,
+        "nilTrustScore": 0.55,
+        "composite": 0.4
+      }
+    },
+    {
+      "name": "undefined undefined",
+      "team": "NE",
+      "position": "N/A",
+      "jerseyNumber": "N/A",
+      "experience": 0,
+      "stats": {
+        "fetched": "2025-08-28T06:10:18.861Z"
+      },
+      "havf": {
+        "championReadiness": 0.35,
+        "cognitiveLeverage": 0.3,
+        "nilTrustScore": 0.55,
+        "composite": 0.4
+      }
+    },
+    {
+      "name": "undefined undefined",
+      "team": "NE",
+      "position": "N/A",
+      "jerseyNumber": "N/A",
+      "experience": 0,
+      "stats": {
+        "fetched": "2025-08-28T06:10:18.861Z"
+      },
+      "havf": {
+        "championReadiness": 0.35,
+        "cognitiveLeverage": 0.3,
+        "nilTrustScore": 0.55,
+        "composite": 0.4
+      }
+    },
+    {
+      "name": "undefined undefined",
+      "team": "NE",
+      "position": "N/A",
+      "jerseyNumber": "N/A",
+      "experience": 0,
+      "stats": {
+        "fetched": "2025-08-28T06:10:18.861Z"
+      },
+      "havf": {
+        "championReadiness": 0.35,
+        "cognitiveLeverage": 0.3,
+        "nilTrustScore": 0.55,
+        "composite": 0.4
+      }
+    },
+    {
+      "name": "undefined undefined",
+      "team": "NE",
+      "position": "N/A",
+      "jerseyNumber": "N/A",
+      "experience": 0,
+      "stats": {
+        "fetched": "2025-08-28T06:10:18.861Z"
+      },
+      "havf": {
+        "championReadiness": 0.35,
+        "cognitiveLeverage": 0.3,
+        "nilTrustScore": 0.55,
+        "composite": 0.4
+      }
+    },
+    {
+      "name": "undefined undefined",
+      "team": "NE",
+      "position": "N/A",
+      "jerseyNumber": "N/A",
+      "experience": 0,
+      "stats": {
+        "fetched": "2025-08-28T06:10:18.861Z"
+      },
+      "havf": {
+        "championReadiness": 0.35,
+        "cognitiveLeverage": 0.3,
+        "nilTrustScore": 0.55,
+        "composite": 0.4
+      }
+    }
+  ],
+  "metrics": {
+    "totalPlayers": 6,
+    "avgChampionReadiness": 0.35,
+    "avgCognitiveLeverage": 0.3,
+    "avgNilTrustScore": 0.55,
+    "topPerformers": [
+      {
+        "name": "undefined undefined",
+        "position": "N/A",
+        "composite": 0.4
+      },
+      {
+        "name": "undefined undefined",
+        "position": "N/A",
+        "composite": 0.4
+      },
+      {
+        "name": "undefined undefined",
+        "position": "N/A",
+        "composite": 0.4
+      },
+      {
+        "name": "undefined undefined",
+        "position": "N/A",
+        "composite": 0.4
+      },
+      {
+        "name": "undefined undefined",
+        "position": "N/A",
+        "composite": 0.4
+      },
+      {
+        "name": "undefined undefined",
+        "position": "N/A",
+        "composite": 0.4
+      }
+    ],
+    "positionGroups": {
+      "N/A": {
+        "count": 6,
+        "avgComposite": 0.4
+      }
+    }
+  },
+  "timestamp": "2025-08-28T06:10:17.989Z"
+}

@@ -1,0 +1,502 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+---
+
+<Layout title="Visual Intelligence Dashboard - Blaze Intelligence">
+  <Navigation />
+  
+  <main class="min-h-screen bg-black">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-red-900/20 to-blue-900/20 border-b border-gray-800">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex items-center justify-between">
+          <h1 class="text-3xl font-bold text-white">Visual Intelligence Dashboard</h1>
+          <div class="flex items-center gap-4">
+            <span id="connectionStatus" class="px-3 py-1 bg-green-600 text-white text-sm rounded-full">
+              Connected
+            </span>
+            <span id="liveIndicator" class="px-3 py-1 bg-red-600 text-white text-sm rounded-full animate-pulse">
+              LIVE
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Dashboard Grid -->
+    <div class="container mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left Column - Live Cardinals Monitor -->
+        <div class="lg:col-span-2 space-y-6">
+          
+          <!-- Game Monitor -->
+          <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-red-500/30">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-bold text-white">Cardinals Game Monitor</h2>
+              <button id="startMonitoring" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                Start Monitoring
+              </button>
+            </div>
+            
+            <div id="gameStatus" class="space-y-4">
+              <!-- Game Info -->
+              <div class="grid grid-cols-3 gap-4">
+                <div class="bg-black/50 rounded-lg p-4">
+                  <div class="text-gray-400 text-sm">Inning</div>
+                  <div class="text-2xl font-bold text-white" id="currentInning">-</div>
+                </div>
+                <div class="bg-black/50 rounded-lg p-4">
+                  <div class="text-gray-400 text-sm">Score</div>
+                  <div class="text-2xl font-bold text-white" id="currentScore">0-0</div>
+                </div>
+                <div class="bg-black/50 rounded-lg p-4">
+                  <div class="text-gray-400 text-sm">Clutch Level</div>
+                  <div class="text-2xl font-bold text-red-500" id="clutchLevel">-</div>
+                </div>
+              </div>
+              
+              <!-- Situation Display -->
+              <div class="bg-black/50 rounded-lg p-4">
+                <div class="text-gray-400 text-sm mb-2">Current Situation</div>
+                <div class="text-white" id="gameSituation">Waiting for game data...</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Recent Clutch Moments -->
+          <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+            <h2 class="text-xl font-bold text-white mb-4">Recent Clutch Moments</h2>
+            <div id="clutchMoments" class="space-y-3">
+              <!-- Clutch moments will be added here dynamically -->
+            </div>
+          </div>
+          
+          <!-- Visual Generation Queue -->
+          <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+            <h2 class="text-xl font-bold text-white mb-4">Visual Generation Queue</h2>
+            <div id="visualQueue" class="space-y-2">
+              <!-- Queue items will be added here -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column - Analytics & Controls -->
+        <div class="space-y-6">
+          
+          <!-- Real-time Metrics -->
+          <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+            <h3 class="text-lg font-bold text-white mb-4">Real-time Metrics</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between">
+                <span class="text-gray-400">Visuals Generated</span>
+                <span class="text-white font-bold" id="visualsGenerated">0</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Avg Generation Time</span>
+                <span class="text-white font-bold" id="avgGenTime">-</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Cache Hit Rate</span>
+                <span class="text-white font-bold" id="cacheHitRate">-</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Active Streams</span>
+                <span class="text-white font-bold" id="activeStreams">0</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- WebSocket Monitor -->
+          <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+            <h3 class="text-lg font-bold text-white mb-4">WebSocket Activity</h3>
+            <div id="wsActivity" class="space-y-2 max-h-48 overflow-y-auto">
+              <!-- WebSocket messages will appear here -->
+            </div>
+          </div>
+          
+          <!-- Visual Types Distribution -->
+          <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+            <h3 class="text-lg font-bold text-white mb-4">Visual Types</h3>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-gray-400">Evolution</span>
+                <div class="flex-1 mx-3 bg-gray-700 rounded-full h-2">
+                  <div class="bg-blue-500 h-2 rounded-full" style="width: 25%" id="evolutionBar"></div>
+                </div>
+                <span class="text-white text-sm" id="evolutionCount">0</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-gray-400">Clutch</span>
+                <div class="flex-1 mx-3 bg-gray-700 rounded-full h-2">
+                  <div class="bg-red-500 h-2 rounded-full" style="width: 60%" id="clutchBar"></div>
+                </div>
+                <span class="text-white text-sm" id="clutchCount">0</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-gray-400">Prediction</span>
+                <div class="flex-1 mx-3 bg-gray-700 rounded-full h-2">
+                  <div class="bg-cyan-500 h-2 rounded-full" style="width: 10%" id="predictionBar"></div>
+                </div>
+                <span class="text-white text-sm" id="predictionCount">0</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-gray-400">Badge</span>
+                <div class="flex-1 mx-3 bg-gray-700 rounded-full h-2">
+                  <div class="bg-yellow-500 h-2 rounded-full" style="width: 5%" id="badgeBar"></div>
+                </div>
+                <span class="text-white text-sm" id="badgeCount">0</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Quick Actions -->
+          <div class="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+            <h3 class="text-lg font-bold text-white mb-4">Quick Actions</h3>
+            <div class="space-y-2">
+              <button class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" onclick="generateTeamVisual()">
+                Generate Team Visual
+              </button>
+              <button class="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition" onclick="exportVisuals()">
+                Export Recent Visuals
+              </button>
+              <button class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition" onclick="clearCache()">
+                Clear Visual Cache
+              </button>
+              <button class="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition" onclick="stopAllMonitors()">
+                Stop All Monitors
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bottom Section - Visual Gallery -->
+      <div class="mt-8 bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+        <h2 class="text-xl font-bold text-white mb-4">Recent Visuals</h2>
+        <div id="recentVisuals" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <!-- Visual thumbnails will appear here -->
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <script>
+    // WebSocket connection
+    let ws = null;
+    let gameMonitorInterval = null;
+    let metricsInterval = null;
+    let currentGameId = null;
+    
+    // Initialize dashboard
+    function initDashboard() {
+      connectWebSocket();
+      startMetricsPolling();
+      loadRecentClutchMoments();
+    }
+    
+    // Connect to WebSocket
+    function connectWebSocket() {
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      ws = new WebSocket(`${protocol}//blaze-intelligence.pages.dev/ws`);
+      
+      ws.onopen = () => {
+        console.log('WebSocket connected');
+        updateConnectionStatus('connected');
+        
+        // Subscribe to visual events
+        ws.send(JSON.stringify({
+          type: 'subscribe',
+          streamId: 'visual_events'
+        }));
+      };
+      
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        handleWebSocketMessage(data);
+      };
+      
+      ws.onerror = (error) => {
+        console.error('WebSocket error:', error);
+        updateConnectionStatus('error');
+      };
+      
+      ws.onclose = () => {
+        console.log('WebSocket disconnected');
+        updateConnectionStatus('disconnected');
+        
+        // Reconnect after 5 seconds
+        setTimeout(connectWebSocket, 5000);
+      };
+    }
+    
+    // Handle WebSocket messages
+    function handleWebSocketMessage(data) {
+      // Log to activity feed
+      addWebSocketActivity(data.type);
+      
+      switch (data.type) {
+        case 'clutch_moment':
+          addClutchMoment(data.data);
+          break;
+          
+        case 'visual_generated':
+          addRecentVisual(data.data);
+          updateVisualCount(data.data.type);
+          break;
+          
+        case 'game_update':
+          updateGameStatus(data.data);
+          break;
+          
+        case 'stream_frame':
+          // Handle live stream frame
+          break;
+      }
+    }
+    
+    // Start monitoring Cardinals game
+    document.getElementById('startMonitoring')?.addEventListener('click', async () => {
+      const gameId = `STL_${new Date().toISOString().split('T')[0]}`;
+      currentGameId = gameId;
+      
+      try {
+        const response = await fetch('/api/cardinals/monitor/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ gameId })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          document.getElementById('startMonitoring').textContent = 'Monitoring...';
+          document.getElementById('startMonitoring').disabled = true;
+          
+          // Start polling for game updates
+          gameMonitorInterval = setInterval(() => {
+            fetchGameSummary(gameId);
+          }, 10000); // Every 10 seconds
+        }
+      } catch (error) {
+        console.error('Failed to start monitoring:', error);
+      }
+    });
+    
+    // Fetch game summary
+    async function fetchGameSummary(gameId) {
+      try {
+        const response = await fetch(`/api/cardinals/game/${gameId}/summary`);
+        const summary = await response.json();
+        
+        // Update UI
+        document.getElementById('currentInning').textContent = summary.inning || '-';
+        document.getElementById('currentScore').textContent = 
+          `${summary.score?.cardinals || 0}-${summary.score?.opponent || 0}`;
+        
+        if (summary.topClutchScore) {
+          document.getElementById('clutchLevel').textContent = summary.topClutchScore;
+        }
+        
+        // Update visuals count
+        document.getElementById('visualsGenerated').textContent = summary.visualsGenerated || 0;
+      } catch (error) {
+        console.error('Failed to fetch game summary:', error);
+      }
+    }
+    
+    // Load recent clutch moments
+    async function loadRecentClutchMoments() {
+      try {
+        const response = await fetch('/api/cardinals/clutch/recent');
+        const data = await response.json();
+        
+        const container = document.getElementById('clutchMoments');
+        container.innerHTML = '';
+        
+        data.moments.forEach(moment => {
+          addClutchMoment(moment);
+        });
+      } catch (error) {
+        console.error('Failed to load clutch moments:', error);
+      }
+    }
+    
+    // Add clutch moment to UI
+    function addClutchMoment(moment) {
+      const container = document.getElementById('clutchMoments');
+      
+      const momentEl = document.createElement('div');
+      momentEl.className = 'bg-black/50 rounded-lg p-3 flex items-center justify-between';
+      momentEl.innerHTML = `
+        <div>
+          <div class="text-white font-bold">Clutch Score: ${moment.clutchScore || moment.momentData?.clutchScore}</div>
+          <div class="text-gray-400 text-sm">${moment.momentData?.quarter || ''} - ${moment.momentData?.score || ''}</div>
+        </div>
+        <a href="${moment.url}" target="_blank" class="text-red-500 hover:text-red-400">
+          View →
+        </a>
+      `;
+      
+      container.insertBefore(momentEl, container.firstChild);
+      
+      // Keep only last 5 moments
+      while (container.children.length > 5) {
+        container.removeChild(container.lastChild);
+      }
+    }
+    
+    // Add recent visual
+    function addRecentVisual(visual) {
+      const container = document.getElementById('recentVisuals');
+      
+      const visualEl = document.createElement('div');
+      visualEl.className = 'aspect-square bg-gray-800 rounded-lg overflow-hidden cursor-pointer hover:ring-2 hover:ring-red-500 transition';
+      visualEl.innerHTML = `
+        <img src="${visual.url}" alt="${visual.type}" class="w-full h-full object-cover" />
+      `;
+      visualEl.onclick = () => window.open(visual.url, '_blank');
+      
+      container.insertBefore(visualEl, container.firstChild);
+      
+      // Keep only last 12 visuals
+      while (container.children.length > 12) {
+        container.removeChild(container.lastChild);
+      }
+    }
+    
+    // Update visual count
+    function updateVisualCount(type) {
+      const counts = {
+        evolution: parseInt(document.getElementById('evolutionCount').textContent) || 0,
+        clutch: parseInt(document.getElementById('clutchCount').textContent) || 0,
+        prediction: parseInt(document.getElementById('predictionCount').textContent) || 0,
+        badge: parseInt(document.getElementById('badgeCount').textContent) || 0
+      };
+      
+      if (counts[type] !== undefined) {
+        counts[type]++;
+        document.getElementById(`${type}Count`).textContent = counts[type];
+        
+        // Update bar width
+        const total = Object.values(counts).reduce((a, b) => a + b, 0);
+        if (total > 0) {
+          document.getElementById(`${type}Bar`).style.width = `${(counts[type] / total) * 100}%`;
+        }
+      }
+    }
+    
+    // Add WebSocket activity
+    function addWebSocketActivity(type) {
+      const container = document.getElementById('wsActivity');
+      
+      const activityEl = document.createElement('div');
+      activityEl.className = 'text-sm text-gray-400';
+      activityEl.innerHTML = `
+        <span class="text-gray-600">${new Date().toLocaleTimeString()}</span>
+        <span class="text-green-400 ml-2">${type}</span>
+      `;
+      
+      container.insertBefore(activityEl, container.firstChild);
+      
+      // Keep only last 10 activities
+      while (container.children.length > 10) {
+        container.removeChild(container.lastChild);
+      }
+    }
+    
+    // Update connection status
+    function updateConnectionStatus(status) {
+      const statusEl = document.getElementById('connectionStatus');
+      
+      switch (status) {
+        case 'connected':
+          statusEl.textContent = 'Connected';
+          statusEl.className = 'px-3 py-1 bg-green-600 text-white text-sm rounded-full';
+          break;
+        case 'disconnected':
+          statusEl.textContent = 'Disconnected';
+          statusEl.className = 'px-3 py-1 bg-gray-600 text-white text-sm rounded-full';
+          break;
+        case 'error':
+          statusEl.textContent = 'Error';
+          statusEl.className = 'px-3 py-1 bg-red-600 text-white text-sm rounded-full';
+          break;
+      }
+    }
+    
+    // Start metrics polling
+    function startMetricsPolling() {
+      metricsInterval = setInterval(async () => {
+        try {
+          const response = await fetch('/api/visuals/analytics');
+          const analytics = await response.json();
+          
+          // Update metrics
+          if (analytics.cacheHits && analytics.totalGenerations) {
+            const hitRate = Math.round((analytics.cacheHits / analytics.totalGenerations) * 100);
+            document.getElementById('cacheHitRate').textContent = `${hitRate}%`;
+          }
+        } catch (error) {
+          console.error('Failed to fetch analytics:', error);
+        }
+      }, 30000); // Every 30 seconds
+    }
+    
+    // Quick action functions
+    window.generateTeamVisual = async () => {
+      // Implementation for generating team visual
+      console.log('Generating team visual...');
+    };
+    
+    window.exportVisuals = async () => {
+      // Implementation for exporting visuals
+      console.log('Exporting visuals...');
+    };
+    
+    window.clearCache = async () => {
+      if (confirm('Clear all visual cache?')) {
+        try {
+          await fetch('/api/visuals/cache', {
+            method: 'DELETE',
+            headers: {
+              'Authorization': 'Bearer admin_token'
+            }
+          });
+          alert('Cache cleared successfully');
+        } catch (error) {
+          console.error('Failed to clear cache:', error);
+        }
+      }
+    };
+    
+    window.stopAllMonitors = async () => {
+      if (currentGameId) {
+        try {
+          await fetch('/api/cardinals/monitor/stop', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ gameId: currentGameId })
+          });
+          
+          clearInterval(gameMonitorInterval);
+          document.getElementById('startMonitoring').textContent = 'Start Monitoring';
+          document.getElementById('startMonitoring').disabled = false;
+        } catch (error) {
+          console.error('Failed to stop monitoring:', error);
+        }
+      }
+    };
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', initDashboard);
+    
+    // Cleanup on unload
+    window.addEventListener('beforeunload', () => {
+      if (ws) ws.close();
+      if (gameMonitorInterval) clearInterval(gameMonitorInterval);
+      if (metricsInterval) clearInterval(metricsInterval);
+    });
+  </script>
+</Layout>

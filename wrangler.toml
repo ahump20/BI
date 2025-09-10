@@ -1,42 +1,25 @@
-name = "blaze-ranch-analytics"
-main = "src/index.js"
-compatibility_date = "2024-09-02"
-compatibility_flags = ["nodejs_compat"]
+name = "youth-txhs-ingestion"
+main = "worker-youth-txhs.js"
+compatibility_date = "2024-01-01"
 
 [env.production]
-name = "blaze-ranch-analytics"
-route = "blaze-intelligence-platform.pages.dev/*"
-
-[site]
-bucket = "./dist"
-entry-point = "workers-site"
-
-[[kv_namespaces]]
-binding = "BLAZE_CACHE"
-id = "blaze_analytics_cache_prod"
-preview_id = "blaze_analytics_cache_dev"
+vars = { ENVIRONMENT = "production" }
 
 [[r2_buckets]]
-binding = "SPORTS_DATA"
-bucket_name = "blaze-sports-data"
+binding = "R2"
+bucket_name = "blaze-youth-data"
 
-[vars]
-API_BASE_URL = "https://blaze-intelligence-platform.pages.dev"
-ENVIRONMENT = "production"
-CACHE_TTL = "300"
-MAX_API_CALLS = "1000"
+[[kv_namespaces]]
+binding = "KV"
+id = "b884d8eb60454eed879d36c8863cf513"
 
-[build]
-command = "npm run build"
-publish = "dist"
+[triggers]
+crons = [
+  "0 2 * * *",      # Daily full ingestion at 2 AM CT
+  "0 * * * *",      # Hourly priority updates
+  "0 18 * * 0",     # Weekly Perfect Game sync
+  "0 20 * * 3"      # Wednesday recruiting updates
+]
 
-[build.environment_variables]
-NODE_VERSION = "18"
-
-[[rules]]
-type = "ESModules"
-globs = ["**/*.js"]
-
-[[rules]]
-type = "Text"
-globs = ["**/*.html", "**/*.css"]
+[observability]
+enabled = true

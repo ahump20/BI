@@ -1,0 +1,377 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+---
+
+<Layout title="Visual Performance Analytics - Blaze Intelligence">
+  <Navigation />
+  
+  <main class="min-h-screen bg-black">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-red-900/20 to-blue-900/20 border-b border-gray-800">
+      <div class="container mx-auto px-4 py-6">
+        <h1 class="text-3xl font-bold text-white">Visual Performance Analytics</h1>
+        <p class="text-gray-400 mt-2">Track engagement, optimize generation, maximize impact</p>
+      </div>
+    </div>
+
+    <!-- Date Range Selector -->
+    <div class="container mx-auto px-4 py-6">
+      <div class="bg-gray-900/50 rounded-lg p-4 flex items-center justify-between">
+        <div class="flex gap-4">
+          <select id="dateRange" class="bg-black/50 border border-gray-700 rounded-lg px-4 py-2 text-white">
+            <option value="24h">Last 24 Hours</option>
+            <option value="7d" selected>Last 7 Days</option>
+            <option value="30d">Last 30 Days</option>
+            <option value="90d">Last 90 Days</option>
+          </select>
+          <select id="visualType" class="bg-black/50 border border-gray-700 rounded-lg px-4 py-2 text-white">
+            <option value="all">All Types</option>
+            <option value="evolution">Evolution</option>
+            <option value="clutch">Clutch Moments</option>
+            <option value="prediction">Predictions</option>
+            <option value="badge">Badges</option>
+          </select>
+        </div>
+        <button onclick="exportAnalytics()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+          Export Report
+        </button>
+      </div>
+    </div>
+
+    <!-- Key Metrics Grid -->
+    <div class="container mx-auto px-4 py-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Total Visuals -->
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-gray-400">Total Visuals</span>
+            <span class="text-green-500 text-sm">+12.5%</span>
+          </div>
+          <div class="text-3xl font-bold text-white mb-2" id="totalVisuals">1,847</div>
+          <div class="text-sm text-gray-500">283 this week</div>
+        </div>
+
+        <!-- Avg Generation Time -->
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-gray-400">Avg Generation Time</span>
+            <span class="text-green-500 text-sm">-8.3%</span>
+          </div>
+          <div class="text-3xl font-bold text-white mb-2" id="avgGenTime">1.8s</div>
+          <div class="text-sm text-gray-500">2.1s last week</div>
+        </div>
+
+        <!-- Cache Hit Rate -->
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-gray-400">Cache Hit Rate</span>
+            <span class="text-yellow-500 text-sm">+2.1%</span>
+          </div>
+          <div class="text-3xl font-bold text-white mb-2" id="cacheHitRate">87.3%</div>
+          <div class="text-sm text-gray-500">Target: 85%</div>
+        </div>
+
+        <!-- Social Engagement -->
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-gray-400">Social Engagement</span>
+            <span class="text-green-500 text-sm">+24.7%</span>
+          </div>
+          <div class="text-3xl font-bold text-white mb-2" id="socialEngagement">45.2K</div>
+          <div class="text-sm text-gray-500">Interactions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Performance Charts -->
+    <div class="container mx-auto px-4 py-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Generation Trends -->
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+          <h3 class="text-xl font-bold text-white mb-4">Generation Trends</h3>
+          <canvas id="generationChart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- Visual Type Distribution -->
+        <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+          <h3 class="text-xl font-bold text-white mb-4">Type Distribution</h3>
+          <canvas id="typeChart" width="400" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- A/B Testing Results -->
+    <div class="container mx-auto px-4 py-6">
+      <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-xl font-bold text-white">A/B Testing Results</h3>
+          <button onclick="startNewTest()" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+            New Test
+          </button>
+        </div>
+        
+        <div class="space-y-4">
+          <!-- Test 1: Clutch Visual Styles -->
+          <div class="bg-black/50 rounded-lg p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <h4 class="text-white font-bold">Clutch Visual Styles</h4>
+                <p class="text-gray-400 text-sm">Energy burst vs Lightning effect</p>
+              </div>
+              <span class="px-3 py-1 bg-green-600/20 text-green-400 rounded-full text-sm">Active</span>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="text-gray-400">Variant A (Energy)</span>
+                  <span class="text-white font-bold">52.3%</span>
+                </div>
+                <div class="bg-gray-700 rounded-full h-2">
+                  <div class="bg-red-500 h-2 rounded-full" style="width: 52.3%"></div>
+                </div>
+                <p class="text-sm text-gray-500 mt-1">2,341 impressions</p>
+              </div>
+              
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="text-gray-400">Variant B (Lightning)</span>
+                  <span class="text-white font-bold">47.7%</span>
+                </div>
+                <div class="bg-gray-700 rounded-full h-2">
+                  <div class="bg-blue-500 h-2 rounded-full" style="width: 47.7%"></div>
+                </div>
+                <p class="text-sm text-gray-500 mt-1">2,138 impressions</p>
+              </div>
+            </div>
+            
+            <div class="mt-3 pt-3 border-t border-gray-700">
+              <p class="text-sm text-gray-400">
+                <span class="text-green-400 font-bold">Winner: Variant A</span> - 
+                9.5% higher engagement rate (p-value: 0.023)
+              </p>
+            </div>
+          </div>
+
+          <!-- Test 2: Evolution Timeline Layouts -->
+          <div class="bg-black/50 rounded-lg p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <h4 class="text-white font-bold">Evolution Timeline Layouts</h4>
+                <p class="text-gray-400 text-sm">Horizontal vs Diagonal progression</p>
+              </div>
+              <span class="px-3 py-1 bg-yellow-600/20 text-yellow-400 rounded-full text-sm">Completed</span>
+            </div>
+            
+            <div class="mt-3">
+              <p class="text-sm text-gray-400">
+                <span class="text-green-400 font-bold">Winner: Horizontal</span> - 
+                15.2% better comprehension in user testing
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Performing Visuals -->
+    <div class="container mx-auto px-4 py-6">
+      <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+        <h3 class="text-xl font-bold text-white mb-4">Top Performing Visuals</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Top Visual 1 -->
+          <div class="bg-black/50 rounded-lg overflow-hidden cursor-pointer hover:ring-2 hover:ring-red-500 transition">
+            <div class="aspect-video bg-gradient-to-br from-red-900 to-orange-900"></div>
+            <div class="p-4">
+              <h4 class="text-white font-bold">Goldschmidt Clutch 98</h4>
+              <p class="text-gray-400 text-sm">45.2K engagements</p>
+              <div class="flex gap-2 mt-2">
+                <span class="text-xs text-gray-500">Twitter: 28K</span>
+                <span class="text-xs text-gray-500">IG: 17.2K</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Visual 2 -->
+          <div class="bg-black/50 rounded-lg overflow-hidden cursor-pointer hover:ring-2 hover:ring-red-500 transition">
+            <div class="aspect-video bg-gradient-to-br from-blue-900 to-purple-900"></div>
+            <div class="p-4">
+              <h4 class="text-white font-bold">Arenado Evolution</h4>
+              <p class="text-gray-400 text-sm">38.7K engagements</p>
+              <div class="flex gap-2 mt-2">
+                <span class="text-xs text-gray-500">Twitter: 22K</span>
+                <span class="text-xs text-gray-500">IG: 16.7K</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Visual 3 -->
+          <div class="bg-black/50 rounded-lg overflow-hidden cursor-pointer hover:ring-2 hover:ring-red-500 transition">
+            <div class="aspect-video bg-gradient-to-br from-cyan-900 to-blue-900"></div>
+            <div class="p-4">
+              <h4 class="text-white font-bold">2026 Predictions</h4>
+              <p class="text-gray-400 text-sm">31.4K engagements</p>
+              <div class="flex gap-2 mt-2">
+                <span class="text-xs text-gray-500">Twitter: 19K</span>
+                <span class="text-xs text-gray-500">IG: 12.4K</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CDN Performance -->
+    <div class="container mx-auto px-4 py-6">
+      <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+        <h3 class="text-xl font-bold text-white mb-4">CDN Performance</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <div class="text-gray-400 mb-2">Global Latency</div>
+            <div class="text-2xl font-bold text-white">42ms</div>
+            <div class="text-sm text-green-400">↓ 12% from last week</div>
+          </div>
+          
+          <div>
+            <div class="text-gray-400 mb-2">Cache Coverage</div>
+            <div class="text-2xl font-bold text-white">94.7%</div>
+            <div class="text-sm text-gray-500">283 edge locations</div>
+          </div>
+          
+          <div>
+            <div class="text-gray-400 mb-2">Bandwidth Saved</div>
+            <div class="text-2xl font-bold text-white">2.4TB</div>
+            <div class="text-sm text-gray-500">This month</div>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <h4 class="text-white font-bold mb-3">Regional Performance</h4>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-gray-400">North America</span>
+              <span class="text-white">28ms</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-gray-400">Europe</span>
+              <span class="text-white">45ms</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-gray-400">Asia Pacific</span>
+              <span class="text-white">67ms</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Initialize charts
+    document.addEventListener('DOMContentLoaded', () => {
+      // Generation Trends Chart
+      const genCtx = document.getElementById('generationChart').getContext('2d');
+      new Chart(genCtx, {
+        type: 'line',
+        data: {
+          labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          datasets: [{
+            label: 'Visuals Generated',
+            data: [245, 289, 267, 312, 298, 341, 283],
+            borderColor: 'rgb(239, 68, 68)',
+            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: { 
+              beginAtZero: true,
+              grid: { color: 'rgba(255, 255, 255, 0.1)' },
+              ticks: { color: 'rgba(255, 255, 255, 0.7)' }
+            },
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.1)' },
+              ticks: { color: 'rgba(255, 255, 255, 0.7)' }
+            }
+          }
+        }
+      });
+
+      // Type Distribution Chart
+      const typeCtx = document.getElementById('typeChart').getContext('2d');
+      new Chart(typeCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Clutch', 'Evolution', 'Prediction', 'Badge'],
+          datasets: [{
+            data: [45, 25, 20, 10],
+            backgroundColor: [
+              'rgb(239, 68, 68)',
+              'rgb(59, 130, 246)',
+              'rgb(6, 182, 212)',
+              'rgb(250, 204, 21)'
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { color: 'rgba(255, 255, 255, 0.7)' }
+            }
+          }
+        }
+      });
+
+      // Load analytics data
+      loadAnalytics();
+    });
+
+    // Load analytics from API
+    async function loadAnalytics() {
+      try {
+        const response = await fetch('/api/visuals/analytics');
+        const data = await response.json();
+        
+        // Update metrics
+        document.getElementById('totalVisuals').textContent = data.totalGenerations || '0';
+        document.getElementById('cacheHitRate').textContent = 
+          `${Math.round((data.cacheHits / data.totalGenerations) * 100)}%`;
+      } catch (error) {
+        console.error('Failed to load analytics:', error);
+      }
+    }
+
+    // Export analytics report
+    function exportAnalytics() {
+      // Generate CSV or PDF report
+      console.log('Exporting analytics report...');
+    }
+
+    // Start new A/B test
+    function startNewTest() {
+      // Open A/B test configuration modal
+      console.log('Starting new A/B test...');
+    }
+
+    // Date range change handler
+    document.getElementById('dateRange')?.addEventListener('change', (e) => {
+      loadAnalytics(e.target.value);
+    });
+
+    // Visual type filter
+    document.getElementById('visualType')?.addEventListener('change', (e) => {
+      loadAnalytics(null, e.target.value);
+    });
+  </script>
+</Layout>

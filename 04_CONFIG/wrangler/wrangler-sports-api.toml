@@ -1,0 +1,41 @@
+name = "blaze-sports-intelligence-api"
+main = "blaze-sports-api-worker.js"
+compatibility_date = "2024-08-24"
+
+# Production deployment
+[env.production]
+name = "blaze-sports-api"
+routes = [
+  { pattern = "api.blaze-intelligence.com/*", zone_name = "blaze-intelligence.com" },
+  { pattern = "sports-api.blaze-intelligence.com/*", zone_name = "blaze-intelligence.com" }
+]
+
+# KV Namespaces for caching
+[[kv_namespaces]]
+binding = "SPORTS_DATA"
+id = "sports_data_kv"
+preview_id = "sports_data_preview"
+
+# D1 Database binding
+[[d1_databases]]
+binding = "SPORTS_DB"
+database_name = "blaze-sports-intelligence"
+database_id = "blaze-sports-db-id"
+
+# R2 Bucket for data storage
+[[r2_buckets]]
+binding = "DATA_BUCKET"
+bucket_name = "blaze-intelligence-mlb"
+
+# Environment variables
+[vars]
+API_VERSION = "1.0.0"
+ENABLE_HAV_F = "true"
+MLB_SEASON = "2025"
+
+# Performance settings
+[placement]
+mode = "smart"
+
+[observability]
+enabled = true

@@ -1,0 +1,70 @@
+name = "blaze-intelligence-os-v2"
+main = "src/workers/analytics-worker.ts"
+compatibility_date = "2024-01-01"
+node_compat = true
+pages_build_output_dir = "dist"
+
+[env.production]
+name = "blaze-intelligence-prod"
+route = { pattern = "blaze-intelligence.com/api/*", zone_id = "YOUR_ZONE_ID" }
+
+[env.staging]
+name = "blaze-intelligence-staging"
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "SPORTS_CACHE"
+id = "YOUR_KV_NAMESPACE_ID"
+preview_id = "YOUR_PREVIEW_KV_ID"
+
+[[r2_buckets]]
+binding = "SPORTS_DATA"
+bucket_name = "blaze-sports-data"
+
+[[d1_databases]]
+binding = "ANALYTICS_DB"
+database_name = "blaze-analytics"
+database_id = "YOUR_D1_DATABASE_ID"
+
+[[durable_objects.bindings]]
+name = "RATE_LIMITER"
+class_name = "RateLimiter"
+script_name = "rate-limiter"
+
+[[analytics_engine_datasets]]
+binding = "METRICS"
+
+[triggers]
+crons = [
+    "*/5 * * * *",  # Every 5 minutes for live game updates
+    "0 */1 * * *",  # Every hour for stats aggregation
+    "0 0 * * *"     # Daily at midnight for cleanup
+]
+
+[vars]
+ENVIRONMENT = "production"
+API_VERSION = "v2"
+
+# Build configuration
+[build]
+command = "npm run build"
+
+[build.upload]
+format = "service-worker"
+
+# Observability
+[observability]
+enabled = true
+
+logpush = true
+tail_consumers = []
+
+# Security
+[[unsafe.bindings]]
+name = "SPORTS_API_KEY"
+type = "secret_text"
+
+# Rate limiting
+[limits]
+cpu_ms = 50
+memory = 128

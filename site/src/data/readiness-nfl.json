@@ -1,0 +1,72 @@
+{
+  "teams": [
+    {
+      "team_id": "NFL-TEN",
+      "name": "Tennessee Titans",
+      "readiness_score": 64,
+      "status": "yellow",
+      "components": {
+        "injury_report": 100,
+        "divisional_matchup": 50,
+        "home_field": 25,
+        "rest_advantage": 50,
+        "playoff_implications": 50
+      },
+      "leverage": 50,
+      "players": {
+        "total": 1,
+        "available": 1,
+        "stars": 0
+      },
+      "next_game": null,
+      "trend": "stable"
+    }
+  ],
+  "averageReadiness": 64,
+  "topTeams": [
+    {
+      "team_id": "NFL-TEN",
+      "name": "Tennessee Titans",
+      "readiness_score": 64,
+      "status": "yellow",
+      "components": {
+        "injury_report": 100,
+        "divisional_matchup": 50,
+        "home_field": 25,
+        "rest_advantage": 50,
+        "playoff_implications": 50
+      },
+      "leverage": 50,
+      "players": {
+        "total": 1,
+        "available": 1,
+        "stars": 0
+      },
+      "next_game": null,
+      "trend": "stable"
+    }
+  ],
+  "bottomTeams": [
+    {
+      "team_id": "NFL-TEN",
+      "name": "Tennessee Titans",
+      "readiness_score": 64,
+      "status": "yellow",
+      "components": {
+        "injury_report": 100,
+        "divisional_matchup": 50,
+        "home_field": 25,
+        "rest_advantage": 50,
+        "playoff_implications": 50
+      },
+      "leverage": 50,
+      "players": {
+        "total": 1,
+        "available": 1,
+        "stars": 0
+      },
+      "next_game": null,
+      "trend": "stable"
+    }
+  ]
+}

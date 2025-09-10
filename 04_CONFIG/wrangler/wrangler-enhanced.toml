@@ -1,0 +1,115 @@
+name = "blaze-intelligence-platform"
+main = "worker-unified-gateway.js"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+vars = { 
+  ENVIRONMENT = "production",
+  API_VERSION = "2.0",
+  ENABLE_VISION_AI = "true",
+  ENABLE_MICRO_EXPRESSIONS = "true"
+}
+
+# R2 Storage Buckets
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "blaze-youth-data"
+
+[[r2_buckets]]
+binding = "VISION_AI_STORAGE"
+bucket_name = "blaze-vision-ai-data"
+
+[[r2_buckets]]
+binding = "ANALYTICS_STORAGE"
+bucket_name = "blaze-analytics-data"
+
+# KV Namespaces
+[[kv_namespaces]]
+binding = "KV"
+id = "b884d8eb60454eed879d36c8863cf513"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "CACHE_NAMESPACE_ID"
+preview_id = "CACHE_PREVIEW_ID"
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "SESSIONS_NAMESPACE_ID"
+preview_id = "SESSIONS_PREVIEW_ID"
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "blaze-intelligence-db"
+database_id = "DB_ID"
+
+# Durable Objects
+[[durable_objects.bindings]]
+name = "WEBSOCKET_HANDLER"
+class_name = "WebSocketHandler"
+
+[[durable_objects.bindings]]
+name = "ANALYTICS_ENGINE"
+class_name = "AnalyticsEngine"
+
+# Analytics Engine
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+
+# Queues
+[[queues.producers]]
+binding = "DATA_QUEUE"
+queue = "data-ingestion-queue"
+
+[[queues.consumers]]
+queue = "data-ingestion-queue"
+max_batch_size = 100
+max_batch_timeout = 30
+
+# Scheduled Workers (Crons)
+[triggers]
+crons = [
+  "0 2 * * *",      # Daily full ingestion at 2 AM CT
+  "0 * * * *",      # Hourly priority updates
+  "*/15 * * * *",   # 15-min real-time data sync
+  "0 18 * * 0",     # Weekly Perfect Game sync
+  "0 20 * * 3",     # Wednesday recruiting updates
+  "*/5 * * * *"     # 5-min WebSocket heartbeat
+]
+
+# Observability & Monitoring
+[observability]
+enabled = true
+
+[logpush]
+enabled = true
+
+# Performance Optimization
+[build]
+command = "npm run build"
+watch_paths = ["src/**/*.js", "src/**/*.ts"]
+
+[limits]
+cpu_ms = 50
+
+[placement]
+mode = "smart"
+
+# Browser Rendering (for Vision AI)
+[browser]
+binding = "BROWSER"
+
+# Service Bindings
+[[services]]
+binding = "VISION_AI_SERVICE"
+service = "blaze-vision-ai-worker"
+
+[[services]]
+binding = "MLB_SERVICE"
+service = "mlb-data-worker"
+
+[[services]]
+binding = "NFL_SERVICE"
+service = "nfl-data-worker"

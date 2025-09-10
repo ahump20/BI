@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardinals Analysis Dashboard - Blaze Intelligence</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a0a0a 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        #hero-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #c41e3a;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px #c41e3a; }
+            to { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px #c41e3a, 0 0 30px #c41e3a; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #c41e3a;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #cccccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .blaze-brand {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 3;
+            text-align: right;
+        }
+
+        .blaze-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .blaze-tagline {
+            font-size: 0.8rem;
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        .dashboard-content {
+            position: relative;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 4rem 2rem;
+            margin-top: -10rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #c41e3a;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .analytics-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(196, 30, 58, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(196, 30, 58, 0.6);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card-content {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .metric-label {
+            color: #cccccc;
+        }
+
+        .metric-value {
+            color: #c41e3a;
+            font-weight: 600;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 1rem 0;
+        }
+
+        .insights-section {
+            background: rgba(196, 30, 58, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .insight-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border-left: 4px solid #ffd700;
+        }
+
+        .framework-section {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .framework-title {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid rgba(196, 30, 58, 0.3);
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            color: #c41e3a;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact {
+            color: #cccccc;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="hero-container">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-overlay">
+            <h1 class="hero-title">ST. LOUIS CARDINALS</h1>
+            <p class="hero-subtitle">Championship Analysis • 2025 Season Outlook</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="championship-prob">12.8%</span>
+                    <span class="stat-label">Championship Probability</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="playoff-prob">42.5%</span>
+                    <span class="stat-label">Playoff Probability</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="org-health">87.5%</span>
+                    <span class="stat-label">Organizational Health</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">11</span>
+                    <span class="stat-label">World Series Titles</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="blaze-brand">
+            <div class="blaze-logo">🔥 BLAZE INTELLIGENCE</div>
+            <div class="blaze-tagline">Pattern Recognition Weaponized</div>
+        </div>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="container">
+            <h2 class="section-title">Comprehensive Cardinals Analysis</h2>
+            
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3 class="card-title">Championship Pattern Analysis</h3>
+                    <div class="card-content">
+                        <div class="metric-row">
+                            <span class="metric-label">Years Since Last Title</span>
+                            <span class="metric-value">14 years (2011)</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Historical Average Gap</span>
+                            <span class="metric-value">14.2 years</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Championship Clusters</span>
+                            <span class="metric-value">5 clusters identified</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Current Cycle Position</span>
+                            <span class="metric-value">Window Opening</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3 class="card-title">2025 Season Projections</h3>
+                    <div class="card-content">
+                        <div class="metric-row">
+                            <span class="metric-label">Projected Record</span>
+                            <span class="metric-value">84-78</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Division Finish</span>
+                            <span class="metric-value">2nd Place</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Wild Card Odds</span>
+                            <span class="metric-value">42.5%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Team WAR Projection</span>
+                            <span class="metric-value">45.2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3 class="card-title">Organizational Strengths</h3>
+                    <div class="card-content">
+                        <div class="metric-row">
+                            <span class="metric-label">Player Development</span>
+                            <span class="metric-value">9.1/10</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Baseball IQ Culture</span>
+                            <span class="metric-value">8.8/10</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Fan Loyalty & Market</span>
+                            <span class="metric-value">9.0/10</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Financial Efficiency</span>
+                            <span class="metric-value">7.9/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3 class="card-title">Key Performance Indicators</h3>
+                    <div class="card-content">
+                        <div class="metric-row">
+                            <span class="metric-label">Pitching Depth</span>
+                            <span class="metric-value">7.2/10</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Offensive Consistency</span>
+                            <span class="metric-value">6.8/10</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Defensive Efficiency</span>
+                            <span class="metric-value">8.1/10</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Organizational Stability</span>
+                            <span class="metric-value">8.9/10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3 class="card-title">NL Central Competition</h3>
+                    <div class="card-content">
+                        <div class="metric-row">
+                            <span class="metric-label">Cubs (Projected)</span>
+                            <span class="metric-value">87-75</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Brewers (Projected)</span>
+                            <span class="metric-value">86-76</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Cardinals (Projected)</span>
+                            <span class="metric-value">84-78</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Division Title Odds</span>
+                            <span class="metric-value">18.7%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3 class="card-title">Top Prospects Impact</h3>
+                    <div class="card-content">
+                        <div class="metric-row">
+                            <span class="metric-label">Jordan Walker (OF)</span>
+                            <span class="metric-value">8.0 Ceiling</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Masyn Winn (SS)</span>
+                            <span class="metric-value">7.8 Ceiling</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Tink Hence (RHP)</span>
+                            <span class="metric-value">8.2 Ceiling</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Farm System Rank</span>
+                            <span class="metric-value">12th of 30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insights-section">
+                <h3 class="section-title" style="color: #ffd700; margin-bottom: 2rem;">Key Strategic Insights</h3>
+                
+                <div class="insight-item">
+                    <strong>Championship Window Analysis:</strong> Historical championship patterns suggest 2025-2027 represents potential window opening. Cardinals demonstrate "cluster championship behavior" with 68% of titles occurring within 5 years of another championship.
+                </div>
+                
+                <div class="insight-item">
+                    <strong>Competitive Positioning:</strong> Cardinals positioned between Cubs' financial advantage and Brewers' pitching strength. Success depends on maximizing organizational development efficiency versus division competitors.
+                </div>
+                
+                <div class="insight-item">
+                    <strong>Prospect Integration Critical:</strong> Jordan Walker and Masyn Winn development timeline directly correlates with championship probability. Accelerated integration increases playoff odds by 12-15%.
+                </div>
+                
+                <div class="insight-item">
+                    <strong>Bullpen Enhancement Priority:</strong> Primary competitive weakness identified in relief pitching consistency. Strategic mid-season acquisition could improve playoff probability to 55%+.
+                </div>
+            </div>
+
+            <div class="framework-section">
+                <h3 class="framework-title">Blaze Intelligence Frameworks Applied</h3>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card" style="background: rgba(255, 215, 0, 0.05);">
+                        <h4 class="card-title">Decision Velocity Model™</h4>
+                        <div class="card-content">
+                            <div class="metric-row">
+                                <span class="metric-label">Organizational Score</span>
+                                <span class="metric-value">8.2/10</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Prospect Promotion Timing</span>
+                                <span class="metric-value">7.9/10</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Trade Deadline Execution</span>
+                                <span class="metric-value">8.5/10</span>
+                            </div>
+                            <p style="margin-top: 1rem; font-style: italic;">Cardinals demonstrate superior decision-making speed in player development and roster construction cycles.</p>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card" style="background: rgba(255, 215, 0, 0.05);">
+                        <h4 class="card-title">Pattern Recognition Hierarchy™</h4>
+                        <div class="card-content">
+                            <div class="metric-row">
+                                <span class="metric-label">Surface Detection</span>
+                                <span class="metric-value">Standard MLB metrics</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Contextual Mapping</span>
+                                <span class="metric-value">Historical patterns integrated</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Predictive Modeling</span>
+                                <span class="metric-value">Championship clustering identified</span>
+                            </div>
+                            <p style="margin-top: 1rem; font-style: italic;">Cardinals organization demonstrates elite pattern recognition in player development and competitive cycles.</p>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card" style="background: rgba(255, 215, 0, 0.05);">
+                        <h4 class="card-title">Cognitive Load Distribution™</h4>
+                        <div class="card-content">
+                            <div class="metric-row">
+                                <span class="metric-label">Task Prioritization</span>
+                                <span class="metric-value">Development > Acquisitions</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Automation Level</span>
+                                <span class="metric-value">High - Established systems</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">Recovery Management</span>
+                                <span class="metric-value">Organizational patience</span>
+                            </div>
+                            <p style="margin-top: 1rem; font-style: italic;">Built-in organizational stability allows focused resource allocation without excessive strategic pivoting.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container" style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 2rem;">
+                <h3 style="color: #c41e3a; margin-bottom: 1rem; text-align: center;">Championship Timeline Visualization</h3>
+                <canvas id="championshipChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-brand">🔥 BLAZE INTELLIGENCE</div>
+        <div class="footer-contact">Where Cognitive Performance Meets Quarterly Performance</div>
+        <div class="footer-contact">Austin Humphrey | ahump20@outlook.com | (210) 273-5538</div>
+        <div style="color: #666; margin-top: 1rem; font-size: 0.9rem;">
+            "Every stat tells a story, every game builds a legacy"
+        </div>
+    </footer>
+
+    <script>
+        // Three.js Hero Animation
+        function initHeroAnimation() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ 
+                canvas: document.getElementById('hero-canvas'), 
+                alpha: true 
+            });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            // Create particle system
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particleCount = 3000;
+            const positions = new Float32Array(particleCount * 3);
+            const velocities = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 100;
+                positions[i + 1] = (Math.random() - 0.5) * 100;
+                positions[i + 2] = (Math.random() - 0.5) * 100;
+                
+                velocities[i] = (Math.random() - 0.5) * 0.02;
+                velocities[i + 1] = (Math.random() - 0.5) * 0.02;
+                velocities[i + 2] = (Math.random() - 0.5) * 0.02;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particlesGeometry.setAttribute('velocity', new THREE.BufferAttribute(velocities, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                color: 0xc41e3a,
+                size: 0.8,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particles);
+            
+            camera.position.z = 30;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Update particles
+                const positions = particles.geometry.attributes.position.array;
+                const velocities = particles.geometry.attributes.velocity.array;
+                
+                for (let i = 0; i < positions.length; i += 3) {
+                    positions[i] += velocities[i];
+                    positions[i + 1] += velocities[i + 1];
+                    positions[i + 2] += velocities[i + 2];
+                    
+                    // Wrap around
+                    if (positions[i] > 50) positions[i] = -50;
+                    if (positions[i] < -50) positions[i] = 50;
+                    if (positions[i + 1] > 50) positions[i + 1] = -50;
+                    if (positions[i + 1] < -50) positions[i + 1] = 50;
+                    if (positions[i + 2] > 50) positions[i + 2] = -50;
+                    if (positions[i + 2] < -50) positions[i + 2] = 50;
+                }
+                
+                particles.geometry.attributes.position.needsUpdate = true;
+                particles.rotation.y += 0.001;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        
+        // Initialize Championship Timeline Chart
+        function initChampionshipChart() {
+            const ctx = document.getElementById('championshipChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1926', '1931', '1934', '1942', '1944', '1946', '1964', '1967', '1982', '2006', '2011', '2025?'],
+                    datasets: [{
+                        label: 'World Series Championships',
+                        data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, null],
+                        borderColor: '#c41e3a',
+                        backgroundColor: 'rgba(196, 30, 58, 0.1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#c41e3a',
+                        pointBorderColor: '#ffd700',
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        tension: 0.4
+                    }, {
+                        label: 'Championship Probability Projection',
+                        data: [null, null, null, null, null, null, null, null, null, null, null, 12.8],
+                        borderColor: '#ffd700',
+                        backgroundColor: 'rgba(255, 215, 0, 0.2)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        pointBackgroundColor: '#ffd700',
+                        pointRadius: 8,
+                        pointHoverRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#ffffff',
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#cccccc'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#cccccc'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Animated counter for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-value');
+            
+            counters.forEach(counter => {
+                const target = parseFloat(counter.textContent);
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    if (counter.textContent.includes('%')) {
+                        counter.textContent = current.toFixed(1) + '%';
+                    } else if (target === 11) {
+                        counter.textContent = Math.floor(current);
+                    } else {
+                        counter.textContent = current.toFixed(1) + '%';
+                    }
+                }, 50);
+            });
+        }
+        
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initHeroAnimation();
+            setTimeout(() => {
+                initChampionshipChart();
+                animateCounters();
+            }, 1000);
+        });
+        
+        // Smooth scroll for better UX
+        document.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('#hero-container');
+            const speed = scrolled * 0.5;
+            
+            if (parallax) {
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

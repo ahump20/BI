@@ -1,0 +1,35 @@
+{
+  "name": "blaze-vision-ai",
+  "version": "1.0.0",
+  "description": "Blaze Vision AI Coaching Platform - Real-time dual-signal analysis",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build", 
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "turbo": "latest",
+    "tsup": "^7.0.0",
+    "vitest": "^0.34.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/austinhumphrey/blaze-vision-ai.git"
+  },
+  "author": "Austin Humphrey <ahump20@outlook.com>",
+  "license": "PROPRIETARY"
+}

@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/Users/AustinHumphrey/**)",
+      "Read(/Users/AustinHumphrey/**)",
+      "Bash(mkdir:*)",
+      "Bash(npm install)",
+      "Bash(npm run type-check:*)",
+      "Bash(find:*)",
+      "Bash(npm cache clean:*)",
+      "Bash(npx tsc:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Read(/Users/AustinHumphrey/**)",
+      "Read(/Users/AustinHumphrey/.claude/**)",
+      "Read(/Users/AustinHumphrey/.claude/**)",
+      "Bash(npm run build:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(npx vite:*)",
+      "Bash(timeout:*)",
+      "Bash(wrangler whoami:*)",
+      "Bash(chmod:*)",
+      "Bash(npx wrangler pages deploy:*)",
+      "Bash(./quick-deploy.sh)",
+      "Read(/Users/AustinHumphrey/austin-portfolio-deploy/**)",
+      "Bash(npm run start:*)",
+      "Bash(python:*)",
+      "Bash(./launch-ultimate-platform.sh:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "outputStyle": "genuine-assistant"
+}
