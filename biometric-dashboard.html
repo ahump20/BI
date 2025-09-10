@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biometric Dashboard - Blaze Intelligence</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            color: #FFFFFF;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { 
+            text-align: center; 
+            margin-bottom: 40px;
+            background: linear-gradient(90deg, #BF5700, #9BCBEB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .metrics-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+            margin-bottom: 40px; 
+        }
+        .metric-card { 
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover { 
+            transform: translateY(-5px);
+            border-color: #BF5700;
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.2);
+        }
+        .metric-title { 
+            font-size: 14px; 
+            color: #9BCBEB; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .metric-value { 
+            font-size: 32px; 
+            font-weight: 700; 
+            color: #BF5700;
+            margin-bottom: 5px;
+        }
+        .metric-change { 
+            font-size: 12px; 
+            color: #00B2A9; 
+        }
+        .chart-container { 
+            height: 300px; 
+            margin-top: 20px; 
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .alert { 
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 10px 0;
+            background: rgba(191, 87, 0, 0.1);
+            border-left: 4px solid #BF5700;
+            color: #BF5700;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-optimal { background: #00B2A9; }
+        .status-warning { background: #BF5700; }
+        .status-critical { background: #FF4757; }
+        .athlete-list {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .athlete-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .athlete-item:last-child { border-bottom: none; }
+        .live-indicator {
+            animation: pulse 2s infinite;
+            background: #00B2A9;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🧠 Blaze Intelligence - Real-time Biometric Dashboard</h1>
+            <p>Advanced Athlete Monitoring & Performance Analytics</p>
+        </header>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-title">Active Athletes</div>
+                <div class="metric-value" id="activeAthletes">12</div>
+                <div class="metric-change">↑ 3 from yesterday</div>
+                <div class="live-indicator"></div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-title">Avg Performance Score</div>
+                <div class="metric-value" id="avgPerformance">0.847</div>
+                <div class="metric-change">↑ 5.2% this week</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-title">High Stress Alerts</div>
+                <div class="metric-value" id="stressAlerts">2</div>
+                <div class="metric-change">↓ 67% reduction</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-title">Character Score</div>
+                <div class="metric-value" id="characterScore">0.912</div>
+                <div class="metric-change">Confidence, Focus, Grit</div>
+            </div>
+        </div>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-title">Heart Rate Monitoring</div>
+                <div class="chart-container">
+                    <canvas id="heartRateChart"></canvas>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-title">Performance Trends</div>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-title">Biomechanical Analysis</div>
+                <div class="chart-container">
+                    <canvas id="biomechChart"></canvas>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-title">Micro-Expression Analysis</div>
+                <div class="chart-container">
+                    <canvas id="expressionChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="athlete-list">
+            <h3>🏃‍♂️ Live Athlete Status</h3>
+            <div id="athletesList">
+                <div class="athlete-item">
+                    <div>
+                        <span class="status-indicator status-optimal"></span>
+                        <strong>Sarah Johnson</strong> - Baseball
+                    </div>
+                    <div>Performance: 0.89 | HR: 145 bpm</div>
+                </div>
+                <div class="athlete-item">
+                    <div>
+                        <span class="status-indicator status-warning"></span>
+                        <strong>Mike Rodriguez</strong> - Football
+                    </div>
+                    <div>Performance: 0.73 | Stress: High</div>
+                </div>
+                <div class="athlete-item">
+                    <div>
+                        <span class="status-indicator status-optimal"></span>
+                        <strong>Emily Chen</strong> - Basketball
+                    </div>
+                    <div>Performance: 0.91 | Character: 0.95</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert">
+            <strong>🚨 Live Alert:</strong> Athlete Mike Rodriguez showing elevated stress levels during training. 
+            Recommend rest period and form analysis.
+        </div>
+    </div>
+
+    <script>
+        // Real-time dashboard functionality
+        class BiometricDashboard {
+            constructor() {
+                this.initCharts();
+                this.startRealTimeUpdates();
+            }
+
+            initCharts() {
+                // Initialize all charts with sample data
+                this.initHeartRateChart();
+                this.initPerformanceChart();
+                this.initBiomechChart();
+                this.initExpressionChart();
+            }
+
+            initHeartRateChart() {
+                const canvas = document.getElementById('heartRateChart');
+                const ctx = canvas.getContext('2d');
+                
+                // Simple animated heart rate visualization
+                this.animateHeartRate(ctx);
+            }
+
+            initPerformanceChart() {
+                const canvas = document.getElementById('performanceChart');
+                const ctx = canvas.getContext('2d');
+                
+                // Performance trend line
+                this.drawPerformanceTrend(ctx);
+            }
+
+            initBiomechChart() {
+                const canvas = document.getElementById('biomechChart');
+                const ctx = canvas.getContext('2d');
+                
+                // Biomechanical efficiency radar
+                this.drawBiomechRadar(ctx);
+            }
+
+            initExpressionChart() {
+                const canvas = document.getElementById('expressionChart');
+                const ctx = canvas.getContext('2d');
+                
+                // Character traits bar chart
+                this.drawCharacterTraits(ctx);
+            }
+
+            animateHeartRate(ctx) {
+                const canvas = ctx.canvas;
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+                
+                let time = 0;
+                const animate = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.strokeStyle = '#BF5700';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    
+                    for (let x = 0; x < canvas.width; x++) {
+                        const y = canvas.height / 2 + Math.sin(x * 0.02 + time) * 30 + 
+                                 Math.sin(x * 0.01 + time * 0.5) * 10;
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                    time += 0.1;
+                    requestAnimationFrame(animate);
+                };
+                animate();
+            }
+
+            drawPerformanceTrend(ctx) {
+                const canvas = ctx.canvas;
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+                
+                const data = [0.65, 0.72, 0.78, 0.81, 0.85, 0.87, 0.84];
+                ctx.strokeStyle = '#9BCBEB';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                
+                data.forEach((value, index) => {
+                    const x = (index / (data.length - 1)) * canvas.width;
+                    const y = canvas.height - (value * canvas.height);
+                    if (index === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                });
+                ctx.stroke();
+            }
+
+            drawBiomechRadar(ctx) {
+                const canvas = ctx.canvas;
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+                
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const radius = Math.min(centerX, centerY) - 20;
+                
+                const metrics = ['Efficiency', 'Balance', 'Power', 'Coordination'];
+                const values = [0.85, 0.78, 0.92, 0.81];
+                
+                // Draw radar background
+                ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+                ctx.lineWidth = 1;
+                for (let i = 1; i <= 4; i++) {
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, (radius * i) / 4, 0, 2 * Math.PI);
+                    ctx.stroke();
+                }
+                
+                // Draw data
+                ctx.strokeStyle = '#00B2A9';
+                ctx.fillStyle = 'rgba(0, 178, 169, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                
+                values.forEach((value, index) => {
+                    const angle = (index * 2 * Math.PI) / metrics.length - Math.PI / 2;
+                    const x = centerX + Math.cos(angle) * radius * value;
+                    const y = centerY + Math.sin(angle) * radius * value;
+                    if (index === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                });
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+            }
+
+            drawCharacterTraits(ctx) {
+                const canvas = ctx.canvas;
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+                
+                const traits = ['Confidence', 'Focus', 'Grit', 'Resilience'];
+                const values = [0.89, 0.94, 0.87, 0.92];
+                const barWidth = canvas.width / (traits.length * 1.5);
+                
+                values.forEach((value, index) => {
+                    const x = (index + 0.5) * (canvas.width / traits.length);
+                    const height = value * canvas.height * 0.8;
+                    const y = canvas.height - height;
+                    
+                    ctx.fillStyle = '#BF5700';
+                    ctx.fillRect(x - barWidth / 2, y, barWidth, height);
+                });
+            }
+
+            startRealTimeUpdates() {
+                setInterval(() => {
+                    this.updateMetrics();
+                }, 5000); // Update every 5 seconds
+            }
+
+            updateMetrics() {
+                // Simulate real-time updates
+                const activeAthletes = document.getElementById('activeAthletes');
+                const avgPerformance = document.getElementById('avgPerformance');
+                const stressAlerts = document.getElementById('stressAlerts');
+                const characterScore = document.getElementById('characterScore');
+                
+                // Add small random variations
+                const variation = () => (Math.random() - 0.5) * 0.02;
+                
+                if (Math.random() > 0.7) { // 30% chance to update
+                    const currentPerf = parseFloat(avgPerformance.textContent);
+                    avgPerformance.textContent = (currentPerf + variation()).toFixed(3);
+                    
+                    const currentChar = parseFloat(characterScore.textContent);
+                    characterScore.textContent = (currentChar + variation()).toFixed(3);
+                }
+            }
+        }
+
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new BiometricDashboard();
+        });
+    </script>
+</body>
+</html>

@@ -14,7 +14,10 @@
       "Bash(npm test)",
       "Bash(npm run dev:*)",
       "Bash(npm run start:*)",
-      "Bash(./scripts/setup-monitoring.sh:*)"
+      "Bash(./scripts/setup-monitoring.sh:*)",
+      "Bash(npm run deploy:production:*)",
+      "Bash(wrangler pages deploy:*)",
+      "Bash(wrangler deploy:*)"
     ],
     "deny": [],
     "ask": []
