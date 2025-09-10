@@ -64,11 +64,6 @@ crons = [
 [observability]
 enabled = true
 
-# Monitoring and Health Checks
-[triggers]
-crons = [
-  "*/5 * * * *",    # Health check every 5 minutes
-  "0 */1 * * *",    # Metrics collection every hour
-  "0 0 * * *"       # Daily maintenance at midnight
-]
+# Note: Multiple [triggers] sections merged above
+# Monitoring and health checks are handled by the cron jobs defined earlier
 

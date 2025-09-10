@@ -5,13 +5,28 @@ Integrates physiological, biomechanical, and performance biometrics
 """
 
 import json
-import numpy as np  # pyright: ignore[reportMissingImports]
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional, Tuple
 import logging
 from dataclasses import dataclass
-import requests  # pyright: ignore[reportMissingModuleSource]
 import time
+import random
+import math
+
+# Try to import optional dependencies, fallback to built-ins if not available
+try:
+    import numpy as np
+    HAS_NUMPY = True
+except ImportError:
+    print("Warning: numpy not available, using built-in random for simulations")
+    HAS_NUMPY = False
+
+try:
+    import requests
+    HAS_REQUESTS = True
+except ImportError:
+    print("Warning: requests not available, external API calls will be disabled")
+    HAS_REQUESTS = False
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -99,22 +114,32 @@ class BiometricIntegrator:
         readings = []
         
         # Heart Rate Variability (Polar H10, Whoop)
-        base_hr = np.random.normal(60, 8)
+        if HAS_NUMPY:
+            base_hr = np.random.normal(60, 8)
+        else:
+            base_hr = random.gauss(60, 8)
         readings.append(BiometricReading(
             "heart_rate_resting", base_hr, "bpm",
             datetime.now(), 0.95, "Polar_H10"
         ))
         
         # VO2 Max (metabolic cart, fitness tracker estimate)
-        vo2_max = np.random.normal(48, 6)
+        if HAS_NUMPY:
+            vo2_max = np.random.normal(48, 6)
+        else:
+            vo2_max = random.gauss(48, 6)
         readings.append(BiometricReading(
             "vo2_max", vo2_max, "ml/kg/min",
             datetime.now(), 0.85, "Metabolic_Cart"
         ))
         
         # Body Composition (DEXA, InBody)
-        body_fat = np.random.normal(10, 3)
-        muscle_mass = np.random.normal(75, 5)
+        if HAS_NUMPY:
+            body_fat = np.random.normal(10, 3)
+            muscle_mass = np.random.normal(75, 5)
+        else:
+            body_fat = random.gauss(10, 3)
+            muscle_mass = random.gauss(75, 5)
         readings.extend([
             BiometricReading("body_fat_percentage", body_fat, "%", 
                            datetime.now(), 0.92, "InBody_970"),
@@ -123,8 +148,12 @@ class BiometricIntegrator:
         ])
         
         # Neuromuscular Function (Force plates, reaction timer)
-        reaction_time = np.random.normal(0.18, 0.03)
-        vertical_jump = np.random.normal(32, 4)
+        if HAS_NUMPY:
+            reaction_time = np.random.normal(0.18, 0.03)
+            vertical_jump = np.random.normal(32, 4)
+        else:
+            reaction_time = random.gauss(0.18, 0.03)
+            vertical_jump = random.gauss(32, 4)
         readings.extend([
             BiometricReading("reaction_time", reaction_time, "seconds",
                            datetime.now(), 0.98, "Blazepod_Trainer"),
@@ -133,8 +162,12 @@ class BiometricIntegrator:
         ])
         
         # Strength & Power (Dynamometer, Power meter)
-        grip_strength = np.random.normal(115, 15)
-        power_output = np.random.normal(850, 100)
+        if HAS_NUMPY:
+            grip_strength = np.random.normal(115, 15)
+            power_output = np.random.normal(850, 100)
+        else:
+            grip_strength = random.gauss(115, 15)
+            power_output = random.gauss(850, 100)
         readings.extend([
             BiometricReading("grip_strength", grip_strength, "lbs",
                            datetime.now(), 0.97, "Jamar_Dynamometer"),
@@ -143,8 +176,12 @@ class BiometricIntegrator:
         ])
         
         # Flexibility & Mobility (Goniometer, functional movement)
-        shoulder_flexibility = np.random.normal(7, 2)
-        hip_mobility = np.random.normal(45, 8)
+        if HAS_NUMPY:
+            shoulder_flexibility = np.random.normal(7, 2)
+            hip_mobility = np.random.normal(45, 8)
+        else:
+            shoulder_flexibility = random.gauss(7, 2)
+            hip_mobility = random.gauss(45, 8)
         readings.extend([
             BiometricReading("shoulder_internal_rotation", shoulder_flexibility, "cm",
                            datetime.now(), 0.88, "Digital_Goniometer"),
@@ -153,8 +190,12 @@ class BiometricIntegrator:
         ])
         
         # Recovery & Sleep (Whoop, Oura Ring)
-        sleep_quality = np.random.normal(85, 10)
-        hrv = np.random.normal(45, 8)
+        if HAS_NUMPY:
+            sleep_quality = np.random.normal(85, 10)
+            hrv = np.random.normal(45, 8)
+        else:
+            sleep_quality = random.gauss(85, 10)
+            hrv = random.gauss(45, 8)
         readings.extend([
             BiometricReading("sleep_quality_score", sleep_quality, "score",
                            datetime.now(), 0.82, "Oura_Ring_Gen3"),
@@ -364,7 +405,7 @@ class BiometricIntegrator:
             "assessment_timestamp": datetime.now().isoformat(),
             "biometric_summary": {
                 "total_metrics_analyzed": len(readings),
-                "data_confidence_avg": round(np.mean([r.confidence for r in readings]), 3),
+                "data_confidence_avg": round(sum(r.confidence for r in readings) / len(readings) if readings else 0, 3),
                 "assessment_period": "24_hours"
             },
             "readiness_analysis": readiness_analysis,
