@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "deployment": "deploy_1757506452362",
+  "timestamp": "2025-09-10T12:14:13.388Z",
+  "features": [
+    "Real-time biometric processing",
+    "Vision AI coaching",
+    "Micro-expression analysis",
+    "Biomechanical assessment",
+    "Performance analytics"
+  ],
+  "endpoints": {
+    "health": "/api/health",
+    "biometrics": "/api/biometrics",
+    "athletes": "/api/athletes",
+    "analytics": "/api/analytics"
+  }
+}
