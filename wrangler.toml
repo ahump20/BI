@@ -1,17 +1,57 @@
-name = "youth-txhs-ingestion"
-main = "worker-youth-txhs.js"
+name = "blaze-intelligence-platform"
+main = "index.js"
 compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
 
+# Environment configurations
 [env.production]
-vars = { ENVIRONMENT = "production" }
+name = "blaze-intelligence-platform"
+vars = { ENVIRONMENT = "production", NODE_ENV = "production", VERSION = "1.0.0" }
+
+[env.staging]
+name = "blaze-intelligence-staging"
+vars = { ENVIRONMENT = "staging", NODE_ENV = "staging", VERSION = "1.0.0-staging" }
+
+# Storage configurations
+[[r2_buckets]]
+binding = "MEDIA_STORAGE"
+bucket_name = "blaze-intelligence-media"
+preview_bucket_name = "blaze-intelligence-media-preview"
 
 [[r2_buckets]]
-binding = "R2"
+binding = "DATA_STORAGE"
+bucket_name = "blaze-intelligence-data"
+preview_bucket_name = "blaze-intelligence-data-preview"
+
+[[r2_buckets]]
+binding = "YOUTH_DATA"
 bucket_name = "blaze-youth-data"
+
+# KV Namespaces
+[[kv_namespaces]]
+binding = "ANALYTICS_CACHE"
+id = "analytics-cache-namespace"
+preview_id = "analytics-cache-preview"
+
+[[kv_namespaces]]
+binding = "SPORTS_DATA" 
+id = "sports-data-namespace"
+preview_id = "sports-data-preview"
+
+[[kv_namespaces]]
+binding = "USER_SESSIONS"
+id = "user-sessions-namespace"
+preview_id = "user-sessions-preview"
 
 [[kv_namespaces]]
 binding = "KV"
 id = "b884d8eb60454eed879d36c8863cf513"
+
+# D1 Database
+[[d1_databases]]
+binding = "BLAZE_DB"
+database_name = "blaze-intelligence-db"
+database_id = "blaze-intelligence-db-id"
 
 [triggers]
 crons = [
@@ -23,3 +63,12 @@ crons = [
 
 [observability]
 enabled = true
+
+# Monitoring and Health Checks
+[triggers]
+crons = [
+  "*/5 * * * *",    # Health check every 5 minutes
+  "0 */1 * * *",    # Metrics collection every hour
+  "0 0 * * *"       # Daily maintenance at midnight
+]
+
