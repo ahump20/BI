@@ -15,9 +15,9 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #002244 0%, #36454F 50%, #002244 100%);
+            color: #E5E4E2;
             overflow-x: hidden;
         }
 
@@ -39,8 +39,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.6) 100%);
-            backdrop-filter: blur(2px);
+            background: linear-gradient(135deg, rgba(0,34,68,0.1) 0%, rgba(54,69,79,0.2) 100%);
+            backdrop-filter: blur(20px);
         }
 
         /* Navigation */
@@ -49,15 +49,16 @@
             top: 0;
             width: 100%;
             padding: 20px 50px;
-            background: rgba(10,10,10,0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(0,34,68,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(191,87,0,0.2);
             z-index: 1000;
             transition: all 0.3s ease;
         }
 
         nav.scrolled {
             padding: 15px 50px;
-            background: rgba(10,10,10,0.95);
+            background: rgba(0,34,68,0.98);
         }
 
         .nav-container {
@@ -71,7 +72,7 @@
         .logo {
             font-size: 24px;
             font-weight: 800;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            background: linear-gradient(135deg, #BF5700 0%, #FF7A00 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -84,19 +85,19 @@
         }
 
         .nav-links a {
-            color: #ffffff;
+            color: #E5E4E2;
             text-decoration: none;
             transition: color 0.3s ease;
             font-weight: 500;
         }
 
         .nav-links a:hover {
-            color: #ff6b6b;
+            color: #BF5700;
         }
 
         .cta-button {
-            padding: 10px 25px;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #BF5700 0%, #FF7A00 100%);
             border: none;
             border-radius: 25px;
             color: white;
@@ -1089,23 +1090,42 @@
             posArray[i + 1] = (Math.random() - 0.5) * 10;
             posArray[i + 2] = (Math.random() - 0.5) * 10;
             
-            // Colors (gradient from red to orange)
-            const t = Math.random();
-            colorsArray[i] = 1.0; // R
-            colorsArray[i + 1] = 0.4 + t * 0.3; // G
-            colorsArray[i + 2] = 0.4 + t * 0.3; // B
+            // Texas Legacy Color Palette (sophisticated branding)
+            const colorChoice = Math.random();
+            if (colorChoice < 0.4) {
+                // Texas Legacy Burnt Orange #BF5700
+                colorsArray[i] = 0.75; // R
+                colorsArray[i + 1] = 0.34; // G
+                colorsArray[i + 2] = 0.0; // B
+            } else if (colorChoice < 0.7) {
+                // Cardinal Sky Blue #9BCBEB
+                colorsArray[i] = 0.61; // R
+                colorsArray[i + 1] = 0.80; // G
+                colorsArray[i + 2] = 0.92; // B
+            } else if (colorChoice < 0.9) {
+                // Grizzly Teal #00B2A9
+                colorsArray[i] = 0.0; // R
+                colorsArray[i + 1] = 0.70; // G
+                colorsArray[i + 2] = 0.66; // B
+            } else {
+                // Platinum #E5E4E2
+                colorsArray[i] = 0.90; // R
+                colorsArray[i + 1] = 0.89; // G
+                colorsArray[i + 2] = 0.89; // B
+            }
         }
 
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
         particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
 
-        // Particle material
+        // Sophisticated particle material (premium aesthetic)
         const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.02,
+            size: 0.025,
             vertexColors: true,
             transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
+            opacity: 0.9,
+            blending: THREE.NormalBlending,
+            sizeAttenuation: true
         });
 
         const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
@@ -1132,11 +1152,11 @@
                         posArray[j * 3], posArray[j * 3 + 1], posArray[j * 3 + 2]
                     );
                     
-                    // Line color
-                    const opacity = 1 - distance / 0.5;
+                    // Cardinal Sky Blue connection lines (sophisticated branding)
+                    const opacity = (1 - distance / 0.5) * 0.6;
                     linesColors.push(
-                        1, 0.5, 0.4, opacity,
-                        1, 0.5, 0.4, opacity
+                        0.61, 0.80, 0.92, opacity, // Cardinal Sky Blue
+                        0.61, 0.80, 0.92, opacity
                     );
                     
                     connectionCount++;
