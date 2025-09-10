@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friday Night Lights Community | Blaze Intelligence</title>
+    <meta name="description" content="Join the Texas football family. Connect with coaches, players, and fans across the Lone Star State. Share highlights, celebrate achievements, and build the Friday Night Lights community.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #E5E4E2;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.9), rgba(0, 34, 68, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23000" width="1200" height="800"/><circle fill="%23BF5700" opacity="0.1" cx="200" cy="200" r="150"/><circle fill="%239BCBEB" opacity="0.1" cx="800" cy="300" r="100"/><circle fill="%2300B2A9" opacity="0.1" cx="1000" cy="600" r="200"/></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero .tagline {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: #e2e8f0;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 15px 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: rgba(191, 87, 0, 0.3);
+            border-color: #BF5700;
+            transform: translateY(-2px);
+        }
+
+        /* Community Features */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(191, 87, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(191, 87, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #BF5700, #d97706);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 2.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #e2e8f0;
+        }
+
+        .feature-description {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .feature-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #BF5700, #d97706);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .feature-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(191, 87, 0, 0.3);
+        }
+
+        /* Live Feed */
+        .live-feed-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 60px 0;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #BF5700, #9BCBEB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feed-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            border-left: 4px solid #BF5700;
+        }
+
+        .feed-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .feed-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #BF5700, #d97706);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        .feed-meta {
+            flex: 1;
+        }
+
+        .feed-author {
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .feed-time {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .feed-content {
+            color: #e2e8f0;
+            margin-bottom: 16px;
+        }
+
+        .feed-engagement {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .engagement-item {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .engagement-item:hover {
+            color: #BF5700;
+        }
+
+        /* Texas Map */
+        .texas-map-section {
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .texas-map {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(191, 87, 0, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid rgba(191, 87, 0, 0.3);
+        }
+
+        .map-placeholder {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #BF5700;
+            font-size: 3rem;
+            font-weight: 900;
+        }
+
+        /* Team Spotlight */
+        .spotlight-section {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.05), rgba(155, 203, 235, 0.05));
+            border-radius: 24px;
+            padding: 50px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .spotlight-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .spotlight-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+        }
+
+        .spotlight-description {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .team-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #BF5700;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .feed-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Animation */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .live-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Friday Night Lights Community</h1>
+        <p class="tagline">Join the Texas football family. Connect. Celebrate. Champion.</p>
+        <div class="cta-buttons">
+            <a href="#" class="cta-button">Join as Coach</a>
+            <a href="#" class="cta-button">Join as Parent</a>
+            <a href="#" class="cta-button">Join as Player</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Community Features -->
+        <section class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏈</div>
+                <h3 class="feature-title">Coach's Corner</h3>
+                <p class="feature-description">
+                    Connect with fellow Texas coaches. Share strategies, discuss game film, and build the coaching community that makes Friday Night Lights special.
+                </p>
+                <a href="#" class="feature-link">Join Coaches Network</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                <h3 class="feature-title">Parent & Fan Hub</h3>
+                <p class="feature-description">
+                    Follow your team, share game highlights, and connect with other families. Celebrate the achievements that make Texas high school football legendary.
+                </p>
+                <a href="#" class="feature-link">Join Parent Network</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3 class="feature-title">Player Showcase</h3>
+                <p class="feature-description">
+                    Create your recruiting profile, share highlights, and connect with college scouts. Your Friday Night Lights journey starts here.
+                </p>
+                <a href="#" class="feature-link">Create Player Profile</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Texas Football Intel</h3>
+                <p class="feature-description">
+                    Access exclusive rankings, predictions, and insights powered by 65+ years of Dave Campbell's Texas Football legacy and modern analytics.
+                </p>
+                <a href="#" class="feature-link">View Intelligence</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎥</div>
+                <h3 class="feature-title">Highlight Central</h3>
+                <p class="feature-description">
+                    Upload, share, and discover the best plays from across Texas. From game-winning touchdowns to incredible defensive stops.
+                </p>
+                <a href="#" class="feature-link">Share Highlights</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3 class="feature-title">Championship Tracker</h3>
+                <p class="feature-description">
+                    Follow your team's playoff journey with real-time championship probability updates and bracket tracking all the way to AT&T Stadium.
+                </p>
+                <a href="#" class="feature-link">Track Championships</a>
+            </div>
+        </section>
+
+        <!-- Live Community Feed -->
+        <section class="live-feed-section">
+            <h2 class="section-title">
+                <span class="live-indicator"></span>
+                Live Community Feed
+            </h2>
+            
+            <div class="feed-grid">
+                <div class="feed-item">
+                    <div class="feed-header">
+                        <div class="feed-avatar">CJ</div>
+                        <div class="feed-meta">
+                            <div class="feed-author">Coach Johnson - Katy High</div>
+                            <div class="feed-time">2 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="feed-content">
+                        Incredible game tonight! Our offensive line dominated in the 4th quarter. Proud of these young men. #FridayNightLights #KatyFootball
+                    </div>
+                    <div class="feed-engagement">
+                        <span class="engagement-item">❤️ 47 likes</span>
+                        <span class="engagement-item">💬 12 comments</span>
+                        <span class="engagement-item">🔄 Share</span>
+                    </div>
+                </div>
+
+                <div class="feed-item">
+                    <div class="feed-header">
+                        <div class="feed-avatar">SM</div>
+                        <div class="feed-meta">
+                            <div class="feed-author">Sarah Martinez - Parent</div>
+                            <div class="feed-time">15 minutes ago</div>
+                        </div>
+                    </div>
+                    <div class="feed-content">
+                        My son's first varsity touchdown! Thank you to all the coaches and teammates who believed in him. This is what Texas football is all about! 🏈
+                    </div>
+                    <div class="feed-engagement">
+                        <span class="engagement-item">❤️ 89 likes</span>
+                        <span class="engagement-item">💬 23 comments</span>
+                        <span class="engagement-item">🔄 Share</span>
+                    </div>
+                </div>
+
+                <div class="feed-item">
+                    <div class="feed-header">
+                        <div class="feed-avatar">BR</div>
+                        <div class="feed-meta">
+                            <div class="feed-author">Blake Rodriguez - QB</div>
+                            <div class="feed-time">1 hour ago</div>
+                        </div>
+                    </div>
+                    <div class="feed-content">
+                        Grateful for this opportunity to represent our school and community. Regional finals here we come! Thanks to everyone who came out to support us tonight.
+                    </div>
+                    <div class="feed-engagement">
+                        <span class="engagement-item">❤️ 156 likes</span>
+                        <span class="engagement-item">💬 34 comments</span>
+                        <span class="engagement-item">🔄 Share</span>
+                    </div>
+                </div>
+
+                <div class="feed-item">
+                    <div class="feed-header">
+                        <div class="feed-avatar">DC</div>
+                        <div class="feed-meta">
+                            <div class="feed-author">Dave Campbell's Texas Football</div>
+                            <div class="feed-time">2 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="feed-content">
+                        Week 12 Blaze Intelligence Power Rankings are live! North Shore maintains #1, but watch out for Westlake's surge. Full analysis and championship probabilities updated.
+                    </div>
+                    <div class="feed-engagement">
+                        <span class="engagement-item">❤️ 234 likes</span>
+                        <span class="engagement-item">💬 67 comments</span>
+                        <span class="engagement-item">🔄 Share</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Texas Football Map -->
+        <section class="texas-map-section">
+            <h2 class="section-title">Texas Football Territory</h2>
+            <div class="texas-map">
+                <div class="map-placeholder">
+                    🗺️ TEXAS<br>
+                    <span style="font-size: 1rem; color: #94a3b8;">Interactive district map coming soon</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Spotlight -->
+        <section class="spotlight-section">
+            <div class="spotlight-content">
+                <h2 class="spotlight-title">This Week's Spotlight: North Shore Mustangs</h2>
+                <p class="spotlight-description">
+                    The defending state champions continue their dominant season with an undefeated record and the #1 ranking in the Blaze Texas Football Power Index. 
+                    Coach Jon Kay has built a dynasty in Houston that exemplifies Friday Night Lights excellence.
+                </p>
+                
+                <div class="team-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">11-0</div>
+                        <div class="stat-label">Season Record</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98.7</div>
+                        <div class="stat-label">BTFPI Rating</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">32.4%</div>
+                        <div class="stat-label">Title Odds</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15</div>
+                        <div class="stat-label">State Titles</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Simulate real-time feed updates
+        function updateFeed() {
+            console.log('Community feed updated - ' + new Date().toLocaleString());
+            // In production, this would fetch new community posts
+        }
+
+        // Update feed every 30 seconds
+        setInterval(updateFeed, 30000);
+
+        // Add engagement interactions
+        document.querySelectorAll('.engagement-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Handle like, comment, share interactions
+                if (this.textContent.includes('likes')) {
+                    const currentLikes = parseInt(this.textContent.match(/\d+/)[0]);
+                    this.textContent = `❤️ ${currentLikes + 1} likes`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
