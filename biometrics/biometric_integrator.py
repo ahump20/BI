@@ -5,12 +5,12 @@ Integrates physiological, biomechanical, and performance biometrics
 """
 
 import json
-import numpy as np
+import numpy as np  # pyright: ignore[reportMissingImports]
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional, Tuple
 import logging
 from dataclasses import dataclass
-import requests
+import requests  # pyright: ignore[reportMissingModuleSource]
 import time
 
 # Configure logging
