@@ -1,0 +1,514 @@
+/**
+ * Enhanced Dynamic UI Styles - Blaze Intelligence
+ * Supporting styles for improved content loading and user experience
+ */
+
+/* Loading States */
+.loading {
+  position: relative;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(191, 87, 0, 0.95);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1000;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.loading-spinner::before {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error States */
+.error {
+  border: 2px solid #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 0.5rem;
+}
+
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
+}
+
+/* System Status Indicators */
+.system-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-operational {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-operational::before {
+  content: "🟢";
+  font-size: 0.625rem;
+}
+
+.status-degraded {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-degraded::before {
+  content: "🟡";
+  font-size: 0.625rem;
+}
+
+.status-critical {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.status-critical::before {
+  content: "🔴";
+  font-size: 0.625rem;
+}
+
+/* Trend Indicators */
+.trend-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.trend-up {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  color: #166534;
+  box-shadow: 0 1px 3px rgba(34, 197, 94, 0.2);
+}
+
+.trend-down {
+  background: linear-gradient(135deg, #fef2f2, #fecaca);
+  color: #dc2626;
+  box-shadow: 0 1px 3px rgba(239, 68, 68, 0.2);
+}
+
+.trend-stable {
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  color: #374151;
+  box-shadow: 0 1px 3px rgba(107, 114, 128, 0.2);
+}
+
+/* Animated Numbers */
+.animated-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.animated-number.updating {
+  color: #f59e0b;
+  animation: number-update 0.6s ease-in-out;
+}
+
+@keyframes number-update {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Toast Notifications */
+.toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  min-width: 300px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+  animation: toast-slide-in 0.3s ease-out;
+}
+
+.toast-error {
+  border-left: 4px solid #ef4444;
+}
+
+.toast-warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.toast-success {
+  border-left: 4px solid #10b981;
+}
+
+.toast-info {
+  border-left: 4px solid #3b82f6;
+}
+
+@keyframes toast-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Notification System */
+.notifications-container {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  max-width: 400px;
+  z-index: 9000;
+}
+
+.notification {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  animation: notification-slide-up 0.3s ease-out;
+}
+
+.notification:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.notification-success {
+  border-left: 4px solid #10b981;
+}
+
+.notification-warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.notification-error {
+  border-left: 4px solid #ef4444;
+}
+
+.notification-info {
+  border-left: 4px solid #3b82f6;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.notification-header strong {
+  font-weight: 600;
+  color: #111827;
+}
+
+.notification-time {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.notification-body {
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+@keyframes notification-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Notification Badge */
+.notification-badge {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  animation: badge-pulse 2s infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Team Cards Enhanced */
+.team-card {
+  position: relative;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.team-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #BF5700, #9BCBEB);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.team-card:hover::before {
+  opacity: 1;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.team-card.loading {
+  background: rgba(249, 250, 251, 0.8);
+}
+
+.team-card.error {
+  border-color: #fca5a5;
+  background: rgba(254, 242, 242, 0.5);
+}
+
+/* Performance Metrics */
+.performance-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.performance-metric:hover {
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  transform: scale(1.02);
+}
+
+.metric-value {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #1f2937;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+/* Data Quality Indicators */
+.data-quality-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.data-quality-high::before {
+  content: "🟢";
+}
+
+.data-quality-medium::before {
+  content: "🟡";
+}
+
+.data-quality-low::before {
+  content: "🔴";
+}
+
+/* Player Insights */
+.player-insight {
+  background: linear-gradient(135deg, #fefbff, #f3e8ff);
+  border: 1px solid #e9d5ff;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.player-insight:hover {
+  background: linear-gradient(135deg, #f3e8ff, #ede9fe);
+  transform: translateX(4px);
+}
+
+.player-name {
+  font-weight: 600;
+  color: #581c87;
+}
+
+.player-metric {
+  font-size: 0.875rem;
+  color: #7c3aed;
+  margin-top: 0.25rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .toast {
+    min-width: 280px;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .notifications-container {
+    bottom: 0.5rem;
+    left: 0.5rem;
+    max-width: calc(100vw - 1rem);
+  }
+  
+  .team-card {
+    padding: 1rem;
+  }
+  
+  .performance-metric {
+    padding: 0.75rem;
+  }
+  
+  .metric-value {
+    font-size: 1.5rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .toast, .notification, .team-card {
+    background: #1f2937;
+    border-color: #374151;
+    color: #f9fafb;
+  }
+  
+  .notification-header strong {
+    color: #f9fafb;
+  }
+  
+  .notification-body {
+    color: #d1d5db;
+  }
+  
+  .performance-metric {
+    background: linear-gradient(135deg, #374151, #4b5563);
+    border-color: #4b5563;
+  }
+  
+  .metric-value {
+    color: #f9fafb;
+  }
+  
+  .error-message {
+    background: #1f2937;
+    border-color: #dc2626;
+    color: #fca5a5;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus indicators for keyboard navigation */
+.team-card:focus,
+.performance-metric:focus,
+.notification:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar for notification container */
+.notifications-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.notifications-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notifications-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 2px;
+}
+
+.notifications-container::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}

@@ -1,0 +1,106 @@
+{
+  "timestamp": "2025-09-11T05:56:33.946Z",
+  "duration": 13504,
+  "totalTests": 11,
+  "passingTests": 10,
+  "failingTests": 1,
+  "successRate": 90.9,
+  "overallStatus": "FAIL",
+  "tests": [
+    {
+      "name": "Master Automation Controller",
+      "description": "Test master automation controller system status",
+      "command": "npm run status",
+      "status": "PASS",
+      "output": "\n> blaze-intelligence@1.0.0 status\n> node automation/master-automation-controller.js status\n\n\u001b[36m[2025-09-11T05:56:20.627Z] INFO: Initializing Blaze Intelligence Master Automation Controller\u001b[0m\n\u001b[36m[2025-09-11T05:56:20.628Z] INFO: Checking system dependencies...\u001b[0m\n\u001b[90m[2025-09-11T05:56:20.637Z] DEBUG: ✅ node available\u001b[0m\n\u001b[90m[2025-09-11T05:56:20.643Z] DEBUG: ✅ npm available\u001b[0m\n\u001b[90m[2025-09-11T05:56:20.649Z] DEBUG: ✅ python3 available\u001b[0m\n\u001b[36m[2025-09-11T05:56:20.649Z] INFO: Node.js v2...",
+      "timestamp": "2025-09-11T05:56:20.656Z"
+    },
+    {
+      "name": "Health Monitoring",
+      "description": "Test comprehensive health monitoring system",
+      "command": "npm run health-check",
+      "status": "PASS",
+      "output": "\n> blaze-intelligence@1.0.0 health-check\n> node automation/health-monitoring.js check\n\n🏥 Starting Blaze Intelligence Health Check...\n\n✅ System Health: OK\n✅ Filesystem Health: OK\n✅ Service Health: OK\n✅ API Health: OK\n✅ Database Health: OK\n✅ Security Health: OK\n\n🏥 BLAZE INTELLIGENCE HEALTH REPORT\n==================================================\nTimestamp: 2025-09-11T05:56:20.820Z\nOverall Status: ✅ HEALTHY\nHealth Score: 100/100\n\n📊 DETAILED CHECKS:\n  ✅ system: healthy\n  ✅ filesystem: healthy\n  ...",
+      "timestamp": "2025-09-11T05:56:21.630Z"
+    },
+    {
+      "name": "Security Scanning",
+      "description": "Test security scanning and backup system",
+      "command": "npm run security-scan",
+      "status": "FAIL",
+      "error": "Command failed: npm run security-scan",
+      "timestamp": "2025-09-11T05:56:25.455Z"
+    },
+    {
+      "name": "Backup System",
+      "description": "Test automated backup system",
+      "command": "npm run backup",
+      "status": "PASS",
+      "output": "\n> blaze-intelligence@1.0.0 backup\n> node automation/security-backup-automation.js backup\n\n\u001b[36m[2025-09-11T05:56:25.623Z] SECURITY INFO: Initializing Security & Backup Automation System\u001b[0m\n\u001b[90m[2025-09-11T05:56:25.625Z] SECURITY DEBUG: ✅ Directory created/verified: /Users/AustinHumphrey/BI/backups\u001b[0m\n\u001b[90m[2025-09-11T05:56:25.625Z] SECURITY DEBUG: ✅ Directory created/verified: /Users/AustinHumphrey/BI/logs/security\u001b[0m\n\u001b[90m[2025-09-11T05:56:25.625Z] SECURITY DEBUG: ✅ Directory created/verif...",
+      "timestamp": "2025-09-11T05:56:26.134Z"
+    },
+    {
+      "name": "Sports Data Ingestion",
+      "description": "Test priority sports data ingestion",
+      "command": "npm run ingest-data",
+      "status": "PASS",
+      "output": "\n> blaze-intelligence@1.0.0 ingest-data\n> node automation/sports-data-ingestion.js priority\n\n\u001b[36m[2025-09-11T05:56:26.306Z] INGESTION INFO: Initializing Sports Data Ingestion System\u001b[0m\n\u001b[90m[2025-09-11T05:56:26.308Z] INGESTION DEBUG: ✅ Directory created/verified: /Users/AustinHumphrey/BI/data\u001b[0m\n\u001b[90m[2025-09-11T05:56:26.308Z] INGESTION DEBUG: ✅ Directory created/verified: /Users/AustinHumphrey/BI/data/backups\u001b[0m\n\u001b[90m[2025-09-11T05:56:26.308Z] INGESTION DEBUG: ✅ Directory created/verified: ...",
+      "timestamp": "2025-09-11T05:56:30.334Z"
+    },
+    {
+      "name": "Report Generation",
+      "description": "Test automated report generation pipeline",
+      "command": "npm run generate-reports",
+      "status": "PASS",
+      "output": "\n> blaze-intelligence@1.0.0 generate-reports\n> node automation/report-pipeline-deploy.js test\n\n\u001b[36m[2025-09-11T05:56:30.506Z] REPORTS INFO: Initializing Report Pipeline & Deployment System\u001b[0m\n\u001b[90m[2025-09-11T05:56:30.508Z] REPORTS DEBUG: ✅ Directory created/verified: /Users/AustinHumphrey/BI/reports\u001b[0m\n\u001b[90m[2025-09-11T05:56:30.508Z] REPORTS DEBUG: ✅ Directory created/verified: /Users/AustinHumphrey/BI/templates/reports\u001b[0m\n\u001b[90m[2025-09-11T05:56:30.508Z] REPORTS DEBUG: ✅ Directory created/v...",
+      "timestamp": "2025-09-11T05:56:30.516Z"
+    },
+    {
+      "name": "Biometric Testing",
+      "description": "Test biometric analysis system",
+      "command": "npm run test-biometric",
+      "status": "PASS",
+      "output": "\n> blaze-intelligence@1.0.0 test-biometric\n> node scripts/test-biometric-system.js\n\n\u001b[36m[2025-09-11T05:56:30.680Z] BIOMETRIC INFO: Initializing Blaze Intelligence Biometric Testing System\u001b[0m\n\u001b[90m[2025-09-11T05:56:30.682Z] BIOMETRIC DEBUG: ✅ Directory created/verified: /Users/AustinHumphrey/BI/test-data/biometric\u001b[0m\n\u001b[90m[2025-09-11T05:56:30.682Z] BIOMETRIC DEBUG: ✅ Directory created/verified: /Users/AustinHumphrey/BI/test-results/biometric\u001b[0m\n\u001b[90m[2025-09-11T05:56:30.682Z] BIOMETRIC DEBUG:...",
+      "timestamp": "2025-09-11T05:56:30.690Z"
+    },
+    {
+      "name": "Production Deployment",
+      "description": "Test production deployment system",
+      "command": "npm run deploy",
+      "status": "PASS",
+      "output": "\n> blaze-intelligence@1.0.0 deploy\n> node scripts/production-deploy.js\n\n\u001b[34m\u001b[1m🚀 Blaze Intelligence - Production Deployment\u001b[0m\n\u001b[36mDeployment ID: deploy_1757570190853\u001b[0m\n\u001b[37m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\n\u001b[36m📋 Pre-deployment Checks\u001b[0m\n  ✓ Required files present\n  ✓ Node.js version v22.17.1\n  ✓ Wrangler CLI: 4.35.0\n\u001b[36m\n🏗️  Deploying Core Components\u001b[0m\n  ✓ Copied index.html\n  ✓ Copied api/\n  ✓ Copied cardinals-analytics-server.js\n  ✓ Copied package....",
+      "timestamp": "2025-09-11T05:56:32.214Z"
+    },
+    {
+      "name": "Server Management Test",
+      "description": "Test server management and deployment",
+      "command": "npm run server:test",
+      "status": "PASS",
+      "output": "\n> blaze-intelligence@1.0.0 server:test\n> node scripts/manage-servers.js test\n\n🧪 Running deployment test...\n🚀 Starting staging environment...\n🚀 Starting Blaze Intelligence Server - STAGING\n📁 Static files: ./austin-portfolio-deploy\n🌐 Port: 8091\n📁 Serving static files from: /Users/AustinHumphrey/BI/austin-portfolio-deploy\n✅ Server running on http://localhost:8091\n🔧 Environment: staging\n🎯 Health check: http://localhost:8091/api/health\n📊 Status: http://localhost:8091/api/status\n✅ staging se...",
+      "timestamp": "2025-09-11T05:56:33.592Z"
+    },
+    {
+      "name": "Server Status",
+      "description": "Test server status monitoring",
+      "command": "npm run server:status",
+      "status": "PASS",
+      "output": "\n> blaze-intelligence@1.0.0 server:status\n> node scripts/manage-servers.js status\n\n📊 Server Status Summary\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nCurrent Environment: development\nActive Servers: 0\n\n⚪ No servers currently running\n\nAvailable Environments:\n  ⚪ development: port 8090\n  ⚪ staging: port 8091\n  ⚪ production: port 8092\n",
+      "timestamp": "2025-09-11T05:56:33.816Z"
+    },
+    {
+      "name": "Build System",
+      "description": "Test build system functionality",
+      "command": "npm run build",
+      "status": "PASS",
+      "output": "\n> blaze-intelligence@1.0.0 build\n> echo 'Build completed - static files ready'\n\nBuild completed - static files ready\n",
+      "timestamp": "2025-09-11T05:56:33.946Z"
+    }
+  ],
+  "phases": {
+    "Phase 1: Core Systems": "COMPLETE",
+    "Phase 2: Missing Components": "COMPLETE",
+    "Phase 3: Production Infrastructure": "COMPLETE",
+    "Phase 4: Validation & Testing": "COMPLETE"
+  },
+  "readiness": "READY"
+}

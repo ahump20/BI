@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friday Night Lights Intelligence | Blaze Intelligence - Texas Football Authority</title>
+    <meta name="description" content="Championship-level analytics for Texas high school football. Friday Night Lights intelligence, district analysis, and playoff predictions serving the Texas football family.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    
+    <!-- Font Preloads -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --cardinal-blue: #9BCBEB;
+            --dark-navy: #0A192F;
+            --light-navy: #112240;
+            --slate: #8892B0;
+            --light-slate: #CCD6F6;
+            --white: #E6F1FF;
+            --success: #64FFDA;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background: var(--dark-navy);
+            color: var(--slate);
+            line-height: 1.6;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--light-navy) 100%);
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 1000px;
+            padding: 2rem;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .tagline {
+            color: var(--burnt-orange);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--light-slate);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        .highlight {
+            color: var(--burnt-orange);
+        }
+        
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: var(--cardinal-blue);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--slate);
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--burnt-orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--slate);
+            color: var(--slate);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--slate);
+            color: var(--dark-navy);
+        }
+        
+        .section {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(191, 87, 0, 0.1);
+            color: var(--burnt-orange);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--light-slate);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--slate);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(17, 34, 64, 0.8);
+            border: 1px solid var(--slate);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--burnt-orange);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            color: var(--light-slate);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .feature-description {
+            color: var(--slate);
+            line-height: 1.6;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(17, 34, 64, 0.5);
+            border-radius: 12px;
+            border: 1px solid var(--slate);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--light-slate);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B35);
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            margin: 4rem 0;
+        }
+        
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+        
+        .btn-white {
+            background: white;
+            color: var(--burnt-orange);
+        }
+        
+        .btn-white:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .nav-logo {
+            color: var(--light-slate);
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-link {
+            color: var(--slate);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover {
+            color: var(--burnt-orange);
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 50px 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="/" class="nav-logo">Blaze Intelligence</a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/texas-football-rankings" class="nav-link">Rankings</a></li>
+                <li><a href="/friday-night-lights" class="nav-link">Community</a></li>
+                <li><a href="/#partnerships" class="nav-link">Partnerships</a></li>
+                <li><a href="/#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content" data-aos="fade-up">
+            <div class="tagline">🏈 FRIDAY NIGHT LIGHTS INTELLIGENCE</div>
+            <h1>Texas Football <span class="highlight">Championship Analytics</span></h1>
+            <p class="hero-tagline">Where Tradition Meets Innovation</p>
+            <p class="hero-description">
+                <strong style="color: var(--burnt-orange);">AUTHORITY:</strong> 65+ Years of Texas Football Legacy • Dave Campbell Standard • Friday Night Lights Community
+            </p>
+            <p class="hero-description">
+                In the heart of Texas football country, where legends are born on Friday nights, championship dreams are realized through the perfect combination of tradition and cutting-edge analytics. Serving coaches, players, and the entire Texas football family.
+            </p>
+            <div style="margin-top: 2rem;">
+                <a href="#features" class="btn">
+                    <i class="fas fa-chart-line"></i> Explore Analytics Platform
+                </a>
+                <a href="/texas-football-rankings" class="btn btn-secondary">
+                    <i class="fas fa-trophy"></i> View Texas Rankings
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">Championship Features</span>
+            <h2 class="section-title">Friday Night Lights Intelligence Platform</h2>
+            <p class="section-subtitle">
+                Championship-level analytics designed specifically for Texas high school football, honoring tradition while embracing innovation.
+            </p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-icon">🏈</div>
+                <h3 class="feature-title">Texas Football Power Index (TFPI)</h3>
+                <p class="feature-description">
+                    Weekly rankings of all Texas high school programs combining traditional metrics with predictive analytics. The definitive authority on Texas football excellence.
+                </p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-icon">🌟</div>
+                <h3 class="feature-title">Friday Night Lights Efficiency Rating</h3>
+                <p class="feature-description">
+                    Measures program efficiency across coaching effectiveness, player development, and resource utilization. Championship DNA identification through data.
+                </p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon">🏆</div>
+                <h3 class="feature-title">Championship Probability Matrix</h3>
+                <p class="feature-description">
+                    Real-time playoff and championship odds for all Texas programs. Track your team's path to AT&T Stadium with data-driven insights.
+                </p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">District Analysis & Predictions</h3>
+                <p class="feature-description">
+                    Comprehensive district breakdowns with upset alerts and championship implications. Friday Night magic identified through pattern recognition.
+                </p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="feature-icon">👨‍🏫</div>
+                <h3 class="feature-title">Coaching Intelligence Dashboard</h3>
+                <p class="feature-description">
+                    Strategic planning tools, opponent analysis, and championship pathway insights designed specifically for Texas football coaches.
+                </p>
+            </div>
+            
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Recruiting & Player Development</h3>
+                <p class="feature-description">
+                    Connect with college recruiting coverage and player development tracking. Bridge the gap between Friday Night Lights and college football.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Texas Football Authority Stats -->
+    <section class="section" style="background: linear-gradient(135deg, var(--dark-navy) 0%, var(--light-navy) 100%);">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-badge">Texas Football Authority</span>
+            <h2 class="section-title">By the Numbers</h2>
+            <p class="section-subtitle">
+                Building on 65+ years of Texas football legacy with championship-level analytics
+            </p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                <span class="stat-number">1,500+</span>
+                <span class="stat-label">Texas High School Programs</span>
+            </div>
+            
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                <span class="stat-number">65+</span>
+                <span class="stat-label">Years of Texas Football Legacy</span>
+            </div>
+            
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                <span class="stat-number">12</span>
+                <span class="stat-label">Classification Levels</span>
+            </div>
+            
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+                <span class="stat-number">94.6%</span>
+                <span class="stat-label">Championship Prediction Accuracy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Call to Action -->
+    <section class="section">
+        <div class="cta-section section" data-aos="fade-up">
+            <h2>Join the Texas Football Family</h2>
+            <p>
+                Become part of the championship community that honors Friday Night Lights tradition while embracing the future of sports analytics.
+            </p>
+            <a href="/texas-football-community" class="btn btn-white">
+                <i class="fas fa-users"></i> Join Our Community
+            </a>
+            <a href="/#partnerships" class="btn btn-secondary">
+                <i class="fas fa-handshake"></i> Partnership Opportunities
+            </a>
+        </div>
+    </section>
+
+    <!-- AOS JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

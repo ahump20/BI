@@ -1,0 +1,15 @@
+{
+  "lastReport": null,
+  "reportFormats": [
+    "html",
+    "json"
+  ],
+  "deploymentEnvironments": [
+    "staging",
+    "production"
+  ],
+  "notifications": {
+    "email": false,
+    "slack": false
+  }
+}

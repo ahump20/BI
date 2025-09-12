@@ -1,0 +1,44 @@
+{
+  "generatedContent": [
+    {
+      "type": "weekly_rankings",
+      "content": {
+        "headline": "Week 12 Texas Football Intelligence: Championship Picture Emerges",
+        "introduction": "In the heart of Texas football country, this week's rankings reveal the championship DNA that separates contenders from pretenders.",
+        "topMovers": "Programs making championship statements this week include North Shore, Westlake, Katy, each showing the Friday Night Lights excellence that defines Texas football.",
+        "upsetWatch": "Don't be surprised if Friday Night magic strikes in key matchups, with upset potential brewing across districts.",
+        "conclusion": "Join the Texas football family in celebrating these Friday Night achievements as we continue the championship journey."
+      },
+      "timestamp": "2025-09-11T01:54:06.309Z"
+    },
+    {
+      "type": "game_predictions",
+      "content": {
+        "headline": "Friday Night Lights Predictions: Championship Implications",
+        "gameOfWeek": "This Friday night promises championship-level football as North Shore hosts Atascocita in a battle that embodies Texas football excellence.",
+        "upsetAlerts": "In Texas football, any Friday night can write a new chapter - watch for potential surprises that could reshape district races.",
+        "predictions": "Building on 65+ years of Texas football legacy, our championship pathway analysis provides the definitive Friday Night Lights intelligence."
+      },
+      "timestamp": "2025-09-11T01:54:06.310Z"
+    },
+    {
+      "type": "community_content",
+      "content": {
+        "headline": "Friday Night Lights Community Celebration",
+        "message": "Join the Texas football family in celebrating another week of championship-level excellence under the Friday Night Lights.",
+        "highlights": [
+          "🏈 North Shore's championship run continues - showcasing the Texas football tradition that makes Friday nights legendary",
+          "🏈 Westlake shows championship form - showcasing the Texas football tradition that makes Friday nights legendary",
+          "🏈 Friday Night Lights magic in District 6-6A - showcasing the Texas football tradition that makes Friday nights legendary"
+        ],
+        "community_call": "Share your Friday Night Lights memories and celebrate Texas football excellence with the championship community."
+      },
+      "timestamp": "2025-09-11T01:54:06.310Z"
+    }
+  ],
+  "voiceEngineStatus": "READY_FOR_DEPLOYMENT",
+  "daveCampbellStandardVerified": true,
+  "fridayNightLightsAuthentic": true,
+  "communityEngagementOptimized": true,
+  "deploymentTimestamp": "2025-09-11T01:54:06.311Z"
+}
