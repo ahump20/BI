@@ -23,7 +23,10 @@
       "Bash(npm install)",
       "Bash(./start-cardinals-server.sh:*)",
       "Bash(npm run test-comprehensive:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(export CLOUDFLARE_ACCOUNT_ID=\"a12cb329d84130460eed99b816e4d0d3\")",
+      "Bash(wrangler whoami:*)",
+      "Bash(wrangler pages project create:*)"
     ],
     "deny": [],
     "ask": []
