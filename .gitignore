@@ -432,3 +432,28 @@ dev-overrides/
 !*.html
 !*.js
 !run_*.py
+# Environment files - NEVER COMMIT
+.env
+.env.*
+.env.local
+.env.*.local
+*.dev.vars
+*.dev.vars.*
+.env.master
+.env.production
+.env.staging
+.env.development
+
+# Secret files
+secrets.env
+*.key
+*.pem
+*.cert
+*.crt
+*.p12
+*.pfx
+
+# Platform-specific
+.vercel/
+.netlify/
+wrangler.toml.local

@@ -260,9 +260,7 @@ jobs:
         if: contains(steps.p.outputs.PLATFORMS, 'cloudflare') && env.CF_PAGES_PROJECT != ''
         run: |
           while IFS='=' read -r k v; do
-            npx wrangler pages secret put "$k" --project-name "$CF_PAGES_PROJECT" <<EOF
-$v
-EOF
+            echo "$v" | npx wrangler pages secret put "$k" --project-name "$CF_PAGES_PROJECT"
           done < secrets.env
 
       # ---------- Replit (best-effort) ----------
