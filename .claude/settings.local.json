@@ -30,7 +30,10 @@
       "Bash(./setup-secrets-sync.sh:*)",
       "Bash(./scripts/add-all-secrets.sh:*)",
       "Bash(gh workflow run:*)",
-      "Bash(./scripts/test-deployment.sh:*)"
+      "Bash(./scripts/test-deployment.sh:*)",
+      "Bash(npx wrangler auth:*)",
+      "Bash(test:*)",
+      "Bash(./scripts/deployment-status.sh:*)"
     ],
     "deny": [],
     "ask": []

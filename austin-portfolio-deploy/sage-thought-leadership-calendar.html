@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sage Intelligence Journal - Thought Leadership Calendar</title>
+    <meta name="description" content="Championship wisdom delivered weekly. The definitive source for strategic intelligence, competitive analysis, and championship thinking in sports and performance.">
+    
+    <!-- Brand System CSS -->
+    <link rel="stylesheet" href="css/blaze-brand-system.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .journal-header {
+            background: linear-gradient(135deg, var(--blaze-background) 0%, var(--blaze-light-navy) 100%);
+            padding: 120px 20px 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .journal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 30% 30%, rgba(191, 87, 0, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 70%, rgba(148, 169, 201, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .journal-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .journal-badge {
+            display: inline-block;
+            background: rgba(191, 87, 0, 0.2);
+            color: var(--blaze-primary);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            border: 1px solid var(--blaze-primary);
+        }
+
+        .journal-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .journal-subtitle {
+            font-size: 1.5rem;
+            color: var(--blaze-accent);
+            margin-bottom: 30px;
+        }
+
+        .journal-description {
+            font-size: 1.25rem;
+            color: var(--blaze-light-slate);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Content Calendar */
+        .calendar-section {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .calendar-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--blaze-white);
+        }
+
+        .calendar-filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--blaze-accent);
+            color: var(--blaze-accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition-base);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--blaze-primary);
+            border-color: var(--blaze-primary);
+            color: var(--blaze-white);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .content-card {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            transition: var(--transition-base);
+            position: relative;
+        }
+
+        .content-card:hover {
+            border-color: var(--blaze-primary);
+            box-shadow: 0 15px 40px rgba(191, 87, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .content-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .content-date {
+            background: var(--blaze-primary);
+            color: var(--blaze-white);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .content-type {
+            background: rgba(148, 169, 201, 0.2);
+            color: var(--blaze-accent);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .content-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .content-preview {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .content-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .content-tag {
+            background: rgba(191, 87, 0, 0.1);
+            color: var(--blaze-primary);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .content-cta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .read-more {
+            color: var(--blaze-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-base);
+        }
+
+        .read-more:hover {
+            color: var(--blaze-secondary);
+        }
+
+        .content-status {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-published { color: var(--blaze-success); }
+        .status-scheduled { color: var(--blaze-primary); }
+        .status-draft { color: var(--blaze-accent); }
+
+        /* Newsletter Signup */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--blaze-light-navy) 0%, var(--blaze-background) 100%);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .newsletter-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .newsletter-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+        }
+
+        .newsletter-description {
+            font-size: 1.1rem;
+            color: var(--blaze-light-slate);
+            margin-bottom: 40px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            background: rgba(10, 25, 47, 0.8);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            color: var(--blaze-white);
+            font-size: 16px;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--blaze-primary);
+        }
+
+        .newsletter-btn {
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border: none;
+            color: var(--blaze-white);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-base);
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(191, 87, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .journal-title {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-nav {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="journal-header">
+        <div class="journal-content">
+            <div class="journal-badge">Thought Leadership</div>
+            <h1 class="journal-title">The Sage Intelligence Journal</h1>
+            <p class="journal-subtitle">Championship Wisdom • Strategic Intelligence • Competitive Advantage</p>
+            <p class="journal-description">
+                The definitive source for championship-level strategic intelligence. Where wisdom meets competition, and insights transform into sustainable competitive advantage.
+            </p>
+        </div>
+    </header>
+
+    <!-- Content Calendar -->
+    <section class="calendar-section">
+        <div class="calendar-nav">
+            <h2 class="calendar-title">Editorial Calendar</h2>
+            <div class="calendar-filters">
+                <button class="filter-btn active" data-filter="all">All Content</button>
+                <button class="filter-btn" data-filter="strategic">Strategic Intelligence</button>
+                <button class="filter-btn" data-filter="character">Character Analysis</button>
+                <button class="filter-btn" data-filter="competitive">Competitive Intelligence</button>
+                <button class="filter-btn" data-filter="framework">Frameworks</button>
+            </div>
+        </div>
+
+        <div class="content-grid" id="contentGrid">
+            <!-- Week 1 -->
+            <div class="content-card" data-category="strategic">
+                <div class="content-meta">
+                    <span class="content-date">January 8, 2025</span>
+                    <span class="content-type">Strategic Intelligence</span>
+                </div>
+                <h3 class="content-title">The Pattern Recognition Advantage: How Champions See What Others Miss</h3>
+                <p class="content-preview">
+                    Deep dive into the cognitive frameworks that separate championship performers from competitors. Explore the science of strategic pattern recognition and how to develop this crucial skill.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Pattern Recognition</span>
+                    <span class="content-tag">Championship Mindset</span>
+                    <span class="content-tag">Cognitive Science</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-scheduled">Scheduled</span>
+                </div>
+            </div>
+
+            <div class="content-card" data-category="character">
+                <div class="content-meta">
+                    <span class="content-date">January 15, 2025</span>
+                    <span class="content-type">Character Intelligence</span>
+                </div>
+                <h3 class="content-title">Micro-Expressions of Champions: Decoding the Pressure Response</h3>
+                <p class="content-preview">
+                    Revolutionary analysis of championship character through micro-expression patterns. What separates champions from competitors when the pressure is highest? The answers lie in the subtle signals others ignore.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Micro-Expressions</span>
+                    <span class="content-tag">Pressure Performance</span>
+                    <span class="content-tag">Character Assessment</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-draft">Draft</span>
+                </div>
+            </div>
+
+            <div class="content-card" data-category="competitive">
+                <div class="content-meta">
+                    <span class="content-date">January 22, 2025</span>
+                    <span class="content-type">Competitive Intelligence</span>
+                </div>
+                <h3 class="content-title">The Mahomes Factor: Strategic Intelligence in Championship Moments</h3>
+                <p class="content-preview">
+                    Case study analysis of championship-level decision making under pressure. How elite performers synthesize multiple intelligence streams to create competitive advantage in critical moments.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Case Study</span>
+                    <span class="content-tag">Strategic Decision Making</span>
+                    <span class="content-tag">Championship Performance</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-draft">Draft</span>
+                </div>
+            </div>
+
+            <div class="content-card" data-category="framework">
+                <div class="content-meta">
+                    <span class="content-date">January 29, 2025</span>
+                    <span class="content-type">Sage Framework</span>
+                </div>
+                <h3 class="content-title">The Competitive Synthesis Model: Integrating Intelligence Streams</h3>
+                <p class="content-preview">
+                    Introduction to The Sage Framework's third pillar. How championship wisdom emerges when multiple intelligence sources converge into strategic clarity and competitive advantage.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Sage Framework</span>
+                    <span class="content-tag">Intelligence Integration</span>
+                    <span class="content-tag">Strategic Synthesis</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-more">Read Framework <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-draft">Draft</span>
+                </div>
+            </div>
+
+            <!-- Week 2 -->
+            <div class="content-card" data-category="strategic">
+                <div class="content-meta">
+                    <span class="content-date">February 5, 2025</span>
+                    <span class="content-type">Strategic Intelligence</span>
+                </div>
+                <h3 class="content-title">Beyond Analytics: The Wisdom-Driven Competitive Advantage</h3>
+                <p class="content-preview">
+                    Why data-driven decision making isn't enough. Explore how championship performers transcend analytics to achieve wisdom-driven competitive intelligence that creates sustainable advantages.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Wisdom vs Data</span>
+                    <span class="content-tag">Strategic Advantage</span>
+                    <span class="content-tag">Championship Intelligence</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-draft">Draft</span>
+                </div>
+            </div>
+
+            <div class="content-card" data-category="character">
+                <div class="content-meta">
+                    <span class="content-date">February 12, 2025</span>
+                    <span class="content-type">Character Intelligence</span>
+                </div>
+                <h3 class="content-title">The Champion's Dilemma: Character vs. Skill in Elite Performance</h3>
+                <p class="content-preview">
+                    Deep analysis of why character trumps skill at the highest levels of competition. How to identify and develop the psychological patterns that separate champions from talented competitors.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Character Development</span>
+                    <span class="content-tag">Elite Performance</span>
+                    <span class="content-tag">Championship Psychology</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-draft">Draft</span>
+                </div>
+            </div>
+
+            <div class="content-card" data-category="competitive">
+                <div class="content-meta">
+                    <span class="content-date">February 19, 2025</span>
+                    <span class="content-type">Competitive Intelligence</span>
+                </div>
+                <h3 class="content-title">The Perfect Game Intelligence: Strategic Foresight in Youth Baseball</h3>
+                <p class="content-preview">
+                    How championship intelligence applies to youth sports development. Analysis of Perfect Game data patterns that predict championship potential and strategic development pathways.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Youth Sports</span>
+                    <span class="content-tag">Perfect Game</span>
+                    <span class="content-tag">Development Intelligence</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-more">Read Analysis <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-draft">Draft</span>
+                </div>
+            </div>
+
+            <div class="content-card" data-category="framework">
+                <div class="content-meta">
+                    <span class="content-date">February 26, 2025</span>
+                    <span class="content-type">Sage Framework</span>
+                </div>
+                <h3 class="content-title">The Texas Football Intelligence Model: Friday Night Lights Wisdom</h3>
+                <p class="content-preview">
+                    How The Sage Framework applies to Texas high school football. Strategic intelligence principles that drive championship programs from district battles to state championships.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Texas Football</span>
+                    <span class="content-tag">Friday Night Lights</span>
+                    <span class="content-tag">High School Athletics</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-framework">Read Framework <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-draft">Draft</span>
+                </div>
+            </div>
+
+            <!-- Weekly Features -->
+            <div class="content-card" data-category="strategic">
+                <div class="content-meta">
+                    <span class="content-date">Every Monday</span>
+                    <span class="content-type">Weekly Feature</span>
+                </div>
+                <h3 class="content-title">Monday Sage Insights: Strategic Intelligence Weekly</h3>
+                <p class="content-preview">
+                    Weekly deep-dive analysis of current competitive landscapes, emerging patterns, and strategic intelligence applications across sports and performance domains.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Weekly Series</span>
+                    <span class="content-tag">Strategic Analysis</span>
+                    <span class="content-tag">Current Events</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-more">Subscribe <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-published">Active</span>
+                </div>
+            </div>
+
+            <div class="content-card" data-category="character">
+                <div class="content-meta">
+                    <span class="content-date">Every Wednesday</span>
+                    <span class="content-type">Weekly Feature</span>
+                </div>
+                <h3 class="content-title">Character Intelligence Wednesday: Championship DNA Analysis</h3>
+                <p class="content-preview">
+                    Mid-week focus on character intelligence, psychological patterns, and the micro-signals that reveal championship potential in athletes and competitors.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Weekly Series</span>
+                    <span class="content-tag">Character Analysis</span>
+                    <span class="content-tag">Psychology</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-more">Subscribe <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-published">Active</span>
+                </div>
+            </div>
+
+            <div class="content-card" data-category="competitive">
+                <div class="content-meta">
+                    <span class="content-date">Every Friday</span>
+                    <span class="content-type">Weekly Feature</span>
+                </div>
+                <h3 class="content-title">Friday Night Intelligence: Competitive Analysis Roundup</h3>
+                <p class="content-preview">
+                    End-of-week synthesis of competitive intelligence insights, strategic patterns, and championship wisdom from across the sports and performance landscape.
+                </p>
+                <div class="content-tags">
+                    <span class="content-tag">Weekly Series</span>
+                    <span class="content-tag">Competitive Intelligence</span>
+                    <span class="content-tag">Weekly Roundup</span>
+                </div>
+                <div class="content-cta">
+                    <a href="#" class="read-more">Subscribe <i class="fas fa-arrow-right"></i></a>
+                    <span class="content-status status-published">Active</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <h2 class="newsletter-title">Join The Sage Intelligence Network</h2>
+            <p class="newsletter-description">
+                Get exclusive access to championship intelligence, strategic frameworks, and competitive analysis delivered directly to your inbox. Join thousands of champions who rely on The Sage for strategic advantage.
+            </p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Join The Network</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const contentCards = document.querySelectorAll('.content-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active filter
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                // Show/hide cards
+                contentCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Newsletter signup
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for joining The Sage Intelligence Network! You will receive championship intelligence insights directly to your inbox.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

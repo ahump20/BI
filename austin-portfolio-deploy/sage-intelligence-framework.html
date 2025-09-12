@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sage Intelligence Framework™ - Blaze Intelligence</title>
+    <meta name="description" content="The definitive framework for championship intelligence. Where wisdom transforms information into competitive advantage through strategic foresight, character intelligence, and competitive synthesis.">
+    
+    <!-- Font Preloads -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    
+    <!-- Brand System CSS -->
+    <link rel="stylesheet" href="css/blaze-brand-system.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .framework-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--blaze-background) 0%, var(--blaze-light-navy) 100%);
+        }
+
+        .framework-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(191, 87, 0, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(148, 169, 201, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .framework-content {
+            max-width: 1200px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .framework-badge {
+            display: inline-block;
+            background: rgba(191, 87, 0, 0.2);
+            color: var(--blaze-primary);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            border: 1px solid var(--blaze-primary);
+        }
+
+        .framework-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .framework-subtitle {
+            font-size: 1.5rem;
+            color: var(--blaze-accent);
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .framework-description {
+            font-size: 1.25rem;
+            color: var(--blaze-light-slate);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .framework-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--blaze-white);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--blaze-light-slate);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-base);
+        }
+
+        .nav-link:hover {
+            color: var(--blaze-primary);
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--blaze-primary);
+            color: var(--blaze-primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-base);
+        }
+
+        .back-btn:hover {
+            background: var(--blaze-primary);
+            color: var(--blaze-white);
+        }
+
+        /* Framework Pillars */
+        .pillars-section {
+            padding: 120px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pillars-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .pillars-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .pillars-subtitle {
+            font-size: 1.25rem;
+            color: var(--blaze-accent);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .pillar-card {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 50px 40px;
+            transition: var(--transition-base);
+            position: relative;
+        }
+
+        .pillar-card:hover {
+            border-color: var(--blaze-primary);
+            box-shadow: 0 20px 60px rgba(191, 87, 0, 0.2);
+            transform: translateY(-10px);
+        }
+
+        .pillar-icon {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .pillar-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .pillar-description {
+            font-size: 1.1rem;
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .pillar-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pillar-features li {
+            color: var(--blaze-accent);
+            font-weight: 500;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .pillar-features li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--blaze-primary);
+            font-size: 1.2rem;
+        }
+
+        /* Methodology Section */
+        .methodology-section {
+            background: linear-gradient(135deg, var(--blaze-light-navy) 0%, var(--blaze-background) 100%);
+            padding: 120px 20px;
+        }
+
+        .methodology-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .methodology-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--blaze-primary);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .methodology-quote {
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--blaze-white);
+            line-height: 1.4;
+            margin: 0 0 50px;
+            position: relative;
+        }
+
+        .methodology-quote::before {
+            content: '"';
+            font-size: 8rem;
+            color: var(--blaze-primary);
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            font-family: serif;
+            opacity: 0.3;
+        }
+
+        .methodology-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .methodology-step {
+            background: rgba(17, 34, 64, 0.6);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border-left: 5px solid var(--blaze-primary);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--blaze-primary);
+            color: var(--blaze-white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .step-title {
+            color: var(--blaze-white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 20px 0 15px;
+        }
+
+        .step-description {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            color: var(--blaze-light-slate);
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .framework-title {
+                font-size: 2.5rem;
+            }
+            
+            .framework-subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pillar-card {
+                padding: 40px 30px;
+            }
+            
+            .methodology-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="framework-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                ⚡ Blaze Intelligence
+            </a>
+            <div class="nav-links">
+                <a href="/" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Platform
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="framework-hero">
+        <div class="framework-content">
+            <div class="framework-badge">The Definitive Framework</div>
+            <h1 class="framework-title">The Sage Intelligence Framework™</h1>
+            <p class="framework-subtitle">Where Wisdom Transforms Information into Championship Advantage</p>
+            <p class="framework-description">
+                True competitive intelligence emerges from the synthesis of strategic foresight, character assessment, and competitive analysis. The Sage Framework transforms raw information into championship wisdom.
+            </p>
+            <div class="cta-buttons">
+                <a href="#pillars" class="btn championship-primary">
+                    <span class="btn-text">Explore the Framework</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="#contact" class="btn championship-secondary">
+                    <span class="btn-text">Seek The Sage</span>
+                    <i class="fas fa-comments"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework Pillars -->
+    <section class="pillars-section" id="pillars">
+        <div class="pillars-header">
+            <h2 class="pillars-title">The Three Pillars of Championship Intelligence</h2>
+            <p class="pillars-subtitle">
+                Each pillar represents a critical dimension of competitive advantage, working in synthesis to create championship-level strategic intelligence.
+            </p>
+        </div>
+
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-icon">🧠</div>
+                <h3 class="pillar-title">Strategic Foresight</h3>
+                <p class="pillar-description">
+                    Champions see patterns others miss. Strategic foresight reveals the competitive pathways that determine championship outcomes before they become obvious to competitors.
+                </p>
+                <ul class="pillar-features">
+                    <li>Pattern Recognition at Championship Level</li>
+                    <li>Predictive Intelligence for Competitive Advantage</li>
+                    <li>Strategic Decision-Making Frameworks</li>
+                    <li>Competitive Opportunity Identification</li>
+                    <li>Risk Assessment and Mitigation Strategies</li>
+                </ul>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">⚡</div>
+                <h3 class="pillar-title">Character Intelligence</h3>
+                <p class="pillar-description">
+                    True championship performance isn't just about skill—it's about character under pressure. We decode the micro-signals that reveal championship DNA and competitive resilience.
+                </p>
+                <ul class="pillar-features">
+                    <li>Micro-Expression Analysis for Character Assessment</li>
+                    <li>Pressure Response Pattern Recognition</li>
+                    <li>Champion Mindset Identification Systems</li>
+                    <li>Leadership Potential Evaluation</li>
+                    <li>Competitive Resilience Profiling</li>
+                </ul>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">🎯</div>
+                <h3 class="pillar-title">Competitive Synthesis</h3>
+                <p class="pillar-description">
+                    Championship wisdom emerges when multiple intelligence streams converge. We synthesize insights from every angle to reveal the complete competitive picture.
+                </p>
+                <ul class="pillar-features">
+                    <li>Multi-Source Intelligence Integration</li>
+                    <li>Competitive Landscape Analysis</li>
+                    <li>Strategic Advantage Identification</li>
+                    <li>Market Positioning Intelligence</li>
+                    <li>Competitive Response Prediction</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section class="methodology-section">
+        <div class="methodology-container">
+            <h2 class="methodology-title">The Sage Methodology</h2>
+            <blockquote class="methodology-quote">
+                In a world drowning in data, wisdom becomes the ultimate competitive advantage. The Sage doesn't just collect information—we synthesize understanding, reveal patterns, and provide the strategic intelligence that transforms potential into championship performance.
+            </blockquote>
+
+            <div class="methodology-steps">
+                <div class="methodology-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Intelligence Gathering</h3>
+                    <p class="step-description">
+                        Comprehensive data collection from multiple sources: performance metrics, behavioral patterns, competitive landscape, and market intelligence.
+                    </p>
+                </div>
+
+                <div class="methodology-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Pattern Recognition</h3>
+                    <p class="step-description">
+                        Advanced analysis to identify strategic patterns, character indicators, and competitive trends that others miss or dismiss.
+                    </p>
+                </div>
+
+                <div class="methodology-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Wisdom Synthesis</h3>
+                    <p class="step-description">
+                        Integration of insights across all three pillars to create comprehensive strategic intelligence that drives championship decisions.
+                    </p>
+                </div>
+
+                <div class="methodology-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Strategic Application</h3>
+                    <p class="step-description">
+                        Implementation of insights through actionable strategies that create sustainable competitive advantage and championship performance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section" id="contact">
+        <div class="cta-container">
+            <h2 class="cta-title">Ready to Transform Your Competitive Intelligence?</h2>
+            <p class="cta-description">
+                Join The Sage Community and discover how championship wisdom can transform your approach to competition, strategy, and performance.
+            </p>
+            <div class="cta-buttons">
+                <a href="/#contact" class="btn championship-primary">
+                    <span class="btn-text">Seek The Sage</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="/" class="btn championship-secondary">
+                    <span class="btn-text">Explore Platform</span>
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll effects to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.framework-nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(10, 25, 47, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 25, 47, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
