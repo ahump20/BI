@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blaze Neural Coach - AI-Powered Performance Intelligence</title>
 
-<canvas id="neural-canvas"></canvas>
+</head><body><canvas id="neural-canvas"></canvas>
 
 <div class="container">
 <div class="coach-grid">
 <div class="video-section">
 <div class="video-container">
-<video id="video-feed" autoplay muted playsinline></video>
+<video id="video-feed" autoplay="" muted="" playsinline=""></video>
 <canvas id="pose-canvas"></canvas>
 </div>
 <div class="video-controls">
 <button class="btn" id="start-btn" onclick="startCoaching()">
 Start Analysis
 </button>
-<button class="btn btn-secondary" id="stop-btn" onclick="stopCoaching()" disabled>
+<button class="btn btn-secondary" id="stop-btn" onclick="stopCoaching()" disabled="">
 Stop
 </button>
 <button class="btn btn-secondary" id="record-btn" onclick="toggleRecording()">
@@ -535,5 +533,5 @@ window.addEventListener('beforeunload', () => {
 stopCoaching();
 });
 </script>
-</body>
-</html>
+
+</div></div></body></html>

@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
+<!DOCTYPE html><html lang="en" class="scroll-smooth"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Revenue Dashboard | Blaze Intelligence</title>
     <meta name="description" content="Real-time revenue tracking and financial analytics for Blaze Intelligence.">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -42,9 +40,7 @@
                 </div>
                 <div class="flex items-center space-x-4">
                     <span class="text-sm text-slate-400" id="last-updated">Last updated: --</span>
-                    <button onclick="refreshData()" 
-                            class="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm"
-                            id="refresh-btn">
+                    <button onclick="refreshData()" class="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm" id="refresh-btn">
                         Refresh
                     </button>
                     <a href="/dashboard.html" class="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600">Dashboard</a>
@@ -127,9 +123,7 @@
                 <div class="glass-card p-6 rounded-2xl">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-bold text-white">Revenue Trend</h3>
-                        <select id="revenue-period" 
-                                class="px-3 py-1 bg-slate-700 text-white rounded-lg text-sm border border-slate-600"
-                                onchange="updateRevenueChart()">
+                        <select id="revenue-period" class="px-3 py-1 bg-slate-700 text-white rounded-lg text-sm border border-slate-600" onchange="updateRevenueChart()">
                             <option value="30">Last 30 days</option>
                             <option value="90">Last 90 days</option>
                             <option value="365">Last year</option>
@@ -192,9 +186,7 @@
                                 <span class="text-white" id="q4-progress-text">$0 (0%)</span>
                             </div>
                             <div class="w-full bg-slate-700 rounded-full h-3">
-                                <div class="bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full transition-all duration-1000" 
-                                     id="q4-progress-bar" 
-                                     style="width: 0%"></div>
+                                <div class="bg-gradient-to-r from-green-500 to-blue-500 h-3 rounded-full transition-all duration-1000" id="q4-progress-bar" style="width: 0%"></div>
                             </div>
                         </div>
                         
@@ -664,5 +656,5 @@
             }
         });
     </script>
-</body>
-</html>
+
+</body></html>

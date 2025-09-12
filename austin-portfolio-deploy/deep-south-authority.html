@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blaze Intelligence - The Deep South Sports Authority | Texas Football & SEC Analytics</title>
-    <meta name="description" content="The Dave Campbell's of SEC/Deep South sports. Complete coverage of Texas high school football, SEC baseball, and every player from Little League to the NFL/MLB.">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    <title>Blaze Intelligence - The Deep South Sports Authority | Texas Football & SEC Baseball Analytics</title>
+    <meta name="description" content="The Dave Campbell's of SEC/Deep South sports. Complete coverage of Texas high school football, SEC baseball, and every player from Little League to the NFL/MLB. 1,437+ schools, 127,000+ players tracked.">
     
     <!-- OpenGraph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://blaze-intelligence.netlify.app/">
     <meta property="og:title" content="Blaze Intelligence - The Deep South Sports Authority">
     <meta property="og:description" content="From Little League to The League. The most trusted source for Texas and SEC sports intelligence.">
-    <meta property="og:image" content="/public/assets/images/og-authority.jpg">
+    <meta property="og:image" content="https://blaze-intelligence.netlify.app/img/og-authority.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -25,52 +22,15 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Three.js for Hero Background -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
-    
-    <!-- Chart.js for Analytics -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- GSAP for Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SportsOrganization",
-      "name": "Blaze Intelligence",
-      "alternateName": "The Deep South Sports Authority",
-      "url": "https://blaze-intelligence.netlify.app",
-      "logo": "https://blaze-intelligence.netlify.app/img/logo.png",
-      "description": "The authoritative source for Texas, SEC, and Deep South sports intelligence from youth through professional levels.",
-      "sameAs": [
-        "https://twitter.com/blazeintel",
-        "https://www.linkedin.com/company/blaze-intelligence",
-        "https://www.instagram.com/blazeintelligence"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "8319 Monument Oak",
-        "addressLocality": "Boerne",
-        "addressRegion": "TX",
-        "postalCode": "78015",
-        "addressCountry": "US"
-      },
-      "areaServed": ["Texas", "Louisiana", "Mississippi", "Alabama", "Georgia", "Florida", "South Carolina", "Tennessee", "Arkansas"],
-      "knowsAbout": ["High School Football", "College Football", "SEC Sports", "Texas Sports", "Baseball Analytics", "Sports Recruiting", "NFL Draft", "MLB Draft"]
-    }
-    </script>
-    
     <style>
+        /* Authority Positioning Styles */
         :root {
-            /* DCTF Authority Color Palette */
+            /* Core Brand Colors */
             --burnt-orange: #BF5700;
             --sec-crimson: #9B2222;
             --cardinal-blue: #9BCBEB;
@@ -79,14 +39,11 @@
             --georgia-clay: #C65D00;
             --texas-navy: #002244;
             --louisiana-bayou: #1B4332;
-            --friday-lights: #FFD700;
-            --stadium-black: #0A0A0A;
             
-            /* Typography */
-            --font-headline: 'Bebas Neue', 'Oswald', sans-serif;
-            --font-body: 'Inter', -apple-system, sans-serif;
+            /* Typography Scale */
+            --font-headline: 'Oswald', sans-serif;
+            --font-body: 'Inter', sans-serif;
             --font-data: 'JetBrains Mono', monospace;
-            --font-letterman: 'Oswald', serif;
         }
         
         * {
@@ -97,61 +54,21 @@
         
         body {
             font-family: var(--font-body);
-            background: linear-gradient(180deg, var(--stadium-black) 0%, var(--texas-navy) 50%, var(--louisiana-bayou) 100%);
-            color: var(--mississippi-white);
+            background: linear-gradient(135deg, #0A192F 0%, #112240 100%);
+            color: #8892B0;
             overflow-x: hidden;
-            min-height: 100vh;
-        }
-        
-        /* Authority Badge */
-        .authority-badge {
-            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
-            color: white;
-            padding: 12px 24px;
-            border-radius: 100px;
-            display: inline-flex;
-            align-items: center;
-            gap: 20px;
-            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
-            margin-bottom: 32px;
-            animation: pulse 3s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3); }
-            50% { transform: scale(1.02); box-shadow: 0 6px 30px rgba(191, 87, 0, 0.5); }
-        }
-        
-        .badge-text {
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        
-        .trust-logos {
-            display: flex;
-            gap: 24px;
-            padding-left: 24px;
-            border-left: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .trust-logos span {
-            font-size: 0.75rem;
-            opacity: 0.95;
-            font-weight: 500;
         }
         
         /* Navigation */
         .main-nav {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--burnt-orange);
             position: fixed;
-            top: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
+            top: 0;
             z-index: 1000;
-            border-bottom: 3px solid var(--burnt-orange);
-            padding: 1rem 5%;
+            padding: 1rem 2rem;
         }
         
         .nav-container {
@@ -168,20 +85,16 @@
             gap: 1rem;
         }
         
-        .logo-text {
-            font-family: var(--font-headline);
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--burnt-orange);
-            text-decoration: none;
-            letter-spacing: 2px;
+        .nav-logo img {
+            height: 40px;
         }
         
-        .tagline {
-            font-size: 0.75rem;
-            color: var(--friday-lights);
-            font-style: italic;
-            letter-spacing: 1px;
+        .nav-logo .tagline {
+            font-family: var(--font-headline);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--georgia-clay);
         }
         
         .nav-sports {
@@ -191,15 +104,13 @@
         
         .dropdown {
             position: relative;
-            cursor: pointer;
         }
         
         .dropdown > span {
             color: var(--mississippi-white);
             font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
             transition: color 0.3s ease;
         }
         
@@ -210,7 +121,7 @@
         .mega-menu {
             position: absolute;
             top: 100%;
-            left: -50px;
+            left: 0;
             background: white;
             border: 1px solid var(--cardinal-blue);
             border-top: 4px solid var(--burnt-orange);
@@ -220,8 +131,8 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 48px;
             min-width: 600px;
-            box-shadow: 0 20px 40px rgba(0, 34, 68, 0.2);
-            margin-top: 20px;
+            box-shadow: 0 20px 40px rgba(0, 34, 68, 0.1);
+            margin-top: 1rem;
         }
         
         .dropdown:hover .mega-menu {
@@ -254,20 +165,15 @@
             padding-left: 8px;
         }
         
-        .nav-tools {
-            display: flex;
-            gap: 1.5rem;
-        }
-        
-        .tool-link {
-            color: var(--cardinal-blue);
+        .nav-tools a {
+            color: var(--mississippi-white);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
+            margin: 0 1rem;
             transition: color 0.3s ease;
         }
         
-        .tool-link:hover {
+        .nav-tools a:hover {
             color: var(--burnt-orange);
         }
         
@@ -276,58 +182,87 @@
             gap: 1rem;
         }
         
-        .btn-login, .btn-subscribe {
-            padding: 8px 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
         .btn-login {
             background: transparent;
-            color: var(--mississippi-white);
-            border: 1px solid var(--mississippi-white);
+            color: var(--burnt-orange);
+            border: 2px solid var(--burnt-orange);
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         .btn-login:hover {
-            background: var(--mississippi-white);
-            color: var(--texas-navy);
+            background: var(--burnt-orange);
+            color: white;
         }
         
         .btn-subscribe {
             background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
             color: white;
             border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         .btn-subscribe:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(191, 87, 0, 0.4);
+            box-shadow: 0 4px 15px rgba(191, 87, 0, 0.3);
         }
         
         /* Hero Section */
         .hero-authority {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 5% 80px;
+            margin-top: 80px;
+            padding: 100px 20px;
+            text-align: center;
             position: relative;
-            background: radial-gradient(ellipse at center, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+            background: linear-gradient(180deg, rgba(10, 25, 47, 0) 0%, rgba(10, 25, 47, 1) 100%);
         }
         
+        /* Authority Badge */
+        .authority-badge {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+            margin-bottom: 32px;
+        }
+        
+        .badge-text {
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .trust-logos {
+            display: flex;
+            gap: 24px;
+            padding-left: 24px;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .trust-logos span {
+            font-size: 12px;
+            opacity: 0.95;
+        }
+        
+        /* Hero Title Hierarchy */
         .hero-title {
             text-align: center;
             margin: 48px 0;
         }
         
         .hero-title .small-text {
-            font-family: var(--font-letterman);
+            font-family: var(--font-headline);
             font-size: 18px;
             color: var(--georgia-clay);
             text-transform: uppercase;
@@ -338,29 +273,26 @@
         
         .hero-title .main-text {
             font-family: var(--font-headline);
-            font-size: 5rem;
+            font-size: 72px;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--burnt-orange), var(--friday-lights), var(--sec-crimson));
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.1;
             display: block;
             margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
         
         .hero-title .sub-text {
             font-family: var(--font-body);
             font-size: 24px;
-            color: var(--mississippi-white);
+            color: var(--cardinal-blue);
             font-weight: 500;
             display: block;
-            opacity: 0.9;
         }
         
-        /* Hero Stats */
+        /* Stats Cards */
         .hero-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -370,8 +302,7 @@
         }
         
         .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            background: white;
             border: 2px solid var(--cardinal-blue);
             border-radius: 16px;
             padding: 32px;
@@ -393,13 +324,12 @@
         
         .stat-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(155, 203, 235, 0.3);
-            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 12px 32px rgba(0, 34, 68, 0.15);
         }
         
         .stat-number {
             font-family: var(--font-data);
-            font-size: 3rem;
+            font-size: 48px;
             font-weight: 700;
             color: var(--burnt-orange);
             display: block;
@@ -409,12 +339,12 @@
         .stat-label {
             font-family: var(--font-body);
             font-size: 14px;
-            color: var(--mississippi-white);
+            color: var(--texas-navy);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         
-        /* CTA Section */
+        /* CTA Buttons */
         .cta-section {
             display: flex;
             gap: 16px;
@@ -422,22 +352,17 @@
             margin-top: 48px;
         }
         
-        .btn-primary, .btn-secondary, .btn-tertiary {
+        .btn-primary {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
             padding: 16px 32px;
             font-family: var(--font-headline);
             font-size: 18px;
             font-weight: 600;
+            border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
-            color: white;
-            border: none;
             box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
         }
         
@@ -450,6 +375,13 @@
             background: white;
             color: var(--burnt-orange);
             border: 2px solid var(--burnt-orange);
+            padding: 16px 32px;
+            font-family: var(--font-headline);
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         .btn-secondary:hover {
@@ -459,19 +391,24 @@
         
         .btn-tertiary {
             background: transparent;
-            color: var(--mississippi-white);
-            border: 1px solid var(--mississippi-white);
+            color: var(--cardinal-blue);
+            border: none;
+            padding: 16px 32px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
         
         .btn-tertiary:hover {
-            background: var(--mississippi-white);
-            color: var(--texas-navy);
+            color: var(--burnt-orange);
         }
         
         /* Authority Proof Section */
         .authority-proof {
-            padding: 100px 5%;
-            background: linear-gradient(180deg, transparent 0%, rgba(20, 33, 61, 0.5) 100%);
+            padding: 100px 20px;
+            background: white;
         }
         
         .container {
@@ -481,12 +418,10 @@
         
         .section-title {
             font-family: var(--font-headline);
-            font-size: 3.5rem;
+            font-size: 48px;
+            color: var(--texas-navy);
             text-align: center;
-            color: var(--burnt-orange);
-            margin-bottom: 60px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin-bottom: 64px;
         }
         
         .proof-grid {
@@ -496,9 +431,8 @@
         }
         
         .proof-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(155, 203, 235, 0.2);
+            background: white;
+            border: 1px solid #E6F1FF;
             border-radius: 16px;
             padding: 32px;
             text-align: center;
@@ -507,49 +441,53 @@
         
         .proof-card:hover {
             transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 34, 68, 0.1);
+            border-color: var(--burnt-orange);
         }
         
         .proof-icon {
-            font-size: 3rem;
-            color: var(--friday-lights);
-            margin-bottom: 20px;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
         }
         
         .proof-card h3 {
             font-family: var(--font-headline);
-            font-size: 1.8rem;
-            color: var(--mississippi-white);
+            font-size: 24px;
+            color: var(--texas-navy);
             margin-bottom: 16px;
-            text-transform: uppercase;
         }
         
         .proof-card p {
-            color: rgba(248, 248, 255, 0.8);
+            color: #64748B;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         
         .proof-stats {
             display: flex;
             justify-content: center;
             gap: 24px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(155, 203, 235, 0.2);
         }
         
         .proof-stats span {
             font-family: var(--font-data);
-            font-size: 0.9rem;
-            color: var(--cardinal-blue);
+            font-size: 14px;
+            color: var(--burnt-orange);
             font-weight: 600;
         }
         
-        /* Product Showcase */
+        /* Product Showcase Section */
         .product-showcase {
-            padding: 100px 5%;
-            background: rgba(10, 10, 10, 0.7);
+            padding: 100px 20px;
+            background: linear-gradient(180deg, white 0%, #F8F8FF 100%);
         }
         
         .product-tabs {
@@ -560,22 +498,21 @@
         }
         
         .tab {
-            padding: 12px 24px;
             background: transparent;
-            color: var(--mississippi-white);
-            border: 1px solid var(--mississippi-white);
-            border-radius: 50px;
+            color: var(--texas-navy);
+            border: 2px solid var(--texas-navy);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
         
-        .tab.active, .tab:hover {
-            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+        .tab.active,
+        .tab:hover {
+            background: var(--burnt-orange);
             color: white;
-            border-color: transparent;
+            border-color: var(--burnt-orange);
         }
         
         .product-content {
@@ -586,7 +523,7 @@
         .product-panel {
             display: none;
             grid-template-columns: 1fr 1fr;
-            gap: 48px;
+            gap: 64px;
             align-items: center;
         }
         
@@ -597,20 +534,19 @@
         .product-visual img {
             width: 100%;
             border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 34, 68, 0.1);
         }
         
         .product-details h3 {
             font-family: var(--font-headline);
-            font-size: 2.5rem;
-            color: var(--burnt-orange);
-            margin-bottom: 12px;
-            text-transform: uppercase;
+            font-size: 36px;
+            color: var(--texas-navy);
+            margin-bottom: 8px;
         }
         
         .product-tagline {
-            font-size: 1.2rem;
-            color: var(--friday-lights);
+            font-size: 18px;
+            color: var(--georgia-clay);
             font-style: italic;
             margin-bottom: 24px;
         }
@@ -622,15 +558,18 @@
         
         .feature-list li {
             padding: 12px 0;
-            color: var(--mississippi-white);
-            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+            padding-left: 32px;
+            position: relative;
+            color: #64748B;
         }
         
         .feature-list li::before {
-            content: '✓';
-            color: var(--friday-lights);
-            margin-right: 12px;
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--burnt-orange);
             font-weight: bold;
+            font-size: 18px;
         }
         
         .product-cta {
@@ -641,88 +580,91 @@
         
         .price {
             font-family: var(--font-data);
-            font-size: 1.8rem;
-            color: var(--friday-lights);
+            font-size: 32px;
             font-weight: 700;
+            color: var(--texas-navy);
         }
         
-        /* Coverage Map */
+        /* Coverage Map Section */
         .coverage-map {
-            padding: 100px 5%;
-            background: linear-gradient(180deg, rgba(20, 33, 61, 0.5) 0%, transparent 100%);
+            padding: 100px 20px;
+            background: var(--texas-navy);
+            color: white;
         }
         
         .section-subtitle {
             text-align: center;
-            font-size: 1.2rem;
-            color: var(--mississippi-white);
+            font-size: 20px;
+            color: var(--cardinal-blue);
             margin-bottom: 48px;
-            opacity: 0.9;
         }
         
         .interactive-map {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 20px;
-            padding: 48px;
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 32px;
+        }
+        
+        .map-placeholder {
+            height: 400px;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.2), rgba(155, 34, 34, 0.2));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--cardinal-blue);
+            margin-bottom: 48px;
         }
         
         .map-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 32px;
-            margin-top: 48px;
         }
         
         .region-stat {
             text-align: center;
-            padding: 24px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            border: 1px solid rgba(155, 203, 235, 0.2);
         }
         
         .region-stat h4 {
             font-family: var(--font-headline);
-            font-size: 1.5rem;
+            font-size: 24px;
             color: var(--burnt-orange);
-            margin-bottom: 12px;
-            text-transform: uppercase;
+            margin-bottom: 16px;
         }
         
         .region-stat span {
             display: block;
-            color: var(--mississippi-white);
-            margin: 8px 0;
-            font-size: 0.95rem;
+            font-size: 16px;
+            color: var(--cardinal-blue);
+            margin-bottom: 8px;
         }
         
         /* Footer */
         footer {
-            background: var(--stadium-black);
-            padding: 60px 5% 40px;
-            border-top: 3px solid var(--burnt-orange);
+            padding: 48px 20px;
+            background: #0A0E1B;
+            text-align: center;
+            border-top: 2px solid var(--burnt-orange);
         }
         
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
         }
         
         .footer-logo {
             font-family: var(--font-headline);
-            font-size: 2.5rem;
+            font-size: 32px;
             color: var(--burnt-orange);
             margin-bottom: 16px;
-            text-transform: uppercase;
         }
         
         .footer-tagline {
-            color: var(--friday-lights);
-            font-style: italic;
+            color: var(--cardinal-blue);
             margin-bottom: 32px;
         }
         
@@ -734,7 +676,7 @@
         }
         
         .footer-links a {
-            color: var(--mississippi-white);
+            color: #8892B0;
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -744,25 +686,22 @@
         }
         
         .footer-copyright {
-            color: rgba(248, 248, 255, 0.5);
-            font-size: 0.9rem;
+            color: #64748B;
+            font-size: 14px;
         }
         
-        /* Responsive */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero-title .main-text {
-                font-size: 3rem;
-            }
-            
-            .hero-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-sports, .nav-tools {
+            .nav-sports,
+            .nav-tools {
                 display: none;
             }
             
-            .proof-grid {
+            .hero-title .main-text {
+                font-size: 48px;
+            }
+            
+            .hero-stats {
                 grid-template-columns: 1fr;
             }
             
@@ -781,7 +720,7 @@
     <nav class="main-nav">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="/" class="logo-text">BLAZE INTELLIGENCE</a>
+                <span style="font-size: 24px; font-weight: 700; color: var(--burnt-orange);">BLAZE</span>
                 <span class="tagline">The Authority</span>
             </div>
             
@@ -829,14 +768,20 @@
                             <a href="/draft-coverage">MLB Draft</a>
                             <a href="/showcase-circuit">Showcases</a>
                         </div>
+                        <div class="menu-column">
+                            <h4>Tools</h4>
+                            <a href="/velocity-tracker">Velocity Tracker</a>
+                            <a href="/exit-velo">Exit Velo Analysis</a>
+                            <a href="/prospect-database">Prospect Database</a>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div class="nav-tools">
-                <a href="/blazescout" class="tool-link">BlazeScout Pro</a>
-                <a href="/blazedraft" class="tool-link">BlazeDraft</a>
-                <a href="/api" class="tool-link">API</a>
+                <a href="/blazescout">BlazeScout Pro</a>
+                <a href="/blazedraft">BlazeDraft</a>
+                <a href="/api">API</a>
             </div>
             
             <div class="nav-account">
@@ -852,18 +797,18 @@
             <span class="badge-text">The Official Intelligence Partner of Championship Programs</span>
             <div class="trust-logos">
                 <span>Dave Campbell's Partner</span>
-                <span>•</span>
+                <span>|</span>
                 <span>SEC Network Data</span>
-                <span>•</span>
+                <span>|</span>
                 <span>Perfect Game Analytics</span>
             </div>
         </div>
         
-        <div class="hero-title">
+        <h1 class="hero-title">
             <span class="small-text">From Little League to The League</span>
             <span class="main-text">The Deep South Sports Authority</span>
             <span class="sub-text">Texas • SEC • Every Player • Every Level</span>
-        </div>
+        </h1>
         
         <div class="hero-stats">
             <div class="stat-card">
@@ -894,9 +839,7 @@
             
             <div class="proof-grid">
                 <div class="proof-card">
-                    <div class="proof-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
+                    <div class="proof-icon">📊</div>
                     <h3>Unmatched Coverage</h3>
                     <p>Every Texas high school. Every SEC program. Every player that matters from Little League to the NFL.</p>
                     <div class="proof-stats">
@@ -906,9 +849,7 @@
                 </div>
                 
                 <div class="proof-card">
-                    <div class="proof-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
+                    <div class="proof-icon">🏆</div>
                     <h3>Trusted Heritage</h3>
                     <p>Official partner of Dave Campbell's Texas Football. The same trust built over decades, powered by modern technology.</p>
                     <div class="proof-stats">
@@ -918,9 +859,7 @@
                 </div>
                 
                 <div class="proof-card">
-                    <div class="proof-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
+                    <div class="proof-icon">🎯</div>
                     <h3>Proven Accuracy</h3>
                     <p>Our AI models predict draft outcomes, transfer decisions, and championship winners with industry-leading precision.</p>
                     <div class="proof-stats">
@@ -930,9 +869,7 @@
                 </div>
                 
                 <div class="proof-card">
-                    <div class="proof-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
+                    <div class="proof-icon">🔍</div>
                     <h3>Scout Network</h3>
                     <p>Boots on the ground at every Friday night game. Eyes on every prospect. Relationships in every field house.</p>
                     <div class="proof-stats">
@@ -950,16 +887,18 @@
             <h2 class="section-title">The Complete Intelligence Suite</h2>
             
             <div class="product-tabs">
-                <button class="tab active" data-product="annual">The Annual</button>
-                <button class="tab" data-product="blazescout">BlazeScout Pro</button>
-                <button class="tab" data-product="blazedraft">BlazeDraft</button>
-                <button class="tab" data-product="api">API Access</button>
+                <button class="tab active" onclick="switchProduct('annual')">The Annual</button>
+                <button class="tab" onclick="switchProduct('blazescout')">BlazeScout Pro</button>
+                <button class="tab" onclick="switchProduct('blazedraft')">BlazeDraft</button>
+                <button class="tab" onclick="switchProduct('api')">API Access</button>
             </div>
             
             <div class="product-content">
                 <div class="product-panel active" id="annual">
                     <div class="product-visual">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect fill='%23BF5700' width='400' height='500'/%3E%3Ctext x='200' y='250' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3E2025 ANNUAL%3C/text%3E%3C/svg%3E" alt="Blaze Intelligence Annual">
+                        <div style="background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson)); height: 400px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            Annual Preview Image
+                        </div>
                     </div>
                     <div class="product-details">
                         <h3>The Blaze Intelligence Annual</h3>
@@ -981,18 +920,20 @@
                 
                 <div class="product-panel" id="blazescout">
                     <div class="product-visual">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect fill='%239B2222' width='400' height='500'/%3E%3Ctext x='200' y='250' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EBlazeScout Pro%3C/text%3E%3C/svg%3E" alt="BlazeScout Pro">
+                        <div style="background: linear-gradient(135deg, var(--georgia-clay), var(--texas-navy)); height: 400px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            BlazeScout Pro Interface
+                        </div>
                     </div>
                     <div class="product-details">
                         <h3>BlazeScout Pro</h3>
-                        <p class="product-tagline">Professional Scouting Terminal</p>
+                        <p class="product-tagline">Professional Scouting Platform</p>
                         <ul class="feature-list">
                             <li>Live game film analysis</li>
                             <li>Automated highlight detection</li>
                             <li>Performance metric tracking</li>
                             <li>Recruiting alert system</li>
                             <li>Multi-screen command center</li>
-                            <li>Custom report generation</li>
+                            <li>Real-time feed aggregation</li>
                         </ul>
                         <div class="product-cta">
                             <button class="btn-primary">Start Free Trial</button>
@@ -1003,18 +944,20 @@
                 
                 <div class="product-panel" id="blazedraft">
                     <div class="product-visual">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect fill='%23002244' width='400' height='500'/%3E%3Ctext x='200' y='250' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EBlazeDraft%3C/text%3E%3C/svg%3E" alt="BlazeDraft">
+                        <div style="background: linear-gradient(135deg, var(--louisiana-bayou), var(--cardinal-blue)); height: 400px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            BlazeDraft Analytics
+                        </div>
                     </div>
                     <div class="product-details">
                         <h3>BlazeDraft</h3>
-                        <p class="product-tagline">Professional Draft Intelligence</p>
+                        <p class="product-tagline">Draft Intelligence Platform</p>
                         <ul class="feature-list">
                             <li>MLB/NFL draft probability models</li>
                             <li>Combine performance predictions</li>
                             <li>Medical red flag analysis</li>
                             <li>Character assessment scores</li>
-                            <li>Comp pick projections</li>
-                            <li>Trade value calculations</li>
+                            <li>Historical draft comparisons</li>
+                            <li>Team fit analytics</li>
                         </ul>
                         <div class="product-cta">
                             <button class="btn-primary">Get Access</button>
@@ -1025,18 +968,20 @@
                 
                 <div class="product-panel" id="api">
                     <div class="product-visual">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect fill='%2300B2A9' width='400' height='500'/%3E%3Ctext x='200' y='250' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EAPI ACCESS%3C/text%3E%3C/svg%3E" alt="API Access">
+                        <div style="background: linear-gradient(135deg, var(--deep-teal), var(--texas-navy)); height: 400px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            API Documentation
+                        </div>
                     </div>
                     <div class="product-details">
-                        <h3>API Access</h3>
-                        <p class="product-tagline">Integrate Our Intelligence</p>
+                        <h3>Blaze Intelligence API</h3>
+                        <p class="product-tagline">Enterprise Data Access</p>
                         <ul class="feature-list">
                             <li>RESTful API endpoints</li>
-                            <li>Real-time webhooks</li>
+                            <li>Real-time data streaming</li>
                             <li>Historical data access</li>
-                            <li>Custom data exports</li>
+                            <li>Custom webhook triggers</li>
                             <li>White-label options</li>
-                            <li>Enterprise SLA support</li>
+                            <li>99.9% uptime SLA</li>
                         </ul>
                         <div class="product-cta">
                             <button class="btn-primary">View Documentation</button>
@@ -1048,31 +993,32 @@
         </div>
     </section>
     
-    <!-- Coverage Map Section -->
+    <!-- Regional Coverage Map -->
     <section class="coverage-map">
         <div class="container">
-            <h2 class="section-title">Our Territory</h2>
+            <h2 class="section-title" style="color: white;">Our Territory</h2>
             <p class="section-subtitle">From Texas to the Atlantic, we own the Deep South</p>
             
             <div class="interactive-map">
+                <div class="map-placeholder">
+                    Interactive Coverage Map Coming Soon
+                </div>
+                
                 <div class="map-stats">
                     <div class="region-stat">
                         <h4>Texas</h4>
                         <span>1,437 High Schools</span>
                         <span>Big 12 + SEC Coverage</span>
-                        <span>45,000+ Active Players</span>
                     </div>
                     <div class="region-stat">
                         <h4>SEC States</h4>
                         <span>14 Universities</span>
                         <span>2,100+ High Schools</span>
-                        <span>62,000+ Active Players</span>
                     </div>
                     <div class="region-stat">
                         <h4>Total Coverage</h4>
                         <span>127,000+ Players</span>
                         <span>8 States Deep</span>
-                        <span>500+ Scouts Active</span>
                     </div>
                 </div>
             </div>
@@ -1082,40 +1028,37 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">Blaze Intelligence</div>
-            <p class="footer-tagline">The Deep South Sports Authority • From Little League to The League</p>
+            <div class="footer-logo">BLAZE INTELLIGENCE</div>
+            <div class="footer-tagline">The Deep South Sports Authority</div>
             <div class="footer-links">
                 <a href="/about">About</a>
                 <a href="/contact">Contact</a>
-                <a href="/media">Media Kit</a>
-                <a href="/api">Developer API</a>
                 <a href="/careers">Careers</a>
+                <a href="/api">API</a>
                 <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
             </div>
-            <p class="footer-copyright">
-                © 2025 Blaze Intelligence. All Rights Reserved.
-                <br>Built on Heritage. Powered by Innovation.
-            </p>
+            <div class="footer-copyright">
+                © 2025 Blaze Intelligence. Built on Trust. Powered by Truth.
+            </div>
         </div>
     </footer>
     
-    <!-- JavaScript -->
     <script>
-        // Authority Features
+        // Initialize BlazeAuthority
         class BlazeAuthority {
             constructor() {
                 this.initLiveStats();
                 this.initProductTabs();
                 this.initTrustBadges();
-                this.initScrollAnimations();
             }
             
             initLiveStats() {
+                // Animate statistics on scroll
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             this.animateNumber(entry.target);
-                            observer.unobserve(entry.target);
                         }
                     });
                 });
@@ -1131,7 +1074,11 @@
                 const hasPercent = text.includes('%');
                 const hasComma = text.includes(',');
                 
-                let target = parseFloat(text.replace(/[^0-9.]/g, ''));
+                let target = parseInt(text.replace(/[^0-9]/g, ''));
+                if (hasPercent) {
+                    target = parseFloat(text.replace('%', ''));
+                }
+                
                 const duration = 2000;
                 const step = target / (duration / 16);
                 let current = 0;
@@ -1141,24 +1088,16 @@
                     if (current >= target) {
                         current = target;
                         clearInterval(timer);
-                        
-                        // Restore original formatting
-                        if (hasPercent) {
-                            element.textContent = current.toFixed(1) + '%';
-                        } else if (hasComma) {
-                            element.textContent = this.formatNumber(Math.floor(current)) + (hasPlus ? '+' : '');
-                        } else {
-                            element.textContent = Math.floor(current).toString() + (hasPlus ? '+' : '');
-                        }
-                    } else {
-                        if (hasPercent) {
-                            element.textContent = current.toFixed(1) + '%';
-                        } else if (hasComma) {
-                            element.textContent = this.formatNumber(Math.floor(current));
-                        } else {
-                            element.textContent = Math.floor(current).toString();
-                        }
                     }
+                    
+                    let display = hasPercent ? current.toFixed(1) : Math.floor(current);
+                    if (hasComma && !hasPercent) {
+                        display = this.formatNumber(Math.floor(current));
+                    }
+                    if (hasPlus) display += '+';
+                    if (hasPercent) display += '%';
+                    
+                    element.textContent = display;
                 }, 16);
             }
             
@@ -1167,21 +1106,7 @@
             }
             
             initProductTabs() {
-                document.querySelectorAll('.tab').forEach(tab => {
-                    tab.addEventListener('click', (e) => {
-                        this.switchProduct(e.target.dataset.product);
-                    });
-                });
-            }
-            
-            switchProduct(product) {
-                // Remove active classes
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
-                
-                // Add active classes
-                document.querySelector(`[data-product="${product}"]`).classList.add('active');
-                document.getElementById(product).classList.add('active');
+                // Product tab switching handled by inline onclick
             }
             
             initTrustBadges() {
@@ -1189,54 +1114,37 @@
                 const badges = [
                     'The Official Intelligence Partner of Championship Programs',
                     'Trusted by 500+ High Schools Across Texas',
-                    'SEC Network Official Data Provider',
-                    'Perfect Game Analytics Partner Since 2024',
-                    'Dave Campbell\'s Digital Evolution Partner'
+                    'SEC Network Data Provider',
+                    'Perfect Game Analytics Partner',
+                    'Dave Campbell\'s Digital Evolution'
                 ];
                 
                 let current = 0;
-                const badgeText = document.querySelector('.badge-text');
-                
                 setInterval(() => {
                     current = (current + 1) % badges.length;
-                    badgeText.style.opacity = '0';
-                    
-                    setTimeout(() => {
-                        badgeText.textContent = badges[current];
-                        badgeText.style.opacity = '1';
-                    }, 300);
+                    const badgeText = document.querySelector('.badge-text');
+                    if (badgeText) {
+                        badgeText.style.opacity = '0';
+                        setTimeout(() => {
+                            badgeText.textContent = badges[current];
+                            badgeText.style.opacity = '1';
+                        }, 300);
+                    }
                 }, 5000);
             }
+        }
+        
+        // Product switching function
+        function switchProduct(product) {
+            // Remove active classes
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
             
-            initScrollAnimations() {
-                if (window.gsap && window.ScrollTrigger) {
-                    gsap.registerPlugin(ScrollTrigger);
-                    
-                    // Animate section entries
-                    gsap.utils.toArray('.proof-card').forEach((card, i) => {
-                        gsap.from(card, {
-                            scrollTrigger: {
-                                trigger: card,
-                                start: 'top 80%'
-                            },
-                            y: 50,
-                            opacity: 0,
-                            duration: 0.8,
-                            delay: i * 0.1
-                        });
-                    });
-                    
-                    // Parallax effect for hero
-                    gsap.to('.hero-authority', {
-                        scrollTrigger: {
-                            trigger: '.hero-authority',
-                            start: 'top top',
-                            end: 'bottom top',
-                            scrub: true
-                        },
-                        backgroundPosition: '50% 100px'
-                    });
-                }
+            // Add active classes
+            event.target.classList.add('active');
+            const panel = document.getElementById(product);
+            if (panel) {
+                panel.classList.add('active');
             }
         }
         
@@ -1244,63 +1152,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             new BlazeAuthority();
         });
-        
-        // Three.js Background Animation
-        if (window.THREE) {
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.domElement.style.position = 'fixed';
-            renderer.domElement.style.top = '0';
-            renderer.domElement.style.left = '0';
-            renderer.domElement.style.zIndex = '-1';
-            renderer.domElement.style.pointerEvents = 'none';
-            document.body.appendChild(renderer.domElement);
-            
-            // Create particle field (stadium lights effect)
-            const particles = new THREE.BufferGeometry();
-            const particleCount = 1000;
-            const positions = new Float32Array(particleCount * 3);
-            
-            for (let i = 0; i < particleCount * 3; i += 3) {
-                positions[i] = (Math.random() - 0.5) * 100;
-                positions[i + 1] = (Math.random() - 0.5) * 100;
-                positions[i + 2] = (Math.random() - 0.5) * 100;
-            }
-            
-            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            
-            const particleMaterial = new THREE.PointsMaterial({
-                color: 0xFFD700,
-                size: 0.5,
-                transparent: true,
-                opacity: 0.6
-            });
-            
-            const particleSystem = new THREE.Points(particles, particleMaterial);
-            scene.add(particleSystem);
-            
-            camera.position.z = 30;
-            
-            function animate() {
-                requestAnimationFrame(animate);
-                
-                particleSystem.rotation.y += 0.0005;
-                particleSystem.rotation.x += 0.0002;
-                
-                renderer.render(scene, camera);
-            }
-            
-            animate();
-            
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
     </script>
 </body>
 </html>

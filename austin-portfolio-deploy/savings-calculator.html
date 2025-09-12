@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blaze vs Hudl Cost Calculator | Verified Savings Analysis</title>
@@ -247,7 +245,7 @@
     
     <!-- Analytics & Testing -->
     <script src="js/analytics-config.js"></script>
-    <script src="js/ab-testing.js" defer></script>
+    <script src="js/ab-testing.js" defer=""></script>
     <script src="js/sentry-config.js"></script>
 </head>
 <body>
@@ -283,7 +281,7 @@
                     <label class="form-label">Hudl Tier Comparison</label>
                     <select class="form-select" id="hudlTier" onchange="updateCalculation()">
                         <option value="silver">Hudl Silver ($900/year)</option>
-                        <option value="gold" selected>Hudl Gold ($1,600/year)</option>
+                        <option value="gold" selected="">Hudl Gold ($1,600/year)</option>
                         <option value="platinum">Hudl Platinum ($3,300/year)</option>
                     </select>
                 </div>
@@ -292,7 +290,7 @@
                     <label class="form-label">Contract Length</label>
                     <select class="form-select" id="contractLength" onchange="updateCalculation()">
                         <option value="1">1 Year</option>
-                        <option value="2" selected>2 Years</option>
+                        <option value="2" selected="">2 Years</option>
                         <option value="3">3 Years</option>
                         <option value="5">5 Years</option>
                     </select>
@@ -578,5 +576,5 @@
         });
     </script>
     
-    <!-- Popup scripts removed for better user experience --></body>
-</html>
+    <!-- Popup scripts removed for better user experience -->
+</body></html>

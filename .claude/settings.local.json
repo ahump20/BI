@@ -37,7 +37,10 @@
       "Bash(./scripts/verify-secrets.sh:*)",
       "Bash(./verify-deployment.sh:*)",
       "Bash(gh workflow list:*)",
-      "Bash(./deploy-deep-south-netlify.sh:*)"
+      "Bash(./deploy-deep-south-netlify.sh:*)",
+      "Bash(npx netlify:*)",
+      "Read(//Users/AustinHumphrey/Downloads/**)",
+      "Bash(unzip:*)"
     ],
     "deny": [],
     "ask": []
