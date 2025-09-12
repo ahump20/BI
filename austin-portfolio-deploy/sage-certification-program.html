@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sage Intelligence Certification Program - The Definitive Authority</title>
+    <meta name="description" content="Become certified in The Sage Intelligence Framework™. The only accredited program for championship-level strategic intelligence, character assessment, and competitive analysis.">
+    
+    <!-- Brand System CSS -->
+    <link rel="stylesheet" href="css/blaze-brand-system.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .certification-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--blaze-background) 0%, var(--blaze-light-navy) 30%, var(--blaze-background) 70%, var(--blaze-light-navy) 100%);
+            overflow: hidden;
+        }
+
+        .certification-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 25% 25%, rgba(191, 87, 0, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 75%, rgba(148, 169, 201, 0.2) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 30%, rgba(191, 87, 0, 0.05) 50%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .certification-seal {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            margin: 0 auto 40px;
+            border: 6px solid rgba(191, 87, 0, 0.3);
+            box-shadow: 
+                0 0 50px rgba(191, 87, 0, 0.5),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .certification-seal::after {
+            content: 'CERTIFIED';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--blaze-background);
+            color: var(--blaze-primary);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border: 2px solid var(--blaze-primary);
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--blaze-white);
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            color: var(--blaze-primary);
+            margin-bottom: 35px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero-tagline {
+            font-size: 1.4rem;
+            color: var(--blaze-accent);
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            color: var(--blaze-light-slate);
+            max-width: 900px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+
+        .accreditation-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .accreditation-badge {
+            background: rgba(17, 34, 64, 0.8);
+            border: 1px solid var(--blaze-primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: var(--blaze-primary);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Certification Levels */
+        .levels-section {
+            padding: 120px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .levels-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .levels-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--blaze-white);
+            margin-bottom: 25px;
+        }
+
+        .levels-subtitle {
+            font-size: 1.3rem;
+            color: var(--blaze-accent);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .level-card {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-card.featured {
+            border-color: var(--blaze-primary);
+            background: rgba(191, 87, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        .level-card:hover {
+            border-color: var(--blaze-primary);
+            box-shadow: 0 25px 80px rgba(191, 87, 0, 0.25);
+            transform: translateY(-10px);
+        }
+
+        .level-card.featured:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .level-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            color: var(--blaze-white);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .level-icon {
+            font-size: 4rem;
+            color: var(--blaze-primary);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .level-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+        }
+
+        .level-tagline {
+            color: var(--blaze-accent);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .level-description {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .level-curriculum {
+            text-align: left;
+            margin-bottom: 35px;
+        }
+
+        .curriculum-title {
+            color: var(--blaze-primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .curriculum-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .curriculum-list li {
+            color: var(--blaze-light-slate);
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .curriculum-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--blaze-success);
+            font-weight: 700;
+        }
+
+        .level-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 35px;
+            text-align: left;
+        }
+
+        .detail-item {
+            background: rgba(10, 25, 47, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--blaze-primary);
+        }
+
+        .detail-label {
+            color: var(--blaze-accent);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .detail-value {
+            color: var(--blaze-white);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Learning Path */
+        .learning-section {
+            background: linear-gradient(135deg, var(--blaze-light-navy) 0%, var(--blaze-background) 100%);
+            padding: 120px 20px;
+        }
+
+        .learning-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .learning-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .learning-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+        }
+
+        .learning-subtitle {
+            font-size: 1.25rem;
+            color: var(--blaze-light-slate);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .learning-path {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .path-step {
+            background: rgba(17, 34, 64, 0.6);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            position: relative;
+            transition: var(--transition-base);
+        }
+
+        .path-step:hover {
+            border-color: var(--blaze-primary);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--blaze-white);
+            font-size: 18px;
+        }
+
+        .step-title {
+            color: var(--blaze-white);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 20px 0 15px;
+        }
+
+        .step-description {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* Enrollment Section */
+        .enrollment-section {
+            padding: 120px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .enrollment-header {
+            margin-bottom: 60px;
+        }
+
+        .enrollment-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .enrollment-description {
+            color: var(--blaze-light-slate);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .enrollment-form {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 60px 50px;
+            text-align: left;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+        }
+
+        .form-section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--blaze-white);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(10, 25, 47, 0.8);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            color: var(--blaze-white);
+            font-size: 16px;
+            transition: var(--transition-base);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--blaze-primary);
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.2);
+        }
+
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border: none;
+            color: var(--blaze-white);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-base);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(191, 87, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .levels-grid,
+            .learning-path {
+                grid-template-columns: 1fr;
+            }
+            
+            .level-card.featured {
+                transform: none;
+            }
+            
+            .level-details,
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="certification-hero">
+        <div class="hero-content">
+            <div class="certification-seal">🎓</div>
+            <h1 class="hero-title">Sage Intelligence Certification</h1>
+            <p class="hero-subtitle">The Definitive Authority Standard</p>
+            <p class="hero-tagline">"The Only Accredited Program for Championship-Level Strategic Intelligence"</p>
+            <p class="hero-description">
+                Become certified in The Sage Intelligence Framework™ - the revolutionary approach to strategic intelligence, character assessment, and competitive analysis that's transforming how champions think, prepare, and dominate.
+            </p>
+            
+            <div class="accreditation-badges">
+                <div class="accreditation-badge">Blaze Intelligence Accredited</div>
+                <div class="accreditation-badge">Championship Validated</div>
+                <div class="accreditation-badge">Industry Recognized</div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="#levels" class="btn championship-primary">
+                    <span class="btn-text">Explore Certification Levels</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="#enrollment" class="btn championship-secondary">
+                    <span class="btn-text">Start Certification Journey</span>
+                    <i class="fas fa-graduation-cap"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certification Levels -->
+    <section class="levels-section" id="levels">
+        <div class="levels-header">
+            <h2 class="levels-title">Certification Excellence Levels</h2>
+            <p class="levels-subtitle">
+                Progressive certification pathway designed to develop championship-level strategic intelligence capabilities across all domains of competition and performance.
+            </p>
+        </div>
+
+        <div class="levels-grid">
+            <div class="level-card">
+                <div class="level-icon">🎯</div>
+                <h3 class="level-title">Strategic Intelligence Associate</h3>
+                <p class="level-tagline">"Foundation of Championship Intelligence"</p>
+                <p class="level-description">
+                    Master the fundamental principles of strategic intelligence and pattern recognition. Perfect for coaches, analysts, and emerging leaders seeking to understand competitive advantage through strategic thinking.
+                </p>
+                
+                <div class="level-curriculum">
+                    <div class="curriculum-title">Core Curriculum:</div>
+                    <ul class="curriculum-list">
+                        <li>Strategic Intelligence Fundamentals</li>
+                        <li>Pattern Recognition Methodology</li>
+                        <li>Competitive Analysis Frameworks</li>
+                        <li>Basic Character Assessment Techniques</li>
+                        <li>Strategic Decision-Making Models</li>
+                        <li>Intelligence Synthesis Principles</li>
+                    </ul>
+                </div>
+
+                <div class="level-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Duration</div>
+                        <div class="detail-value">8 Weeks</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Investment</div>
+                        <div class="detail-value">$2,497</div>
+                    </div>
+                </div>
+
+                <button class="btn championship-secondary" onclick="selectLevel('sia')">
+                    Begin Associate Certification
+                </button>
+            </div>
+
+            <div class="level-card featured">
+                <div class="level-badge">Most Popular</div>
+                <div class="level-icon">🏆</div>
+                <h3 class="level-title">Strategic Intelligence Professional</h3>
+                <p class="level-tagline">"Championship-Level Expertise"</p>
+                <p class="level-description">
+                    Advanced mastery of The Sage Framework with specialization in character intelligence and competitive synthesis. Designed for serious practitioners who want to transform their strategic approach.
+                </p>
+                
+                <div class="level-curriculum">
+                    <div class="curriculum-title">Advanced Curriculum:</div>
+                    <ul class="curriculum-list">
+                        <li>Everything in Associate Level</li>
+                        <li>Advanced Character Intelligence Platform</li>
+                        <li>Micro-Expression Analysis Certification</li>
+                        <li>Competitive Synthesis Mastery</li>
+                        <li>Predictive Intelligence Modeling</li>
+                        <li>Strategic Foresight Development</li>
+                        <li>Championship Psychology Framework</li>
+                        <li>Intelligence Integration Systems</li>
+                    </ul>
+                </div>
+
+                <div class="level-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Duration</div>
+                        <div class="detail-value">16 Weeks</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Investment</div>
+                        <div class="detail-value">$7,497</div>
+                    </div>
+                </div>
+
+                <button class="btn championship-primary" onclick="selectLevel('sip')">
+                    Begin Professional Certification
+                </button>
+            </div>
+
+            <div class="level-card">
+                <div class="level-icon">💎</div>
+                <h3 class="level-title">Sage Intelligence Master</h3>
+                <p class="level-tagline">"Ultimate Authority Certification"</p>
+                <p class="level-description">
+                    Elite certification for those who will become authorities in their domain. Comprehensive mastery of all Sage Framework elements with the ability to train and certify others in strategic intelligence.
+                </p>
+                
+                <div class="level-curriculum">
+                    <div class="curriculum-title">Master Curriculum:</div>
+                    <ul class="curriculum-list">
+                        <li>Everything in Professional Level</li>
+                        <li>Sage Framework Instructor Certification</li>
+                        <li>Advanced Predictive Modeling Systems</li>
+                        <li>Custom Intelligence Framework Development</li>
+                        <li>Strategic Authority Positioning</li>
+                        <li>Thought Leadership Content Creation</li>
+                        <li>Championship Mindset Development</li>
+                        <li>Intelligence Network Building</li>
+                        <li>Master Practitioner Mentorship Program</li>
+                    </ul>
+                </div>
+
+                <div class="level-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Duration</div>
+                        <div class="detail-value">24 Weeks</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Investment</div>
+                        <div class="detail-value">$19,997</div>
+                    </div>
+                </div>
+
+                <button class="btn championship-secondary" onclick="selectLevel('sim')">
+                    Apply for Master Certification
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Path -->
+    <section class="learning-section">
+        <div class="learning-container">
+            <div class="learning-header">
+                <h2 class="learning-title">The Championship Learning Path</h2>
+                <p class="learning-subtitle">
+                    Structured progression through The Sage Intelligence Framework, designed to transform how you think about competition, strategy, and performance excellence.
+                </p>
+            </div>
+
+            <div class="learning-path">
+                <div class="path-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Foundation Assessment</h3>
+                    <p class="step-description">
+                        Comprehensive evaluation of your current strategic thinking capabilities and competitive intelligence understanding.
+                    </p>
+                </div>
+
+                <div class="path-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Framework Immersion</h3>
+                    <p class="step-description">
+                        Deep dive into The Sage Framework's three pillars: Strategic Foresight, Character Intelligence, and Competitive Synthesis.
+                    </p>
+                </div>
+
+                <div class="path-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Practical Application</h3>
+                    <p class="step-description">
+                        Real-world case studies and hands-on projects applying strategic intelligence principles to actual competitive scenarios.
+                    </p>
+                </div>
+
+                <div class="path-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Mastery Validation</h3>
+                    <p class="step-description">
+                        Comprehensive certification examination and practical demonstration of strategic intelligence mastery.
+                    </p>
+                </div>
+
+                <div class="path-step">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Authority Development</h3>
+                    <p class="step-description">
+                        Advanced training in thought leadership, authority positioning, and strategic intelligence application across domains.
+                    </p>
+                </div>
+
+                <div class="path-step">
+                    <div class="step-number">6</div>
+                    <h3 class="step-title">Sage Network Integration</h3>
+                    <p class="step-description">
+                        Integration into The Sage Intelligence Network with ongoing development and strategic collaboration opportunities.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enrollment -->
+    <section class="enrollment-section" id="enrollment">
+        <div class="enrollment-header">
+            <h2 class="enrollment-title">Begin Your Certification Journey</h2>
+            <p class="enrollment-description">
+                Join the exclusive community of certified Sage Intelligence practitioners. Transform your strategic thinking and competitive approach through the definitive authority framework.
+            </p>
+        </div>
+
+        <form class="enrollment-form" id="certificationEnrollment">
+            <div class="form-section">
+                <h3 class="form-section-title">Personal Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" class="form-input" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="form-section-title">Professional Background</h3>
+                <div class="form-group">
+                    <label for="currentRole" class="form-label">Current Role/Position *</label>
+                    <input type="text" id="currentRole" name="currentRole" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="organization" class="form-label">Organization/Institution</label>
+                    <input type="text" id="organization" name="organization" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="industry" class="form-label">Industry/Domain *</label>
+                    <select id="industry" name="industry" class="form-select" required>
+                        <option value="">Select your domain...</option>
+                        <option value="coaching">Coaching</option>
+                        <option value="athletics-administration">Athletics Administration</option>
+                        <option value="sports-analytics">Sports Analytics</option>
+                        <option value="talent-evaluation">Talent Evaluation</option>
+                        <option value="sports-psychology">Sports Psychology</option>
+                        <option value="strategic-consulting">Strategic Consulting</option>
+                        <option value="business-leadership">Business Leadership</option>
+                        <option value="education">Education/Training</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience" class="form-label">Years of Professional Experience *</label>
+                    <select id="experience" name="experience" class="form-select" required>
+                        <option value="">Select experience level...</option>
+                        <option value="0-2">0-2 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="6-10">6-10 years</option>
+                        <option value="11-15">11-15 years</option>
+                        <option value="15+">15+ years</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="form-section-title">Certification Interest</h3>
+                <div class="form-group">
+                    <label for="certificationLevel" class="form-label">Desired Certification Level *</label>
+                    <select id="certificationLevel" name="certificationLevel" class="form-select" required>
+                        <option value="">Select certification level...</option>
+                        <option value="sia">Strategic Intelligence Associate ($2,497)</option>
+                        <option value="sip">Strategic Intelligence Professional ($7,497)</option>
+                        <option value="sim">Sage Intelligence Master ($19,997)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="motivation" class="form-label">Why do you want to become Sage Intelligence Certified? *</label>
+                    <textarea id="motivation" name="motivation" class="form-textarea" placeholder="Tell us about your motivation for pursuing Sage Intelligence certification and how you plan to apply strategic intelligence in your domain..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="goals" class="form-label">Professional Development Goals *</label>
+                    <textarea id="goals" name="goals" class="form-textarea" placeholder="What specific professional goals do you hope to achieve through this certification? How will strategic intelligence transform your approach to competition and performance?" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="commitment" class="form-label">Commitment to Excellence *</label>
+                    <textarea id="commitment" name="commitment" class="form-textarea" placeholder="The Sage Intelligence Certification requires dedication to excellence and championship thinking. Describe your commitment to completing this program and applying these principles." required></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Submit Certification Application
+            </button>
+        </form>
+    </section>
+
+    <script>
+        function selectLevel(level) {
+            document.getElementById('certificationLevel').value = level;
+            document.getElementById('enrollment').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission
+        document.getElementById('certificationEnrollment').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Show success message (in real implementation, this would integrate with your CRM)
+            alert('Thank you for your certification application! The Sage Intelligence Certification Council will review your submission and contact you within 48 hours with next steps for your certification journey.');
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
