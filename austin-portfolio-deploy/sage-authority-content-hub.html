@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sage Authority Content Hub - Championship Intelligence Library</title>
+    <meta name="description" content="The definitive repository of championship intelligence content. Access The Sage's complete collection of strategic frameworks, competitive analysis, and championship wisdom.">
+    
+    <!-- Brand System CSS -->
+    <link rel="stylesheet" href="css/blaze-brand-system.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .content-hub-header {
+            background: linear-gradient(135deg, var(--blaze-background) 0%, var(--blaze-light-navy) 50%, var(--blaze-background) 100%);
+            padding: 120px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-hub-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 25% 25%, rgba(191, 87, 0, 0.2) 0%, transparent 60%),
+                radial-gradient(ellipse at 75% 75%, rgba(148, 169, 201, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hub-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .authority-emblem {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            margin: 0 auto 40px;
+            border: 8px solid rgba(191, 87, 0, 0.3);
+            box-shadow: 
+                0 0 80px rgba(191, 87, 0, 0.6),
+                inset 0 0 40px rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .authority-emblem::after {
+            content: 'DEFINITIVE AUTHORITY';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--blaze-background);
+            color: var(--blaze-primary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border: 2px solid var(--blaze-primary);
+            white-space: nowrap;
+        }
+
+        .hub-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--blaze-white);
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .hub-subtitle {
+            font-size: 2rem;
+            color: var(--blaze-primary);
+            margin-bottom: 35px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hub-description {
+            font-size: 1.4rem;
+            color: var(--blaze-light-slate);
+            max-width: 900px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        .content-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--blaze-primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--blaze-accent);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Content Categories */
+        .categories-section {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .categories-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .categories-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .categories-subtitle {
+            font-size: 1.25rem;
+            color: var(--blaze-accent);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .category-card {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px 35px;
+            text-align: center;
+            transition: var(--transition-base);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            border-color: var(--blaze-primary);
+            box-shadow: 0 20px 60px rgba(191, 87, 0, 0.2);
+            transform: translateY(-10px);
+        }
+
+        .category-icon {
+            font-size: 4rem;
+            color: var(--blaze-primary);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+        }
+
+        .category-description {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .category-count {
+            background: rgba(191, 87, 0, 0.2);
+            color: var(--blaze-primary);
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Featured Content */
+        .featured-section {
+            background: linear-gradient(135deg, var(--blaze-light-navy) 0%, var(--blaze-background) 100%);
+            padding: 80px 20px;
+        }
+
+        .featured-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .featured-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .featured-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+        }
+
+        .featured-subtitle {
+            font-size: 1.25rem;
+            color: var(--blaze-light-slate);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .featured-card {
+            background: rgba(17, 34, 64, 0.6);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition-base);
+        }
+
+        .featured-card:hover {
+            border-color: var(--blaze-primary);
+            transform: translateY(-5px);
+        }
+
+        .featured-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--blaze-white);
+        }
+
+        .featured-content {
+            padding: 30px 25px;
+        }
+
+        .featured-type {
+            background: rgba(191, 87, 0, 0.2);
+            color: var(--blaze-primary);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .featured-content-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .featured-description {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .featured-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: var(--blaze-accent);
+        }
+
+        .read-time {
+            background: rgba(148, 169, 201, 0.2);
+            padding: 4px 10px;
+            border-radius: 10px;
+        }
+
+        /* Access Levels */
+        .access-section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .access-header {
+            margin-bottom: 60px;
+        }
+
+        .access-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .access-description {
+            color: var(--blaze-light-slate);
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .access-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .access-tier {
+            background: rgba(17, 34, 64, 0.8);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: var(--transition-base);
+        }
+
+        .access-tier.premium {
+            border-color: var(--blaze-primary);
+            background: rgba(191, 87, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        .access-tier:hover {
+            border-color: var(--blaze-primary);
+            transform: translateY(-5px);
+        }
+
+        .tier-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+        }
+
+        .tier-access {
+            color: var(--blaze-accent);
+            margin-bottom: 25px;
+        }
+
+        .tier-features {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .tier-features li {
+            color: var(--blaze-light-slate);
+            padding: 6px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .tier-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--blaze-success);
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .hub-title {
+                font-size: 2.8rem;
+            }
+            
+            .content-stats {
+                gap: 30px;
+            }
+            
+            .categories-grid,
+            .featured-grid,
+            .access-tiers {
+                grid-template-columns: 1fr;
+            }
+            
+            .access-tier.premium {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="content-hub-header">
+        <div class="hub-content">
+            <div class="authority-emblem">📚</div>
+            <h1 class="hub-title">The Sage Authority Content Hub</h1>
+            <p class="hub-subtitle">Championship Intelligence Library</p>
+            <p class="hub-description">
+                The definitive repository of championship intelligence content. Access The Sage's complete collection of strategic frameworks, competitive analysis, and championship wisdom - the knowledge base that defines excellence in sports intelligence.
+            </p>
+            
+            <div class="content-stats">
+                <div class="stat-item">
+                    <span class="stat-number">147</span>
+                    <span class="stat-label">Intelligence Reports</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">23</span>
+                    <span class="stat-label">Strategic Frameworks</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">89</span>
+                    <span class="stat-label">Case Studies</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Certification Modules</span>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="#categories" class="btn championship-primary">
+                    <span class="btn-text">Explore Content Categories</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="/sage-community-onboarding.html" class="btn championship-secondary">
+                    <span class="btn-text">Get Premium Access</span>
+                    <i class="fas fa-crown"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Categories -->
+    <section class="categories-section" id="categories">
+        <div class="categories-header">
+            <h2 class="categories-title">Championship Intelligence Categories</h2>
+            <p class="categories-subtitle">
+                Comprehensive content library organized by strategic intelligence domains and competitive expertise areas.
+            </p>
+        </div>
+
+        <div class="categories-grid">
+            <div class="category-card" onclick="exploreCategory('strategic-foresight')">
+                <div class="category-icon">🧠</div>
+                <h3 class="category-title">Strategic Foresight</h3>
+                <p class="category-description">
+                    Advanced pattern recognition, predictive intelligence, and strategic decision-making frameworks that reveal competitive pathways before they become obvious.
+                </p>
+                <span class="category-count">34 Articles</span>
+            </div>
+
+            <div class="category-card" onclick="exploreCategory('character-intelligence')">
+                <div class="category-icon">⚡</div>
+                <h3 class="category-title">Character Intelligence</h3>
+                <p class="category-description">
+                    Micro-expression analysis, pressure response patterns, and championship DNA assessment techniques that decode the psychology of elite performance.
+                </p>
+                <span class="category-count">28 Articles</span>
+            </div>
+
+            <div class="category-card" onclick="exploreCategory('competitive-synthesis')">
+                <div class="category-icon">🎯</div>
+                <h3 class="category-title">Competitive Synthesis</h3>
+                <p class="category-description">
+                    Multi-source intelligence integration, competitive landscape analysis, and strategic advantage identification across all competitive domains.
+                </p>
+                <span class="category-count">41 Articles</span>
+            </div>
+
+            <div class="category-card" onclick="exploreCategory('championship-case-studies')">
+                <div class="category-icon">🏆</div>
+                <h3 class="category-title">Championship Case Studies</h3>
+                <p class="category-description">
+                    In-depth analysis of championship-level performance, strategic decisions, and competitive intelligence applications across sports and business.
+                </p>
+                <span class="category-count">22 Case Studies</span>
+            </div>
+
+            <div class="category-card" onclick="exploreCategory('sage-frameworks')">
+                <div class="category-icon">📋</div>
+                <h3 class="category-title">Sage Frameworks</h3>
+                <p class="category-description">
+                    Proprietary strategic intelligence methodologies, assessment tools, and implementation guides developed by The Sage Intelligence Network.
+                </p>
+                <span class="category-count">15 Frameworks</span>
+            </div>
+
+            <div class="category-card" onclick="exploreCategory('industry-intelligence')">
+                <div class="category-icon">📊</div>
+                <h3 class="category-title">Industry Intelligence</h3>
+                <p class="category-description">
+                    Market analysis, competitive positioning, and strategic intelligence applications across sports, business, and performance domains.
+                </p>
+                <span class="category-count">37 Reports</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Content -->
+    <section class="featured-section">
+        <div class="featured-container">
+            <div class="featured-header">
+                <h2 class="featured-title">Featured Championship Intelligence</h2>
+                <p class="featured-subtitle">
+                    The most impactful and transformative content from The Sage's championship intelligence collection.
+                </p>
+            </div>
+
+            <div class="featured-grid">
+                <div class="featured-card">
+                    <div class="featured-image">🧠</div>
+                    <div class="featured-content">
+                        <span class="featured-type">Strategic Framework</span>
+                        <h3 class="featured-content-title">The Pattern Recognition Advantage: How Champions See What Others Miss</h3>
+                        <p class="featured-description">
+                            Deep dive into the cognitive frameworks that separate championship performers from competitors. The definitive guide to developing strategic pattern recognition capabilities.
+                        </p>
+                        <div class="featured-meta">
+                            <span>Published 3 days ago</span>
+                            <span class="read-time">12 min read</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured-card">
+                    <div class="featured-image">⚡</div>
+                    <div class="featured-content">
+                        <span class="featured-type">Character Analysis</span>
+                        <h3 class="featured-content-title">Micro-Expressions of Champions: Decoding Pressure Performance</h3>
+                        <p class="featured-description">
+                            Revolutionary analysis of championship character through micro-expression patterns. What separates champions from competitors when pressure is highest.
+                        </p>
+                        <div class="featured-meta">
+                            <span>Published 1 week ago</span>
+                            <span class="read-time">18 min read</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured-card">
+                    <div class="featured-image">🎯</div>
+                    <div class="featured-content">
+                        <span class="featured-type">Case Study</span>
+                        <h3 class="featured-content-title">The Mahomes Factor: Strategic Intelligence in Championship Moments</h3>
+                        <p class="featured-description">
+                            Comprehensive analysis of championship-level decision making under pressure. How elite performers synthesize multiple intelligence streams for competitive advantage.
+                        </p>
+                        <div class="featured-meta">
+                            <span>Published 2 weeks ago</span>
+                            <span class="read-time">25 min read</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured-card">
+                    <div class="featured-image">🏆</div>
+                    <div class="featured-content">
+                        <span class="featured-type">Championship Intelligence</span>
+                        <h3 class="featured-content-title">Beyond Analytics: The Wisdom-Driven Competitive Advantage</h3>
+                        <p class="featured-description">
+                            Why data-driven decision making isn't enough. How championship performers transcend analytics to achieve wisdom-driven competitive intelligence.
+                        </p>
+                        <div class="featured-meta">
+                            <span>Published 3 weeks ago</span>
+                            <span class="read-time">22 min read</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Access Levels -->
+    <section class="access-section">
+        <div class="access-header">
+            <h2 class="access-title">Championship Intelligence Access Levels</h2>
+            <p class="access-description">
+                Choose your level of access to The Sage's complete championship intelligence library and strategic frameworks.
+            </p>
+        </div>
+
+        <div class="access-tiers">
+            <div class="access-tier">
+                <h3 class="tier-title">Public Access</h3>
+                <p class="tier-access">Selected articles and insights available to all visitors</p>
+                <ul class="tier-features">
+                    <li>Weekly intelligence insights</li>
+                    <li>Basic strategic frameworks</li>
+                    <li>Championship case study summaries</li>
+                    <li>Newsletter subscription</li>
+                </ul>
+                <button class="btn championship-secondary">
+                    Explore Public Content
+                </button>
+            </div>
+
+            <div class="access-tier premium">
+                <h3 class="tier-title">Community Member</h3>
+                <p class="tier-access">Full access to championship intelligence library</p>
+                <ul class="tier-features">
+                    <li>Complete article library access</li>
+                    <li>All strategic frameworks</li>
+                    <li>Detailed case studies</li>
+                    <li>Advanced character intelligence guides</li>
+                    <li>Competitive synthesis tools</li>
+                    <li>Monthly exclusive content</li>
+                </ul>
+                <button class="btn championship-primary">
+                    Join Sage Community
+                </button>
+            </div>
+
+            <div class="access-tier">
+                <h3 class="tier-title">Certified Practitioner</h3>
+                <p class="tier-access">Ultimate access plus certification materials</p>
+                <ul class="tier-features">
+                    <li>Everything in Community Member</li>
+                    <li>Certification training modules</li>
+                    <li>Assessment tools and frameworks</li>
+                    <li>Instructor guides and materials</li>
+                    <li>Advanced methodology resources</li>
+                    <li>Direct Sage consultation access</li>
+                </ul>
+                <button class="btn championship-secondary">
+                    Begin Certification
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function exploreCategory(category) {
+            // In a real implementation, this would navigate to category-specific content
+            alert(`Exploring ${category.replace('-', ' ')} category. This would navigate to filtered content in the full implementation.`);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sage Marketing Intelligence System - Authority-Driven Automation</title>
+    <meta name="description" content="Advanced marketing automation system designed for authority-driven brands. Leverage The Sage Framework for strategic marketing intelligence and championship-level audience development.">
+    
+    <!-- Brand System CSS -->
+    <link rel="stylesheet" href="css/blaze-brand-system.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--blaze-background) 0%, var(--blaze-light-navy) 100%);
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 30% 30%, rgba(191, 87, 0, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 70%, rgba(148, 169, 201, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .dashboard-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dashboard-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.2rem;
+            color: var(--blaze-accent);
+            margin-bottom: 30px;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 40px;
+            background: rgba(17, 34, 64, 0.6);
+            border-radius: 15px;
+            padding: 5px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: none;
+            color: var(--blaze-light-slate);
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: var(--transition-base);
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-tab.active,
+        .nav-tab:hover {
+            background: var(--blaze-primary);
+            color: var(--blaze-white);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Analytics Grid */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .analytics-card {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            transition: var(--transition-base);
+        }
+
+        .analytics-card:hover {
+            border-color: var(--blaze-primary);
+            box-shadow: 0 15px 40px rgba(191, 87, 0, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--blaze-white);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            color: var(--blaze-primary);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--blaze-primary);
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: var(--blaze-accent);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .metric-change {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .metric-change.positive {
+            color: var(--blaze-success);
+        }
+
+        .metric-change.negative {
+            color: var(--blaze-error);
+        }
+
+        /* Automation Flows */
+        .automation-flows {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .flow-card {
+            background: rgba(17, 34, 64, 0.6);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 15px;
+            padding: 30px 25px;
+            transition: var(--transition-base);
+        }
+
+        .flow-card:hover {
+            border-color: var(--blaze-primary);
+            transform: translateY(-5px);
+        }
+
+        .flow-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .flow-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+        }
+
+        .flow-status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: rgba(100, 255, 218, 0.2);
+            color: var(--blaze-success);
+        }
+
+        .status-paused {
+            background: rgba(255, 217, 61, 0.2);
+            color: var(--blaze-warning);
+        }
+
+        .flow-description {
+            color: var(--blaze-light-slate);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .flow-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .flow-metric {
+            background: rgba(10, 25, 47, 0.6);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .flow-metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blaze-primary);
+        }
+
+        .flow-metric-label {
+            font-size: 12px;
+            color: var(--blaze-accent);
+            text-transform: uppercase;
+        }
+
+        /* Campaign Builder */
+        .campaign-builder {
+            background: rgba(17, 34, 64, 0.8);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 15px;
+            padding: 40px 35px;
+            margin-bottom: 40px;
+        }
+
+        .builder-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .builder-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+        }
+
+        .builder-description {
+            color: var(--blaze-light-slate);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .campaign-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--blaze-white);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(10, 25, 47, 0.8);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            color: var(--blaze-white);
+            font-size: 14px;
+            transition: var(--transition-base);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--blaze-primary);
+        }
+
+        .form-textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        /* Audience Segments */
+        .audience-segments {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .segment-card {
+            background: rgba(17, 34, 64, 0.6);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
+
+        .segment-card:hover {
+            border-color: var(--blaze-primary);
+            transform: translateY(-3px);
+        }
+
+        .segment-card.selected {
+            border-color: var(--blaze-primary);
+            background: rgba(191, 87, 0, 0.1);
+        }
+
+        .segment-icon {
+            font-size: 2.5rem;
+            color: var(--blaze-primary);
+            margin-bottom: 15px;
+        }
+
+        .segment-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--blaze-white);
+            margin-bottom: 10px;
+        }
+
+        .segment-count {
+            color: var(--blaze-accent);
+            font-size: 14px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border: none;
+            color: var(--blaze-white);
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-base);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(191, 87, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--blaze-primary);
+            color: var(--blaze-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--blaze-primary);
+            color: var(--blaze-white);
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .analytics-grid,
+            .automation-flows,
+            .audience-segments {
+                grid-template-columns: 1fr;
+            }
+            
+            .campaign-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-content">
+            <h1 class="dashboard-title">Sage Marketing Intelligence System</h1>
+            <p class="dashboard-subtitle">Authority-Driven Marketing Automation • Championship-Level Audience Development</p>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="showTab('analytics')">Analytics Dashboard</button>
+        <button class="nav-tab" onclick="showTab('automation')">Automation Flows</button>
+        <button class="nav-tab" onclick="showTab('campaigns')">Campaign Builder</button>
+        <button class="nav-tab" onclick="showTab('audiences')">Audience Intelligence</button>
+    </div>
+
+    <!-- Analytics Dashboard Tab -->
+    <div class="tab-content active" id="analytics">
+        <div class="analytics-grid">
+            <div class="analytics-card">
+                <div class="card-header">
+                    <h3 class="card-title">Sage Community Growth</h3>
+                    <i class="fas fa-users card-icon"></i>
+                </div>
+                <div class="metric-value">2,847</div>
+                <div class="metric-label">Active Members</div>
+                <div class="metric-change positive">↗ +23.4% this month</div>
+            </div>
+
+            <div class="analytics-card">
+                <div class="card-header">
+                    <h3 class="card-title">Certification Applications</h3>
+                    <i class="fas fa-graduation-cap card-icon"></i>
+                </div>
+                <div class="metric-value">189</div>
+                <div class="metric-label">Monthly Applications</div>
+                <div class="metric-change positive">↗ +67.2% vs last month</div>
+            </div>
+
+            <div class="analytics-card">
+                <div class="card-header">
+                    <h3 class="card-title">Content Engagement</h3>
+                    <i class="fas fa-eye card-icon"></i>
+                </div>
+                <div class="metric-value">94.6%</div>
+                <div class="metric-label">Authority Content CTR</div>
+                <div class="metric-change positive">↗ +15.8% engagement rate</div>
+            </div>
+
+            <div class="analytics-card">
+                <div class="card-header">
+                    <h3 class="card-title">Partnership Inquiries</h3>
+                    <i class="fas fa-handshake card-icon"></i>
+                </div>
+                <div class="metric-value">47</div>
+                <div class="metric-label">Strategic Partnership Requests</div>
+                <div class="metric-change positive">↗ +41.3% quality score</div>
+            </div>
+
+            <div class="analytics-card">
+                <div class="card-header">
+                    <h3 class="card-title">Revenue Impact</h3>
+                    <i class="fas fa-chart-line card-icon"></i>
+                </div>
+                <div class="metric-value">$127K</div>
+                <div class="metric-label">Monthly Recurring Revenue</div>
+                <div class="metric-change positive">↗ +89.3% growth trajectory</div>
+            </div>
+
+            <div class="analytics-card">
+                <div class="card-header">
+                    <h3 class="card-title">Authority Positioning</h3>
+                    <i class="fas fa-crown card-icon"></i>
+                </div>
+                <div class="metric-value">8.7/10</div>
+                <div class="metric-label">Industry Authority Score</div>
+                <div class="metric-change positive">↗ +0.9 points this quarter</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Automation Flows Tab -->
+    <div class="tab-content" id="automation">
+        <div class="automation-flows">
+            <div class="flow-card">
+                <div class="flow-header">
+                    <h3 class="flow-title">Sage Community Onboarding</h3>
+                    <span class="flow-status status-active">Active</span>
+                </div>
+                <p class="flow-description">
+                    Comprehensive nurture sequence for new community members, delivering championship intelligence content and strategic framework introductions.
+                </p>
+                <div class="flow-metrics">
+                    <div class="flow-metric">
+                        <div class="flow-metric-value">847</div>
+                        <div class="flow-metric-label">Active Contacts</div>
+                    </div>
+                    <div class="flow-metric">
+                        <div class="flow-metric-value">73%</div>
+                        <div class="flow-metric-label">Completion Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-header">
+                    <h3 class="flow-title">Certification Journey Pipeline</h3>
+                    <span class="flow-status status-active">Active</span>
+                </div>
+                <p class="flow-description">
+                    Authority-driven qualification sequence that identifies high-potential certification candidates and guides them through the application process.
+                </p>
+                <div class="flow-metrics">
+                    <div class="flow-metric">
+                        <div class="flow-metric-value">234</div>
+                        <div class="flow-metric-label">In Pipeline</div>
+                    </div>
+                    <div class="flow-metric">
+                        <div class="flow-metric-value">41%</div>
+                        <div class="flow-metric-label">Conversion Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-header">
+                    <h3 class="flow-title">Strategic Partnership Development</h3>
+                    <span class="flow-status status-active">Active</span>
+                </div>
+                <p class="flow-description">
+                    Elite relationship-building sequence for potential strategic partners, demonstrating authority positioning and collaborative value.
+                </p>
+                <div class="flow-metrics">
+                    <div class="flow-metric">
+                        <div class="flow-metric-value">67</div>
+                        <div class="flow-metric-label">Active Prospects</div>
+                    </div>
+                    <div class="flow-metric">
+                        <div class="flow-metric-value">28%</div>
+                        <div class="flow-metric-label">Partner Rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-card">
+                <div class="flow-header">
+                    <h3 class="flow-title">Thought Leadership Amplification</h3>
+                    <span class="flow-status status-active">Active</span>
+                </div>
+                <p class="flow-description">
+                    Authority-building content distribution that positions The Sage as the definitive source of championship intelligence across all channels.
+                </p>
+                <div class="flow-metrics">
+                    <div class="flow-metric">
+                        <div class="flow-metric-value">1.2K</div>
+                        <div class="flow-metric-label">Weekly Reach</div>
+                    </div>
+                    <div class="flow-metric">
+                        <div class="flow-metric-value">94%</div>
+                        <div class="flow-metric-label">Authority Score</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campaign Builder Tab -->
+    <div class="tab-content" id="campaigns">
+        <div class="campaign-builder">
+            <div class="builder-header">
+                <h2 class="builder-title">Authority-Driven Campaign Builder</h2>
+                <p class="builder-description">
+                    Create championship-level marketing campaigns that establish authority, build community, and drive strategic partnerships using The Sage Framework methodology.
+                </p>
+            </div>
+
+            <form class="campaign-form" id="campaignBuilder">
+                <div>
+                    <div class="form-group">
+                        <label for="campaignName" class="form-label">Campaign Name</label>
+                        <input type="text" id="campaignName" class="form-input" placeholder="Enter campaign name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="campaignType" class="form-label">Campaign Type</label>
+                        <select id="campaignType" class="form-select">
+                            <option value="">Select campaign type</option>
+                            <option value="authority-building">Authority Building</option>
+                            <option value="community-growth">Community Growth</option>
+                            <option value="certification-promotion">Certification Promotion</option>
+                            <option value="partnership-outreach">Partnership Outreach</option>
+                            <option value="thought-leadership">Thought Leadership</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="campaignObjective" class="form-label">Primary Objective</label>
+                        <select id="campaignObjective" class="form-select">
+                            <option value="">Select objective</option>
+                            <option value="establish-authority">Establish Industry Authority</option>
+                            <option value="grow-community">Grow Sage Community</option>
+                            <option value="drive-certifications">Drive Certification Applications</option>
+                            <option value="build-partnerships">Build Strategic Partnerships</option>
+                            <option value="increase-engagement">Increase Content Engagement</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-group">
+                        <label for="campaignMessage" class="form-label">Core Message</label>
+                        <textarea id="campaignMessage" class="form-textarea" placeholder="Enter your authority-driven message..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="campaignDuration" class="form-label">Campaign Duration</label>
+                        <select id="campaignDuration" class="form-select">
+                            <option value="">Select duration</option>
+                            <option value="1-week">1 Week</option>
+                            <option value="2-weeks">2 Weeks</option>
+                            <option value="1-month">1 Month</option>
+                            <option value="3-months">3 Months</option>
+                            <option value="ongoing">Ongoing</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contentType" class="form-label">Content Type</label>
+                        <select id="contentType" class="form-select">
+                            <option value="">Select content type</option>
+                            <option value="strategic-insights">Strategic Intelligence Insights</option>
+                            <option value="case-studies">Championship Case Studies</option>
+                            <option value="frameworks">Sage Framework Content</option>
+                            <option value="character-analysis">Character Intelligence Analysis</option>
+                            <option value="competitive-intelligence">Competitive Intelligence Reports</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+
+            <div class="action-buttons">
+                <button class="btn-action" onclick="launchCampaign()">Launch Campaign</button>
+                <button class="btn-action btn-secondary" onclick="saveDraft()">Save Draft</button>
+                <button class="btn-action btn-secondary" onclick="previewCampaign()">Preview</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audience Intelligence Tab -->
+    <div class="tab-content" id="audiences">
+        <div class="audience-segments">
+            <div class="segment-card" onclick="selectSegment(this, 'championship-seekers')">
+                <div class="segment-icon">🏆</div>
+                <h3 class="segment-title">Championship Seekers</h3>
+                <p class="segment-count">1,247 contacts</p>
+            </div>
+
+            <div class="segment-card" onclick="selectSegment(this, 'coaching-professionals')">
+                <div class="segment-icon">👨‍🏫</div>
+                <h3 class="segment-title">Coaching Professionals</h3>
+                <p class="segment-count">892 contacts</p>
+            </div>
+
+            <div class="segment-card" onclick="selectSegment(this, 'strategic-leaders')">
+                <div class="segment-icon">🎯</div>
+                <h3 class="segment-title">Strategic Leaders</h3>
+                <p class="segment-count">634 contacts</p>
+            </div>
+
+            <div class="segment-card" onclick="selectSegment(this, 'certification-candidates')">
+                <div class="segment-icon">🎓</div>
+                <h3 class="segment-title">Certification Candidates</h3>
+                <p class="segment-count">423 contacts</p>
+            </div>
+
+            <div class="segment-card" onclick="selectSegment(this, 'partnership-prospects')">
+                <div class="segment-icon">🤝</div>
+                <h3 class="segment-title">Partnership Prospects</h3>
+                <p class="segment-count">156 contacts</p>
+            </div>
+
+            <div class="segment-card" onclick="selectSegment(this, 'sage-community')">
+                <div class="segment-icon">🧠</div>
+                <h3 class="segment-title">Sage Community Elite</h3>
+                <p class="segment-count">89 contacts</p>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-action" onclick="createSegment()">Create New Segment</button>
+            <button class="btn-action btn-secondary" onclick="analyzeSegments()">Analyze Segments</button>
+            <button class="btn-action btn-secondary" onclick="exportData()">Export Data</button>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function selectSegment(element, segmentType) {
+            // Remove selected class from all segments
+            document.querySelectorAll('.segment-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked segment
+            element.classList.add('selected');
+            
+            console.log(`Selected segment: ${segmentType}`);
+        }
+
+        function launchCampaign() {
+            alert('Campaign launched! This would integrate with your marketing automation platform in the full implementation.');
+        }
+
+        function saveDraft() {
+            alert('Campaign draft saved! This would save to your campaign library in the full implementation.');
+        }
+
+        function previewCampaign() {
+            alert('Campaign preview generated! This would show a preview of your authority-driven campaign in the full implementation.');
+        }
+
+        function createSegment() {
+            alert('Create new audience segment! This would open the segment builder in the full implementation.');
+        }
+
+        function analyzeSegments() {
+            alert('Segment analysis initiated! This would provide deep intelligence insights on your audience segments.');
+        }
+
+        function exportData() {
+            alert('Data export started! This would export your audience intelligence data in the full implementation.');
+        }
+
+        // Simulate real-time data updates
+        setInterval(() => {
+            // Update random metrics to show live dashboard functionality
+            const metrics = document.querySelectorAll('.metric-value');
+            metrics.forEach(metric => {
+                if (Math.random() > 0.9) { // 10% chance of update
+                    const currentValue = parseInt(metric.textContent.replace(/[^0-9]/g, ''));
+                    const variation = Math.floor(Math.random() * 10) - 5; // -5 to +5 variation
+                    const newValue = Math.max(0, currentValue + variation);
+                    
+                    // Format based on original format
+                    if (metric.textContent.includes('K')) {
+                        metric.textContent = `$${newValue}K`;
+                    } else if (metric.textContent.includes('%')) {
+                        metric.textContent = `${(newValue/100).toFixed(1)}%`;
+                    } else if (metric.textContent.includes('/10')) {
+                        metric.textContent = `${(newValue/100).toFixed(1)}/10`;
+                    } else {
+                        metric.textContent = newValue.toLocaleString();
+                    }
+                    
+                    // Add flash effect
+                    metric.style.color = '#64FFDA';
+                    setTimeout(() => {
+                        metric.style.color = 'var(--blaze-primary)';
+                    }, 1000);
+                }
+            });
+        }, 5000); // Update every 5 seconds
+    </script>
+</body>
+</html>

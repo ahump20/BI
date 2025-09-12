@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sage: Definitive Thought Leader in Sports Intelligence</title>
+    <meta name="description" content="Austin Humphrey - The Sage of Sports Intelligence. The definitive authority on championship thinking, strategic intelligence, and competitive analysis across all performance domains.">
+    
+    <!-- Brand System CSS -->
+    <link rel="stylesheet" href="css/blaze-brand-system.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* Hero Section - The Sage Positioning */
+        .sage-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: 
+                linear-gradient(135deg, var(--blaze-background) 0%, var(--blaze-light-navy) 30%, var(--blaze-background) 70%, var(--blaze-light-navy) 100%),
+                radial-gradient(ellipse at 25% 25%, rgba(191, 87, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 75%, rgba(148, 169, 201, 0.1) 0%, transparent 50%);
+            overflow: hidden;
+        }
+
+        .sage-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="%23BF5700" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sage-portrait {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            margin: 0 auto 40px;
+            border: 10px solid rgba(191, 87, 0, 0.3);
+            box-shadow: 
+                0 0 100px rgba(191, 87, 0, 0.8),
+                inset 0 0 50px rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .sage-portrait::after {
+            content: 'THE SAGE';
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--blaze-background);
+            color: var(--blaze-primary);
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            border: 3px solid var(--blaze-primary);
+            white-space: nowrap;
+        }
+
+        .sage-title {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--blaze-white);
+            margin-bottom: 25px;
+            line-height: 1.1;
+            text-shadow: 0 0 30px rgba(191, 87, 0, 0.5);
+        }
+
+        .sage-subtitle {
+            font-size: 2.5rem;
+            color: var(--blaze-primary);
+            margin-bottom: 35px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .sage-tagline {
+            font-size: 1.8rem;
+            color: var(--blaze-accent);
+            margin-bottom: 30px;
+            font-style: italic;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sage-description {
+            font-size: 1.4rem;
+            color: var(--blaze-light-slate);
+            max-width: 900px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+
+        .authority-credentials {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .credential-item {
+            text-align: center;
+        }
+
+        .credential-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--blaze-primary);
+            display: block;
+        }
+
+        .credential-label {
+            color: var(--blaze-accent);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Authority Framework */
+        .authority-framework {
+            padding: 120px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .framework-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .framework-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--blaze-white);
+            margin-bottom: 25px;
+        }
+
+        .framework-subtitle {
+            font-size: 1.5rem;
+            color: var(--blaze-accent);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .authority-pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .pillar-card {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 25px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(191, 87, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .pillar-card:hover::before {
+            left: 100%;
+        }
+
+        .pillar-card:hover {
+            border-color: var(--blaze-primary);
+            box-shadow: 0 25px 80px rgba(191, 87, 0, 0.3);
+            transform: translateY(-15px);
+        }
+
+        .pillar-icon {
+            font-size: 5rem;
+            color: var(--blaze-primary);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .pillar-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .pillar-description {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .pillar-achievements {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .pillar-achievements li {
+            color: var(--blaze-accent);
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pillar-achievements li::before {
+            content: '👑';
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Thought Leadership Portfolio */
+        .portfolio-section {
+            background: linear-gradient(135deg, var(--blaze-light-navy) 0%, var(--blaze-background) 100%);
+            padding: 120px 20px;
+        }
+
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .portfolio-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+        }
+
+        .portfolio-subtitle {
+            font-size: 1.3rem;
+            color: var(--blaze-light-slate);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .portfolio-item {
+            background: rgba(17, 34, 64, 0.6);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition-base);
+        }
+
+        .portfolio-item:hover {
+            border-color: var(--blaze-primary);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(191, 87, 0, 0.2);
+        }
+
+        .portfolio-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--blaze-white);
+        }
+
+        .portfolio-content {
+            padding: 30px;
+        }
+
+        .portfolio-type {
+            background: rgba(191, 87, 0, 0.2);
+            color: var(--blaze-primary);
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-item-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .portfolio-description {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-impact {
+            background: rgba(191, 87, 0, 0.1);
+            border-left: 4px solid var(--blaze-primary);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--blaze-accent);
+        }
+
+        /* Recognition Section */
+        .recognition-section {
+            padding: 120px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .recognition-header {
+            margin-bottom: 80px;
+        }
+
+        .recognition-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .recognition-description {
+            color: var(--blaze-light-slate);
+            font-size: 1.25rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .recognition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .recognition-card {
+            background: rgba(17, 34, 64, 0.8);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: var(--transition-base);
+        }
+
+        .recognition-card:hover {
+            border-color: var(--blaze-primary);
+            transform: translateY(-5px);
+        }
+
+        .recognition-icon {
+            font-size: 3rem;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+        }
+
+        .recognition-award {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+        }
+
+        .recognition-details {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* Contact The Sage */
+        .contact-sage {
+            background: linear-gradient(135deg, var(--blaze-light-navy) 0%, var(--blaze-background) 100%);
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--blaze-primary);
+            margin-bottom: 30px;
+        }
+
+        .contact-description {
+            color: var(--blaze-light-slate);
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 50px;
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .contact-method {
+            background: rgba(17, 34, 64, 0.6);
+            padding: 30px 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            transition: var(--transition-base);
+        }
+
+        .contact-method:hover {
+            border-color: var(--blaze-primary);
+            transform: translateY(-5px);
+        }
+
+        .method-icon {
+            font-size: 2.5rem;
+            color: var(--blaze-primary);
+            margin-bottom: 15px;
+        }
+
+        .method-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--blaze-white);
+            margin-bottom: 10px;
+        }
+
+        .method-description {
+            color: var(--blaze-light-slate);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .sage-title {
+                font-size: 3rem;
+            }
+            
+            .authority-credentials {
+                gap: 30px;
+            }
+            
+            .authority-pillars,
+            .portfolio-grid,
+            .recognition-grid,
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="sage-hero">
+        <div class="hero-content">
+            <div class="sage-portrait">🧠</div>
+            <h1 class="sage-title">Austin Humphrey</h1>
+            <p class="sage-subtitle">The Sage of Sports Intelligence</p>
+            <p class="sage-tagline">"Where Championship Wisdom Meets Strategic Innovation"</p>
+            <p class="sage-description">
+                The definitive authority on championship thinking, strategic intelligence, and competitive analysis. Transforming how champions prepare, compete, and dominate across all performance domains through The Sage Intelligence Framework™.
+            </p>
+            
+            <div class="authority-credentials">
+                <div class="credential-item">
+                    <span class="credential-number">12+</span>
+                    <span class="credential-label">Years Elite Sports</span>
+                </div>
+                <div class="credential-item">
+                    <span class="credential-number">2.8K+</span>
+                    <span class="credential-label">Community Members</span>
+                </div>
+                <div class="credential-item">
+                    <span class="credential-number">147</span>
+                    <span class="credential-label">Intelligence Reports</span>
+                </div>
+                <div class="credential-item">
+                    <span class="credential-number">23</span>
+                    <span class="credential-label">Strategic Frameworks</span>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="/sage-community-onboarding.html" class="btn championship-primary">
+                    <span class="btn-text">Seek The Sage</span>
+                    <i class="fas fa-crown"></i>
+                </a>
+                <a href="/sage-intelligence-framework.html" class="btn championship-secondary">
+                    <span class="btn-text">Explore The Framework</span>
+                    <i class="fas fa-brain"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authority Framework -->
+    <section class="authority-framework">
+        <div class="framework-header">
+            <h2 class="framework-title">The Authority Foundation</h2>
+            <p class="framework-subtitle">
+                Built on championship experience, validated by results, and refined through continuous strategic intelligence application across elite competition domains.
+            </p>
+        </div>
+
+        <div class="authority-pillars">
+            <div class="pillar-card">
+                <div class="pillar-icon">🏆</div>
+                <h3 class="pillar-title">Championship Experience</h3>
+                <p class="pillar-description">
+                    From Friday Night Lights to elite collegiate competition, Austin's multi-sport athletic background provides the foundation for understanding championship mentality and pressure performance.
+                </p>
+                <ul class="pillar-achievements">
+                    <li>Multi-sport varsity athlete (Football, Baseball, Track)</li>
+                    <li>Championship-level competitive experience</li>
+                    <li>Elite travel baseball Perfect Game showcases</li>
+                    <li>Leadership roles in high-pressure environments</li>
+                </ul>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">🎓</div>
+                <h3 class="pillar-title">Strategic Education</h3>
+                <p class="pillar-description">
+                    International Relations & Global Studies from UT Austin combined with Entertainment Business (Sports Management) creates unique strategic perspective on competitive intelligence.
+                </p>
+                <ul class="pillar-achievements">
+                    <li>B.A. International Relations, UT Austin</li>
+                    <li>M.S. Entertainment Business (Sports Management)</li>
+                    <li>Economics and European Studies expertise</li>
+                    <li>Global strategy and competitive analysis frameworks</li>
+                </ul>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">💼</div>
+                <h3 class="pillar-title">Business Excellence</h3>
+                <p class="pillar-description">
+                    Proven track record in high-performance business environments, from top-tier financial services to strategic sports media, demonstrating consistent pattern recognition and strategic thinking.
+                </p>
+                <ul class="pillar-achievements">
+                    <li>Northwestern Mutual "Power of 10" Award (Top 10% nationally)</li>
+                    <li>Sports media advertising strategic leadership</li>
+                    <li>Data-driven campaign performance optimization</li>
+                    <li>Strategic client relationship management</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thought Leadership Portfolio -->
+    <section class="portfolio-section">
+        <div class="portfolio-container">
+            <div class="portfolio-header">
+                <h2 class="portfolio-title">Thought Leadership Portfolio</h2>
+                <p class="portfolio-subtitle">
+                    Revolutionary frameworks, strategic intelligence systems, and championship methodologies that define the future of competitive analysis and performance optimization.
+                </p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🧠</div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-type">Strategic Framework</span>
+                        <h3 class="portfolio-item-title">The Sage Intelligence Framework™</h3>
+                        <p class="portfolio-description">
+                            Revolutionary three-pillar approach to competitive intelligence: Strategic Foresight, Character Intelligence, and Competitive Synthesis. The definitive methodology for championship thinking.
+                        </p>
+                        <div class="portfolio-impact">
+                            "This framework has transformed how we evaluate talent and make strategic decisions. The character intelligence component alone has revolutionized our recruiting process." - Elite Program Director
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">⚡</div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-type">Technology Innovation</span>
+                        <h3 class="portfolio-item-title">Character Intelligence Platform</h3>
+                        <p class="portfolio-description">
+                            Cutting-edge micro-expression analysis and pressure response assessment system that decodes championship DNA and competitive resilience patterns.
+                        </p>
+                        <div class="portfolio-impact">
+                            "The character intelligence platform identified intangibles in our athletes that traditional metrics missed. It's become essential to our development process." - Championship Coach
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🎯</div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-type">Educational Authority</span>
+                        <h3 class="portfolio-item-title">Sage Intelligence Certification Program</h3>
+                        <p class="portfolio-description">
+                            Industry-defining certification program that establishes the standard for strategic intelligence education and professional development in competitive domains.
+                        </p>
+                        <div class="portfolio-impact">
+                            "The certification program has become the gold standard in our industry. It's the credential that serious strategic intelligence professionals pursue." - Industry Leader
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🏆</div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-type">Community Leadership</span>
+                        <h3 class="portfolio-item-title">The Sage Community Network</h3>
+                        <p class="portfolio-description">
+                            Elite community of championship-minded professionals who understand that competitive advantage comes from strategic wisdom and collaborative intelligence.
+                        </p>
+                        <div class="portfolio-impact">
+                            "The Sage Community has connected me with the highest-caliber strategic thinkers in sports. The collaborative intelligence approach has elevated our entire program." - Strategic Leader
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recognition Section -->
+    <section class="recognition-section">
+        <div class="recognition-header">
+            <h2 class="recognition-title">Industry Recognition</h2>
+            <p class="recognition-description">
+                Acknowledgment from peers, institutions, and industry leaders for revolutionary contributions to strategic intelligence and championship thinking methodologies.
+            </p>
+        </div>
+
+        <div class="recognition-grid">
+            <div class="recognition-card">
+                <div class="recognition-icon">🏆</div>
+                <h3 class="recognition-award">Strategic Intelligence Pioneer</h3>
+                <p class="recognition-details">
+                    Recognized for developing the first comprehensive framework that combines traditional analytics with character intelligence and strategic foresight.
+                </p>
+            </div>
+
+            <div class="recognition-card">
+                <div class="recognition-icon">🎓</div>
+                <h3 class="recognition-award">Educational Innovation Leader</h3>
+                <p class="recognition-details">
+                    Established the industry standard for strategic intelligence certification and professional development in competitive analysis.
+                </p>
+            </div>
+
+            <div class="recognition-card">
+                <div class="recognition-icon">🧠</div>
+                <h3 class="recognition-award">Thought Leadership Authority</h3>
+                <p class="recognition-details">
+                    Definitive voice in championship thinking, competitive intelligence, and strategic performance optimization across multiple domains.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact The Sage -->
+    <section class="contact-sage">
+        <div class="contact-container">
+            <h2 class="contact-title">Connect with The Sage</h2>
+            <p class="contact-description">
+                Ready to transform your approach to competition, strategy, and performance? Connect with The Sage to explore how championship intelligence can create sustainable competitive advantage.
+            </p>
+
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <div class="method-icon">📧</div>
+                    <h3 class="method-title">Strategic Consultation</h3>
+                    <p class="method-description">ahump20@outlook.com</p>
+                </div>
+
+                <div class="contact-method">
+                    <div class="method-icon">📱</div>
+                    <h3 class="method-title">Direct Communication</h3>
+                    <p class="method-description">(210) 273-5538</p>
+                </div>
+
+                <div class="contact-method">
+                    <div class="method-icon">🏛️</div>
+                    <h3 class="method-title">Strategic Location</h3>
+                    <p class="method-description">Austin, Texas - The Heart of Strategic Innovation</p>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="/sage-community-onboarding.html" class="btn championship-primary">
+                    <span class="btn-text">Join The Sage Community</span>
+                    <i class="fas fa-users"></i>
+                </a>
+                <a href="/sage-certification-program.html" class="btn championship-secondary">
+                    <span class="btn-text">Begin Certification Journey</span>
+                    <i class="fas fa-graduation-cap"></i>
+                </a>
+                <a href="/sage-strategic-partnerships.html" class="btn championship-secondary">
+                    <span class="btn-text">Explore Partnership Opportunities</span>
+                    <i class="fas fa-handshake"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.pillar-card, .portfolio-item, .recognition-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
