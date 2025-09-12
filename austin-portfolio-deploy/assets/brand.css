@@ -1,0 +1,286 @@
+/* ================================
+   BLAZE INTELLIGENCE BRAND CSS
+   Perfect Game Integration Styles
+   ================================ */
+
+/* Import existing design system tokens */
+@import url('./design-system.css');
+
+/* Additional Brand Styles for Perfect Game Integration */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-secondary);
+  background: var(--blaze-dark);
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+/* Navigation Styles */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5%;
+  background: rgba(10, 14, 39, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.brand {
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--blaze-orange);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.badge {
+  padding: 8px 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.badge:hover {
+  background: var(--blaze-orange);
+  color: var(--blaze-dark);
+  border-color: var(--blaze-orange);
+  transform: translateY(-2px);
+}
+
+/* Container and Layout */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+/* Typography */
+.h1 {
+  font-family: var(--font-primary);
+  font-size: 3rem;
+  color: var(--blaze-orange);
+  margin: 40px 0 20px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.h2 {
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #cbd5e0;
+  margin: 0 0 20px;
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  gap: 32px;
+  margin: 40px 0;
+}
+
+.cols-2 {
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+/* Card Components */
+.card {
+  background: var(--glass-bg-dark);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 32px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: var(--blaze-orange);
+  box-shadow: 0 20px 40px rgba(255, 107, 53, 0.1);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Perfect Game Specific Styles */
+.perfect-game-header {
+  text-align: center;
+  margin: 60px 0;
+}
+
+.perfect-game-subtitle {
+  font-size: 1.3rem;
+  color: var(--blaze-accent);
+  max-width: 800px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+/* Elite Teams Grid */
+.elite-teams-grid .card {
+  position: relative;
+}
+
+.elite-teams-grid .card .h2 {
+  position: relative;
+  z-index: 2;
+}
+
+.elite-teams-grid .card .p {
+  position: relative;
+  z-index: 2;
+}
+
+/* Team specific styling */
+.card[data-team="sliders"] {
+  border-color: var(--cardinals-red);
+}
+
+.card[data-team="sliders"]:hover {
+  box-shadow: 0 20px 40px rgba(196, 30, 58, 0.2);
+}
+
+.card[data-team="wings"] {
+  border-color: var(--longhorns-orange);
+}
+
+.card[data-team="wings"]:hover {
+  box-shadow: 0 20px 40px rgba(191, 87, 0, 0.2);
+}
+
+.card[data-team="banditos"] {
+  border-color: var(--titans-blue);
+}
+
+.card[data-team="banditos"]:hover {
+  box-shadow: 0 20px 40px rgba(12, 35, 64, 0.2);
+}
+
+.card[data-team="dodgers"] {
+  border-color: var(--grizzlies-blue);
+}
+
+.card[data-team="dodgers"]:hover {
+  box-shadow: 0 20px 40px rgba(93, 118, 169, 0.2);
+}
+
+.card[data-team="germantown"] {
+  border-color: var(--blaze-accent);
+}
+
+.card[data-team="germantown"]:hover {
+  box-shadow: 0 20px 40px rgba(26, 101, 158, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .h1 {
+    font-size: 2.2rem;
+  }
+  
+  .cols-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .card {
+    padding: 24px;
+  }
+  
+  .container {
+    padding: 0 4%;
+  }
+}
+
+@media (max-width: 480px) {
+  .h1 {
+    font-size: 1.8rem;
+  }
+  
+  .h2 {
+    font-size: 1.4rem;
+  }
+  
+  .p {
+    font-size: 1rem;
+  }
+  
+  .card {
+    padding: 20px;
+  }
+}
+
+/* Hero Canvas Styling */
+#hero {
+  border-radius: 0 0 32px 32px;
+  margin-bottom: 40px;
+}
+
+/* Loading States */
+.loading {
+  opacity: 0.6;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+  
+  .badge {
+    transition: none;
+  }
+  
+  .loading {
+    animation: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.badge:focus,
+.card:focus {
+  outline: 2px solid var(--blaze-orange);
+  outline-offset: 2px;
+}

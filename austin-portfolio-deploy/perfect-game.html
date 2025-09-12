@@ -1,74 +1,171 @@
-<html><head></head><body>   <meta charset="UTF-8">
-    <title>Perfect Game Pipeline - Blaze Intelligence</title>
-    <meta name="description" content="Elite youth baseball intelligence. Track prospects from select teams to the MLB draft.">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #1B3D1B 0%, #0A0E1B 100%);
-            color: white;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3rem;
-            text-transform: uppercase;
-            color: #FFD700;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .stat-card {
-            background: rgba(255,215,0,0.1);
-            border: 1px solid #FFD700;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #FFD700;
-        }
-        .stat-label {
-            margin-top: 0.5rem;
-            opacity: 0.8;
-        }
-    </style>
-
-
-    <div class="header">
-        <h1>⚾ Perfect Game Pipeline</h1>
-        <p>From youth select to the MLB draft - complete prospect intelligence</p>
-    </div>
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-number">10,000+</div>
-            <div class="stat-label">Prospects Tracked</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">500+</div>
-            <div class="stat-label">Select Teams</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">94.6%</div>
-            <div class="stat-label">Draft Prediction Accuracy</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">15</div>
-            <div class="stat-label">States Covered</div>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Perfect Game Select — Scouting Intelligence | Blaze Intelligence</title>
+    <meta name="description" content="Elite travel baseball programs across Texas and the Deep South. Impartial scouting intelligence for top Perfect Game organizations.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="/assets/brand.css">
+    
+    <!-- Three.js for Hero Animation -->
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav">
+        <div class="brand">🔥 Blaze Intelligence</div>
+        <div style="display: flex; gap: 16px;">
+            <a href="/dashboard.html" class="badge">Dashboard</a>
+            <a href="/index.html" class="badge">Home</a>
         </div>
     </div>
 
+    <!-- Hero Canvas Background -->
+    <canvas id="hero" style="width:100%;height:32vh;display:block"></canvas>
 
-</body></html>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="perfect-game-header">
+            <div class="h1">Perfect Game Select Teams</div>
+            <p class="perfect-game-subtitle">In line with our Sage archetype, we offer impartial scouting intelligence for top travel baseball programs across Texas and the Deep South. Our analysis highlights program pedigree, player development pathways, and objective metrics of success.</p>
+        </div>
+
+        <!-- Elite Teams Grid -->
+        <div class="grid cols-2 elite-teams-grid">
+            <div class="card" data-team="sliders">
+                <div class="h2">South Texas Sliders</div>
+                <p class="p">Founded in 2003 in San Antonio, the South Texas Sliders have established themselves as a premier travel organization. With high-level instruction and multiple teams, they've produced numerous college commitments across Texas universities.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Est. 2003</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">San Antonio</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">College Commitments</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-team="wings">
+                <div class="h2">Austin Wings</div>
+                <p class="p">Formed in 1999 to operate a first-class program for worthy youth in Austin and Central Texas, the Wings offer high-level instruction and a competitive environment that promotes life skills and community leadership. Their teams have earned national titles and top finishes across Premier and Triple Crown events.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Est. 1999</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Austin/Central TX</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">National Titles</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-team="banditos">
+                <div class="h2">Houston Banditos</div>
+                <p class="p">Established in 1994 and based in Tomball, the Banditos Baseball Club is one of the nation's most successful programs, with over 280 MLB drafted alumni and more than 1,400 college commitments. The Banditos achieved an unprecedented sweep in 2016, winning the 15U PG World Series, WWBA National Championship, BCS National Championship, and Freshman World Championship.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Est. 1994</span>
+                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">280+ MLB Drafted</span>
+                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">1,400+ College</span>
+                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">2016 Grand Slam</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-team="dodgers">
+                <div class="h2">Dulin's Dodgers</div>
+                <p class="p">Created in 2000, this elite program in the Southeast fields teams for athletes aged 8–18. Dulins Dodgers have won 16 national championships and placed in nine other national tournaments, producing 15 Major League players, eight first-round draft picks and over 700 college scholarships.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Est. 2000</span>
+                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">15 MLB Players</span>
+                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">8 First Round</span>
+                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">16 Championships</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-team="germantown">
+                <div class="h2">Germantown Baseball Club</div>
+                <p class="p">A tradition-rich program based in Germantown, Tennessee. The club provides opportunities for boys aged 7–14 to play competitive baseball under top instructors, competing at the AAA level within USSSA rules.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Germantown, TN</span>
+                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Ages 7-14</span>
+                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">USSSA AAA</span>
+                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Tradition Rich</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Perfect Game Intelligence Section -->
+        <div style="margin: 80px 0; text-align: center;">
+            <div class="h2" style="color: var(--blaze-orange); margin-bottom: 24px;">Perfect Game Intelligence Network</div>
+            <p class="p" style="max-width: 800px; margin: 0 auto 40px;">Our scout network tracks performance metrics, player development trajectories, and recruitment patterns across all major Perfect Game events and showcase tournaments throughout the Deep South region.</p>
+            
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 40px;">
+                <div style="text-align: center; padding: 24px;">
+                    <div style="font-size: 2.5rem; color: var(--blaze-orange); font-weight: 900; margin-bottom: 8px;">127K+</div>
+                    <div style="color: #cbd5e0;">Players Tracked</div>
+                </div>
+                <div style="text-align: center; padding: 24px;">
+                    <div style="font-size: 2.5rem; color: var(--blaze-orange); font-weight: 900; margin-bottom: 8px;">850+</div>
+                    <div style="color: #cbd5e0;">Teams Analyzed</div>
+                </div>
+                <div style="text-align: center; padding: 24px;">
+                    <div style="font-size: 2.5rem; color: var(--blaze-orange); font-weight: 900; margin-bottom: 8px;">2.8M+</div>
+                    <div style="color: #cbd5e0;">Data Points</div>
+                </div>
+                <div style="text-align: center; padding: 24px;">
+                    <div style="font-size: 2.5rem; color: var(--blaze-orange); font-weight: 900; margin-bottom: 8px;">15+</div>
+                    <div style="color: #cbd5e0;">States Covered</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div style="background: var(--glass-bg-dark); border: 1px solid var(--glass-border); border-radius: 16px; padding: 48px; text-align: center; margin: 60px 0;">
+            <div class="h2" style="color: #fff; margin-bottom: 16px;">Access Elite Baseball Intelligence</div>
+            <p class="p" style="margin-bottom: 32px;">Join coaches, scouts, and families who trust Blaze Intelligence for comprehensive Perfect Game analytics and scouting reports.</p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="/dashboard.html" class="badge" style="padding: 12px 24px; font-size: 1rem;">View Dashboard</a>
+                <a href="/contact.html" class="badge" style="padding: 12px 24px; font-size: 1rem;">Contact Scout Network</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Hero Animation -->
+    <script src="/assets/hero.js"></script>
+
+    <!-- Performance Tracking -->
+    <script>
+        // Track Perfect Game page visits
+        if (typeof gtag !== 'undefined') {
+            gtag('config', 'GA_TRACKING_ID', {
+                page_title: 'Perfect Game Select Teams',
+                page_location: window.location.href
+            });
+        }
+
+        // Log page load for analytics
+        console.log('🥇 Perfect Game Select Intelligence Loaded');
+        
+        // Add interactive card hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
