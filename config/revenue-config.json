@@ -1,0 +1,69 @@
+{
+  "systems": {
+    "leadCapture": {
+      "status": "Active",
+      "endpoint": "/api/lead",
+      "integration": "HubSpot CRM",
+      "automation": "Email follow-up sequences"
+    },
+    "stripeIntegration": {
+      "status": "Configured",
+      "products": [
+        {
+          "name": "Blaze Intelligence Pro",
+          "price": "$1,188/year",
+          "savings": "67-80% vs competitors"
+        },
+        {
+          "name": "Enterprise Platform",
+          "price": "Custom pricing",
+          "features": "Full platform access"
+        },
+        {
+          "name": "Texas Football Authority",
+          "price": "$2,500/year",
+          "features": "Complete Texas HS coverage"
+        }
+      ],
+      "subscriptionModel": "Annual with monthly option"
+    },
+    "partnershipOutreach": {
+      "status": "Ready",
+      "targets": [
+        "Texas High School Athletic Directors",
+        "Dave Campbell Texas Football Partnership",
+        "MLB/NFL/NBA Team Analytics Departments",
+        "Perfect Game Baseball Organizations"
+      ],
+      "automatedCampaigns": true
+    },
+    "affiliateProgram": {
+      "status": "Configured",
+      "commission": "20% recurring",
+      "partners": [
+        "Sports Tech Companies",
+        "Analytics Consultants",
+        "Coaching Organizations"
+      ]
+    },
+    "nilCalculator": {
+      "status": "Live",
+      "endpoint": "/api/nil-calculator",
+      "monetization": "Lead generation for premium features"
+    }
+  },
+  "dashboard": {
+    "monthlyRecurringRevenue": 0,
+    "activeSubscriptions": 0,
+    "leadsPipeline": 0,
+    "conversionRate": "0%",
+    "projectedAnnualRevenue": "$0",
+    "revenueStreams": [
+      "Subscription Revenue",
+      "Enterprise Contracts",
+      "Partnership Deals",
+      "Affiliate Commissions",
+      "Consulting Services"
+    ]
+  }
+}

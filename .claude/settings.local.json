@@ -22,7 +22,8 @@
       "Bash(curl:*)",
       "Bash(npm install)",
       "Bash(./start-cardinals-server.sh:*)",
-      "Bash(npm run test-comprehensive:*)"
+      "Bash(npm run test-comprehensive:*)",
+      "Bash(npm run:*)"
     ],
     "deny": [],
     "ask": []
