@@ -17,7 +17,9 @@
       "Bash(./scripts/setup-monitoring.sh:*)",
       "Bash(npm run deploy:production:*)",
       "Bash(wrangler pages deploy:*)",
-      "Bash(wrangler deploy:*)"
+      "Bash(wrangler deploy:*)",
+      "Bash(osascript:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
