@@ -1,0 +1,57 @@
+# Netlify Configuration for Blaze Intelligence
+
+[build]
+  command = "npm run build"
+  functions = "netlify/functions"
+  publish = "austin-portfolio-deploy"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self' https://*.blaze-intelligence.com https://*.netlify.app https://*.github.io; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.openai.com https://api.stripe.com https://api.hubapi.com https://api.sportradar.us"
+
+# API Proxy Function
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api-proxy/:splat"
+  status = 200
+
+# SPA Support
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Function Configuration
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Environment variable templates (actual values set in Netlify UI)
+[context.production.environment]
+  ENVIRONMENT = "production"
+  NODE_ENV = "production"
+  
+[context.deploy-preview.environment]
+  ENVIRONMENT = "preview"
+  NODE_ENV = "development"
+
+[context.branch-deploy.environment]
+  ENVIRONMENT = "staging"
+  NODE_ENV = "development"
+
+# Dev server configuration
+[dev]
+  command = "npm run serve"
+  port = 8888
+  targetPort = 8000
+  publish = "austin-portfolio-deploy"
+  autoLaunch = false

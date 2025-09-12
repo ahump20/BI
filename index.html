@@ -3004,5 +3004,27 @@
             dataCache.websocketConnected = true;
         }
     </script>
+    
+    <!-- Blaze Intelligence Secure API Client -->
+    <script src="public/js/blaze-api-client.js"></script>
+    <script>
+        // Initialize API integrations
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Blaze Intelligence Secure API Client loaded');
+            
+            // Initialize live data feeds if API is available
+            if (window.blazeAPI) {
+                // Auto-load Cardinals data for Cardinals section
+                const cardinalsSection = document.querySelector('[data-team="cardinals"]');
+                if (cardinalsSection) {
+                    window.blazeAPI.getCardinalsData().then(data => {
+                        console.log('Cardinals live data:', data);
+                    }).catch(err => {
+                        console.log('Cardinals data loading deferred');
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>
