@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blaze Intelligence - The Deep South Sports Authority | Texas Football & SEC Analytics</title>
+    <title>Blaze Intelligence - The Deep South Sports Authority | Texas Football &amp; SEC Analytics</title>
     <meta name="description" content="The Dave Campbell's of SEC/Deep South sports. Complete coverage of Texas high school football, SEC baseball, and every player from Little League to the NFL/MLB.">
     
     <!-- Favicon -->
@@ -24,8 +22,8 @@
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&amp;family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -646,6 +644,242 @@
             font-weight: 700;
         }
         
+        /* Scout Network Section */
+        .scout-network {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, rgba(20, 33, 61, 0.3) 0%, rgba(0, 178, 169, 0.1) 50%, transparent 100%);
+        }
+        
+        .network-overview {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .network-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        
+        .network-stat {
+            text-align: center;
+            padding: 32px 20px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .network-stat:hover {
+            transform: translateY(-4px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 16px 32px rgba(191, 87, 0, 0.2);
+        }
+        
+        .network-stat .stat-number {
+            display: block;
+            font-family: var(--font-headline);
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            margin-bottom: 8px;
+        }
+        
+        .network-stat .stat-label {
+            display: block;
+            font-family: var(--font-headline);
+            font-size: 1.1rem;
+            color: var(--mississippi-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        
+        .network-stat .stat-detail {
+            display: block;
+            font-size: 0.9rem;
+            color: rgba(248, 248, 255, 0.7);
+            font-style: italic;
+        }
+        
+        .network-visualization {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 48px;
+            margin-top: 60px;
+        }
+        
+        .scout-map {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 48px;
+            position: relative;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .region-cluster {
+            margin-bottom: 40px;
+        }
+        
+        .region-cluster.texas {
+            border-left: 4px solid var(--burnt-orange);
+            padding-left: 24px;
+        }
+        
+        .region-cluster.sec {
+            border-left: 4px solid var(--sec-crimson);
+            padding-left: 24px;
+        }
+        
+        .cluster-hub {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .scout-count {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-family: var(--font-headline);
+            font-size: 1.4rem;
+            font-weight: 700;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .region-label {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            color: var(--mississippi-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .scout-nodes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-left: 20px;
+        }
+        
+        .node {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--cardinal-blue);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid rgba(155, 203, 235, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .node:hover {
+            background: rgba(191, 87, 0, 0.1);
+            border-color: var(--burnt-orange);
+            color: var(--burnt-orange);
+            transform: scale(1.05);
+        }
+        
+        .scout-activity-feed {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .scout-activity-feed h4 {
+            font-family: var(--font-headline);
+            font-size: 1.4rem;
+            color: var(--burnt-orange);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .activity-stream {
+            margin-bottom: 32px;
+        }
+        
+        .activity-item {
+            display: grid;
+            grid-template-columns: auto auto 1fr;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+            align-items: center;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-item .time {
+            font-family: var(--font-data);
+            font-size: 0.8rem;
+            color: var(--friday-lights);
+            font-weight: 600;
+            min-width: 60px;
+        }
+        
+        .activity-item .scout {
+            font-family: var(--font-data);
+            font-size: 0.8rem;
+            color: var(--deep-teal);
+            font-weight: 600;
+            min-width: 90px;
+        }
+        
+        .activity-item .action {
+            font-size: 0.9rem;
+            color: var(--mississippi-white);
+            line-height: 1.3;
+        }
+        
+        .scout-credentials {
+            border-top: 2px solid var(--burnt-orange);
+            padding-top: 24px;
+        }
+        
+        .scout-credentials h5 {
+            font-family: var(--font-headline);
+            font-size: 1.1rem;
+            color: var(--mississippi-white);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .credential-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .credential-list li {
+            color: rgba(248, 248, 255, 0.8);
+            padding: 6px 0;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .credential-list li:before {
+            content: "✓";
+            color: var(--friday-lights);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+        
         /* Coverage Map */
         .coverage-map {
             padding: 100px 5%;
@@ -959,14 +1193,14 @@
             <div class="product-content">
                 <div class="product-panel active" id="annual">
                     <div class="product-visual">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect fill='%23BF5700' width='400' height='500'/%3E%3Ctext x='200' y='250' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3E2025 ANNUAL%3C/text%3E%3C/svg%3E" alt="Blaze Intelligence Annual">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%25252Bxml%25252C%2525253Csvg%252520xmlns%25253D%252527http://www.w3.org/2000/svg%252527%252520viewBox%25253D%2525270%2525200%252520400%252520500%252527%2525253E%2525253Crect%252520fill%25253D%252527%25252523BF5700%252527%252520width%25253D%252527400%252527%252520height%25253D%252527500%252527/%2525253E%2525253Ctext%252520x%25253D%252527200%252527%252520y%25253D%252527250%252527%252520font-family%25253D%252527Arial%252527%252520font-size%25253D%25252724%252527%252520fill%25253D%252527white%252527%252520text-anchor%25253D%252527middle%252527%2525253E2025%252520ANNUAL%2525253C/text%2525253E%2525253C/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="Blaze Intelligence Annual" loading="lazy">
                     </div>
                     <div class="product-details">
                         <h3>The Blaze Intelligence Annual</h3>
                         <p class="product-tagline">The Bible of Deep South Sports</p>
                         <ul class="feature-list">
                             <li>1,437 Texas high schools covered</li>
-                            <li>Complete SEC baseball & football coverage</li>
+                            <li>Complete SEC baseball &amp; football coverage</li>
                             <li>127,000+ player profiles and ratings</li>
                             <li>Historical statistics and records</li>
                             <li>Coaching staff analysis</li>
@@ -981,7 +1215,7 @@
                 
                 <div class="product-panel" id="blazescout">
                     <div class="product-visual">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect fill='%239B2222' width='400' height='500'/%3E%3Ctext x='200' y='250' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EBlazeScout Pro%3C/text%3E%3C/svg%3E" alt="BlazeScout Pro">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%25252Bxml%25252C%2525253Csvg%252520xmlns%25253D%252527http://www.w3.org/2000/svg%252527%252520viewBox%25253D%2525270%2525200%252520400%252520500%252527%2525253E%2525253Crect%252520fill%25253D%252527%252525239B2222%252527%252520width%25253D%252527400%252527%252520height%25253D%252527500%252527/%2525253E%2525253Ctext%252520x%25253D%252527200%252527%252520y%25253D%252527250%252527%252520font-family%25253D%252527Arial%252527%252520font-size%25253D%25252724%252527%252520fill%25253D%252527white%252527%252520text-anchor%25253D%252527middle%252527%2525253EBlazeScout%252520Pro%2525253C/text%2525253E%2525253C/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="BlazeScout Pro" loading="lazy">
                     </div>
                     <div class="product-details">
                         <h3>BlazeScout Pro</h3>
@@ -1003,7 +1237,7 @@
                 
                 <div class="product-panel" id="blazedraft">
                     <div class="product-visual">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect fill='%23002244' width='400' height='500'/%3E%3Ctext x='200' y='250' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EBlazeDraft%3C/text%3E%3C/svg%3E" alt="BlazeDraft">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%25252Bxml%25252C%2525253Csvg%252520xmlns%25253D%252527http://www.w3.org/2000/svg%252527%252520viewBox%25253D%2525270%2525200%252520400%252520500%252527%2525253E%2525253Crect%252520fill%25253D%252527%25252523002244%252527%252520width%25253D%252527400%252527%252520height%25253D%252527500%252527/%2525253E%2525253Ctext%252520x%25253D%252527200%252527%252520y%25253D%252527250%252527%252520font-family%25253D%252527Arial%252527%252520font-size%25253D%25252724%252527%252520fill%25253D%252527white%252527%252520text-anchor%25253D%252527middle%252527%2525253EBlazeDraft%2525253C/text%2525253E%2525253C/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="BlazeDraft" loading="lazy">
                     </div>
                     <div class="product-details">
                         <h3>BlazeDraft</h3>
@@ -1025,7 +1259,7 @@
                 
                 <div class="product-panel" id="api">
                     <div class="product-visual">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect fill='%2300B2A9' width='400' height='500'/%3E%3Ctext x='200' y='250' font-family='Arial' font-size='24' fill='white' text-anchor='middle'%3EAPI ACCESS%3C/text%3E%3C/svg%3E" alt="API Access">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%25252Bxml%25252C%2525253Csvg%252520xmlns%25253D%252527http://www.w3.org/2000/svg%252527%252520viewBox%25253D%2525270%2525200%252520400%252520500%252527%2525253E%2525253Crect%252520fill%25253D%252527%2525252300B2A9%252527%252520width%25253D%252527400%252527%252520height%25253D%252527500%252527/%2525253E%2525253Ctext%252520x%25253D%252527200%252527%252520y%25253D%252527250%252527%252520font-family%25253D%252527Arial%252527%252520font-size%25253D%25252724%252527%252520fill%25253D%252527white%252527%252520text-anchor%25253D%252527middle%252527%2525253EAPI%252520ACCESS%2525253C/text%2525253E%2525253C/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="API Access" loading="lazy">
                     </div>
                     <div class="product-details">
                         <h3>API Access</h3>
@@ -1041,6 +1275,117 @@
                         <div class="product-cta">
                             <button class="btn-primary">View Documentation</button>
                             <span class="price">Custom Pricing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Scout Network Section -->
+    <section class="scout-network">
+        <div class="container">
+            <h2 class="section-title">Our Scout Network</h2>
+            <p class="section-subtitle">500+ Scouts Covering Every Friday Night Game Across the Deep South</p>
+            
+            <div class="network-overview">
+                <div class="network-stats">
+                    <div class="network-stat">
+                        <span class="stat-number">40</span>
+                        <span class="stat-label">Active Scouts</span>
+                        <span class="stat-detail">Experienced professionals</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">States Covered</span>
+                        <span class="stat-detail">Texas through Georgia</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-number">2,500+</span>
+                        <span class="stat-label">Games Per Season</span>
+                        <span class="stat-detail">Live coverage weekly</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Coverage Active</span>
+                        <span class="stat-detail">Year-round scouting</span>
+                    </div>
+                </div>
+                
+                <div class="network-visualization">
+                    <div class="scout-map">
+                        <div class="region-cluster texas" data-region="texas">
+                            <div class="cluster-hub">
+                                <span class="scout-count">25</span>
+                                <span class="region-label">Texas</span>
+                            </div>
+                            <div class="scout-nodes">
+                                <div class="node dfw">DFW (5)</div>
+                                <div class="node houston">Houston (5)</div>
+                                <div class="node satx">SA/Austin (4)</div>
+                                <div class="node east-tx">East TX (3)</div>
+                                <div class="node west-tx">West TX (3)</div>
+                                <div class="node rgv">RGV (3)</div>
+                                <div class="node central-tx">Central (2)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="region-cluster sec" data-region="sec">
+                            <div class="cluster-hub">
+                                <span class="scout-count">15</span>
+                                <span class="region-label">SEC States</span>
+                            </div>
+                            <div class="scout-nodes">
+                                <div class="node louisiana">Louisiana (3)</div>
+                                <div class="node alabama">Alabama (3)</div>
+                                <div class="node mississippi">Mississippi (2)</div>
+                                <div class="node georgia">Georgia (2)</div>
+                                <div class="node florida">FL Panhandle (2)</div>
+                                <div class="node arkansas">Arkansas (2)</div>
+                                <div class="node tennessee">Tennessee (1)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scout-activity-feed">
+                        <h4>Live Scout Activity</h4>
+                        <div class="activity-stream">
+                            <div class="activity-item">
+                                <span class="time">8:45 PM</span>
+                                <span class="scout">Scout_TX_07</span>
+                                <span class="action">Uploaded film: Westlake vs Lake Travis</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="time">8:42 PM</span>
+                                <span class="scout">Scout_LA_02</span>
+                                <span class="action">Player eval: 5⭐ QB (Class 2025)</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="time">8:38 PM</span>
+                                <span class="scout">Scout_AL_03</span>
+                                <span class="action">Injury report: Thompson vs Hoover</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="time">8:35 PM</span>
+                                <span class="scout">Scout_TX_12</span>
+                                <span class="action">Recruiting intel: Duncanville visit update</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="time">8:31 PM</span>
+                                <span class="scout">Scout_GA_01</span>
+                                <span class="action">Weather alert: Buford game delayed</span>
+                            </div>
+                        </div>
+                        
+                        <div class="scout-credentials">
+                            <h5>Our Scout Standards</h5>
+                            <ul class="credential-list">
+                                <li>10+ years coaching/playing experience</li>
+                                <li>Certified by Dave Campbell's network</li>
+                                <li>Background checked and bonded</li>
+                                <li>Weekly training on new evaluation methods</li>
+                                <li>Direct relationships with field houses</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1108,6 +1453,7 @@
                 this.initProductTabs();
                 this.initTrustBadges();
                 this.initScrollAnimations();
+                this.initScoutNetwork();
             }
             
             initLiveStats() {
@@ -1238,6 +1584,137 @@
                     });
                 }
             }
+            
+            initScoutNetwork() {
+                // Animate scout activity feed
+                this.initLiveActivityFeed();
+                
+                // Interactive node hover effects
+                this.initNodeInteractions();
+                
+                // Add pulsing animations to active scouts
+                this.initScoutAnimations();
+            }
+            
+            initLiveActivityFeed() {
+                const activities = [
+                    { scout: 'Scout_TX_07', action: 'Uploaded film: Westlake vs Lake Travis', region: 'TX' },
+                    { scout: 'Scout_LA_02', action: 'Player eval: 5⭐ QB (Class 2025)', region: 'LA' },
+                    { scout: 'Scout_AL_03', action: 'Injury report: Thompson vs Hoover', region: 'AL' },
+                    { scout: 'Scout_TX_12', action: 'Recruiting intel: Duncanville visit update', region: 'TX' },
+                    { scout: 'Scout_GA_01', action: 'Weather alert: Buford game delayed', region: 'GA' },
+                    { scout: 'Scout_MS_01', action: 'Scouting report: Brandon RB showing D1 speed', region: 'MS' },
+                    { scout: 'Scout_FL_02', action: 'Commitment alert: Pensacola WR picks Auburn', region: 'FL' },
+                    { scout: 'Scout_TX_03', action: 'Film analysis: North Shore defensive scheme', region: 'TX' },
+                    { scout: 'Scout_AR_01', action: 'Transfer portal: Bentonville QB enters portal', region: 'AR' },
+                    { scout: 'Scout_TN_01', action: 'Recruiting visit: Memphis prospect tours A&M', region: 'TN' }
+                ];
+                
+                let currentActivity = 0;
+                const activityStream = document.querySelector('.activity-stream');
+                
+                setInterval(() => {
+                    // Add new activity at top
+                    currentActivity = (currentActivity + 1) % activities.length;
+                    const activity = activities[currentActivity];
+                    const now = new Date();
+                    const timeString = now.toLocaleTimeString('en-US', { 
+                        hour: 'numeric', 
+                        minute: '2-digit', 
+                        hour12: true 
+                    });
+                    
+                    const newItem = document.createElement('div');
+                    newItem.className = 'activity-item new';
+                    newItem.innerHTML = `
+                        <span class="time">${timeString}</span>
+                        <span class="scout">${activity.scout}</span>
+                        <span class="action">${activity.action}</span>
+                    `;
+                    
+                    // Add fade-in animation
+                    newItem.style.opacity = '0';
+                    newItem.style.transform = 'translateX(-20px)';
+                    activityStream.insertBefore(newItem, activityStream.firstChild);
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        newItem.style.transition = 'all 0.5s ease';
+                        newItem.style.opacity = '1';
+                        newItem.style.transform = 'translateX(0)';
+                    }, 100);
+                    
+                    // Remove oldest if more than 6 items
+                    const items = activityStream.querySelectorAll('.activity-item');
+                    if (items.length > 6) {
+                        const oldestItem = items[items.length - 1];
+                        oldestItem.style.transition = 'all 0.3s ease';
+                        oldestItem.style.opacity = '0';
+                        setTimeout(() => {
+                            if (oldestItem.parentNode) {
+                                activityStream.removeChild(oldestItem);
+                            }
+                        }, 300);
+                    }
+                    
+                    // Flash corresponding region
+                    this.flashRegion(activity.region);
+                    
+                }, 8000); // New activity every 8 seconds
+            }
+            
+            initNodeInteractions() {
+                document.querySelectorAll('.node').forEach(node => {
+                    node.addEventListener('mouseenter', () => {
+                        // Add glow effect
+                        node.style.boxShadow = '0 0 20px rgba(191, 87, 0, 0.4)';
+                        node.style.transform = 'scale(1.05)';
+                    });
+                    
+                    node.addEventListener('mouseleave', () => {
+                        node.style.boxShadow = 'none';
+                        node.style.transform = 'scale(1.0)';
+                    });
+                });
+            }
+            
+            initScoutAnimations() {
+                // Add subtle pulsing to scout counts
+                document.querySelectorAll('.scout-count').forEach(count => {
+                    setInterval(() => {
+                        count.style.transform = 'scale(1.1)';
+                        setTimeout(() => {
+                            count.style.transform = 'scale(1.0)';
+                        }, 200);
+                    }, 3000 + Math.random() * 2000); // Random pulse between 3-5 seconds
+                });
+            }
+            
+            flashRegion(region) {
+                const regionMap = {
+                    'TX': 'texas',
+                    'LA': 'sec',
+                    'AL': 'sec', 
+                    'GA': 'sec',
+                    'MS': 'sec',
+                    'FL': 'sec',
+                    'AR': 'sec',
+                    'TN': 'sec'
+                };
+                
+                const clusterElement = document.querySelector(`.region-cluster.${regionMap[region]}`);
+                if (clusterElement) {
+                    clusterElement.style.transition = 'all 0.3s ease';
+                    clusterElement.style.borderLeftColor = '#FFD700';
+                    clusterElement.style.transform = 'scale(1.02)';
+                    
+                    setTimeout(() => {
+                        const originalColor = regionMap[region] === 'texas' ? '#BF5700' : '#9B2222';
+                        clusterElement.style.borderLeftColor = originalColor;
+                        clusterElement.style.transform = 'scale(1.0)';
+                    }, 800);
+                }
+            }
         }
         
         // Initialize on DOM load
@@ -1302,5 +1779,5 @@
             });
         }
     </script>
-</body>
-</html>
+
+</body></html>
