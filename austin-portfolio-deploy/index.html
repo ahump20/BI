@@ -2370,6 +2370,33 @@
         </div>
     </section>
     
+    <!-- 3D Analytics Showcase Section -->
+    <section class="analytics-showcase" style="background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); padding: 80px 0;">
+        <div class="container">
+            <h2 class="section-title" style="color: #BF5700; text-align: center; margin-bottom: 60px;">
+                Live 3D Analytics & Performance Intelligence
+            </h2>
+            
+            <div class="visualization-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px;">
+                <div class="viz-container">
+                    <h3 style="color: #9BCBEB; margin-bottom: 20px;">Advanced 3D Data Visualization</h3>
+                    <div id="advanced-3d-container" style="width: 100%; height: 400px; background: rgba(0,0,0,0.3); border-radius: 15px; border: 1px solid rgba(191,87,0,0.3);"></div>
+                </div>
+                <div class="viz-container">
+                    <h3 style="color: #9BCBEB; margin-bottom: 20px;">Performance Analytics 3D Charts</h3>
+                    <div id="charts-3d-container" style="width: 100%; height: 400px; background: rgba(0,0,0,0.3); border-radius: 15px; border: 1px solid rgba(191,87,0,0.3);"></div>
+                </div>
+            </div>
+            
+            <div class="viz-controls" style="text-align: center; margin-top: 40px;">
+                <button class="btn-secondary" onclick="if(window.blazeAdvanced3D) window.blazeAdvanced3D.switchVisualization('scatter3d')" style="margin: 0 10px;">Player Performance</button>
+                <button class="btn-secondary" onclick="if(window.blaze3DCharts) window.blaze3DCharts.showChart('bar3d')" style="margin: 0 10px;">Team Rankings</button>
+                <button class="btn-secondary" onclick="if(window.blazeInteractiveMap) window.blazeInteractiveMap.showRegion('texas')" style="margin: 0 10px;">Regional View</button>
+                <button class="btn-secondary" onclick="if(window.blaze3DCharts) window.blaze3DCharts.showChart('network')" style="margin: 0 10px;">Recruiting Network</button>
+            </div>
+        </div>
+    </section>
+    
     <!-- Authority Proof Section -->
     <section class="authority-proof">
         <div class="container">
@@ -2993,6 +3020,9 @@
                         <span>500+ Scouts Active</span>
                     </div>
                 </div>
+                
+                <!-- 3D Interactive Map Container -->
+                <div id="interactive-3d-map" style="width: 100%; height: 600px; margin-top: 20px; border-radius: 15px; overflow: hidden;"></div>
             </div>
         </div>
     </section>
@@ -3973,12 +4003,44 @@
                 window.blazeAISearch = new BlazeAISearch(aiSearchContainer);
             }
             
+            // Initialize Advanced 3D Visualizations
+            const advanced3DContainer = document.getElementById('advanced-3d-container');
+            if (advanced3DContainer && window.BlazeAdvanced3DVisualizations) {
+                window.blazeAdvanced3D = new BlazeAdvanced3DVisualizations(advanced3DContainer);
+                window.blazeAdvanced3D.initialize();
+            }
+            
+            // Initialize 3D Charts
+            const charts3DContainer = document.getElementById('charts-3d-container');
+            if (charts3DContainer && window.Blaze3DCharts) {
+                window.blaze3DCharts = new Blaze3DCharts(charts3DContainer);
+                // Show default bar chart with sample data
+                window.blaze3DCharts.showChart('bar3d', [
+                    { name: 'Cardinals', performance: 85, potential: 92 },
+                    { name: 'Titans', performance: 78, potential: 88 },
+                    { name: 'Longhorns', performance: 91, potential: 95 },
+                    { name: 'Grizzlies', performance: 74, potential: 81 }
+                ]);
+            }
+            
+            // Initialize Interactive 3D Map
+            const interactive3DMapContainer = document.getElementById('interactive-3d-map');
+            if (interactive3DMapContainer && window.BlazeInteractiveMaps) {
+                window.blazeInteractiveMap = new BlazeInteractiveMaps(interactive3DMapContainer);
+                window.blazeInteractiveMap.initialize();
+            }
+            
             // Mobile optimization is auto-initialized
-            console.log('🚀 Blaze Intelligence Phase 1 Upgrades Loaded');
+            console.log('🚀 Blaze Intelligence Phase 2: Advanced 3D Visualizations Loaded');
         });
     </script>
     
     <!-- Maintain backward compatibility with existing Three.js -->
     <script src="js/professional-threejs.js"></script>
+    
+    <!-- Advanced 3D Visualization Components -->
+    <script src="js/blaze-advanced-3d-visualizations.js"></script>
+    <script src="js/blaze-interactive-maps.js"></script>
+    <script src="js/blaze-3d-charts.js"></script>
 
 </body></html>
