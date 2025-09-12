@@ -22,7 +22,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    <!-- Professional Background System -->
+    <script src="js/three-professional-background.js"></script>
     
     <!-- Chart.js for Analytics -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -3997,108 +3999,51 @@
             }
         });
         
-        // Three.js Hero Animation
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ 
-            canvas: document.getElementById('three-canvas'),
-            alpha: true,
-            antialias: true
-        });
+        // Initialize Professional Three.js Background
+        let professionalBackground = null;
         
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        
-        // Create particle system
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 5000;
-        const posArray = new Float32Array(particlesCount * 3);
-        
-        for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 10;
-        }
-        
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        
-        // Create gradient texture for particles
-        const canvas = document.createElement('canvas');
-        canvas.width = 32;
-        canvas.height = 32;
-        const ctx = canvas.getContext('2d');
-        const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
-        gradient.addColorStop(0, '#FF6B35');
-        gradient.addColorStop(0.5, '#BF5700');
-        gradient.addColorStop(1, 'transparent');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, 32, 32);
-        
-        const texture = new THREE.CanvasTexture(canvas);
-        
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.02,
-            map: texture,
-            transparent: true,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false
-        });
-        
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-        
-        // Create floating geometric shapes
-        const geometry = new THREE.IcosahedronGeometry(0.5, 0);
-        const material = new THREE.MeshBasicMaterial({
-            color: 0xBF5700,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.3
-        });
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
-        
-        // Additional shapes
-        const geometry2 = new THREE.OctahedronGeometry(0.7, 0);
-        const material2 = new THREE.MeshBasicMaterial({
-            color: 0xFF6B35,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.2
-        });
-        const mesh2 = new THREE.Mesh(geometry2, material2);
-        mesh2.position.x = 2;
-        mesh2.position.y = -1;
-        scene.add(mesh2);
-        
-        camera.position.z = 3;
-        
-        // Animation loop
-        function animateThree() {
-            requestAnimationFrame(animateThree);
+        // Initialize with Blaze color scheme matching the site theme
+        try {
+            professionalBackground = new BlazeProfessionalBackground({
+                containerId: 'three-canvas',
+                particleCount: 2000, // Reduced for better performance and professional look
+                primaryColor: 0x0066CC,    // Professional blue
+                secondaryColor: 0x00A8CC,  // Cyan accent
+                accentColor: 0xBF5700,     // Blaze orange accent (subtle)
+                backgroundColor: 0x000814  // Deep navy matching site
+            });
             
-            particlesMesh.rotation.y += 0.001;
-            particlesMesh.rotation.x += 0.0005;
+            console.log('🎯 Professional Three.js background initialized successfully');
+        } catch (error) {
+            console.error('❌ Failed to initialize professional background:', error);
             
-            mesh.rotation.x += 0.01;
-            mesh.rotation.y += 0.01;
+            // Fallback to minimal Three.js setup
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ 
+                canvas: document.getElementById('three-canvas'),
+                alpha: true,
+                antialias: true
+            });
             
-            mesh2.rotation.x -= 0.008;
-            mesh2.rotation.y -= 0.012;
-            
-            // Float effect
-            mesh.position.y = Math.sin(Date.now() * 0.001) * 0.2;
-            mesh2.position.y = Math.cos(Date.now() * 0.001) * 0.2;
-            
-            renderer.render(scene, camera);
-        }
-        
-        animateThree();
-        
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            scene.background = new THREE.Color(0x000814);
+            
+            camera.position.z = 3;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
         
         // Counter animation for stats
         const observer = new IntersectionObserver((entries) => {
