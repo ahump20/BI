@@ -1,27 +1,14 @@
-# Championship Intelligence Routes - All Teams
-/orioles        /orioles-executive-championship.html    301
-/baltimore      /baltimore-intelligence.html    301
-/moneyball      /baltimore-intelligence.html    301
-/blackbird      /project-blackbird-live-demo.html    301
-/chad-tatum     /chad-tatum-championship-demo.html   301
-/tatum          /chad-tatum-championship-demo.html   301
-/scouting       /chad-tatum-championship-demo.html   301
-/executive      /orioles-executive-intelligence.html  301
-/war-room       /orioles-executive-intelligence.html  301
-/c-suite        /orioles-executive-intelligence.html  301
-/brand          /blaze-brand-showcase.html            301
-/brand-system   /blaze-brand-showcase.html            301
-/cardinals      /cardinals-intelligence.html    301
-/stl            /cardinals-intelligence.html    301
-/titans         /titans-intelligence.html    301
-/nashville      /titans-intelligence.html    301
-/grizzlies      /grizzlies-intelligence.html    301
-/memphis        /grizzlies-intelligence.html    301
-/longhorns      /longhorns-intelligence.html    301
-/texas          /longhorns-intelligence.html    301
+# Netlify redirects for Deep South Sports Authority
 
-# Legacy Platform Routes
-/os     https://a4dc795e.blaze-intelligence.pages.dev/   302
-/platform  https://9fb73261.blaze-intelligence.pages.dev/ 302
-/videos https://9fb73261.blaze-intelligence.pages.dev/#videos 302
-/dashboard https://9fb73261.blaze-intelligence.pages.dev/#live-analytics-dashboard 302
+# Main sections
+/texas-football    /texas-football-authority.html    200
+/sec              /sec-command.html                   200
+/perfect-game     /perfect-game.html                  200
+/recruiting       /recruiting-hq.html                 200
+
+# Legacy redirects
+/platform         /index.html                         301
+/dashboard        /texas-football-authority.html      301
+
+# API endpoints (if using Netlify Functions)
+/api/*            /.netlify/functions/:splat          200
