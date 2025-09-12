@@ -40,7 +40,8 @@
       "Bash(./deploy-deep-south-netlify.sh:*)",
       "Bash(npx netlify:*)",
       "Read(//Users/AustinHumphrey/Downloads/**)",
-      "Bash(unzip:*)"
+      "Bash(unzip:*)",
+      "Read(//var/folders/kg/n1t_tbds23df03t2kqq054l80000gn/T/TemporaryItems/NSIRD_screencaptureui_anRPdm/**)"
     ],
     "deny": [],
     "ask": []
