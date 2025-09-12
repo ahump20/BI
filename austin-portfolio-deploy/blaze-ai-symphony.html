@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blaze Intelligence AI Symphony | Neural Sports Analytics Engine</title>
+    
+    <!-- Three.js for Professional Background Option -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    <!-- Professional Background System -->
+    <script src="js/three-professional-background.js"></script>
     <style>
         /* Neural Network Inspired CSS Variables */
         :root {
@@ -43,7 +48,17 @@
             position: relative;
         }
 
-        /* Neural Network Background */
+        /* Professional Three.js Background */
+        #three-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        /* Neural Network Background Overlay */
         .neural-canvas {
             position: fixed;
             top: 0;
@@ -51,7 +66,8 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            background: var(--texas-pride);
+            background: transparent;
+            pointer-events: none;
         }
 
         /* Advanced Neural Grid */
@@ -680,7 +696,10 @@
     </style>
 </head>
 <body>
-    <!-- Neural Canvas Background -->
+    <!-- Professional Three.js Background -->
+    <canvas id="three-canvas"></canvas>
+    
+    <!-- Neural Canvas Overlay -->
     <div class="neural-canvas">
         <div class="neural-grid"></div>
         <div class="consciousness-wave"></div>
@@ -1116,6 +1135,32 @@ Where Texas heritage meets AI excellence
                 console.log('🤠 TEXAS PRIDE ACTIVATED! YEEHAW! 🤠');
             }
         });
+        
+        // Initialize Professional Background System
+        let professionalBackground;
+        
+        function initProfessionalBackground() {
+            try {
+                // Initialize with AI Symphony theme colors
+                professionalBackground = new BlazeProfessionalBackground({
+                    containerId: 'three-canvas',
+                    particleCount: 2200, // AI Symphony enhanced particle count
+                    primaryColor: 0xBF5700, // Neural orange
+                    secondaryColor: 0x9BCBEB, // Synapse blue
+                    accentColor: 0x00B2A9, // Quantum teal
+                    backgroundColor: 0x002244 // Texas navy
+                });
+                
+                console.log('🎯 Professional background initialized for AI Symphony');
+            } catch (error) {
+                console.error('❌ Failed to initialize professional background:', error);
+                // Fallback: Keep neural canvas visible
+                document.querySelector('.neural-canvas').style.background = 'var(--texas-pride)';
+            }
+        }
+        
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', initProfessionalBackground);
     </script>
 </body>
 </html>

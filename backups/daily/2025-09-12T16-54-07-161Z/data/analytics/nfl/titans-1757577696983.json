@@ -1,0 +1,36 @@
+{
+  "team": "Tennessee Titans",
+  "league": "nfl",
+  "timestamp": "2025-09-11T08:01:36.983Z",
+  "dataPoints": 19,
+  "data": {
+    "schedule": {
+      "league": "NFL",
+      "team": "Tennessee Titans",
+      "games": [
+        {
+          "date": "2025-09-11T08:01:36.983Z",
+          "opponent": "Mock Opponent",
+          "home": true,
+          "result": "W 7-3"
+        }
+      ],
+      "lastUpdated": "2025-09-11T08:01:36.983Z"
+    },
+    "stats": {
+      "league": "NFL",
+      "team": "Tennessee Titans",
+      "wins": 75,
+      "losses": 45,
+      "percentage": 0.625,
+      "lastUpdated": "2025-09-11T08:01:36.983Z"
+    },
+    "standings": {
+      "league": "NFL",
+      "division": "Mock Division",
+      "position": 2,
+      "gamesBack": 1.5,
+      "lastUpdated": "2025-09-11T08:01:36.983Z"
+    }
+  }
+}

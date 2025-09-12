@@ -20,7 +20,9 @@
       "Bash(wrangler deploy:*)",
       "Bash(osascript:*)",
       "Bash(curl:*)",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(./start-cardinals-server.sh:*)",
+      "Bash(npm run test-comprehensive:*)"
     ],
     "deny": [],
     "ask": []
