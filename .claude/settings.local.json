@@ -27,7 +27,10 @@
       "Bash(export CLOUDFLARE_ACCOUNT_ID=\"a12cb329d84130460eed99b816e4d0d3\")",
       "Bash(wrangler whoami:*)",
       "Bash(wrangler pages project create:*)",
-      "Bash(./setup-secrets-sync.sh:*)"
+      "Bash(./setup-secrets-sync.sh:*)",
+      "Bash(./scripts/add-all-secrets.sh:*)",
+      "Bash(gh workflow run:*)",
+      "Bash(./scripts/test-deployment.sh:*)"
     ],
     "deny": [],
     "ask": []
