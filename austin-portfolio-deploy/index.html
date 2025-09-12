@@ -1,15 +1,15 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blaze Intelligence - The Texas Authority on Sports Analytics™</title>
-    <meta name="description" content="Building on 65+ years of Texas football legacy, Blaze Intelligence is the definitive authority for championship-level sports analytics. Friday Night Lights meets cutting-edge AI.">
+    <title>Blaze Intelligence - The Sage of Sports Intelligence™</title>
+    <meta name="description" content="Where championship wisdom meets frontier innovation. The definitive intelligence platform transforming how champions think, prepare, and dominate - from Friday Night Lights to the highest levels of competition.">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
     
     <!-- OpenGraph -->
-    <meta property="og:title" content="Blaze Intelligence - The Texas Authority on Sports Analytics™">
-    <meta property="og:description" content="Building on 65+ years of Texas football legacy, the definitive authority for championship-level sports analytics and Friday Night Lights intelligence."
+    <meta property="og:title" content="Blaze Intelligence - The Sage of Sports Intelligence™">
+    <meta property="og:description" content="Championship wisdom meets frontier innovation. The definitive intelligence platform transforming how champions think, prepare, and dominate across all levels of competition."
     <meta property="og:image" content="/public/assets/images/BI logo_1757392449601.png">
     <meta property="og:type" content="website">
     
@@ -874,6 +874,16 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -0.5px;
+        }
+        
+        .nav-logo-tagline {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--blaze-accent);
+            margin-top: -2px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            opacity: 0.8;
         }
         
         .nav-links {
@@ -1888,6 +1898,213 @@
             padding-top: 40px;
             border-top: 1px solid rgba(191, 87, 0, 0.2);
         }
+
+        /* The Sage Wisdom Section */
+        .sage-wisdom-section {
+            padding: 120px 50px;
+            background: linear-gradient(135deg, var(--blaze-background) 0%, var(--blaze-light-navy) 100%);
+            position: relative;
+        }
+
+        .sage-wisdom-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(191, 87, 0, 0.1) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(148, 169, 201, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .wisdom-pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pillar-card {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .pillar-card:hover {
+            border-color: var(--blaze-primary);
+            box-shadow: 0 10px 40px rgba(191, 87, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .pillar-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .pillar-title {
+            color: var(--blaze-white);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .pillar-description {
+            color: var(--blaze-light-slate);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .pillar-insights {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .pillar-insights li {
+            color: var(--blaze-accent);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .pillar-insights li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--blaze-primary);
+        }
+
+        .sage-manifesto {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .manifesto-title {
+            color: var(--blaze-primary);
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sage-quote {
+            font-size: 20px;
+            font-style: italic;
+            color: var(--blaze-white);
+            line-height: 1.6;
+            margin: 0 0 40px;
+            padding: 0;
+            border: none;
+            position: relative;
+        }
+
+        .sage-quote::before {
+            content: '"';
+            font-size: 80px;
+            color: var(--blaze-primary);
+            position: absolute;
+            top: -20px;
+            left: -40px;
+            font-family: serif;
+        }
+
+        .manifesto-principles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .principle {
+            background: rgba(17, 34, 64, 0.6);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--blaze-primary);
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--blaze-light-slate);
+        }
+
+        .principle strong {
+            color: var(--blaze-primary);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .sage-community-invitation {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .invitation-title {
+            color: var(--blaze-white);
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .invitation-description {
+            color: var(--blaze-light-slate);
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .community-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .sage-wisdom-section {
+                padding: 80px 20px;
+            }
+            
+            .wisdom-pillars {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .pillar-card {
+                padding: 30px 20px;
+            }
+            
+            .manifesto-title {
+                font-size: 24px;
+            }
+            
+            .sage-quote {
+                font-size: 18px;
+            }
+            
+            .community-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
         
         .compliance-items {
             display: flex;
@@ -2609,24 +2826,26 @@
         <div class="nav-container">
             <div style="display: flex; align-items: center; gap: 2rem;">
                 <div class="nav-logo">
-                    <div class="nav-logo-icon">B</div>
-                    <div class="nav-logo-text">Blaze <span>Intelligence</span></div>
+                    <div class="nav-logo-icon">⚡</div>
+                    <div class="nav-logo-text">Blaze <span>Intelligence</span>
+                        <div class="nav-logo-tagline">The Sage of Sports Intelligence</div>
+                    </div>
                 </div>
                 
                 <div class="nav-links">
                     <a href="/" class="nav-link active">Home</a>
-                    <a href="#texas-football-authority" class="nav-link">Texas Football Authority</a>
-                    <a href="/friday-night-lights" class="nav-link">Friday Night Lights 🏈</a>
-                    <a href="#analytics" class="nav-link">Championship Analytics</a>
-                    <a href="/blaze-vision-intelligence-command-center.html" class="nav-link">🎯 Vision AI</a>
-                    <a href="/vision-ai-demo.html" class="nav-link">👁️ Character Assessment</a>
-                    <a href="/realtime-analytics-dashboard.html" class="nav-link">📊 Live Analytics</a>
-                    <a href="/blaze-predictive-championship-dashboard.html" class="nav-link">🏆 Predictive Intelligence</a>
-                    <a href="/texas-football-rankings" class="nav-link">Texas Rankings™</a>
-                    <a href="#partnerships" class="nav-link">Strategic Partnerships</a>
-                    <a href="#community" class="nav-link">Texas Football Community</a>
-                    <a href="/dave-campbell-authority" class="nav-link">Authority Model 🔥</a>
-                    <a href="#contact" class="nav-link highlight">Join the Community</a>
+                    <a href="#championship-wisdom" class="nav-link">Championship Wisdom</a>
+                    <a href="/strategic-intelligence" class="nav-link">Strategic Intelligence 🧠</a>
+                    <a href="#performance-insights" class="nav-link">Performance Insights</a>
+                    <a href="/blaze-vision-intelligence-command-center.html" class="nav-link">🔮 Character Intelligence</a>
+                    <a href="/vision-ai-demo.html" class="nav-link">🥇 Championship Character</a>
+                    <a href="/realtime-analytics-dashboard.html" class="nav-link">📊 Strategic Insights</a>
+                    <a href="/blaze-predictive-championship-dashboard.html" class="nav-link">🎯 Championship Foresight</a>
+                    <a href="/championship-intelligence-hub" class="nav-link">Intelligence Hub™</a>
+                    <a href="#wisdom-network" class="nav-link">The Wisdom Network</a>
+                    <a href="#sage-community" class="nav-link">The Sage Community</a>
+                    <a href="/sage-intelligence-framework" class="nav-link">The Sage Framework ✨</a>
+                    <a href="#contact" class="nav-link highlight">Seek The Sage</a>
                 </div>
             </div>
             
@@ -2672,19 +2891,19 @@
             <div class="hero-content">
                 <div class="newspaper-header">
                     <div class="established-badge">EST. 1959 • DAVE CAMPBELL'S LEGACY</div>
-                    <div class="tagline texas-pride">🏈 THE TEXAS AUTHORITY ON SPORTS ANALYTICS™</div>
+                    <div class="tagline texas-pride">🏈 THE SAGE OF SPORTS INTELLIGENCE™</div>
                 </div>
-                <h1 class="championship-title">The Dave Campbell of <span class="highlight texas-orange">Data Analytics</span></h1>
+                <h1 class="championship-title">Where Wisdom Meets <span class="highlight texas-orange">Championship Innovation</span></h1>
                 <div class="heritage-subtitle">
-                    <span class="legacy-text">Building on 65+ Years of Texas Football Legacy</span>
-                    <span class="friday-night-badge">Friday Night Lights Intelligence</span>
+                    <span class="legacy-text">Championship Wisdom • Strategic Foresight • Competitive Intelligence</span>
+                    <span class="friday-night-badge">The Sage of Sports Intelligence</span>
                 </div>
                 <div class="dave-campbell-quote">
                     <div class="quote-mark">"</div>
                     <p class="authority-statement">
-                        In the heart of Texas football country, where legends are born on Friday nights, we honor the Dave Campbell tradition of championship excellence while pioneering the future of sports intelligence.
+                        True competitive advantage isn't just about data—it's about the wisdom to interpret it, the foresight to act on it, and the intelligence to transform insight into championship performance.
                     </p>
-                    <div class="quote-attribution">— The Texas Football Authority</div>
+                    <div class="quote-attribution">— The Sage Approach to Sports Intelligence</div>
                 </div>
                 
                 <div class="texas-stats-bar">
@@ -2708,22 +2927,22 @@
                         <a href="/texas-football-intelligence" class="btn championship-primary">
                             <span class="btn-icon">🏈</span>
                             <span class="btn-text">
-                                <strong>Friday Night Lights Intelligence</strong>
-                                <small>Championship Analytics Platform</small>
+                                <strong>Championship Intelligence Platform</strong>
+                                <small>Where Wisdom Drives Victory</small>
                             </span>
                         </a>
                         <a href="/texas-football-rankings" class="btn championship-secondary">
                             <span class="btn-icon">🏆</span>
                             <span class="btn-text">
-                                <strong>Texas Football Rankings™</strong>
-                                <small>Live Power Index & Predictions</small>
+                                <strong>Strategic Intelligence Hub</strong>
+                                <small>Foresight • Insights • Championship Thinking</small>
                             </span>
                         </a>
                     </div>
                     <div class="authority-link">
                         <a href="#dave-campbell-authority" class="authority-btn">
-                            <span class="authority-badge">OFFICIAL</span>
-                            Dave Campbell Authority Model
+                            <span class="authority-badge">THE SAGE</span>
+                            Sports Intelligence Framework
                             <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -2971,17 +3190,17 @@
     <!-- Real-time Analytics Section -->
     <section class="analytics-section" id="analytics" data-aos="fade-up">
         <div class="section-header">
-            <span class="section-badge">Championship Analytics</span>
-            <h2 class="section-title">Friday Night Lights Intelligence Platform</h2>
+            <span class="section-badge">Championship Wisdom</span>
+            <h2 class="section-title">Strategic Intelligence for Champions</h2>
             <p class="section-subtitle">
-                From district battles to championship runs, track the metrics that matter most in Texas football. Our championship-level analytics serve coaches, administrators, and the entire Friday Night Lights community with insights that honor the game.
+                True competitive advantage lies not in data collection, but in the wisdom to interpret patterns others miss. We transform information into championship intelligence, providing the strategic foresight that separates champions from competitors.
             </p>
         </div>
         
         <div class="analytics-grid">
             <div class="analytics-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="analytics-card-header">
-                    <h3 class="analytics-card-title">Player Performance Index</h3>
+                    <h3 class="analytics-card-title">Champion Character Intelligence</h3>
                     <span class="analytics-card-badge">LIVE</span>
                 </div>
                 <div class="chart-container">
@@ -2991,7 +3210,7 @@
             
             <div class="analytics-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="analytics-card-header">
-                    <h3 class="analytics-card-title">Team Efficiency Metrics</h3>
+                    <h3 class="analytics-card-title">Strategic Performance Insights</h3>
                     <span class="analytics-card-badge">LIVE</span>
                 </div>
                 <div class="chart-container">
@@ -3097,10 +3316,10 @@
     <!-- AI Intelligence Section -->
     <section class="ai-intelligence-section" id="ai-intelligence" data-aos="fade-up">
         <div class="section-header">
-            <span class="section-badge">AI Intelligence</span>
-            <h2 class="section-title">Powered by Leading AI Services</h2>
+            <span class="section-badge">The Sage Framework</span>
+            <h2 class="section-title">Wisdom Through Intelligence Synthesis</h2>
             <p class="section-subtitle">
-                Experience real AI-powered sports analysis using ChatGPT 5, Claude Opus 4.1, and Gemini 2.5 Pro for championship insights.
+                Championship wisdom emerges from the synthesis of multiple intelligence sources. Our Sage Framework combines the strategic insights of leading AI systems to provide the deep understanding that drives championship decisions.
             </p>
         </div>
         
@@ -3109,12 +3328,12 @@
             <div class="ai-feature-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="ai-feature-header">
                     <div class="ai-service-logo">🤖</div>
-                    <h3 class="ai-feature-title">OpenAI Team Analysis</h3>
-                    <span class="ai-service-badge">ChatGPT 5</span>
+                    <h3 class="ai-feature-title">Strategic Pattern Recognition</h3>
+                    <span class="ai-service-badge">Championship AI</span>
                 </div>
                 <div class="ai-feature-content">
                     <p class="ai-feature-description">
-                        Get deep team insights powered by OpenAI's advanced language models. Analyze strengths, weaknesses, and championship potential.
+                        Uncover the strategic patterns that separate champions from competitors. Our intelligence synthesis reveals the deeper insights that drive championship decisions.
                     </p>
                     <div class="team-selector">
                         <select id="teamSelector" class="ai-input">
@@ -3158,12 +3377,12 @@
             <div class="ai-feature-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="ai-feature-header">
                     <div class="ai-service-logo">🧠</div>
-                    <h3 class="ai-feature-title">Championship Predictions</h3>
-                    <span class="ai-service-badge">Claude Opus 4.1</span>
+                    <h3 class="ai-feature-title">Championship Foresight</h3>
+                    <span class="ai-service-badge">The Sage Intelligence</span>
                 </div>
                 <div class="ai-feature-content">
                     <p class="ai-feature-description">
-                        Advanced championship probability analysis using Claude Opus 4.1 for detailed predictions and insights.
+                        Strategic foresight that reveals championship pathways before they emerge. True wisdom lies in seeing what others cannot - the subtle patterns that determine destiny.
                     </p>
                     <div class="league-selector">
                         <select id="leagueSelector" class="ai-input">
@@ -3172,7 +3391,7 @@
                             <option value="nba">NBA</option>
                             <option value="cfb">College Football</option>
                         </select>
-                        <button class="ai-action-btn" id="predictChampionshipBtn">Predict Championship</button>
+                        <button class="ai-action-btn" id="predictChampionshipBtn">Reveal Championship Path</button>
                     </div>
                     <div id="championshipResult" class="ai-result-container"></div>
                 </div>
@@ -3182,8 +3401,8 @@
             <div class="ai-feature-card" data-aos="fade-up" data-aos-delay="250">
                 <div class="ai-feature-header">
                     <div class="ai-service-logo">⚡</div>
-                    <h3 class="ai-feature-title">Game Highlights Analysis</h3>
-                    <span class="ai-service-badge">Gemini 2.5 Pro</span>
+                    <h3 class="ai-feature-title">Moment of Truth Intelligence</h3>
+                    <span class="ai-service-badge">Championship Moments</span>
                 </div>
                 <div class="ai-feature-content">
                     <p class="ai-feature-description">
@@ -3368,22 +3587,22 @@
 
     <section class="pricing-section" id="pricing" data-aos="fade-up">
         <div class="section-header">
-            <span class="section-badge">Community Investment</span>
-            <h2 class="section-title">Texas Football Community Access</h2>
+            <span class="section-badge">Championship Investment</span>
+            <h2 class="section-title">The Value of Wisdom</h2>
             <p class="section-subtitle">
-                Championship-level analytics accessible to the entire Texas football family - from Friday Night Lights to state championships, pricing that serves our community.
+                True competitive advantage requires strategic investment in intelligence that transforms how you think, prepare, and dominate. The Sage approach to championship intelligence - an investment in wisdom, not just tools.
             </p>
         </div>
         
         <div class="pricing-container">
             <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="100">
                 <div class="pricing-header">
-                    <h3>Team Analytics Pro</h3>
+                    <h3>The Sage Intelligence</h3>
                     <div class="price">
                         <span class="amount">$1,188</span>
                         <span class="period">/annual</span>
                     </div>
-                    <p class="price-subtitle">Complete analytics platform for serious teams</p>
+                    <p class="price-subtitle">Championship wisdom and strategic foresight for serious competitors</p>
                 </div>
                 <div class="pricing-features">
                     <ul>
@@ -3751,32 +3970,32 @@
     <section class="contact-form-section">
         <div class="contact-form-content" data-aos="fade-up">
             <div class="section-header">
-                <span class="section-badge">Get Started</span>
-                <h2 class="section-title">Ready to Dominate?</h2>
+                <span class="section-badge">Seek The Sage</span>
+                <h2 class="section-title">Join The Championship Intelligence Community</h2>
                 <p class="section-subtitle">
-                    Schedule a personalized demo and see Blaze Intelligence in action
+                    Connect with champions who understand that true competitive advantage lies in strategic intelligence and championship wisdom.
                 </p>
             </div>
             
             <div class="contact-form-grid">
                 <div class="contact-form-left">
-                    <h3>Why Choose Blaze Intelligence?</h3>
+                    <h3>Why Join The Sage Community?</h3>
                     <div class="benefits-list">
                         <div class="benefit-item">
                             <span class="benefit-icon">⚡</span>
-                            <span>Real-time analytics with &lt;100ms latency</span>
+                            <span>Strategic intelligence that reveals championship patterns</span>
                         </div>
                         <div class="benefit-item">
                             <span class="benefit-icon">🎯</span>
-                            <span>94.6% prediction accuracy rate</span>
+                            <span>Character assessment through micro-expression analysis</span>
                         </div>
                         <div class="benefit-item">
                             <span class="benefit-icon">💰</span>
-                            <span>67-80% cost savings vs competitors</span>
+                            <span>Championship wisdom investment approach</span>
                         </div>
                         <div class="benefit-item">
                             <span class="benefit-icon">📞</span>
-                            <span>24/7 support and consulting</span>
+                            <span>24/7 access to championship intelligence network</span>
                         </div>
                     </div>
                     
@@ -3784,7 +4003,7 @@
                         <h4>Contact Information</h4>
                         <div class="austin-contact-details">
                             <p><strong>Austin Humphrey</strong></p>
-                            <p>Founder &amp; CEO</p>
+                            <p>The Sage • Founder &amp; Chief Intelligence Officer</p>
                             <p>📧 <a href="mailto:ahump20@outlook.com">ahump20@outlook.com</a></p>
                             <p>📱 <a href="tel:+12102735538">(210) 273-5538</a></p>
                             <p>📍 Austin, Texas</p>
@@ -3840,7 +4059,7 @@
                             <label class="checkbox-label">
                                 <input type="checkbox" id="updates" name="updates">
                                 <span class="checkmark-custom"></span>
-                                Send me updates about Blaze Intelligence
+                                Send me updates from The Sage Intelligence Community
                             </label>
                         </div>
                         
@@ -3851,11 +4070,100 @@
                         
                         <div class="form-success" id="formSuccess" style="display: none;">
                             <div class="success-icon">✅</div>
-                            <h4>Thank you for your interest!</h4>
-                            <p>We will contact you within 24 hours to schedule your personalized demo.</p>
+                            <h4>Welcome to The Sage Community!</h4>
+                            <p>The Sage will connect with you within 24 hours to begin your championship intelligence journey.</p>
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Sage Thought Leadership Framework -->
+    <section class="sage-wisdom-section" id="sage-wisdom" data-aos="fade-up">
+        <div class="section-header">
+            <span class="section-badge">The Sage Framework</span>
+            <h2 class="section-title">Championship Wisdom in Action</h2>
+            <p class="section-subtitle">
+                True competitive intelligence emerges from the synthesis of wisdom, foresight, and strategic understanding. The Sage approach transforms information into championship intelligence.
+            </p>
+        </div>
+
+        <div class="wisdom-pillars">
+            <div class="pillar-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="pillar-icon">🧠</div>
+                <h3 class="pillar-title">Strategic Foresight</h3>
+                <p class="pillar-description">
+                    Champions see patterns others miss. Our intelligence framework reveals the strategic pathways that determine championship outcomes before they become obvious.
+                </p>
+                <ul class="pillar-insights">
+                    <li>Pattern Recognition at Championship Level</li>
+                    <li>Predictive Intelligence for Competitive Advantage</li>
+                    <li>Strategic Decision-Making Frameworks</li>
+                </ul>
+            </div>
+
+            <div class="pillar-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="pillar-icon">⚡</div>
+                <h3 class="pillar-title">Character Intelligence</h3>
+                <p class="pillar-description">
+                    True championship performance isn't just about skill—it's about character under pressure. We decode the micro-signals that reveal championship DNA.
+                </p>
+                <ul class="pillar-insights">
+                    <li>Micro-Expression Analysis for Character Assessment</li>
+                    <li>Pressure Response Pattern Recognition</li>
+                    <li>Champion Mindset Identification Systems</li>
+                </ul>
+            </div>
+
+            <div class="pillar-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="pillar-icon">🎯</div>
+                <h3 class="pillar-title">Competitive Synthesis</h3>
+                <p class="pillar-description">
+                    Championship wisdom emerges when multiple intelligence streams converge. We synthesize insights from every angle to reveal the complete competitive picture.
+                </p>
+                <ul class="pillar-insights">
+                    <li>Multi-Source Intelligence Integration</li>
+                    <li>Competitive Landscape Analysis</li>
+                    <li>Strategic Opportunity Identification</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sage-manifesto">
+            <div class="manifesto-content">
+                <h3 class="manifesto-title">The Sage Manifesto</h3>
+                <blockquote class="sage-quote">
+                    "In a world drowning in data, wisdom becomes the ultimate competitive advantage. The Sage doesn't just collect information—we synthesize understanding, reveal patterns, and provide the strategic intelligence that transforms potential into championship performance."
+                </blockquote>
+                <div class="manifesto-principles">
+                    <div class="principle">
+                        <strong>Wisdom Over Data:</strong> Information is abundant; insight is rare. We provide the wisdom that drives championship decisions.
+                    </div>
+                    <div class="principle">
+                        <strong>Character Over Statistics:</strong> Numbers tell what happened; character reveals what will happen when it matters most.
+                    </div>
+                    <div class="principle">
+                        <strong>Synthesis Over Analysis:</strong> True intelligence emerges when multiple perspectives converge into championship clarity.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sage-community-invitation">
+            <h3 class="invitation-title">Join The Sage Community</h3>
+            <p class="invitation-description">
+                Connect with champions who understand that true competitive advantage lies in strategic intelligence, character assessment, and championship wisdom.
+            </p>
+            <div class="community-actions">
+                <a href="#contact" class="btn championship-primary">
+                    <span class="btn-text">Seek The Sage</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="/sage-intelligence-framework" class="btn championship-secondary">
+                    <span class="btn-text">Explore The Framework</span>
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -3866,8 +4174,8 @@
             <div class="footer-brand">
                 <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252Cq_auto/https://blaze-intelligence.netlify.app/public/assets/images/BI-3_1757392449602.png%25253F_a%25253DBBFAAAAA0%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="Blaze Intelligence" class="footer-logo" loading="lazy">
                 <div class="footer-brand-info">
-                    <h4>BLAZE INTELLIGENCE</h4>
-                    <p>Elite sports analytics platform transforming raw data into championship insights.</p>
+                    <h4>BLAZE INTELLIGENCE • THE SAGE</h4>
+                    <p>Where championship wisdom meets strategic intelligence. Transforming information into competitive advantage through The Sage Framework.</p>
                 </div>
             </div>
             
