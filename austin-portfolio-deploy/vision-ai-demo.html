@@ -21,22 +21,26 @@
     
     <style>
         :root {
-            --blaze-primary: #ff6b35;
-            --blaze-secondary: #f7931e;
-            --blaze-accent: #ffd700;
-            --blaze-dark: #0a0a0a;
-            --blaze-darker: #050505;
-            --blaze-gray: #1a1a2e;
-            --blaze-blue: #16213e;
-            --blaze-cyan: #00ffff;
-            --blaze-green: #00ff88;
+            /* Blaze Intelligence Brand Colors - Consistent with Netlify */
+            --blaze-primary: #BF5700;        /* Deep Burnt Orange */
+            --blaze-secondary: #FF6B35;      /* Bright Orange */
+            --blaze-background: #0A192F;     /* Deep Navy Blue */
+            --blaze-light-navy: #112240;     /* Light Navy */
+            --blaze-slate: #8892B0;          /* Muted Gray-Blue */
+            --blaze-light-slate: #CCD6F6;    /* Light Slate */
+            --blaze-accent: #94A9C9;         /* Muted Gray-Blue */
+            --blaze-white: #E6F1FF;          /* Light Blue/White */
+            --blaze-success: #64FFDA;        /* Success Green */
         }
 
         body { 
-            background: linear-gradient(135deg, var(--blaze-dark) 0%, var(--blaze-gray) 50%, var(--blaze-blue) 100%);
-            color: #e2e8f0; 
-            font-family: 'Inter', sans-serif;
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate); 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             overflow-x: hidden;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .glass-nav { 

@@ -18,12 +18,28 @@
             box-sizing: border-box;
         }
         
+        :root {
+            /* Blaze Intelligence Brand Colors - Consistent with Netlify */
+            --blaze-primary: #BF5700;        /* Deep Burnt Orange */
+            --blaze-secondary: #FF6B35;      /* Bright Orange */
+            --blaze-background: #0A192F;     /* Deep Navy Blue */
+            --blaze-light-navy: #112240;     /* Light Navy */
+            --blaze-slate: #8892B0;          /* Muted Gray-Blue */
+            --blaze-light-slate: #CCD6F6;    /* Light Slate */
+            --blaze-accent: #94A9C9;         /* Muted Gray-Blue */
+            --blaze-white: #E6F1FF;          /* Light Blue/White */
+            --blaze-success: #64FFDA;        /* Success Green */
+        }
+        
         body {
-            font-family: 'Inter', sans-serif;
-            background: #000814;
-            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--blaze-background);
+            color: var(--blaze-white);
             overflow-x: hidden;
             position: relative;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         #three-canvas {

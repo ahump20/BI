@@ -43,17 +43,34 @@
     
     <style>
         :root {
-            --burnt-orange: #BF5700;
+            /* Blaze Intelligence Brand Colors - Consistent with Netlify */
+            --blaze-primary: #BF5700;        /* Deep Burnt Orange */
+            --blaze-secondary: #FF6B35;      /* Bright Orange */
+            --blaze-background: #0A192F;     /* Deep Navy Blue */
+            --blaze-light-navy: #112240;     /* Light Navy */
+            --blaze-slate: #8892B0;          /* Muted Gray-Blue */
+            --blaze-light-slate: #CCD6F6;    /* Light Slate */
+            --blaze-accent: #94A9C9;         /* Muted Gray-Blue */
+            --blaze-white: #E6F1FF;          /* Light Blue/White */
+            --blaze-success: #64FFDA;        /* Success Green */
+            
+            /* Legacy support */
+            --burnt-orange: var(--blaze-primary);
             --light-orange: #FFD7B8;
-            --dark-navy: #0A192F;
-            --light-navy: #112240;
-            --slate: #8892B0;
-            --light-slate: #CCD6F6;
-            --white: #E6F1FF;
-            --success: #64FFDA;
-            --font-sans: 'Inter', sans-serif;
-            --font-mono: 'Roboto Mono', monospace;
+            --dark-navy: var(--blaze-background);
+            --light-navy: var(--blaze-light-navy);
+            --slate: var(--blaze-slate);
+            --light-slate: var(--blaze-light-slate);
+            --white: var(--blaze-white);
+            --success: var(--blaze-success);
+            
+            /* Typography */
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Roboto Mono', 'Monaco', 'Courier New', monospace;
+            
+            /* Animation */
             --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --transition-slow: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
         
         * {
@@ -64,11 +81,14 @@
         
         body {
             font-family: var(--font-sans);
-            background: linear-gradient(180deg, #000810 0%, #001122 50%, #000810 100%);
-            color: var(--light-slate);
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate);
             overflow-x: hidden;
             line-height: 1.6;
             position: relative;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         body::before {
@@ -79,15 +99,8 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(ellipse at 20% 10%, rgba(191, 87, 0, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 90%, rgba(155, 203, 235, 0.1) 0%, transparent 50%),
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 98px,
-                    rgba(191, 87, 0, 0.03) 100px,
-                    rgba(191, 87, 0, 0.03) 102px
-                );
+                radial-gradient(ellipse at 20% 10%, rgba(191, 87, 0, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(148, 169, 201, 0.05) 0%, transparent 60%);
             pointer-events: none;
             z-index: -1;
         }
@@ -871,16 +884,16 @@
         }
         
         .nav-links a {
-            color: rgba(255, 255, 255, 0.85);
+            color: var(--blaze-light-slate);
             text-decoration: none;
             font-weight: 500;
             font-size: 15px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             position: relative;
         }
         
         .nav-links a:hover {
-            color: var(--burnt-orange);
+            color: var(--blaze-primary);
         }
         
         .nav-links a::after {
@@ -890,7 +903,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--burnt-orange);
+            background: var(--blaze-primary);
             transition: width 0.3s ease;
         }
         
@@ -1018,7 +1031,7 @@
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #FFFFFF 0%, #BF5700 100%);
+            background: linear-gradient(135deg, var(--blaze-white) 0%, var(--blaze-primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1027,7 +1040,7 @@
         
         .hero-tagline {
             font-size: clamp(20px, 3vw, 28px);
-            color: var(--burnt-orange);
+            color: var(--blaze-secondary);
             margin-bottom: 25px;
             font-weight: 600;
             font-style: italic;
@@ -1038,12 +1051,13 @@
         
         .hero-subtitle {
             font-size: clamp(18px, 2.5vw, 24px);
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--blaze-light-slate);
             margin-bottom: 50px;
             line-height: 1.6;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0.9;
         }
         
         .hero-buttons {

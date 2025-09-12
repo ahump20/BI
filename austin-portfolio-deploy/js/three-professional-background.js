@@ -11,10 +11,10 @@ class BlazeProfessionalBackground {
             waveAmplitude: options.waveAmplitude || 0.5,
             animationSpeed: options.animationSpeed || 0.001,
             colors: {
-                primary: options.primaryColor || 0x0066CC,      // Professional blue
-                secondary: options.secondaryColor || 0x00A8CC,   // Cyan accent
-                accent: options.accentColor || 0xFFFFFF,         // Clean white
-                background: options.backgroundColor || 0x000814  // Deep navy
+                primary: options.primaryColor || 0xBF5700,      // Blaze Primary Orange
+                secondary: options.secondaryColor || 0xFF6B35,   // Blaze Secondary Orange  
+                accent: options.accentColor || 0x94A9C9,         // Blaze Accent Blue
+                background: options.backgroundColor || 0x0A192F  // Blaze Deep Navy
             },
             opacity: {
                 particles: 0.6,
