@@ -1398,6 +1398,299 @@
             top: 6px;
         }
         
+        /* Morning Blaze Newsletter Section */
+        .morning-blaze-newsletter {
+            padding: 120px 5%;
+            background: linear-gradient(180deg, rgba(191, 87, 0, 0.15) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(0, 0, 0, 0.8) 100%);
+            position: relative;
+        }
+        
+        .morning-blaze-newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(191, 87, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .newsletter-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .blaze-logo-large {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            justify-content: center;
+        }
+        
+        .blaze-logo-large i {
+            font-size: 4rem;
+            color: var(--friday-lights);
+            animation: flameDance 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes flameDance {
+            0% { 
+                transform: scale(1) rotate(-2deg);
+                color: #FFD700;
+            }
+            100% { 
+                transform: scale(1.1) rotate(2deg);
+                color: #FF6B00;
+            }
+        }
+        
+        .blaze-logo-large .logo-text {
+            font-family: var(--font-headline);
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--friday-lights), var(--burnt-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+        }
+        
+        .newsletter-title {
+            font-family: var(--font-headline);
+            font-size: 3.2rem;
+            color: var(--mississippi-white);
+            text-align: center;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+        
+        .newsletter-subtitle {
+            font-size: 1.3rem;
+            color: var(--cardinal-blue);
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-benefits {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .benefit-item i {
+            color: var(--friday-lights);
+            font-size: 1.2rem;
+            min-width: 20px;
+        }
+        
+        .benefit-item span {
+            color: var(--mississippi-white);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .newsletter-signup-form {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--burnt-orange);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .form-header h3 {
+            font-family: var(--font-headline);
+            font-size: 2.2rem;
+            color: var(--burnt-orange);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        
+        .subscriber-count {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--friday-lights), var(--burnt-orange));
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-flex;
+        }
+        
+        .subscriber-count .count {
+            font-family: var(--font-data);
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--stadium-black);
+        }
+        
+        .subscriber-count .label {
+            font-size: 0.9rem;
+            color: var(--stadium-black);
+            font-weight: 600;
+        }
+        
+        .signup-form {
+            display: grid;
+            gap: 24px;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .email-input, .role-select, .interests-select {
+            width: 100%;
+            padding: 20px 16px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(155, 203, 235, 0.2);
+            border-radius: 12px;
+            color: var(--mississippi-white);
+            font-size: 1.1rem;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+        }
+        
+        .email-input:focus, .role-select:focus, .interests-select:focus {
+            outline: none;
+            border-color: var(--burnt-orange);
+            background: rgba(191, 87, 0, 0.1);
+        }
+        
+        .form-group label {
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            font-size: 0.8rem;
+            color: var(--cardinal-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .subscribe-btn {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            border: none;
+            padding: 20px 40px;
+            border-radius: 12px;
+            color: white;
+            font-family: var(--font-headline);
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 8px 32px rgba(191, 87, 0, 0.3);
+        }
+        
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(191, 87, 0, 0.4);
+        }
+        
+        .subscribe-btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .subscribe-btn:hover i {
+            transform: translateX(4px);
+        }
+        
+        .form-guarantee {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--cardinal-blue);
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .form-guarantee i {
+            color: #00ff88;
+        }
+        
+        .newsletter-preview {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(155, 203, 235, 0.2);
+        }
+        
+        .newsletter-preview h4 {
+            font-family: var(--font-headline);
+            color: var(--burnt-orange);
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .headline-scroll {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .headline-item {
+            display: flex;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+        }
+        
+        .headline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .headline-item .date {
+            font-family: var(--font-data);
+            color: var(--friday-lights);
+            font-weight: 600;
+            min-width: 50px;
+            font-size: 0.85rem;
+        }
+        
+        .headline-item .title {
+            color: var(--mississippi-white);
+            font-size: 0.9rem;
+            line-height: 1.3;
+        }
+        
         /* Coverage Map */
         .coverage-map {
             padding: 100px 5%;
@@ -1711,7 +2004,7 @@
             <div class="product-content">
                 <div class="product-panel active" id="annual">
                     <div class="product-visual">
-                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%25252Bxml%25252C%2525253Csvg%252520xmlns%25253D%252527http://www.w3.org/2000/svg%252527%252520viewBox%25253D%2525270%2525200%252520400%252520500%252527%2525253E%2525253Crect%252520fill%25253D%252527%25252523BF5700%252527%252520width%25253D%252527400%252527%252520height%25253D%252527500%252527/%2525253E%2525253Ctext%252520x%25253D%252527200%252527%252520y%25253D%252527250%252527%252520font-family%25253D%252527Arial%252527%252520font-size%25253D%25252724%252527%252520fill%25253D%252527white%252527%252520text-anchor%25253D%252527middle%252527%2525253E2025%252520ANNUAL%2525253C/text%2525253E%2525253C/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="Blaze Intelligence Annual" loading="lazy">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%2525252Bxml%2525252C%252525253Csvg%25252520xmlns%2525253D%25252527http://www.w3.org/2000/svg%25252527%25252520viewBox%2525253D%252525270%252525200%25252520400%25252520500%25252527%252525253E%252525253Crect%25252520fill%2525253D%25252527%2525252523BF5700%25252527%25252520width%2525253D%25252527400%25252527%25252520height%2525253D%25252527500%25252527/%252525253E%252525253Ctext%25252520x%2525253D%25252527200%25252527%25252520y%2525253D%25252527250%25252527%25252520font-family%2525253D%25252527Arial%25252527%25252520font-size%2525253D%2525252724%25252527%25252520fill%2525253D%25252527white%25252527%25252520text-anchor%2525253D%25252527middle%25252527%252525253E2025%25252520ANNUAL%252525253C/text%252525253E%252525253C/svg%252525253E%25253F_a%25253DBBFAAAAA0%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="Blaze Intelligence Annual" loading="lazy">
                     </div>
                     <div class="product-details">
                         <h3>The Blaze Intelligence Annual</h3>
@@ -1733,7 +2026,7 @@
                 
                 <div class="product-panel" id="blazescout">
                     <div class="product-visual">
-                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%25252Bxml%25252C%2525253Csvg%252520xmlns%25253D%252527http://www.w3.org/2000/svg%252527%252520viewBox%25253D%2525270%2525200%252520400%252520500%252527%2525253E%2525253Crect%252520fill%25253D%252527%252525239B2222%252527%252520width%25253D%252527400%252527%252520height%25253D%252527500%252527/%2525253E%2525253Ctext%252520x%25253D%252527200%252527%252520y%25253D%252527250%252527%252520font-family%25253D%252527Arial%252527%252520font-size%25253D%25252724%252527%252520fill%25253D%252527white%252527%252520text-anchor%25253D%252527middle%252527%2525253EBlazeScout%252520Pro%2525253C/text%2525253E%2525253C/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="BlazeScout Pro" loading="lazy">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%2525252Bxml%2525252C%252525253Csvg%25252520xmlns%2525253D%25252527http://www.w3.org/2000/svg%25252527%25252520viewBox%2525253D%252525270%252525200%25252520400%25252520500%25252527%252525253E%252525253Crect%25252520fill%2525253D%25252527%25252525239B2222%25252527%25252520width%2525253D%25252527400%25252527%25252520height%2525253D%25252527500%25252527/%252525253E%252525253Ctext%25252520x%2525253D%25252527200%25252527%25252520y%2525253D%25252527250%25252527%25252520font-family%2525253D%25252527Arial%25252527%25252520font-size%2525253D%2525252724%25252527%25252520fill%2525253D%25252527white%25252527%25252520text-anchor%2525253D%25252527middle%25252527%252525253EBlazeScout%25252520Pro%252525253C/text%252525253E%252525253C/svg%252525253E%25253F_a%25253DBBFAAAAA0%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="BlazeScout Pro" loading="lazy">
                     </div>
                     <div class="product-details">
                         <h3>BlazeScout Pro</h3>
@@ -1755,7 +2048,7 @@
                 
                 <div class="product-panel" id="blazedraft">
                     <div class="product-visual">
-                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%25252Bxml%25252C%2525253Csvg%252520xmlns%25253D%252527http://www.w3.org/2000/svg%252527%252520viewBox%25253D%2525270%2525200%252520400%252520500%252527%2525253E%2525253Crect%252520fill%25253D%252527%25252523002244%252527%252520width%25253D%252527400%252527%252520height%25253D%252527500%252527/%2525253E%2525253Ctext%252520x%25253D%252527200%252527%252520y%25253D%252527250%252527%252520font-family%25253D%252527Arial%252527%252520font-size%25253D%25252724%252527%252520fill%25253D%252527white%252527%252520text-anchor%25253D%252527middle%252527%2525253EBlazeDraft%2525253C/text%2525253E%2525253C/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="BlazeDraft" loading="lazy">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%2525252Bxml%2525252C%252525253Csvg%25252520xmlns%2525253D%25252527http://www.w3.org/2000/svg%25252527%25252520viewBox%2525253D%252525270%252525200%25252520400%25252520500%25252527%252525253E%252525253Crect%25252520fill%2525253D%25252527%2525252523002244%25252527%25252520width%2525253D%25252527400%25252527%25252520height%2525253D%25252527500%25252527/%252525253E%252525253Ctext%25252520x%2525253D%25252527200%25252527%25252520y%2525253D%25252527250%25252527%25252520font-family%2525253D%25252527Arial%25252527%25252520font-size%2525253D%2525252724%25252527%25252520fill%2525253D%25252527white%25252527%25252520text-anchor%2525253D%25252527middle%25252527%252525253EBlazeDraft%252525253C/text%252525253E%252525253C/svg%252525253E%25253F_a%25253DBBFAAAAA0%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="BlazeDraft" loading="lazy">
                     </div>
                     <div class="product-details">
                         <h3>BlazeDraft</h3>
@@ -1777,7 +2070,7 @@
                 
                 <div class="product-panel" id="api">
                     <div class="product-visual">
-                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%25252Bxml%25252C%2525253Csvg%252520xmlns%25253D%252527http://www.w3.org/2000/svg%252527%252520viewBox%25253D%2525270%2525200%252520400%252520500%252527%2525253E%2525253Crect%252520fill%25253D%252527%2525252300B2A9%252527%252520width%25253D%252527400%252527%252520height%25253D%252527500%252527/%2525253E%2525253Ctext%252520x%25253D%252527200%252527%252520y%25253D%252527250%252527%252520font-family%25253D%252527Arial%252527%252520font-size%25253D%25252724%252527%252520fill%25253D%252527white%252527%252520text-anchor%25253D%252527middle%252527%2525253EAPI%252520ACCESS%2525253C/text%2525253E%2525253C/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="API Access" loading="lazy">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%2525252Bxml%2525252C%252525253Csvg%25252520xmlns%2525253D%25252527http://www.w3.org/2000/svg%25252527%25252520viewBox%2525253D%252525270%252525200%25252520400%25252520500%25252527%252525253E%252525253Crect%25252520fill%2525253D%25252527%252525252300B2A9%25252527%25252520width%2525253D%25252527400%25252527%25252520height%2525253D%25252527500%25252527/%252525253E%252525253Ctext%25252520x%2525253D%25252527200%25252527%25252520y%2525253D%25252527250%25252527%25252520font-family%2525253D%25252527Arial%25252527%25252520font-size%2525253D%2525252724%25252527%25252520fill%2525253D%25252527white%25252527%25252520text-anchor%2525253D%25252527middle%25252527%252525253EAPI%25252520ACCESS%252525253C/text%252525253E%252525253C/svg%252525253E%25253F_a%25253DBBFAAAAA0%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="API Access" loading="lazy">
                     </div>
                     <div class="product-details">
                         <h3>API Access</h3>
@@ -2084,7 +2377,7 @@
     <!-- Media Authority Proof Section -->
     <section class="media-authority-proof">
         <div class="container">
-            <h2 class="section-title">Trusted by Media & Coaches</h2>
+            <h2 class="section-title">Trusted by Media &amp; Coaches</h2>
             <p class="section-subtitle">The source that sources trust • From ESPN to local news</p>
             
             <div class="media-grid">
@@ -2250,6 +2543,252 @@
         </div>
     </section>
     
+    <!-- Morning Blaze Newsletter Signup -->
+    <section class="morning-blaze-newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-hero">
+                    <div class="blaze-logo-large">
+                        <i class="fas fa-fire"></i>
+                        <span class="logo-text">MORNING BLAZE</span>
+                    </div>
+                    <h2 class="newsletter-title">Start Every Day with Championship Intelligence</h2>
+                    <p class="newsletter-subtitle">Join 47,000+ coaches, scouts, and fans who wake up to The Morning Blaze - your daily 5-minute briefing on Deep South sports intelligence.</p>
+                    
+                    <div class="newsletter-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Daily 6 AM Delivery</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Yesterday's Scores + Today's Games</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-star"></i>
+                            <span>One Deep-Dive Feature</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-user-tie"></i>
+                            <span>"Scout's Take" Expert Opinion</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="newsletter-signup-form">
+                    <div class="form-header">
+                        <h3>Get The Morning Blaze</h3>
+                        <div class="subscriber-count">
+                            <span class="count">47,247</span>
+                            <span class="label">Daily Readers</span>
+                        </div>
+                    </div>
+                    
+                    <form class="signup-form" id="blazeNewsletterForm">
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="coach@yourschool.com" required="" class="email-input">
+                            <label for="email">Email Address</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="role" name="role" class="role-select" required="">
+                                <option value="">Select Your Role</option>
+                                <option value="coach">Coach</option>
+                                <option value="scout">Scout/Recruiter</option>
+                                <option value="parent">Parent</option>
+                                <option value="fan">Fan</option>
+                                <option value="media">Media</option>
+                                <option value="admin">Athletic Director</option>
+                            </select>
+                            <label for="role">Role</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="interests" name="interests" class="interests-select" required="">
+                                <option value="">Primary Interest</option>
+                                <option value="texas-football">Texas High School Football</option>
+                                <option value="sec-football">SEC Football</option>
+                                <option value="texas-baseball">Texas Baseball</option>
+                                <option value="sec-baseball">SEC Baseball</option>
+                                <option value="recruiting">Recruiting Intelligence</option>
+                                <option value="analytics">Sports Analytics</option>
+                            </select>
+                            <label for="interests">Primary Interest</label>
+                        </div>
+                        
+                        <button type="submit" class="subscribe-btn">
+                            <span class="btn-text">Subscribe to Morning Blaze</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        
+                        <div class="form-guarantee">
+                            <i class="fas fa-shield-check"></i>
+                            <span>No spam. Unsubscribe anytime. Trusted by Texas coaches since 2024.</span>
+                        </div>
+                    </form>
+                    
+                    <div class="newsletter-preview">
+                        <h4>Recent Morning Blaze Headlines</h4>
+                        <div class="headline-scroll">
+                            <div class="headline-item">
+                                <span class="date">Dec 12</span>
+                                <span class="title">Westlake's Path to Perfect: Inside the Chaparrals' Championship DNA</span>
+                            </div>
+                            <div class="headline-item">
+                                <span class="date">Dec 11</span>
+                                <span class="title">North Shore's Defense: How 145 YPG Became a Playoff Problem</span>
+                            </div>
+                            <div class="headline-item">
+                                <span class="date">Dec 10</span>
+                                <span class="title">Transfer Portal Watch: 15 Texas Prospects SEC Schools Need</span>
+                            </div>
+                            <div class="headline-item">
+                                <span class="date">Dec 9</span>
+                                <span class="title">Friday Night Film Study: Duncanville's Ground Game Evolution</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Competitive Authority Matrix -->
+    <section class="competitive-authority-matrix">
+        <div class="container">
+            <h2 class="section-title">Why We're Different</h2>
+            <p class="section-subtitle">Not competing • Completing • The authority that others cite</p>
+            
+            <div class="comparison-grid">
+                <div class="comparison-header">
+                    <div class="feature-label"></div>
+                    <div class="competitor-column">
+                        <div class="competitor-logo blaze-logo">
+                            <i class="fas fa-fire"></i>
+                            <span>Blaze Intelligence</span>
+                        </div>
+                    </div>
+                    <div class="competitor-column">
+                        <div class="competitor-logo">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Dave Campbell's</span>
+                        </div>
+                    </div>
+                    <div class="competitor-column">
+                        <div class="competitor-logo">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>MaxPreps</span>
+                        </div>
+                    </div>
+                    <div class="competitor-column">
+                        <div class="competitor-logo">
+                            <i class="fas fa-trophy"></i>
+                            <span>247Sports</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Digital-First Innovation</div>
+                    <div class="feature-value advantage">✓ Real-time intelligence</div>
+                    <div class="feature-value">Print heritage</div>
+                    <div class="feature-value">Automated data</div>
+                    <div class="feature-value">College focus</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Coverage Scope</div>
+                    <div class="feature-value advantage">Little League → NFL/MLB</div>
+                    <div class="feature-value">High school football</div>
+                    <div class="feature-value">National platform</div>
+                    <div class="feature-value">College recruiting</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Scout Network</div>
+                    <div class="feature-value advantage">500+ boots on ground</div>
+                    <div class="feature-value">Editorial tradition</div>
+                    <div class="feature-value">Automated feeds</div>
+                    <div class="feature-value">Internet-based</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Geographic Focus</div>
+                    <div class="feature-value advantage">Texas + Deep South</div>
+                    <div class="feature-value">Texas-centric</div>
+                    <div class="feature-value">National generic</div>
+                    <div class="feature-value">National recruiting</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">AI &amp; Analytics</div>
+                    <div class="feature-value advantage">Predictive modeling</div>
+                    <div class="feature-value">Historical stats</div>
+                    <div class="feature-value">Basic analytics</div>
+                    <div class="feature-value">Recruiting rankings</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Data Frequency</div>
+                    <div class="feature-value advantage">24/7 real-time</div>
+                    <div class="feature-value">Annual + weekly</div>
+                    <div class="feature-value">Game-by-game</div>
+                    <div class="feature-value">Recruiting cycles</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Community Integration</div>
+                    <div class="feature-value advantage">Coach partnerships</div>
+                    <div class="feature-value">Tradition-based</div>
+                    <div class="feature-value">School-submitted</div>
+                    <div class="feature-value">Player-driven</div>
+                </div>
+            </div>
+            
+            <div class="differentiation-summary">
+                <div class="summary-card">
+                    <h3>We Complement Dave Campbell's</h3>
+                    <p>Digital evolution partner • Not replacing tradition, extending it</p>
+                    <ul>
+                        <li>Real-time updates vs. annual excellence</li>
+                        <li>Multi-sport vs. football specialization</li>
+                        <li>AI-powered vs. editorial heritage</li>
+                    </ul>
+                </div>
+                
+                <div class="summary-card">
+                    <h3>We're Deeper Than MaxPreps</h3>
+                    <p>Expert intelligence vs. automated aggregation</p>
+                    <ul>
+                        <li>Scout network vs. data scraping</li>
+                        <li>Predictive models vs. historical stats</li>
+                        <li>Local expertise vs. national platform</li>
+                    </ul>
+                </div>
+                
+                <div class="summary-card">
+                    <h3>We're Broader Than 247Sports</h3>
+                    <p>Complete pipeline coverage vs. recruiting focus</p>
+                    <ul>
+                        <li>Youth through pro vs. college-centric</li>
+                        <li>Two-sport authority vs. all sports</li>
+                        <li>Community embedded vs. recruiting portal</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="authority-statement">
+                <div class="statement-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="statement-content">
+                    <h3>The Authority Position</h3>
+                    <p>"When ESPN needs Texas high school data, they cite us. When Dave Campbell's goes digital, they partner with us. When coaches need tomorrow's intelligence, they trust us. We don't compete with authorities — we become them."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -2282,6 +2821,7 @@
                 this.initScoutNetwork();
                 this.initTexasFootballAuthority();
                 this.initMediaAuthorityProof();
+                this.initMorningBlazeNewsletter();
             }
             
             initLiveStats() {
@@ -2730,6 +3270,163 @@
                     dateEl.textContent = `${months[citationDate.getMonth()]} ${citationDate.getFullYear()}`;
                 });
             }
+            
+            initMorningBlazeNewsletter() {
+                // Handle newsletter form submission
+                const form = document.getElementById('blazeNewsletterForm');
+                if (form) {
+                    form.addEventListener('submit', (e) => {
+                        this.handleNewsletterSignup(e);
+                    });
+                }
+                
+                // Animate subscriber count
+                this.animateSubscriberCount();
+                
+                // Update headline dates
+                this.updateHeadlineDates();
+                
+                // Add form field animations
+                this.initFormAnimations();
+            }
+            
+            handleNewsletterSignup(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(e.target);
+                const data = {
+                    email: formData.get('email'),
+                    role: formData.get('role'),
+                    interests: formData.get('interests')
+                };
+                
+                // Show loading state
+                const submitBtn = e.target.querySelector('.subscribe-btn');
+                const originalText = submitBtn.querySelector('.btn-text').textContent;
+                submitBtn.querySelector('.btn-text').textContent = 'Subscribing...';
+                submitBtn.disabled = true;
+                
+                // Simulate API call (replace with actual API endpoint)
+                setTimeout(() => {
+                    // Success feedback
+                    submitBtn.style.background = '#00ff88';
+                    submitBtn.querySelector('.btn-text').textContent = 'Welcome to the Blaze!';
+                    
+                    // Show success message
+                    const successMsg = document.createElement('div');
+                    successMsg.innerHTML = `
+                        <div style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; 
+                                    padding: 16px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                            <i class="fas fa-check-circle" style="color: #00ff88; margin-right: 8px;"></i>
+                            <strong style="color: #00ff88;">You're in!</strong> 
+                            <span style="color: var(--mississippi-white);">Your first Morning Blaze arrives at 6 AM tomorrow.</span>
+                        </div>
+                    `;
+                    
+                    e.target.appendChild(successMsg);
+                    
+                    // Update subscriber count
+                    this.incrementSubscriberCount();
+                    
+                    // Reset form after delay
+                    setTimeout(() => {
+                        e.target.reset();
+                        submitBtn.disabled = false;
+                        submitBtn.style.background = '';
+                        submitBtn.querySelector('.btn-text').textContent = originalText;
+                        successMsg.remove();
+                    }, 5000);
+                    
+                }, 1500);
+                
+                // Track conversion (Google Analytics, etc.)
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'newsletter_signup', {
+                        'custom_parameters': {
+                            'role': data.role,
+                            'interests': data.interests
+                        }
+                    });
+                }
+            }
+            
+            animateSubscriberCount() {
+                const countElement = document.querySelector('.subscriber-count .count');
+                if (!countElement) return;
+                
+                let currentCount = 47247;
+                
+                // Simulate real-time subscriber growth
+                setInterval(() => {
+                    const increment = Math.floor(Math.random() * 3) + 1; // 1-3 new subscribers
+                    currentCount += increment;
+                    
+                    // Animate the count change
+                    countElement.style.transform = 'scale(1.1)';
+                    countElement.style.color = '#FFD700';
+                    
+                    setTimeout(() => {
+                        countElement.textContent = currentCount.toLocaleString();
+                        countElement.style.transform = 'scale(1.0)';
+                        countElement.style.color = '';
+                    }, 200);
+                    
+                }, 45000); // Every 45 seconds
+            }
+            
+            incrementSubscriberCount() {
+                const countElement = document.querySelector('.subscriber-count .count');
+                if (!countElement) return;
+                
+                let currentCount = parseInt(countElement.textContent.replace(/,/g, ''));
+                currentCount += 1;
+                
+                countElement.style.transform = 'scale(1.2)';
+                countElement.style.color = '#00ff88';
+                
+                setTimeout(() => {
+                    countElement.textContent = currentCount.toLocaleString();
+                    countElement.style.transform = 'scale(1.0)';
+                    countElement.style.color = '';
+                }, 300);
+            }
+            
+            updateHeadlineDates() {
+                const dateElements = document.querySelectorAll('.headline-item .date');
+                const today = new Date();
+                
+                dateElements.forEach((dateEl, index) => {
+                    const daysAgo = index;
+                    const date = new Date(today);
+                    date.setDate(date.getDate() - daysAgo);
+                    
+                    const month = date.toLocaleString('default', { month: 'short' });
+                    const day = date.getDate();
+                    dateEl.textContent = `${month} ${day}`;
+                });
+            }
+            
+            initFormAnimations() {
+                // Add focus animations to form fields
+                document.querySelectorAll('.email-input, .role-select, .interests-select').forEach(field => {
+                    field.addEventListener('focus', () => {
+                        field.parentNode.style.transform = 'scale(1.02)';
+                    });
+                    
+                    field.addEventListener('blur', () => {
+                        field.parentNode.style.transform = 'scale(1.0)';
+                    });
+                });
+                
+                // Add validation feedback
+                const emailField = document.getElementById('email');
+                if (emailField) {
+                    emailField.addEventListener('input', (e) => {
+                        const isValid = e.target.checkValidity();
+                        e.target.style.borderColor = isValid ? '#00ff88' : 'rgba(155, 203, 235, 0.2)';
+                    });
+                }
+            }
         }
         
         // Initialize on DOM load
@@ -2794,5 +3491,8 @@
             });
         }
     </script>
+    
+    <!-- Load Professional Three.js Implementation -->
+    <script src="js/professional-threejs.js"></script>
 
 </body></html>
