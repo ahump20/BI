@@ -888,7 +888,7 @@
         
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 24px;
             list-style: none;
             align-items: center;
         }
@@ -897,9 +897,10 @@
             color: var(--blaze-light-slate);
             text-decoration: none;
             font-weight: 500;
-            font-size: 15px;
+            font-size: 14px;
             transition: var(--transition);
             position: relative;
+            white-space: nowrap;
         }
         
         .nav-links a:hover {
@@ -919,6 +920,24 @@
         
         .nav-links a:hover::after {
             width: 100%;
+        }
+        
+        .nav-links a.highlight {
+            background: linear-gradient(135deg, var(--blaze-primary), var(--blaze-secondary));
+            color: white !important;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(191, 87, 0, 0.3);
+        }
+        
+        .nav-links a.highlight:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(191, 87, 0, 0.5);
+        }
+        
+        .nav-links a.highlight::after {
+            display: none;
         }
         
         .nav-cta {
@@ -2834,16 +2853,14 @@
                 
                 <div class="nav-links">
                     <a href="/" class="nav-link active">Home</a>
-                    <a href="/sage-intelligence-framework.html" class="nav-link">🧠 The Sage Framework</a>
-                    <a href="/sage-certification-program.html" class="nav-link">🎓 Certification Program</a>
-                    <a href="/sage-community-onboarding.html" class="nav-link">🔥 Join Community</a>
-                    <a href="/sage-strategic-partnerships.html" class="nav-link">🤝 Strategic Partnerships</a>
-                    <a href="/sage-thought-leadership-calendar.html" class="nav-link">📚 Intelligence Journal</a>
-                    <a href="/blaze-vision-intelligence-command-center.html" class="nav-link">🔮 Character Intelligence</a>
-                    <a href="/vision-ai-demo.html" class="nav-link">🥇 Championship Character</a>
-                    <a href="/realtime-analytics-dashboard.html" class="nav-link">📊 Strategic Insights</a>
-                    <a href="/blaze-predictive-championship-dashboard.html" class="nav-link">🎯 Championship Foresight</a>
-                    <a href="#contact" class="nav-link highlight">Seek The Sage</a>
+                    <a href="/sage-intelligence-framework.html" class="nav-link">The Sage Framework</a>
+                    <a href="/sage-certification-program.html" class="nav-link">Certification</a>
+                    <a href="/sage-community-onboarding.html" class="nav-link">Community</a>
+                    <a href="/sage-strategic-partnerships.html" class="nav-link">Partnerships</a>
+                    <a href="/sage-thought-leadership-calendar.html" class="nav-link">Intelligence Journal</a>
+                    <a href="/sage-authority-content-hub.html" class="nav-link">Content Hub</a>
+                    <a href="/sage-thought-leader-positioning.html" class="nav-link">About</a>
+                    <a href="#contact" class="nav-link highlight">Contact</a>
                 </div>
             </div>
             
@@ -2856,7 +2873,7 @@
                 
                 <div class="season-indicator">
                     <span class="season-label">Season:</span>
-                    <span class="season-value">2023-2024</span>
+                    <span class="season-value">2024-2025</span>
                     <span class="season-label" style="margin-left: 1rem;">Last Update:</span>
                     <span class="season-value" id="lastUpdate">--</span>
                 </div>
