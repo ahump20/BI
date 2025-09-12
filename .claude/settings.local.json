@@ -19,7 +19,8 @@
       "Bash(wrangler pages deploy:*)",
       "Bash(wrangler deploy:*)",
       "Bash(osascript:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(npm install)"
     ],
     "deny": [],
     "ask": []
