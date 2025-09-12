@@ -266,12 +266,17 @@
                         <canvas id="savings-chart" width="400" height="200"></canvas>
                     </div>
 
-                    <!-- CTA -->
-                    <div class="text-center pt-8 border-t border-slate-700">
+                    <!-- CTA Buttons -->
+                    <div class="text-center pt-8 border-t border-slate-700 space-y-4">
+                        <button id="checkout-btn" 
+                                class="enhanced-btn inline-flex items-center gap-3 text-white font-semibold px-8 py-4 rounded-full w-full justify-center">
+                            <i data-lucide="credit-card" class="w-6 h-6"></i>
+                            Start Saving Now - $1,188/year
+                        </button>
                         <a href="mailto:ahump20@outlook.com?subject=ROI%20Calculator%20-%20Let's%20Discuss&body=I'm%20interested%20in%20learning%20more%20about%20Blaze%20Intelligence.%20My%20calculated%20savings:%20$2,808/year" 
-                           class="enhanced-btn inline-flex items-center gap-3 text-white font-semibold px-8 py-4 rounded-full">
-                            <i data-lucide="mail" class="w-6 h-6"></i>
-                            Get Started - Save $<span id="cta-savings">2,808</span>/year
+                           class="inline-flex items-center gap-3 text-slate-300 hover:text-white transition-colors px-8 py-3 rounded-full border border-slate-600 hover:border-neon-blue">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            Contact Sales - Save $<span id="cta-savings">2,808</span>/year
                         </a>
                     </div>
                 </div>
@@ -408,6 +413,9 @@
             // Calculate button
             document.getElementById('calculate-btn').addEventListener('click', calculateROI);
 
+            // Checkout button
+            document.getElementById('checkout-btn').addEventListener('click', handleCheckout);
+
             // Set default selection
             document.getElementById('size-medium').click();
             
@@ -521,6 +529,61 @@
                     }
                 }
             });
+        }
+
+        // Handle Stripe Checkout
+        async function handleCheckout() {
+            const btn = document.getElementById('checkout-btn');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i data-lucide="loader" class="w-6 h-6 animate-spin"></i> Processing...';
+            btn.disabled = true;
+            
+            try {
+                // Determine appropriate plan based on configuration
+                let plan = 'professional';
+                if (currentConfig.size === 'small' && currentConfig.sports <= 2) {
+                    plan = 'starter';
+                } else if (currentConfig.size === 'enterprise' || currentConfig.features.length > 4) {
+                    plan = 'enterprise';
+                }
+                
+                // Create checkout session
+                const response = await fetch('/api/stripe/create-checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        plan: plan,
+                        customerEmail: null, // Will be collected in Stripe
+                        metadata: {
+                            roi_calculator: true,
+                            organization_size: currentConfig.size,
+                            sports_count: currentConfig.sports,
+                            features: currentConfig.features,
+                            estimated_savings: document.getElementById('total-savings').textContent
+                        }
+                    }),
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to create checkout session');
+                }
+                
+                const { url } = await response.json();
+                
+                // Redirect to Stripe Checkout
+                window.location.href = url;
+                
+            } catch (error) {
+                console.error('Checkout error:', error);
+                alert('Sorry, there was an error processing your request. Please try contacting us directly.');
+                
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                lucide.createIcons();
+            }
         }
 
         // Initialize when page loads

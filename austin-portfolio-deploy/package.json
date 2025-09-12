@@ -5,20 +5,12 @@
   "main": "simple-blaze-server.js",
   "scripts": {
     "start": "node simple-blaze-server.js",
-    "dev": "nodemon simple-blaze-server.js",
-    "build": "echo 'Build complete - static files ready'",
-    "clean": "rm -rf node_modules package-lock.json dist build .cache",
-    "clean:cache": "rm -rf .cache .netlify/cache",
-    "clean:logs": "rm -f *.log deployment_*.log",
-    "clean:temp": "rm -f *.tmp *.temp *~ *.save",
-    "clean:all": "npm run clean && npm run clean:cache && npm run clean:logs && npm run clean:temp",
-    "organize": "tools/cleanup-project.sh"
+    "dev": "nodemon simple-blaze-server.js"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "stripe": "^18.5.0"
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
   },
   "engines": {
     "node": ">=14.0.0"

@@ -33,7 +33,10 @@
       "Bash(./scripts/test-deployment.sh:*)",
       "Bash(npx wrangler auth:*)",
       "Bash(test:*)",
-      "Bash(./scripts/deployment-status.sh:*)"
+      "Bash(./scripts/deployment-status.sh:*)",
+      "Bash(./scripts/verify-secrets.sh:*)",
+      "Bash(./verify-deployment.sh:*)",
+      "Bash(gh workflow list:*)"
     ],
     "deny": [],
     "ask": []
