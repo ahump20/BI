@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | The Deep South Sports Authority - Texas Football & SEC Analytics</title>
+    <meta name="description" content="Where Texas grit meets algorithmic excellence. The definitive intelligence platform for Texas high school football, SEC football, and Deep South baseball analytics.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --cardinal-blue: #9BCBEB;
+            --tennessee-deep: #002244;
+            --vancouver-teal: #00B2A9;
+            --platinum: #E5E4E2;
+            --graphite: #36454F;
+            --pearl: #FAFAFA;
+            --shadow-dark: rgba(0, 34, 68, 0.2);
+            --gradient-hero: linear-gradient(135deg, #BF5700 0%, #FF7A33 100%);
+            --gradient-data: linear-gradient(135deg, #002244 0%, #00B2A9 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: var(--pearl);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center top, rgba(191, 87, 0, 0.1) 0%, transparent 70%),
+                        linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(191, 87, 0, 0.03) 10px,
+                rgba(191, 87, 0, 0.03) 20px
+            );
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(28px, 28px); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            padding: 0 2rem;
+            z-index: 10;
+            position: relative;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--gradient-hero);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(180deg, #FFFFFF 0%, #9BCBEB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 60px rgba(155, 203, 235, 0.3);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--cardinal-blue);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--platinum);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--pearl);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--burnt-orange);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--burnt-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 5rem 0;
+            padding: 0 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, rgba(0, 34, 68, 0.1) 100%);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(191, 87, 0, 0.2);
+            border-color: var(--burnt-orange);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-hero);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--cardinal-blue);
+            font-weight: 600;
+        }
+
+        .stat-description {
+            margin-top: 1rem;
+            color: var(--platinum);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+
+        /* Feature Sections */
+        .feature-section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(180deg, var(--burnt-orange) 0%, var(--cardinal-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--platinum);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Analytics Dashboard Preview */
+        .dashboard-preview {
+            background: linear-gradient(135deg, rgba(0, 34, 68, 0.2) 0%, rgba(0, 178, 169, 0.1) 100%);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cardinal-blue);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(191, 87, 0, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            border: 1px solid var(--burnt-orange);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--burnt-orange);
+            border-radius: 50%;
+            animation: livePulse 2s infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(191, 87, 0, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            background: rgba(191, 87, 0, 0.05);
+            border-color: var(--burnt-orange);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--cardinal-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .metric-change {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            background: rgba(0, 178, 169, 0.1);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--vancouver-teal);
+            font-weight: 600;
+        }
+
+        /* Team Showcase */
+        .team-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .team-card {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.05) 0%, rgba(0, 34, 68, 0.1) 100%);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(191, 87, 0, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .team-card:hover::before {
+            left: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(191, 87, 0, 0.2);
+        }
+
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-hero);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+        }
+
+        .team-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--pearl);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-conference {
+            font-size: 0.875rem;
+            color: var(--cardinal-blue);
+            margin-bottom: 1rem;
+        }
+
+        .team-stats {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(191, 87, 0, 0.1);
+        }
+
+        .team-stat {
+            flex: 1;
+            text-align: center;
+        }
+
+        .team-stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .team-stat-label {
+            font-size: 0.75rem;
+            color: var(--platinum);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 2rem;
+            background: radial-gradient(ellipse at center, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-description {
+            font-size: 1.25rem;
+            color: var(--platinum);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient-hero);
+            color: white;
+            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(191, 87, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--cardinal-blue);
+            border: 2px solid var(--cardinal-blue);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(155, 203, 235, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 34, 68, 0.1) 100%);
+            border-top: 1px solid rgba(191, 87, 0, 0.1);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            color: var(--cardinal-blue);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--burnt-orange);
+        }
+
+        .copyright {
+            color: var(--graphite);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            margin-bottom: 2rem;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(191, 87, 0, 0.5); }
+            50% { text-shadow: 0 0 40px rgba(191, 87, 0, 0.8); }
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(191, 87, 0, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 40%;
+            background: var(--gradient-hero);
+            animation: loading 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">BLAZE</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span>🔥</span> BLAZE INTELLIGENCE
+            </a>
+            <ul class="nav-links">
+                <li><a href="#analytics">Analytics</a></li>
+                <li><a href="#teams">Teams</a></li>
+                <li><a href="#insights">Insights</a></li>
+                <li><a href="#api">API</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="badge">THE DEEP SOUTH AUTHORITY</span>
+            <h1>Where Texas Grit Meets Algorithmic Excellence</h1>
+            <p class="tagline">Intelligence. Integrity. Innovation.</p>
+            <p class="subtitle">
+                From Friday night lights in Texas to Saturday showdowns in the SEC, 
+                we deliver the intelligence that separates champions from the rest. 
+                This is where heritage meets the cutting edge of sports analytics.
+            </p>
+            <div class="cta-buttons">
+                <a href="#demo" class="btn btn-primary">Request Demo</a>
+                <a href="#analytics" class="btn btn-secondary">Explore Analytics</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Grid -->
+    <section class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-number">2,847</span>
+            <span class="stat-label">Texas HS Teams Tracked</span>
+            <p class="stat-description">Every snap, every play, every moment from 6A powerhouses to 1A dynasties</p>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">14</span>
+            <span class="stat-label">SEC Programs Analyzed</span>
+            <p class="stat-description">Complete coverage of the most dominant conference in college football</p>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">95.7%</span>
+            <span class="stat-label">Prediction Accuracy</span>
+            <p class="stat-description">Industry-leading algorithms refined by Texas determination</p>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">50ms</span>
+            <span class="stat-label">Real-Time Latency</span>
+            <p class="stat-description">Lightning-fast insights when every second counts</p>
+        </div>
+    </section>
+
+    <!-- Analytics Dashboard Preview -->
+    <section class="feature-section">
+        <div class="section-header">
+            <h2 class="section-title">Live Intelligence Dashboard</h2>
+            <p class="section-subtitle">
+                Where the rubber meets the road. Real-time analytics that capture the heartbeat 
+                of Texas football and SEC dominance.
+            </p>
+        </div>
+        
+        <div class="dashboard-preview">
+            <div class="dashboard-header">
+                <h3 class="dashboard-title">Texas 6A Championship Analytics</h3>
+                <div class="live-indicator">
+                    <span class="live-dot"></span>
+                    <span>LIVE</span>
+                </div>
+            </div>
+            
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-value">342</div>
+                    <div class="metric-label">Rushing Yards</div>
+                    <span class="metric-change">+12% vs Season Avg</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">87.3%</div>
+                    <div class="metric-label">Red Zone Efficiency</div>
+                    <span class="metric-change">Elite Performance</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">4.7</div>
+                    <div class="metric-label">YPC Average</div>
+                    <span class="metric-change">Championship Level</span>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">28:15</div>
+                    <div class="metric-label">Time of Possession</div>
+                    <span class="metric-change">Dominating Field</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Showcase -->
+    <section class="feature-section">
+        <div class="section-header">
+            <h2 class="section-title">Elite Program Intelligence</h2>
+            <p class="section-subtitle">
+                From Southlake Carroll to Alabama, from Allen to LSU – 
+                we track the programs that define excellence in the Deep South.
+            </p>
+        </div>
+        
+        <div class="team-showcase">
+            <div class="team-card">
+                <div class="team-logo">SC</div>
+                <h3 class="team-name">Southlake Carroll Dragons</h3>
+                <p class="team-conference">UIL 6A Division I</p>
+                <div class="team-stats">
+                    <div class="team-stat">
+                        <div class="team-stat-value">8</div>
+                        <div class="team-stat-label">State Titles</div>
+                    </div>
+                    <div class="team-stat">
+                        <div class="team-stat-value">79</div>
+                        <div class="team-stat-label">Win Streak</div>
+                    </div>
+                    <div class="team-stat">
+                        <div class="team-stat-value">42.7</div>
+                        <div class="team-stat-label">PPG</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-logo">A</div>
+                <h3 class="team-name">Alabama Crimson Tide</h3>
+                <p class="team-conference">SEC West</p>
+                <div class="team-stats">
+                    <div class="team-stat">
+                        <div class="team-stat-value">18</div>
+                        <div class="team-stat-label">Natl Titles</div>
+                    </div>
+                    <div class="team-stat">
+                        <div class="team-stat-value">93%</div>
+                        <div class="team-stat-label">Win Rate</div>
+                    </div>
+                    <div class="team-stat">
+                        <div class="team-stat-value">38.2</div>
+                        <div class="team-stat-label">PPG</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-logo">AE</div>
+                <h3 class="team-name">Allen Eagles</h3>
+                <p class="team-conference">UIL 6A Division I</p>
+                <div class="team-stats">
+                    <div class="team-stat">
+                        <div class="team-stat-value">6</div>
+                        <div class="team-stat-label">State Titles</div>
+                    </div>
+                    <div class="team-stat">
+                        <div class="team-stat-value">57</div>
+                        <div class="team-stat-label">Win Streak</div>
+                    </div>
+                    <div class="team-stat">
+                        <div class="team-stat-value">48.3</div>
+                        <div class="team-stat-label">PPG</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="cta-title">Ready to Dominate with Data?</h2>
+        <p class="cta-description">
+            Join the programs that don't just compete – they conquer. 
+            Experience the Blaze Intelligence difference.
+        </p>
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-primary">Start Free Trial</a>
+            <a href="#" class="btn btn-secondary">Schedule Demo</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">BLAZE INTELLIGENCE</div>
+        <p class="footer-tagline">Where Heritage Meets Algorithmic Excellence</p>
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Analytics</a>
+            <a href="#">API Docs</a>
+            <a href="#">Blog</a>
+            <a href="#">Careers</a>
+            <a href="#">Contact</a>
+        </div>
+        <p class="copyright">© 2025 Blaze Intelligence. The Deep South Sports Authority.</p>
+    </footer>
+
+    <script>
+        // Page Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('fade-out');
+            }, 1500);
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.stat-card, .team-card, .metric-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Dynamic Stats Animation
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value.toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Animate stats when they come into view
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.animated) {
+                    entry.target.animated = true;
+                    const value = parseInt(entry.target.textContent.replace(/,/g, ''));
+                    animateValue(entry.target, 0, value, 2000);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            const value = stat.textContent;
+            if (!value.includes('.') && !value.includes('ms')) {
+                statsObserver.observe(stat);
+            }
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.background = 'rgba(10, 10, 10, 0.98)';
+                nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.95)';
+                nav.style.boxShadow = 'none';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Live data simulation
+        setInterval(() => {
+            const metrics = document.querySelectorAll('.metric-value');
+            metrics.forEach(metric => {
+                if (Math.random() > 0.7) {
+                    const current = parseFloat(metric.textContent);
+                    const change = (Math.random() - 0.5) * 2;
+                    const newValue = (current + change).toFixed(1);
+                    metric.textContent = newValue;
+                    metric.style.color = '#FF7A33';
+                    setTimeout(() => {
+                        metric.style.color = 'var(--burnt-orange)';
+                    }, 500);
+                }
+            });
+        }, 3000);
+
+        console.log('%c🔥 BLAZE INTELLIGENCE', 'color: #BF5700; font-size: 24px; font-weight: bold;');
+        console.log('%cWhere Texas Grit Meets Algorithmic Excellence', 'color: #9BCBEB; font-size: 14px;');
+    </script>
+</body>
+</html>

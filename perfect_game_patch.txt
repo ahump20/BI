@@ -1,0 +1,49 @@
+
+*** Begin Patch
+*** Add File: site/perfect-game.html
++<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
++<title>Perfect Game Select — Scouting Intelligence</title>
++<link rel="stylesheet" href="/assets/brand.css">
++<div class="nav">
++  <div class="brand">🔥 Blaze Intelligence</div>
++  <a href="/dashboard.html" class="badge">Dashboard</a>
++  <a href="/index.html" class="badge">Home</a>
++</div>
++<canvas id="hero" style="width:100%;height:32vh;display:block"></canvas>
++<div class="container">
++  <div class="h1">Perfect Game Select Teams</div>
++  <p class="p">In line with our Sage archetype, we offer impartial scouting intelligence for top travel baseball programs across Texas and the Deep South. Our analysis highlights program pedigree, player development pathways, and objective metrics of success.</p>
++  <div class="grid cols-2">
++    <div class="card">
++      <div class="h2">South Texas Sliders</div>
++      <p class="p">Founded in 2003 in San Antonio, the South Texas Sliders have established themselves as a premier travel organization. With high-level instruction and multiple teams, they've produced numerous college commitments across Texas universities.</p>
++    </div>
++    <div class="card">
++      <div class="h2">Austin Wings</div>
++      <p class="p">Formed in 1999 to operate a first-class program for worthy youth in Austin and Central Texas, the Wings offer high-level instruction and a competitive environment that promotes life skills and community leadershiphttps://www.wingsbaseball.com/about#:~:text=Wings%20Baseball%20was%20formed%20in,academic%20success%2C%20and%20community%20leadership. Their teams have earned national titles and top finishes across Premier and Triple Crown eventshttps://www.wingsbaseball.com/about#:~:text=The%20Wings%20are%20well%20known,group%20in%20different%20local%2Fnational%20events.</p>
++    </div>
++    <div class="card">
++      <div class="h2">Houston Banditos</div>
++      <p class="p">Established in 1994 and based in Tomball, the Banditos Baseball Club is one of the nation’s most successful programs, with over 280 MLB drafted alumni and more than 1,400 college commitments. The Banditos achieved an unprecedented sweep in 2016, winning the 15U PG World Series, WWBA National Championship, BCS National Championship, and Freshman World Championshiphttps://www.perfectgame.org/articles/view.aspx#:~:text=Top%20Historical%20Perfect%20Game%20Moments,2014%20PG%20World%20Series%20Champions.</p>
++    </div>
++    <div class="card">
++      <div class="h2">Dulin's Dodgers</div>
++      <p class="p">Created in 2000, this elite program in the Southeast fields teams for athletes aged 8–18. Dulins Dodgers have won 16 national championships and placed in nine other national tournaments, producing 15 Major League players, eight first-round draft picks and over 700 college scholarshipshttps://dulinsdodgers.com/about-2/history/#:~:text=The%20Dulins%20Dodgers%20organization%20is,accolades%20that%20speak%20for%20themselves.</p>
++    </div>
++    <div class="card">
++      <div class="h2">Germantown Baseball Club</div>
++      <p class="p">A tradition-rich program based in Germantown, Tennessee. The club provides opportunities for boys aged 7–14 to play competitive baseball under top instructors, competing at the AAA level within USSSA ruleshttps://www.causeiq.com/organizations/germantown-baseball-club,270960746/#:~:text=The%20Germantown%20Baseball%20Club%20provides,Youth%20Baseball%20program%20operations.</p>
++    </div>
++  </div>
++</div>
++<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
++<script src="/assets/hero.js"></script>
+*** End Patch
+
+*** Begin Patch
+*** Update File: site/index.html
+@@
+-    <a class="pill" href="/mlb">⚾ MLB</a>
++    <a class="pill" href="/mlb">⚾ MLB</a>
++    <a class="pill" href="/perfect-game.html">🥇 PG Select</a>
+*** End Patch

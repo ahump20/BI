@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<!-- saved from url=(0080)file:///Users/AustinHumphrey/austin-portfolio-deploy/perfect-game-analytics.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Game Youth Baseball Analytics | Blaze Intelligence</title>
+    <meta name="description" content="Advanced analytics platform for Perfect Game tournaments, youth baseball development, and prospect evaluation. Track, develop, and recruit the next generation of baseball stars.">
+    <meta name="keywords" content="Perfect Game, youth baseball, travel ball, prospect rankings, baseball analytics, player development">
+    
+    <link href="./Perfect Game Youth Baseball Analytics _ Blaze Intelligence_files/css2" rel="stylesheet">
+    <script src="./Perfect Game Youth Baseball Analytics _ Blaze Intelligence_files/saved_resource"></script>
+    <script src="./Perfect Game Youth Baseball Analytics _ Blaze Intelligence_files/lucide.js"></script>
+    <script src="./Perfect Game Youth Baseball Analytics _ Blaze Intelligence_files/enhanced-charts.js" defer=""></script>
+    
+    <style>
+        body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+        .metric-card { background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(255, 140, 0, 0.3); }
+        .age-group-card { background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(30, 41, 59, 0.9)); }
+        .perfect-game-red { color: #E31E24; }
+        .perfect-game-blue { color: #003DA5; }
+    </style>
+    
+    <!-- Analytics & Testing -->
+    <script src="./Perfect Game Youth Baseball Analytics _ Blaze Intelligence_files/analytics-config.js"></script>
+    <script src="./Perfect Game Youth Baseball Analytics _ Blaze Intelligence_files/ab-testing.js" defer=""></script>
+    <script src="./Perfect Game Youth Baseball Analytics _ Blaze Intelligence_files/sentry-config.js"></script>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.relative{position:relative}.sticky{position:sticky}.top-0{top:0px}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mt-0\.5{margin-top:0.125rem}.mt-12{margin-top:3rem}.flex{display:flex}.grid{display:grid}.h-12{height:3rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.w-12{width:3rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-full{width:100%}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-7xl{max-width:80rem}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.rounded{border-radius:0.25rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-cyan-500{--tw-border-opacity:1;border-color:rgb(6 182 212 / var(--tw-border-opacity, 1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-cyan-500\/20{background-color:rgb(6 182 212 / 0.2)}.bg-cyan-600{--tw-bg-opacity:1;background-color:rgb(8 145 178 / var(--tw-bg-opacity, 1))}.bg-green-500\/20{background-color:rgb(34 197 94 / 0.2)}.bg-green-600{--tw-bg-opacity:1;background-color:rgb(22 163 74 / var(--tw-bg-opacity, 1))}.bg-orange-500\/20{background-color:rgb(249 115 22 / 0.2)}.bg-orange-600{--tw-bg-opacity:1;background-color:rgb(234 88 12 / var(--tw-bg-opacity, 1))}.bg-red-600{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.bg-slate-800\/50{background-color:rgb(30 41 59 / 0.5)}.bg-slate-900\/50{background-color:rgb(15 23 42 / 0.5)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-orange-900\/20{--tw-gradient-from:rgb(124 45 18 / 0.2) var(--tw-gradient-from-position);--tw-gradient-to:rgb(124 45 18 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-red-500{--tw-gradient-from:#ef4444 var(--tw-gradient-from-position);--tw-gradient-to:rgb(239 68 68 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-red-900\/20{--tw-gradient-from:rgb(127 29 29 / 0.2) var(--tw-gradient-from-position);--tw-gradient-to:rgb(127 29 29 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-slate-800{--tw-gradient-from:#1e293b var(--tw-gradient-from-position);--tw-gradient-to:rgb(30 41 59 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-blue-500{--tw-gradient-to:#3b82f6 var(--tw-gradient-to-position)}.to-blue-900\/20{--tw-gradient-to:rgb(30 58 138 / 0.2) var(--tw-gradient-to-position)}.to-red-900\/20{--tw-gradient-to:rgb(127 29 29 / 0.2) var(--tw-gradient-to-position)}.to-slate-900{--tw-gradient-to:#0f172a var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.p-3{padding:0.75rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.px-8{padding-left:2rem;padding-right:2rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-6xl{font-size:3.75rem;line-height:1}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-semibold{font-weight:600}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.text-green-400{--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.text-orange-400{--tw-text-opacity:1;color:rgb(251 146 60 / var(--tw-text-opacity, 1))}.text-red-400{--tw-text-opacity:1;color:rgb(248 113 113 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.backdrop-blur-lg{--tw-backdrop-blur:blur(16px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.hover\:bg-cyan-700:hover{--tw-bg-opacity:1;background-color:rgb(14 116 144 / var(--tw-bg-opacity, 1))}.hover\:bg-green-700:hover{--tw-bg-opacity:1;background-color:rgb(21 128 61 / var(--tw-bg-opacity, 1))}.hover\:bg-orange-700:hover{--tw-bg-opacity:1;background-color:rgb(194 65 12 / var(--tw-bg-opacity, 1))}.hover\:bg-red-700:hover{--tw-bg-opacity:1;background-color:rgb(185 28 28 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(71 85 105 / var(--tw-bg-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:flex-row{flex-direction:row}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}</style><script async="" src="./Perfect Game Youth Baseball Analytics _ Blaze Intelligence_files/js"></script><script src="./Perfect Game Youth Baseball Analytics _ Blaze Intelligence_files/bundle.tracing.replay.min.js" crossorigin="anonymous"></script></head>
+<body data-sport="youth-baseball" data-organization="perfect-game">
+    <!-- Navigation -->
+    <nav class="bg-black/50 backdrop-blur-lg border-b border-slate-800 px-4 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="file:///index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+                <span class="text-slate-500">×</span>
+                <span class="text-xl font-bold perfect-game-red">PERFECT GAME</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="file:///demo.html" class="text-slate-300 hover:text-white">Demo</a>
+                <a href="file:///contact.html" class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-6xl font-black mb-6">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500">
+                    YOUTH BASEBALL ANALYTICS
+                </span>
+            </h1>
+            <p class="text-2xl text-slate-300 mb-8">
+                Professional-Grade Analytics for Perfect Game Tournaments &amp; Travel Ball
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="file:///Users/AustinHumphrey/austin-portfolio-deploy/perfect-game-analytics.html#features" class="px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700">
+                    Explore Features
+                </a>
+                <a href="file:///demo.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+                    Live Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Metrics -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid md:grid-cols-4 gap-6 mb-12">
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold text-green-400 mb-2">15,000+</div>
+                <div class="text-sm text-slate-400">MLB Draft Selections</div>
+                <div class="text-xs text-slate-500">Perfect Game Alumni</div>
+            </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold text-cyan-400 mb-2">2,300+</div>
+                <div class="text-sm text-slate-400">Current MLB Players</div>
+                <div class="text-xs text-slate-500">Perfect Game Alumni</div>
+            </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold text-orange-400 mb-2">94.6%</div>
+                <div class="text-sm text-slate-400">Projection Accuracy</div>
+                <div class="text-xs text-slate-500">Elite prospect identification</div>
+            </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold perfect-game-red mb-2">304</div>
+                <div class="text-sm text-slate-400">Texas NFL Players</div>
+                <div class="text-xs text-slate-500">Most in the nation</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Age Group Analytics -->
+    <section id="features" class="bg-slate-900/50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                AGE-SPECIFIC <span class="perfect-game-red">DEVELOPMENT TRACKING</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 13U-14U -->
+                <div class="age-group-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-green-400 mb-4">13U-14U Division</h3>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Avg Exit Velocity</span>
+                            <span class="font-bold">72.4 mph</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">60-Yard Dash</span>
+                            <span class="font-bold">7.82 sec</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Fastball Velocity</span>
+                            <span class="font-bold">68-75 mph</span>
+                        </div>
+                    </div>
+                    <div class="text-sm text-slate-400">
+                        <strong>Key Metrics:</strong> Mechanics consistency, growth projection, fundamental skills
+                    </div>
+                </div>
+                
+                <!-- 15U-16U -->
+                <div class="age-group-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-4">15U-16U Division</h3>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Avg Exit Velocity</span>
+                            <span class="font-bold">83.7 mph</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">60-Yard Dash</span>
+                            <span class="font-bold">7.21 sec</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Fastball Velocity</span>
+                            <span class="font-bold">76-84 mph</span>
+                        </div>
+                    </div>
+                    <div class="text-sm text-slate-400">
+                        <strong>Key Metrics:</strong> Power development, pitch arsenal, defensive range
+                    </div>
+                </div>
+                
+                <!-- 17U-18U -->
+                <div class="age-group-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-orange-400 mb-4">17U-18U Division</h3>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Avg Exit Velocity</span>
+                            <span class="font-bold">91.2 mph</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">60-Yard Dash</span>
+                            <span class="font-bold">6.89 sec</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-300">Fastball Velocity</span>
+                            <span class="font-bold">85-92 mph</span>
+                        </div>
+                    </div>
+                    <div class="text-sm text-slate-400">
+                        <strong>Key Metrics:</strong> College readiness, pro potential, advanced metrics
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Player Development Features -->
+    <section class="max-w-7xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold mb-12">COMPLETE <span class="perfect-game-blue">PLAYER DEVELOPMENT SUITE</span></h2>
+        
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Hitting Analytics -->
+            <div class="metric-card rounded-lg p-6">
+                <h3 class="text-xl font-bold text-green-400 mb-4">⚾ Hitting Analytics</h3>
+                <ul class="space-y-3 text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-5 h-5 text-green-400 mt-0.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                        <div>
+                            <strong>Exit Velocity Tracking:</strong> Monitor power development over time
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-5 h-5 text-green-400 mt-0.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                        <div>
+                            <strong>Launch Angle Optimization:</strong> Find ideal swing plane for each player
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-5 h-5 text-green-400 mt-0.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                        <div>
+                            <strong>Approach Analysis:</strong> Plate discipline and pitch selection metrics
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-5 h-5 text-green-400 mt-0.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                        <div>
+                            <strong>Spray Charts:</strong> Hit distribution and field usage patterns
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Pitching Analytics -->
+            <div class="metric-card rounded-lg p-6">
+                <h3 class="text-xl font-bold text-cyan-400 mb-4">🎯 Pitching Analytics</h3>
+                <ul class="space-y-3 text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-5 h-5 text-cyan-400 mt-0.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                        <div>
+                            <strong>Velocity Progression:</strong> Track velo gains with age-appropriate targets
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-5 h-5 text-cyan-400 mt-0.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                        <div>
+                            <strong>Spin Rate Analysis:</strong> Movement profiles for all pitch types
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-5 h-5 text-cyan-400 mt-0.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                        <div>
+                            <strong>Command Zones:</strong> Strike zone heat maps and location consistency
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" class="lucide lucide-check-circle w-5 h-5 text-cyan-400 mt-0.5"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>
+                        <div>
+                            <strong>Arm Health Monitoring:</strong> Workload management and fatigue indicators
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tournament Performance -->
+    <section class="bg-gradient-to-r from-red-900/20 to-blue-900/20 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                PERFECT GAME <span class="perfect-game-red">TOURNAMENT ANALYTICS</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-white mb-2">850+</div>
+                    <div class="text-sm text-slate-400">Tournaments Covered</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-green-400 mb-2">2.3M</div>
+                    <div class="text-sm text-slate-400">At-Bats Analyzed</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-cyan-400 mb-2">1.8M</div>
+                    <div class="text-sm text-slate-400">Pitches Tracked</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold perfect-game-red mb-2">24/7</div>
+                    <div class="text-sm text-slate-400">Real-Time Updates</div>
+                </div>
+            </div>
+            
+            <div class="mt-12 max-w-4xl mx-auto">
+                <div class="metric-card rounded-lg p-8">
+                    <h3 class="text-xl font-bold mb-6 text-center">Top Tournament Performance Metrics</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-slate-800/50 rounded">
+                            <span class="text-slate-300">WWBA Championships</span>
+                            <span class="font-bold text-green-400">3,847 Players Tracked</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-800/50 rounded">
+                            <span class="text-slate-300">PG All-American Classic</span>
+                            <span class="font-bold text-cyan-400">156 Future MLB Players</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-800/50 rounded">
+                            <span class="text-slate-300">Super25 Series</span>
+                            <span class="font-bold text-orange-400">892 D1 Commits</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Southern Sports Pipeline -->
+    <section class="bg-gradient-to-r from-orange-900/20 to-red-900/20 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                SOUTHERN SPORTS <span class="perfect-game-red">ECOSYSTEM INTELLIGENCE</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-orange-400 mb-2">$14M</div>
+                    <div class="text-sm text-slate-400">Average SEC NIL Collective</div>
+                    <div class="text-xs text-slate-500">Annual funding</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-red-400 mb-2">$32M</div>
+                    <div class="text-sm text-slate-400">Oklahoma NIL Distribution</div>
+                    <div class="text-xs text-slate-500">Record-setting collective</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold text-cyan-400 mb-2">5+</div>
+                    <div class="text-sm text-slate-400">Media Subscriptions</div>
+                    <div class="text-xs text-slate-500">Fan ecosystem fragmentation</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold perfect-game-red mb-2">72%</div>
+                    <div class="text-sm text-slate-400">SEC Draft Dominance</div>
+                    <div class="text-xs text-slate-500">First-round MLB picks</div>
+                </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="metric-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-orange-400 mb-4">🏈 Football Pipeline</h3>
+                    <ul class="space-y-3 text-slate-300 text-sm">
+                        <li class="flex justify-between">
+                            <span>Texas NFL Players:</span>
+                            <span class="font-bold text-orange-400">304</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>SEC Conference:</span>
+                            <span class="font-bold text-red-400">67% of top recruits</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>High School Football:</span>
+                            <span class="font-bold text-cyan-400">15,000+ Texas players</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="metric-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-4">⚾ Baseball Dominance</h3>
+                    <ul class="space-y-3 text-slate-300 text-sm">
+                        <li class="flex justify-between">
+                            <span>Perfect Game Alumni:</span>
+                            <span class="font-bold text-green-400">15,000+ MLB drafted</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Current MLB:</span>
+                            <span class="font-bold text-cyan-400">2,300+ players</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Elite Prospects:</span>
+                            <span class="font-bold text-orange-400">Trout, Harper, Tatis</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="metric-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-red-400 mb-4">💰 NIL Intelligence</h3>
+                    <ul class="space-y-3 text-slate-300 text-sm">
+                        <li class="flex justify-between">
+                            <span>Collective Funding:</span>
+                            <span class="font-bold text-red-400">$14M average</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Top Programs:</span>
+                            <span class="font-bold text-orange-400">$20M+ annually</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Youth Impact:</span>
+                            <span class="font-bold text-cyan-400">Early recruitment</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recruiting Intelligence -->
+    <section class="max-w-7xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold mb-12">RECRUITING <span class="perfect-game-blue">INTELLIGENCE PLATFORM</span></h2>
+        
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="metric-card rounded-lg p-6">
+                <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trending-up" class="lucide lucide-trending-up w-6 h-6 text-green-400"><path d="M16 7h6v6"></path><path d="m22 7-8.5 8.5-5-5L2 17"></path></svg>
+                </div>
+                <h3 class="font-bold text-lg mb-3">AI Projection Models</h3>
+                <p class="text-slate-400 text-sm">
+                    Advanced machine learning models trained on 15,000+ Perfect Game alumni MLB trajectories 
+                    to predict professional potential and optimal development paths.
+                </p>
+            </div>
+            
+            <div class="metric-card rounded-lg p-6">
+                <div class="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="users" class="lucide lucide-users w-6 h-6 text-cyan-400"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                </div>
+                <h3 class="font-bold text-lg mb-3">Southern Pipeline Analytics</h3>
+                <p class="text-slate-400 text-sm">
+                    Comprehensive tracking of talent flow from Texas high school football (304 NFL players) 
+                    through SEC dominance to professional success.
+                </p>
+            </div>
+            
+            <div class="metric-card rounded-lg p-6">
+                <div class="w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="dollar-sign" class="lucide lucide-dollar-sign w-6 h-6 text-orange-400"><line x1="12" x2="12" y1="2" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <h3 class="font-bold text-lg mb-3">NIL Intelligence Tracker</h3>
+                <p class="text-slate-400 text-sm">
+                    Real-time monitoring of NIL collective funding ($14M SEC average) and market valuations 
+                    to optimize athlete positioning and recruitment strategy.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Sample Player Card -->
+        <div class="mt-12 max-w-3xl mx-auto">
+            <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-lg p-6 border border-slate-700">
+                <h4 class="text-lg font-bold mb-4 text-white">Sample Player Profile</h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="text-sm text-slate-400 mb-1">Position</div>
+                        <div class="font-semibold mb-3">SS/2B</div>
+                        
+                        <div class="text-sm text-slate-400 mb-1">Class</div>
+                        <div class="font-semibold mb-3">2026</div>
+                        
+                        <div class="text-sm text-slate-400 mb-1">Perfect Game Grade</div>
+                        <div class="font-semibold text-green-400">9.5</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-slate-400 mb-1">60-Yard Dash</div>
+                        <div class="font-semibold mb-3">6.74 sec</div>
+                        
+                        <div class="text-sm text-slate-400 mb-1">Exit Velocity</div>
+                        <div class="font-semibold mb-3">94 mph</div>
+                        
+                        <div class="text-sm text-slate-400 mb-1">NIL Valuation</div>
+                        <div class="font-semibold text-green-400">$485K potential</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="bg-slate-900/50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">YOUTH BASEBALL ANALYTICS PLANS</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Team Plan -->
+                <div class="metric-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-green-400 mb-2">Team Plan</h3>
+                    <div class="text-3xl font-bold mb-4">$299<span class="text-lg text-slate-400">/month</span></div>
+                    <ul class="space-y-2 text-sm text-slate-300 mb-6">
+                        <li>• Up to 25 players</li>
+                        <li>• Tournament performance tracking</li>
+                        <li>• Development reports</li>
+                        <li>• Basic video analysis</li>
+                        <li>• Email support</li>
+                    </ul>
+                    <button class="w-full px-4 py-2 bg-green-600 text-white font-semibold rounded hover:bg-green-700">
+                        Start Free Trial
+                    </button>
+                </div>
+                
+                <!-- Organization Plan -->
+                <div class="metric-card rounded-lg p-6 border-2 border-cyan-500">
+                    <div class="text-xs text-cyan-400 font-bold mb-2">MOST POPULAR</div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-2">Organization Plan</h3>
+                    <div class="text-3xl font-bold mb-4">$799<span class="text-lg text-slate-400">/month</span></div>
+                    <ul class="space-y-2 text-sm text-slate-300 mb-6">
+                        <li>• Unlimited players</li>
+                        <li>• Multiple teams/age groups</li>
+                        <li>• Advanced analytics suite</li>
+                        <li>• Recruiting intelligence</li>
+                        <li>• Video breakdown tools</li>
+                        <li>• Priority support</li>
+                    </ul>
+                    <button class="w-full px-4 py-2 bg-cyan-600 text-white font-semibold rounded hover:bg-cyan-700">
+                        Start Free Trial
+                    </button>
+                </div>
+                
+                <!-- Elite Plan -->
+                <div class="metric-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold text-orange-400 mb-2">Elite Plan</h3>
+                    <div class="text-3xl font-bold mb-4">Custom</div>
+                    <ul class="space-y-2 text-sm text-slate-300 mb-6">
+                        <li>• National organizations</li>
+                        <li>• Custom integrations</li>
+                        <li>• White-label options</li>
+                        <li>• On-site training</li>
+                        <li>• Dedicated analyst</li>
+                        <li>• 24/7 phone support</li>
+                    </ul>
+                    <button class="w-full px-4 py-2 bg-orange-600 text-white font-semibold rounded hover:bg-orange-700">
+                        Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="max-w-4xl mx-auto px-4 py-16 text-center">
+        <h2 class="text-4xl font-bold mb-6">
+            Give Your Players <span class="perfect-game-red">Professional Analytics</span>
+        </h2>
+        <p class="text-xl text-slate-300 mb-8">
+            Join 500+ youth organizations using Blaze Intelligence to develop the next generation of baseball stars.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="file:///demo.html" class="px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700">
+                See Live Demo
+            </a>
+            <a href="file:///contact.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+                Schedule Consultation
+            </a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Track page view
+            if (window.BlazeAnalytics) {
+                window.BlazeAnalytics.track('page_view', {
+                    page_title: 'Perfect Game Analytics',
+                    sport: 'Youth Baseball',
+                    organization: 'Perfect Game'
+                });
+            }
+        });
+    </script>
+
+</body></html>

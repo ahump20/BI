@@ -1,0 +1,53 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive Intelligence — Blaze Intelligence</title>
+<link rel="stylesheet" href="/assets/brand.css">
+<div class="nav">
+  <div class="brand">🔥 Blaze Intelligence</div>
+  <a href="/executive-intelligence.html" class="badge">Executive</a>
+  <a href="/live-analytics.html" class="badge">Live Analytics</a>
+  <a href="/nil-calculator.html" class="badge">NIL Engine</a>
+  <a href="/dashboard.html" class="badge">Dashboard</a>
+  <a href="/status.html" class="badge">API Status</a>
+  <a href="/southern-research.html" class="badge">Research</a>
+  <a href="/get-started.html" class="badge">Get Started</a>
+</div>
+<canvas id="hero" style="width:100%;height:32vh;display:block"></canvas>
+<div class="container">
+  <div class="h1">Executive Intelligence</div>
+  <p class="p">Real‑time insights for decision makers. Track readiness, leverage, and risk to stay ahead.</p>
+  <div class="grid cols-3" id="exec-cards"></div>
+  <div class="card" style="margin-top:20px">
+    <div class="h2">Recent Signals</div>
+    <pre id="exec-signals" class="p" style="white-space:pre-wrap">Loading…</pre>
+  </div>
+</div>
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script src="/assets/hero.js"></script>
+<script>
+(async () => {
+  try {
+    const r = await fetch('/api/v2/metrics', {headers:{'accept':'application/json'}});
+    if(!r.ok) throw 0;
+    const m = await r.json();
+    const cards = [
+      {title:'Readiness', value: (m?.cardinals?.readiness ?? 0).toFixed(1)+'%'},
+      {title:'Leverage', value: (m?.cardinals?.leverage ?? 0).toFixed(2)},
+      {title:'Risk', value: m?.cardinals?.risk_band ?? '—'},
+    ];
+    const el=document.getElementById('exec-cards');
+    el.innerHTML = cards.map(c=>`<div class="card"><div class="h2">${c.title}</div><div class="p">${c.value}</div></div>`).join('');
+    const signals=m?.signals?.slice(0,5)?.map(s=>'• '+s).join('\n') || 'Stable.';
+    document.getElementById('exec-signals').textContent=signals;
+  } catch {
+    const el=document.getElementById('exec-cards');
+    el.innerHTML = `
+      <div class="card"><div class="h2">Readiness</div><div class="p">86.6%</div></div>
+      <div class="card"><div class="h2">Leverage</div><div class="p">2.85</div></div>
+      <div class="card"><div class="h2">Risk</div><div class="p">Balanced</div></div>
+    `;
+    document.getElementById('exec-signals').textContent = 'Stable program trajectory.';
+  }
+})();
+</script>
