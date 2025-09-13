@@ -41,7 +41,10 @@
       "Bash(npx netlify:*)",
       "Read(//Users/AustinHumphrey/Downloads/**)",
       "Bash(unzip:*)",
-      "Read(//var/folders/kg/n1t_tbds23df03t2kqq054l80000gn/T/TemporaryItems/NSIRD_screencaptureui_anRPdm/**)"
+      "Read(//var/folders/kg/n1t_tbds23df03t2kqq054l80000gn/T/TemporaryItems/NSIRD_screencaptureui_anRPdm/**)",
+      "Read(//var/folders/kg/n1t_tbds23df03t2kqq054l80000gn/T/TemporaryItems/NSIRD_screencaptureui_P4YtJS/**)",
+      "Read(//var/folders/kg/n1t_tbds23df03t2kqq054l80000gn/T/TemporaryItems/NSIRD_screencaptureui_9YyRCT/**)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []
