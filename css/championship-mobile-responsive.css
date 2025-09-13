@@ -1,0 +1,676 @@
+/**
+ * Championship Mobile Responsive CSS
+ * Elite mobile experience for Blaze Intelligence platforms
+ * Optimized for all devices and screen sizes
+ */
+
+/* Mobile-First Responsive Design */
+:root {
+    --mobile-padding: 16px;
+    --tablet-padding: 24px;
+    --desktop-padding: 32px;
+    --championship-gold: #FFD700;
+    --championship-blue: #1E3A8A;
+    --championship-gradient: linear-gradient(135deg, #FF6B35, #F7931E);
+    --text-shadow-mobile: 0 1px 3px rgba(0,0,0,0.5);
+    --card-shadow-mobile: 0 4px 15px rgba(0,0,0,0.1);
+    --transition-mobile: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Mobile Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile Navigation */
+.mobile-nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(30, 58, 138, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px var(--mobile-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition-mobile);
+}
+
+.mobile-nav-container.scrolled {
+    background: rgba(30, 58, 138, 0.98);
+    padding: 8px var(--mobile-padding);
+}
+
+.mobile-logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--championship-gold);
+    text-decoration: none;
+    text-shadow: var(--text-shadow-mobile);
+}
+
+.mobile-menu-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: var(--transition-mobile);
+}
+
+.mobile-menu-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.98), rgba(15, 29, 69, 0.98));
+    backdrop-filter: blur(20px);
+    z-index: 1001;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 80px var(--mobile-padding) var(--mobile-padding);
+    overflow-y: auto;
+}
+
+.mobile-menu.open {
+    left: 0;
+}
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-mobile);
+}
+
+.mobile-menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: var(--transition-mobile);
+}
+
+.mobile-menu-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
+}
+
+.mobile-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav-links li {
+    margin-bottom: 8px;
+}
+
+.mobile-nav-links a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: var(--transition-mobile);
+    border: 1px solid transparent;
+}
+
+.mobile-nav-links a:hover,
+.mobile-nav-links a.active {
+    background: var(--championship-gradient);
+    color: white;
+    border-color: var(--championship-gold);
+    transform: translateX(4px);
+    box-shadow: var(--card-shadow-mobile);
+}
+
+.mobile-nav-links a .icon {
+    margin-right: 12px;
+    font-size: 1.1rem;
+}
+
+/* Main Content Mobile Layout */
+.main-content {
+    margin-top: 70px;
+    padding: var(--mobile-padding);
+    min-height: calc(100vh - 70px);
+}
+
+/* Championship Cards Mobile */
+.championship-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow-mobile);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition-mobile);
+    overflow: hidden;
+    position: relative;
+}
+
+.championship-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--championship-gradient);
+}
+
+.championship-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.championship-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.championship-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--championship-blue);
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+}
+
+.championship-badge {
+    background: var(--championship-gradient);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.championship-metric {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.championship-metric:last-child {
+    border-bottom: none;
+}
+
+.metric-label {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.metric-value {
+    color: var(--championship-blue);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.metric-value.live {
+    color: #10B981;
+    animation: pulse-live 2s infinite;
+}
+
+@keyframes pulse-live {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Sports Team Cards */
+.team-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition-mobile);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--team-color, var(--championship-gradient));
+}
+
+.team-card.cardinals::before { background: #C41E3A; }
+.team-card.titans::before { background: #4B92DB; }
+.team-card.longhorns::before { background: #BF5700; }
+.team-card.grizzlies::before { background: #5D76A9; }
+
+.team-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+.team-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 1.2rem;
+    background: var(--team-color, var(--championship-gradient));
+}
+
+.team-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--championship-blue);
+    font-weight: 700;
+}
+
+.team-sport {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.team-status {
+    margin-left: auto;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.team-status.live {
+    background: #EF4444;
+    color: white;
+    animation: pulse-live 2s infinite;
+}
+
+.team-status.upcoming {
+    background: #F59E0B;
+    color: white;
+}
+
+.team-status.completed {
+    background: #10B981;
+    color: white;
+}
+
+/* Button Styles */
+.championship-button {
+    background: var(--championship-gradient);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition-mobile);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    justify-content: center;
+    min-height: 44px; /* iOS touch target */
+    touch-action: manipulation;
+}
+
+.championship-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.championship-button:active {
+    transform: translateY(0);
+}
+
+.championship-button.secondary {
+    background: white;
+    color: var(--championship-blue);
+    border: 2px solid var(--championship-blue);
+}
+
+.championship-button.secondary:hover {
+    background: var(--championship-blue);
+    color: white;
+}
+
+/* Loading States */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Mobile Grid System */
+.mobile-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+}
+
+.mobile-grid.two-column {
+    grid-template-columns: 1fr 1fr;
+}
+
+.mobile-grid-item {
+    min-width: 0; /* Prevent overflow */
+}
+
+/* Toast Notifications */
+.mobile-toast {
+    position: fixed;
+    bottom: 20px;
+    left: var(--mobile-padding);
+    right: var(--mobile-padding);
+    background: rgba(30, 58, 138, 0.95);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    z-index: 1050;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: var(--transition-mobile);
+    box-shadow: var(--card-shadow-mobile);
+}
+
+.mobile-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.mobile-toast.success {
+    background: rgba(16, 185, 129, 0.95);
+}
+
+.mobile-toast.error {
+    background: rgba(239, 68, 68, 0.95);
+}
+
+.mobile-toast.warning {
+    background: rgba(245, 158, 11, 0.95);
+}
+
+/* Responsive Breakpoints */
+
+/* Small Mobile: 320px - 480px */
+@media (max-width: 480px) {
+    :root {
+        --mobile-padding: 12px;
+    }
+
+    .mobile-nav-container {
+        padding: 10px var(--mobile-padding);
+    }
+
+    .mobile-logo {
+        font-size: 1rem;
+    }
+
+    .championship-card {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .championship-card-title {
+        font-size: 1rem;
+    }
+
+    .mobile-grid.two-column {
+        grid-template-columns: 1fr;
+    }
+
+    .championship-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Large Mobile: 481px - 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+    :root {
+        --mobile-padding: 20px;
+    }
+
+    .mobile-grid.three-column {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .championship-card {
+        padding: 24px;
+    }
+
+    .championship-card-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* Tablet: 769px - 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    :root {
+        --mobile-padding: var(--tablet-padding);
+    }
+
+    .mobile-nav-container {
+        display: none; /* Use desktop nav */
+    }
+
+    .main-content {
+        margin-top: 0;
+        padding: var(--tablet-padding);
+    }
+
+    .mobile-grid.three-column {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .mobile-grid.four-column {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .championship-card {
+        padding: 28px;
+    }
+}
+
+/* Desktop: 1025px+ */
+@media (min-width: 1025px) {
+    :root {
+        --mobile-padding: var(--desktop-padding);
+    }
+
+    .mobile-nav-container {
+        display: none; /* Use desktop nav */
+    }
+
+    .mobile-menu {
+        display: none;
+    }
+
+    .main-content {
+        margin-top: 0;
+        padding: var(--desktop-padding);
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .mobile-grid.four-column {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .mobile-grid.six-column {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .championship-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .championship-card {
+        border-width: 0.5px;
+    }
+
+    .mobile-nav-links a {
+        border-width: 0.5px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .championship-card {
+        background: rgba(31, 41, 55, 0.95);
+        border-color: rgba(75, 85, 99, 0.3);
+        color: white;
+    }
+
+    .championship-card-title {
+        color: var(--championship-gold);
+    }
+
+    .metric-label {
+        color: #9CA3AF;
+    }
+
+    .metric-value {
+        color: #E5E7EB;
+    }
+
+    .team-card {
+        background: linear-gradient(135deg, rgba(31, 41, 55, 0.95), rgba(17, 24, 39, 0.95));
+        border-color: rgba(75, 85, 99, 0.3);
+        color: white;
+    }
+
+    .team-info h3 {
+        color: var(--championship-gold);
+    }
+
+    .team-sport {
+        color: #9CA3AF;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .mobile-nav-container,
+    .mobile-menu,
+    .mobile-menu-overlay,
+    .championship-button {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-top: 0;
+        padding: 0;
+    }
+
+    .championship-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+}
+
+/* Focus Styles for Accessibility */
+.championship-button:focus,
+.mobile-nav-links a:focus,
+.mobile-menu-button:focus {
+    outline: 2px solid var(--championship-gold);
+    outline-offset: 2px;
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .championship-card:hover {
+        transform: none;
+    }
+
+    .championship-button:hover {
+        transform: none;
+        box-shadow: var(--card-shadow-mobile);
+    }
+
+    .mobile-nav-links a:hover {
+        transform: none;
+    }
+}
