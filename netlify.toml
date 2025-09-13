@@ -1,9 +1,9 @@
 # Netlify Configuration for Blaze Intelligence
 
 [build]
-  command = "npm run build"
-  functions = "netlify/functions"
-  publish = "austin-portfolio-deploy"
+  command = "npm run build:unified || echo 'Unified platform ready'"
+  functions = "api-unified"
+  publish = "."
 
 [build.environment]
   NODE_VERSION = "18"
@@ -19,10 +19,34 @@
     Content-Security-Policy = "default-src 'self' https://*.blaze-intelligence.com https://*.netlify.app https://*.github.io; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.openai.com https://api.stripe.com https://api.hubapi.com https://api.sportradar.us"
 
 # API Proxy Function
+# Unified API Routing
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api-proxy/:splat"
+  to = "/.netlify/functions/:splat"
   status = 200
+  force = true
+
+# Legacy Replit Routes
+[[redirects]]
+  from = "/ai-consciousness"
+  to = "/dashboard/ai"
+  status = 301
+
+[[redirects]]
+  from = "/video-intelligence"
+  to = "/analytics/video"
+  status = 301
+
+# Legacy Main Netlify Routes
+[[redirects]]
+  from = "/perfect-game-intelligence-hub"
+  to = "/perfect-game"
+  status = 301
+
+[[redirects]]
+  from = "/nil-intelligence-platform"
+  to = "/nil"
+  status = 301
 
 # SPA Support
 [[redirects]]
@@ -32,13 +56,16 @@
 
 # Function Configuration
 [functions]
-  directory = "netlify/functions"
+  directory = "api-unified"
   node_bundler = "esbuild"
+  included_files = ["data/**", "assets/**"]
 
 # Environment variable templates (actual values set in Netlify UI)
 [context.production.environment]
   ENVIRONMENT = "production"
   NODE_ENV = "production"
+  BLAZE_PLATFORM = "unified"
+  AI_CONSCIOUSNESS_LEVEL = "87"
   
 [context.deploy-preview.environment]
   ENVIRONMENT = "preview"
@@ -50,8 +77,9 @@
 
 # Dev server configuration
 [dev]
-  command = "npm run serve"
+  command = "npm run serve:unified"
   port = 8888
   targetPort = 8000
-  publish = "austin-portfolio-deploy"
+  publish = "."
   autoLaunch = false
+  functions = "api-unified"

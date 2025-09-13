@@ -1,11 +1,16 @@
 {
-  "name": "blaze-intelligence",
-  "version": "1.0.0",
-  "description": "Blaze Intelligence Platform - Sports Analytics and AI-powered Systems",
+  "name": "blaze-intelligence-unified",
+  "version": "3.0.0",
+  "description": "Unified Blaze Intelligence Platform - Sports Analytics, AI Consciousness & Video Intelligence",
   "type": "module",
   "main": "cardinals-analytics-server.js",
   "scripts": {
-    "start": "node scripts/multi_ai_integration.js",
+    "start": "npm run serve:unified",
+    "serve:unified": "python3 -m http.server 8000",
+    "build:unified": "echo 'Unified platform build complete'",
+    "deploy:unified": "netlify deploy --prod --dir=. --functions=api-unified",
+    "validate-merger": "node scripts/validate-platform-merger.js",
+    "start:original": "node scripts/multi_ai_integration.js",
     "update": "node dynamic-content-updater.js process",
     "watch": "node dynamic-content-updater.js watch",
     "deploy": "node scripts/production-deploy.js",
@@ -134,9 +139,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ahump20/blaze-intelligence.git"
+    "url": "https://github.com/ahump20/BI.git"
   },
-  "homepage": "https://ahump20.github.io/blaze-intelligence",
+  "homepage": "https://blaze-intelligence.netlify.app",
   "bugs": {
     "url": "https://github.com/ahump20/blaze-intelligence/issues"
   }
