@@ -44,6 +44,25 @@
     <!-- GSAP for Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- D3.js for Advanced Data Visualization -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- MediaPipe for Enhanced Video Analysis -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+
+    <!-- TensorFlow.js for Machine Learning -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+
+    <!-- Enhanced Blaze Intelligence Systems -->
+    <script src="/src/js/advanced-visualizations.js"></script>
+    <script src="/src/js/ai-consciousness-engine.js"></script>
+    <script src="/src/js/enhanced-video-analysis.js"></script>
+    <script src="/src/js/narrative-generation-engine.js"></script>
+    <script src="/src/js/nil-calculator.js"></script>
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -2394,6 +2413,34 @@
                 <button class="btn-secondary" onclick="if(window.blaze3DCharts) window.blaze3DCharts.showChart('bar3d')" style="margin: 0 10px;">Team Rankings</button>
                 <button class="btn-secondary" onclick="if(window.blazeInteractiveMap) window.blazeInteractiveMap.showRegion('texas')" style="margin: 0 10px;">Regional View</button>
                 <button class="btn-secondary" onclick="if(window.blaze3DCharts) window.blaze3DCharts.showChart('network')" style="margin: 0 10px;">Recruiting Network</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced AI Systems Integration -->
+    <section class="enhanced-ai-systems" style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); padding: 60px 0;">
+        <div class="container">
+            <!-- AI Consciousness Engine Container -->
+            <div id="ai-consciousness-container"></div>
+
+            <!-- Enhanced Video Analysis Container -->
+            <div id="video-analysis-container"></div>
+
+            <!-- Real-time Narrative Engine Container -->
+            <div id="narrative-engine-container"></div>
+
+            <!-- NIL Calculator Container -->
+            <div id="nil-calculator-container"></div>
+
+            <!-- Advanced Visualization Containers -->
+            <div class="visualization-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-top: 30px;">
+                <div class="hero-3d-container" style="height: 300px; border: 1px solid rgba(191, 87, 0, 0.3); border-radius: 12px; background: rgba(0, 0, 0, 0.5);"></div>
+                <div id="d3-metrics-container" style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(191, 87, 0, 0.3); border-radius: 12px; padding: 20px;"></div>
+                <canvas id="pressure-stream" style="width: 100%; height: 300px; border: 1px solid rgba(191, 87, 0, 0.3); border-radius: 12px; background: rgba(0, 0, 0, 0.5);"></canvas>
+                <div id="webgl-metrics" style="background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(191, 87, 0, 0.3); border-radius: 12px; padding: 20px; color: #E2E8F0; font-family: 'JetBrains Mono', monospace;">
+                    <h4 style="color: #BF5700; margin-bottom: 15px;">WebGL Performance</h4>
+                    <div>Initializing...</div>
+                </div>
             </div>
         </div>
     </section>
