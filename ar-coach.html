@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Coaching Platform | Blaze Intelligence</title>
+
+    <!-- Meta Tags -->
+    <meta name="description" content="Next-generation AR coaching with real-time biomechanical feedback and elite performance optimization">
+    <meta name="keywords" content="AR coaching, augmented reality, biomechanical feedback, sports training">
+
+    <!-- Stylesheets & Scripts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --blaze-orange: #BF5700;
+            --blaze-gold: #FFD700;
+            --blaze-deep: #FF8C00;
+            --cardinal-red: #C41E3A;
+            --titan-blue: #4B92DB;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: linear-gradient(135deg, #0c1222 0%, #1a2744 50%, #0f1419 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .ar-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .ar-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .ar-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .ar-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--blaze-orange) 0%, var(--blaze-deep) 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--blaze-orange) 0%, var(--blaze-deep) 50%, var(--blaze-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #94A3B8;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .ar-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--blaze-orange);
+            box-shadow: 0 20px 40px rgba(191, 87, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--blaze-orange) 0%, var(--blaze-deep) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(191, 87, 0, 0.3);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--blaze-orange);
+        }
+
+        .feature-desc {
+            color: #94A3B8;
+            line-height: 1.6;
+        }
+
+        .ar-demo {
+            background: rgba(191, 87, 0, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.1);
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .demo-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--blaze-orange) 0%, var(--blaze-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ar-viewport {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ar-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(191, 87, 0, 0.9);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--blaze-orange) 0%, var(--blaze-deep) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin: 1rem;
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(191, 87, 0, 0.4);
+        }
+
+        .tech-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .spec-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .spec-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--blaze-orange) 0%, var(--blaze-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-label {
+            color: #94A3B8;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-back {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-back:hover {
+            background: rgba(191, 87, 0, 0.2);
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .ar-features {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-specs {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .ar-demo {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="nav-back">
+        <i class="fas fa-arrow-left"></i>
+        Back to Platform
+    </a>
+
+    <canvas id="arCanvas" class="ar-canvas"></canvas>
+
+    <section class="ar-hero">
+        <div class="hero-content">
+            <div class="ar-badge">
+                <div class="ar-icon">AR</div>
+                <span>Next-Generation Augmented Reality Coaching</span>
+            </div>
+
+            <h1 class="hero-title">AR Coaching Revolution</h1>
+            <p class="hero-subtitle">
+                Transform athletic training with cutting-edge augmented reality technology.
+                Real-time biomechanical feedback, elite performance optimization, and championship-level coaching intelligence.
+            </p>
+
+            <div class="tech-specs">
+                <div class="spec-item">
+                    <div class="spec-value">60fps</div>
+                    <div class="spec-label">AR Tracking</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">&lt;20ms</div>
+                    <div class="spec-label">Latency</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">33</div>
+                    <div class="spec-label">Body Points</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-value">97%</div>
+                    <div class="spec-label">Accuracy</div>
+                </div>
+            </div>
+
+            <div class="ar-features">
+                <div class="feature-box">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Real-Time Form Analysis</h3>
+                    <p class="feature-desc">
+                        Instant biomechanical feedback with AR overlays showing optimal positioning and movement patterns.
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">👁️</div>
+                    <h3 class="feature-title">Elite Comparisons</h3>
+                    <p class="feature-desc">
+                        Compare your technique against championship athletes with side-by-side AR visualizations.
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Performance Optimization</h3>
+                    <p class="feature-desc">
+                        AI-driven recommendations for immediate improvement with personalized training programs.
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Championship Training</h3>
+                    <p class="feature-desc">
+                        Train like the elite with championship-level coaching methodologies and proven techniques.
+                    </p>
+                </div>
+            </div>
+
+            <div class="ar-demo">
+                <h2 class="demo-title">Experience AR Coaching</h2>
+                <div class="ar-viewport" id="arViewport">
+                    <div class="ar-overlay">
+                        AR Mode: Active • Tracking 33 Points • 97% Accuracy
+                    </div>
+                    <div style="font-size: 4rem; color: rgba(191, 87, 0, 0.3);">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                </div>
+
+                <a href="/ai-coaching-platform.html" class="cta-button">
+                    <i class="fas fa-video"></i>
+                    Try Video Analysis
+                </a>
+
+                <a href="/deep-south-sports-authority.html" class="cta-button" style="background: transparent; border: 2px solid var(--blaze-orange);">
+                    <i class="fas fa-rocket"></i>
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // AR Background Animation
+        const canvas = document.getElementById('arCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 30;
+
+        // Create AR-style particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 4 + 2,
+                speedX: (Math.random() - 0.5) * 2,
+                speedY: (Math.random() - 0.5) * 2,
+                opacity: Math.random() * 0.5 + 0.3,
+                hue: Math.random() * 60 + 20 // Orange/gold range
+            });
+        }
+
+        function animateAR() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                // Update position
+                particle.x += particle.speedX;
+                particle.y += particle.speedY;
+
+                // Bounce off edges
+                if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+                if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+
+                // Draw particle
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${particle.hue}, 100%, 60%, ${particle.opacity})`;
+                ctx.fill();
+
+                // Draw connections
+                particles.forEach(otherParticle => {
+                    const distance = Math.sqrt(
+                        Math.pow(particle.x - otherParticle.x, 2) +
+                        Math.pow(particle.y - otherParticle.y, 2)
+                    );
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(otherParticle.x, otherParticle.y);
+                        ctx.strokeStyle = `hsla(30, 100%, 60%, ${0.1 - distance / 1500})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(animateAR);
+        }
+
+        animateAR();
+
+        // AR Viewport interaction
+        const arViewport = document.getElementById('arViewport');
+        arViewport.addEventListener('click', () => {
+            arViewport.innerHTML = `
+                <div class="ar-overlay" style="background: rgba(34, 197, 94, 0.9);">
+                    AR Analysis: Complete • Elite Form Detected • 97% Match
+                </div>
+                <div style="font-size: 4rem; color: #22C55E;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+            `;
+            arViewport.style.border = '2px solid #22C55E';
+        });
+
+        // GSAP Animations
+        gsap.from('.feature-box', {
+            y: 100,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power2.out',
+            delay: 0.5
+        });
+
+        gsap.from('.spec-item', {
+            scale: 0.8,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'back.out(1.7)',
+            delay: 0.8
+        });
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        console.log('🎯 AR Coaching Platform Loaded - Ready for Championship Training');
+    </script>
+</body>
+</html>

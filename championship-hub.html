@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Championship Hub | Blaze Intelligence - Unified Platform Command Center</title>
+
+    <!-- Core Libraries -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --championship-gold: #FFD700;
+            --deep-navy: #002244;
+            --cardinal-red: #C41E3A;
+            --titan-blue: #4B92DB;
+            --neural-green: #00FF41;
+            --ai-purple: #8B5CF6;
+            --vancouver-teal: #00B2A9;
+            --platinum: #E5E4E2;
+            --graphite: #36454F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Neural Network Background */
+        #neural-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        /* Main Container */
+        .hub-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .hub-header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .hub-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--championship-gold));
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(191, 87, 0, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hub-title {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg,
+                var(--burnt-orange) 0%,
+                var(--championship-gold) 25%,
+                var(--neural-green) 50%,
+                var(--ai-purple) 75%,
+                var(--vancouver-teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: shimmer 3s linear infinite;
+            background-size: 200% 100%;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .hub-subtitle {
+            font-size: 1.5rem;
+            color: var(--platinum);
+            margin-bottom: 1rem;
+        }
+
+        .hub-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--championship-gold);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--platinum);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Platform Grid */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .platform-card {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1), rgba(0, 0, 0, 0.8));
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: linear-gradient(45deg,
+                transparent,
+                rgba(255, 215, 0, 0.1),
+                transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+
+        .platform-card:hover::before {
+            top: -50%;
+            left: -50%;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 20px 60px rgba(191, 87, 0, 0.4);
+        }
+
+        .platform-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--championship-gold));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .platform-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--championship-gold);
+        }
+
+        .platform-description {
+            color: var(--platinum);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .platform-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .platform-features li {
+            padding: 0.5rem 0;
+            color: var(--platinum);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .platform-features li::before {
+            content: '✓';
+            color: var(--neural-green);
+            font-weight: bold;
+        }
+
+        .platform-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--neural-green);
+            border-radius: 20px;
+            color: var(--neural-green);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--neural-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
+        }
+
+        /* Live Data Stream */
+        .data-stream {
+            background: rgba(0, 34, 68, 0.3);
+            border: 1px solid rgba(155, 203, 235, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stream-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .stream-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--championship-gold);
+        }
+
+        .stream-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--neural-green);
+        }
+
+        .stream-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .stream-item {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .stream-metric {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--championship-gold);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stream-label {
+            font-size: 0.875rem;
+            color: var(--platinum);
+        }
+
+        /* Command Center */
+        .command-center {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0, 0, 0, 0.9));
+            border: 2px solid var(--ai-purple);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .command-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .command-btn {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid var(--ai-purple);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .command-btn:hover {
+            background: var(--ai-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+
+        .command-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        .hub-footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--burnt-orange);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hub-title { font-size: 2.5rem; }
+            .platform-grid { grid-template-columns: 1fr; }
+            .hub-stats { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Neural Network Background -->
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- Main Hub Container -->
+    <div class="hub-container">
+        <!-- Header -->
+        <header class="hub-header">
+            <div class="hub-logo">🏆</div>
+            <h1 class="hub-title">Championship Intelligence Hub</h1>
+            <p class="hub-subtitle">Unified Command Center for Elite Sports Analytics</p>
+
+            <div class="hub-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="liveConnections">12</span>
+                    <span class="stat-label">Live Connections</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="dataProcessed">2.8M</span>
+                    <span class="stat-label">Data Points/Sec</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="aiAccuracy">94.6%</span>
+                    <span class="stat-label">AI Accuracy</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="activeUsers">1,247</span>
+                    <span class="stat-label">Active Users</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Platform Grid -->
+        <section class="platform-grid">
+            <!-- Main Championship Platform -->
+            <div class="platform-card" onclick="window.location.href='/'">
+                <div class="platform-icon">🏆</div>
+                <h3 class="platform-title">Championship Platform</h3>
+                <p class="platform-description">
+                    Main intelligence hub with executive dashboard, 3D universe visualization, and real-time analytics.
+                </p>
+                <ul class="platform-features">
+                    <li>Executive Analytics Dashboard</li>
+                    <li>3D Universe Visualization</li>
+                    <li>Classic & Advanced Views</li>
+                    <li>Neural Network Background</li>
+                </ul>
+                <div class="platform-status">
+                    <span class="status-dot"></span>
+                    LIVE • Primary
+                </div>
+            </div>
+
+            <!-- Video Intelligence -->
+            <div class="platform-card" onclick="window.location.href='/video-intelligence.html'">
+                <div class="platform-icon">🎥</div>
+                <h3 class="platform-title">Video Intelligence</h3>
+                <p class="platform-description">
+                    AI-powered video analytics with biomechanical analysis and micro-expression detection.
+                </p>
+                <ul class="platform-features">
+                    <li>Motion Detection & Analysis</li>
+                    <li>Biomechanical Scoring</li>
+                    <li>Performance Prediction</li>
+                    <li>Elite Athlete Comparison</li>
+                </ul>
+                <div class="platform-status">
+                    <span class="status-dot"></span>
+                    LIVE • Enhanced
+                </div>
+            </div>
+
+            <!-- AR Coaching Platform -->
+            <div class="platform-card" onclick="window.location.href='/ar-coach.html'">
+                <div class="platform-icon">🎯</div>
+                <h3 class="platform-title">AR Coaching Platform</h3>
+                <p class="platform-description">
+                    Revolutionary AR coaching with real-time biomechanical feedback and elite optimization.
+                </p>
+                <ul class="platform-features">
+                    <li>60fps AR Tracking</li>
+                    <li>33 Body Point Detection</li>
+                    <li>97% Accuracy Rate</li>
+                    <li>Real-time Form Analysis</li>
+                </ul>
+                <div class="platform-status">
+                    <span class="status-dot"></span>
+                    LIVE • Active
+                </div>
+            </div>
+
+            <!-- SEC NIL Analytics -->
+            <div class="platform-card" onclick="window.location.href='/sec-nil-analytics.html'">
+                <div class="platform-icon">💰</div>
+                <h3 class="platform-title">SEC NIL Analytics</h3>
+                <p class="platform-description">
+                    Comprehensive NIL valuation and tracking for SEC and championship programs.
+                </p>
+                <ul class="platform-features">
+                    <li>$196M+ NIL Tracked</li>
+                    <li>50+ Programs Analyzed</li>
+                    <li>2025-26 Projections</li>
+                    <li>Championship Probability</li>
+                </ul>
+                <div class="platform-status">
+                    <span class="status-dot"></span>
+                    LIVE • Updated
+                </div>
+            </div>
+
+            <!-- AI Coaching Platform -->
+            <div class="platform-card" onclick="window.location.href='/ai-coaching-platform.html'">
+                <div class="platform-icon">🧠</div>
+                <h3 class="platform-title">AI Coaching Platform</h3>
+                <p class="platform-description">
+                    Advanced AI coaching with character analysis and championship-level pattern matching.
+                </p>
+                <ul class="platform-features">
+                    <li>Micro-expression Detection</li>
+                    <li>Character Evaluation</li>
+                    <li>Elite Pattern Matching</li>
+                    <li>Real-time Feedback</li>
+                </ul>
+                <div class="platform-status">
+                    <span class="status-dot"></span>
+                    LIVE • AI-Powered
+                </div>
+            </div>
+
+            <!-- Deep South Authority -->
+            <div class="platform-card" onclick="window.location.href='/deep-south-sports-authority.html'">
+                <div class="platform-icon">⚡</div>
+                <h3 class="platform-title">Deep South Authority</h3>
+                <p class="platform-description">
+                    Complete Deep South platform with Digital Combine™ and neural network visualization.
+                </p>
+                <ul class="platform-features">
+                    <li>Digital Combine™ Analysis</li>
+                    <li>Neural Network Viz</li>
+                    <li>Founded by Austin Humphrey</li>
+                    <li>Championship Heritage</li>
+                </ul>
+                <div class="platform-status">
+                    <span class="status-dot"></span>
+                    LIVE • Integrated
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Data Stream -->
+        <section class="data-stream">
+            <div class="stream-header">
+                <h2 class="stream-title">Live Data Intelligence Stream</h2>
+                <div class="stream-status">
+                    <span class="status-dot"></span>
+                    <span>STREAMING</span>
+                </div>
+            </div>
+            <div class="stream-grid">
+                <div class="stream-item">
+                    <span class="stream-metric" id="cardinalsScore">7-3</span>
+                    <span class="stream-label">Cardinals Score</span>
+                </div>
+                <div class="stream-item">
+                    <span class="stream-metric" id="titansOdds">+3.5</span>
+                    <span class="stream-label">Titans Spread</span>
+                </div>
+                <div class="stream-item">
+                    <span class="stream-metric" id="longhornsRank">#3</span>
+                    <span class="stream-label">Longhorns Rank</span>
+                </div>
+                <div class="stream-item">
+                    <span class="stream-metric" id="grizzliesWin">87%</span>
+                    <span class="stream-label">Grizzlies Win%</span>
+                </div>
+                <div class="stream-item">
+                    <span class="stream-metric" id="nilActive">$24.7M</span>
+                    <span class="stream-label">Active NIL</span>
+                </div>
+                <div class="stream-item">
+                    <span class="stream-metric" id="videoAnalyzed">847</span>
+                    <span class="stream-label">Videos Today</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Command Center -->
+        <section class="command-center">
+            <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--ai-purple);">
+                Quick Access Command Center
+            </h2>
+            <div class="command-grid">
+                <a href="/analytics.html" class="command-btn">
+                    <span class="command-icon">📊</span>
+                    <span>Analytics</span>
+                </a>
+                <a href="/universe.html" class="command-btn">
+                    <span class="command-icon">🌌</span>
+                    <span>3D Universe</span>
+                </a>
+                <a href="/monitoring-dashboard.html" class="command-btn">
+                    <span class="command-icon">📡</span>
+                    <span>Monitoring</span>
+                </a>
+                <a href="/championship-live-dashboard.html" class="command-btn">
+                    <span class="command-icon">🔴</span>
+                    <span>Live Dashboard</span>
+                </a>
+                <a href="/executive-presentation.html" class="command-btn">
+                    <span class="command-icon">📈</span>
+                    <span>Presentation</span>
+                </a>
+                <a href="https://blaze-intelligence.replit.app" class="command-btn" target="_blank">
+                    <span class="command-icon">🚀</span>
+                    <span>Replit Hub</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="hub-footer">
+            <div class="footer-links">
+                <a href="/about.html">About</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/api-docs.html">API Docs</a>
+                <a href="/privacy.html">Privacy</a>
+                <a href="/terms.html">Terms</a>
+            </div>
+            <p style="color: var(--platinum); font-size: 0.875rem;">
+                © 2025 Blaze Intelligence. Championship Sports Analytics Platform.
+            </p>
+            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.75rem; margin-top: 1rem;">
+                Deep South Sports Authority • Founded by Austin Humphrey
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Neural Network Background Animation
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const nodes = [];
+        const nodeCount = 100;
+
+        // Create nodes
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                radius: Math.random() * 2 + 1,
+                connections: []
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Update and draw nodes
+            nodes.forEach((node, i) => {
+                // Update position
+                node.x += node.vx;
+                node.y += node.vy;
+
+                // Bounce off walls
+                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+
+                // Draw connections
+                nodes.forEach((otherNode, j) => {
+                    if (i !== j) {
+                        const distance = Math.sqrt(
+                            Math.pow(node.x - otherNode.x, 2) +
+                            Math.pow(node.y - otherNode.y, 2)
+                        );
+
+                        if (distance < 150) {
+                            ctx.beginPath();
+                            ctx.moveTo(node.x, node.y);
+                            ctx.lineTo(otherNode.x, otherNode.y);
+                            ctx.strokeStyle = `rgba(191, 87, 0, ${0.2 - distance / 750})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                });
+
+                // Draw node
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#FFD700';
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Update live stats
+        function updateStats() {
+            // Simulate live updates
+            document.getElementById('liveConnections').textContent =
+                Math.floor(Math.random() * 5) + 10;
+
+            document.getElementById('dataProcessed').textContent =
+                (Math.random() * 0.5 + 2.5).toFixed(1) + 'M';
+
+            document.getElementById('activeUsers').textContent =
+                Math.floor(Math.random() * 100) + 1200;
+
+            // Update stream metrics
+            document.getElementById('videoAnalyzed').textContent =
+                Math.floor(Math.random() * 50) + 825;
+        }
+
+        // Update every 5 seconds
+        setInterval(updateStats, 5000);
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // GSAP Animations
+        if (typeof gsap !== 'undefined') {
+            gsap.from('.platform-card', {
+                y: 100,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'power2.out'
+            });
+
+            gsap.from('.stat-item', {
+                scale: 0,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'back.out(1.7)',
+                delay: 0.5
+            });
+        }
+
+        console.log('🏆 Championship Intelligence Hub Loaded');
+        console.log('Deep South Sports Authority - Where Data Meets Dominance');
+    </script>
+</body>
+</html>
