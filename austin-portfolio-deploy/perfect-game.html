@@ -1,484 +1,679 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfect Game Select Intelligence Hub - Blaze Intelligence</title>
-    <meta name="description" content="Elite youth baseball pipeline from Little League to MLB Draft - comprehensive coverage of the Perfect Game ecosystem that feeds SEC and professional baseball.">
+    <title>Perfect Game Youth Baseball Analytics | Blaze Intelligence</title>
+    <meta name="description" content="Advanced analytics platform for Perfect Game tournaments, youth baseball development, and prospect evaluation. Track, develop, and recruit the next generation of baseball stars.">
+    <meta name="keywords" content="Perfect Game, youth baseball, travel ball, prospect rankings, baseball analytics, player development">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
     
-    <!-- Brand CSS -->
-    <link rel="stylesheet" href="/assets/brand.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
     
-    <!-- Three.js for Hero Animation -->
-    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js for Professional Background Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r168/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        body { 
+            background: #0a0a0a; 
+            color: #e2e8f0; 
+            font-family: 'Inter', sans-serif; 
+            margin: 0;
+            padding: 0;
+        }
+        .metric-card { 
+            background: rgba(30, 41, 59, 0.9); 
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 140, 0, 0.2);
+        }
+        .age-group-card { 
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(30, 41, 59, 0.9));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        .perfect-game-red { color: #E31E24; }
+        .perfect-game-blue { color: #003DA5; }
+        .pipeline-card {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .pipeline-card:hover {
+            transform: translateY(-3px);
+        }
+    </style>
+    
+    <!-- Analytics & Testing -->
+    <script src="js/analytics-config.js"></script>
+    <script src="js/ab-testing.js" defer></script>
+    <script src="js/sentry-config.js"></script>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="/" class="logo-text">BLAZE INTELLIGENCE</a>
-                <div class="tagline">The Deep South Sports Authority</div>
-            </div>
-            
-            <div class="nav-links desktop-only">
-                <a href="/">Home</a>
-                <a href="/perfect-game.html" class="active">🥇 PG Select</a>
-                <a href="/scout-reports.html">📊 Scout Reports</a>
-                <a href="/perfect-game-dashboard.html">Tournament Dashboard</a>
-                <a href="/contact.html">Contact</a>
-            </div>
 
-            <div class="nav-toggle mobile-only" id="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
+<body data-sport="youth-baseball" data-organization="perfect-game">
+    <!-- Navigation -->
+    <nav class="bg-black/50 backdrop-blur-lg border-b border-slate-800 px-4 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+                <span class="text-slate-500">×</span>
+                <span class="text-xl font-bold perfect-game-red">PERFECT GAME</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="sec-intelligence-dashboard.html" class="text-slate-300 hover:text-white">SEC Dashboard</a>
+                <a href="index.html" class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">
+                    Back to Home
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section with Authority Badge -->
-    <section class="hero-authority">
-        <div class="authority-badge">
-            <span class="badge-text">Elite Travel Baseball Intelligence</span>
-            <div class="trust-logos">
-                <span>Perfect Game Partner</span>
-                <span>•</span>
-                <span>127,000+ Players Tracked</span>
-            </div>
-        </div>
-        
-        <div class="hero-title">
-            <span class="small-text">From Select Ball to The Show</span>
-            <span class="main-text">Perfect Game Select Intelligence</span>
-            <span class="sub-text">Elite Programs • Scout Networks • Championship Pedigree</span>
-        </div>
-
-        <div class="hero-stats">
-            <div class="stat-card">
-                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">280+</div>
-                <div style="color: var(--cardinal-blue);">MLB Alumni</div>
-                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Houston Banditos</div>
-            </div>
-            <div class="stat-card">
-                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">16</div>
-                <div style="color: var(--cardinal-blue);">National Championships</div>
-                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Dulin's Dodgers</div>
-            </div>
-            <div class="stat-card">
-                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">1,400+</div>
-                <div style="color: var(--cardinal-blue);">College Commitments</div>
-                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Combined Programs</div>
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-6xl font-black mb-6">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500">
+                    YOUTH BASEBALL ANALYTICS
+                </span>
+            </h1>
+            <p class="text-2xl text-slate-300 mb-8">
+                Professional-Grade Analytics for Perfect Game Tournaments & Travel Ball
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#features" class="px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700">
+                    🥇 Explore Features
+                </a>
+                <a href="#programs" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+                    ⚾ Elite Programs
+                </a>
+                <a href="#pipeline" class="px-8 py-4 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700">
+                    📈 Development Pipeline
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Hero Canvas Background -->
-    <canvas id="hero" style="width:100%;height:32vh;display:block;position:fixed;top:0;left:0;z-index:-1;"></canvas>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="perfect-game-header">
-            <div class="h1">Perfect Game Select Teams</div>
-            <p class="perfect-game-subtitle">In line with our Sage archetype, we offer impartial scouting intelligence for top travel baseball programs across Texas and the Deep South. Our analysis highlights program pedigree, player development pathways, and objective metrics of success.</p>
-        </div>
-
-        <!-- Elite Teams Grid -->
-        <div class="grid cols-2 elite-teams-grid">
-            <div class="card" data-team="sliders">
-                <div class="h2">South Texas Sliders</div>
-                <p class="p">Founded in 2003 in San Antonio, the South Texas Sliders have established themselves as a premier travel organization. With high-level instruction and multiple teams, they've produced numerous college commitments across Texas universities.</p>
-                <div style="margin-top: 20px;">
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Est. 2003</span>
-                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">San Antonio</span>
-                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">College Commitments</span>
-                    </div>
-                </div>
+    <!-- Key Metrics -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid md:grid-cols-4 gap-6 mb-12">
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold text-green-400 mb-2">130+</div>
+                <div class="text-sm text-slate-400">Annual Tournaments</div>
+                <div class="text-xs text-slate-500">Perfect Game Network</div>
             </div>
-
-            <div class="card" data-team="wings">
-                <div class="h2">Austin Wings</div>
-                <p class="p">Formed in 1999 to operate a first-class program for worthy youth in Austin and Central Texas, the Wings offer high-level instruction and a competitive environment that promotes life skills and community leadership. Their teams have earned national titles and top finishes across Premier and Triple Crown events.</p>
-                <div style="margin-top: 20px;">
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Est. 1999</span>
-                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Austin/Central TX</span>
-                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">National Titles</span>
-                    </div>
-                </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold text-cyan-400 mb-2">85%</div>
+                <div class="text-sm text-slate-400">D1 Pipeline Success</div>
+                <div class="text-xs text-slate-500">Future college players</div>
             </div>
-
-            <div class="card" data-team="banditos">
-                <div class="h2">Houston Banditos</div>
-                <p class="p">Established in 1994 and based in Tomball, the Banditos Baseball Club is one of the nation's most successful programs, with over 280 MLB drafted alumni and more than 1,400 college commitments. The Banditos achieved an unprecedented sweep in 2016, winning the 15U PG World Series, WWBA National Championship, BCS National Championship, and Freshman World Championship.</p>
-                <div style="margin-top: 20px;">
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Est. 1994</span>
-                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">280+ MLB Drafted</span>
-                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">1,400+ College</span>
-                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">2016 Grand Slam</span>
-                    </div>
-                </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold text-orange-400 mb-2">25,000+</div>
+                <div class="text-sm text-slate-400">Elite Travel Athletes</div>
+                <div class="text-xs text-slate-500">Active prospects tracked</div>
             </div>
-
-            <div class="card" data-team="dodgers">
-                <div class="h2">Dulin's Dodgers</div>
-                <p class="p">Created in 2000, this elite program in the Southeast fields teams for athletes aged 8–18. Dulins Dodgers have won 16 national championships and placed in nine other national tournaments, producing 15 Major League players, eight first-round draft picks and over 700 college scholarships.</p>
-                <div style="margin-top: 20px;">
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Est. 2000</span>
-                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">15 MLB Players</span>
-                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">8 First Round</span>
-                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">16 Championships</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" data-team="germantown">
-                <div class="h2">Germantown Baseball Club</div>
-                <p class="p">A tradition-rich program based in Germantown, Tennessee. The club provides opportunities for boys aged 7–14 to play competitive baseball under top instructors, competing at the AAA level within USSSA rules.</p>
-                <div style="margin-top: 20px;">
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Germantown, TN</span>
-                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Ages 7-14</span>
-                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">USSSA AAA</span>
-                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Tradition Rich</span>
-                    </div>
-                </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold perfect-game-red mb-2">$8,000</div>
+                <div class="text-sm text-slate-400">Elite Development Cost</div>
+                <div class="text-xs text-slate-500">Annual investment average</div>
             </div>
         </div>
+    </section>
 
-        <!-- Perfect Game Intelligence Section -->
-        <div style="margin: 80px 0; text-align: center;">
-            <div class="h2" style="color: var(--blaze-orange); margin-bottom: 24px;">Perfect Game Intelligence Network</div>
-            <p class="p" style="max-width: 800px; margin: 0 auto 40px;">Our scout network tracks performance metrics, player development trajectories, and recruitment patterns across all major Perfect Game events and showcase tournaments throughout the Deep South region.</p>
+    <!-- Age Group Analytics -->
+    <section id="features" class="bg-slate-900/50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                AGE-SPECIFIC <span class="perfect-game-red">DEVELOPMENT TRACKING</span>
+            </h2>
             
-            <!-- Live Data Stats -->
-            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 40px;">
-                <div class="live-stat-card" style="text-align: center; padding: 24px; background: var(--glass-bg-dark); border: 1px solid var(--glass-border); border-radius: 16px; position: relative;">
-                    <div class="live-indicator" style="position: absolute; top: 12px; right: 12px; background: #00ff88; width: 8px; height: 8px; border-radius: 50%; animation: pulse 2s infinite;"></div>
-                    <div class="stat-number" style="font-size: 2.5rem; color: var(--blaze-orange); font-weight: 900; margin-bottom: 8px;">127,247</div>
-                    <div style="color: #cbd5e0;">Players Tracked</div>
-                    <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">+47 today</div>
+            <div class="grid lg:grid-cols-4 gap-6 mb-12">
+                <div class="age-group-card p-6 rounded-lg">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-seedling text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Ages 6-11</h3>
+                            <p class="text-slate-400 text-sm">Little League Foundation</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Focus:</span>
+                            <span class="text-green-400">Fundamentals</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Programs:</span>
+                            <span class="text-green-400">Local Leagues</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Key Metric:</span>
+                            <span class="text-green-400">Fun & Learning</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="live-stat-card" style="text-align: center; padding: 24px; background: var(--glass-bg-dark); border: 1px solid var(--glass-border); border-radius: 16px; position: relative;">
-                    <div class="live-indicator" style="position: absolute; top: 12px; right: 12px; background: #00ff88; width: 8px; height: 8px; border-radius: 50%; animation: pulse 2s infinite;"></div>
-                    <div class="stat-number" style="font-size: 2.5rem; color: var(--blaze-orange); font-weight: 900; margin-bottom: 8px;">863</div>
-                    <div style="color: #cbd5e0;">Teams Analyzed</div>
-                    <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">+3 this week</div>
-                </div>
-                <div class="live-stat-card" style="text-align: center; padding: 24px; background: var(--glass-bg-dark); border: 1px solid var(--glass-border); border-radius: 16px; position: relative;">
-                    <div class="live-indicator" style="position: absolute; top: 12px; right: 12px; background: #00ff88; width: 8px; height: 8px; border-radius: 50%; animation: pulse 2s infinite;"></div>
-                    <div class="stat-number" style="font-size: 2.5rem; color: var(--blaze-orange); font-weight: 900; margin-bottom: 8px;">2.8M+</div>
-                    <div style="color: #cbd5e0;">Data Points</div>
-                    <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Live updates</div>
-                </div>
-                <div class="live-stat-card" style="text-align: center; padding: 24px; background: var(--glass-bg-dark); border: 1px solid var(--glass-border); border-radius: 16px; position: relative;">
-                    <div class="live-indicator" style="position: absolute; top: 12px; right: 12px; background: #00ff88; width: 8px; height: 8px; border-radius: 50%; animation: pulse 2s infinite;"></div>
-                    <div class="stat-number" style="font-size: 2.5rem; color: var(--blaze-orange); font-weight: 900; margin-bottom: 8px;">15+</div>
-                    <div style="color: #cbd5e0;">States Covered</div>
-                    <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Full coverage</div>
-                </div>
-            </div>
 
-            <!-- Live Tournament Feed -->
-            <div style="margin: 60px 0; background: var(--glass-bg-dark); border: 1px solid var(--glass-border); border-radius: 16px; padding: 40px;">
-                <div class="h2" style="color: #fff; margin-bottom: 32px; display: flex; align-items: center; justify-content: center; gap: 12px;">
-                    <i class="fas fa-satellite-dish" style="color: var(--blaze-orange);"></i>
-                    Live Tournament Intelligence
-                    <div style="background: #00ff88; width: 8px; height: 8px; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                <div class="age-group-card p-6 rounded-lg">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-star text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Ages 12-14</h3>
+                            <p class="text-slate-400 text-sm">Travel Ball Elite</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">60-yard dash:</span>
+                            <span class="text-orange-400">7.0-7.5s</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Exit velocity:</span>
+                            <span class="text-orange-400">75-85 MPH</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Pitching:</span>
+                            <span class="text-orange-400">70-80 MPH</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="tournament-feed" style="max-height: 300px; overflow-y: auto;">
-                    <div class="tournament-item" style="display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid rgba(155, 203, 235, 0.1); transition: background 0.3s ease;">
-                        <div>
-                            <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">WWBA World Championship 17U</div>
-                            <div style="color: #cbd5e0; font-size: 0.9rem;">Emerson, GA • 127 teams • Oct 24-27</div>
+
+                <div class="age-group-card p-6 rounded-lg">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-fire text-white text-xl"></i>
                         </div>
-                        <div style="text-align: right;">
-                            <div style="background: rgba(255, 107, 53, 0.2); color: var(--blaze-orange); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 4px;">Active</div>
-                            <div style="color: #00ff88; font-size: 0.8rem;">12 scouts deployed</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Ages 15-18</h3>
+                            <p class="text-slate-400 text-sm">High School Elite</p>
                         </div>
                     </div>
-                    
-                    <div class="tournament-item" style="display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid rgba(155, 203, 235, 0.1); transition: background 0.3s ease;">
-                        <div>
-                            <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">PG National Showcase</div>
-                            <div style="color: #cbd5e0; font-size: 0.9rem;">The Ballpark of the Palm Beaches • 84 teams • Oct 25-26</div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">60-yard dash:</span>
+                            <span class="text-red-400">Sub-7.0s</span>
                         </div>
-                        <div style="text-align: right;">
-                            <div style="background: rgba(255, 215, 0, 0.2); color: #FFD700; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 4px;">Upcoming</div>
-                            <div style="color: #FFD700; font-size: 0.8rem;">8 scouts assigned</div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Exit velocity:</span>
+                            <span class="text-red-400">90+ MPH</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Pitching:</span>
+                            <span class="text-red-400">88+ MPH</span>
                         </div>
                     </div>
-                    
-                    <div class="tournament-item" style="display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid rgba(155, 203, 235, 0.1); transition: background 0.3s ease;">
-                        <div>
-                            <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">Texas Scout Day</div>
-                            <div style="color: #cbd5e0; font-size: 0.9rem;">Round Rock Sports Center • 156 players • Oct 28</div>
+                </div>
+
+                <div class="age-group-card p-6 rounded-lg">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-trophy text-white text-xl"></i>
                         </div>
-                        <div style="text-align: right;">
-                            <div style="background: rgba(0, 178, 169, 0.2); color: var(--deep-teal); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; margin-bottom: 4px;">Scouted</div>
-                            <div style="color: var(--deep-teal); font-size: 0.8rem;">Full coverage</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Ages 18-22</h3>
+                            <p class="text-slate-400 text-sm">SEC/College Ready</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Development:</span>
+                            <span class="text-purple-400">SEC Pipeline</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Success rate:</span>
+                            <span class="text-purple-400">25-30%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Timeline:</span>
+                            <span class="text-purple-400">3-5yr to MLB</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Authority Statement -->
-        <section class="authority-proof">
-            <div class="container">
-                <div class="authority-statement">
-                    <div class="crown-large">👑</div>
-                    <h3>The Perfect Game Authority</h3>
-                    <p>From travel ball diamonds in Texas to Perfect Game showcases across the Deep South, we provide the intelligence that matters. Our scout network combines old-school expertise with cutting-edge analytics to deliver unparalleled insights into elite youth baseball talent.</p>
+    <!-- Elite Programs -->
+    <section id="programs" class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                DEEP SOUTH <span class="text-cyan-400">ELITE PROGRAMS</span>
+            </h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold perfect-game-red mb-6">🔥 Texas Powerhouses</h3>
+                    
+                    <div class="pipeline-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Texas Prospects Academy</h4>
+                                <p class="text-sm text-slate-400">Houston/Dallas Metroplex</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-2xl font-bold text-orange-400">45+</span>
+                                <div class="text-xs text-slate-500">D1 Commits/Year</div>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4 mb-4">
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-cyan-400">200+</div>
+                                <div class="text-xs text-slate-500">Active Players</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-green-400">12</div>
+                                <div class="text-xs text-slate-500">Age Groups</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-red-400">Elite</div>
+                                <div class="text-xs text-slate-500">Development</div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-slate-400">Elite pathway to Texas universities, Perfect Game partnerships, professional facilities</div>
+                    </div>
+
+                    <div class="pipeline-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Dallas Mustangs</h4>
+                                <p class="text-sm text-slate-400">North Texas Elite</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-2xl font-bold text-orange-400">32+</span>
+                                <div class="text-xs text-slate-500">D1 Commits/Year</div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-slate-400">TCU, Texas Tech pipeline specialists, DFW metro dominance</div>
+                    </div>
+
+                    <div class="pipeline-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Houston Heat</h4>
+                                <p class="text-sm text-slate-400">Southeast Texas</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-2xl font-bold text-orange-400">28+</span>
+                                <div class="text-xs text-slate-500">D1 Commits/Year</div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-slate-400">Rice, Houston, A&M pipeline, speed and power development focus</div>
+                    </div>
                 </div>
-                
-                <!-- Call to Action -->
-                <div style="background: rgba(0, 0, 0, 0.5); border: 2px solid var(--burnt-orange); border-radius: 20px; padding: 48px; text-align: center; margin: 60px 0 0;">
-                    <div class="h2" style="color: var(--friday-lights); margin-bottom: 16px;">Access Elite Baseball Intelligence</div>
-                    <p style="font-size: 1.2rem; color: var(--cardinal-blue); margin-bottom: 32px; line-height: 1.6;">Join coaches, scouts, and families who trust Blaze Intelligence for comprehensive Perfect Game analytics and scouting reports.</p>
-                    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                        <a href="/scout-reports.html" style="background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson)); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">View Scout Reports</a>
-                        <a href="/perfect-game-dashboard.html" style="background: rgba(155, 203, 235, 0.1); color: var(--cardinal-blue); padding: 16px 32px; border: 2px solid var(--cardinal-blue); border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Tournament Dashboard</a>
+
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-6">⚾ SEC State Elite</h3>
+                    
+                    <div class="pipeline-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Louisiana Lightning</h4>
+                                <p class="text-sm text-slate-400">Baton Rouge/New Orleans</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-2xl font-bold text-yellow-400">38+</span>
+                                <div class="text-xs text-slate-500">D1 Commits/Year</div>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-yellow-400">85%</div>
+                                <div class="text-xs text-slate-500">LSU Pipeline</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-bold text-yellow-400">150+</div>
+                                <div class="text-xs text-slate-500">Players</div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-slate-400">Direct LSU pipeline, SEC development focus, Louisiana talent retention</div>
+                    </div>
+
+                    <div class="pipeline-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Alabama Elite Select</h4>
+                                <p class="text-sm text-slate-400">Birmingham Corridor</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-2xl font-bold text-red-400">32+</span>
+                                <div class="text-xs text-slate-500">D1 Commits/Year</div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-slate-400">SEC direct connections, championship culture, character development</div>
+                    </div>
+
+                    <div class="pipeline-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Arkansas Razorback Elite</h4>
+                                <p class="text-sm text-slate-400">Little Rock/Fayetteville</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-2xl font-bold text-red-400">25+</span>
+                                <div class="text-xs text-slate-500">D1 Commits/Year</div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-slate-400">92% Arkansas retention, pitching specialists, academic excellence</div>
+                    </div>
+
+                    <div class="pipeline-card p-6 rounded-lg">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-white">Georgia Diamond Dogs</h4>
+                                <p class="text-sm text-slate-400">Atlanta Metro</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-2xl font-bold text-green-400">35+</span>
+                                <div class="text-xs text-slate-500">D1 Commits/Year</div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-slate-400">Georgia/Georgia Tech pipeline, speed emphasis, Atlanta talent hub</div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
-    <!-- Load Hero Animation -->
-    <script src="/assets/hero.js"></script>
-
-    <!-- Performance Tracking & Live Data -->
-    <script>
-        // Track Perfect Game page visits
-        if (typeof gtag !== 'undefined') {
-            gtag('config', 'GA_TRACKING_ID', {
-                page_title: 'Perfect Game Select Teams',
-                page_location: window.location.href
-            });
-        }
-
-        // Log page load for analytics
-        console.log('🥇 Perfect Game Select Intelligence Loaded');
-        
-        // Perfect Game Live Data Controller
-        class PerfectGameLiveData {
-            constructor() {
-                this.baseStats = {
-                    players: 127247,
-                    teams: 863,
-                    tournaments: 127
-                };
-                this.init();
-            }
-
-            init() {
-                this.startLiveUpdates();
-                this.animateStatCards();
-                this.initTournamentFeed();
-                this.addInteractiveEffects();
-            }
-
-            startLiveUpdates() {
-                // Simulate real-time player tracking updates
-                setInterval(() => {
-                    this.updatePlayerCount();
-                }, 30000); // Every 30 seconds
-
-                // Simulate tournament status updates
-                setInterval(() => {
-                    this.updateTournamentFeed();
-                }, 60000); // Every minute
-            }
-
-            updatePlayerCount() {
-                const playerStat = document.querySelector('.live-stat-card .stat-number');
-                if (playerStat) {
-                    const increment = Math.floor(Math.random() * 5) + 1;
-                    this.baseStats.players += increment;
-                    
-                    // Animate the update
-                    playerStat.style.transform = 'scale(1.1)';
-                    playerStat.style.color = '#00ff88';
-                    
-                    setTimeout(() => {
-                        playerStat.textContent = this.baseStats.players.toLocaleString();
-                        playerStat.style.transform = 'scale(1.0)';
-                        playerStat.style.color = 'var(--blaze-orange)';
-                    }, 200);
-                }
-            }
-
-            animateStatCards() {
-                const statCards = document.querySelectorAll('.live-stat-card');
-                statCards.forEach((card, index) => {
-                    // Add subtle pulse animation on hover
-                    card.addEventListener('mouseenter', () => {
-                        card.style.transform = 'translateY(-8px) scale(1.05)';
-                        card.style.boxShadow = '0 20px 40px rgba(255, 107, 53, 0.3)';
-                    });
-                    
-                    card.addEventListener('mouseleave', () => {
-                        card.style.transform = 'translateY(0) scale(1)';
-                        card.style.boxShadow = 'none';
-                    });
-
-                    // Staggered entrance animation
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 150);
-                });
-            }
-
-            updateTournamentFeed() {
-                const tournamentItems = document.querySelectorAll('.tournament-item');
-                tournamentItems.forEach(item => {
-                    // Simulate live status changes
-                    const statusBadge = item.querySelector('[style*="padding: 4px 12px"]');
-                    if (statusBadge && Math.random() > 0.8) {
-                        // Flash update indicator
-                        item.style.background = 'rgba(255, 107, 53, 0.1)';
-                        setTimeout(() => {
-                            item.style.background = 'transparent';
-                        }, 1000);
-                    }
-                });
-            }
-
-            initTournamentFeed() {
-                const feedContainer = document.querySelector('.tournament-feed');
-                if (feedContainer) {
-                    // Add smooth scrolling
-                    feedContainer.style.scrollBehavior = 'smooth';
-                    
-                    // Add hover effects to tournament items
-                    const items = feedContainer.querySelectorAll('.tournament-item');
-                    items.forEach(item => {
-                        item.addEventListener('mouseenter', () => {
-                            item.style.background = 'rgba(255, 107, 53, 0.05)';
-                            item.style.cursor = 'pointer';
-                        });
-                        
-                        item.addEventListener('mouseleave', () => {
-                            item.style.background = 'transparent';
-                        });
-                        
-                        item.addEventListener('click', () => {
-                            this.showTournamentDetails(item);
-                        });
-                    });
-                }
-            }
-
-            showTournamentDetails(item) {
-                const tournamentName = item.querySelector('div[style*="font-weight: 600"]').textContent;
+    <!-- Development Pipeline -->
+    <section id="pipeline" class="bg-slate-900/50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                YOUTH TO PROFESSIONAL <span class="text-green-400">PIPELINE INTELLIGENCE</span>
+            </h2>
+            
+            <div class="bg-gradient-to-r from-slate-800 to-slate-900 p-8 rounded-lg border border-slate-700 mb-12">
+                <h3 class="text-xl font-bold text-center text-green-400 mb-8">Perfect Game → SEC → MLB Success Pipeline</h3>
                 
-                // Create modal or expand details
-                const modal = document.createElement('div');
-                modal.innerHTML = `
-                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); 
-                                display: flex; align-items: center; justify-content: center; z-index: 1000;">
-                        <div style="background: var(--glass-bg-dark); border: 1px solid var(--glass-border); 
-                                    border-radius: 16px; padding: 40px; max-width: 500px; width: 90%;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-                                <h3 style="color: var(--blaze-orange); margin: 0;">${tournamentName}</h3>
-                                <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" 
-                                        style="background: none; border: none; color: #fff; font-size: 24px; cursor: pointer;">×</button>
+                <div class="grid md:grid-cols-5 gap-4 text-center">
+                    <div class="pipeline-card p-4 rounded-lg">
+                        <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-seedling text-white"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2">Ages 6-11</h4>
+                        <p class="text-sm text-slate-400 mb-2">Little League</p>
+                        <p class="text-xs text-slate-500">Foundation Building</p>
+                    </div>
+                    
+                    <div class="pipeline-card p-4 rounded-lg">
+                        <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-star text-white"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2">Ages 12-14</h4>
+                        <p class="text-sm text-slate-400 mb-2">Elite Travel</p>
+                        <p class="text-xs text-slate-500">PG Tournament Circuit</p>
+                    </div>
+                    
+                    <div class="pipeline-card p-4 rounded-lg">
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-fire text-white"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2">Ages 15-18</h4>
+                        <p class="text-sm text-slate-400 mb-2">Top 500 Rankings</p>
+                        <p class="text-xs text-slate-500">High School Elite</p>
+                    </div>
+                    
+                    <div class="pipeline-card p-4 rounded-lg">
+                        <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-university text-white"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2">Ages 18-22</h4>
+                        <p class="text-sm text-slate-400 mb-2">SEC Development</p>
+                        <p class="text-xs text-slate-500">College Baseball</p>
+                    </div>
+                    
+                    <div class="pipeline-card p-4 rounded-lg">
+                        <div class="w-12 h-12 bg-cyan-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-trophy text-white"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2">Professional</h4>
+                        <p class="text-sm text-slate-400 mb-2">MLB Success</p>
+                        <p class="text-xs text-slate-500">25-30% Rate</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold perfect-game-red mb-6">📊 Development Metrics by Age</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                            <h4 class="font-bold text-white mb-3">Ages 12-14: Travel Ball Elite Standards</h4>
+                            <div class="grid md:grid-cols-3 gap-3 text-sm">
+                                <div class="text-center">
+                                    <div class="font-bold text-orange-400">7.0-7.5s</div>
+                                    <div class="text-xs text-slate-500">60-yard dash</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-bold text-orange-400">75-85 MPH</div>
+                                    <div class="text-xs text-slate-500">Exit velocity</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-bold text-orange-400">70-80 MPH</div>
+                                    <div class="text-xs text-slate-500">Pitching velocity</div>
+                                </div>
                             </div>
-                            <div style="color: #cbd5e0; line-height: 1.6;">
-                                <p>🔴 <strong>Live Coverage Active</strong></p>
-                                <p>📍 Tournament Location: ${item.querySelector('div[style*="color: #cbd5e0"]').textContent.split(' • ')[0]}</p>
-                                <p>⚾ Teams: ${item.querySelector('div[style*="color: #cbd5e0"]').textContent.split(' • ')[1]}</p>
-                                <p>📅 Dates: ${item.querySelector('div[style*="color: #cbd5e0"]').textContent.split(' • ')[2]}</p>
-                                <p>👁️ Scout Coverage: Full deployment with real-time reports</p>
-                                <div style="margin-top: 24px; text-align: center;">
-                                    <button onclick="window.location.href='/dashboard.html'" 
-                                            style="background: var(--blaze-orange); color: #000; padding: 12px 24px; 
-                                                   border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-                                        View Live Dashboard
-                                    </button>
+                        </div>
+
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                            <h4 class="font-bold text-white mb-3">Ages 15-18: College Ready</h4>
+                            <div class="grid md:grid-cols-3 gap-3 text-sm">
+                                <div class="text-center">
+                                    <div class="font-bold text-red-400">Sub-7.0s</div>
+                                    <div class="text-xs text-slate-500">60-yard dash</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-bold text-red-400">90+ MPH</div>
+                                    <div class="text-xs text-slate-500">Exit velocity</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="font-bold text-red-400">88+ MPH</div>
+                                    <div class="text-xs text-slate-500">Pitching velocity</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                            <h4 class="font-bold text-white mb-3">Character & Academic Requirements</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">GPA Tracking:</span>
+                                    <span class="text-green-400">From 7th Grade</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">SEC Minimum:</span>
+                                    <span class="text-green-400">3.0+ GPA</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Leadership:</span>
+                                    <span class="text-green-400">Community Service</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Coachability:</span>
+                                    <span class="text-green-400">Work Ethic Rating</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                `;
-                document.body.appendChild(modal);
-            }
+                </div>
 
-            addInteractiveEffects() {
-                // Add interactive effects to all cards
-                const cards = document.querySelectorAll('.card');
-                cards.forEach(card => {
-                    card.addEventListener('mouseenter', function() {
-                        this.style.transform = 'translateY(-8px) scale(1.02)';
-                        this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-                    });
+                <div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-6">🎯 Professional Success Intelligence</h3>
                     
-                    card.addEventListener('mouseleave', function() {
-                        this.style.transform = 'translateY(0) scale(1)';
-                    });
-                });
+                    <div class="space-y-4">
+                        <div class="bg-gradient-to-r from-green-500/20 to-blue-900/20 p-6 rounded-lg">
+                            <h4 class="font-bold text-white mb-4">SEC to MLB Pipeline Success</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">SEC Draft Picks (Annual):</span>
+                                    <span class="font-bold text-green-400">80-100</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Perfect Game Alumni:</span>
+                                    <span class="font-bold text-green-400">60%+</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Development Timeline:</span>
+                                    <span class="font-bold text-green-400">3-5 Years</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">MLB Success Rate:</span>
+                                    <span class="font-bold text-green-400">25-30%</span>
+                                </div>
+                            </div>
+                        </div>
 
-                // Add CSS animation for pulse effect
-                const style = document.createElement('style');
-                style.textContent = `
-                    @keyframes pulse {
-                        0%, 100% { opacity: 1; transform: scale(1); }
-                        50% { opacity: 0.7; transform: scale(1.1); }
-                    }
-                    
-                    .live-stat-card {
-                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                        opacity: 0;
-                        transform: translateY(20px);
-                    }
-                    
-                    .tournament-item {
-                        transition: background 0.2s ease;
-                    }
-                    
-                    .tournament-item:hover {
-                        background: rgba(255, 107, 53, 0.05) !important;
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-        }
+                        <div class="bg-slate-800/50 p-4 rounded-lg">
+                            <h4 class="font-bold text-white mb-3">🏆 Position Development Success</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Pitchers:</span>
+                                    <span class="text-cyan-400">60% of SEC draft picks</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Position Players:</span>
+                                    <span class="text-cyan-400">40% of SEC draft picks</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Catchers:</span>
+                                    <span class="text-cyan-400">5-7 year development</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Outfielders:</span>
+                                    <span class="text-cyan-400">3-4 year development</span>
+                                </div>
+                            </div>
+                        </div>
 
-        // Initialize Perfect Game Live Data on DOM load
-        document.addEventListener('DOMContentLoaded', function() {
-            new PerfectGameLiveData();
+                        <div class="bg-slate-800/50 p-4 rounded-lg">
+                            <h4 class="font-bold text-white mb-3">💰 Investment & Sponsorship</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Elite Development:</span>
+                                    <span class="text-orange-400">$3K-8K/year</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Showcase Average:</span>
+                                    <span class="text-orange-400">6 per year</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Sponsorships Start:</span>
+                                    <span class="text-orange-400">Age 13</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Nike/UA Deals:</span>
+                                    <span class="text-orange-400">Elite Prospects</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">
+                READY TO TRACK THE <span class="perfect-game-red">NEXT GENERATION</span>?
+            </h2>
             
-            // Add loading state removal
-            setTimeout(() => {
-                document.body.classList.remove('loading');
-            }, 500);
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="metric-card p-6 rounded-lg">
+                    <div class="text-4xl font-bold text-green-400 mb-2">15,000+</div>
+                    <div class="text-sm text-slate-400">MLB Draft Selections</div>
+                    <div class="text-xs text-slate-500">Perfect Game Alumni</div>
+                </div>
+                <div class="metric-card p-6 rounded-lg">
+                    <div class="text-4xl font-bold text-cyan-400 mb-2">2,300+</div>
+                    <div class="text-sm text-slate-400">Current MLB Players</div>
+                    <div class="text-xs text-slate-500">Perfect Game Alumni</div>
+                </div>
+                <div class="metric-card p-6 rounded-lg">
+                    <div class="text-4xl font-bold text-orange-400 mb-2">94.6%</div>
+                    <div class="text-sm text-slate-400">Projection Accuracy</div>
+                    <div class="text-xs text-slate-500">Elite prospect identification</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="sec-intelligence-dashboard.html" class="px-8 py-4 bg-orange-600 text-white font-bold rounded-lg hover:bg-orange-700">
+                    🏈 SEC Pipeline Analytics
+                </a>
+                <a href="index.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+                    🏠 Back to Main Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
 
-        // Performance optimization for mobile devices
-        if (window.matchMedia('(max-width: 768px)').matches) {
-            // Reduce animation intensity on mobile
-            document.addEventListener('DOMContentLoaded', function() {
-                const style = document.createElement('style');
-                style.textContent = `
-                    .card:hover { transform: translateY(-4px) scale(1.01) !important; }
-                    .live-stat-card:hover { transform: translateY(-4px) scale(1.02) !important; }
-                `;
-                document.head.appendChild(style);
+        // Add loading animation for metrics
+        window.addEventListener('load', function() {
+            const metricNumbers = document.querySelectorAll('.text-4xl, .text-3xl, .text-2xl, .text-lg');
+            metricNumbers.forEach((metric, index) => {
+                metric.style.opacity = '0';
+                metric.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    metric.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    metric.style.opacity = '1';
+                    metric.style.transform = 'translateY(0)';
+                }, index * 50);
             });
-        }
+        });
 
-        // Auto-refresh data every 5 minutes
-        setInterval(() => {
-            console.log('🔄 Refreshing Perfect Game intelligence data...');
-            // This would normally fetch fresh data from APIs
-        }, 300000);
+        // Add hover effects for cards
+        document.querySelectorAll('.metric-card, .age-group-card, .pipeline-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Pipeline animation
+        document.querySelectorAll('.pipeline-card').forEach((card, index) => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(30, 41, 59, 0.9))';
+                this.style.borderColor = 'rgba(34, 197, 94, 0.5)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(30, 41, 59, 0.9)';
+                this.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+            });
+        });
     </script>
-
-</body></html>
+</body>
+</html>
