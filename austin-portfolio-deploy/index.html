@@ -4243,4 +4243,59 @@
     <script src="js/blaze-interactive-maps.js"></script>
     <script src="js/blaze-3d-charts.js"></script>
 
+    <!-- Championship-Level Analytics Features -->
+    <script src="src/js/mobile-first-youth-analytics.js"></script>
+    <script src="src/js/competitive-intelligence-dashboard.js"></script>
+    <script src="src/js/next-gen-visualization-engine.js"></script>
+    <script src="src/js/unified-data-pipeline.js"></script>
+
+    <!-- Initialize Mobile Youth Analytics -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Mobile-First Youth Analytics
+            const youthAnalyticsContainer = document.querySelector('.mobile-first-youth-analytics');
+            if (!youthAnalyticsContainer) {
+                // Create container if it doesn't exist
+                const container = document.createElement('div');
+                container.id = 'youth-analytics-section';
+                container.className = 'section-padding';
+                container.innerHTML = `
+                    <div class="container">
+                        <h2 class="section-title">Youth Team Analytics</h2>
+                        <p class="section-subtitle">Championship Intelligence for 3M+ Youth Teams</p>
+                        <div class="mobile-first-youth-analytics"></div>
+                    </div>
+                `;
+                // Add before footer
+                const footer = document.querySelector('footer');
+                if (footer) {
+                    footer.parentNode.insertBefore(container, footer);
+                }
+            }
+
+            // Initialize Competitive Intelligence Dashboard
+            const competitiveContainer = document.querySelector('.competitive-intelligence-dashboard');
+            if (!competitiveContainer) {
+                // Create container if it doesn't exist
+                const container = document.createElement('div');
+                container.id = 'competitive-intelligence-section';
+                container.className = 'section-padding';
+                container.innerHTML = `
+                    <div class="container">
+                        <h2 class="section-title">Market Intelligence</h2>
+                        <p class="section-subtitle">Dominating the Gap Hudl Abandoned</p>
+                        <div class="competitive-intelligence-dashboard"></div>
+                    </div>
+                `;
+                // Add before footer
+                const footer = document.querySelector('footer');
+                if (footer) {
+                    footer.parentNode.insertBefore(container, footer);
+                }
+            }
+
+            console.log('🏆 Championship Analytics Initialized - Ready to Dominate');
+        });
+    </script>
+
 </body></html>
