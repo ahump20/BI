@@ -1,0 +1,3937 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)file:///Users/AustinHumphrey/BI/austin-portfolio-deploy/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - The Deep South Sports Authority | Texas Football &amp; SEC Analytics</title>
+    <meta name="description" content="The Dave Campbell&#39;s of SEC/Deep South sports. Complete coverage of Texas high school football, SEC baseball, and every player from Little League to the NFL/MLB.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="file:///public/assets/images/BI-4_1757392449602.png">
+    
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blaze-intelligence.netlify.app/">
+    <meta property="og:title" content="Blaze Intelligence - The Deep South Sports Authority">
+    <meta property="og:description" content="From Little League to The League. The most trusted source for Texas and SEC sports intelligence.">
+    <meta property="og:image" content="/public/assets/images/og-authority.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://blaze-intelligence.netlify.app/">
+    <meta property="twitter:title" content="Blaze Intelligence - The Deep South Sports Authority">
+    <meta property="twitter:description" content="The Dave Campbell&#39;s of Deep South sports. 127,000+ players tracked.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/css2" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/all.min.css">
+    
+    <!-- Three.js for Professional Background Effects -->
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/three.min.js"></script>
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/OrbitControls.js"></script>
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/EffectComposer.js"></script>
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/RenderPass.js"></script>
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/UnrealBloomPass.js"></script>
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/CopyShader.js"></script>
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/LuminosityHighPassShader.js"></script>
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/ShaderPass.js"></script>
+    
+    <!-- Chart.js for Analytics -->
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/chart.js"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/gsap.min.js"></script>
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/ScrollTrigger.min.js"></script>
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsOrganization",
+      "name": "Blaze Intelligence",
+      "alternateName": "The Deep South Sports Authority",
+      "url": "https://blaze-intelligence.netlify.app",
+      "logo": "https://blaze-intelligence.netlify.app/img/logo.png",
+      "description": "The authoritative source for Texas, SEC, and Deep South sports intelligence from youth through professional levels.",
+      "sameAs": [
+        "https://twitter.com/blazeintel",
+        "https://www.linkedin.com/company/blaze-intelligence",
+        "https://www.instagram.com/blazeintelligence"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "8319 Monument Oak",
+        "addressLocality": "Boerne",
+        "addressRegion": "TX",
+        "postalCode": "78015",
+        "addressCountry": "US"
+      },
+      "areaServed": ["Texas", "Louisiana", "Mississippi", "Alabama", "Georgia", "Florida", "South Carolina", "Tennessee", "Arkansas"],
+      "knowsAbout": ["High School Football", "College Football", "SEC Sports", "Texas Sports", "Baseball Analytics", "Sports Recruiting", "NFL Draft", "MLB Draft"]
+    }
+    </script>
+    
+    <style>
+        :root {
+            /* DCTF Authority Color Palette */
+            --burnt-orange: #BF5700;
+            --sec-crimson: #9B2222;
+            --cardinal-blue: #9BCBEB;
+            --deep-teal: #00B2A9;
+            --mississippi-white: #F8F8FF;
+            --georgia-clay: #C65D00;
+            --texas-navy: #002244;
+            --louisiana-bayou: #1B4332;
+            --friday-lights: #FFD700;
+            --stadium-black: #0A0A0A;
+            
+            /* Typography */
+            --font-headline: 'Bebas Neue', 'Oswald', sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-data: 'JetBrains Mono', monospace;
+            --font-letterman: 'Oswald', serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(180deg, var(--stadium-black) 0%, var(--texas-navy) 50%, var(--louisiana-bayou) 100%);
+            color: var(--mississippi-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Authority Badge */
+        .authority-badge {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+            margin-bottom: 32px;
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3); }
+            50% { transform: scale(1.02); box-shadow: 0 6px 30px rgba(191, 87, 0, 0.5); }
+        }
+        
+        .badge-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .trust-logos {
+            display: flex;
+            gap: 24px;
+            padding-left: 24px;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .trust-logos span {
+            font-size: 0.75rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 3px solid var(--burnt-orange);
+            padding: 1rem 5%;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-text {
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-size: 0.75rem;
+            color: var(--friday-lights);
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        
+        .nav-sports {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .dropdown > span {
+            color: var(--mississippi-white);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        
+        .dropdown:hover > span {
+            color: var(--burnt-orange);
+        }
+        
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: -50px;
+            background: white;
+            border: 1px solid var(--cardinal-blue);
+            border-top: 4px solid var(--burnt-orange);
+            border-radius: 0 0 16px 16px;
+            padding: 32px;
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            min-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 34, 68, 0.2);
+            margin-top: 20px;
+        }
+        
+        .dropdown:hover .mega-menu {
+            display: grid;
+        }
+        
+        .menu-column h4 {
+            font-family: var(--font-headline);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sec-crimson);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--cardinal-blue);
+        }
+        
+        .menu-column a {
+            display: block;
+            padding: 8px 0;
+            color: var(--texas-navy);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+        
+        .menu-column a:hover {
+            color: var(--burnt-orange);
+            padding-left: 8px;
+        }
+        
+        .nav-tools {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .tool-link {
+            color: var(--cardinal-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .tool-link:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .nav-account {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-login, .btn-subscribe {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-login {
+            background: transparent;
+            color: var(--mississippi-white);
+            border: 1px solid var(--mississippi-white);
+        }
+        
+        .btn-login:hover {
+            background: var(--mississippi-white);
+            color: var(--texas-navy);
+        }
+        
+        .btn-subscribe {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            border: none;
+        }
+        
+        .btn-subscribe:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(191, 87, 0, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero-authority {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 5% 80px;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero-title {
+            text-align: center;
+            margin: 48px 0;
+        }
+        
+        .hero-title .small-text {
+            font-family: var(--font-letterman);
+            font-size: 18px;
+            color: var(--georgia-clay);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 12px;
+        }
+        
+        .hero-title .main-text {
+            font-family: var(--font-headline);
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--friday-lights), var(--sec-crimson));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            display: block;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero-title .sub-text {
+            font-family: var(--font-body);
+            font-size: 24px;
+            color: var(--mississippi-white);
+            font-weight: 500;
+            display: block;
+            opacity: 0.9;
+        }
+        
+        /* Hero Stats */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 64px auto;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--cardinal-blue);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--sec-crimson));
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(155, 203, 235, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .stat-number {
+            font-family: var(--font-data);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--mississippi-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 48px;
+        }
+        
+        .btn-primary, .btn-secondary, .btn-tertiary {
+            padding: 16px 32px;
+            font-family: var(--font-headline);
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(191, 87, 0, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--burnt-orange);
+            border: 2px solid var(--burnt-orange);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--burnt-orange);
+            color: white;
+        }
+        
+        .btn-tertiary {
+            background: transparent;
+            color: var(--mississippi-white);
+            border: 1px solid var(--mississippi-white);
+        }
+        
+        .btn-tertiary:hover {
+            background: var(--mississippi-white);
+            color: var(--texas-navy);
+        }
+        
+        /* Authority Proof Section */
+        .authority-proof {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, transparent 0%, rgba(20, 33, 61, 0.5) 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: var(--font-headline);
+            font-size: 3.5rem;
+            text-align: center;
+            color: var(--burnt-orange);
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        
+        .proof-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .proof-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .proof-icon {
+            font-size: 3rem;
+            color: var(--friday-lights);
+            margin-bottom: 20px;
+        }
+        
+        .proof-card h3 {
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            color: var(--mississippi-white);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        
+        .proof-card p {
+            color: rgba(248, 248, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .proof-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(155, 203, 235, 0.2);
+        }
+        
+        .proof-stats span {
+            font-family: var(--font-data);
+            font-size: 0.9rem;
+            color: var(--cardinal-blue);
+            font-weight: 600;
+        }
+        
+        /* Product Showcase */
+        .product-showcase {
+            padding: 100px 5%;
+            background: rgba(10, 10, 10, 0.7);
+        }
+        
+        .product-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            background: transparent;
+            color: var(--mississippi-white);
+            border: 1px solid var(--mississippi-white);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .tab.active, .tab:hover {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            border-color: transparent;
+        }
+        
+        .product-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .product-panel {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        
+        .product-panel.active {
+            display: grid;
+        }
+        
+        .product-visual img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product-details h3 {
+            font-family: var(--font-headline);
+            font-size: 2.5rem;
+            color: var(--burnt-orange);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        
+        .product-tagline {
+            font-size: 1.2rem;
+            color: var(--friday-lights);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        
+        .feature-list li {
+            padding: 12px 0;
+            color: var(--mississippi-white);
+            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            color: var(--friday-lights);
+            margin-right: 12px;
+            font-weight: bold;
+        }
+        
+        .product-cta {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .price {
+            font-family: var(--font-data);
+            font-size: 1.8rem;
+            color: var(--friday-lights);
+            font-weight: 700;
+        }
+        
+        /* Texas Football Authority Section */
+        .texas-football-authority {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, rgba(191, 87, 0, 0.1) 0%, rgba(155, 34, 34, 0.05) 50%, transparent 100%);
+        }
+        
+        .rankings-dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .rankings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+            padding: 24px 32px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .classification-tabs {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .classification-tab {
+            background: transparent;
+            color: var(--mississippi-white);
+            border: 2px solid rgba(191, 87, 0, 0.3);
+            padding: 12px 24px;
+            font-family: var(--font-headline);
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .classification-tab:hover {
+            border-color: var(--burnt-orange);
+            background: rgba(191, 87, 0, 0.1);
+        }
+        
+        .classification-tab.active {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            border-color: var(--burnt-orange);
+            color: white;
+            box-shadow: 0 4px 16px rgba(191, 87, 0, 0.3);
+        }
+        
+        .update-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .update-time {
+            font-family: var(--font-data);
+            color: var(--cardinal-blue);
+            font-size: 0.9rem;
+        }
+        
+        .live-indicator {
+            width: 12px;
+            height: 12px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 1.0; }
+        }
+        
+        .rankings-panel {
+            display: none;
+        }
+        
+        .rankings-panel.active {
+            display: block;
+        }
+        
+        .rankings-grid {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        
+        .ranking-card {
+            display: grid;
+            grid-template-columns: 60px 1fr auto auto;
+            align-items: center;
+            gap: 24px;
+            padding: 24px 32px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(155, 203, 235, 0.15);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .ranking-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+            border-color: rgba(191, 87, 0, 0.3);
+        }
+        
+        .rank-number {
+            font-family: var(--font-headline);
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            text-align: center;
+            line-height: 1;
+        }
+        
+        .team-info h4 {
+            font-family: var(--font-headline);
+            font-size: 1.4rem;
+            color: var(--mississippi-white);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        
+        .team-info .location {
+            display: block;
+            color: var(--cardinal-blue);
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+        
+        .team-info .record {
+            display: block;
+            color: var(--friday-lights);
+            font-family: var(--font-data);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .team-metrics {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric .value {
+            display: block;
+            font-family: var(--font-data);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--mississippi-white);
+        }
+        
+        .metric .label {
+            display: block;
+            font-size: 0.8rem;
+            color: rgba(248, 248, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .trend {
+            font-family: var(--font-headline);
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 60px;
+        }
+        
+        .trend.up {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff88;
+        }
+        
+        .trend.down {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff6666;
+        }
+        
+        .trend.stable {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--mississippi-white);
+        }
+        
+        .rankings-insights {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .rankings-insights h4 {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            color: var(--burnt-orange);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .insight-items {
+            display: grid;
+            gap: 16px;
+        }
+        
+        .insight-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+        
+        .insight-item i {
+            color: var(--friday-lights);
+            font-size: 1.2rem;
+            min-width: 20px;
+        }
+        
+        .insight-item span {
+            color: var(--mississippi-white);
+            line-height: 1.4;
+        }
+        
+        .authority-proof-footer {
+            margin-top: 48px;
+            padding: 32px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            border: 2px solid var(--burnt-orange);
+        }
+        
+        .coverage-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        
+        .coverage-stat {
+            text-align: center;
+        }
+        
+        .coverage-stat .number {
+            display: block;
+            font-family: var(--font-headline);
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            margin-bottom: 8px;
+        }
+        
+        .coverage-stat .label {
+            display: block;
+            color: var(--mississippi-white);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Media Authority Proof Section */
+        .media-authority-proof {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, rgba(0, 178, 169, 0.05) 0%, rgba(155, 34, 34, 0.1) 50%, transparent 100%);
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .media-citations h3, .partnerships-showcase h3 {
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            color: var(--burnt-orange);
+            margin-bottom: 32px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .citation-scroll {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 16px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--burnt-orange) transparent;
+        }
+        
+        .citation-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .citation-scroll::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+        
+        .citation-scroll::-webkit-scrollbar-thumb {
+            background: var(--burnt-orange);
+            border-radius: 3px;
+        }
+        
+        .citation-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .citation-item:hover {
+            transform: translateX(8px);
+            border-color: var(--burnt-orange);
+            background: rgba(191, 87, 0, 0.05);
+        }
+        
+        .citation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .media-outlet {
+            font-family: var(--font-headline);
+            font-size: 1.1rem;
+            color: var(--burnt-orange);
+            font-weight: 600;
+        }
+        
+        .citation-date {
+            font-family: var(--font-data);
+            font-size: 0.9rem;
+            color: var(--cardinal-blue);
+        }
+        
+        .citation-text {
+            color: var(--mississippi-white);
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+        
+        .citation-link {
+            color: var(--friday-lights);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .partnership-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .partnership-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(155, 203, 235, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .partnership-card.verified {
+            border-color: rgba(0, 255, 0, 0.3);
+        }
+        
+        .partnership-card:hover {
+            transform: translateY(-4px);
+            background: rgba(191, 87, 0, 0.1);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .partner-logo {
+            font-size: 2.5rem;
+            color: var(--friday-lights);
+            margin-bottom: 16px;
+        }
+        
+        .partnership-card h4 {
+            font-family: var(--font-headline);
+            color: var(--mississippi-white);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .partnership-card p {
+            color: var(--cardinal-blue);
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        
+        .partnership-status {
+            color: #00ff88;
+            font-family: var(--font-data);
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .trust-metrics {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            padding: 32px;
+            border: 2px solid var(--burnt-orange);
+        }
+        
+        .trust-metrics h4 {
+            font-family: var(--font-headline);
+            color: var(--burnt-orange);
+            text-align: center;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+        }
+        
+        .trust-stats {
+            display: grid;
+            gap: 24px;
+        }
+        
+        .trust-stat {
+            text-align: center;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+        
+        .trust-stat .number {
+            display: block;
+            font-family: var(--font-headline);
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--friday-lights);
+            margin-bottom: 8px;
+        }
+        
+        .trust-stat .label {
+            color: var(--mississippi-white);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .credibility-footer {
+            margin-top: 60px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .credibility-statement {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--burnt-orange);
+            backdrop-filter: blur(10px);
+        }
+        
+        .credibility-statement i {
+            font-size: 3rem;
+            color: var(--friday-lights);
+            min-width: 60px;
+        }
+        
+        .statement-content h4 {
+            font-family: var(--font-headline);
+            font-size: 1.6rem;
+            color: var(--burnt-orange);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        
+        .statement-content p {
+            color: var(--mississippi-white);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        
+        /* Scout Network Section */
+        .scout-network {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, rgba(20, 33, 61, 0.3) 0%, rgba(0, 178, 169, 0.1) 50%, transparent 100%);
+        }
+        
+        .network-overview {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .network-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        
+        .network-stat {
+            text-align: center;
+            padding: 32px 20px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .network-stat:hover {
+            transform: translateY(-4px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 16px 32px rgba(191, 87, 0, 0.2);
+        }
+        
+        .network-stat .stat-number {
+            display: block;
+            font-family: var(--font-headline);
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            margin-bottom: 8px;
+        }
+        
+        .network-stat .stat-label {
+            display: block;
+            font-family: var(--font-headline);
+            font-size: 1.1rem;
+            color: var(--mississippi-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        
+        .network-stat .stat-detail {
+            display: block;
+            font-size: 0.9rem;
+            color: rgba(248, 248, 255, 0.7);
+            font-style: italic;
+        }
+        
+        .network-visualization {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 48px;
+            margin-top: 60px;
+        }
+        
+        .scout-map {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 48px;
+            position: relative;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .region-cluster {
+            margin-bottom: 40px;
+        }
+        
+        .region-cluster.texas {
+            border-left: 4px solid var(--burnt-orange);
+            padding-left: 24px;
+        }
+        
+        .region-cluster.sec {
+            border-left: 4px solid var(--sec-crimson);
+            padding-left: 24px;
+        }
+        
+        .cluster-hub {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .scout-count {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-family: var(--font-headline);
+            font-size: 1.4rem;
+            font-weight: 700;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .region-label {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            color: var(--mississippi-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .scout-nodes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-left: 20px;
+        }
+        
+        .node {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--cardinal-blue);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid rgba(155, 203, 235, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .node:hover {
+            background: rgba(191, 87, 0, 0.1);
+            border-color: var(--burnt-orange);
+            color: var(--burnt-orange);
+            transform: scale(1.05);
+        }
+        
+        .scout-activity-feed {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .scout-activity-feed h4 {
+            font-family: var(--font-headline);
+            font-size: 1.4rem;
+            color: var(--burnt-orange);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .activity-stream {
+            margin-bottom: 32px;
+        }
+        
+        .activity-item {
+            display: grid;
+            grid-template-columns: auto auto 1fr;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+            align-items: center;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-item .time {
+            font-family: var(--font-data);
+            font-size: 0.8rem;
+            color: var(--friday-lights);
+            font-weight: 600;
+            min-width: 60px;
+        }
+        
+        .activity-item .scout {
+            font-family: var(--font-data);
+            font-size: 0.8rem;
+            color: var(--deep-teal);
+            font-weight: 600;
+            min-width: 90px;
+        }
+        
+        .activity-item .action {
+            font-size: 0.9rem;
+            color: var(--mississippi-white);
+            line-height: 1.3;
+        }
+        
+        .scout-credentials {
+            border-top: 2px solid var(--burnt-orange);
+            padding-top: 24px;
+        }
+        
+        .scout-credentials h5 {
+            font-family: var(--font-headline);
+            font-size: 1.1rem;
+            color: var(--mississippi-white);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .credential-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .credential-list li {
+            color: rgba(248, 248, 255, 0.8);
+            padding: 6px 0;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .credential-list li:before {
+            content: "✓";
+            color: var(--friday-lights);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+        
+        /* Morning Blaze Newsletter Section */
+        .morning-blaze-newsletter {
+            padding: 120px 5%;
+            background: linear-gradient(180deg, rgba(191, 87, 0, 0.15) 0%, rgba(255, 215, 0, 0.1) 50%, rgba(0, 0, 0, 0.8) 100%);
+            position: relative;
+        }
+        
+        .morning-blaze-newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(191, 87, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .newsletter-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .blaze-logo-large {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            justify-content: center;
+        }
+        
+        .blaze-logo-large i {
+            font-size: 4rem;
+            color: var(--friday-lights);
+            animation: flameDance 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes flameDance {
+            0% { 
+                transform: scale(1) rotate(-2deg);
+                color: #FFD700;
+            }
+            100% { 
+                transform: scale(1.1) rotate(2deg);
+                color: #FF6B00;
+            }
+        }
+        
+        .blaze-logo-large .logo-text {
+            font-family: var(--font-headline);
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--friday-lights), var(--burnt-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+        }
+        
+        .newsletter-title {
+            font-family: var(--font-headline);
+            font-size: 3.2rem;
+            color: var(--mississippi-white);
+            text-align: center;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+        
+        .newsletter-subtitle {
+            font-size: 1.3rem;
+            color: var(--cardinal-blue);
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-benefits {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .benefit-item i {
+            color: var(--friday-lights);
+            font-size: 1.2rem;
+            min-width: 20px;
+        }
+        
+        .benefit-item span {
+            color: var(--mississippi-white);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .newsletter-signup-form {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--burnt-orange);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .form-header h3 {
+            font-family: var(--font-headline);
+            font-size: 2.2rem;
+            color: var(--burnt-orange);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        
+        .subscriber-count {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--friday-lights), var(--burnt-orange));
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-flex;
+        }
+        
+        .subscriber-count .count {
+            font-family: var(--font-data);
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--stadium-black);
+        }
+        
+        .subscriber-count .label {
+            font-size: 0.9rem;
+            color: var(--stadium-black);
+            font-weight: 600;
+        }
+        
+        .signup-form {
+            display: grid;
+            gap: 24px;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .email-input, .role-select, .interests-select {
+            width: 100%;
+            padding: 20px 16px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(155, 203, 235, 0.2);
+            border-radius: 12px;
+            color: var(--mississippi-white);
+            font-size: 1.1rem;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+        }
+        
+        .email-input:focus, .role-select:focus, .interests-select:focus {
+            outline: none;
+            border-color: var(--burnt-orange);
+            background: rgba(191, 87, 0, 0.1);
+        }
+        
+        .form-group label {
+            position: absolute;
+            top: 8px;
+            left: 16px;
+            font-size: 0.8rem;
+            color: var(--cardinal-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .subscribe-btn {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            border: none;
+            padding: 20px 40px;
+            border-radius: 12px;
+            color: white;
+            font-family: var(--font-headline);
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 8px 32px rgba(191, 87, 0, 0.3);
+        }
+        
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(191, 87, 0, 0.4);
+        }
+        
+        .subscribe-btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .subscribe-btn:hover i {
+            transform: translateX(4px);
+        }
+        
+        .form-guarantee {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--cardinal-blue);
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .form-guarantee i {
+            color: #00ff88;
+        }
+        
+        .newsletter-preview {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(155, 203, 235, 0.2);
+        }
+        
+        .newsletter-preview h4 {
+            font-family: var(--font-headline);
+            color: var(--burnt-orange);
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .headline-scroll {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .headline-item {
+            display: flex;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+        }
+        
+        .headline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .headline-item .date {
+            font-family: var(--font-data);
+            color: var(--friday-lights);
+            font-weight: 600;
+            min-width: 50px;
+            font-size: 0.85rem;
+        }
+        
+        .headline-item .title {
+            color: var(--mississippi-white);
+            font-size: 0.9rem;
+            line-height: 1.3;
+        }
+        
+        /* Coverage Map */
+        .coverage-map {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, rgba(20, 33, 61, 0.5) 0%, transparent 100%);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--mississippi-white);
+            margin-bottom: 48px;
+            opacity: 0.9;
+        }
+        
+        .interactive-map {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 48px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .map-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+        
+        .region-stat {
+            text-align: center;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+        }
+        
+        .region-stat h4 {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            color: var(--burnt-orange);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        
+        .region-stat span {
+            display: block;
+            color: var(--mississippi-white);
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--stadium-black);
+            padding: 60px 5% 40px;
+            border-top: 3px solid var(--burnt-orange);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: var(--font-headline);
+            font-size: 2.5rem;
+            color: var(--burnt-orange);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        
+        .footer-tagline {
+            color: var(--friday-lights);
+            font-style: italic;
+            margin-bottom: 32px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .footer-links a {
+            color: var(--mississippi-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .footer-copyright {
+            color: rgba(248, 248, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title .main-text {
+                font-size: 3rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-sports, .nav-tools {
+                display: none;
+            }
+            
+            .proof-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-panel {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Competitive Authority Matrix Section */
+        .competitive-authority-matrix {
+            padding: 120px 5%;
+            background: 
+                linear-gradient(135deg, rgba(0, 34, 68, 0.95) 0%, rgba(36, 69, 79, 0.9) 50%, rgba(0, 0, 0, 0.95) 100%),
+                radial-gradient(ellipse at center top, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .competitive-authority-matrix::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 98px,
+                    rgba(255, 215, 0, 0.03) 100px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 98px,
+                    rgba(191, 87, 0, 0.03) 100px
+                );
+            animation: matrixScroll 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes matrixScroll {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100px, 100px) rotate(0.5deg); }
+        }
+        
+        .matrix-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .matrix-title {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        
+        .matrix-title h2 {
+            font-family: var(--font-headline);
+            font-size: 3.2rem;
+            color: var(--mississippi-white);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .matrix-title .subtitle {
+            font-size: 1.4rem;
+            color: var(--cardinal-blue);
+            font-weight: 300;
+            line-height: 1.5;
+        }
+        
+        .matrix-title .crown-icon {
+            font-size: 2rem;
+            color: var(--friday-lights);
+            margin-right: 16px;
+            animation: crownGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes crownGlow {
+            0%, 100% { 
+                color: var(--friday-lights);
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+                transform: scale(1);
+            }
+            50% { 
+                color: #FFA500;
+                text-shadow: 0 0 30px rgba(255, 165, 0, 0.8);
+                transform: scale(1.1);
+            }
+        }
+        
+        /* Comparison Grid */
+        .comparison-grid {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 64px;
+        }
+        
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 1px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--friday-lights));
+        }
+        
+        .header-cell {
+            padding: 24px 16px;
+            text-align: center;
+            font-family: var(--font-headline);
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: #000;
+            background: rgba(248, 248, 255, 0.95);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .header-cell.blaze {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--friday-lights));
+            color: #000;
+            position: relative;
+        }
+        
+        .header-cell.blaze::after {
+            content: '👑';
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            font-size: 1.2rem;
+            animation: crownFloat 2s ease-in-out infinite;
+        }
+        
+        @keyframes crownFloat {
+            0%, 100% { transform: translateY(0px) rotate(-5deg); }
+            50% { transform: translateY(-3px) rotate(5deg); }
+        }
+        
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 1px;
+            background: rgba(155, 203, 235, 0.1);
+        }
+        
+        .comparison-row:nth-child(even) {
+            background: rgba(191, 87, 0, 0.05);
+        }
+        
+        .feature-name {
+            padding: 20px;
+            font-weight: 600;
+            color: var(--mississippi-white);
+            background: rgba(0, 0, 0, 0.4);
+            border-right: 1px solid rgba(155, 203, 235, 0.2);
+            font-size: 1rem;
+        }
+        
+        .feature-value {
+            padding: 20px 16px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--cardinal-blue);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-value.advantage {
+            background: linear-gradient(135deg, 
+                rgba(191, 87, 0, 0.2) 0%, 
+                rgba(255, 215, 0, 0.15) 50%, 
+                rgba(191, 87, 0, 0.2) 100%
+            );
+            color: var(--mississippi-white);
+            font-weight: 600;
+            position: relative;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .feature-value.advantage::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(45deg, 
+                var(--burnt-orange), 
+                var(--friday-lights), 
+                var(--burnt-orange)
+            );
+            border-radius: inherit;
+            z-index: -1;
+            animation: advantageGlow 2s linear infinite;
+        }
+        
+        @keyframes advantageGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        
+        .feature-value.advantage .checkmark {
+            color: var(--friday-lights);
+            font-weight: 900;
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+        
+        /* Differentiation Summary Cards */
+        .differentiation-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 64px;
+        }
+        
+        .competitor-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+        .competitor-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .competitor-card h3 {
+            font-family: var(--font-headline);
+            font-size: 1.4rem;
+            color: var(--mississippi-white);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .competitor-card .relationship {
+            font-size: 1.1rem;
+            color: var(--friday-lights);
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+        
+        .competitor-card .advantages {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .competitor-card .advantages li {
+            color: var(--cardinal-blue);
+            line-height: 1.6;
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .competitor-card .advantages li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--burnt-orange);
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+        
+        /* Authority Statement */
+        .authority-statement {
+            text-align: center;
+            background: linear-gradient(135deg, 
+                rgba(0, 34, 68, 0.8) 0%, 
+                rgba(191, 87, 0, 0.2) 50%, 
+                rgba(0, 34, 68, 0.8) 100%
+            );
+            padding: 48px 32px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .authority-statement::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(45deg, 
+                var(--burnt-orange), 
+                var(--friday-lights), 
+                var(--burnt-orange), 
+                var(--friday-lights)
+            );
+            border-radius: 20px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: source-out;
+            animation: borderFlow 3s linear infinite;
+        }
+        
+        @keyframes borderFlow {
+            0%, 100% { 
+                background: linear-gradient(45deg, 
+                    var(--burnt-orange), 
+                    var(--friday-lights), 
+                    var(--burnt-orange), 
+                    var(--friday-lights)
+                );
+            }
+            50% { 
+                background: linear-gradient(225deg, 
+                    var(--friday-lights), 
+                    var(--burnt-orange), 
+                    var(--friday-lights), 
+                    var(--burnt-orange)
+                );
+            }
+        }
+        
+        .authority-statement h3 {
+            font-family: var(--font-headline);
+            font-size: 2.4rem;
+            color: var(--mississippi-white);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .authority-statement p {
+            font-size: 1.2rem;
+            color: var(--cardinal-blue);
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .authority-statement .crown-large {
+            font-size: 3rem;
+            color: var(--friday-lights);
+            margin-bottom: 16px;
+            animation: crownPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes crownPulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            }
+            25% { 
+                transform: scale(1.1) rotate(5deg);
+                text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+            }
+            50% { 
+                transform: scale(1) rotate(0deg);
+                text-shadow: 0 0 35px rgba(255, 215, 0, 0.7);
+            }
+            75% { 
+                transform: scale(1.05) rotate(-3deg);
+                text-shadow: 0 0 45px rgba(255, 215, 0, 0.9);
+            }
+        }
+        
+        /* Responsive Design for Matrix */
+        @media (max-width: 1024px) {
+            .comparison-header,
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .header-cell,
+            .feature-name,
+            .feature-value {
+                text-align: left;
+                border-right: none;
+                border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+            }
+            
+            .feature-name::before {
+                content: attr(data-feature) ': ';
+                font-weight: 700;
+                color: var(--burnt-orange);
+            }
+            
+            .differentiation-summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .matrix-title h2 {
+                font-size: 2.4rem;
+            }
+            
+            .authority-statement h3 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .competitive-authority-matrix {
+                padding: 80px 5%;
+            }
+            
+            .matrix-title h2 {
+                font-size: 2rem;
+            }
+            
+            .matrix-title .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .authority-statement {
+                padding: 32px 24px;
+            }
+            
+            .authority-statement h3 {
+                font-size: 1.5rem;
+            }
+            
+            .authority-statement p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body style="">
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="file:///" class="logo-text">BLAZE INTELLIGENCE</a>
+                <span class="tagline">The Authority</span>
+            </div>
+            
+            <div class="nav-sports">
+                <div class="dropdown" data-sport="football">
+                    <span>Football</span>
+                    <div class="mega-menu">
+                        <div class="menu-column">
+                            <h4>Levels</h4>
+                            <a href="file:///youth-football">Youth (6-14)</a>
+                            <a href="file:///high-school-football">High School</a>
+                            <a href="file:///college-football">College/SEC</a>
+                            <a href="file:///pro-football">NFL/Professional</a>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Intelligence</h4>
+                            <a href="file:///football-rankings">Rankings</a>
+                            <a href="file:///football-recruiting">Recruiting</a>
+                            <a href="file:///football-analytics">Analytics</a>
+                            <a href="file:///football-film">Film Study</a>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Publications</h4>
+                            <a href="file:///texas-football-annual">Texas Annual</a>
+                            <a href="file:///sec-preview">SEC Preview</a>
+                            <a href="file:///draft-guide">Draft Guide</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dropdown" data-sport="baseball">
+                    <span>Baseball</span>
+                    <div class="mega-menu">
+                        <div class="menu-column">
+                            <h4>Levels</h4>
+                            <a href="file:///little-league">Little League</a>
+                            <a href="file:///high-school-baseball">High School</a>
+                            <a href="file:///college-baseball">College/SEC</a>
+                            <a href="file:///milb-mlb">MiLB/MLB</a>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Intelligence</h4>
+                            <a href="file:///prospect-rankings">Prospect Rankings</a>
+                            <a href="file:///perfect-game">Perfect Game</a>
+                            <a href="file:///draft-coverage">MLB Draft</a>
+                            <a href="file:///showcase-circuit">Showcases</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-tools">
+                <a href="file:///blazescout" class="tool-link">BlazeScout Pro</a>
+                <a href="file:///blazedraft" class="tool-link">BlazeDraft</a>
+                <a href="file:///api" class="tool-link">API</a>
+            </div>
+            
+            <div class="nav-account">
+                <button class="btn-login">Scout Login</button>
+                <button class="btn-subscribe">Subscribe</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-authority" style="background-position: 48.6032% 97.2065px;">
+        <div class="authority-badge">
+            <span class="badge-text" style="opacity: 1;">Trusted by 500+ High Schools Across Texas</span>
+            <div class="trust-logos">
+                <span>Dave Campbell's Partner</span>
+                <span>•</span>
+                <span>SEC Network Data</span>
+                <span>•</span>
+                <span>Perfect Game Analytics</span>
+            </div>
+        </div>
+        
+        <div class="hero-title">
+            <span class="small-text">From Little League to The League</span>
+            <span class="main-text">The Deep South Sports Authority</span>
+            <span class="sub-text">Texas • SEC • Every Player • Every Level</span>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-card">
+                <span class="stat-number">1,437</span>
+                <span class="stat-label">Texas High Schools Covered</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">127,000+</span>
+                <span class="stat-label">Players Tracked</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">94.6%</span>
+                <span class="stat-label">Draft Prediction Accuracy</span>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <button class="btn-primary">Get The 2025 Football Annual</button>
+            <button class="btn-secondary">Scout Portal Login</button>
+            <button class="btn-tertiary">Free Player Lookup</button>
+        </div>
+    </section>
+    
+    <!-- Authority Proof Section -->
+    <section class="authority-proof">
+        <div class="container">
+            <h2 class="section-title">Why We're The Authority</h2>
+            
+            <div class="proof-grid">
+                <div class="proof-card" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                    <div class="proof-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Unmatched Coverage</h3>
+                    <p>Every Texas high school. Every SEC program. Every player that matters from Little League to the NFL.</p>
+                    <div class="proof-stats">
+                        <span>1,437 Schools</span>
+                        <span>127,000+ Players</span>
+                    </div>
+                </div>
+                
+                <div class="proof-card" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                    <div class="proof-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Trusted Heritage</h3>
+                    <p>Official partner of Dave Campbell's Texas Football. The same trust built over decades, powered by modern technology.</p>
+                    <div class="proof-stats">
+                        <span>Since 1960 Legacy</span>
+                        <span>3 Generations</span>
+                    </div>
+                </div>
+                
+                <div class="proof-card" style="translate: none; rotate: none; scale: none; opacity: 0; transform: translate(0px, 50px);">
+                    <div class="proof-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Proven Accuracy</h3>
+                    <p>Our AI models predict draft outcomes, transfer decisions, and championship winners with industry-leading precision.</p>
+                    <div class="proof-stats">
+                        <span>94.6% Draft Accuracy</span>
+                        <span>91.2% Game Predictions</span>
+                    </div>
+                </div>
+                
+                <div class="proof-card" style="translate: none; rotate: none; scale: none; opacity: 0; transform: translate(0px, 50px);">
+                    <div class="proof-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Scout Network</h3>
+                    <p>Boots on the ground at every Friday night game. Eyes on every prospect. Relationships in every field house.</p>
+                    <div class="proof-stats">
+                        <span>500+ Scouts</span>
+                        <span>24/7 Coverage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Product Showcase Section -->
+    <section class="product-showcase">
+        <div class="container">
+            <h2 class="section-title">The Complete Intelligence Suite</h2>
+            
+            <div class="product-tabs">
+                <button class="tab active" data-product="annual">The Annual</button>
+                <button class="tab" data-product="blazescout">BlazeScout Pro</button>
+                <button class="tab" data-product="blazedraft">BlazeDraft</button>
+                <button class="tab" data-product="api">API Access</button>
+            </div>
+            
+            <div class="product-content">
+                <div class="product-panel active" id="annual">
+                    <div class="product-visual">
+                        <img src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0__a=BBFAAAAA0" alt="Blaze Intelligence Annual" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <h3>The Blaze Intelligence Annual</h3>
+                        <p class="product-tagline">The Bible of Deep South Sports</p>
+                        <ul class="feature-list">
+                            <li>1,437 Texas high schools covered</li>
+                            <li>Complete SEC baseball &amp; football coverage</li>
+                            <li>127,000+ player profiles and ratings</li>
+                            <li>Historical statistics and records</li>
+                            <li>Coaching staff analysis</li>
+                            <li>Digital + Print editions available</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">Pre-Order 2025 Edition</button>
+                            <span class="price">$49.99</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-panel" id="blazescout">
+                    <div class="product-visual">
+                        <img src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0__a=BBFAAAAA0(1)" alt="BlazeScout Pro" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <h3>BlazeScout Pro</h3>
+                        <p class="product-tagline">Professional Scouting Terminal</p>
+                        <ul class="feature-list">
+                            <li>Live game film analysis</li>
+                            <li>Automated highlight detection</li>
+                            <li>Performance metric tracking</li>
+                            <li>Recruiting alert system</li>
+                            <li>Multi-screen command center</li>
+                            <li>Custom report generation</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">Start Free Trial</button>
+                            <span class="price">$299/mo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-panel" id="blazedraft">
+                    <div class="product-visual">
+                        <img src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0__a=BBFAAAAA0(2)" alt="BlazeDraft" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <h3>BlazeDraft</h3>
+                        <p class="product-tagline">Professional Draft Intelligence</p>
+                        <ul class="feature-list">
+                            <li>MLB/NFL draft probability models</li>
+                            <li>Combine performance predictions</li>
+                            <li>Medical red flag analysis</li>
+                            <li>Character assessment scores</li>
+                            <li>Comp pick projections</li>
+                            <li>Trade value calculations</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">Get Access</button>
+                            <span class="price">$199/mo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-panel" id="api">
+                    <div class="product-visual">
+                        <img src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/svg%2525253E%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0__a=BBFAAAAA0(3)" alt="API Access" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <h3>API Access</h3>
+                        <p class="product-tagline">Integrate Our Intelligence</p>
+                        <ul class="feature-list">
+                            <li>RESTful API endpoints</li>
+                            <li>Real-time webhooks</li>
+                            <li>Historical data access</li>
+                            <li>Custom data exports</li>
+                            <li>White-label options</li>
+                            <li>Enterprise SLA support</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">View Documentation</button>
+                            <span class="price">Custom Pricing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Scout Network Section -->
+    <section class="scout-network">
+        <div class="container">
+            <h2 class="section-title">Our Scout Network</h2>
+            <p class="section-subtitle">500+ Scouts Covering Every Friday Night Game Across the Deep South</p>
+            
+            <div class="network-overview">
+                <div class="network-stats">
+                    <div class="network-stat">
+                        <span class="stat-number">40</span>
+                        <span class="stat-label">Active Scouts</span>
+                        <span class="stat-detail">Experienced professionals</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">States Covered</span>
+                        <span class="stat-detail">Texas through Georgia</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-number">2,500+</span>
+                        <span class="stat-label">Games Per Season</span>
+                        <span class="stat-detail">Live coverage weekly</span>
+                    </div>
+                    <div class="network-stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Coverage Active</span>
+                        <span class="stat-detail">Year-round scouting</span>
+                    </div>
+                </div>
+                
+                <div class="network-visualization">
+                    <div class="scout-map">
+                        <div class="region-cluster texas" data-region="texas" style="transition: 0.3s; border-left-color: rgb(191, 87, 0); transform: scale(1);">
+                            <div class="cluster-hub">
+                                <span class="scout-count" style="transform: scale(1.1);">25</span>
+                                <span class="region-label">Texas</span>
+                            </div>
+                            <div class="scout-nodes">
+                                <div class="node dfw">DFW (5)</div>
+                                <div class="node houston">Houston (5)</div>
+                                <div class="node satx">SA/Austin (4)</div>
+                                <div class="node east-tx">East TX (3)</div>
+                                <div class="node west-tx">West TX (3)</div>
+                                <div class="node rgv">RGV (3)</div>
+                                <div class="node central-tx">Central (2)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="region-cluster sec" data-region="sec" style="transition: 0.3s; border-left-color: rgb(155, 34, 34); transform: scale(1);">
+                            <div class="cluster-hub">
+                                <span class="scout-count" style="transform: scale(1);">15</span>
+                                <span class="region-label">SEC States</span>
+                            </div>
+                            <div class="scout-nodes">
+                                <div class="node louisiana">Louisiana (3)</div>
+                                <div class="node alabama">Alabama (3)</div>
+                                <div class="node mississippi">Mississippi (2)</div>
+                                <div class="node georgia">Georgia (2)</div>
+                                <div class="node florida">FL Panhandle (2)</div>
+                                <div class="node arkansas">Arkansas (2)</div>
+                                <div class="node tennessee">Tennessee (1)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scout-activity-feed">
+                        <h4>Live Scout Activity</h4>
+                        <div class="activity-stream"><div class="activity-item new" style="opacity: 1; transform: translateX(0px); transition: 0.5s;">
+                        <span class="time">5:42 PM</span>
+                        <span class="scout">Scout_TX_03</span>
+                        <span class="action">Film analysis: North Shore defensive scheme</span>
+                    </div><div class="activity-item new" style="opacity: 1; transform: translateX(0px); transition: 0.5s;">
+                        <span class="time">5:41 PM</span>
+                        <span class="scout">Scout_FL_02</span>
+                        <span class="action">Commitment alert: Pensacola WR picks Auburn</span>
+                    </div><div class="activity-item new" style="opacity: 1; transform: translateX(0px); transition: 0.5s;">
+                        <span class="time">5:41 PM</span>
+                        <span class="scout">Scout_MS_01</span>
+                        <span class="action">Scouting report: Brandon RB showing D1 speed</span>
+                    </div><div class="activity-item new" style="opacity: 1; transform: translateX(0px); transition: 0.5s;">
+                        <span class="time">5:41 PM</span>
+                        <span class="scout">Scout_GA_01</span>
+                        <span class="action">Weather alert: Buford game delayed</span>
+                    </div><div class="activity-item new" style="opacity: 1; transform: translateX(0px); transition: 0.5s;">
+                        <span class="time">5:41 PM</span>
+                        <span class="scout">Scout_TX_12</span>
+                        <span class="action">Recruiting intel: Duncanville visit update</span>
+                    </div><div class="activity-item new" style="opacity: 1; transform: translateX(0px); transition: 0.5s;">
+                        <span class="time">5:41 PM</span>
+                        <span class="scout">Scout_AL_03</span>
+                        <span class="action">Injury report: Thompson vs Hoover</span>
+                    </div>
+                            
+                            
+                            
+                            
+                            
+                        </div>
+                        
+                        <div class="scout-credentials">
+                            <h5>Our Scout Standards</h5>
+                            <ul class="credential-list">
+                                <li>10+ years coaching/playing experience</li>
+                                <li>Certified by Dave Campbell's network</li>
+                                <li>Background checked and bonded</li>
+                                <li>Weekly training on new evaluation methods</li>
+                                <li>Direct relationships with field houses</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Texas Football Authority Section -->
+    <section class="texas-football-authority">
+        <div class="container">
+            <h2 class="section-title">Texas Football Authority</h2>
+            <p class="section-subtitle">Real-time rankings and intelligence across all UIL classifications</p>
+            
+            <div class="rankings-dashboard">
+                <div class="rankings-header">
+                    <div class="classification-tabs">
+                        <button class="classification-tab active" data-class="6a">6A</button>
+                        <button class="classification-tab" data-class="5a">5A</button>
+                        <button class="classification-tab" data-class="4a">4A</button>
+                        <button class="classification-tab" data-class="3a">3A</button>
+                        <button class="classification-tab" data-class="2a">2A</button>
+                        <button class="classification-tab" data-class="1a">1A</button>
+                    </div>
+                    <div class="update-indicator">
+                        <span class="update-time">Updated: 120 hours ago</span>
+                        <div class="live-indicator"></div>
+                    </div>
+                </div>
+                
+                <div class="rankings-content">
+                    <div class="rankings-panel active" id="rankings-6a">
+                        <div class="rankings-grid">
+                            <div class="ranking-card" style="transition: 0.3s; border-color: rgba(155, 203, 235, 0.15); transform: scale(1);">
+                                <div class="rank-number">1</div>
+                                <div class="team-info">
+                                    <h4>Westlake Chaparrals</h4>
+                                    <span class="location">Austin (6A-DI)</span>
+                                    <span class="record">12-0</span>
+                                </div>
+                                <div class="team-metrics">
+                                    <div class="metric">
+                                        <span class="value">562</span>
+                                        <span class="label">Off YPG</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="value">127</span>
+                                        <span class="label">Def YPG</span>
+                                    </div>
+                                </div>
+                                <div class="trend up">↑ 2</div>
+                            </div>
+                            
+                            <div class="ranking-card" style="transition: 0.3s; border-color: rgba(155, 203, 235, 0.15); transform: scale(1);">
+                                <div class="rank-number">2</div>
+                                <div class="team-info">
+                                    <h4>North Shore Mustangs</h4>
+                                    <span class="location">Houston (6A-DI)</span>
+                                    <span class="record">11-1</span>
+                                </div>
+                                <div class="team-metrics">
+                                    <div class="metric">
+                                        <span class="value">498</span>
+                                        <span class="label">Off YPG</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="value">145</span>
+                                        <span class="label">Def YPG</span>
+                                    </div>
+                                </div>
+                                <div class="trend down">↓ 1</div>
+                            </div>
+                            
+                            <div class="ranking-card" style="transition: 0.3s; border-color: rgba(155, 203, 235, 0.15); transform: scale(1);">
+                                <div class="rank-number">3</div>
+                                <div class="team-info">
+                                    <h4>Duncanville Panthers</h4>
+                                    <span class="location">Dallas (6A-DI)</span>
+                                    <span class="record">10-2</span>
+                                </div>
+                                <div class="team-metrics">
+                                    <div class="metric">
+                                        <span class="value">487</span>
+                                        <span class="label">Off YPG</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="value">163</span>
+                                        <span class="label">Def YPG</span>
+                                    </div>
+                                </div>
+                                <div class="trend up">↑ 1</div>
+                            </div>
+                            
+                            <div class="ranking-card" style="transition: 0.3s; border-color: rgba(155, 203, 235, 0.15); transform: scale(1);">
+                                <div class="rank-number">4</div>
+                                <div class="team-info">
+                                    <h4>Lake Travis Cavaliers</h4>
+                                    <span class="location">Austin (6A-DI)</span>
+                                    <span class="record">9-3</span>
+                                </div>
+                                <div class="team-metrics">
+                                    <div class="metric">
+                                        <span class="value">512</span>
+                                        <span class="label">Off YPG</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="value">201</span>
+                                        <span class="label">Def YPG</span>
+                                    </div>
+                                </div>
+                                <div class="trend stable">—</div>
+                            </div>
+                            
+                            <div class="ranking-card" style="transition: 0.3s; border-color: rgba(155, 203, 235, 0.15); transform: scale(1);">
+                                <div class="rank-number">5</div>
+                                <div class="team-info">
+                                    <h4>DeSoto Eagles</h4>
+                                    <span class="location">Dallas (6A-DI)</span>
+                                    <span class="record">9-3</span>
+                                </div>
+                                <div class="team-metrics">
+                                    <div class="metric">
+                                        <span class="value">445</span>
+                                        <span class="label">Off YPG</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="value">178</span>
+                                        <span class="label">Def YPG</span>
+                                    </div>
+                                </div>
+                                <div class="trend down">↓ 2</div>
+                            </div>
+                        </div>
+                        
+                        <div class="rankings-insights">
+                            <h4>This Week's Analysis</h4>
+                            <div class="insight-items">
+                                <div class="insight-item">
+                                    <i class="fas fa-trophy"></i>
+                                    <span>Westlake's championship win moves them to unanimous #1</span>
+                                </div>
+                                <div class="insight-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>North Shore drops after close loss to DeSoto in semifinals</span>
+                                </div>
+                                <div class="insight-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>5 teams from DFW in top 10 heading into playoffs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="authority-proof-footer">
+                    <div class="coverage-stats">
+                        <div class="coverage-stat">
+                            <span class="number">1,437</span>
+                            <span class="label">Texas Schools Covered</span>
+                        </div>
+                        <div class="coverage-stat">
+                            <span class="number">2,847</span>
+                            <span class="label">Games Analyzed Weekly</span>
+                        </div>
+                        <div class="coverage-stat">
+                            <span class="number">94.6%</span>
+                            <span class="label">Playoff Prediction Accuracy</span>
+                        </div>
+                        <div class="coverage-stat">
+                            <span class="number">24/7</span>
+                            <span class="label">Live Coverage</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Media Authority Proof Section -->
+    <section class="media-authority-proof">
+        <div class="container">
+            <h2 class="section-title">Trusted by Media &amp; Coaches</h2>
+            <p class="section-subtitle">The source that sources trust • From ESPN to local news</p>
+            
+            <div class="media-grid">
+                <div class="media-citations">
+                    <h3>Recent Media Citations</h3>
+                    <div class="citation-scroll">
+                        <div class="citation-item">
+                            <div class="citation-header">
+                                <div class="media-outlet">ESPN Dallas</div>
+                                <div class="citation-date">August 2025</div>
+                            </div>
+                            <p class="citation-text">"According to Blaze Intelligence rankings, Westlake's championship path shows why they're the unanimous #1 team in Texas..."</p>
+                            <div class="citation-link">📰 State Championship Preview</div>
+                        </div>
+                        
+                        <div class="citation-item">
+                            <div class="citation-header">
+                                <div class="media-outlet">Dave Campbell's Texas Football</div>
+                                <div class="citation-date">July 2025</div>
+                            </div>
+                            <p class="citation-text">"Blaze Intelligence data shows North Shore's defense has allowed just 145 yards per game, validating their playoff positioning..."</p>
+                            <div class="citation-link">📰 Playoff Predictions Analysis</div>
+                        </div>
+                        
+                        <div class="citation-item">
+                            <div class="citation-header">
+                                <div class="media-outlet">Houston Chronicle Sports</div>
+                                <div class="citation-date">June 2025</div>
+                            </div>
+                            <p class="citation-text">"The latest Blaze Intelligence scout reports from Friday night indicate Duncanville's rushing attack could be the X-factor..."</p>
+                            <div class="citation-link">📰 Friday Night Roundup</div>
+                        </div>
+                        
+                        <div class="citation-item">
+                            <div class="citation-header">
+                                <div class="media-outlet">Dallas Morning News</div>
+                                <div class="citation-date">May 2025</div>
+                            </div>
+                            <p class="citation-text">"Blaze Intelligence's 94.6% playoff prediction accuracy this season makes them the go-to source for DFW coaches..."</p>
+                            <div class="citation-link">📰 High School Football Analytics</div>
+                        </div>
+                        
+                        <div class="citation-item">
+                            <div class="citation-header">
+                                <div class="media-outlet">Austin American-Statesman</div>
+                                <div class="citation-date">April 2025</div>
+                            </div>
+                            <p class="citation-text">"The Lake Travis vs. Westlake matchup hinges on statistical trends identified by Blaze Intelligence scouts last week..."</p>
+                            <div class="citation-link">📰 Battle of the Lakes Preview</div>
+                        </div>
+                        
+                        <div class="citation-item">
+                            <div class="citation-header">
+                                <div class="media-outlet">SEC Network</div>
+                                <div class="citation-date">March 2025</div>
+                            </div>
+                            <p class="citation-text">"Using Blaze Intelligence recruiting data, we project 15 Texas prospects will sign with SEC schools this February..."</p>
+                            <div class="citation-link">📺 SEC Recruiting Special</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="partnerships-showcase">
+                    <h3>Official Partnerships</h3>
+                    <div class="partnership-grid">
+                        <div class="partnership-card verified" style="position: relative;">
+                            <div class="partner-logo">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <h4>Dave Campbell's Texas Football</h4>
+                            <p>Digital Evolution Partner</p>
+                            <div class="partnership-status" style="transform: scale(1);">✓ Verified Since 2024</div>
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgb(0, 255, 136); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold;">✓</div></div>
+                        
+                        <div class="partnership-card verified" style="position: relative;">
+                            <div class="partner-logo">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <h4>SEC Network</h4>
+                            <p>Official Data Provider</p>
+                            <div class="partnership-status" style="transform: scale(1);">✓ Analytics Partner</div>
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgb(0, 255, 136); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold;">✓</div></div>
+                        
+                        <div class="partnership-card verified" style="position: relative;">
+                            <div class="partner-logo">
+                                <i class="fas fa-baseball-ball"></i>
+                            </div>
+                            <h4>Perfect Game USA</h4>
+                            <p>Analytics Integration</p>
+                            <div class="partnership-status" style="transform: scale(1);">✓ Youth Baseball Authority</div>
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgb(0, 255, 136); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold;">✓</div></div>
+                        
+                        <div class="partnership-card verified" style="position: relative;">
+                            <div class="partner-logo">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4>Texas High School Coaches Association</h4>
+                            <p>Official Technology Partner</p>
+                            <div class="partnership-status" style="transform: scale(1);">✓ THSCA Certified</div>
+                        <div style="position: absolute; top: 10px; right: 10px; background: rgb(0, 255, 136); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold;">✓</div></div>
+                    </div>
+                    
+                    <div class="trust-metrics">
+                        <h4>Authority Metrics</h4>
+                        <div class="trust-stats">
+                            <div class="trust-stat">
+                                <span class="number">127</span>
+                                <span class="label">Media Citations This Season</span>
+                            </div>
+                            <div class="trust-stat">
+                                <span class="number">500+</span>
+                                <span class="label">High School Partnerships</span>
+                            </div>
+                            <div class="trust-stat">
+                                <span class="number">89%</span>
+                                <span class="label">Coach Trust Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="credibility-footer">
+                <div class="credibility-statement">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="statement-content">
+                        <h4>Built on Trust, Verified by Results</h4>
+                        <p>Every statistic is verified. Every scout is vetted. Every partnership is earned. When media, coaches, and programs need the truth, they turn to Blaze Intelligence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Coverage Map Section -->
+    <section class="coverage-map">
+        <div class="container">
+            <h2 class="section-title">Our Territory</h2>
+            <p class="section-subtitle">From Texas to the Atlantic, we own the Deep South</p>
+            
+            <div class="interactive-map">
+                <div class="map-stats">
+                    <div class="region-stat">
+                        <h4>Texas</h4>
+                        <span>1,437 High Schools</span>
+                        <span>Big 12 + SEC Coverage</span>
+                        <span>45,000+ Active Players</span>
+                    </div>
+                    <div class="region-stat">
+                        <h4>SEC States</h4>
+                        <span>14 Universities</span>
+                        <span>2,100+ High Schools</span>
+                        <span>62,000+ Active Players</span>
+                    </div>
+                    <div class="region-stat">
+                        <h4>Total Coverage</h4>
+                        <span>127,000+ Players</span>
+                        <span>8 States Deep</span>
+                        <span>500+ Scouts Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Morning Blaze Newsletter Signup -->
+    <section class="morning-blaze-newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-hero">
+                    <div class="blaze-logo-large">
+                        <i class="fas fa-fire"></i>
+                        <span class="logo-text">MORNING BLAZE</span>
+                    </div>
+                    <h2 class="newsletter-title">Start Every Day with Championship Intelligence</h2>
+                    <p class="newsletter-subtitle">Join 47,000+ coaches, scouts, and fans who wake up to The Morning Blaze - your daily 5-minute briefing on Deep South sports intelligence.</p>
+                    
+                    <div class="newsletter-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Daily 6 AM Delivery</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Yesterday's Scores + Today's Games</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-star"></i>
+                            <span>One Deep-Dive Feature</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-user-tie"></i>
+                            <span>"Scout's Take" Expert Opinion</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="newsletter-signup-form">
+                    <div class="form-header">
+                        <h3>Get The Morning Blaze</h3>
+                        <div class="subscriber-count">
+                            <span class="count" style="transform: scale(1);">47,290</span>
+                            <span class="label">Daily Readers</span>
+                        </div>
+                    </div>
+                    
+                    <form class="signup-form" id="blazeNewsletterForm">
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="coach@yourschool.com" required="" class="email-input">
+                            <label for="email">Email Address</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="role" name="role" class="role-select" required="">
+                                <option value="">Select Your Role</option>
+                                <option value="coach">Coach</option>
+                                <option value="scout">Scout/Recruiter</option>
+                                <option value="parent">Parent</option>
+                                <option value="fan">Fan</option>
+                                <option value="media">Media</option>
+                                <option value="admin">Athletic Director</option>
+                            </select>
+                            <label for="role">Role</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <select id="interests" name="interests" class="interests-select" required="">
+                                <option value="">Primary Interest</option>
+                                <option value="texas-football">Texas High School Football</option>
+                                <option value="sec-football">SEC Football</option>
+                                <option value="texas-baseball">Texas Baseball</option>
+                                <option value="sec-baseball">SEC Baseball</option>
+                                <option value="recruiting">Recruiting Intelligence</option>
+                                <option value="analytics">Sports Analytics</option>
+                            </select>
+                            <label for="interests">Primary Interest</label>
+                        </div>
+                        
+                        <button type="submit" class="subscribe-btn">
+                            <span class="btn-text">Subscribe to Morning Blaze</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        
+                        <div class="form-guarantee">
+                            <i class="fas fa-shield-check"></i>
+                            <span>No spam. Unsubscribe anytime. Trusted by Texas coaches since 2024.</span>
+                        </div>
+                    </form>
+                    
+                    <div class="newsletter-preview">
+                        <h4>Recent Morning Blaze Headlines</h4>
+                        <div class="headline-scroll">
+                            <div class="headline-item">
+                                <span class="date">Sep 12</span>
+                                <span class="title">Westlake's Path to Perfect: Inside the Chaparrals' Championship DNA</span>
+                            </div>
+                            <div class="headline-item">
+                                <span class="date">Sep 11</span>
+                                <span class="title">North Shore's Defense: How 145 YPG Became a Playoff Problem</span>
+                            </div>
+                            <div class="headline-item">
+                                <span class="date">Sep 10</span>
+                                <span class="title">Transfer Portal Watch: 15 Texas Prospects SEC Schools Need</span>
+                            </div>
+                            <div class="headline-item">
+                                <span class="date">Sep 9</span>
+                                <span class="title">Friday Night Film Study: Duncanville's Ground Game Evolution</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Competitive Authority Matrix -->
+    <section class="competitive-authority-matrix">
+        <div class="container">
+            <h2 class="section-title">Why We're Different</h2>
+            <p class="section-subtitle">Not competing • Completing • The authority that others cite</p>
+            
+            <div class="comparison-grid">
+                <div class="comparison-header">
+                    <div class="feature-label"></div>
+                    <div class="competitor-column">
+                        <div class="competitor-logo blaze-logo">
+                            <i class="fas fa-fire"></i>
+                            <span>Blaze Intelligence</span>
+                        </div>
+                    </div>
+                    <div class="competitor-column">
+                        <div class="competitor-logo">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Dave Campbell's</span>
+                        </div>
+                    </div>
+                    <div class="competitor-column">
+                        <div class="competitor-logo">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>MaxPreps</span>
+                        </div>
+                    </div>
+                    <div class="competitor-column">
+                        <div class="competitor-logo">
+                            <i class="fas fa-trophy"></i>
+                            <span>247Sports</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Digital-First Innovation</div>
+                    <div class="feature-value advantage">✓ Real-time intelligence</div>
+                    <div class="feature-value">Print heritage</div>
+                    <div class="feature-value">Automated data</div>
+                    <div class="feature-value">College focus</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Coverage Scope</div>
+                    <div class="feature-value advantage">Little League → NFL/MLB</div>
+                    <div class="feature-value">High school football</div>
+                    <div class="feature-value">National platform</div>
+                    <div class="feature-value">College recruiting</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Scout Network</div>
+                    <div class="feature-value advantage">500+ boots on ground</div>
+                    <div class="feature-value">Editorial tradition</div>
+                    <div class="feature-value">Automated feeds</div>
+                    <div class="feature-value">Internet-based</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Geographic Focus</div>
+                    <div class="feature-value advantage">Texas + Deep South</div>
+                    <div class="feature-value">Texas-centric</div>
+                    <div class="feature-value">National generic</div>
+                    <div class="feature-value">National recruiting</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">AI &amp; Analytics</div>
+                    <div class="feature-value advantage">Predictive modeling</div>
+                    <div class="feature-value">Historical stats</div>
+                    <div class="feature-value">Basic analytics</div>
+                    <div class="feature-value">Recruiting rankings</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Data Frequency</div>
+                    <div class="feature-value advantage">24/7 real-time</div>
+                    <div class="feature-value">Annual + weekly</div>
+                    <div class="feature-value">Game-by-game</div>
+                    <div class="feature-value">Recruiting cycles</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div class="feature-label">Community Integration</div>
+                    <div class="feature-value advantage">Coach partnerships</div>
+                    <div class="feature-value">Tradition-based</div>
+                    <div class="feature-value">School-submitted</div>
+                    <div class="feature-value">Player-driven</div>
+                </div>
+            </div>
+            
+            <div class="differentiation-summary">
+                <div class="summary-card">
+                    <h3>We Complement Dave Campbell's</h3>
+                    <p>Digital evolution partner • Not replacing tradition, extending it</p>
+                    <ul>
+                        <li>Real-time updates vs. annual excellence</li>
+                        <li>Multi-sport vs. football specialization</li>
+                        <li>AI-powered vs. editorial heritage</li>
+                    </ul>
+                </div>
+                
+                <div class="summary-card">
+                    <h3>We're Deeper Than MaxPreps</h3>
+                    <p>Expert intelligence vs. automated aggregation</p>
+                    <ul>
+                        <li>Scout network vs. data scraping</li>
+                        <li>Predictive models vs. historical stats</li>
+                        <li>Local expertise vs. national platform</li>
+                    </ul>
+                </div>
+                
+                <div class="summary-card">
+                    <h3>We're Broader Than 247Sports</h3>
+                    <p>Complete pipeline coverage vs. recruiting focus</p>
+                    <ul>
+                        <li>Youth through pro vs. college-centric</li>
+                        <li>Two-sport authority vs. all sports</li>
+                        <li>Community embedded vs. recruiting portal</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="authority-statement">
+                <div class="statement-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="statement-content">
+                    <h3>The Authority Position</h3>
+                    <p>"When ESPN needs Texas high school data, they cite us. When Dave Campbell's goes digital, they partner with us. When coaches need tomorrow's intelligence, they trust us. We don't compete with authorities — we become them."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Blaze Intelligence</div>
+            <p class="footer-tagline">The Deep South Sports Authority • From Little League to The League</p>
+            <div class="footer-links">
+                <a href="file:///about">About</a>
+                <a href="file:///contact">Contact</a>
+                <a href="file:///media">Media Kit</a>
+                <a href="file:///api">Developer API</a>
+                <a href="file:///careers">Careers</a>
+                <a href="file:///privacy">Privacy</a>
+            </div>
+            <p class="footer-copyright">
+                © 2025 Blaze Intelligence. All Rights Reserved.
+                <br>Built on Heritage. Powered by Innovation.
+            </p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Authority Features
+        class BlazeAuthority {
+            constructor() {
+                this.initLiveStats();
+                this.initProductTabs();
+                this.initTrustBadges();
+                this.initScrollAnimations();
+                this.initScoutNetwork();
+                this.initTexasFootballAuthority();
+                this.initMediaAuthorityProof();
+                this.initMorningBlazeNewsletter();
+            }
+            
+            initLiveStats() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.animateNumber(entry.target);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.stat-number').forEach(stat => {
+                    observer.observe(stat);
+                });
+            }
+            
+            animateNumber(element) {
+                const text = element.textContent;
+                const hasPlus = text.includes('+');
+                const hasPercent = text.includes('%');
+                const hasComma = text.includes(',');
+                
+                let target = parseFloat(text.replace(/[^0-9.]/g, ''));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                        
+                        // Restore original formatting
+                        if (hasPercent) {
+                            element.textContent = current.toFixed(1) + '%';
+                        } else if (hasComma) {
+                            element.textContent = this.formatNumber(Math.floor(current)) + (hasPlus ? '+' : '');
+                        } else {
+                            element.textContent = Math.floor(current).toString() + (hasPlus ? '+' : '');
+                        }
+                    } else {
+                        if (hasPercent) {
+                            element.textContent = current.toFixed(1) + '%';
+                        } else if (hasComma) {
+                            element.textContent = this.formatNumber(Math.floor(current));
+                        } else {
+                            element.textContent = Math.floor(current).toString();
+                        }
+                    }
+                }, 16);
+            }
+            
+            formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+            
+            initProductTabs() {
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        this.switchProduct(e.target.dataset.product);
+                    });
+                });
+            }
+            
+            switchProduct(product) {
+                // Remove active classes
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+                
+                // Add active classes
+                document.querySelector(`[data-product="${product}"]`).classList.add('active');
+                document.getElementById(product).classList.add('active');
+            }
+            
+            initTrustBadges() {
+                // Rotate through trust badges
+                const badges = [
+                    'The Official Intelligence Partner of Championship Programs',
+                    'Trusted by 500+ High Schools Across Texas',
+                    'SEC Network Official Data Provider',
+                    'Perfect Game Analytics Partner Since 2024',
+                    'Dave Campbell\'s Digital Evolution Partner'
+                ];
+                
+                let current = 0;
+                const badgeText = document.querySelector('.badge-text');
+                
+                setInterval(() => {
+                    current = (current + 1) % badges.length;
+                    badgeText.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        badgeText.textContent = badges[current];
+                        badgeText.style.opacity = '1';
+                    }, 300);
+                }, 5000);
+            }
+            
+            initScrollAnimations() {
+                if (window.gsap && window.ScrollTrigger) {
+                    gsap.registerPlugin(ScrollTrigger);
+                    
+                    // Animate section entries
+                    gsap.utils.toArray('.proof-card').forEach((card, i) => {
+                        gsap.from(card, {
+                            scrollTrigger: {
+                                trigger: card,
+                                start: 'top 80%'
+                            },
+                            y: 50,
+                            opacity: 0,
+                            duration: 0.8,
+                            delay: i * 0.1
+                        });
+                    });
+                    
+                    // Parallax effect for hero
+                    gsap.to('.hero-authority', {
+                        scrollTrigger: {
+                            trigger: '.hero-authority',
+                            start: 'top top',
+                            end: 'bottom top',
+                            scrub: true
+                        },
+                        backgroundPosition: '50% 100px'
+                    });
+                }
+            }
+            
+            initScoutNetwork() {
+                // Animate scout activity feed
+                this.initLiveActivityFeed();
+                
+                // Interactive node hover effects
+                this.initNodeInteractions();
+                
+                // Add pulsing animations to active scouts
+                this.initScoutAnimations();
+            }
+            
+            initLiveActivityFeed() {
+                const activities = [
+                    { scout: 'Scout_TX_07', action: 'Uploaded film: Westlake vs Lake Travis', region: 'TX' },
+                    { scout: 'Scout_LA_02', action: 'Player eval: 5⭐ QB (Class 2025)', region: 'LA' },
+                    { scout: 'Scout_AL_03', action: 'Injury report: Thompson vs Hoover', region: 'AL' },
+                    { scout: 'Scout_TX_12', action: 'Recruiting intel: Duncanville visit update', region: 'TX' },
+                    { scout: 'Scout_GA_01', action: 'Weather alert: Buford game delayed', region: 'GA' },
+                    { scout: 'Scout_MS_01', action: 'Scouting report: Brandon RB showing D1 speed', region: 'MS' },
+                    { scout: 'Scout_FL_02', action: 'Commitment alert: Pensacola WR picks Auburn', region: 'FL' },
+                    { scout: 'Scout_TX_03', action: 'Film analysis: North Shore defensive scheme', region: 'TX' },
+                    { scout: 'Scout_AR_01', action: 'Transfer portal: Bentonville QB enters portal', region: 'AR' },
+                    { scout: 'Scout_TN_01', action: 'Recruiting visit: Memphis prospect tours A&M', region: 'TN' }
+                ];
+                
+                let currentActivity = 0;
+                const activityStream = document.querySelector('.activity-stream');
+                
+                setInterval(() => {
+                    // Add new activity at top
+                    currentActivity = (currentActivity + 1) % activities.length;
+                    const activity = activities[currentActivity];
+                    const now = new Date();
+                    const timeString = now.toLocaleTimeString('en-US', { 
+                        hour: 'numeric', 
+                        minute: '2-digit', 
+                        hour12: true 
+                    });
+                    
+                    const newItem = document.createElement('div');
+                    newItem.className = 'activity-item new';
+                    newItem.innerHTML = `
+                        <span class="time">${timeString}</span>
+                        <span class="scout">${activity.scout}</span>
+                        <span class="action">${activity.action}</span>
+                    `;
+                    
+                    // Add fade-in animation
+                    newItem.style.opacity = '0';
+                    newItem.style.transform = 'translateX(-20px)';
+                    activityStream.insertBefore(newItem, activityStream.firstChild);
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        newItem.style.transition = 'all 0.5s ease';
+                        newItem.style.opacity = '1';
+                        newItem.style.transform = 'translateX(0)';
+                    }, 100);
+                    
+                    // Remove oldest if more than 6 items
+                    const items = activityStream.querySelectorAll('.activity-item');
+                    if (items.length > 6) {
+                        const oldestItem = items[items.length - 1];
+                        oldestItem.style.transition = 'all 0.3s ease';
+                        oldestItem.style.opacity = '0';
+                        setTimeout(() => {
+                            if (oldestItem.parentNode) {
+                                activityStream.removeChild(oldestItem);
+                            }
+                        }, 300);
+                    }
+                    
+                    // Flash corresponding region
+                    this.flashRegion(activity.region);
+                    
+                }, 8000); // New activity every 8 seconds
+            }
+            
+            initNodeInteractions() {
+                document.querySelectorAll('.node').forEach(node => {
+                    node.addEventListener('mouseenter', () => {
+                        // Add glow effect
+                        node.style.boxShadow = '0 0 20px rgba(191, 87, 0, 0.4)';
+                        node.style.transform = 'scale(1.05)';
+                    });
+                    
+                    node.addEventListener('mouseleave', () => {
+                        node.style.boxShadow = 'none';
+                        node.style.transform = 'scale(1.0)';
+                    });
+                });
+            }
+            
+            initScoutAnimations() {
+                // Add subtle pulsing to scout counts
+                document.querySelectorAll('.scout-count').forEach(count => {
+                    setInterval(() => {
+                        count.style.transform = 'scale(1.1)';
+                        setTimeout(() => {
+                            count.style.transform = 'scale(1.0)';
+                        }, 200);
+                    }, 3000 + Math.random() * 2000); // Random pulse between 3-5 seconds
+                });
+            }
+            
+            flashRegion(region) {
+                const regionMap = {
+                    'TX': 'texas',
+                    'LA': 'sec',
+                    'AL': 'sec', 
+                    'GA': 'sec',
+                    'MS': 'sec',
+                    'FL': 'sec',
+                    'AR': 'sec',
+                    'TN': 'sec'
+                };
+                
+                const clusterElement = document.querySelector(`.region-cluster.${regionMap[region]}`);
+                if (clusterElement) {
+                    clusterElement.style.transition = 'all 0.3s ease';
+                    clusterElement.style.borderLeftColor = '#FFD700';
+                    clusterElement.style.transform = 'scale(1.02)';
+                    
+                    setTimeout(() => {
+                        const originalColor = regionMap[region] === 'texas' ? '#BF5700' : '#9B2222';
+                        clusterElement.style.borderLeftColor = originalColor;
+                        clusterElement.style.transform = 'scale(1.0)';
+                    }, 800);
+                }
+            }
+            
+            initTexasFootballAuthority() {
+                // Initialize classification tabs
+                document.querySelectorAll('.classification-tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        this.switchClassification(e.target.dataset.class);
+                    });
+                });
+                
+                // Update timestamp every minute
+                this.updateRankingsTimestamp();
+                setInterval(() => {
+                    this.updateRankingsTimestamp();
+                }, 60000);
+                
+                // Simulate live ranking updates
+                this.initLiveRankingUpdates();
+            }
+            
+            switchClassification(classification) {
+                // Remove active classes
+                document.querySelectorAll('.classification-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.rankings-panel').forEach(p => p.classList.remove('active'));
+                
+                // Add active classes
+                document.querySelector(`[data-class="${classification}"]`).classList.add('active');
+                
+                // Show corresponding panel (for now just show 6A, could expand with real data)
+                document.getElementById('rankings-6a').classList.add('active');
+                
+                // Update title based on classification
+                const classNames = {
+                    '6a': 'Class 6A - DI & DII',
+                    '5a': 'Class 5A - DI & DII', 
+                    '4a': 'Class 4A - DI & DII',
+                    '3a': 'Class 3A - DI & DII',
+                    '2a': 'Class 2A - DI & DII',
+                    '1a': 'Class 1A'
+                };
+                
+                // Could add different data for each classification
+                this.animateRankingCards();
+            }
+            
+            updateRankingsTimestamp() {
+                const now = new Date();
+                const timeAgo = Math.floor((now.getTime() - (now.getTime() - 2 * 60 * 60 * 1000)) / (1000 * 60)); // 2 hours ago
+                const timestamp = `Updated: ${timeAgo} hours ago`;
+                
+                const updateElement = document.querySelector('.update-time');
+                if (updateElement) {
+                    updateElement.textContent = timestamp;
+                }
+            }
+            
+            initLiveRankingUpdates() {
+                // Simulate live updates with subtle animations
+                const cards = document.querySelectorAll('.ranking-card');
+                
+                setInterval(() => {
+                    // Random card gets a subtle highlight
+                    const randomCard = cards[Math.floor(Math.random() * cards.length)];
+                    if (randomCard) {
+                        randomCard.style.transition = 'all 0.3s ease';
+                        randomCard.style.borderColor = '#FFD700';
+                        randomCard.style.transform = 'scale(1.02)';
+                        
+                        setTimeout(() => {
+                            randomCard.style.borderColor = 'rgba(155, 203, 235, 0.15)';
+                            randomCard.style.transform = 'scale(1.0)';
+                        }, 2000);
+                    }
+                }, 15000); // Every 15 seconds
+            }
+            
+            animateRankingCards() {
+                const cards = document.querySelectorAll('.ranking-card');
+                cards.forEach((card, i) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateX(-50px)';
+                    
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.5s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateX(0)';
+                    }, i * 100);
+                });
+            }
+            
+            initMediaAuthorityProof() {
+                // Auto-scroll citation feed
+                this.initCitationAutoScroll();
+                
+                // Animate partnership cards
+                this.initPartnershipAnimations();
+                
+                // Update citation timestamps dynamically
+                this.updateCitationTimestamps();
+            }
+            
+            initCitationAutoScroll() {
+                const scrollContainer = document.querySelector('.citation-scroll');
+                if (!scrollContainer) return;
+                
+                let isScrolling = false;
+                
+                const autoScroll = () => {
+                    if (!isScrolling) {
+                        const scrollHeight = scrollContainer.scrollHeight;
+                        const clientHeight = scrollContainer.clientHeight;
+                        const currentScroll = scrollContainer.scrollTop;
+                        
+                        if (currentScroll + clientHeight >= scrollHeight - 10) {
+                            // Reached bottom, scroll to top
+                            scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+                        } else {
+                            // Scroll down
+                            scrollContainer.scrollBy({ top: 80, behavior: 'smooth' });
+                        }
+                    }
+                };
+                
+                // Auto-scroll every 4 seconds
+                const scrollInterval = setInterval(autoScroll, 4000);
+                
+                // Pause auto-scroll on user interaction
+                scrollContainer.addEventListener('mouseenter', () => {
+                    isScrolling = true;
+                });
+                
+                scrollContainer.addEventListener('mouseleave', () => {
+                    isScrolling = false;
+                });
+                
+                scrollContainer.addEventListener('scroll', () => {
+                    isScrolling = true;
+                    setTimeout(() => {
+                        isScrolling = false;
+                    }, 3000);
+                });
+            }
+            
+            initPartnershipAnimations() {
+                // Animate partnership verification status
+                document.querySelectorAll('.partnership-status').forEach(status => {
+                    setInterval(() => {
+                        status.style.transform = 'scale(1.05)';
+                        setTimeout(() => {
+                            status.style.transform = 'scale(1.0)';
+                        }, 200);
+                    }, 5000 + Math.random() * 3000);
+                });
+                
+                // Add pulse animation to verified badges
+                document.querySelectorAll('.partnership-card.verified').forEach(card => {
+                    const checkmark = document.createElement('div');
+                    checkmark.innerHTML = '✓';
+                    checkmark.style.position = 'absolute';
+                    checkmark.style.top = '10px';
+                    checkmark.style.right = '10px';
+                    checkmark.style.background = '#00ff88';
+                    checkmark.style.color = 'white';
+                    checkmark.style.width = '24px';
+                    checkmark.style.height = '24px';
+                    checkmark.style.borderRadius = '50%';
+                    checkmark.style.display = 'flex';
+                    checkmark.style.alignItems = 'center';
+                    checkmark.style.justifyContent = 'center';
+                    checkmark.style.fontSize = '14px';
+                    checkmark.style.fontWeight = 'bold';
+                    
+                    card.style.position = 'relative';
+                    card.appendChild(checkmark);
+                });
+            }
+            
+            updateCitationTimestamps() {
+                const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                               'July', 'August', 'September', 'October', 'November', 'December'];
+                
+                document.querySelectorAll('.citation-date').forEach((dateEl, index) => {
+                    const now = new Date();
+                    const monthsAgo = index + 1;
+                    const citationDate = new Date(now.getFullYear(), now.getMonth() - monthsAgo, 1);
+                    dateEl.textContent = `${months[citationDate.getMonth()]} ${citationDate.getFullYear()}`;
+                });
+            }
+            
+            initMorningBlazeNewsletter() {
+                // Handle newsletter form submission
+                const form = document.getElementById('blazeNewsletterForm');
+                if (form) {
+                    form.addEventListener('submit', (e) => {
+                        this.handleNewsletterSignup(e);
+                    });
+                }
+                
+                // Animate subscriber count
+                this.animateSubscriberCount();
+                
+                // Update headline dates
+                this.updateHeadlineDates();
+                
+                // Add form field animations
+                this.initFormAnimations();
+            }
+            
+            handleNewsletterSignup(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(e.target);
+                const data = {
+                    email: formData.get('email'),
+                    role: formData.get('role'),
+                    interests: formData.get('interests')
+                };
+                
+                // Show loading state
+                const submitBtn = e.target.querySelector('.subscribe-btn');
+                const originalText = submitBtn.querySelector('.btn-text').textContent;
+                submitBtn.querySelector('.btn-text').textContent = 'Subscribing...';
+                submitBtn.disabled = true;
+                
+                // Simulate API call (replace with actual API endpoint)
+                setTimeout(() => {
+                    // Success feedback
+                    submitBtn.style.background = '#00ff88';
+                    submitBtn.querySelector('.btn-text').textContent = 'Welcome to the Blaze!';
+                    
+                    // Show success message
+                    const successMsg = document.createElement('div');
+                    successMsg.innerHTML = `
+                        <div style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; 
+                                    padding: 16px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                            <i class="fas fa-check-circle" style="color: #00ff88; margin-right: 8px;"></i>
+                            <strong style="color: #00ff88;">You're in!</strong> 
+                            <span style="color: var(--mississippi-white);">Your first Morning Blaze arrives at 6 AM tomorrow.</span>
+                        </div>
+                    `;
+                    
+                    e.target.appendChild(successMsg);
+                    
+                    // Update subscriber count
+                    this.incrementSubscriberCount();
+                    
+                    // Reset form after delay
+                    setTimeout(() => {
+                        e.target.reset();
+                        submitBtn.disabled = false;
+                        submitBtn.style.background = '';
+                        submitBtn.querySelector('.btn-text').textContent = originalText;
+                        successMsg.remove();
+                    }, 5000);
+                    
+                }, 1500);
+                
+                // Track conversion (Google Analytics, etc.)
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'newsletter_signup', {
+                        'custom_parameters': {
+                            'role': data.role,
+                            'interests': data.interests
+                        }
+                    });
+                }
+            }
+            
+            animateSubscriberCount() {
+                const countElement = document.querySelector('.subscriber-count .count');
+                if (!countElement) return;
+                
+                let currentCount = 47247;
+                
+                // Simulate real-time subscriber growth
+                setInterval(() => {
+                    const increment = Math.floor(Math.random() * 3) + 1; // 1-3 new subscribers
+                    currentCount += increment;
+                    
+                    // Animate the count change
+                    countElement.style.transform = 'scale(1.1)';
+                    countElement.style.color = '#FFD700';
+                    
+                    setTimeout(() => {
+                        countElement.textContent = currentCount.toLocaleString();
+                        countElement.style.transform = 'scale(1.0)';
+                        countElement.style.color = '';
+                    }, 200);
+                    
+                }, 45000); // Every 45 seconds
+            }
+            
+            incrementSubscriberCount() {
+                const countElement = document.querySelector('.subscriber-count .count');
+                if (!countElement) return;
+                
+                let currentCount = parseInt(countElement.textContent.replace(/,/g, ''));
+                currentCount += 1;
+                
+                countElement.style.transform = 'scale(1.2)';
+                countElement.style.color = '#00ff88';
+                
+                setTimeout(() => {
+                    countElement.textContent = currentCount.toLocaleString();
+                    countElement.style.transform = 'scale(1.0)';
+                    countElement.style.color = '';
+                }, 300);
+            }
+            
+            updateHeadlineDates() {
+                const dateElements = document.querySelectorAll('.headline-item .date');
+                const today = new Date();
+                
+                dateElements.forEach((dateEl, index) => {
+                    const daysAgo = index;
+                    const date = new Date(today);
+                    date.setDate(date.getDate() - daysAgo);
+                    
+                    const month = date.toLocaleString('default', { month: 'short' });
+                    const day = date.getDate();
+                    dateEl.textContent = `${month} ${day}`;
+                });
+            }
+            
+            initFormAnimations() {
+                // Add focus animations to form fields
+                document.querySelectorAll('.email-input, .role-select, .interests-select').forEach(field => {
+                    field.addEventListener('focus', () => {
+                        field.parentNode.style.transform = 'scale(1.02)';
+                    });
+                    
+                    field.addEventListener('blur', () => {
+                        field.parentNode.style.transform = 'scale(1.0)';
+                    });
+                });
+                
+                // Add validation feedback
+                const emailField = document.getElementById('email');
+                if (emailField) {
+                    emailField.addEventListener('input', (e) => {
+                        const isValid = e.target.checkValidity();
+                        e.target.style.borderColor = isValid ? '#00ff88' : 'rgba(155, 203, 235, 0.2)';
+                    });
+                }
+            }
+        }
+        
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            new BlazeAuthority();
+        });
+        
+        // Three.js Background Animation
+        if (window.THREE) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.domElement.style.position = 'fixed';
+            renderer.domElement.style.top = '0';
+            renderer.domElement.style.left = '0';
+            renderer.domElement.style.zIndex = '-1';
+            renderer.domElement.style.pointerEvents = 'none';
+            document.body.appendChild(renderer.domElement);
+            
+            // Create particle field (stadium lights effect)
+            const particles = new THREE.BufferGeometry();
+            const particleCount = 1000;
+            const positions = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 100;
+                positions[i + 1] = (Math.random() - 0.5) * 100;
+                positions[i + 2] = (Math.random() - 0.5) * 100;
+            }
+            
+            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const particleMaterial = new THREE.PointsMaterial({
+                color: 0xFFD700,
+                size: 0.5,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const particleSystem = new THREE.Points(particles, particleMaterial);
+            scene.add(particleSystem);
+            
+            camera.position.z = 30;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                particleSystem.rotation.y += 0.0005;
+                particleSystem.rotation.x += 0.0002;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+    </script>
+    
+    <!-- Load Professional Three.js Implementation -->
+    <script src="./Blaze Intelligence - The Deep South Sports Authority _ Texas Football &amp; SEC Analytics_files/professional-threejs.js"></script>
+
+</body></html>

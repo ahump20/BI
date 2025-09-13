@@ -1,0 +1,114 @@
+
+*** Begin Patch
+*** Add File: site/sec-football.html
++<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
++<title>SEC Football Week 3 — Blaze Intelligence</title>
++<!-- Use shared brand styles and hero animation -->
++<link rel="stylesheet" href="/assets/brand.css">
++<div class="nav">
++  <div class="brand">🔥 Blaze Intelligence</div>
++  <a href="/dashboard.html" class="badge">Dashboard</a>
++  <a href="/get-started.html" class="badge">Get Started</a>
++</div>
++<canvas id="hero" style="width:100%;height:28vh;display:block"></canvas>
++<div class="container">
++  <div class="h1">SEC Football — Week 3 Preview</div>
++  <p class="p">A quick look at every SEC program heading into Week 3 of the 2025 season.  Records and basic offensive/defensive metrics are up to date as of September 12, 2025, with points for and against drawn from the official NCAA standingshttps://www.ncaa.com/standings/football/fbs/sec#:~:text=.  Last week’s scores and upcoming matchups come from the SEC’s official scoreboardhttps://www.secsports.com/scores/football#:~:text=09https://www.secsports.com/scores/football#:~:text=09.</p>
++  <div class="grid cols-3" style="margin-top:1rem">
++    <!-- Ole Miss -->
++    <div class="card">
++      <div class="h2">Ole Miss (2–0)</div>
++      <p class="p">Conf 1–0 | PF 93, PA 30 (46.5 PF/G, 15.0 PA/G).  The Rebels outlasted Kentucky 30–23 last weekhttps://www.secsports.com/scores/football#:~:text=09.  Next: vs. Arkansas, Sep 13.</p>
++    </div>
++    <!-- Tennessee -->
++    <div class="card">
++      <div class="h2">Tennessee (2–0)</div>
++      <p class="p">Conf 0–0 | PF 117, PA 43 (58.5 PF/G, 21.5 PA/G).  Vols routed ETSU 72–17https://www.secsports.com/scores/football#:~:text=09.  Next: at Georgia, Sep 13.</p>
++    </div>
++    <!-- Arkansas -->
++    <div class="card">
++      <div class="h2">Arkansas (2–0)</div>
++      <p class="p">Conf 0–0 | PF 108, PA 21 (54.0 PF/G, 10.5 PA/G).  Hogs handled Arkansas State 56–14https://www.secsports.com/scores/football#:~:text=09.  Next: at Ole Miss, Sep 13.</p>
++    </div>
++    <!-- Missouri -->
++    <div class="card">
++      <div class="h2">Missouri (2–0)</div>
++      <p class="p">Conf 0–0 | PF 103, PA 37 (51.5 PF/G, 18.5 PA/G).  Tigers topped Kansas 42–31https://www.secsports.com/scores/football#:~:text=09.  Next: vs. Louisiana Lafayette, Sep 13.</p>
++    </div>
++    <!-- Vanderbilt -->
++    <div class="card">
++      <div class="h2">Vanderbilt (2–0)</div>
++      <p class="p">Conf 0–0 | PF 89, PA 23 (44.5 PF/G, 11.5 PA/G).  Dores defeated Virginia Tech 44–20https://www.secsports.com/scores/football#:~:text=09.  Next: at South Carolina, Sep 13.</p>
++    </div>
++    <!-- Texas A&M -->
++    <div class="card">
++      <div class="h2">Texas A&M (2–0)</div>
++      <p class="p">Conf 0–0 | PF 86, PA 46 (43.0 PF/G, 23.0 PA/G).  Aggies blew past Utah State 44–22https://www.secsports.com/scores/football#:~:text=09.  Next: vs. Notre Dame, Sep 13.</p>
++    </div>
++    <!-- Auburn -->
++    <div class="card">
++      <div class="h2">Auburn (2–0)</div>
++      <p class="p">Conf 0–0 | PF 80, PA 27 (40.0 PF/G, 13.5 PA/G).  Tigers crushed Ball State 42–3https://www.secsports.com/scores/football#:~:text=09.  Next: vs. South Alabama, Sep 13.</p>
++    </div>
++    <!-- Georgia -->
++    <div class="card">
++      <div class="h2">Georgia (2–0)</div>
++      <p class="p">Conf 0–0 | PF 73, PA 13 (36.5 PF/G, 6.5 PA/G).  Bulldogs beat Austin Peay 28–6https://www.secsports.com/scores/football#:~:text=09.  Next: vs. Tennessee, Sep 13.</p>
++    </div>
++    <!-- South Carolina -->
++    <div class="card">
++      <div class="h2">South Carolina (2–0)</div>
++      <p class="p">Conf 0–0 | PF 62, PA 21 (31.0 PF/G, 10.5 PA/G).  Gamecocks handled SC State 38–10https://www.secsports.com/scores/football#:~:text=09.  Next: vs. Vanderbilt, Sep 13.</p>
++    </div>
++    <!-- Oklahoma -->
++    <div class="card">
++      <div class="h2">Oklahoma (2–0)</div>
++      <p class="p">Conf 0–0 | PF 59, PA 16 (29.5 PF/G, 8.0 PA/G).  Sooners upset Michigan 24–13https://www.secsports.com/scores/football#:~:text=09.  Next: vs. Temple, Sep 13.</p>
++    </div>
++    <!-- Mississippi State -->
++    <div class="card">
++      <div class="h2">Mississippi State (2–0)</div>
++      <p class="p">Conf 0–0 | PF 58, PA 37 (29.0 PF/G, 18.5 PA/G).  Bulldogs edged Arizona State 24–20https://www.secsports.com/scores/football#:~:text=09.  Next: vs. Alcorn State, Sep 13.</p>
++    </div>
++    <!-- LSU -->
++    <div class="card">
++      <div class="h2">LSU (2–0)</div>
++      <p class="p">Conf 0–0 | PF 40, PA 17 (20.0 PF/G, 8.5 PA/G).  Tigers beat LA Tech 23–7https://www.secsports.com/scores/football#:~:text=09.  Next: at Florida, Sep 13.</p>
++    </div>
++    <!-- Alabama -->
++    <div class="card">
++      <div class="h2">Alabama (1–1)</div>
++      <p class="p">Conf 0–0 | PF 90, PA 31 (45.0 PF/G, 15.5 PA/G).  Tide blanked ULM 73–0https://www.secsports.com/scores/football#:~:text=09 after falling to a ranked foe in Week 1.  Next: vs. Wisconsin, Sep 13.</p>
++    </div>
++    <!-- Florida -->
++    <div class="card">
++      <div class="h2">Florida (1–1)</div>
++      <p class="p">Conf 0–0 | PF 71, PA 18 (35.5 PF/G, 9.0 PA/G).  Gators were upset by USF 18–16https://www.secsports.com/scores/football#:~:text=09.  Next: vs. LSU, Sep 13.</p>
++    </div>
++    <!-- Kentucky -->
++    <div class="card">
++      <div class="h2">Kentucky (1–1)</div>
++      <p class="p">Conf 0–1 | PF 47, PA 46 (23.5 PF/G, 23.0 PA/G).  Wildcats fell to Ole Miss 30–23https://www.secsports.com/scores/football#:~:text=09.  Next: vs. Eastern Michigan, Sep 13.</p>
++    </div>
++    <!-- Texas -->
++    <div class="card">
++      <div class="h2">Texas (1–1)</div>
++      <p class="p">Conf 0–0 | PF 45, PA 21 (22.5 PF/G, 10.5 PA/G).  Longhorns rebounded by beating San Jose St. 38–7https://www.secsports.com/scores/football#:~:text=09.  Next: vs. UTEP, Sep 13.</p>
++    </div>
++  </div>
++  <hr>
++  <div class="h2">Key Storylines</div>
++  <p class="p">Half of the league sits at 2–0 with formidable scoring margins.  Tennessee (117 points) leads the conference in offensehttps://www.ncaa.com/standings/football/fbs/sec#:~:text=,1%20Won%201, while Georgia and LSU boast stifling defenses (13 and 17 points allowed respectively).  Arkansas vs. Ole Miss and Georgia vs. Tennessee headline Week 3 as the first major conference testshttps://www.secsports.com/scores/football#:~:text=09.</p>
++  <p class="p">Florida’s upset loss to USF and Kentucky’s loss to Ole Miss leave both programs searching for answers.  Alabama and Texas bounced back from opening losses and now face tough non‑conference opponents Wisconsin and UTEPhttps://www.secsports.com/scores/football#:~:text=09.  Keep an eye on Missouri’s high‑powered offense (51.5 PF/G) and Vanderbilt’s balanced start as potential dark horses.</p>
++</div>
++<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
++<script src="/assets/hero.js"></script>
+*** End Patch
+*** Update File: site/index.html
+@@
+-    <a class="pill" href="/perfect-game.html">🥇 PG Select</a>
+-    <a class="pill" href="/perfect-game.html">🥇 PG Select</a>
+-    <a class="pill" href="/perfect-game.html">🥇 PG Select</a>
++    <a class="pill" href="/perfect-game.html">🥇 PG Select</a>
++    <a class="pill" href="/sec-football.html">🏈 SEC Football</a>
+*** End Patch

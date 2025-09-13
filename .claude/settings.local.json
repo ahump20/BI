@@ -30,9 +30,24 @@
       "Bash(./setup-secrets-sync.sh:*)",
       "Bash(./scripts/add-all-secrets.sh:*)",
       "Bash(gh workflow run:*)",
-      "Bash(./scripts/test-deployment.sh:*)"
+      "Bash(./scripts/test-deployment.sh:*)",
+      "Bash(npx wrangler auth:*)",
+      "Bash(test:*)",
+      "Bash(./scripts/deployment-status.sh:*)",
+      "Bash(./scripts/verify-secrets.sh:*)",
+      "Bash(./verify-deployment.sh:*)",
+      "Bash(gh workflow list:*)",
+      "Bash(./deploy-deep-south-netlify.sh:*)",
+      "Bash(npx netlify:*)",
+      "Read(//Users/AustinHumphrey/Downloads/**)",
+      "Bash(unzip:*)",
+      "Read(//var/folders/kg/n1t_tbds23df03t2kqq054l80000gn/T/TemporaryItems/NSIRD_screencaptureui_anRPdm/**)",
+      "Read(//var/folders/kg/n1t_tbds23df03t2kqq054l80000gn/T/TemporaryItems/NSIRD_screencaptureui_P4YtJS/**)",
+      "Read(//var/folders/kg/n1t_tbds23df03t2kqq054l80000gn/T/TemporaryItems/NSIRD_screencaptureui_9YyRCT/**)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "outputStyle": "deep-south-sports-authority"
 }

@@ -1,0 +1,1154 @@
+<html><head></head><body>   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - The Deep South Sports Authority | Texas Football &amp; SEC Baseball Analytics</title>
+    <meta name="description" content="The Dave Campbell's of SEC/Deep South sports. Complete coverage of Texas high school football, SEC baseball, and every player from Little League to the NFL/MLB. 1,437+ schools, 127,000+ players tracked.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blaze-intelligence.netlify.app/">
+    <meta property="og:title" content="Blaze Intelligence - The Deep South Sports Authority">
+    <meta property="og:description" content="From Little League to The League. The most trusted source for Texas and SEC sports intelligence.">
+    <meta property="og:image" content="https://blaze-intelligence.netlify.app/img/og-authority.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://blaze-intelligence.netlify.app/">
+    <meta property="twitter:title" content="Blaze Intelligence - The Deep South Sports Authority">
+    <meta property="twitter:description" content="The Dave Campbell's of Deep South sports. 127,000+ players tracked.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Authority Positioning Styles */
+        :root {
+            /* Core Brand Colors */
+            --burnt-orange: #BF5700;
+            --sec-crimson: #9B2222;
+            --cardinal-blue: #9BCBEB;
+            --deep-teal: #00B2A9;
+            --mississippi-white: #F8F8FF;
+            --georgia-clay: #C65D00;
+            --texas-navy: #002244;
+            --louisiana-bayou: #1B4332;
+            
+            /* Typography Scale */
+            --font-headline: 'Oswald', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-data: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #0A192F 0%, #112240 100%);
+            color: #8892B0;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--burnt-orange);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-logo img {
+            height: 40px;
+        }
+        
+        .nav-logo .tagline {
+            font-family: var(--font-headline);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--georgia-clay);
+        }
+        
+        .nav-sports {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown > span {
+            color: var(--mississippi-white);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .dropdown:hover > span {
+            color: var(--burnt-orange);
+        }
+        
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid var(--cardinal-blue);
+            border-top: 4px solid var(--burnt-orange);
+            border-radius: 0 0 16px 16px;
+            padding: 32px;
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            min-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 34, 68, 0.1);
+            margin-top: 1rem;
+        }
+        
+        .dropdown:hover .mega-menu {
+            display: grid;
+        }
+        
+        .menu-column h4 {
+            font-family: var(--font-headline);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sec-crimson);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--cardinal-blue);
+        }
+        
+        .menu-column a {
+            display: block;
+            padding: 8px 0;
+            color: var(--texas-navy);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+        
+        .menu-column a:hover {
+            color: var(--burnt-orange);
+            padding-left: 8px;
+        }
+        
+        .nav-tools a {
+            color: var(--mississippi-white);
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-tools a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .nav-account {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-login {
+            background: transparent;
+            color: var(--burnt-orange);
+            border: 2px solid var(--burnt-orange);
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-login:hover {
+            background: var(--burnt-orange);
+            color: white;
+        }
+        
+        .btn-subscribe {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-subscribe:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(191, 87, 0, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero-authority {
+            margin-top: 80px;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, rgba(10, 25, 47, 0) 0%, rgba(10, 25, 47, 1) 100%);
+        }
+        
+        /* Authority Badge */
+        .authority-badge {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+            margin-bottom: 32px;
+        }
+        
+        .badge-text {
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .trust-logos {
+            display: flex;
+            gap: 24px;
+            padding-left: 24px;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .trust-logos span {
+            font-size: 12px;
+            opacity: 0.95;
+        }
+        
+        /* Hero Title Hierarchy */
+        .hero-title {
+            text-align: center;
+            margin: 48px 0;
+        }
+        
+        .hero-title .small-text {
+            font-family: var(--font-headline);
+            font-size: 18px;
+            color: var(--georgia-clay);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 12px;
+        }
+        
+        .hero-title .main-text {
+            font-family: var(--font-headline);
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            display: block;
+            margin-bottom: 16px;
+        }
+        
+        .hero-title .sub-text {
+            font-family: var(--font-body);
+            font-size: 24px;
+            color: var(--cardinal-blue);
+            font-weight: 500;
+            display: block;
+        }
+        
+        /* Stats Cards */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 64px auto;
+        }
+        
+        .stat-card {
+            background: white;
+            border: 2px solid var(--cardinal-blue);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--sec-crimson));
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 34, 68, 0.15);
+        }
+        
+        .stat-number {
+            font-family: var(--font-data);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--texas-navy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* CTA Buttons */
+        .cta-section {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 48px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 16px 32px;
+            font-family: var(--font-headline);
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(191, 87, 0, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--burnt-orange);
+            border: 2px solid var(--burnt-orange);
+            padding: 16px 32px;
+            font-family: var(--font-headline);
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--burnt-orange);
+            color: white;
+        }
+        
+        .btn-tertiary {
+            background: transparent;
+            color: var(--cardinal-blue);
+            border: none;
+            padding: 16px 32px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-tertiary:hover {
+            color: var(--burnt-orange);
+        }
+        
+        /* Authority Proof Section */
+        .authority-proof {
+            padding: 100px 20px;
+            background: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: var(--font-headline);
+            font-size: 48px;
+            color: var(--texas-navy);
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        
+        .proof-card {
+            background: white;
+            border: 1px solid #E6F1FF;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .proof-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 34, 68, 0.1);
+            border-color: var(--burnt-orange);
+        }
+        
+        .proof-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
+        }
+        
+        .proof-card h3 {
+            font-family: var(--font-headline);
+            font-size: 24px;
+            color: var(--texas-navy);
+            margin-bottom: 16px;
+        }
+        
+        .proof-card p {
+            color: #64748B;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .proof-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+        
+        .proof-stats span {
+            font-family: var(--font-data);
+            font-size: 14px;
+            color: var(--burnt-orange);
+            font-weight: 600;
+        }
+        
+        /* Product Showcase Section */
+        .product-showcase {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, white 0%, #F8F8FF 100%);
+        }
+        
+        .product-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        
+        .tab {
+            background: transparent;
+            color: var(--texas-navy);
+            border: 2px solid var(--texas-navy);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active,
+        .tab:hover {
+            background: var(--burnt-orange);
+            color: white;
+            border-color: var(--burnt-orange);
+        }
+        
+        .product-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .product-panel {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+        
+        .product-panel.active {
+            display: grid;
+        }
+        
+        .product-visual img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 34, 68, 0.1);
+        }
+        
+        .product-details h3 {
+            font-family: var(--font-headline);
+            font-size: 36px;
+            color: var(--texas-navy);
+            margin-bottom: 8px;
+        }
+        
+        .product-tagline {
+            font-size: 18px;
+            color: var(--georgia-clay);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            color: #64748B;
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--burnt-orange);
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .product-cta {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .price {
+            font-family: var(--font-data);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--texas-navy);
+        }
+        
+        /* Coverage Map Section */
+        .coverage-map {
+            padding: 100px 20px;
+            background: var(--texas-navy);
+            color: white;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: var(--cardinal-blue);
+            margin-bottom: 48px;
+        }
+        
+        .interactive-map {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 32px;
+        }
+        
+        .map-placeholder {
+            height: 400px;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.2), rgba(155, 34, 34, 0.2));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--cardinal-blue);
+            margin-bottom: 48px;
+        }
+        
+        .map-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        
+        .region-stat {
+            text-align: center;
+        }
+        
+        .region-stat h4 {
+            font-family: var(--font-headline);
+            font-size: 24px;
+            color: var(--burnt-orange);
+            margin-bottom: 16px;
+        }
+        
+        .region-stat span {
+            display: block;
+            font-size: 16px;
+            color: var(--cardinal-blue);
+            margin-bottom: 8px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 48px 20px;
+            background: #0A0E1B;
+            text-align: center;
+            border-top: 2px solid var(--burnt-orange);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-family: var(--font-headline);
+            font-size: 32px;
+            color: var(--burnt-orange);
+            margin-bottom: 16px;
+        }
+        
+        .footer-tagline {
+            color: var(--cardinal-blue);
+            margin-bottom: 32px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .footer-links a {
+            color: #8892B0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .footer-copyright {
+            color: #64748B;
+            font-size: 14px;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-sports,
+            .nav-tools {
+                display: none;
+            }
+            
+            .hero-title .main-text {
+                font-size: 48px;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-panel {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span style="font-size: 24px; font-weight: 700; color: var(--burnt-orange);">BLAZE</span>
+                <span class="tagline">The Authority</span>
+            </div>
+            
+            <div class="nav-sports">
+                <div class="dropdown" data-sport="football">
+                    <span>Football</span>
+                    <div class="mega-menu">
+                        <div class="menu-column">
+                            <h4>Levels</h4>
+                            <a href="/youth-football">Youth (6-14)</a>
+                            <a href="/high-school-football">High School</a>
+                            <a href="/college-football">College/SEC</a>
+                            <a href="/pro-football">NFL/Professional</a>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Intelligence</h4>
+                            <a href="/football-rankings">Rankings</a>
+                            <a href="/football-recruiting">Recruiting</a>
+                            <a href="/football-analytics">Analytics</a>
+                            <a href="/football-film">Film Study</a>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Publications</h4>
+                            <a href="/texas-football-annual">Texas Annual</a>
+                            <a href="/sec-preview">SEC Preview</a>
+                            <a href="/draft-guide">Draft Guide</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dropdown" data-sport="baseball">
+                    <span>Baseball</span>
+                    <div class="mega-menu">
+                        <div class="menu-column">
+                            <h4>Levels</h4>
+                            <a href="/little-league">Little League</a>
+                            <a href="/high-school-baseball">High School</a>
+                            <a href="/college-baseball">College/SEC</a>
+                            <a href="/milb-mlb">MiLB/MLB</a>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Intelligence</h4>
+                            <a href="/prospect-rankings">Prospect Rankings</a>
+                            <a href="/perfect-game">Perfect Game</a>
+                            <a href="/draft-coverage">MLB Draft</a>
+                            <a href="/showcase-circuit">Showcases</a>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Tools</h4>
+                            <a href="/velocity-tracker">Velocity Tracker</a>
+                            <a href="/exit-velo">Exit Velo Analysis</a>
+                            <a href="/prospect-database">Prospect Database</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-tools">
+                <a href="/blazescout">BlazeScout Pro</a>
+                <a href="/blazedraft">BlazeDraft</a>
+                <a href="/api">API</a>
+            </div>
+            
+            <div class="nav-account">
+                <button class="btn-login">Scout Login</button>
+                <button class="btn-subscribe">Subscribe</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-authority">
+        <div class="authority-badge">
+            <span class="badge-text">The Official Intelligence Partner of Championship Programs</span>
+            <div class="trust-logos">
+                <span>Dave Campbell's Partner</span>
+                <span>|</span>
+                <span>SEC Network Data</span>
+                <span>|</span>
+                <span>Perfect Game Analytics</span>
+            </div>
+        </div>
+        
+        <h1 class="hero-title">
+            <span class="small-text">From Little League to The League</span>
+            <span class="main-text">The Deep South Sports Authority</span>
+            <span class="sub-text">Texas • SEC • Every Player • Every Level</span>
+        </h1>
+        
+        <div class="hero-stats">
+            <div class="stat-card">
+                <span class="stat-number">1,437</span>
+                <span class="stat-label">Texas High Schools Covered</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">127,000+</span>
+                <span class="stat-label">Players Tracked</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">94.6%</span>
+                <span class="stat-label">Draft Prediction Accuracy</span>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <button class="btn-primary">Get The 2025 Football Annual</button>
+            <button class="btn-secondary">Scout Portal Login</button>
+            <button class="btn-tertiary">Free Player Lookup</button>
+        </div>
+    </section>
+    
+    <!-- Authority Proof Section -->
+    <section class="authority-proof">
+        <div class="container">
+            <h2 class="section-title">Why We're The Authority</h2>
+            
+            <div class="proof-grid">
+                <div class="proof-card">
+                    <div class="proof-icon">📊</div>
+                    <h3>Unmatched Coverage</h3>
+                    <p>Every Texas high school. Every SEC program. Every player that matters from Little League to the NFL.</p>
+                    <div class="proof-stats">
+                        <span>1,437 Schools</span>
+                        <span>127,000+ Players</span>
+                    </div>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-icon">🏆</div>
+                    <h3>Trusted Heritage</h3>
+                    <p>Official partner of Dave Campbell's Texas Football. The same trust built over decades, powered by modern technology.</p>
+                    <div class="proof-stats">
+                        <span>Since 1960 Legacy</span>
+                        <span>3 Generations</span>
+                    </div>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-icon">🎯</div>
+                    <h3>Proven Accuracy</h3>
+                    <p>Our AI models predict draft outcomes, transfer decisions, and championship winners with industry-leading precision.</p>
+                    <div class="proof-stats">
+                        <span>94.6% Draft Accuracy</span>
+                        <span>91.2% Game Predictions</span>
+                    </div>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-icon">🔍</div>
+                    <h3>Scout Network</h3>
+                    <p>Boots on the ground at every Friday night game. Eyes on every prospect. Relationships in every field house.</p>
+                    <div class="proof-stats">
+                        <span>500+ Scouts</span>
+                        <span>24/7 Coverage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Product Showcase Section -->
+    <section class="product-showcase">
+        <div class="container">
+            <h2 class="section-title">The Complete Intelligence Suite</h2>
+            
+            <div class="product-tabs">
+                <button class="tab active" onclick="switchProduct('annual')">The Annual</button>
+                <button class="tab" onclick="switchProduct('blazescout')">BlazeScout Pro</button>
+                <button class="tab" onclick="switchProduct('blazedraft')">BlazeDraft</button>
+                <button class="tab" onclick="switchProduct('api')">API Access</button>
+            </div>
+            
+            <div class="product-content">
+                <div class="product-panel active" id="annual">
+                    <div class="product-visual">
+                        <div style="background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson)); height: 400px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            Annual Preview Image
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>The Blaze Intelligence Annual</h3>
+                        <p class="product-tagline">The Bible of Deep South Sports</p>
+                        <ul class="feature-list">
+                            <li>1,437 Texas high schools covered</li>
+                            <li>Complete SEC baseball &amp; football coverage</li>
+                            <li>127,000+ player profiles and ratings</li>
+                            <li>Historical statistics and records</li>
+                            <li>Coaching staff analysis</li>
+                            <li>Digital + Print editions available</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">Pre-Order 2025 Edition</button>
+                            <span class="price">$49.99</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-panel" id="blazescout">
+                    <div class="product-visual">
+                        <div style="background: linear-gradient(135deg, var(--georgia-clay), var(--texas-navy)); height: 400px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            BlazeScout Pro Interface
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>BlazeScout Pro</h3>
+                        <p class="product-tagline">Professional Scouting Platform</p>
+                        <ul class="feature-list">
+                            <li>Live game film analysis</li>
+                            <li>Automated highlight detection</li>
+                            <li>Performance metric tracking</li>
+                            <li>Recruiting alert system</li>
+                            <li>Multi-screen command center</li>
+                            <li>Real-time feed aggregation</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">Start Free Trial</button>
+                            <span class="price">$299/mo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-panel" id="blazedraft">
+                    <div class="product-visual">
+                        <div style="background: linear-gradient(135deg, var(--louisiana-bayou), var(--cardinal-blue)); height: 400px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            BlazeDraft Analytics
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>BlazeDraft</h3>
+                        <p class="product-tagline">Draft Intelligence Platform</p>
+                        <ul class="feature-list">
+                            <li>MLB/NFL draft probability models</li>
+                            <li>Combine performance predictions</li>
+                            <li>Medical red flag analysis</li>
+                            <li>Character assessment scores</li>
+                            <li>Historical draft comparisons</li>
+                            <li>Team fit analytics</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">Get Access</button>
+                            <span class="price">$199/mo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-panel" id="api">
+                    <div class="product-visual">
+                        <div style="background: linear-gradient(135deg, var(--deep-teal), var(--texas-navy)); height: 400px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            API Documentation
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>Blaze Intelligence API</h3>
+                        <p class="product-tagline">Enterprise Data Access</p>
+                        <ul class="feature-list">
+                            <li>RESTful API endpoints</li>
+                            <li>Real-time data streaming</li>
+                            <li>Historical data access</li>
+                            <li>Custom webhook triggers</li>
+                            <li>White-label options</li>
+                            <li>99.9% uptime SLA</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">View Documentation</button>
+                            <span class="price">Custom Pricing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Regional Coverage Map -->
+    <section class="coverage-map">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Our Territory</h2>
+            <p class="section-subtitle">From Texas to the Atlantic, we own the Deep South</p>
+            
+            <div class="interactive-map">
+                <div class="map-placeholder">
+                    Interactive Coverage Map Coming Soon
+                </div>
+                
+                <div class="map-stats">
+                    <div class="region-stat">
+                        <h4>Texas</h4>
+                        <span>1,437 High Schools</span>
+                        <span>Big 12 + SEC Coverage</span>
+                    </div>
+                    <div class="region-stat">
+                        <h4>SEC States</h4>
+                        <span>14 Universities</span>
+                        <span>2,100+ High Schools</span>
+                    </div>
+                    <div class="region-stat">
+                        <h4>Total Coverage</h4>
+                        <span>127,000+ Players</span>
+                        <span>8 States Deep</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">BLAZE INTELLIGENCE</div>
+            <div class="footer-tagline">The Deep South Sports Authority</div>
+            <div class="footer-links">
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/careers">Careers</a>
+                <a href="/api">API</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 Blaze Intelligence. Built on Trust. Powered by Truth.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Initialize BlazeAuthority
+        class BlazeAuthority {
+            constructor() {
+                this.initLiveStats();
+                this.initProductTabs();
+                this.initTrustBadges();
+            }
+            
+            initLiveStats() {
+                // Animate statistics on scroll
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.animateNumber(entry.target);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.stat-number').forEach(stat => {
+                    observer.observe(stat);
+                });
+            }
+            
+            animateNumber(element) {
+                const text = element.textContent;
+                const hasPlus = text.includes('+');
+                const hasPercent = text.includes('%');
+                const hasComma = text.includes(',');
+                
+                let target = parseInt(text.replace(/[^0-9]/g, ''));
+                if (hasPercent) {
+                    target = parseFloat(text.replace('%', ''));
+                }
+                
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    let display = hasPercent ? current.toFixed(1) : Math.floor(current);
+                    if (hasComma && !hasPercent) {
+                        display = this.formatNumber(Math.floor(current));
+                    }
+                    if (hasPlus) display += '+';
+                    if (hasPercent) display += '%';
+                    
+                    element.textContent = display;
+                }, 16);
+            }
+            
+            formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+            
+            initProductTabs() {
+                // Product tab switching handled by inline onclick
+            }
+            
+            initTrustBadges() {
+                // Rotate through trust badges
+                const badges = [
+                    'The Official Intelligence Partner of Championship Programs',
+                    'Trusted by 500+ High Schools Across Texas',
+                    'SEC Network Data Provider',
+                    'Perfect Game Analytics Partner',
+                    'Dave Campbell\'s Digital Evolution'
+                ];
+                
+                let current = 0;
+                setInterval(() => {
+                    current = (current + 1) % badges.length;
+                    const badgeText = document.querySelector('.badge-text');
+                    if (badgeText) {
+                        badgeText.style.opacity = '0';
+                        setTimeout(() => {
+                            badgeText.textContent = badges[current];
+                            badgeText.style.opacity = '1';
+                        }, 300);
+                    }
+                }, 5000);
+            }
+        }
+        
+        // Product switching function
+        function switchProduct(product) {
+            // Remove active classes
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+            
+            // Add active classes
+            event.target.classList.add('active');
+            const panel = document.getElementById(product);
+            if (panel) {
+                panel.classList.add('active');
+            }
+        }
+        
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            new BlazeAuthority();
+        });
+    </script>
+
+</body></html>

@@ -1,0 +1,915 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Scout Reports | Blaze Intelligence</title>
+    <link rel="stylesheet" href="/assets/brand.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <style>
+        .scout-header {
+            background: linear-gradient(135deg, var(--blaze-orange) 0%, var(--cardinal-blue) 100%);
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scout-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>') repeat;
+            animation: sparkle 3s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(20px); }
+        }
+
+        .scout-controls {
+            background: var(--glass-bg-light);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px auto;
+            max-width: 1200px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .filter-select, .filter-input {
+            padding: 12px 16px;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            background: var(--glass-bg-dark);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .reports-main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .scout-report {
+            background: var(--glass-bg-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .scout-report:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .player-info {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .player-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .player-details {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .report-meta {
+            text-align: right;
+        }
+
+        .scout-name {
+            font-weight: 600;
+            color: var(--blaze-orange);
+            margin-bottom: 4px;
+        }
+
+        .report-time {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .priority-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .priority-hot {
+            background: linear-gradient(45deg, #FF4444, #FF6B35);
+            color: white;
+        }
+
+        .priority-watch {
+            background: linear-gradient(45deg, #FFA500, #FFD700);
+            color: #333;
+        }
+
+        .priority-monitor {
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            color: white;
+        }
+
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .metric {
+            background: var(--glass-bg-dark);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        .metric-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--blaze-orange);
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .scout-notes {
+            background: var(--glass-bg-dark);
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid var(--blaze-orange);
+            margin-top: 16px;
+        }
+
+        .notes-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .notes-content {
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: var(--glass-bg-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .live-feed {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .feed-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .feed-item:last-child {
+            border-bottom: none;
+        }
+
+        .feed-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--blaze-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .feed-content {
+            flex: 1;
+        }
+
+        .feed-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .feed-description {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .feed-time {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .trending-players {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .trending-player {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 12px;
+            background: var(--glass-bg-dark);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .trending-player:hover {
+            transform: translateX(4px);
+            background: var(--glass-bg-light);
+        }
+
+        .player-trend {
+            flex: 1;
+        }
+
+        .trend-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .trend-team {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .trend-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .trend-up {
+            color: #4CAF50;
+        }
+
+        .trend-hot {
+            color: #FF6B35;
+        }
+
+        .load-more {
+            background: linear-gradient(135deg, var(--blaze-orange), var(--cardinal-blue));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .load-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(191, 87, 0, 0.3);
+        }
+
+        .search-highlight {
+            background: rgba(191, 87, 0, 0.2);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .report-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .control-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .performance-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" class="logo-text">BLAZE INTELLIGENCE</a>
+                <div class="tagline">The Deep South Sports Authority</div>
+            </div>
+            
+            <div class="nav-links desktop-only">
+                <a href="/">Home</a>
+                <a href="/perfect-game.html">🥇 PG Select</a>
+                <a href="/scout-reports.html" class="active">📊 Scout Reports</a>
+                <a href="/perfect-game-dashboard.html">Tournament Dashboard</a>
+                <a href="/contact.html">Contact</a>
+            </div>
+
+            <div class="nav-toggle mobile-only" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Authority Badge -->
+    <section class="hero-authority">
+        <div class="authority-badge">
+            <span class="badge-text">Real-Time Scout Intelligence</span>
+            <div class="trust-logos">
+                <span>47 Active Scouts</span>
+                <span>•</span>
+                <span>Updates Every 30s</span>
+            </div>
+        </div>
+        
+        <div class="hero-title">
+            <span class="small-text">From Friday Night Lights to Perfect Game</span>
+            <span class="main-text">Live Scout Reports</span>
+            <span class="sub-text">Real-Time Intelligence • Expert Analysis • Championship Insights</span>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat-card">
+                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">🔴</div>
+                <div style="color: var(--cardinal-blue);">Live Coverage</div>
+                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Active Now</div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">47</div>
+                <div style="color: var(--cardinal-blue);">Active Scouts</div>
+                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Texas &amp; Deep South</div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">30s</div>
+                <div style="color: var(--cardinal-blue);">Update Frequency</div>
+                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Real-Time Feed</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="scout-controls">
+            <div class="control-grid">
+                <div class="filter-group">
+                    <label>Position</label>
+                    <select class="filter-select" id="positionFilter">
+                        <option value="all">All Positions</option>
+                        <option value="pitcher">Pitcher</option>
+                        <option value="catcher">Catcher</option>
+                        <option value="infield">Infield</option>
+                        <option value="outfield">Outfield</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Priority Level</label>
+                    <select class="filter-select" id="priorityFilter">
+                        <option value="all">All Priority</option>
+                        <option value="hot">🔥 Hot Prospect</option>
+                        <option value="watch">⭐ Watch List</option>
+                        <option value="monitor">📊 Monitor</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Team/Organization</label>
+                    <select class="filter-select" id="teamFilter">
+                        <option value="all">All Teams</option>
+                        <option value="banditos">Houston Banditos</option>
+                        <option value="stix">East Cobb Colt 45s Stix</option>
+                        <option value="colts">Canes</option>
+                        <option value="prospects">Texas Prospects</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Search Player</label>
+                    <input type="text" class="filter-input" id="playerSearch" placeholder="Search by name...">
+                </div>
+            </div>
+        </div>
+
+        <div class="report-grid">
+            <div class="reports-main" id="reportsContainer">
+                <!-- Scout reports will be dynamically generated here -->
+            </div>
+
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <div class="sidebar-title">
+                        <i class="fas fa-broadcast-tower"></i>
+                        Live Activity Feed
+                    </div>
+                    <div class="live-feed" id="liveFeed">
+                        <!-- Live activity items will be generated here -->
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-title">
+                        <i class="fas fa-trending-up"></i>
+                        Trending Players
+                    </div>
+                    <div class="trending-players" id="trendingPlayers">
+                        <!-- Trending players will be generated here -->
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <div class="sidebar-title">
+                        <i class="fas fa-chart-line"></i>
+                        Scout Network
+                    </div>
+                    <canvas id="scoutNetworkChart" width="300" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <button class="load-more" id="loadMoreBtn">Load More Reports</button>
+    </div>
+
+    <script>
+        class ScoutReportsSystem {
+            constructor() {
+                this.reports = [];
+                this.filteredReports = [];
+                this.currentPage = 1;
+                this.reportsPerPage = 10;
+                this.filters = {
+                    position: 'all',
+                    priority: 'all',
+                    team: 'all',
+                    search: ''
+                };
+                
+                this.init();
+            }
+
+            init() {
+                this.generateSampleReports();
+                this.setupEventListeners();
+                this.renderReports();
+                this.startLiveUpdates();
+                this.setupCharts();
+                this.generateLiveFeed();
+                this.generateTrendingPlayers();
+            }
+
+            generateSampleReports() {
+                const positions = ['pitcher', 'catcher', 'infield', 'outfield'];
+                const priorities = ['hot', 'watch', 'monitor'];
+                const teams = ['banditos', 'stix', 'colts', 'prospects'];
+                const scouts = ['Mike Rodriguez', 'Sarah Johnson', 'Carlos Martinez', 'David Thompson', 'Lisa Chen'];
+                
+                const players = [
+                    {name: 'Jake Martinez', grade: '2025', height: '6\'2"', weight: '185', bats: 'R', throws: 'R'},
+                    {name: 'Connor Williams', grade: '2024', height: '5\'11"', weight: '175', bats: 'L', throws: 'R'},
+                    {name: 'Tyler Johnson', grade: '2025', height: '6\'0"', weight: '180', bats: 'R', throws: 'R'},
+                    {name: 'Alex Rodriguez', grade: '2026', height: '6\'3"', weight: '195', bats: 'R', throws: 'R'},
+                    {name: 'Mason Davis', grade: '2024', height: '5\'10"', weight: '170', bats: 'S', throws: 'R'},
+                    {name: 'Brandon Lee', grade: '2025', height: '6\'1"', weight: '188', bats: 'L', throws: 'L'},
+                    {name: 'Dylan Smith', grade: '2026', height: '6\'4"', weight: '205', bats: 'R', throws: 'R'},
+                    {name: 'Noah Brown', grade: '2024', height: '5\'9"', weight: '165', bats: 'R', throws: 'R'}
+                ];
+
+                const sampleNotes = [
+                    "Exceptional arm strength with consistent 92-94 mph fastball. Command of secondary pitches needs work but shows elite potential.",
+                    "Smooth swing with natural power to all fields. Excellent plate discipline and approaches at-bats like a veteran.",
+                    "Outstanding defensive instincts with quick release and accurate throws. Bat continues to develop but shows promise.",
+                    "Projectable frame with room to grow. Currently throwing 89-91 but mechanics suggest velocity increase coming.",
+                    "Elite speed and baserunning instincts. Contact bat with gap power. Needs to improve approach vs. breaking balls.",
+                    "Strong hands and quick bat. Shows plus raw power in BP but needs to translate to games. Good defensive actions.",
+                    "Tall, lanky frame with projectability. Fastball sits 87-89 with good movement. Curveball is plus pitch already.",
+                    "Compact swing with excellent hand-eye coordination. Makes consistent contact and rarely strikes out."
+                ];
+
+                for (let i = 0; i < 25; i++) {
+                    const player = players[Math.floor(Math.random() * players.length)];
+                    const position = positions[Math.floor(Math.random() * positions.length)];
+                    const priority = priorities[Math.floor(Math.random() * priorities.length)];
+                    const team = teams[Math.floor(Math.random() * teams.length)];
+                    const scout = scouts[Math.floor(Math.random() * scouts.length)];
+                    const notes = sampleNotes[Math.floor(Math.random() * sampleNotes.length)];
+                    
+                    const report = {
+                        id: i + 1,
+                        player: player,
+                        position: position,
+                        priority: priority,
+                        team: team,
+                        scout: scout,
+                        timestamp: new Date(Date.now() - Math.random() * 24 * 60 * 60 * 1000),
+                        notes: notes,
+                        metrics: this.generateMetrics(position),
+                        location: this.getTeamLocation(team)
+                    };
+                    
+                    this.reports.push(report);
+                }
+                
+                this.reports.sort((a, b) => b.timestamp - a.timestamp);
+                this.filteredReports = [...this.reports];
+            }
+
+            generateMetrics(position) {
+                const baseMetrics = {
+                    overall: Math.floor(Math.random() * 30) + 70,
+                    arm: Math.floor(Math.random() * 20) + 60,
+                    speed: Math.floor(Math.random() * 25) + 55,
+                    power: Math.floor(Math.random() * 25) + 55
+                };
+                
+                if (position === 'pitcher') {
+                    return {
+                        ...baseMetrics,
+                        velocity: Math.floor(Math.random() * 15) + 85,
+                        control: Math.floor(Math.random() * 20) + 60,
+                        movement: Math.floor(Math.random() * 20) + 60
+                    };
+                } else {
+                    return {
+                        ...baseMetrics,
+                        contact: Math.floor(Math.random() * 20) + 60,
+                        defense: Math.floor(Math.random() * 20) + 60
+                    };
+                }
+            }
+
+            getTeamLocation(team) {
+                const locations = {
+                    banditos: 'Tomball, TX',
+                    stix: 'Marietta, GA',
+                    colts: 'Coppell, TX',
+                    prospects: 'Dallas, TX'
+                };
+                return locations[team] || 'Unknown';
+            }
+
+            setupEventListeners() {
+                document.getElementById('positionFilter').addEventListener('change', (e) => {
+                    this.filters.position = e.target.value;
+                    this.applyFilters();
+                });
+                
+                document.getElementById('priorityFilter').addEventListener('change', (e) => {
+                    this.filters.priority = e.target.value;
+                    this.applyFilters();
+                });
+                
+                document.getElementById('teamFilter').addEventListener('change', (e) => {
+                    this.filters.team = e.target.value;
+                    this.applyFilters();
+                });
+                
+                document.getElementById('playerSearch').addEventListener('input', (e) => {
+                    this.filters.search = e.target.value.toLowerCase();
+                    this.applyFilters();
+                });
+                
+                document.getElementById('loadMoreBtn').addEventListener('click', () => {
+                    this.currentPage++;
+                    this.renderReports();
+                });
+            }
+
+            applyFilters() {
+                this.filteredReports = this.reports.filter(report => {
+                    const matchesPosition = this.filters.position === 'all' || report.position === this.filters.position;
+                    const matchesPriority = this.filters.priority === 'all' || report.priority === this.filters.priority;
+                    const matchesTeam = this.filters.team === 'all' || report.team === this.filters.team;
+                    const matchesSearch = this.filters.search === '' || 
+                        report.player.name.toLowerCase().includes(this.filters.search);
+                    
+                    return matchesPosition && matchesPriority && matchesTeam && matchesSearch;
+                });
+                
+                this.currentPage = 1;
+                this.renderReports();
+            }
+
+            renderReports() {
+                const container = document.getElementById('reportsContainer');
+                const startIndex = (this.currentPage - 1) * this.reportsPerPage;
+                const endIndex = startIndex + this.reportsPerPage;
+                const reportsToShow = this.filteredReports.slice(0, endIndex);
+                
+                if (this.currentPage === 1) {
+                    container.innerHTML = '';
+                }
+                
+                reportsToShow.slice(startIndex).forEach(report => {
+                    const reportElement = this.createReportElement(report);
+                    container.appendChild(reportElement);
+                });
+                
+                const loadMoreBtn = document.getElementById('loadMoreBtn');
+                if (endIndex >= this.filteredReports.length) {
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    loadMoreBtn.style.display = 'block';
+                }
+            }
+
+            createReportElement(report) {
+                const element = document.createElement('div');
+                element.className = 'scout-report';
+                element.innerHTML = `
+                    <div class="priority-badge priority-${report.priority}">
+                        ${report.priority === 'hot' ? '🔥 Hot' : report.priority === 'watch' ? '⭐ Watch' : '📊 Monitor'}
+                    </div>
+                    
+                    <div class="report-header">
+                        <div class="player-info">
+                            <h3 class="player-name">${this.highlightSearch(report.player.name)}</h3>
+                            <div class="player-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-baseball"></i>
+                                    ${report.position.charAt(0).toUpperCase() + report.position.slice(1)}
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Class of ${report.player.grade}
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-ruler-vertical"></i>
+                                    ${report.player.height}, ${report.player.weight}
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-hand-paper"></i>
+                                    B/T: ${report.player.bats}/${report.player.throws}
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    ${report.location}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="report-meta">
+                            <div class="scout-name">${report.scout}</div>
+                            <div class="report-time">${this.formatTimeAgo(report.timestamp)}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-metrics">
+                        ${this.renderMetrics(report.metrics)}
+                    </div>
+                    
+                    <div class="scout-notes">
+                        <div class="notes-title">Scout Notes</div>
+                        <div class="notes-content">${report.notes}</div>
+                    </div>
+                `;
+                
+                return element;
+            }
+
+            renderMetrics(metrics) {
+                return Object.entries(metrics).map(([key, value]) => `
+                    <div class="metric">
+                        <div class="metric-value">${value}</div>
+                        <div class="metric-label">${key.charAt(0).toUpperCase() + key.slice(1)}</div>
+                    </div>
+                `).join('');
+            }
+
+            highlightSearch(text) {
+                if (this.filters.search === '') return text;
+                const regex = new RegExp(`(${this.filters.search})`, 'gi');
+                return text.replace(regex, '<span class="search-highlight">$1</span>');
+            }
+
+            formatTimeAgo(date) {
+                const now = new Date();
+                const diffMs = now - date;
+                const diffMins = Math.floor(diffMs / (1000 * 60));
+                const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+                
+                if (diffMins < 60) {
+                    return `${diffMins}m ago`;
+                } else if (diffHours < 24) {
+                    return `${diffHours}h ago`;
+                } else {
+                    return date.toLocaleDateString();
+                }
+            }
+
+            startLiveUpdates() {
+                setInterval(() => {
+                    this.updateLiveFeed();
+                    this.updateTrendingPlayers();
+                }, 30000); // Update every 30 seconds
+            }
+
+            generateLiveFeed() {
+                const activities = [
+                    {icon: '📝', title: 'New Report Filed', description: 'Jake Martinez - Houston Banditos', time: '2m ago'},
+                    {icon: '🎯', title: 'Priority Updated', description: 'Connor Williams moved to Watch List', time: '5m ago'},
+                    {icon: '📍', title: 'Scout Check-in', description: 'Mike Rodriguez at Perfect Game Showcase', time: '8m ago'},
+                    {icon: '🔥', title: 'Hot Prospect Alert', description: 'Tyler Johnson throwing 94 mph', time: '12m ago'},
+                    {icon: '📊', title: 'Metrics Updated', description: 'Alex Rodriguez defensive rating increased', time: '15m ago'},
+                    {icon: '🏆', title: 'Tournament Alert', description: 'East Cobb World Series starting tomorrow', time: '18m ago'}
+                ];
+                
+                const feedContainer = document.getElementById('liveFeed');
+                feedContainer.innerHTML = activities.map(activity => `
+                    <div class="feed-item">
+                        <div class="feed-icon">${activity.icon}</div>
+                        <div class="feed-content">
+                            <div class="feed-title">${activity.title}</div>
+                            <div class="feed-description">${activity.description}</div>
+                            <div class="feed-time">${activity.time}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            updateLiveFeed() {
+                // Simulate new activity
+                const newActivities = [
+                    '📝 New report filed',
+                    '🎯 Priority level changed',
+                    '📍 Scout location update',
+                    '🔥 Hot prospect identified',
+                    '📊 Performance metrics updated'
+                ];
+                
+                const activity = newActivities[Math.floor(Math.random() * newActivities.length)];
+                console.log('Live update:', activity);
+            }
+
+            generateTrendingPlayers() {
+                const trendingData = [
+                    {name: 'Jake Martinez', team: 'Houston Banditos', trend: 'up', indicator: '↗️ +8'},
+                    {name: 'Dylan Smith', team: 'East Cobb Stix', trend: 'hot', indicator: '🔥 Hot'},
+                    {name: 'Connor Williams', team: 'Texas Prospects', trend: 'up', indicator: '↗️ +5'},
+                    {name: 'Mason Davis', team: 'Canes', trend: 'hot', indicator: '🔥 Hot'},
+                    {name: 'Brandon Lee', team: 'Houston Banditos', trend: 'up', indicator: '↗️ +3'}
+                ];
+                
+                const container = document.getElementById('trendingPlayers');
+                container.innerHTML = trendingData.map(player => `
+                    <div class="trending-player">
+                        <div class="player-trend">
+                            <div class="trend-name">${player.name}</div>
+                            <div class="trend-team">${player.team}</div>
+                        </div>
+                        <div class="trend-indicator trend-${player.trend}">
+                            ${player.indicator}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            updateTrendingPlayers() {
+                // Simulate trending changes
+                console.log('Updating trending players...');
+            }
+
+            setupCharts() {
+                const ctx = document.getElementById('scoutNetworkChart').getContext('2d');
+                
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Active', 'At Events', 'Traveling', 'Off Duty'],
+                        datasets: [{
+                            data: [28, 12, 7, 3],
+                            backgroundColor: [
+                                'var(--blaze-orange)',
+                                'var(--cardinal-blue)',
+                                '#4CAF50',
+                                '#666'
+                            ],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 15,
+                                    usePointStyle: true,
+                                    color: 'var(--text-primary)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialize the system when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new ScoutReportsSystem();
+        });
+
+        // Mobile navigation
+        document.getElementById('nav-toggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+
+</body></html>

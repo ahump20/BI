@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
+<html><head></head><body>croll-smooth"&gt;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROI Calculator | See Your Championship Savings - Blaze Intelligence</title>
     <meta name="description" content="Calculate your exact savings with Blaze Intelligence. Live comparison with Hudl, interactive projections, and personalized recommendations.">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -52,8 +50,8 @@
             font-variant-numeric: tabular-nums;
         }
     </style>
-</head>
-<body>
+
+
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 py-4">
@@ -134,8 +132,7 @@
                             <label class="block text-sm font-medium text-slate-300 mb-3">
                                 Team Size: <span id="team-size-display" class="text-orange-400 font-bold">25</span> athletes
                             </label>
-                            <input type="range" id="team-size" class="slider w-full" min="10" max="200" value="25" 
-                                   oninput="updateTeamSize(this.value)">
+                            <input type="range" id="team-size" class="slider w-full" min="10" max="200" value="25" oninput="updateTeamSize(this.value)">
                             <div class="flex justify-between text-xs text-slate-400 mt-2">
                                 <span>10</span>
                                 <span>50</span>
@@ -161,15 +158,15 @@
                             <label class="block text-sm font-medium text-slate-300 mb-3">Required Features</label>
                             <div class="space-y-2">
                                 <label class="flex items-center gap-3 cursor-pointer">
-                                    <input type="checkbox" checked onchange="updateCalculation()" class="w-5 h-5 text-orange-500">
+                                    <input type="checkbox" checked="" onchange="updateCalculation()" class="w-5 h-5 text-orange-500">
                                     <span>Real-time Analytics</span>
                                 </label>
                                 <label class="flex items-center gap-3 cursor-pointer">
-                                    <input type="checkbox" checked onchange="updateCalculation()" class="w-5 h-5 text-orange-500">
+                                    <input type="checkbox" checked="" onchange="updateCalculation()" class="w-5 h-5 text-orange-500">
                                     <span>Video Analysis</span>
                                 </label>
                                 <label class="flex items-center gap-3 cursor-pointer">
-                                    <input type="checkbox" checked onchange="updateCalculation()" class="w-5 h-5 text-orange-500">
+                                    <input type="checkbox" checked="" onchange="updateCalculation()" class="w-5 h-5 text-orange-500">
                                     <span>Predictive Modeling</span>
                                 </label>
                                 <label class="flex items-center gap-3 cursor-pointer">
@@ -184,13 +181,7 @@
                     <div class="glass-card p-6 rounded-2xl mt-6">
                         <h3 class="text-lg font-bold text-white mb-4">Why I Built This Different</h3>
                         <div class="aspect-video rounded-lg overflow-hidden bg-black/50 mb-4">
-                            <iframe
-                                src="https://customer-mpdvoybjqct2pzls.cloudflarestream.com/acb0f50e86caf8f840f3b36a0c463229/iframe?poster=https%3A%2F%2Fcustomer-mpdvoybjqct2pzls.cloudflarestream.com%2Facb0f50e86caf8f840f3b36a0c463229%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
-                                loading="lazy"
-                                style="border: none; width: 100%; height: 100%;"
-                                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                allowfullscreen="true"
-                            ></iframe>
+                            <iframe src="https://customer-mpdvoybjqct2pzls.cloudflarestream.com/acb0f50e86caf8f840f3b36a0c463229/iframe?poster=https%3A%2F%2Fcustomer-mpdvoybjqct2pzls.cloudflarestream.com%2Facb0f50e86caf8f840f3b36a0c463229%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600" loading="lazy" style="border: none; width: 100%; height: 100%;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
                         </div>
                         <p class="text-sm text-slate-300">
                             "As a former athlete, I know budgets matter. That's why we deliver championship analytics at a fraction of the cost."
@@ -339,7 +330,7 @@
                 <div class="glass-card p-6 rounded-xl">
                     <h3 class="text-xl font-bold text-cyan-400 mb-3">Do we lose features by switching?</h3>
                     <p class="text-slate-300">
-                        Actually, you gain features. Our 94.6% prediction accuracy, <100ms response times, 
+                        Actually, you gain features. Our 94.6% prediction accuracy, &lt;100ms response times, 
                         and Vision AI capabilities exceed what traditional platforms offer. You get more for less.
                     </p>
                 </div>
@@ -371,9 +362,9 @@
     <!-- Footer -->
     <footer class="bg-black/50 border-t border-slate-800 py-8 px-4">
         <div class="max-w-7xl mx-auto text-center text-slate-400">
-            <p>&copy; 2025 Blaze Intelligence. Savings calculations based on published competitor pricing.</p>
+            <p>© 2025 Blaze Intelligence. Savings calculations based on published competitor pricing.</p>
             <p class="text-sm mt-2">
-                <a href="/methods.html" class="text-cyan-400 underline">Methods & Definitions</a>
+                <a href="/methods.html" class="text-cyan-400 underline">Methods &amp; Definitions</a>
             </p>
         </div>
     </footer>
@@ -515,5 +506,5 @@
             alert('Personalized savings report will be emailed to you within 24 hours.');
         }
     </script>
-</body>
-</html>
+
+</body></html>
