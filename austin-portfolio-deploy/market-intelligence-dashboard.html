@@ -1,0 +1,719 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Market Intelligence Dashboard | $1.1B TAM Analysis</title>
+    <meta name="description" content="Real-time market intelligence dashboard showing $1.1B total addressable market in Deep South sports analytics.">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&amp;family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js & Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r168/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --sec-crimson: #9B2222;
+            --texas-sky-blue: #9BCBEB;
+            --friday-lights: #FFD700;
+            --stadium-black: #0A0A0A;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--stadium-black);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.9);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--texas-sky-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--texas-sky-blue);
+        }
+
+        /* Dashboard Layout */
+        .dashboard-container {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .market-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--friday-lights), var(--burnt-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .market-subtitle {
+            font-size: 1.5rem;
+            color: var(--texas-sky-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .market-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--glass);
+            border: 1px solid var(--burnt-orange);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* KPI Cards Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .kpi-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--texas-sky-blue));
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+
+        .kpi-label {
+            font-size: 0.875rem;
+            color: var(--texas-sky-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-change {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .kpi-change.positive {
+            color: #00ff88;
+        }
+
+        .kpi-change.negative {
+            color: #ff6666;
+        }
+
+        /* Market Segments */
+        .market-segments {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .segment-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .segment-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .segment-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .segment-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .segment-value {
+            font-size: 1.25rem;
+            color: var(--friday-lights);
+            font-weight: 600;
+        }
+
+        .segment-details {
+            margin-top: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .detail-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--texas-sky-blue);
+        }
+
+        /* Charts Section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-container {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .chart-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--texas-sky-blue);
+        }
+
+        .chart-canvas {
+            height: 300px;
+        }
+
+        /* Pipeline Analysis */
+        .pipeline-section {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pipeline-header {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--friday-lights);
+        }
+
+        .pipeline-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .pipeline-stage {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid var(--burnt-orange);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .pipeline-stage::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: var(--burnt-orange);
+        }
+
+        .pipeline-stage:last-child::after {
+            display: none;
+        }
+
+        .stage-count {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--friday-lights);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stage-label {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--texas-sky-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .market-segments {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline-flow {
+                flex-direction: column;
+            }
+
+            .pipeline-stage::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-header">
+        <div class="nav-content">
+            <div class="logo">BLAZE INTELLIGENCE</div>
+            <div class="nav-links">
+                <a href="index-unified-hub.html">🚀 Unified Hub</a>
+                <a href="index.html">Home</a>
+                <a href="deep-south-research-summary.md">Research</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1 class="market-title">$1.1B Market Intelligence</h1>
+            <p class="market-subtitle">Deep South Sports Analytics TAM</p>
+            <span class="market-badge">Real-Time Market Analysis</span>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Total Addressable Market</div>
+                <div class="kpi-value">$1.1B</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+18% YoY Growth</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">Texas NIL Spending</div>
+                <div class="kpi-value">$40M</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Industry Leading</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">Perfect Game Market</div>
+                <div class="kpi-value">$500M</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+12% Annual Growth</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">Teams Tracked</div>
+                <div class="kpi-value">2,847</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+347 This Quarter</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">Elite Travel Teams</div>
+                <div class="kpi-value">427</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Houston Banditos #1</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-label">Prediction Accuracy</div>
+                <div class="kpi-value">94.6%</div>
+                <div class="kpi-change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+2.3% vs Competitors</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Segments -->
+        <div class="market-segments">
+            <div class="segment-card">
+                <div class="segment-header">
+                    <div class="segment-icon">🏈</div>
+                    <div>
+                        <div class="segment-title">SEC Football NIL</div>
+                        <div class="segment-value">$280M Annual</div>
+                    </div>
+                </div>
+                <div class="segment-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Texas Spending</span>
+                        <span class="detail-value">$35-40M</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Top Player Value</span>
+                        <span class="detail-value">$6.8M (Arch Manning)</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Transfer Portal Max</span>
+                        <span class="detail-value">$10.5M</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Donor Collective %</span>
+                        <span class="detail-value">80%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header">
+                    <div class="segment-icon">⚾</div>
+                    <div>
+                        <div class="segment-title">Perfect Game Baseball</div>
+                        <div class="segment-value">$500M+ Market</div>
+                    </div>
+                </div>
+                <div class="segment-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Elite Team Cost</span>
+                        <span class="detail-value">$15-30K/year</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Houston Banditos</span>
+                        <span class="detail-value">955 Commits</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">MLB Draftees</span>
+                        <span class="detail-value">155 Players</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">D1 Velocity Req</span>
+                        <span class="detail-value">90+ MPH</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="segment-card">
+                <div class="segment-header">
+                    <div class="segment-icon">🏟️</div>
+                    <div>
+                        <div class="segment-title">Texas HS Infrastructure</div>
+                        <div class="segment-value">$2.5B+ Assets</div>
+                    </div>
+                </div>
+                <div class="segment-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Football Stadiums</span>
+                        <span class="detail-value">1,305 Facilities</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Total Capacity</span>
+                        <span class="detail-value">4.1M Seats</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Largest Investment</span>
+                        <span class="detail-value">$72M Stadium</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">UIL Players</span>
+                        <span class="detail-value">167,428</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h3 class="chart-title">Market Growth Trajectory</h3>
+                <canvas id="growthChart" class="chart-canvas"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h3 class="chart-title">Revenue Distribution</h3>
+                <canvas id="revenueChart" class="chart-canvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Pipeline Analysis -->
+        <div class="pipeline-section">
+            <h2 class="pipeline-header">Deep South Talent Pipeline</h2>
+            <div class="pipeline-flow">
+                <div class="pipeline-stage">
+                    <div class="stage-count">250K</div>
+                    <div class="stage-label">Youth League</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-count">167K</div>
+                    <div class="stage-label">High School</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-count">12K</div>
+                    <div class="stage-label">College</div>
+                </div>
+                <div class="pipeline-stage">
+                    <div class="stage-count">850</div>
+                    <div class="stage-label">Professional</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Streaming Platforms -->
+        <div class="segment-card">
+            <div class="segment-header">
+                <div class="segment-icon">📺</div>
+                <div>
+                    <div class="segment-title">Streaming &amp; Media Intelligence</div>
+                    <div class="segment-value">100K+ Events Annually</div>
+                </div>
+            </div>
+            <div class="segment-details">
+                <div class="detail-item">
+                    <span class="detail-label">NFHS Network</span>
+                    <span class="detail-value">14M Site Visits</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Non-Local Viewers</span>
+                    <span class="detail-value">70%</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">ESPN+ Coverage</span>
+                    <span class="detail-value">Growing 45% YoY</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">AI Video Analysis</span>
+                    <span class="detail-value">Market Gap Identified</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', () => {
+            // Growth Chart
+            const growthCtx = document.getElementById('growthChart').getContext('2d');
+            new Chart(growthCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+                    datasets: [{
+                        label: 'TAM Growth',
+                        data: [450, 520, 650, 780, 920, 1100, 1350],
+                        borderColor: '#BF5700',
+                        backgroundColor: 'rgba(191, 87, 0, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Blaze Target',
+                        data: [0, 0, 0, 0, 5, 45, 125],
+                        borderColor: '#9BCBEB',
+                        backgroundColor: 'rgba(155, 203, 235, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: { color: 'white' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { 
+                                color: 'white',
+                                callback: function(value) {
+                                    return '$' + value + 'M';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: 'white' }
+                        }
+                    }
+                }
+            });
+
+            // Revenue Distribution Chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(revenueCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['NIL Market', 'Youth Sports', 'Media/Streaming', 'Analytics/Tech'],
+                    datasets: [{
+                        data: [280, 500, 200, 120],
+                        backgroundColor: [
+                            '#BF5700',
+                            '#9BCBEB',
+                            '#9B2222',
+                            '#FFD700'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: { color: 'white', padding: 20 }
+                        }
+                    }
+                }
+            });
+
+            // Animate KPI cards on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.5s ease forwards';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.kpi-card').forEach((card) => {
+                observer.observe(card);
+            });
+        });
+
+        // Add fade in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body></html>
