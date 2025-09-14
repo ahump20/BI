@@ -9,6 +9,7 @@ import sys
 import argparse
 from datetime import datetime
 from typing import List, Dict, Any
+import requests
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from ingestion.havf import compute_all
@@ -23,8 +24,23 @@ class HSAgent:
     def fetch_raw(self, params: Dict[str, Any], live: bool = False) -> Dict[str, Any]:
         """Fetch raw HS data"""
         if live and os.getenv('LIVE_FETCH') == '1':
-            print("Live HS fetching not implemented, using mocks")
-        
+            base_url = os.getenv('HS_BASE_URL')
+            api_key = os.getenv('HS_API_KEY')
+            if base_url and api_key:
+                try:
+                    response = requests.get(
+                        f"{base_url}/players",
+                        params=params,
+                        headers={"Authorization": f"Bearer {api_key}"},
+                        timeout=30,
+                    )
+                    response.raise_for_status()
+                    return response.json()
+                except Exception as e:
+                    print(f"Live HS fetch failed: {e}, falling back to mocks")
+            else:
+                print("HS_BASE_URL or HS_API_KEY not set, using mocks")
+
         try:
             with open(self.mock_path, 'r') as f:
                 return json.load(f)
