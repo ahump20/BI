@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-09-11T05:47:09.266Z",
+  "files": [
+    {
+      "source": "package.json",
+      "destination": "/Users/AustinHumphrey/BI/backups/daily/2025-09-11T05-47-09-266Z/package.json",
+      "size": 3675
+    },
+    {
+      "source": "package-lock.json",
+      "destination": "/Users/AustinHumphrey/BI/backups/daily/2025-09-11T05-47-09-266Z/package-lock.json",
+      "size": 823004
+    },
+    {
+      "source": ".env.example",
+      "destination": "/Users/AustinHumphrey/BI/backups/daily/2025-09-11T05-47-09-266Z/.env.example",
+      "size": 6335
+    },
+    {
+      "source": "cardinals-analytics-server.js",
+      "destination": "/Users/AustinHumphrey/BI/backups/daily/2025-09-11T05-47-09-266Z/cardinals-analytics-server.js",
+      "size": 22590
+    },
+    {
+      "source": "austin-portfolio-deploy/",
+      "destination": "/Users/AustinHumphrey/BI/backups/daily/2025-09-11T05-47-09-266Z/austin-portfolio-deploy",
+      "size": 10432
+    },
+    {
+      "source": "automation/",
+      "destination": "/Users/AustinHumphrey/BI/backups/daily/2025-09-11T05-47-09-266Z/automation",
+      "size": 256
+    },
+    {
+      "source": "data/",
+      "destination": "/Users/AustinHumphrey/BI/backups/daily/2025-09-11T05-47-09-266Z/data",
+      "size": 544
+    },
+    {
+      "source": "scripts/",
+      "destination": "/Users/AustinHumphrey/BI/backups/daily/2025-09-11T05-47-09-266Z/scripts",
+      "size": 544
+    }
+  ],
+  "totalSize": 867380,
+  "systemInfo": {
+    "platform": "darwin",
+    "nodeVersion": "v22.17.1",
+    "hostname": "ahump20-2.local"
+  }
+}

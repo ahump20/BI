@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html><head></head><body>   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vision AI Demo | Blaze Intelligence - Advanced Sports Analytics</title>
     <meta name="description" content="Experience Blaze Intelligence Vision AI - Revolutionary biomechanical analysis, micro-expression detection, and championship character assessment powered by computer vision">
     <meta name="keywords" content="sports vision AI, biomechanical analysis, micro-expressions, athlete assessment, computer vision, sports analytics">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
@@ -17,26 +14,30 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="js/blaze-three-visuals.js" defer></script>
+    <script src="js/blaze-three-visuals.js" defer=""></script>
     
     <style>
         :root {
-            --blaze-primary: #ff6b35;
-            --blaze-secondary: #f7931e;
-            --blaze-accent: #ffd700;
-            --blaze-dark: #0a0a0a;
-            --blaze-darker: #050505;
-            --blaze-gray: #1a1a2e;
-            --blaze-blue: #16213e;
-            --blaze-cyan: #00ffff;
-            --blaze-green: #00ff88;
+            /* Blaze Intelligence Brand Colors - Consistent with Netlify */
+            --blaze-primary: #BF5700;        /* Deep Burnt Orange */
+            --blaze-secondary: #FF6B35;      /* Bright Orange */
+            --blaze-background: #0A192F;     /* Deep Navy Blue */
+            --blaze-light-navy: #112240;     /* Light Navy */
+            --blaze-slate: #8892B0;          /* Muted Gray-Blue */
+            --blaze-light-slate: #CCD6F6;    /* Light Slate */
+            --blaze-accent: #94A9C9;         /* Muted Gray-Blue */
+            --blaze-white: #E6F1FF;          /* Light Blue/White */
+            --blaze-success: #64FFDA;        /* Success Green */
         }
 
         body { 
-            background: linear-gradient(135deg, var(--blaze-dark) 0%, var(--blaze-gray) 50%, var(--blaze-blue) 100%);
-            color: #e2e8f0; 
-            font-family: 'Inter', sans-serif;
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate); 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             overflow-x: hidden;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .glass-nav { 
@@ -225,10 +226,10 @@
     
     <!-- Analytics & Testing -->
     <script src="js/analytics-config.js"></script>
-    <script src="js/ab-testing.js" defer></script>
+    <script src="js/ab-testing.js" defer=""></script>
     <script src="js/sentry-config.js"></script>
-</head>
-<body>
+
+
     <nav class="glass-nav fixed top-0 left-0 right-0 z-50 px-4 py-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="/index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
@@ -304,12 +305,8 @@
                         <div class="grid lg:grid-cols-2 gap-8 p-6">
                             <div>
                                 <h3 class="text-2xl font-bold text-cyan-400 mb-4">Real-Time Biomechanical Analysis</h3>
-                                <div class="video-placeholder mb-6">
-                                    <div class="text-center">
-                                        <i data-lucide="play-circle" class="w-16 h-16 text-cyan-400 mb-4 mx-auto pulse-animation"></i>
-                                        <p class="text-xl font-semibold text-white mb-2">Live Motion Capture Demo</p>
-                                        <p class="text-slate-400">30+ joint tracking points with millisecond precision</p>
-                                    </div>
+                                <div class="mb-6 rounded-xl overflow-hidden">
+                                    <iframe src="https://customer-mpdvoybjqct2pzls.cloudflarestream.com/138facaf760c65e9b4efab3715ae6f50/iframe?poster=https%3A%2F%2Fcustomer-mpdvoybjqct2pzls.cloudflarestream.com%2F138facaf760c65e9b4efab3715ae6f50%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600" loading="lazy" style="border: none; width: 100%; height: 400px;" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen="true"></iframe>
                                 </div>
                             </div>
                             <div>
@@ -464,7 +461,7 @@
                         </div>
                         <div class="flex items-center gap-2 text-sm text-slate-400">
                             <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
-                            <span>Force vector analysis & power output</span>
+                            <span>Force vector analysis &amp; power output</span>
                         </div>
                         <div class="flex items-center gap-2 text-sm text-slate-400">
                             <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
@@ -472,7 +469,7 @@
                         </div>
                         <div class="flex items-center gap-2 text-sm text-slate-400">
                             <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
-                            <span>Injury risk assessment & prevention</span>
+                            <span>Injury risk assessment &amp; prevention</span>
                         </div>
                     </div>
                 </div>
@@ -488,19 +485,19 @@
                     <div class="space-y-3">
                         <div class="flex items-center gap-2 text-sm text-slate-400">
                             <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
-                            <span>Confidence & composure indicators</span>
+                            <span>Confidence &amp; composure indicators</span>
                         </div>
                         <div class="flex items-center gap-2 text-sm text-slate-400">
                             <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
-                            <span>Stress & pressure response markers</span>
+                            <span>Stress &amp; pressure response markers</span>
                         </div>
                         <div class="flex items-center gap-2 text-sm text-slate-400">
                             <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
-                            <span>Focus & attention assessment</span>
+                            <span>Focus &amp; attention assessment</span>
                         </div>
                         <div class="flex items-center gap-2 text-sm text-slate-400">
                             <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
-                            <span>Team chemistry & communication analysis</span>
+                            <span>Team chemistry &amp; communication analysis</span>
                         </div>
                     </div>
                 </div>
@@ -756,5 +753,6 @@
             }
         });
     </script>
-</body>
-</html>
+
+
+</body></html>

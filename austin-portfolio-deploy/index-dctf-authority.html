@@ -1,0 +1,1303 @@
+<html><head></head><body>   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - The Deep South Sports Authority | Texas Football &amp; SEC Analytics</title>
+    <meta name="description" content="The Dave Campbell's of SEC/Deep South sports. Complete coverage of Texas high school football, SEC baseball, and every player from Little League to the NFL/MLB.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blaze-intelligence.netlify.app/">
+    <meta property="og:title" content="Blaze Intelligence - The Deep South Sports Authority">
+    <meta property="og:description" content="From Little League to The League. The most trusted source for Texas and SEC sports intelligence.">
+    <meta property="og:image" content="/public/assets/images/og-authority.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://blaze-intelligence.netlify.app/">
+    <meta property="twitter:title" content="Blaze Intelligence - The Deep South Sports Authority">
+    <meta property="twitter:description" content="The Dave Campbell's of Deep South sports. 127,000+ players tracked.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&amp;family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js for Hero Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsOrganization",
+      "name": "Blaze Intelligence",
+      "alternateName": "The Deep South Sports Authority",
+      "url": "https://blaze-intelligence.netlify.app",
+      "logo": "https://blaze-intelligence.netlify.app/img/logo.png",
+      "description": "The authoritative source for Texas, SEC, and Deep South sports intelligence from youth through professional levels.",
+      "sameAs": [
+        "https://twitter.com/blazeintel",
+        "https://www.linkedin.com/company/blaze-intelligence",
+        "https://www.instagram.com/blazeintelligence"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "8319 Monument Oak",
+        "addressLocality": "Boerne",
+        "addressRegion": "TX",
+        "postalCode": "78015",
+        "addressCountry": "US"
+      },
+      "areaServed": ["Texas", "Louisiana", "Mississippi", "Alabama", "Georgia", "Florida", "South Carolina", "Tennessee", "Arkansas"],
+      "knowsAbout": ["High School Football", "College Football", "SEC Sports", "Texas Sports", "Baseball Analytics", "Sports Recruiting", "NFL Draft", "MLB Draft"]
+    }
+    </script>
+    
+    <style>
+        :root {
+            /* DCTF Authority Color Palette */
+            --burnt-orange: #BF5700;
+            --sec-crimson: #9B2222;
+            --cardinal-blue: #9BCBEB;
+            --deep-teal: #00B2A9;
+            --mississippi-white: #F8F8FF;
+            --georgia-clay: #C65D00;
+            --texas-navy: #002244;
+            --louisiana-bayou: #1B4332;
+            --friday-lights: #FFD700;
+            --stadium-black: #0A0A0A;
+            
+            /* Typography */
+            --font-headline: 'Bebas Neue', 'Oswald', sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-data: 'JetBrains Mono', monospace;
+            --font-letterman: 'Oswald', serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(180deg, var(--stadium-black) 0%, var(--texas-navy) 50%, var(--louisiana-bayou) 100%);
+            color: var(--mississippi-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Authority Badge */
+        .authority-badge {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+            margin-bottom: 32px;
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3); }
+            50% { transform: scale(1.02); box-shadow: 0 6px 30px rgba(191, 87, 0, 0.5); }
+        }
+        
+        .badge-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .trust-logos {
+            display: flex;
+            gap: 24px;
+            padding-left: 24px;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .trust-logos span {
+            font-size: 0.75rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 3px solid var(--burnt-orange);
+            padding: 1rem 5%;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-text {
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-size: 0.75rem;
+            color: var(--friday-lights);
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        
+        .nav-sports {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .dropdown {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .dropdown > span {
+            color: var(--mississippi-white);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        
+        .dropdown:hover > span {
+            color: var(--burnt-orange);
+        }
+        
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: -50px;
+            background: white;
+            border: 1px solid var(--cardinal-blue);
+            border-top: 4px solid var(--burnt-orange);
+            border-radius: 0 0 16px 16px;
+            padding: 32px;
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            min-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 34, 68, 0.2);
+            margin-top: 20px;
+        }
+        
+        .dropdown:hover .mega-menu {
+            display: grid;
+        }
+        
+        .menu-column h4 {
+            font-family: var(--font-headline);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sec-crimson);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--cardinal-blue);
+        }
+        
+        .menu-column a {
+            display: block;
+            padding: 8px 0;
+            color: var(--texas-navy);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+        
+        .menu-column a:hover {
+            color: var(--burnt-orange);
+            padding-left: 8px;
+        }
+        
+        .nav-tools {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .tool-link {
+            color: var(--cardinal-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .tool-link:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .nav-account {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-login, .btn-subscribe {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-login {
+            background: transparent;
+            color: var(--mississippi-white);
+            border: 1px solid var(--mississippi-white);
+        }
+        
+        .btn-login:hover {
+            background: var(--mississippi-white);
+            color: var(--texas-navy);
+        }
+        
+        .btn-subscribe {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            border: none;
+        }
+        
+        .btn-subscribe:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(191, 87, 0, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero-authority {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 5% 80px;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero-title {
+            text-align: center;
+            margin: 48px 0;
+        }
+        
+        .hero-title .small-text {
+            font-family: var(--font-letterman);
+            font-size: 18px;
+            color: var(--georgia-clay);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: block;
+            margin-bottom: 12px;
+        }
+        
+        .hero-title .main-text {
+            font-family: var(--font-headline);
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--friday-lights), var(--sec-crimson));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            display: block;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero-title .sub-text {
+            font-family: var(--font-body);
+            font-size: 24px;
+            color: var(--mississippi-white);
+            font-weight: 500;
+            display: block;
+            opacity: 0.9;
+        }
+        
+        /* Hero Stats */
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 64px auto;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--cardinal-blue);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--sec-crimson));
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(155, 203, 235, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .stat-number {
+            font-family: var(--font-data);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--mississippi-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 48px;
+        }
+        
+        .btn-primary, .btn-secondary, .btn-tertiary {
+            padding: 16px 32px;
+            font-family: var(--font-headline);
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(191, 87, 0, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--burnt-orange);
+            border: 2px solid var(--burnt-orange);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--burnt-orange);
+            color: white;
+        }
+        
+        .btn-tertiary {
+            background: transparent;
+            color: var(--mississippi-white);
+            border: 1px solid var(--mississippi-white);
+        }
+        
+        .btn-tertiary:hover {
+            background: var(--mississippi-white);
+            color: var(--texas-navy);
+        }
+        
+        /* Authority Proof Section */
+        .authority-proof {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, transparent 0%, rgba(20, 33, 61, 0.5) 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: var(--font-headline);
+            font-size: 3.5rem;
+            text-align: center;
+            color: var(--burnt-orange);
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        
+        .proof-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .proof-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .proof-icon {
+            font-size: 3rem;
+            color: var(--friday-lights);
+            margin-bottom: 20px;
+        }
+        
+        .proof-card h3 {
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            color: var(--mississippi-white);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        
+        .proof-card p {
+            color: rgba(248, 248, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .proof-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(155, 203, 235, 0.2);
+        }
+        
+        .proof-stats span {
+            font-family: var(--font-data);
+            font-size: 0.9rem;
+            color: var(--cardinal-blue);
+            font-weight: 600;
+        }
+        
+        /* Product Showcase */
+        .product-showcase {
+            padding: 100px 5%;
+            background: rgba(10, 10, 10, 0.7);
+        }
+        
+        .product-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            background: transparent;
+            color: var(--mississippi-white);
+            border: 1px solid var(--mississippi-white);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .tab.active, .tab:hover {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            border-color: transparent;
+        }
+        
+        .product-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .product-panel {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        
+        .product-panel.active {
+            display: grid;
+        }
+        
+        .product-visual img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product-details h3 {
+            font-family: var(--font-headline);
+            font-size: 2.5rem;
+            color: var(--burnt-orange);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        
+        .product-tagline {
+            font-size: 1.2rem;
+            color: var(--friday-lights);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        
+        .feature-list li {
+            padding: 12px 0;
+            color: var(--mississippi-white);
+            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            color: var(--friday-lights);
+            margin-right: 12px;
+            font-weight: bold;
+        }
+        
+        .product-cta {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .price {
+            font-family: var(--font-data);
+            font-size: 1.8rem;
+            color: var(--friday-lights);
+            font-weight: 700;
+        }
+        
+        /* Coverage Map */
+        .coverage-map {
+            padding: 100px 5%;
+            background: linear-gradient(180deg, rgba(20, 33, 61, 0.5) 0%, transparent 100%);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--mississippi-white);
+            margin-bottom: 48px;
+            opacity: 0.9;
+        }
+        
+        .interactive-map {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 48px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .map-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+        
+        .region-stat {
+            text-align: center;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+        }
+        
+        .region-stat h4 {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            color: var(--burnt-orange);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        
+        .region-stat span {
+            display: block;
+            color: var(--mississippi-white);
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--stadium-black);
+            padding: 60px 5% 40px;
+            border-top: 3px solid var(--burnt-orange);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: var(--font-headline);
+            font-size: 2.5rem;
+            color: var(--burnt-orange);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+        
+        .footer-tagline {
+            color: var(--friday-lights);
+            font-style: italic;
+            margin-bottom: 32px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .footer-links a {
+            color: var(--mississippi-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .footer-copyright {
+            color: rgba(248, 248, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title .main-text {
+                font-size: 3rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-sports, .nav-tools {
+                display: none;
+            }
+            
+            .proof-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-panel {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" class="logo-text">BLAZE INTELLIGENCE</a>
+                <span class="tagline">The Authority</span>
+            </div>
+            
+            <div class="nav-sports">
+                <div class="dropdown" data-sport="football">
+                    <span>Football</span>
+                    <div class="mega-menu">
+                        <div class="menu-column">
+                            <h4>Levels</h4>
+                            <a href="/youth-football">Youth (6-14)</a>
+                            <a href="/high-school-football">High School</a>
+                            <a href="/college-football">College/SEC</a>
+                            <a href="/pro-football">NFL/Professional</a>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Intelligence</h4>
+                            <a href="/football-rankings">Rankings</a>
+                            <a href="/football-recruiting">Recruiting</a>
+                            <a href="/football-analytics">Analytics</a>
+                            <a href="/football-film">Film Study</a>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Publications</h4>
+                            <a href="/texas-football-annual">Texas Annual</a>
+                            <a href="/sec-preview">SEC Preview</a>
+                            <a href="/draft-guide">Draft Guide</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dropdown" data-sport="baseball">
+                    <span>Baseball</span>
+                    <div class="mega-menu">
+                        <div class="menu-column">
+                            <h4>Levels</h4>
+                            <a href="/little-league">Little League</a>
+                            <a href="/high-school-baseball">High School</a>
+                            <a href="/college-baseball">College/SEC</a>
+                            <a href="/milb-mlb">MiLB/MLB</a>
+                        </div>
+                        <div class="menu-column">
+                            <h4>Intelligence</h4>
+                            <a href="/prospect-rankings">Prospect Rankings</a>
+                            <a href="/perfect-game">Perfect Game</a>
+                            <a href="/draft-coverage">MLB Draft</a>
+                            <a href="/showcase-circuit">Showcases</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-tools">
+                <a href="/blazescout" class="tool-link">BlazeScout Pro</a>
+                <a href="/blazedraft" class="tool-link">BlazeDraft</a>
+                <a href="/api" class="tool-link">API</a>
+            </div>
+            
+            <div class="nav-account">
+                <button class="btn-login">Scout Login</button>
+                <button class="btn-subscribe">Subscribe</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-authority">
+        <div class="authority-badge">
+            <span class="badge-text">The Official Intelligence Partner of Championship Programs</span>
+            <div class="trust-logos">
+                <span>Dave Campbell's Partner</span>
+                <span>•</span>
+                <span>SEC Network Data</span>
+                <span>•</span>
+                <span>Perfect Game Analytics</span>
+            </div>
+        </div>
+        
+        <div class="hero-title">
+            <span class="small-text">From Little League to The League</span>
+            <span class="main-text">The Deep South Sports Authority</span>
+            <span class="sub-text">Texas • SEC • Every Player • Every Level</span>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-card">
+                <span class="stat-number">1,437</span>
+                <span class="stat-label">Texas High Schools Covered</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">127,000+</span>
+                <span class="stat-label">Players Tracked</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">94.6%</span>
+                <span class="stat-label">Draft Prediction Accuracy</span>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <button class="btn-primary">Get The 2025 Football Annual</button>
+            <button class="btn-secondary">Scout Portal Login</button>
+            <button class="btn-tertiary">Free Player Lookup</button>
+        </div>
+    </section>
+    
+    <!-- Authority Proof Section -->
+    <section class="authority-proof">
+        <div class="container">
+            <h2 class="section-title">Why We're The Authority</h2>
+            
+            <div class="proof-grid">
+                <div class="proof-card">
+                    <div class="proof-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Unmatched Coverage</h3>
+                    <p>Every Texas high school. Every SEC program. Every player that matters from Little League to the NFL.</p>
+                    <div class="proof-stats">
+                        <span>1,437 Schools</span>
+                        <span>127,000+ Players</span>
+                    </div>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Trusted Heritage</h3>
+                    <p>Official partner of Dave Campbell's Texas Football. The same trust built over decades, powered by modern technology.</p>
+                    <div class="proof-stats">
+                        <span>Since 1960 Legacy</span>
+                        <span>3 Generations</span>
+                    </div>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Proven Accuracy</h3>
+                    <p>Our AI models predict draft outcomes, transfer decisions, and championship winners with industry-leading precision.</p>
+                    <div class="proof-stats">
+                        <span>94.6% Draft Accuracy</span>
+                        <span>91.2% Game Predictions</span>
+                    </div>
+                </div>
+                
+                <div class="proof-card">
+                    <div class="proof-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Scout Network</h3>
+                    <p>Boots on the ground at every Friday night game. Eyes on every prospect. Relationships in every field house.</p>
+                    <div class="proof-stats">
+                        <span>500+ Scouts</span>
+                        <span>24/7 Coverage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Product Showcase Section -->
+    <section class="product-showcase">
+        <div class="container">
+            <h2 class="section-title">The Complete Intelligence Suite</h2>
+            
+            <div class="product-tabs">
+                <button class="tab active" data-product="annual">The Annual</button>
+                <button class="tab" data-product="blazescout">BlazeScout Pro</button>
+                <button class="tab" data-product="blazedraft">BlazeDraft</button>
+                <button class="tab" data-product="api">API Access</button>
+            </div>
+            
+            <div class="product-content">
+                <div class="product-panel active" id="annual">
+                    <div class="product-visual">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252525252525252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%252525252525252525252Bxml%252525252525252525252C%25252525252525252525253Csvg%2525252525252525252520xmlns%252525252525252525253D%2525252525252525252527http://www.w3.org/2000/svg%2525252525252525252527%2525252525252525252520viewBox%252525252525252525253D%25252525252525252525270%25252525252525252525200%2525252525252525252520400%2525252525252525252520500%2525252525252525252527%25252525252525252525253E%25252525252525252525253Crect%2525252525252525252520fill%252525252525252525253D%2525252525252525252527%252525252525252525252523BF5700%2525252525252525252527%2525252525252525252520width%252525252525252525253D%2525252525252525252527400%2525252525252525252527%2525252525252525252520height%252525252525252525253D%2525252525252525252527500%2525252525252525252527/%25252525252525252525253E%25252525252525252525253Ctext%2525252525252525252520x%252525252525252525253D%2525252525252525252527200%2525252525252525252527%2525252525252525252520y%252525252525252525253D%2525252525252525252527250%2525252525252525252527%2525252525252525252520font-family%252525252525252525253D%2525252525252525252527Arial%2525252525252525252527%2525252525252525252520font-size%252525252525252525253D%252525252525252525252724%2525252525252525252527%2525252525252525252520fill%252525252525252525253D%2525252525252525252527white%2525252525252525252527%2525252525252525252520text-anchor%252525252525252525253D%2525252525252525252527middle%2525252525252525252527%25252525252525252525253E2025%2525252525252525252520ANNUAL%25252525252525252525253C/text%25252525252525252525253E%25252525252525252525253C/svg%25252525252525252525253E%2525252525252525253F_a%2525252525252525253DBBFAAAAA0%25252525252525253F_a%25252525252525253DBBFAAAAA0%252525252525253F_a%252525252525253DBBFAAAAA0%2525252525253F_a%2525252525253DBBFAAAAA0%25252525253F_a%25252525253DBBFAAAAA0%252525253F_a%252525253DBBFAAAAA0%2525253F_a%2525253DBBFAAAAA0%25253F_a%25253DBBFAAAAA0%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="Blaze Intelligence Annual" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <h3>The Blaze Intelligence Annual</h3>
+                        <p class="product-tagline">The Bible of Deep South Sports</p>
+                        <ul class="feature-list">
+                            <li>1,437 Texas high schools covered</li>
+                            <li>Complete SEC baseball &amp; football coverage</li>
+                            <li>127,000+ player profiles and ratings</li>
+                            <li>Historical statistics and records</li>
+                            <li>Coaching staff analysis</li>
+                            <li>Digital + Print editions available</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">Pre-Order 2025 Edition</button>
+                            <span class="price">$49.99</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-panel" id="blazescout">
+                    <div class="product-visual">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252525252525252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%252525252525252525252Bxml%252525252525252525252C%25252525252525252525253Csvg%2525252525252525252520xmlns%252525252525252525253D%2525252525252525252527http://www.w3.org/2000/svg%2525252525252525252527%2525252525252525252520viewBox%252525252525252525253D%25252525252525252525270%25252525252525252525200%2525252525252525252520400%2525252525252525252520500%2525252525252525252527%25252525252525252525253E%25252525252525252525253Crect%2525252525252525252520fill%252525252525252525253D%2525252525252525252527%2525252525252525252525239B2222%2525252525252525252527%2525252525252525252520width%252525252525252525253D%2525252525252525252527400%2525252525252525252527%2525252525252525252520height%252525252525252525253D%2525252525252525252527500%2525252525252525252527/%25252525252525252525253E%25252525252525252525253Ctext%2525252525252525252520x%252525252525252525253D%2525252525252525252527200%2525252525252525252527%2525252525252525252520y%252525252525252525253D%2525252525252525252527250%2525252525252525252527%2525252525252525252520font-family%252525252525252525253D%2525252525252525252527Arial%2525252525252525252527%2525252525252525252520font-size%252525252525252525253D%252525252525252525252724%2525252525252525252527%2525252525252525252520fill%252525252525252525253D%2525252525252525252527white%2525252525252525252527%2525252525252525252520text-anchor%252525252525252525253D%2525252525252525252527middle%2525252525252525252527%25252525252525252525253EBlazeScout%2525252525252525252520Pro%25252525252525252525253C/text%25252525252525252525253E%25252525252525252525253C/svg%25252525252525252525253E%2525252525252525253F_a%2525252525252525253DBBFAAAAA0%25252525252525253F_a%25252525252525253DBBFAAAAA0%252525252525253F_a%252525252525253DBBFAAAAA0%2525252525253F_a%2525252525253DBBFAAAAA0%25252525253F_a%25252525253DBBFAAAAA0%252525253F_a%252525253DBBFAAAAA0%2525253F_a%2525253DBBFAAAAA0%25253F_a%25253DBBFAAAAA0%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="BlazeScout Pro" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <h3>BlazeScout Pro</h3>
+                        <p class="product-tagline">Professional Scouting Terminal</p>
+                        <ul class="feature-list">
+                            <li>Live game film analysis</li>
+                            <li>Automated highlight detection</li>
+                            <li>Performance metric tracking</li>
+                            <li>Recruiting alert system</li>
+                            <li>Multi-screen command center</li>
+                            <li>Custom report generation</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">Start Free Trial</button>
+                            <span class="price">$299/mo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-panel" id="blazedraft">
+                    <div class="product-visual">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252525252525252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%252525252525252525252Bxml%252525252525252525252C%25252525252525252525253Csvg%2525252525252525252520xmlns%252525252525252525253D%2525252525252525252527http://www.w3.org/2000/svg%2525252525252525252527%2525252525252525252520viewBox%252525252525252525253D%25252525252525252525270%25252525252525252525200%2525252525252525252520400%2525252525252525252520500%2525252525252525252527%25252525252525252525253E%25252525252525252525253Crect%2525252525252525252520fill%252525252525252525253D%2525252525252525252527%252525252525252525252523002244%2525252525252525252527%2525252525252525252520width%252525252525252525253D%2525252525252525252527400%2525252525252525252527%2525252525252525252520height%252525252525252525253D%2525252525252525252527500%2525252525252525252527/%25252525252525252525253E%25252525252525252525253Ctext%2525252525252525252520x%252525252525252525253D%2525252525252525252527200%2525252525252525252527%2525252525252525252520y%252525252525252525253D%2525252525252525252527250%2525252525252525252527%2525252525252525252520font-family%252525252525252525253D%2525252525252525252527Arial%2525252525252525252527%2525252525252525252520font-size%252525252525252525253D%252525252525252525252724%2525252525252525252527%2525252525252525252520fill%252525252525252525253D%2525252525252525252527white%2525252525252525252527%2525252525252525252520text-anchor%252525252525252525253D%2525252525252525252527middle%2525252525252525252527%25252525252525252525253EBlazeDraft%25252525252525252525253C/text%25252525252525252525253E%25252525252525252525253C/svg%25252525252525252525253E%2525252525252525253F_a%2525252525252525253DBBFAAAAA0%25252525252525253F_a%25252525252525253DBBFAAAAA0%252525252525253F_a%252525252525253DBBFAAAAA0%2525252525253F_a%2525252525253DBBFAAAAA0%25252525253F_a%25252525253DBBFAAAAA0%252525253F_a%252525253DBBFAAAAA0%2525253F_a%2525253DBBFAAAAA0%25253F_a%25253DBBFAAAAA0%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="BlazeDraft" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <h3>BlazeDraft</h3>
+                        <p class="product-tagline">Professional Draft Intelligence</p>
+                        <ul class="feature-list">
+                            <li>MLB/NFL draft probability models</li>
+                            <li>Combine performance predictions</li>
+                            <li>Medical red flag analysis</li>
+                            <li>Character assessment scores</li>
+                            <li>Comp pick projections</li>
+                            <li>Trade value calculations</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">Get Access</button>
+                            <span class="price">$199/mo</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-panel" id="api">
+                    <div class="product-visual">
+                        <img src="https://res.cloudinary.com/418463612899497/image/fetch/f_auto,q_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%252525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%25252525252525252Cq_auto/https://res.cloudinary.com/418463612899497/image/fetch/f_auto%2525252525252525252Cq_auto/https://blaze-intelligence.netlify.app/data:image/svg%252525252525252525252Bxml%252525252525252525252C%25252525252525252525253Csvg%2525252525252525252520xmlns%252525252525252525253D%2525252525252525252527http://www.w3.org/2000/svg%2525252525252525252527%2525252525252525252520viewBox%252525252525252525253D%25252525252525252525270%25252525252525252525200%2525252525252525252520400%2525252525252525252520500%2525252525252525252527%25252525252525252525253E%25252525252525252525253Crect%2525252525252525252520fill%252525252525252525253D%2525252525252525252527%25252525252525252525252300B2A9%2525252525252525252527%2525252525252525252520width%252525252525252525253D%2525252525252525252527400%2525252525252525252527%2525252525252525252520height%252525252525252525253D%2525252525252525252527500%2525252525252525252527/%25252525252525252525253E%25252525252525252525253Ctext%2525252525252525252520x%252525252525252525253D%2525252525252525252527200%2525252525252525252527%2525252525252525252520y%252525252525252525253D%2525252525252525252527250%2525252525252525252527%2525252525252525252520font-family%252525252525252525253D%2525252525252525252527Arial%2525252525252525252527%2525252525252525252520font-size%252525252525252525253D%252525252525252525252724%2525252525252525252527%2525252525252525252520fill%252525252525252525253D%2525252525252525252527white%2525252525252525252527%2525252525252525252520text-anchor%252525252525252525253D%2525252525252525252527middle%2525252525252525252527%25252525252525252525253EAPI%2525252525252525252520ACCESS%25252525252525252525253C/text%25252525252525252525253E%25252525252525252525253C/svg%25252525252525252525253E%2525252525252525253F_a%2525252525252525253DBBFAAAAA0%25252525252525253F_a%25252525252525253DBBFAAAAA0%252525252525253F_a%252525252525253DBBFAAAAA0%2525252525253F_a%2525252525253DBBFAAAAA0%25252525253F_a%25252525253DBBFAAAAA0%252525253F_a%252525253DBBFAAAAA0%2525253F_a%2525253DBBFAAAAA0%25253F_a%25253DBBFAAAAA0%253F_a%253DBBFAAAAA0%3F_a%3DBBFAAAAA0?_a=BBFAAAAA0" alt="API Access" loading="lazy">
+                    </div>
+                    <div class="product-details">
+                        <h3>API Access</h3>
+                        <p class="product-tagline">Integrate Our Intelligence</p>
+                        <ul class="feature-list">
+                            <li>RESTful API endpoints</li>
+                            <li>Real-time webhooks</li>
+                            <li>Historical data access</li>
+                            <li>Custom data exports</li>
+                            <li>White-label options</li>
+                            <li>Enterprise SLA support</li>
+                        </ul>
+                        <div class="product-cta">
+                            <button class="btn-primary">View Documentation</button>
+                            <span class="price">Custom Pricing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Coverage Map Section -->
+    <section class="coverage-map">
+        <div class="container">
+            <h2 class="section-title">Our Territory</h2>
+            <p class="section-subtitle">From Texas to the Atlantic, we own the Deep South</p>
+            
+            <div class="interactive-map">
+                <div class="map-stats">
+                    <div class="region-stat">
+                        <h4>Texas</h4>
+                        <span>1,437 High Schools</span>
+                        <span>Big 12 + SEC Coverage</span>
+                        <span>45,000+ Active Players</span>
+                    </div>
+                    <div class="region-stat">
+                        <h4>SEC States</h4>
+                        <span>14 Universities</span>
+                        <span>2,100+ High Schools</span>
+                        <span>62,000+ Active Players</span>
+                    </div>
+                    <div class="region-stat">
+                        <h4>Total Coverage</h4>
+                        <span>127,000+ Players</span>
+                        <span>8 States Deep</span>
+                        <span>500+ Scouts Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Blaze Intelligence</div>
+            <p class="footer-tagline">The Deep South Sports Authority • From Little League to The League</p>
+            <div class="footer-links">
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/media">Media Kit</a>
+                <a href="/api">Developer API</a>
+                <a href="/careers">Careers</a>
+                <a href="/privacy">Privacy</a>
+            </div>
+            <p class="footer-copyright">
+                © 2025 Blaze Intelligence. All Rights Reserved.
+                <br>Built on Heritage. Powered by Innovation.
+            </p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Authority Features
+        class BlazeAuthority {
+            constructor() {
+                this.initLiveStats();
+                this.initProductTabs();
+                this.initTrustBadges();
+                this.initScrollAnimations();
+            }
+            
+            initLiveStats() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.animateNumber(entry.target);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.stat-number').forEach(stat => {
+                    observer.observe(stat);
+                });
+            }
+            
+            animateNumber(element) {
+                const text = element.textContent;
+                const hasPlus = text.includes('+');
+                const hasPercent = text.includes('%');
+                const hasComma = text.includes(',');
+                
+                let target = parseFloat(text.replace(/[^0-9.]/g, ''));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                        
+                        // Restore original formatting
+                        if (hasPercent) {
+                            element.textContent = current.toFixed(1) + '%';
+                        } else if (hasComma) {
+                            element.textContent = this.formatNumber(Math.floor(current)) + (hasPlus ? '+' : '');
+                        } else {
+                            element.textContent = Math.floor(current).toString() + (hasPlus ? '+' : '');
+                        }
+                    } else {
+                        if (hasPercent) {
+                            element.textContent = current.toFixed(1) + '%';
+                        } else if (hasComma) {
+                            element.textContent = this.formatNumber(Math.floor(current));
+                        } else {
+                            element.textContent = Math.floor(current).toString();
+                        }
+                    }
+                }, 16);
+            }
+            
+            formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            }
+            
+            initProductTabs() {
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        this.switchProduct(e.target.dataset.product);
+                    });
+                });
+            }
+            
+            switchProduct(product) {
+                // Remove active classes
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.product-panel').forEach(p => p.classList.remove('active'));
+                
+                // Add active classes
+                document.querySelector(`[data-product="${product}"]`).classList.add('active');
+                document.getElementById(product).classList.add('active');
+            }
+            
+            initTrustBadges() {
+                // Rotate through trust badges
+                const badges = [
+                    'The Official Intelligence Partner of Championship Programs',
+                    'Trusted by 500+ High Schools Across Texas',
+                    'SEC Network Official Data Provider',
+                    'Perfect Game Analytics Partner Since 2024',
+                    'Dave Campbell\'s Digital Evolution Partner'
+                ];
+                
+                let current = 0;
+                const badgeText = document.querySelector('.badge-text');
+                
+                setInterval(() => {
+                    current = (current + 1) % badges.length;
+                    badgeText.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        badgeText.textContent = badges[current];
+                        badgeText.style.opacity = '1';
+                    }, 300);
+                }, 5000);
+            }
+            
+            initScrollAnimations() {
+                if (window.gsap && window.ScrollTrigger) {
+                    gsap.registerPlugin(ScrollTrigger);
+                    
+                    // Animate section entries
+                    gsap.utils.toArray('.proof-card').forEach((card, i) => {
+                        gsap.from(card, {
+                            scrollTrigger: {
+                                trigger: card,
+                                start: 'top 80%'
+                            },
+                            y: 50,
+                            opacity: 0,
+                            duration: 0.8,
+                            delay: i * 0.1
+                        });
+                    });
+                    
+                    // Parallax effect for hero
+                    gsap.to('.hero-authority', {
+                        scrollTrigger: {
+                            trigger: '.hero-authority',
+                            start: 'top top',
+                            end: 'bottom top',
+                            scrub: true
+                        },
+                        backgroundPosition: '50% 100px'
+                    });
+                }
+            }
+        }
+        
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            new BlazeAuthority();
+        });
+        
+        // Three.js Background Animation
+        if (window.THREE) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.domElement.style.position = 'fixed';
+            renderer.domElement.style.top = '0';
+            renderer.domElement.style.left = '0';
+            renderer.domElement.style.zIndex = '-1';
+            renderer.domElement.style.pointerEvents = 'none';
+            document.body.appendChild(renderer.domElement);
+            
+            // Create particle field (stadium lights effect)
+            const particles = new THREE.BufferGeometry();
+            const particleCount = 1000;
+            const positions = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 100;
+                positions[i + 1] = (Math.random() - 0.5) * 100;
+                positions[i + 2] = (Math.random() - 0.5) * 100;
+            }
+            
+            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const particleMaterial = new THREE.PointsMaterial({
+                color: 0xFFD700,
+                size: 0.5,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const particleSystem = new THREE.Points(particles, particleMaterial);
+            scene.add(particleSystem);
+            
+            camera.position.z = 30;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                particleSystem.rotation.y += 0.0005;
+                particleSystem.rotation.x += 0.0002;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+    </script>
+
+</body></html>

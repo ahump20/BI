@@ -162,7 +162,7 @@ function calculateTeamGrade(team, sport) {
 }
 
 function getTeamStrengths(sport) {
-  const strengthsBySport = {
+  const strengthsBysport = {
     baseball: ['Pitching depth', 'Clutch hitting', 'Defensive fundamentals', 'Team chemistry'],
     football: ['Offensive line', 'Defensive pressure', 'Special teams', 'Coaching'],
     basketball: ['Ball movement', 'Defensive intensity', 'Bench depth', 'Free throw shooting']

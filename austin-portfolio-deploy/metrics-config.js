@@ -1,48 +1,40 @@
 // Blaze Intelligence Centralized Metrics Configuration
-// Phase 0 - Truth Audit: Single source of truth for all platform claims
-// Import this file to ensure consistent metrics across the platform
+// Truth Audit Updated: Honest capabilities and current status
+// Import this file to ensure consistent and truthful metrics across the platform
 
 export const BLAZE_METRICS = {
   // Version control for metrics
-  version: "1.0.0",
-  last_updated: "2025-08-28T14:00:00Z",
+  version: "2.0.0-truthful",
+  last_updated: "2025-09-12T12:00:00Z",
   
-  // Core platform metrics - these are the canonical values
-  data_points: {
-    value: "2.8M+",
-    exact_count: 2847293,
-    daily_intake: 15247,
-    growth_rate: "5.2% monthly",
-    sources_breakdown: {
-      "MLB Statcast": 45,
-      "NFL Next Gen Stats": 25,
-      "NBA Advanced Stats": 15,
-      "College Sports APIs": 10,
-      "Perfect Game Youth": 5
+  // Core platform capabilities - these reflect actual current status
+  data_processing: {
+    capacity: "High-Volume",
+    description: "Architecture designed for millions of data points",
+    current_status: "Interface ready, data ingestion in development",
+    target_launch: "Q1 2025",
+    sources_planned: {
+      "ESPN APIs": "Active",
+      "MLB Stats API": "Active", 
+      "College Football Data": "Active",
+      "Perfect Game Youth": "Planned",
+      "Advanced Analytics": "In Development"
     }
   },
   
-  accuracy: {
-    value: "94.6%",
-    exact_percentage: 94.63,
-    measurement_period: "rolling_12_months",
-    sample_size: 15847,
-    methodology: "cross_validated_prediction_accuracy",
-    benchmark_comparison: {
-      industry_average: 78.2,
-      improvement_points: 16.41
-    }
+  analytics_precision: {
+    value: "Pro-Grade",
+    description: "Professional-level analytics framework",
+    current_status: "Interface complete, models in development",
+    validation_planned: true,
+    methodology_notes: "Accuracy metrics will be tracked once live data integration is complete"
   },
   
-  availability: {
-    value: "24/7",
-    uptime_percentage: 99.94,
-    sla_target: 99.5,
-    last_downtime: {
-      date: "2025-07-15T03:22:00Z",
-      duration_minutes: 12,
-      reason: "scheduled_maintenance"
-    }
+  system_availability: {
+    value: "Always-On",
+    description: "Interface available 24/7, data processing as scheduled",
+    current_status: "Interface operational, live data feeds in development",
+    deployment_target: "Continuous uptime for production data feeds in Q1 2025"
   },
   
   pricing: {

@@ -1,0 +1,12 @@
+# Blaze Intelligence Robots.txt
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /.git/
+
+Sitemap: https://blaze-intelligence.pages.dev/sitemap.xml
+
+# Crawl-delay for respectful crawling
+User-agent: *
+Crawl-delay: 1

@@ -1,0 +1,148 @@
+{
+  "appStoreConnect": {
+    "appName": "Blaze Intelligence",
+    "bundleId": "com.blazeintelligence.mobile",
+    "sku": "blaze-intelligence-mobile-001",
+    "primaryLanguage": "en-US",
+    "version": "1.0.0",
+    "copyright": "© 2025 Blaze Intelligence. All rights reserved."
+  },
+  "appInfo": {
+    "category": "Sports",
+    "subCategory": "Performance Analysis",
+    "contentRating": "4+",
+    "targetAudience": ["Athletes", "Coaches", "Sports Analysts"],
+    "price": "Free",
+    "availability": {
+      "territories": ["US", "CA", "MX", "GB", "AU"],
+      "releaseDate": "Manual Release"
+    }
+  },
+  "appDescription": {
+    "subtitle": "AI-Powered Sports Performance Analysis",
+    "description": "🔥 Blaze Intelligence revolutionizes sports performance with cutting-edge AI video analysis.\n\nFEATURES:\n• Real-time biomechanical analysis with 33 body landmark tracking\n• Micro-expression detection for championship character assessment\n• Live metrics overlay during video recording\n• Multi-AI analysis powered by ChatGPT 5, Claude Opus 4.1, and Gemini 2.5 Pro\n• Comprehensive sports data integration (MLB, NFL, NBA, NCAA)\n• Training data collection for continuous improvement\n• Blaze Score calculation for performance optimization\n\nSUPPORTED SPORTS:\n• Baseball (MLB Cardinals data integration)\n• Football (NFL Titans analytics)\n• Basketball (NBA Grizzlies insights)\n• College Sports (NCAA Longhorns tracking)\n\nADVANCED ANALYTICS:\n• Biomechanical assessment (hip rotation, shoulder alignment, knee flexion)\n• Character analysis (grit, determination, focus, composure)\n• Performance prediction with 94.6% accuracy\n• Championship potential scoring\n• Personalized improvement recommendations\n\nWHY BLAZE INTELLIGENCE?\n• Professional-grade analysis used by elite athletes\n• Real-time feedback during training sessions\n• Comprehensive dashboard with skill breakdown\n• Achievement tracking and progress monitoring\n• Secure video storage and analysis\n\nPERFECT FOR:\n• Athletes seeking performance optimization\n• Coaches analyzing player development\n• Sports teams tracking collective progress\n• Youth sports development programs\n• Perfect Game baseball prospects\n\nTurn data into dominance with Blaze Intelligence - where championship mindset meets cutting-edge technology.",
+    "keywords": [
+      "sports",
+      "athletics",
+      "performance",
+      "analysis",
+      "AI",
+      "video",
+      "coaching",
+      "baseball",
+      "football",
+      "basketball",
+      "training",
+      "biomechanics",
+      "analytics",
+      "championship"
+    ],
+    "promotionalText": "Experience the future of sports performance analysis. Download Blaze Intelligence and unlock your championship potential with AI-powered video analysis.",
+    "whatsNew": "🔥 Introducing Blaze Intelligence v1.0\n\n• Revolutionary AI-powered video analysis\n• Real-time biomechanical assessment\n• Micro-expression character detection\n• Multi-sport data integration\n• Championship potential scoring\n• Professional-grade analytics platform\n\nReady to turn data into dominance? Start your journey to championship performance today!"
+  },
+  "screenshots": {
+    "iPhone": {
+      "6.7inch": [
+        "screenshot-iphone-67-01-camera.png",
+        "screenshot-iphone-67-02-analysis.png", 
+        "screenshot-iphone-67-03-dashboard.png",
+        "screenshot-iphone-67-04-profile.png",
+        "screenshot-iphone-67-05-settings.png"
+      ],
+      "6.5inch": [
+        "screenshot-iphone-65-01-camera.png",
+        "screenshot-iphone-65-02-analysis.png",
+        "screenshot-iphone-65-03-dashboard.png",
+        "screenshot-iphone-65-04-profile.png",
+        "screenshot-iphone-65-05-settings.png"
+      ]
+    },
+    "iPad": {
+      "12.9inch": [
+        "screenshot-ipad-129-01-camera.png",
+        "screenshot-ipad-129-02-analysis.png",
+        "screenshot-ipad-129-03-dashboard.png"
+      ]
+    }
+  },
+  "appIcon": {
+    "appStore": "app-icon-1024x1024.png",
+    "sizes": {
+      "180x180": "app-icon-180x180.png",
+      "120x120": "app-icon-120x120.png",
+      "87x87": "app-icon-87x87.png",
+      "80x80": "app-icon-80x80.png",
+      "60x60": "app-icon-60x60.png",
+      "58x58": "app-icon-58x58.png",
+      "40x40": "app-icon-40x40.png",
+      "29x29": "app-icon-29x29.png",
+      "20x20": "app-icon-20x20.png"
+    }
+  },
+  "reviewInformation": {
+    "contact": {
+      "firstName": "Austin",
+      "lastName": "Humphrey",
+      "phone": "+1 (210) 273-5538",
+      "email": "ahump20@outlook.com"
+    },
+    "demoAccount": {
+      "username": "demo@blaze-intelligence.com",
+      "password": "demo123",
+      "instructions": "Use the demo account to access all features. Record a video using the camera screen to see AI analysis in action."
+    },
+    "notes": "Blaze Intelligence uses advanced AI models for sports performance analysis. The app requires camera access for video recording and analysis. All video processing happens securely on our servers with encryption."
+  },
+  "buildSettings": {
+    "developmentTeam": "YOUR_TEAM_ID",
+    "bundleIdentifier": "com.blazeintelligence.mobile",
+    "codeSigningIdentity": "Apple Distribution",
+    "provisioningProfile": "Blaze Intelligence Distribution Profile",
+    "exportMethod": "app-store",
+    "compileBitcode": false,
+    "uploadBitcode": false,
+    "uploadSymbols": true,
+    "stripSwiftSymbols": true
+  },
+  "requiredDeviceCapabilities": [
+    "camera-flash",
+    "video-camera",
+    "accelerometer",
+    "gyroscope"
+  ],
+  "supportedDevices": [
+    "iPhone",
+    "iPad"
+  ],
+  "minimumOSVersion": {
+    "iOS": "14.0",
+    "iPadOS": "14.0"
+  },
+  "permissions": {
+    "NSCameraUsageDescription": "Blaze Intelligence needs camera access to record and analyze your sports performance videos.",
+    "NSMicrophoneUsageDescription": "Microphone access allows for comprehensive video analysis including audio cues.",
+    "NSPhotoLibraryUsageDescription": "Access to photo library allows you to analyze existing videos and save your analysis results.",
+    "NSLocationWhenInUseUsageDescription": "Location services help provide relevant local sports data and training facilities."
+  },
+  "privacyPolicy": {
+    "url": "https://blaze-intelligence.com/privacy-policy",
+    "dataCollection": [
+      "Video recordings for analysis",
+      "Performance metrics and analytics",
+      "User profile information",
+      "Device information for optimization"
+    ],
+    "dataUsage": [
+      "Sports performance analysis",
+      "Personalized recommendations",
+      "App improvement and optimization",
+      "Customer support"
+    ],
+    "dataSharing": "We do not share personal data with third parties except as required for app functionality (secure video analysis servers)."
+  },
+  "supportUrl": "https://blaze-intelligence.com/support",
+  "marketingUrl": "https://blaze-intelligence.com",
+  "releaseNotes": {
+    "v1.0.0": "🔥 Welcome to Blaze Intelligence - the future of sports performance analysis! This initial release includes AI-powered video analysis, real-time biomechanical assessment, and comprehensive sports data integration."
+  }
+}

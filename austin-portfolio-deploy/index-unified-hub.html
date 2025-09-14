@@ -1,0 +1,1302 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - The Unified Deep South Sports Authority Hub</title>
+    <meta name="description" content="The ultimate unified platform merging Texas Football Authority, SEC Analytics, Perfect Game Integration, and Vision AI into one comprehensive sports intelligence hub.">
+    
+    <!-- Enhanced Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blaze-intelligence.netlify.app/">
+    <meta property="og:title" content="Blaze Intelligence - Unified Sports Authority">
+    <meta property="og:description" content="From Little League to The League. Unified platform with AI consciousness, real-time analytics, and comprehensive coverage.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&amp;family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Enhanced Three.js with Advanced Features -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r168/three.min.js"></script>
+    <script src="js/enhanced-three-visualization.js" defer=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/postprocessing/ShaderPass.js"></script>
+    
+    <!-- Analytics & Animation Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Blaze Intelligence Unified Styles -->
+    <style>
+        :root {
+            /* Deep South Sports Authority Color Palette */
+            --burnt-orange: #BF5700;
+            --sec-crimson: #9B2222;
+            --mississippi-magnolia: #F8F8FF;
+            --louisiana-bayou: #1B4332;
+            --texas-sky-blue: #9BCBEB;
+            --georgia-clay: #C65D00;
+            --friday-lights: #FFD700;
+            --stadium-black: #0A0A0A;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neural-glow: rgba(191, 87, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--stadium-black);
+            color: var(--mississippi-magnolia);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Unified Navigation */
+        .unified-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .unified-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--texas-sky-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--mississippi-magnolia);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--texas-sky-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--burnt-orange);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--neural-glow);
+        }
+
+        /* Enhanced Hero Section with Neural Consciousness */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            min-height: 800px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #neural-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-consciousness {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            z-index: 20;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .consciousness-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--texas-sky-blue);
+        }
+
+        .consciousness-pulse {
+            width: 12px;
+            height: 12px;
+            background: var(--burnt-orange);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1000px;
+            padding: 0 2rem;
+        }
+
+        .authority-badge {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--glass);
+            border: 1px solid var(--burnt-orange);
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--mississippi-magnolia) 0%, var(--texas-sky-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--mississippi-magnolia);
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .platform-button {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .platform-button.primary {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+        }
+
+        .platform-button.secondary {
+            background: transparent;
+            border-color: var(--texas-sky-blue);
+            color: var(--texas-sky-blue);
+        }
+
+        .platform-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Unified Platform Overview Grid */
+        .platform-overview {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: var(--glass);
+            border: 1px solid var(--burnt-orange);
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--mississippi-magnolia) 50%, var(--texas-sky-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--mississippi-magnolia);
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .platform-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--texas-sky-blue));
+        }
+
+        .platform-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .platform-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .platform-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--mississippi-magnolia);
+        }
+
+        .platform-description {
+            color: var(--mississippi-magnolia);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .platform-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .platform-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            color: var(--mississippi-magnolia);
+            font-size: 0.9rem;
+        }
+
+        .platform-features li::before {
+            content: '✓';
+            color: var(--texas-sky-blue);
+            font-weight: bold;
+        }
+
+        .platform-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--texas-sky-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .platform-link:hover {
+            color: var(--burnt-orange);
+            transform: translateX(5px);
+        }
+
+        /* Enhanced Three.js Data Visualization Section */
+        .data-viz-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(27, 67, 50, 0.1));
+        }
+
+        .viz-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .interactive-map {
+            height: 600px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #map-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 12px;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .map-title {
+            font-weight: 700;
+            color: var(--texas-sky-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .map-subtitle {
+            font-size: 0.875rem;
+            color: var(--mississippi-magnolia);
+            opacity: 0.8;
+        }
+
+        /* Live Analytics Dashboard */
+        .analytics-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .analytics-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .analytics-title {
+            font-size: 1rem;
+            color: var(--texas-sky-blue);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .platform-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .platform-card {
+                padding: 2rem;
+            }
+
+            .hero-consciousness {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.75rem;
+            }
+
+            .analytics-dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--stadium-black);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--texas-sky-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .loading-text {
+            color: var(--mississippi-magnolia);
+            font-size: 1.25rem;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-logo">BLAZE INTELLIGENCE</div>
+        <div class="loading-text">Unifying Sports Intelligence Platforms...</div>
+    </div>
+
+    <!-- Unified Navigation -->
+    <nav class="unified-nav" id="navbar">
+        <div class="nav-container">
+            <div class="unified-logo">BLAZE INTELLIGENCE HUB</div>
+            <div class="nav-menu">
+                <a href="#platforms">Platforms</a>
+                <a href="#analytics">Analytics</a>
+                <a href="market-intelligence-dashboard.html" style="color: #FFD700; font-weight: 700;">💰 $1.1B Market</a>
+                <a href="#coverage">Coverage</a>
+                <a href="#research">Research</a>
+                <a href="#contact">Contact</a>
+                <a href="#demo" class="cta-button">Live Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Neural Consciousness -->
+    <section class="hero-section">
+        <canvas id="neural-canvas"></canvas>
+        
+        <!-- AI Consciousness Indicator -->
+        <div class="hero-consciousness">
+            <div class="consciousness-indicator">
+                <div class="consciousness-pulse"></div>
+                <span>AI Consciousness: Active &amp; Learning</span>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <div class="authority-badge">The Unified Deep South Sports Authority</div>
+            <h1 class="hero-title">One Platform. Complete Intelligence.</h1>
+            <p class="hero-subtitle">
+                Merging Texas Football Authority, SEC Analytics, Perfect Game Intelligence, and AI Consciousness into the ultimate sports intelligence hub.
+            </p>
+            
+            <div class="hero-actions">
+                <a href="#platforms" class="platform-button primary">
+                    <i class="fas fa-rocket"></i>
+                    Explore Platforms
+                </a>
+                <a href="#analytics" class="platform-button secondary">
+                    <i class="fas fa-chart-line"></i>
+                    Live Analytics
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Overview -->
+    <section class="platform-overview" id="platforms">
+        <div class="section-header">
+            <span class="section-badge">Unified Intelligence</span>
+            <h2 class="section-title">Three Platforms. One Authority.</h2>
+            <p class="section-subtitle">
+                The most comprehensive sports intelligence ecosystem ever built, unifying all aspects of Deep South sports from youth through professional levels.
+            </p>
+        </div>
+
+        <div class="platform-grid">
+            <!-- Texas Football Authority -->
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fas fa-football-ball"></i>
+                </div>
+                <h3 class="platform-title">Texas Football Authority</h3>
+                <p class="platform-description">
+                    The Dave Campbell's evolution for modern Texas high school football. Complete coverage of all UIL classifications with AI-powered scouting and recruiting intelligence.
+                </p>
+                <ul class="platform-features">
+                    <li>1,400+ Texas High Schools Covered</li>
+                    <li>Friday Night Lights Intelligence</li>
+                    <li>UIL Championship Analytics</li>
+                    <li>Real-time Scout Reports</li>
+                    <li>Recruiting Pipeline Tracking</li>
+                </ul>
+                <a href="index.html" class="platform-link">
+                    Access Platform <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Perfect Game Intelligence -->
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fas fa-baseball-ball"></i>
+                </div>
+                <h3 class="platform-title">Perfect Game Intelligence</h3>
+                <p class="platform-description">
+                    Elite youth baseball analytics connecting Little League to professional pipelines. Tournament tracking, select team intelligence, and pathway optimization.
+                </p>
+                <ul class="platform-features">
+                    <li>Elite Travel Team Showcases</li>
+                    <li>Tournament Analytics Dashboard</li>
+                    <li>Scout Reporting System</li>
+                    <li>College Pipeline Tracking</li>
+                    <li>Performance Benchmarking</li>
+                </ul>
+                <a href="perfect-game.html" class="platform-link">
+                    Access Platform <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- AI Consciousness Platform -->
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="platform-title">AI Consciousness Platform</h3>
+                <p class="platform-description">
+                    Revolutionary neural network visualization with 33+ keypoint biomechanical tracking. Character assessment through micro-expression detection and performance optimization.
+                </p>
+                <ul class="platform-features">
+                    <li>33+ Keypoint Biomechanical Analysis</li>
+                    <li>Micro-expression Character Assessment</li>
+                    <li>Neural Network Visualization</li>
+                    <li>Real-time Performance Feedback</li>
+                    <li>Video Intelligence Processing</li>
+                </ul>
+                <a href="index-blaze-ultimate.html" class="platform-link">
+                    Access Platform <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- SEC Authority -->
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3 class="platform-title">SEC Authority</h3>
+                <p class="platform-description">
+                    Comprehensive SEC football and baseball coverage with championship-level analytics. Conference intelligence, NIL tracking, and transfer portal insights.
+                </p>
+                <ul class="platform-features">
+                    <li>16 SEC Teams Complete Coverage</li>
+                    <li>Conference Championship Analytics</li>
+                    <li>NIL Market Intelligence</li>
+                    <li>Transfer Portal Tracking</li>
+                    <li>Playoff Prediction Models</li>
+                </ul>
+                <a href="sec-football.html" class="platform-link">
+                    Access Platform <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Data Visualization Section -->
+    <section class="data-viz-section" id="analytics">
+        <div class="viz-container">
+            <div class="section-header">
+                <span class="section-badge">Interactive Intelligence</span>
+                <h2 class="section-title">Three.js Enhanced Analytics</h2>
+                <p class="section-subtitle">
+                    Immersive data visualization using advanced Three.js rendering, providing spatial intelligence mapping and real-time analytics dashboards.
+                </p>
+            </div>
+
+            <!-- Interactive 3D Map -->
+            <div class="interactive-map">
+                <canvas id="map-canvas"></canvas>
+                <div class="map-overlay">
+                    <div class="map-title">Deep South Coverage Map</div>
+                    <div class="map-subtitle">Live tracking of 2,847 teams across Texas &amp; SEC states</div>
+                </div>
+            </div>
+
+            <!-- Live Analytics Dashboard -->
+            <div class="analytics-dashboard">
+                <div class="analytics-card">
+                    <div class="analytics-title">Texas Friday Night Lights</div>
+                    <div class="chart-container">
+                        <canvas id="texasChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <div class="analytics-title">SEC Performance Index</div>
+                    <div class="chart-container">
+                        <canvas id="secChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <div class="analytics-title">Perfect Game Pipeline</div>
+                    <div class="chart-container">
+                        <canvas id="perfectGameChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <div class="analytics-title">AI Consciousness Activity</div>
+                    <div class="chart-container">
+                        <canvas id="aiChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Research Coverage Section -->
+    <section class="platform-overview" id="coverage">
+        <div class="section-header">
+            <span class="section-badge">Research Initiative</span>
+            <h2 class="section-title">Deep South Sports Research</h2>
+            <p class="section-subtitle">
+                Comprehensive research across all levels of Texas and SEC sports, from youth leagues through professional pipelines.
+            </p>
+        </div>
+
+        <div class="platform-grid">
+            <!-- Youth Development -->
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fas fa-child"></i>
+                </div>
+                <h3 class="platform-title">Youth Development Pipeline</h3>
+                <p class="platform-description">
+                    Complete mapping of youth sports development from Little League through high school, including Perfect Game tournaments and select team pathways.
+                </p>
+                <ul class="platform-features">
+                    <li>Little League to High School Tracking</li>
+                    <li>Perfect Game Tournament Analysis</li>
+                    <li>Select Team Intelligence</li>
+                    <li>Development Pathway Optimization</li>
+                </ul>
+            </div>
+
+            <!-- High School Authority -->
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fas fa-school"></i>
+                </div>
+                <h3 class="platform-title">High School Authority</h3>
+                <p class="platform-description">
+                    The most comprehensive high school sports intelligence covering Texas UIL and all Deep South state championships with real-time recruiting insights.
+                </p>
+                <ul class="platform-features">
+                    <li>Texas UIL Complete Coverage</li>
+                    <li>Deep South State Championships</li>
+                    <li>Recruiting Intelligence Network</li>
+                    <li>Friday Night Lights Analytics</li>
+                </ul>
+            </div>
+
+            <!-- College Intelligence -->
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h3 class="platform-title">College Intelligence</h3>
+                <p class="platform-description">
+                    SEC conference analytics, Big 12 Texas coverage, and comprehensive college sports intelligence with NIL tracking and transfer portal insights.
+                </p>
+                <ul class="platform-features">
+                    <li>SEC Conference Analytics</li>
+                    <li>Big 12 Texas Coverage</li>
+                    <li>NIL Market Intelligence</li>
+                    <li>Transfer Portal Tracking</li>
+                </ul>
+            </div>
+
+            <!-- Professional Pipeline -->
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3 class="platform-title">Professional Pipeline</h3>
+                <p class="platform-description">
+                    Complete professional sports intelligence covering MLB Draft pipelines, NFL scouting, and career development from college to the pros.
+                </p>
+                <ul class="platform-features">
+                    <li>MLB Draft Pipeline Analysis</li>
+                    <li>NFL Scouting Intelligence</li>
+                    <li>Professional Career Tracking</li>
+                    <li>Performance Optimization</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="platform-overview" id="contact">
+        <div class="section-header">
+            <span class="section-badge">Get Connected</span>
+            <h2 class="section-title">Join The Authority</h2>
+            <p class="section-subtitle">
+                Ready to access the most comprehensive sports intelligence platform in the Deep South? Contact us to get started.
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="mailto:ahump20@outlook.com" class="platform-button primary" style="font-size: 1.25rem; padding: 1.5rem 3rem;">
+                <i class="fas fa-envelope"></i>
+                Contact The Authority
+            </a>
+        </div>
+    </section>
+
+    <!-- Enhanced JavaScript for Unified Platform -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize loading sequence
+            initializeUnifiedPlatform();
+        });
+
+        async function initializeUnifiedPlatform() {
+            try {
+                // Initialize Three.js Neural Visualization
+                initNeuralVisualization();
+                
+                // Initialize 3D Coverage Map
+                init3DCoverageMap();
+                
+                // Initialize Live Analytics Charts
+                initAnalyticsCharts();
+                
+                // Initialize Scroll Animations
+                initScrollAnimations();
+                
+                // Hide loading overlay after initialization
+                setTimeout(() => {
+                    const overlay = document.getElementById('loadingOverlay');
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.style.display = 'none', 500);
+                }, 2000);
+                
+                // Start real-time data updates
+                startRealTimeUpdates();
+                
+            } catch (error) {
+                console.error('Platform initialization error:', error);
+            }
+        }
+
+        // Enhanced Three.js Neural Network Visualization
+        function initNeuralVisualization() {
+            const canvas = document.getElementById('neural-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            
+            // Create enhanced neural network particles
+            const particleCount = 5000;
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            const sizes = new Float32Array(particleCount);
+            
+            const colorBurntOrange = new THREE.Color('#BF5700');
+            const colorTexasBlue = new THREE.Color('#9BCBEB');
+            const colorCrimson = new THREE.Color('#9B2222');
+            
+            for (let i = 0; i < particleCount; i++) {
+                // Create spherical distribution
+                const radius = 15 + Math.random() * 10;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(2 * Math.random() - 1);
+                
+                positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+                positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+                positions[i * 3 + 2] = radius * Math.cos(phi);
+                
+                // Random color selection
+                const colorChoice = Math.random();
+                let selectedColor;
+                if (colorChoice < 0.4) selectedColor = colorBurntOrange;
+                else if (colorChoice < 0.7) selectedColor = colorTexasBlue;
+                else selectedColor = colorCrimson;
+                
+                colors[i * 3] = selectedColor.r;
+                colors[i * 3 + 1] = selectedColor.g;
+                colors[i * 3 + 2] = selectedColor.b;
+                
+                sizes[i] = Math.random() * 2 + 0.5;
+            }
+            
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+            
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    time: { value: 0 }
+                },
+                vertexShader: `
+                    attribute float size;
+                    attribute vec3 color;
+                    varying vec3 vColor;
+                    uniform float time;
+                    
+                    void main() {
+                        vColor = color;
+                        
+                        vec3 pos = position;
+                        pos.x += sin(time * 0.001 + position.y * 0.01) * 2.0;
+                        pos.y += cos(time * 0.001 + position.x * 0.01) * 2.0;
+                        pos.z += sin(time * 0.001 + position.x * 0.01 + position.y * 0.01) * 1.0;
+                        
+                        vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+                        gl_PointSize = size * (300.0 / -mvPosition.z);
+                        gl_Position = projectionMatrix * mvPosition;
+                    }
+                `,
+                fragmentShader: `
+                    varying vec3 vColor;
+                    
+                    void main() {
+                        float distance = length(gl_PointCoord - vec2(0.5));
+                        if (distance > 0.5) discard;
+                        
+                        float alpha = 1.0 - distance * 2.0;
+                        gl_FragColor = vec4(vColor, alpha * 0.8);
+                    }
+                `,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                vertexColors: true
+            });
+            
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+            
+            camera.position.z = 30;
+            
+            let mouseX = 0, mouseY = 0;
+            
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                material.uniforms.time.value = Date.now();
+                
+                particles.rotation.x += 0.0002;
+                particles.rotation.y += 0.0003;
+                
+                camera.position.x += (mouseX * 5 - camera.position.x) * 0.02;
+                camera.position.y += (-mouseY * 5 - camera.position.y) * 0.02;
+                camera.lookAt(scene.position);
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // 3D Coverage Map
+        function init3DCoverageMap() {
+            const canvas = document.getElementById('map-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, canvas.offsetWidth / canvas.offsetHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            
+            renderer.setSize(canvas.offsetWidth, canvas.offsetHeight);
+            renderer.setClearColor(0x000000, 0);
+            
+            // Create simplified map representation
+            const geometry = new THREE.PlaneGeometry(20, 15, 50, 50);
+            const material = new THREE.MeshBasicMaterial({
+                color: 0x1B4332,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.3
+            });
+            
+            const plane = new THREE.Mesh(geometry, material);
+            scene.add(plane);
+            
+            // Add location markers for major cities
+            const cities = [
+                { name: 'Houston', x: -2, y: 1, z: 0 },
+                { name: 'Dallas', x: 0, y: 3, z: 0 },
+                { name: 'Austin', x: -1, y: 0, z: 0 },
+                { name: 'San Antonio', x: -2, y: -1, z: 0 },
+                { name: 'Atlanta', x: 4, y: 2, z: 0 },
+                { name: 'Birmingham', x: 3, y: 1, z: 0 },
+                { name: 'Baton Rouge', x: 1, y: -1, z: 0 },
+                { name: 'Memphis', x: 2, y: 3, z: 0 }
+            ];
+            
+            cities.forEach(city => {
+                const markerGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+                const markerMaterial = new THREE.MeshBasicMaterial({
+                    color: 0xBF5700,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                
+                const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+                marker.position.set(city.x, city.y, city.z);
+                scene.add(marker);
+                
+                // Add pulsing animation
+                marker.userData = { 
+                    originalScale: marker.scale.clone(),
+                    pulsePhase: Math.random() * Math.PI * 2
+                };
+            });
+            
+            camera.position.set(0, 0, 15);
+            
+            function animateMap() {
+                requestAnimationFrame(animateMap);
+                
+                const time = Date.now() * 0.001;
+                
+                // Animate city markers
+                scene.children.forEach(child => {
+                    if (child.userData.originalScale) {
+                        const scale = 1 + Math.sin(time * 2 + child.userData.pulsePhase) * 0.3;
+                        child.scale.setScalar(scale);
+                    }
+                });
+                
+                plane.rotation.z += 0.001;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animateMap();
+        }
+
+        // Analytics Charts Initialization
+        function initAnalyticsCharts() {
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        grid: { color: 'rgba(155, 203, 235, 0.1)' },
+                        ticks: { color: '#F8F8FF' }
+                    },
+                    x: { 
+                        grid: { color: 'rgba(155, 203, 235, 0.1)' },
+                        ticks: { color: '#F8F8FF' }
+                    }
+                }
+            };
+
+            // Texas Chart
+            const texasCtx = document.getElementById('texasChart').getContext('2d');
+            new Chart(texasCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
+                    datasets: [{
+                        label: 'Game Analysis',
+                        data: [1250, 1340, 1420, 1380, 1450],
+                        borderColor: '#BF5700',
+                        backgroundColor: 'rgba(191, 87, 0, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: chartOptions
+            });
+
+            // SEC Chart
+            const secCtx = document.getElementById('secChart').getContext('2d');
+            new Chart(secCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Alabama', 'Georgia', 'LSU', 'Texas', 'Tennessee'],
+                    datasets: [{
+                        label: 'Performance Index',
+                        data: [92, 89, 85, 88, 83],
+                        backgroundColor: [
+                            'rgba(155, 34, 34, 0.8)',
+                            'rgba(155, 203, 235, 0.8)',
+                            'rgba(191, 87, 0, 0.8)',
+                            'rgba(255, 215, 0, 0.8)',
+                            'rgba(27, 67, 50, 0.8)'
+                        ]
+                    }]
+                },
+                options: chartOptions
+            });
+
+            // Perfect Game Chart
+            const pgCtx = document.getElementById('perfectGameChart').getContext('2d');
+            new Chart(pgCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Elite', 'Advanced', 'Developing'],
+                    datasets: [{
+                        data: [25, 45, 30],
+                        backgroundColor: ['#BF5700', '#9BCBEB', '#9B2222']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { 
+                            display: true,
+                            position: 'bottom',
+                            labels: { color: '#F8F8FF' }
+                        }
+                    }
+                }
+            });
+
+            // AI Chart
+            const aiCtx = document.getElementById('aiChart').getContext('2d');
+            new Chart(aiCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Biomechanics', 'Character', 'Performance', 'Prediction', 'Analysis'],
+                    datasets: [{
+                        label: 'AI Metrics',
+                        data: [94, 87, 92, 89, 96],
+                        borderColor: '#9BCBEB',
+                        backgroundColor: 'rgba(155, 203, 235, 0.2)',
+                        pointBackgroundColor: '#BF5700'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: 'rgba(155, 203, 235, 0.2)' },
+                            angleLines: { color: 'rgba(155, 203, 235, 0.2)' },
+                            pointLabels: { color: '#F8F8FF', font: { size: 12 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Scroll Animations
+        function initScrollAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero content animation
+            gsap.from('.hero-content > *', {
+                y: 100,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                delay: 2,
+                ease: 'power3.out'
+            });
+
+            // Platform cards animation
+            gsap.from('.platform-card', {
+                scrollTrigger: {
+                    trigger: '.platform-grid',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                y: 80,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+
+            // Analytics cards animation
+            gsap.from('.analytics-card', {
+                scrollTrigger: {
+                    trigger: '.analytics-dashboard',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                scale: 0.8,
+                y: 60,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: 'back.out(1.7)'
+            });
+        }
+
+        // Real-time Updates
+        function startRealTimeUpdates() {
+            // Simulate real-time data updates
+            setInterval(() => {
+                updateConsciousnessIndicator();
+            }, 3000);
+        }
+
+        function updateConsciousnessIndicator() {
+            const indicator = document.querySelector('.consciousness-indicator span');
+            const activities = [
+                'AI Consciousness: Active & Learning',
+                'AI Consciousness: Processing Data',
+                'AI Consciousness: Analyzing Performance',
+                'AI Consciousness: Generating Insights',
+                'AI Consciousness: Optimizing Models'
+            ];
+            
+            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+            indicator.textContent = randomActivity;
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.8)';
+            }
+        });
+    </script>
+
+</body></html>

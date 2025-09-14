@@ -1,0 +1,799 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Perfect Game Tournament Dashboard — Live Intelligence | Blaze Intelligence</title>
+    <meta name="description" content="Real-time Perfect Game tournament tracking, scout reports, and player performance analytics across Texas and the Deep South.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="/assets/brand.css">
+    
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" class="logo-text">BLAZE INTELLIGENCE</a>
+                <div class="tagline">The Deep South Sports Authority</div>
+            </div>
+            
+            <div class="nav-links desktop-only">
+                <a href="/">Home</a>
+                <a href="/perfect-game.html">🥇 PG Select</a>
+                <a href="/scout-reports.html">📊 Scout Reports</a>
+                <a href="/perfect-game-dashboard.html" class="active">Tournament Dashboard</a>
+                <a href="/contact.html">Contact</a>
+            </div>
+
+            <div class="nav-toggle mobile-only" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Authority Badge -->
+    <section class="hero-authority">
+        <div class="authority-badge">
+            <span class="badge-text">Live Tournament Intelligence</span>
+            <div class="trust-logos">
+                <span>7 Active Tournaments</span>
+                <span>•</span>
+                <span>Real-Time Updates</span>
+            </div>
+        </div>
+        
+        <div class="hero-title">
+            <span class="small-text">Perfect Game Tournament Network</span>
+            <span class="main-text">Tournament Intelligence</span>
+            <span class="sub-text">Live Tracking • Scout Deployment • Performance Analytics</span>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat-card">
+                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">7</div>
+                <div style="color: var(--cardinal-blue);">Active Tournaments</div>
+                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">+2 this week</div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">28</div>
+                <div style="color: var(--cardinal-blue);">Scouts Deployed</div>
+                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Full Coverage</div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">1.2K</div>
+                <div style="color: var(--cardinal-blue);">Players Tracked</div>
+                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Live Analytics</div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Tournament Overview Grid -->
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 60px;">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-trophy" style="color: var(--blaze-orange);"></i>
+                    <span>Active Tournaments</span>
+                </div>
+                <div class="stat-display">
+                    <div class="stat-number">7</div>
+                    <div class="stat-trend">+2 this week</div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-users" style="color: var(--cardinals-red);"></i>
+                    <span>Teams Competing</span>
+                </div>
+                <div class="stat-display">
+                    <div class="stat-number">1,247</div>
+                    <div class="stat-trend">Across 15 states</div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-eye" style="color: var(--deep-teal);"></i>
+                    <span>Scouts Deployed</span>
+                </div>
+                <div class="stat-display">
+                    <div class="stat-number">43</div>
+                    <div class="stat-trend">Full coverage</div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <i class="fas fa-chart-line" style="color: var(--longhorns-orange);"></i>
+                    <span>Reports Generated</span>
+                </div>
+                <div class="stat-display">
+                    <div class="stat-number">2,847</div>
+                    <div class="stat-trend">Today: +247</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Content -->
+        <div class="grid" style="grid-template-columns: 2fr 1fr; gap: 40px; margin-bottom: 60px;">
+            <!-- Tournament Map & Schedule -->
+            <div class="dashboard-panel">
+                <div class="panel-header">
+                    <h3>Active Tournament Map</h3>
+                    <div class="view-toggles">
+                        <button class="toggle-btn active" data-view="map">Map View</button>
+                        <button class="toggle-btn" data-view="schedule">Schedule</button>
+                    </div>
+                </div>
+                
+                <div class="panel-content">
+                    <!-- Map View -->
+                    <div id="tournament-map" class="map-container">
+                        <div class="tournament-location" style="position: absolute; top: 20%; left: 30%;" data-tournament="wwba-17u">
+                            <div class="location-pin active">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="tournament-tooltip">WWBA 17U Championship<br>Emerson, GA • 127 teams</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tournament-location" style="position: absolute; top: 60%; left: 75%;" data-tournament="pg-national">
+                            <div class="location-pin upcoming">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="tournament-tooltip">PG National Showcase<br>West Palm Beach, FL • 84 teams</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tournament-location" style="position: absolute; top: 35%; left: 15%;" data-tournament="texas-scout">
+                            <div class="location-pin completed">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="tournament-tooltip">Texas Scout Day<br>Round Rock, TX • 156 players</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule View -->
+                    <div id="tournament-schedule" class="schedule-container" style="display: none;">
+                        <div class="schedule-day">
+                            <h4>Today - October 24</h4>
+                            <div class="schedule-events">
+                                <div class="schedule-event active">
+                                    <span class="event-time">9:00 AM</span>
+                                    <span class="event-name">WWBA 17U Pool Play</span>
+                                    <span class="event-status live">LIVE</span>
+                                </div>
+                                <div class="schedule-event">
+                                    <span class="event-time">2:00 PM</span>
+                                    <span class="event-name">Southeast Showcase</span>
+                                    <span class="event-status upcoming">UPCOMING</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="schedule-day">
+                            <h4>Tomorrow - October 25</h4>
+                            <div class="schedule-events">
+                                <div class="schedule-event">
+                                    <span class="event-time">8:00 AM</span>
+                                    <span class="event-name">PG National Showcase</span>
+                                    <span class="event-status scheduled">SCHEDULED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Scout Feed -->
+            <div class="dashboard-panel">
+                <div class="panel-header">
+                    <h3>Live Scout Reports</h3>
+                    <div class="live-indicator" style="background: #00ff88; width: 8px; height: 8px; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                </div>
+                
+                <div class="panel-content">
+                    <div class="scout-feed">
+                        <div class="scout-report">
+                            <div class="report-header">
+                                <span class="scout-name">Mike Rodriguez</span>
+                                <span class="report-time">2 min ago</span>
+                            </div>
+                            <div class="report-content">
+                                <strong>Banditos 17U</strong> - RHP Jake Martinez showing 92-94 FB with good command. Plus curveball at 78-80. College level prospect.
+                            </div>
+                            <div class="report-tags">
+                                <span class="tag">RHP</span>
+                                <span class="tag">College</span>
+                                <span class="tag priority">High Priority</span>
+                            </div>
+                        </div>
+
+                        <div class="scout-report">
+                            <div class="report-header">
+                                <span class="scout-name">Sarah Johnson</span>
+                                <span class="report-time">7 min ago</span>
+                            </div>
+                            <div class="report-content">
+                                <strong>Austin Wings</strong> - OF Tommy Chen (.447 avg) with excellent speed and arm strength. 6.4 sixty time.
+                            </div>
+                            <div class="report-tags">
+                                <span class="tag">OF</span>
+                                <span class="tag">Speed</span>
+                            </div>
+                        </div>
+
+                        <div class="scout-report">
+                            <div class="report-header">
+                                <span class="scout-name">Carlos Garcia</span>
+                                <span class="report-time">12 min ago</span>
+                            </div>
+                            <div class="report-content">
+                                <strong>South Texas Sliders</strong> - C David Park with strong defensive skills. 2.01 pop time to second base.
+                            </div>
+                            <div class="report-tags">
+                                <span class="tag">C</span>
+                                <span class="tag">Defense</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Analytics -->
+        <div class="dashboard-panel" style="margin-bottom: 60px;">
+            <div class="panel-header">
+                <h3>Tournament Analytics</h3>
+                <div class="view-toggles">
+                    <button class="toggle-btn active" data-chart="performance">Performance</button>
+                    <button class="toggle-btn" data-chart="regional">Regional</button>
+                    <button class="toggle-btn" data-chart="trends">Trends</button>
+                </div>
+            </div>
+            
+            <div class="panel-content">
+                <div class="charts-container">
+                    <div class="chart-wrapper">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Center -->
+        <div class="action-center">
+            <div class="h2" style="color: #fff; margin-bottom: 32px; text-align: center;">Perfect Game Intelligence Command Center</div>
+            
+            <div class="action-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+                <div class="action-card">
+                    <i class="fas fa-download"></i>
+                    <h4>Download Reports</h4>
+                    <p>Access comprehensive tournament reports and player analytics</p>
+                    <button class="action-btn">Generate Report</button>
+                </div>
+                
+                <div class="action-card">
+                    <i class="fas fa-bell"></i>
+                    <h4>Set Alerts</h4>
+                    <p>Configure notifications for high-priority prospects and events</p>
+                    <button class="action-btn">Configure Alerts</button>
+                </div>
+                
+                <div class="action-card">
+                    <i class="fas fa-users"></i>
+                    <h4>Scout Network</h4>
+                    <p>Communicate with field scouts and coordinate coverage</p>
+                    <button class="action-btn">Contact Scouts</button>
+                </div>
+                
+                <div class="action-card">
+                    <i class="fas fa-chart-bar"></i>
+                    <h4>Advanced Analytics</h4>
+                    <p>Deep dive into player performance and predictive modeling</p>
+                    <button class="action-btn">View Analytics</button>
+                </div>
+            </div>
+        </div>
+    
+
+    <!-- Dashboard Styles -->
+    <style>
+        .dashboard-card {
+            background: var(--glass-bg-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            color: #cbd5e0;
+        }
+
+        .stat-display {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--blaze-orange);
+            margin-bottom: 8px;
+        }
+
+        .stat-trend {
+            font-size: 0.9rem;
+            color: #00ff88;
+        }
+
+        .dashboard-panel {
+            background: var(--glass-bg-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-header h3 {
+            color: #fff;
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .view-toggles {
+            display: flex;
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: #cbd5e0;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active,
+        .toggle-btn:hover {
+            background: var(--blaze-orange);
+            color: #000;
+            border-color: var(--blaze-orange);
+        }
+
+        .panel-content {
+            padding: 24px;
+        }
+
+        .map-container {
+            height: 400px;
+            background: linear-gradient(135deg, rgba(0, 34, 68, 0.3) 0%, rgba(36, 69, 79, 0.2) 100%);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tournament-location {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .location-pin {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .location-pin.active {
+            background: var(--blaze-orange);
+            color: #000;
+        }
+
+        .location-pin.upcoming {
+            background: #FFD700;
+            color: #000;
+        }
+
+        .location-pin.completed {
+            background: var(--deep-teal);
+            color: #fff;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .tournament-tooltip {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .tournament-location:hover .tournament-tooltip {
+            opacity: 1;
+        }
+
+        .schedule-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .schedule-day {
+            margin-bottom: 24px;
+        }
+
+        .schedule-day h4 {
+            color: var(--blaze-orange);
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+
+        .schedule-event {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .schedule-event:hover {
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .event-time {
+            font-weight: 600;
+            color: #cbd5e0;
+            min-width: 80px;
+        }
+
+        .event-name {
+            flex: 1;
+            color: #fff;
+        }
+
+        .event-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .event-status.live {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--blaze-orange);
+        }
+
+        .event-status.upcoming {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        .event-status.scheduled {
+            background: rgba(155, 203, 235, 0.2);
+            color: var(--cardinal-blue);
+        }
+
+        .scout-feed {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .scout-report {
+            padding: 16px;
+            border-bottom: 1px solid rgba(155, 203, 235, 0.1);
+            transition: background 0.3s ease;
+        }
+
+        .scout-report:hover {
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .scout-name {
+            font-weight: 600;
+            color: var(--blaze-orange);
+        }
+
+        .report-time {
+            font-size: 0.8rem;
+            color: #cbd5e0;
+        }
+
+        .report-content {
+            color: #fff;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .report-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 2px 8px;
+            background: rgba(155, 203, 235, 0.2);
+            color: var(--cardinal-blue);
+            border-radius: 12px;
+            font-size: 0.7rem;
+        }
+
+        .tag.priority {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--blaze-orange);
+        }
+
+        .charts-container {
+            height: 300px;
+        }
+
+        .chart-wrapper {
+            height: 100%;
+            position: relative;
+        }
+
+        .action-center {
+            background: var(--glass-bg-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .action-grid {
+            margin-top: 32px;
+        }
+
+        .action-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--blaze-orange);
+        }
+
+        .action-card i {
+            font-size: 2rem;
+            color: var(--blaze-orange);
+            margin-bottom: 16px;
+        }
+
+        .action-card h4 {
+            color: #fff;
+            margin: 0 0 12px 0;
+        }
+
+        .action-card p {
+            color: #cbd5e0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .action-btn {
+            background: var(--blaze-orange);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .panel-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .view-toggles {
+                align-self: stretch;
+            }
+            
+            .toggle-btn {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    </style>
+
+    <!-- Dashboard JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize dashboard components
+            initTournamentMap();
+            initPerformanceChart();
+            initLiveUpdates();
+            initViewToggles();
+        });
+
+        function initTournamentMap() {
+            const mapPins = document.querySelectorAll('.location-pin');
+            mapPins.forEach(pin => {
+                pin.addEventListener('click', function() {
+                    const tournament = this.closest('.tournament-location').dataset.tournament;
+                    showTournamentDetails(tournament);
+                });
+            });
+        }
+
+        function initPerformanceChart() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Oct 20', 'Oct 21', 'Oct 22', 'Oct 23', 'Oct 24'],
+                    datasets: [{
+                        label: 'Scout Reports',
+                        data: [45, 67, 89, 112, 247],
+                        borderColor: '#FF6B35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#cbd5e0' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { color: '#cbd5e0' },
+                            grid: { color: 'rgba(203, 213, 224, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#cbd5e0' },
+                            grid: { color: 'rgba(203, 213, 224, 0.1)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initLiveUpdates() {
+            // Simulate live data updates
+            setInterval(() => {
+                updateScoutFeed();
+                updateStatNumbers();
+            }, 30000);
+        }
+
+        function updateScoutFeed() {
+            // Add flash animation to indicate new reports
+            const firstReport = document.querySelector('.scout-report');
+            if (firstReport) {
+                firstReport.style.background = 'rgba(255, 107, 53, 0.2)';
+                setTimeout(() => {
+                    firstReport.style.background = 'transparent';
+                }, 1000);
+            }
+        }
+
+        function updateStatNumbers() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                stat.style.transform = 'scale(1.05)';
+                stat.style.color = '#00ff88';
+                setTimeout(() => {
+                    stat.style.transform = 'scale(1)';
+                    stat.style.color = 'var(--blaze-orange)';
+                }, 300);
+            });
+        }
+
+        function initViewToggles() {
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const view = this.dataset.view || this.dataset.chart;
+                    const parent = this.closest('.dashboard-panel');
+                    
+                    // Update active state
+                    parent.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Toggle views
+                    if (view === 'map') {
+                        parent.querySelector('#tournament-map').style.display = 'block';
+                        parent.querySelector('#tournament-schedule').style.display = 'none';
+                    } else if (view === 'schedule') {
+                        parent.querySelector('#tournament-map').style.display = 'none';
+                        parent.querySelector('#tournament-schedule').style.display = 'block';
+                    }
+                });
+            });
+        }
+
+        function showTournamentDetails(tournament) {
+            console.log('🏆 Loading tournament details for:', tournament);
+            // Would integrate with actual tournament API
+        }
+
+        // Action button handlers
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.textContent.trim();
+                console.log('🎯 Action triggered:', action);
+                // Would integrate with actual functionality
+            });
+        });
+    </script>
+
+</body></html>
