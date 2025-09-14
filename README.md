@@ -159,6 +159,9 @@ npm run health-check  # System health monitoring
 
 ### MCP Server Commands
 ```bash
+# Register Hawk-Eye Innovations MCP server
+claude mcp add hawkeye-innovations -- node mcp-servers/hawkeye-innovations/index.js
+
 # Analyze sports trajectories
 /mcp call cardinals-analytics analyzeTrajectory
 
