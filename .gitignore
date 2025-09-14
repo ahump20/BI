@@ -352,6 +352,14 @@ OLD_*/
 *.tar.gz
 *.zip
 
+# Binary Documents and Backups
+*.pdf
+*.bak
+*.backup
+
+# Allow documentation PDFs
+!docs/**/*.pdf
+
 # =============================================================================
 # Python Environments
 # =============================================================================
