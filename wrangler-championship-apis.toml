@@ -1,0 +1,78 @@
+name = "blaze-intelligence-championship-apis"
+main = "api/analytics.js"
+compatibility_date = "2024-09-13"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "blaze-intelligence-championship-apis-prod"
+vars = { ENVIRONMENT = "production" }
+
+[env.staging]
+name = "blaze-intelligence-championship-apis-staging"
+vars = { ENVIRONMENT = "staging" }
+
+[[routes]]
+pattern = "blaze-intelligence-lsl.pages.dev/api/*"
+zone_name = "pages.dev"
+
+# Analytics API
+[[routes]]
+pattern = "*/api/analytics"
+zone_name = "blaze-intelligence-lsl.pages.dev"
+
+# Live Data Engine API
+[[routes]]
+pattern = "*/api/live-data-engine"
+zone_name = "blaze-intelligence-lsl.pages.dev"
+
+# Video Analysis API
+[[routes]]
+pattern = "*/api/video-analysis"
+zone_name = "blaze-intelligence-lsl.pages.dev"
+
+# AR Coaching Engine API
+[[routes]]
+pattern = "*/api/ar-coaching-engine"
+zone_name = "blaze-intelligence-lsl.pages.dev"
+
+# Cardinals Readiness API
+[[routes]]
+pattern = "*/api/cardinals/readiness"
+zone_name = "blaze-intelligence-lsl.pages.dev"
+
+[vars]
+PLATFORM_VERSION = "2.0.0"
+ANALYTICS_VERSION = "1.5.0"
+VIDEO_AI_VERSION = "3.1.0"
+AR_ENGINE_VERSION = "4.2.0"
+
+# KV Namespaces for caching
+[[kv_namespaces]]
+binding = "ANALYTICS_CACHE"
+id = "analytics_cache_namespace"
+preview_id = "analytics_cache_preview"
+
+[[kv_namespaces]]
+binding = "SESSION_STORE"
+id = "session_store_namespace"
+preview_id = "session_store_preview"
+
+# R2 Storage for video files
+[[r2_buckets]]
+binding = "VIDEO_STORAGE"
+bucket_name = "blaze-video-analysis"
+
+[[r2_buckets]]
+binding = "AR_SESSIONS"
+bucket_name = "blaze-ar-coaching"
+
+# D1 Database for analytics
+[[d1_databases]]
+binding = "ANALYTICS_DB"
+database_name = "blaze-analytics-prod"
+database_id = "championship-analytics-db"
+
+[build]
+command = "echo 'Building Championship APIs...'"
+cwd = "."
+watch_dir = "api"
