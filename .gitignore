@@ -263,7 +263,8 @@ analytics-cache/
 # Deployment and CI/CD
 # =============================================================================
 .vercel/
-.netlify/
+.netlify/*
+!.netlify/config
 .firebase/
 
 # Terraform
@@ -463,5 +464,4 @@ secrets.env
 
 # Platform-specific
 .vercel/
-.netlify/
 wrangler.toml.local
