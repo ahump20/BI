@@ -2,7 +2,7 @@
 
 ## Purpose of the Hawk-Eye API/MCP Server
 - Provides a central API layer for the Blaze Intelligence "Hawk-Eye" tracking system.
-- Exposes machine control protocol (MCP) endpoints that orchestrate analytics, biometrics, and real-time data collection.
+- Exposes Machine Control Protocol (MCP) endpoints that orchestrate analytics, biometrics, and real-time data collection.
 - Acts as the backend for Netlify-hosted functions and supports integrations with external sports data and AI providers.
 
 ## Required Environment Variables
