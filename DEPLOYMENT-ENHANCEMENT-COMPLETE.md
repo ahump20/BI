@@ -6,16 +6,16 @@
 - Acts as the backend for Netlify-hosted functions and supports integrations with external sports data and AI providers.
 
 ## Required Environment Variables
-| Variable | Description |
-|----------|-------------|
-| `CLAUDE_API_KEY` | Access key for Claude-based analysis. |
-| `OPENAI_API_KEY` | Access key for OpenAI models. |
-| `GOOGLE_AI_API_KEY` | Enables Gemini/Google AI features. |
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account identifier for Worker resources. |
-| `CLOUDFLARE_API_TOKEN` | Token used to manage Cloudflare deployments. |
-| `CLOUDFLARE_ZONE_ID` | Zone identifier for DNS configuration. |
-| `NODE_ENV` | Runtime environment (`development`, `production`, etc.). |
-| `PORT` | Port used when running the MCP server locally. |
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `CLAUDE_API_KEY` | Access key for Claude-based analysis. | Yes |
+| `OPENAI_API_KEY` | Access key for OpenAI models. | Yes |
+| `GOOGLE_AI_API_KEY` | Enables Gemini/Google AI features. | Yes |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account identifier for Worker resources. | Yes |
+| `CLOUDFLARE_API_TOKEN` | Token used to manage Cloudflare deployments. | Yes |
+| `CLOUDFLARE_ZONE_ID` | Zone identifier for DNS configuration. | Yes |
+| `NODE_ENV` | Runtime environment (`development`, `production`, etc.). Defaults to `development` if not set. | No |
+| `PORT` | Port used when running the MCP server locally. Defaults to `3000` if not set. | No |
 
 ## Netlify Deployment
 - **Domain:** `https://blaze-intelligence.netlify.app`
