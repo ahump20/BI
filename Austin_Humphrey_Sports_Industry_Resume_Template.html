@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austin Humphrey – Sports Industry Professional</title>
+    <!--
+      General-purpose sports industry résumé template
+      Adaptable for: Analytics, Operations, Marketing, Sales, Events, Media, Technology
+      Design maintains burnt orange heritage with professional presentation
+    -->
+    <style>
+        /* Core brand palette */
+        :root {
+            --primary: #BF5700;      /* burnt orange heritage */
+            --accent:  #FF8C00;      /* vivid orange accent */
+            --dark:    #0A0A0F;      /* darkest background */
+            --surface: #1A1A24;      /* secondary background */
+            --border: rgba(191,87,0,0.35);
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --success: #10B981;
+            --info: #00B2A9;        /* teal for variety */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto,
+                         'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--surface) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .resume-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(26,26,36,0.96);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        /* Hero section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 48px 32px;
+            background: radial-gradient(circle at 10% 30%, rgba(191,87,0,0.25), rgba(26,26,36,0.7));
+            border-bottom: 1px solid var(--border);
+        }
+
+        @media (min-width: 700px) {
+            .hero {
+                flex-direction: row;
+                text-align: left;
+                padding: 64px;
+            }
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-name {
+            font-size: 2.75rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .hero-name span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            max-width: 650px;
+        }
+
+        /* Contact bar */
+        .contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        @media (min-width: 700px) {
+            .contact {
+                justify-content: flex-start;
+            }
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-item svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+            stroke: var(--accent);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .contact-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        /* Sections */
+        .section {
+            padding: 40px 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        @media (min-width: 700px) {
+            .section {
+                padding: 48px 64px;
+            }
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Professional Summary */
+        .summary p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+            line-height: 1.75;
+            max-width: 850px;
+        }
+
+        /* Experience */
+        .experience-item {
+            margin-bottom: 36px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(191,87,0,0.15);
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .experience-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .experience-company {
+            font-size: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .experience-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+        }
+
+        .experience-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-list li {
+            position: relative;
+            margin-bottom: 10px;
+            padding-left: 24px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .experience-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 8px;
+            color: var(--accent);
+        }
+
+        /* Skills Grid */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-category {
+            background: rgba(191,87,0,0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .skill-category h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Education & Certs */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .education-card {
+            background: rgba(191,87,0,0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .education-institution {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            font-size: 1.05rem;
+        }
+
+        .education-degree {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .education-details {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .achievement-item .icon {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        /* Value Proposition */
+        .value-props {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(191,87,0,0.05);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .value-item .metric {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .value-item .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px;
+            background: rgba(10,10,15,0.5);
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: #000;
+                padding: 0;
+            }
+            
+            .resume-wrapper {
+                background: white;
+                box-shadow: none;
+                border: none;
+            }
+            
+            .hero {
+                background: none;
+                padding: 32px 0;
+            }
+            
+            .section {
+                padding: 24px 0;
+            }
+            
+            .hero-name span {
+                color: var(--primary) !important;
+                -webkit-text-fill-color: var(--primary) !important;
+            }
+            
+            .contact-item svg {
+                stroke: #666;
+            }
+            
+            .skill-category,
+            .education-card,
+            .value-item {
+                background: #f5f5f5;
+                border-color: #ddd;
+            }
+            
+            .footer {
+                display: none;
+            }
+        }
+
+        @page {
+            margin: 0.5in;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-wrapper">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-name">AUSTIN <span>HUMPHREY</span></h1>
+                <div class="hero-tagline">
+                    Sports industry professional combining analytical expertise, proven sales performance, 
+                    and authentic athletic experience to drive excellence in operations, technology, and fan engagement.
+                </div>
+                <div class="contact">
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <span>Boerne, TX</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.1 6.11 2 2 0 0 1 5.28 4h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11l-1.18 1.18a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <span>(210) 273-5538</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <a href="mailto:ahump20@outlook.com">ahump20@outlook.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        <a href="https://linkedin.com/in/john-humphrey-2033">linkedin.com/in/john-humphrey-2033</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFESSIONAL SUMMARY -->
+        <section class="section">
+            <h2>Professional Summary</h2>
+            <div class="summary">
+                <p>
+                    Dynamic sports industry professional with a unique blend of business acumen, technical insight, 
+                    and authentic athletic background. Currently pursuing a Master's in Entertainment Business with 
+                    a sports management focus while building sports analytics platform concepts. Proven track record 
+                    in high-pressure sales environments, data-driven decision making, and stakeholder management 
+                    across professional sports organizations in Texas.
+                </p>
+                <p>
+                    Former multi-sport varsity athlete and youth baseball player who understands the game from 
+                    both performance and business perspectives. Seeking to leverage analytical expertise, operational 
+                    excellence, and deep passion for sports innovation to contribute to forward-thinking organizations 
+                    in analytics, operations, technology, or business development roles.
+                </p>
+            </div>
+        </section>
+
+        <!-- PROFESSIONAL EXPERIENCE -->
+        <section class="section">
+            <h2>Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Advertising Account Executive</div>
+                        <div class="experience-company">Spectrum Reach – Austin, TX</div>
+                    </div>
+                    <div class="experience-date">Nov 2022 – Present</div>
+                </div>
+                <ul class="experience-list">
+                    <li>Develop and execute multi-platform media strategies for professional sports organizations across Texas, managing complex campaigns with budgets ranging from $50K to $500K</li>
+                    <li>Leverage advanced analytics platforms to generate actionable insights on fan engagement, viewership patterns, and ROI, informing strategic recommendations for sports clients</li>
+                    <li>Coordinate event sponsorships and promotional activations at major sporting venues, ensuring seamless execution and compliance with league regulations</li>
+                    <li>Build relationships with C-suite executives at sports franchises, demonstrating expertise in both traditional and digital marketing channels</li>
+                    <li>Consistently exceed quarterly sales targets by 15-20% through strategic account development and data-driven optimization</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Financial Representative</div>
+                        <div class="experience-company">Northwestern Mutual – San Antonio, TX</div>
+                    </div>
+                    <div class="experience-date">Dec 2020 – Aug 2022</div>
+                </div>
+                <ul class="experience-list">
+                    <li>Achieved top 10% national ranking through systematic process optimization and disciplined pipeline management, earning the prestigious Power of 10 Award</li>
+                    <li>Won 150-person "March Madness" sales competition through strategic analysis of competitive dynamics and sustained high-performance execution</li>
+                    <li>Developed proprietary CRM workflows and data tracking systems that improved client conversion rates by 35%</li>
+                    <li>Managed portfolio of high-net-worth clients including former professional athletes and sports industry executives</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Leadership & Event Management Roles</div>
+                        <div class="experience-company">Alpha Tau Omega Fraternity – Austin, TX</div>
+                    </div>
+                    <div class="experience-date">Jan 2016 – Jun 2018</div>
+                </div>
+                <ul class="experience-list">
+                    <li>As Rush Captain, orchestrated recruitment events drawing 70+ new members, managing $100K+ budgets and coordinating logistics across multiple venues</li>
+                    <li>Led alumni relations initiatives that increased engagement by 40% and secured $250K in donations for facility improvements</li>
+                    <li>Developed event operations playbooks that became organizational standards, demonstrating ability to systematize and scale successful processes</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CORE COMPETENCIES -->
+        <section class="section">
+            <h2>Core Competencies</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Sports Business & Operations</h3>
+                    <ul class="skill-list">
+                        <li>Event planning & venue management</li>
+                        <li>Sponsorship activation & partnerships</li>
+                        <li>Fan engagement & experience design</li>
+                        <li>Ticketing & revenue optimization</li>
+                        <li>League compliance & regulations</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Analytics & Technology</h3>
+                    <ul class="skill-list">
+                        <li>Performance metrics & KPI development</li>
+                        <li>Data visualization (Tableau, Power BI)</li>
+                        <li>CRM systems (Salesforce, HubSpot)</li>
+                        <li>Statistical analysis & modeling</li>
+                        <li>Digital marketing analytics</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Sales & Marketing</h3>
+                    <ul class="skill-list">
+                        <li>B2B sales & account management</li>
+                        <li>Media planning & buying</li>
+                        <li>Brand strategy & positioning</li>
+                        <li>ROI analysis & reporting</li>
+                        <li>Presentation & pitch development</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Leadership & Communication</h3>
+                    <ul class="skill-list">
+                        <li>Stakeholder management</li>
+                        <li>Team building & mentorship</li>
+                        <li>Public speaking & media relations</li>
+                        <li>Cross-functional collaboration</li>
+                        <li>Strategic planning & execution</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & DEVELOPMENT -->
+        <section class="section">
+            <h2>Education & Professional Development</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-institution">Full Sail University</div>
+                    <div class="education-degree">Master of Science – Entertainment Business</div>
+                    <div class="education-details">
+                        Expected 2025<br>
+                        Focus: Sports Management, Media Analytics, Digital Strategy<br>
+                        Current GPA: 3.8/4.0
+                    </div>
+                </div>
+                <div class="education-card">
+                    <div class="education-institution">The University of Texas at Austin</div>
+                    <div class="education-degree">Bachelor of Arts – International Relations & Global Studies</div>
+                    <div class="education-details">
+                        Class of 2020<br>
+                        Minors: Economics, European Studies<br>
+                        Relevant Coursework: Data Analysis, Strategic Planning, Market Economics
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACHIEVEMENTS & ATHLETICS -->
+        <section class="section">
+            <h2>Achievements & Athletic Background</h2>
+            <div class="achievements-grid">
+                <div class="achievement-item">
+                    <span class="icon">🏆</span>
+                    <span><strong>Power of 10 Award:</strong> Top 10% national performance ranking at Northwestern Mutual (2022)</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="icon">🥇</span>
+                    <span><strong>March Madness Champion:</strong> Won 150-person regional sales competition through strategic excellence</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="icon">⚾</span>
+                    <span><strong>Multi-Sport Athlete:</strong> 3× Varsity Letterman in Baseball, Football, and Track & Field</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="icon">🎯</span>
+                    <span><strong>Youth Baseball:</strong> South Texas Sliders and USSSA tournament experience</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="icon">📊</span>
+                    <span><strong>Sports Analytics Project:</strong> Developing "Blaze Intelligence" platform concept for professional sports analytics</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="icon">🎓</span>
+                    <span><strong>Academic Excellence:</strong> Dean's List recognition and leadership awards at UT Austin</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- VALUE PROPOSITION -->
+        <section class="section">
+            <h2>What I Bring to Your Organization</h2>
+            <div class="value-props">
+                <div class="value-item">
+                    <div class="metric">15%+</div>
+                    <div class="label">Sales Growth Track Record</div>
+                </div>
+                <div class="value-item">
+                    <div class="metric">$1M+</div>
+                    <div class="label">Managed Campaign Budgets</div>
+                </div>
+                <div class="value-item">
+                    <div class="metric">Top 10%</div>
+                    <div class="label">National Performance Ranking</div>
+                </div>
+                <div class="value-item">
+                    <div class="metric">3 Sports</div>
+                    <div class="label">Varsity Athletic Experience</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-text">
+                Austin Humphrey • Sports Intelligence & Business Innovation<br>
+                <em>Where athletic heritage meets analytical excellence</em>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
