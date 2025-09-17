@@ -1,6 +1,7 @@
 {
   "name": "blaze-intelligence-simple",
   "version": "1.0.0",
+  "type": "module",
   "description": "Simple interface, sophisticated backend",
   "main": "simple-blaze-server.js",
   "scripts": {

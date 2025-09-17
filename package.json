@@ -1,11 +1,15 @@
 {
   "name": "blaze-intelligence-api",
   "version": "1.0.0",
+  "type": "module",
   "description": "Blaze Intelligence API Services",
   "main": "contact-form.js",
   "scripts": {
     "deploy:contact": "wrangler deploy contact-form.js --config ../wrangler-contact-api.toml --env production",
-    "deploy:auth": "wrangler deploy auth.js --config ../wrangler-auth-api.toml --env production"
+    "deploy:auth": "wrangler deploy auth.js --config ../wrangler-auth-api.toml --env production",
+    "deploy:simulate": "node simulate-deployment.js",
+    "deploy:production": "cd austin-portfolio-deploy/deployment && node continuous-delivery.cjs deploy",
+    "status": "cd austin-portfolio-deploy/deployment && node continuous-delivery.cjs snapshot"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3"
