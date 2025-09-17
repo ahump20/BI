@@ -1,0 +1,58 @@
+{
+  "deploymentId": "deploy-1758132466720",
+  "timestamp": "2025-09-17T18:07:53.283Z",
+  "status": "success",
+  "summary": {
+    "gitStatus": "dirty",
+    "preDeploymentChecks": 3,
+    "conflictsResolved": 0,
+    "deploymentUrl": "https://xdi02z9e.blaze-intelligence.pages.dev",
+    "overallHealth": "healthy"
+  },
+  "details": {
+    "gitStatus": {
+      "clean": false,
+      "branch": "copilot/fix-73d22504-3ef8-4cc2-a773-3a5f5cf67435",
+      "uncommittedChanges": 3
+    },
+    "checks": [
+      {
+        "name": "security",
+        "status": "skipped",
+        "error": "git secrets not available in sandboxed environment"
+      },
+      {
+        "name": "file-package.json",
+        "status": "passed"
+      },
+      {
+        "name": "file-index.html",
+        "status": "passed"
+      },
+      {
+        "name": "file-live-connections.js",
+        "status": "passed"
+      }
+    ],
+    "conflictResults": {
+      "detectedConflicts": 1,
+      "resolved": 0,
+      "manualReview": 0,
+      "failed": 1,
+      "resolutionRate": 0
+    },
+    "deploymentUrl": "https://xdi02z9e.blaze-intelligence.pages.dev",
+    "healthStatus": {
+      "overall": "healthy",
+      "responseTime": "78ms",
+      "uptime": "99.61%",
+      "apis": {
+        "gateway": "healthy",
+        "cardinals": "healthy",
+        "titans": "healthy",
+        "longhorns": "healthy",
+        "grizzlies": "healthy"
+      }
+    }
+  }
+}
