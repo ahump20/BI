@@ -7,7 +7,7 @@ Runs after data ingestion to update team readiness metrics
 import os
 import sys
 import subprocess
-from datetime import datetime
+from datetime import datetime, timezone
 
 # Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -16,7 +16,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 def run_readiness_update():
     """Run the readiness board update"""
     print("🏆 Updating Blaze Intelligence Readiness Board")
-    print(f"Timestamp: {datetime.utcnow().isoformat()}Z")
+    print(f"Timestamp: {datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')}")
     print("-" * 60)
     
     try:
@@ -99,7 +99,7 @@ def generate_teams_summary():
         
         # Generate teams.json
         teams_data = {
-            'generated_at': datetime.utcnow().isoformat() + 'Z',
+            'generated_at': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
             'teams': teams,
             'analytics': {
                 'totalTeams': len(teams),
