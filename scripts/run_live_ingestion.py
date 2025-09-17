@@ -8,7 +8,7 @@ import os
 import sys
 import subprocess
 import argparse
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict
 
 # Add parent directory to path
@@ -77,7 +77,7 @@ def check_api_keys() -> Dict[str, bool]:
 def run_full_pipeline(leagues: List[str] = None) -> bool:
     """Run the complete live data ingestion pipeline"""
     print("🚀 Starting Blaze Intelligence Live Data Ingestion")
-    print(f"Timestamp: {datetime.utcnow().isoformat()}Z")
+    print(f"Timestamp: {datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')}")
     print("-" * 60)
     
     # Check API keys
