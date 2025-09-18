@@ -1,0 +1,233 @@
+{
+  "collection": "Perfect Game + TrackMan Event Metrics",
+  "last_updated": "2025-02-14",
+  "players": [
+    {
+      "name": "Jackson Miller",
+      "player_id": "jackson-miller-2028",
+      "age_group": "15u",
+      "grad_year": 2028,
+      "state": "TX",
+      "primary_position": "RHP",
+      "secondary_position": "IF",
+      "bats": "R",
+      "throws": "R",
+      "travel_team": "Texas Twelve Maroon 15U",
+      "last_event": "2025 PG South Elite",
+      "metrics": {
+        "pitching": {
+          "fastball_velocity": 93,
+          "fastball_spin": 2350,
+          "breaking_ball_spin": 2680,
+          "changeup_velocity": 82,
+          "extension": 6.4
+        },
+        "hitting": {
+          "exit_velocity": 99,
+          "launch_angle_avg": 18,
+          "hard_hit_pct": 62,
+          "contact_pct": 79
+        },
+        "fielding": {
+          "infield_velocity": 90,
+          "arm_strength": 92,
+          "pop_time": null
+        },
+        "athletic": {
+          "sixty_yard": 6.72,
+          "vertical_jump": 32,
+          "sprint_speed": 29.8
+        }
+      },
+      "evaluations": [
+        {
+          "source": "Perfect Game",
+          "grade": 9.5,
+          "summary": "High-octane arm with advanced pitchability and two-way upside."
+        },
+        {
+          "source": "USSSA",
+          "grade": 92,
+          "summary": "Dominant on the mound during Select 30, shows leadership traits."
+        }
+      ]
+    },
+    {
+      "name": "Mason Carter",
+      "player_id": "mason-carter-2027",
+      "age_group": "16u",
+      "grad_year": 2027,
+      "state": "GA",
+      "primary_position": "SS",
+      "secondary_position": "3B",
+      "bats": "S",
+      "throws": "R",
+      "travel_team": "Georgia Bombers 16U National",
+      "last_event": "2025 PG WWBA 16U",
+      "metrics": {
+        "pitching": null,
+        "hitting": {
+          "exit_velocity": 101,
+          "launch_angle_avg": 15,
+          "hard_hit_pct": 68,
+          "contact_pct": 84
+        },
+        "fielding": {
+          "infield_velocity": 91,
+          "arm_strength": 93,
+          "pop_time": null
+        },
+        "athletic": {
+          "sixty_yard": 6.54,
+          "vertical_jump": 34,
+          "sprint_speed": 30.4
+        }
+      },
+      "evaluations": [
+        {
+          "source": "Perfect Game",
+          "grade": 9.7,
+          "summary": "Premium defender with plus bat speed and polish from both sides."
+        },
+        {
+          "source": "D1Baseball",
+          "grade": 60,
+          "summary": "Immediate impact shortstop with SEC-ready actions."
+        }
+      ]
+    },
+    {
+      "name": "Caleb Johnson",
+      "player_id": "caleb-johnson-2026",
+      "age_group": "17u",
+      "grad_year": 2026,
+      "state": "FL",
+      "primary_position": "OF",
+      "secondary_position": "CF",
+      "bats": "L",
+      "throws": "R",
+      "travel_team": "Florida Hurricanes Platinum 17U",
+      "last_event": "2025 PG BCS National",
+      "metrics": {
+        "pitching": null,
+        "hitting": {
+          "exit_velocity": 102,
+          "launch_angle_avg": 19,
+          "hard_hit_pct": 64,
+          "contact_pct": 82
+        },
+        "fielding": {
+          "outfield_velocity": 96,
+          "arm_strength": 95,
+          "pop_time": null
+        },
+        "athletic": {
+          "sixty_yard": 6.41,
+          "vertical_jump": 35,
+          "sprint_speed": 31.2
+        }
+      },
+      "evaluations": [
+        {
+          "source": "Perfect Game",
+          "grade": 9.6,
+          "summary": "Impact bat with leverage and electric speed, projects to stay in center."
+        },
+        {
+          "source": "D1Baseball",
+          "grade": 60,
+          "summary": "Pro-ready athleticism with top-of-the-order profile."
+        }
+      ]
+    },
+    {
+      "name": "Noah Williams",
+      "player_id": "noah-williams-2025",
+      "age_group": "18u",
+      "grad_year": 2025,
+      "state": "TX",
+      "primary_position": "RHP",
+      "secondary_position": null,
+      "bats": "R",
+      "throws": "R",
+      "travel_team": "Banditos Black 18U",
+      "last_event": "2025 PG South World Series",
+      "metrics": {
+        "pitching": {
+          "fastball_velocity": 97,
+          "fastball_spin": 2450,
+          "breaking_ball_spin": 2805,
+          "changeup_velocity": 85,
+          "extension": 6.7
+        },
+        "hitting": null,
+        "fielding": {
+          "arm_strength": 98,
+          "infield_velocity": null,
+          "pop_time": null
+        },
+        "athletic": {
+          "sixty_yard": 6.88,
+          "vertical_jump": 30,
+          "sprint_speed": 28.9
+        }
+      },
+      "evaluations": [
+        {
+          "source": "Perfect Game",
+          "grade": 10.0,
+          "summary": "Electric arm strength with frontline starter ceiling."
+        },
+        {
+          "source": "D1Baseball",
+          "grade": 65,
+          "summary": "Ready to anchor an SEC weekend rotation early in career."
+        }
+      ]
+    },
+    {
+      "name": "Ethan Rodriguez",
+      "player_id": "ethan-rodriguez-2029",
+      "age_group": "14u",
+      "grad_year": 2029,
+      "state": "TX",
+      "primary_position": "C",
+      "secondary_position": "1B",
+      "bats": "R",
+      "throws": "R",
+      "travel_team": "Dallas Tigers Polk 14U",
+      "last_event": "2025 PG 14U Select World Series",
+      "metrics": {
+        "pitching": null,
+        "hitting": {
+          "exit_velocity": 94,
+          "launch_angle_avg": 17,
+          "hard_hit_pct": 58,
+          "contact_pct": 81
+        },
+        "fielding": {
+          "pop_time": 1.90,
+          "arm_strength": 83,
+          "catcher_throw_velocity": 80
+        },
+        "athletic": {
+          "sixty_yard": 7.15,
+          "vertical_jump": 29,
+          "sprint_speed": 27.6
+        }
+      },
+      "evaluations": [
+        {
+          "source": "Perfect Game",
+          "grade": 9.3,
+          "summary": "Advanced receiver with improving power production."
+        },
+        {
+          "source": "USSSA",
+          "grade": 88,
+          "summary": "Commanded pitching staff throughout Select 30 Championships."
+        }
+      ]
+    }
+  ]
+}
