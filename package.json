@@ -5,7 +5,9 @@
   "main": "contact-form.js",
   "scripts": {
     "deploy:contact": "wrangler deploy contact-form.js --config ../wrangler-contact-api.toml --env production",
-    "deploy:auth": "wrangler deploy auth.js --config ../wrangler-auth-api.toml --env production"
+    "deploy:auth": "wrangler deploy auth.js --config ../wrangler-auth-api.toml --env production",
+    "build:unified": "npm --prefix blaze-intelligence-os-v2 install && bash -lc 'cd blaze-intelligence-os-v2 && npx vite build'",
+    "serve:unified": "npm --prefix blaze-intelligence-os-v2 install && BROWSER=none bash -lc 'cd blaze-intelligence-os-v2 && npx vite build && npx vite preview --host 0.0.0.0 --port 8000'"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3"
