@@ -19,8 +19,9 @@ export default async function handler(request, env, ctx) {
 
     // Check database connectivity
     try {
-      if (env.BLAZE_DB) {
-        const result = await env.BLAZE_DB.prepare('SELECT 1 as test').first();
+      const databaseBinding = env.BLAZE_DB || env.DB;
+      if (databaseBinding) {
+        const result = await databaseBinding.prepare('SELECT 1 as test').first();
         health.services.database = result ? 'connected' : 'error';
       } else {
         health.services.database = 'not_configured';
@@ -32,9 +33,10 @@ export default async function handler(request, env, ctx) {
 
     // Check KV storage
     try {
-      if (env.ANALYTICS_CACHE) {
-        await env.ANALYTICS_CACHE.put('health_check', 'ok', { expirationTtl: 60 });
-        const test = await env.ANALYTICS_CACHE.get('health_check');
+      const kvBinding = env.ANALYTICS_CACHE || env.CACHE;
+      if (kvBinding) {
+        await kvBinding.put('health_check', 'ok', { expirationTtl: 60 });
+        const test = await kvBinding.get('health_check');
         health.services.kv_storage = test === 'ok' ? 'connected' : 'error';
       } else {
         health.services.kv_storage = 'not_configured';
@@ -46,7 +48,8 @@ export default async function handler(request, env, ctx) {
 
     // Check R2 storage
     try {
-      if (env.DATA_STORAGE) {
+      const r2Binding = env.DATA_STORAGE || env.MEDIA_STORAGE || env.MEDIA;
+      if (r2Binding) {
         // Simple R2 connectivity test
         health.services.r2_storage = 'connected';
       } else {
