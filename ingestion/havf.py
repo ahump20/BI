@@ -6,8 +6,10 @@ Computes three core metrics:
 - NIL Trust Score: Authenticity + Velocity + Salience
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
+
+from ingestion.time_utils import ensure_utc, utc_now_isoformat
 
 
 def normalize_value(value: float, min_val: float = 0, max_val: float = 100) -> float:
@@ -85,7 +87,8 @@ def compute_champion_readiness(player: Dict[str, Any]) -> Optional[float]:
     if "bio" in player and player["bio"].get("dob"):
         try:
             dob = datetime.fromisoformat(player["bio"]["dob"].replace("Z", "+00:00"))
-            age = (datetime.now() - dob).days / 365.25
+            dob = ensure_utc(dob)
+            age = (datetime.now(timezone.utc) - dob).days / 365.25
             
             # Peak athletic age modeling (24-28 optimal)
             if 24 <= age <= 28:
@@ -244,6 +247,6 @@ def compute_all(players: List[Dict[str, Any]]) -> None:
     """
     Apply HAV-F computation to all players in-place.
     """
-    now_iso = datetime.utcnow().isoformat() + "Z"
+    now_iso = utc_now_isoformat()
     for player in players:
         stamp_havf(player, now_iso)
