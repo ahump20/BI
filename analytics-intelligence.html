@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Control Room | Blaze Intelligence</title>
+    <meta name="description" content="Command Blaze Intelligence analytics with live decision profiles, production-ready embeds, and dynamic reporting tuned for SEC programs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/performance-pages.css">
+    <style>
+        .hero__title span {
+            color: var(--blaze-gold);
+        }
+
+        .profile-switcher {
+            display: inline-flex;
+            padding: 0.5rem;
+            border-radius: 999px;
+            background: rgba(96, 165, 250, 0.08);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .profile-switcher button {
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 0.6rem 1.4rem;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .profile-switcher button.is-active {
+            background: linear-gradient(135deg, var(--blaze-orange), var(--electric));
+            color: #05060f;
+            box-shadow: 0 10px 25px rgba(96, 165, 250, 0.25);
+        }
+
+        .profile-switcher button:hover {
+            color: var(--text-primary);
+        }
+
+        .analytics-console {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            align-items: stretch;
+        }
+
+        .console-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .console-card--chart {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 960px) {
+            .console-card--chart {
+                grid-column: span 1;
+            }
+        }
+
+        .console-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .metric-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .metric-card {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.75rem;
+            align-items: center;
+            padding: 1.1rem 1.25rem;
+            border-radius: var(--radius-md);
+            background: rgba(96, 165, 250, 0.08);
+            border: 1px solid rgba(96, 165, 250, 0.18);
+        }
+
+        .metric-card__label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .metric-card__value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .metric-card__trend {
+            font-size: 0.75rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .metric-card__trend[data-trend="down"] {
+            color: var(--danger);
+        }
+
+        .playbook-list {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .playbook-item {
+            padding: 0.85rem 1rem;
+            border-radius: var(--radius-md);
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            font-size: 0.95rem;
+        }
+
+        .embed-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            align-items: stretch;
+        }
+
+        .embed-preview {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.18), rgba(15, 23, 42, 0.8));
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .embed-preview__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .embed-preview__grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .preview-metric {
+            padding: 1rem 1.25rem;
+            background: rgba(4, 7, 16, 0.65);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .preview-metric__label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .preview-metric__value {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-top: 0.4rem;
+            color: var(--text-primary);
+        }
+
+        .embed-snippet {
+            background: rgba(4, 7, 16, 0.85);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            padding: 1.75rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .embed-snippet__label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .code-block {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            font-family: 'IBM Plex Mono', 'SFMono-Regular', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--electric);
+            overflow-x: auto;
+        }
+
+        .integration-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .integration-card {
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .integration-card__title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text-primary);
+        }
+
+        .integration-card__meta {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .integration-pill {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.35rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(96, 165, 250, 0.12);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            color: var(--electric);
+        }
+
+        .integration-card__footer {
+            margin-top: auto;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Embed presentation */
+        body.embed-mode {
+            background: #04060f;
+        }
+
+        body.embed-mode .global-nav,
+        body.embed-mode .hero,
+        body.embed-mode .section:not(#embed) {
+            display: none !important;
+        }
+
+        body.embed-mode .page-shell {
+            max-width: 480px;
+            margin: 0 auto;
+            padding-top: 1.5rem;
+        }
+
+        body.embed-mode #embed {
+            padding-top: 0;
+        }
+
+        body.embed-mode .embed-grid {
+            grid-template-columns: 1fr;
+        }
+
+        body.embed-mode .embed-snippet {
+            display: none;
+        }
+
+        body.embed-mode .embed-preview {
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+        }
+    </style>
+</head>
+<body>
+    <header class="global-nav">
+        <div class="global-nav__inner">
+            <a class="nav-logo" href="index.html">
+                <span class="nav-logo__mark">BI</span>
+                Blaze Intelligence
+            </a>
+            <nav class="nav-links">
+                <a href="analytics-intelligence.html" class="active">Analytics</a>
+                <a href="sec-nil-intelligence.html">SEC NIL</a>
+                <a href="video-intelligence.html">Video AI</a>
+                <a href="embedded-biomechanics.html">Biomechanics</a>
+                <a href="ar-real-time-visualization.html">AR Coaching</a>
+                <a href="index.html#contact" class="nav-cta">Talk to us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <span class="hero__eyebrow">Analytics command center</span>
+                    <h1 class="hero__title">Direct championship decisions with <span>live intelligence profiles</span></h1>
+                    <p class="hero__description">
+                        Pivot between gameday control, season planning, and recruiting market intel in one interface.
+                        Blaze Intelligence synchronizes NIL valuations, performance telemetry, and fan engagement
+                        to anchor every move in hard data.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn--primary" href="#control-room">Launch control room</a>
+                        <a class="btn btn--ghost" href="#embed">Copy production embed</a>
+                    </div>
+                    <div class="hero-metrics">
+                        <div class="hero-metric">
+                            <div class="hero-metric__label">Control index</div>
+                            <div class="hero-metric__value" data-analytics-metric="control">0.92</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric__label">Win probability delta</div>
+                            <div class="hero-metric__value" data-analytics-metric="delta">+6.4%</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric__label">Alert latency</div>
+                            <div class="hero-metric__value" data-analytics-metric="latency">41 ms</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-visual__overlay">
+                        <div class="hero-visual__badge">Live scenario feed</div>
+                        <div class="visual-stream">
+                            <div class="stream-card">
+                                <div class="stream-card__label">Active profile</div>
+                                <div class="stream-card__value" data-profile-label>Gameday control</div>
+                                <div class="telemetry-pill" data-profile-tag>Tempo surge</div>
+                            </div>
+                            <div class="stream-card">
+                                <div class="stream-card__label">Critical lever</div>
+                                <div class="stream-card__value" data-profile-lever>3rd down conversions</div>
+                                <div class="telemetry-pill" data-profile-lever-tag>+11% over SEC avg</div>
+                            </div>
+                            <div class="stream-card">
+                                <div class="stream-card__label">Market signal</div>
+                                <div class="stream-card__value" data-profile-market>Booster momentum ↑</div>
+                                <div class="telemetry-pill" data-profile-market-tag>Funding unlocked</div>
+                            </div>
+                        </div>
+                        <div class="pose-output" style="margin-top: 1.5rem">
+                            <div class="pose-output__title">Decision intelligence</div>
+                            <div class="pose-output__list" data-profile-summary>
+                                Coordinated blitz calls with NIL momentum to lock 68% win probability swing.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="control-room">
+            <div class="section-header">
+                <span class="section-eyebrow">Real-time decision stack</span>
+                <h2 class="section-title">Switch between gameday, season, and recruiting control panels</h2>
+                <p class="section-subtitle">Each profile recalibrates data ingestion, predictive modeling, and staff workflows in milliseconds so your program stays two moves ahead.</p>
+            </div>
+
+            <div class="profile-switcher" role="tablist">
+                <button class="is-active" data-profile="game" aria-selected="true">Gameday</button>
+                <button data-profile="season">Season</button>
+                <button data-profile="recruiting">Recruiting</button>
+            </div>
+
+            <div class="analytics-console">
+                <article class="console-card console-card--chart">
+                    <div class="console-title">Momentum tracking</div>
+                    <canvas id="momentumChart" height="220"></canvas>
+                    <div class="metric-grid">
+                        <div class="metric-card">
+                            <div>
+                                <div class="metric-card__label">Tempo efficiency</div>
+                                <div class="metric-card__value" data-console-metric="tempo">92.1</div>
+                            </div>
+                            <div class="metric-card__trend" data-console-trend="tempo">▲ 3.1%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>
+                                <div class="metric-card__label">Explosive plays window</div>
+                                <div class="metric-card__value" data-console-metric="explosive">7.3%</div>
+                            </div>
+                            <div class="metric-card__trend" data-console-trend="explosive" data-trend="down">▼ 1.4%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>
+                                <div class="metric-card__label">Fan sentiment</div>
+                                <div class="metric-card__value" data-console-metric="sentiment">88</div>
+                            </div>
+                            <div class="metric-card__trend" data-console-trend="sentiment">▲ 6 pts</div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="console-card">
+                    <div class="console-title">Operational directives</div>
+                    <div class="playbook-list" data-playbook>
+                        <div class="playbook-item">Keep tempo at 24.6s between snaps to exhaust opposing front seven.</div>
+                        <div class="playbook-item">Shift NIL spotlight to defensive unit to fuel booster activations.</div>
+                        <div class="playbook-item">Queue red-zone AI package for 3rd and medium scenarios.</div>
+                    </div>
+                </article>
+
+                <article class="console-card">
+                    <div class="console-title">Staff notifications</div>
+                    <div class="metric-grid">
+                        <div class="metric-card">
+                            <div>
+                                <div class="metric-card__label">Coaching alerts</div>
+                                <div class="metric-card__value" data-console-metric="alerts">12</div>
+                            </div>
+                            <div class="metric-card__trend" data-console-trend="alerts">LIVE</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>
+                                <div class="metric-card__label">Sponsor-ready clips</div>
+                                <div class="metric-card__value" data-console-metric="sponsor">8</div>
+                            </div>
+                            <div class="metric-card__trend" data-console-trend="sponsor">▲ 3 queued</div>
+                        </div>
+                        <div class="metric-card">
+                            <div>
+                                <div class="metric-card__label">Player risk index</div>
+                                <div class="metric-card__value" data-console-metric="risk">0.14</div>
+                            </div>
+                            <div class="metric-card__trend" data-console-trend="risk" data-trend="down">▼ stabilized</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="embed">
+            <div class="section-header">
+                <span class="section-eyebrow">Production-ready embed</span>
+                <h2 class="section-title">Drop the analytics console into any CMS or partner site</h2>
+                <p class="section-subtitle">Secure embed respects branding, auth layers, and throttled refresh so media, collectives, and boosters see what they need—no more, no less.</p>
+            </div>
+
+            <div class="embed-grid">
+                <div class="embed-preview">
+                    <div class="embed-preview__header">
+                        <span>Blaze Analytics Widget</span>
+                        <span class="telemetry-pill">Live</span>
+                    </div>
+                    <div class="embed-preview__grid">
+                        <div class="preview-metric">
+                            <div class="preview-metric__label">Win probability</div>
+                            <div class="preview-metric__value" data-embed-metric="probability">71%</div>
+                        </div>
+                        <div class="preview-metric">
+                            <div class="preview-metric__label">Focus player</div>
+                            <div class="preview-metric__value" data-embed-metric="player">QB • Manning</div>
+                        </div>
+                        <div class="preview-metric">
+                            <div class="preview-metric__label">Engagement</div>
+                            <div class="preview-metric__value" data-embed-metric="engagement">+24%</div>
+                        </div>
+                    </div>
+                    <div class="pose-output">
+                        <div class="pose-output__title">Snapshot narrative</div>
+                        <div class="pose-output__list" data-embed-story>
+                            Texas surges behind 3 explosive plays; booster pledges spike 18% quarter-over-quarter.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="embed-snippet">
+                    <div class="embed-snippet__label">Copy &amp; ship</div>
+                    <div class="code-block">&lt;iframe
+    src="https://blaze-intelligence.netlify.app/analytics-intelligence.html?embed=1"
+    style="border:0;width:100%;max-width:420px;height:540px;border-radius:24px"
+    allow="clipboard-write; fullscreen"
+    loading="lazy"
+&gt;&lt;/iframe&gt;</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                        Parameterize with <code>&amp;profile=season</code> or <code>&amp;profile=recruiting</code> to set default mode.
+                        Embed auto-refreshes every 30 seconds with signed requests.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <span class="section-eyebrow">Connect every system</span>
+                <h2 class="section-title">Analytics pipeline aligns with your operations stack</h2>
+                <p class="section-subtitle">Ready-made connectors stream Blaze insights into player care, donor CRM, and in-game strategy workflows.</p>
+            </div>
+            <div class="integration-grid">
+                <article class="integration-card">
+                    <div class="integration-card__title">Coaching tablets</div>
+                    <div>Push updated call sheets, probability charts, and personnel groupings straight to sideline devices.</div>
+                    <div class="integration-card__meta">
+                        <span class="integration-pill">Offline sync</span>
+                        <span class="integration-pill">Field-ready</span>
+                    </div>
+                    <div class="integration-card__footer">Latency &lt; 80ms with auto failover.</div>
+                </article>
+                <article class="integration-card">
+                    <div class="integration-card__title">Collective CRM</div>
+                    <div>Surface NIL momentum, donor clustering, and campaign readiness inside Salesforce or HubSpot.</div>
+                    <div class="integration-card__meta">
+                        <span class="integration-pill">API-first</span>
+                        <span class="integration-pill">Secure scopes</span>
+                    </div>
+                    <div class="integration-card__footer">Signed webhooks trigger after each analytics refresh.</div>
+                </article>
+                <article class="integration-card">
+                    <div class="integration-card__title">Broadcast partners</div>
+                    <div>Deliver lower-third graphics, interactive overlays, and storytelling cues synchronized with live data.</div>
+                    <div class="integration-card__meta">
+                        <span class="integration-pill">Viz ready</span>
+                        <span class="integration-pill">REST &amp; WebSocket</span>
+                    </div>
+                    <div class="integration-card__footer">Pre-built templates for ESPN+, SEC Network, and in-venue boards.</div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" integrity="sha384-zgVqFvHcdbn+tOfevzpW6vPLuP4W5OcQCXPh85Pu0p50bJuCL8WsFaLZlRChJ0aW" crossorigin="anonymous"></script>
+    <script>
+        const analyticsProfiles = {
+            game: {
+                label: 'Gameday control',
+                tag: 'Tempo surge',
+                lever: '3rd down conversions',
+                leverTag: '+11% over SEC avg',
+                market: 'Booster momentum ↑',
+                marketTag: 'Funding unlocked',
+                summary: [
+                    'Keep tempo at 24.6s between snaps to exhaust opposing front seven.',
+                    'Shift NIL spotlight to defensive unit to fuel booster activations.',
+                    'Queue red-zone AI package for 3rd and medium scenarios.'
+                ],
+                narrative: 'Texas surges behind 3 explosive plays; booster pledges spike 18% quarter-over-quarter.',
+                metrics: {
+                    control: '0.92',
+                    delta: '+6.4%',
+                    latency: '41 ms',
+                    tempo: '92.1',
+                    explosive: '7.3%',
+                    sentiment: '88',
+                    alerts: '12',
+                    sponsor: '8',
+                    risk: '0.14',
+                    probability: '71%',
+                    player: 'QB • Manning',
+                    engagement: '+24%'
+                },
+                trends: {
+                    tempo: { label: '▲ 3.1%', trend: 'up' },
+                    explosive: { label: '▼ 1.4%', trend: 'down' },
+                    sentiment: { label: '▲ 6 pts', trend: 'up' },
+                    alerts: { label: 'LIVE', trend: 'up' },
+                    sponsor: { label: '▲ 3 queued', trend: 'up' },
+                    risk: { label: '▼ stabilized', trend: 'down' }
+                },
+                chart: {
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    data: [52, 63, 75, 81]
+                }
+            },
+            season: {
+                label: 'Season blueprint',
+                tag: 'Roster optimization',
+                lever: 'Explosive rate trend',
+                leverTag: '+9% YoY',
+                market: 'Collective health',
+                marketTag: '+3.2M pipeline',
+                summary: [
+                    'Redistribute NIL pool to OL development—projected +12% protection grade.',
+                    'Lock in bye week travel with 98% recovery compliance.',
+                    'Trigger schedule simulator for Big 12 crossover impact.'
+                ],
+                narrative: 'Season model projects 10.7 wins with 84% conference title probability when NIL budget sticks to scenario B.',
+                metrics: {
+                    control: '0.87',
+                    delta: '+4.1%',
+                    latency: 'Seasonal',
+                    tempo: '88.5',
+                    explosive: '6.1%',
+                    sentiment: '91',
+                    alerts: '6',
+                    sponsor: '14',
+                    risk: '0.21',
+                    probability: '84%',
+                    player: 'WR • Worthy',
+                    engagement: '+31%'
+                },
+                trends: {
+                    tempo: { label: '▲ 1.7%', trend: 'up' },
+                    explosive: { label: '▲ 2.2%', trend: 'up' },
+                    sentiment: { label: '▲ 4 pts', trend: 'up' },
+                    alerts: { label: '▲ 2 planned', trend: 'up' },
+                    sponsor: { label: '▲ 6 activated', trend: 'up' },
+                    risk: { label: '▼ trending', trend: 'down' }
+                },
+                chart: {
+                    labels: ['Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    data: [68, 72, 81, 86, 90]
+                }
+            },
+            recruiting: {
+                label: 'Recruiting intel',
+                tag: 'Pipeline takeover',
+                lever: 'Blue-chip probability',
+                leverTag: 'Top 3 in SEC',
+                market: 'Fan conversion',
+                marketTag: '+42% digital',
+                summary: [
+                    'Deploy visit heatmap to align 5-star tours with donor surge windows.',
+                    'Automate content drops for QB+WR duos at 6pm CT for max engagement.',
+                    'Sync player care notes into CRM to maintain top-of-mind messaging.'
+                ],
+                narrative: 'Recruiting pipeline loaded with 14 blue-chip targets; conversion jumps once fan campaigns hit 1.3M impressions.',
+                metrics: {
+                    control: '0.95',
+                    delta: '+8.9%',
+                    latency: 'Sub 30 ms',
+                    tempo: '97.4',
+                    explosive: '12.6%',
+                    sentiment: '94',
+                    alerts: '18',
+                    sponsor: '11',
+                    risk: '0.09',
+                    probability: '78%',
+                    player: 'RB • Baxter',
+                    engagement: '+42%'
+                },
+                trends: {
+                    tempo: { label: '▲ 4.8%', trend: 'up' },
+                    explosive: { label: '▲ 5.1%', trend: 'up' },
+                    sentiment: { label: '▲ 3 pts', trend: 'up' },
+                    alerts: { label: '▲ 7 follow-ups', trend: 'up' },
+                    sponsor: { label: '▲ 5 campaigns', trend: 'up' },
+                    risk: { label: '▼ safeguarded', trend: 'down' }
+                },
+                chart: {
+                    labels: ['Impressions', 'Visits', 'Offers', 'Commits'],
+                    data: [45, 31, 18, 9]
+                }
+            }
+        };
+
+        const chartCtx = document.getElementById('momentumChart');
+        let momentumChart = new Chart(chartCtx, {
+            type: 'line',
+            data: {
+                labels: analyticsProfiles.game.chart.labels,
+                datasets: [{
+                    label: 'Momentum score',
+                    data: analyticsProfiles.game.chart.data,
+                    fill: true,
+                    tension: 0.35,
+                    borderColor: 'rgba(96, 165, 250, 1)',
+                    backgroundColor: 'rgba(96, 165, 250, 0.25)',
+                    borderWidth: 3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#ffffff'
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: 'rgba(148, 163, 184, 0.8)' },
+                        grid: { color: 'rgba(148, 163, 184, 0.12)' }
+                    },
+                    y: {
+                        ticks: { color: 'rgba(148, 163, 184, 0.8)' },
+                        grid: { color: 'rgba(148, 163, 184, 0.12)' }
+                    }
+                }
+            }
+        });
+
+        const profileButtons = document.querySelectorAll('[data-profile]');
+
+        function updateProfile(profileKey) {
+            const profile = analyticsProfiles[profileKey];
+            if (!profile) return;
+
+            profileButtons.forEach(btn => {
+                btn.classList.toggle('is-active', btn.dataset.profile === profileKey);
+                btn.setAttribute('aria-selected', btn.dataset.profile === profileKey ? 'true' : 'false');
+            });
+
+            document.querySelector('[data-profile-label]').textContent = profile.label;
+            document.querySelector('[data-profile-tag]').textContent = profile.tag;
+            document.querySelector('[data-profile-lever]').textContent = profile.lever;
+            document.querySelector('[data-profile-lever-tag]').textContent = profile.leverTag;
+            document.querySelector('[data-profile-market]').textContent = profile.market;
+            document.querySelector('[data-profile-market-tag]').textContent = profile.marketTag;
+
+            const summaryContainer = document.querySelector('[data-profile-summary]');
+            summaryContainer.innerHTML = '';
+            profile.summary.forEach(item => {
+                const span = document.createElement('span');
+                span.textContent = item;
+                summaryContainer.appendChild(span);
+            });
+
+            document.querySelector('[data-embed-story]').textContent = profile.narrative;
+
+            Object.entries(profile.metrics).forEach(([key, value]) => {
+                const metricEl = document.querySelector(`[data-analytics-metric="${key}"]`) ||
+                    document.querySelector(`[data-console-metric="${key}"]`) ||
+                    document.querySelector(`[data-embed-metric="${key}"]`);
+
+                if (metricEl) {
+                    metricEl.textContent = value;
+                }
+            });
+
+            Object.entries(profile.trends).forEach(([key, trend]) => {
+                const trendEl = document.querySelector(`[data-console-trend="${key}"]`);
+                if (trendEl) {
+                    trendEl.textContent = trend.label;
+                    if (trend.trend === 'down') {
+                        trendEl.dataset.trend = 'down';
+                    } else {
+                        delete trendEl.dataset.trend;
+                    }
+                }
+            });
+
+            const playbook = document.querySelector('[data-playbook]');
+            playbook.innerHTML = '';
+            profile.summary.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'playbook-item';
+                div.textContent = item;
+                playbook.appendChild(div);
+            });
+
+            momentumChart.data.labels = profile.chart.labels;
+            momentumChart.data.datasets[0].data = profile.chart.data;
+            momentumChart.update();
+        }
+
+        profileButtons.forEach(btn => {
+            btn.addEventListener('click', () => updateProfile(btn.dataset.profile));
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        const requestedProfile = params.get('view');
+        const initialProfile = analyticsProfiles[requestedProfile] ? requestedProfile : 'game';
+        updateProfile(initialProfile);
+
+        if (params.get('embed') === '1') {
+            document.body.classList.add('embed-mode');
+            const embedSection = document.getElementById('embed');
+            if (embedSection) {
+                requestAnimationFrame(() => {
+                    embedSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+                });
+            }
+        }
+    </script>
+</body>
+</html>

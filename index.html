@@ -806,6 +806,144 @@
         }
 
         /* Charts Container */
+        .module-launchpad {
+            margin: 80px 0 60px;
+        }
+
+        .module-launchpad__header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .module-launchpad__title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--championship-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .module-launchpad__subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 780px;
+            margin: 0 auto;
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .module-card {
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(191, 87, 0, 0.25);
+            border-radius: 24px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 35px 80px rgba(191, 87, 0, 0.25);
+        }
+
+        .module-card__icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.2), rgba(155, 203, 235, 0.2));
+            display: grid;
+            place-items: center;
+            font-size: 1.6rem;
+        }
+
+        .module-card__title {
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .module-card__body {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.6;
+        }
+
+        .module-card__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .module-card__list li {
+            position: relative;
+            padding-left: 22px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .module-card__list li::before {
+            content: '➜';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--championship-gold);
+        }
+
+        .module-card__badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .module-card__badge {
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(155, 203, 235, 0.15);
+            border: 1px solid rgba(155, 203, 235, 0.35);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--cardinal-blue);
+        }
+
+        .module-card__cta {
+            margin-top: auto;
+            align-self: flex-start;
+            padding: 12px 22px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--championship-gold));
+            color: #000;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 18px 40px rgba(191, 87, 0, 0.35);
+            transition: transform 0.3s ease;
+        }
+
+        .module-card__cta:hover {
+            transform: translateY(-2px);
+        }
+
+        .module-card--highlight {
+            border-color: rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.35), rgba(0, 0, 0, 0.85));
+        }
+
+        .module-card--highlight .module-card__badge {
+            background: rgba(255, 215, 0, 0.25);
+            border-color: rgba(255, 215, 0, 0.45);
+            color: var(--championship-gold);
+        }
+
         .charts-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -951,6 +1089,17 @@
             </div>
         </div>
         <nav class="nav-menu">
+            <div class="nav-links">
+                <a class="nav-item" href="#product-modules">Modules</a>
+                <a class="nav-item" href="analytics-intelligence.html">Analytics</a>
+                <a class="nav-item" href="sec-nil-intelligence.html">SEC NIL</a>
+                <a class="nav-item" href="video-intelligence.html">Video AI</a>
+                <a class="nav-item" href="embedded-biomechanics.html">Biomechanics</a>
+                <a class="nav-item" href="ar-real-time-visualization.html">AR Coaching</a>
+            </div>
+            <div class="nav-cta-group">
+                <a class="nav-item nav-cta" href="#contact">Book a Demo</a>
+            </div>
         </nav>
     </div>
 
@@ -1104,6 +1253,94 @@
                             <li>Tap-to-explore overlays synchronized with live performance metrics.</li>
                         </ul>
                         <a href="https://blaze-3d.netlify.app/" target="_blank" rel="noopener noreferrer" class="card-link">Launch Immersive 3D</a>
+                    </article>
+                </div>
+            </section>
+
+            <section class="module-launchpad" id="product-modules">
+                <div class="module-launchpad__header">
+                    <h2 class="module-launchpad__title">Launch Blaze product modules</h2>
+                    <p class="module-launchpad__subtitle">Deliver the exact experience every stakeholder needs—from real-time analytics to biomechanics and AR coaching—without leaving the Blaze Intelligence ecosystem.</p>
+                </div>
+                <div class="module-grid">
+                    <article class="module-card module-card--highlight">
+                        <div class="module-card__icon">📊</div>
+                        <div class="module-card__badges">
+                            <span class="module-card__badge">Live profiles</span>
+                            <span class="module-card__badge">Chart.js</span>
+                        </div>
+                        <h3 class="module-card__title">Analytics Control Room</h3>
+                        <p class="module-card__body">Pivot between gameday, season, and recruiting intelligence with one click. Stream KPIs, alerting, and executive-ready narratives into any workflow.</p>
+                        <ul class="module-card__list">
+                            <li>Dynamic momentum charts with profile switching.</li>
+                            <li>Embedded widget for media, sponsors, and collectives.</li>
+                            <li>Operational directives tied to Blaze alerting.</li>
+                        </ul>
+                        <a class="module-card__cta" href="analytics-intelligence.html">Open analytics</a>
+                    </article>
+
+                    <article class="module-card">
+                        <div class="module-card__icon">💰</div>
+                        <div class="module-card__badges">
+                            <span class="module-card__badge">SEC focus</span>
+                            <span class="module-card__badge">Market heat</span>
+                        </div>
+                        <h3 class="module-card__title">SEC NIL Intelligence</h3>
+                        <p class="module-card__body">Monitor valuations, collective health, and portal reserves in real time. Built for athletic departments, donors, and collectives that need transparency.</p>
+                        <ul class="module-card__list">
+                            <li>Interactive leaderboard with program switching.</li>
+                            <li>Transfer war-chest tracking and booster signals.</li>
+                            <li>Embeddable snapshot tuned for donor portals.</li>
+                        </ul>
+                        <a class="module-card__cta" href="sec-nil-intelligence.html">View SEC NIL</a>
+                    </article>
+
+                    <article class="module-card">
+                        <div class="module-card__icon">🎥</div>
+                        <div class="module-card__badges">
+                            <span class="module-card__badge">Video AI</span>
+                            <span class="module-card__badge">Computer vision</span>
+                        </div>
+                        <h3 class="module-card__title">AI Video Analytics</h3>
+                        <p class="module-card__body">Upload film, auto-generate breakdowns, and sync highlight reels with NIL storytelling. Perfect for recruiting, scouting, and sponsorship activations.</p>
+                        <ul class="module-card__list">
+                            <li>Drag-and-drop upload with instant model processing.</li>
+                            <li>AI-driven clip tagging and narrative overlays.</li>
+                            <li>Coach, scout, and media export workflows.</li>
+                        </ul>
+                        <a class="module-card__cta" href="video-intelligence.html">Explore Video AI</a>
+                    </article>
+
+                    <article class="module-card">
+                        <div class="module-card__icon">🧬</div>
+                        <div class="module-card__badges">
+                            <span class="module-card__badge">Sensor fusion</span>
+                            <span class="module-card__badge">Embed ready</span>
+                        </div>
+                        <h3 class="module-card__title">Embedded Biomechanics</h3>
+                        <p class="module-card__body">Drop a fully responsive biomechanics lab into any product. Capture motion, apply Blaze coaching copy, and automate athlete-specific benchmarks.</p>
+                        <ul class="module-card__list">
+                            <li>Live telemetry dashboards across mechanics.</li>
+                            <li>Adaptive coaching API with sport personas.</li>
+                            <li>Deployable SDK with sub-50 ms latency.</li>
+                        </ul>
+                        <a class="module-card__cta" href="embedded-biomechanics.html">Launch biomechanics</a>
+                    </article>
+
+                    <article class="module-card">
+                        <div class="module-card__icon">🕶️</div>
+                        <div class="module-card__badges">
+                            <span class="module-card__badge">Spatial coaching</span>
+                            <span class="module-card__badge">AR overlays</span>
+                        </div>
+                        <h3 class="module-card__title">AR Coaching Engine</h3>
+                        <p class="module-card__body">Synchronize Blaze data with augmented reality overlays. Deliver haptic cues, biomechanics alignment, and cognitive reinforcement at live game speed.</p>
+                        <ul class="module-card__list">
+                            <li>Sport-specific overlays with intensity controls.</li>
+                            <li>Real-time coaching alerts with risk monitoring.</li>
+                            <li>Seamless pairing with biomechanical lab feeds.</li>
+                        </ul>
+                        <a class="module-card__cta" href="ar-real-time-visualization.html">Preview AR coaching</a>
                     </article>
                 </div>
             </section>

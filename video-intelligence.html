@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blaze Intelligence | AI-Powered Video Analytics Platform</title>
+    <link rel="stylesheet" href="css/performance-pages.css">
     <style>
         :root {
             --burnt-orange: #BF5700;
@@ -32,7 +33,7 @@
         /* Header */
         .header {
             position: fixed;
-            top: 0;
+            top: 78px;
             width: 100%;
             z-index: 1000;
             background: rgba(10, 10, 10, 0.95);
@@ -69,26 +70,26 @@
             font-size: 1.5rem;
         }
 
-        .nav-links {
+        .header .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
         }
 
-        .nav-links a {
+        .header .nav-links a {
             color: var(--platinum);
             text-decoration: none;
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
+        .header .nav-links a:hover {
             color: var(--burnt-orange);
         }
 
         /* Main Container */
         .main-container {
             max-width: 1400px;
-            margin: 80px auto 0;
+            margin: 150px auto 0;
             padding: 2rem;
         }
 
@@ -461,11 +462,20 @@
             .hero h1 {
                 font-size: 2rem;
             }
-            
-            .nav-links {
+
+            .header .nav-links {
                 display: none;
             }
-            
+
+            .header {
+                top: 68px;
+            }
+
+            .main-container {
+                margin: 130px auto 0;
+                padding: 1.5rem;
+            }
+
             .dashboard {
                 grid-template-columns: 1fr;
             }
@@ -473,6 +483,22 @@
     </style>
 </head>
 <body>
+    <header class="global-nav">
+        <div class="global-nav__inner">
+            <a class="nav-logo" href="index.html">
+                <span class="nav-logo__mark">BI</span>
+                Blaze Intelligence
+            </a>
+            <nav class="nav-links">
+                <a href="analytics-intelligence.html">Analytics</a>
+                <a href="sec-nil-intelligence.html">SEC NIL</a>
+                <a href="video-intelligence.html" class="active">Video AI</a>
+                <a href="embedded-biomechanics.html">Biomechanics</a>
+                <a href="ar-real-time-visualization.html">AR Coaching</a>
+                <a href="index.html#contact" class="nav-cta">Talk to us</a>
+            </nav>
+        </div>
+    </header>
     <!-- Header -->
     <header class="header">
         <nav class="nav-container">
