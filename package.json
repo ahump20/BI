@@ -6,9 +6,10 @@
   "scripts": {
     "deploy:contact": "wrangler deploy contact-form.js --config ../wrangler-contact-api.toml --env production",
     "deploy:auth": "wrangler deploy auth.js --config ../wrangler-auth-api.toml --env production",
-    "build": "npm run build:site && npm run copy:data",
+    "build": "npm run build:site && npm run copy:data && npm run copy:assets",
     "build:site": "node -e \"console.log('Static site already committed to dist')\"",
     "copy:data": "mkdir -p dist/data && cp -R data/* dist/data 2>/dev/null || true",
+    "copy:assets": "node scripts/sync-static-assets.js",
     "dev": "netlify dev"
   },
   "dependencies": {
