@@ -1,5 +1,4 @@
 // Netlify Function for Secure API Proxy
-const fetch = require('node-fetch');
 
 exports.handler = async (event, context) => {
   // Parse the request

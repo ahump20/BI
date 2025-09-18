@@ -8,7 +8,8 @@
     "deploy:auth": "wrangler deploy auth.js --config ../wrangler-auth-api.toml --env production"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "stripe": "^18.5.0"
   },
   "devDependencies": {},
   "keywords": ["cloudflare", "workers", "api", "authentication", "contact"],
