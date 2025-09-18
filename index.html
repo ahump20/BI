@@ -937,8 +937,8 @@
 
     <!-- Mode Toggle -->
     <div class="mode-toggle">
-        <button class="mode-btn" onclick="setViewMode('3d')">3D Universe</button>
-        <button class="mode-btn active" onclick="setViewMode('classic')">Classic View</button>
+        <button class="mode-btn" data-view-mode="3d" onclick="setViewMode('3d', event)">3D Universe</button>
+        <button class="mode-btn active" data-view-mode="classic" onclick="setViewMode('classic', event)">Classic View</button>
     </div>
 
     <!-- Professional Header -->
@@ -1030,10 +1030,10 @@
 
             <!-- Control Panel -->
             <div class="control-panel">
-                <button class="control-btn active" onclick="setUniverseMode('explore')">Explore</button>
-                <button class="control-btn" onclick="setUniverseMode('analytics')">Analytics</button>
-                <button class="control-btn" onclick="setUniverseMode('heatmap')">Heat Map</button>
-                <button class="control-btn" onclick="setUniverseMode('connections')">Network</button>
+                <button class="control-btn active" data-universe-mode="explore" onclick="setUniverseMode('explore', event)">Explore</button>
+                <button class="control-btn" data-universe-mode="analytics" onclick="setUniverseMode('analytics', event)">Analytics</button>
+                <button class="control-btn" data-universe-mode="heatmap" onclick="setUniverseMode('heatmap', event)">Heat Map</button>
+                <button class="control-btn" data-universe-mode="connections" onclick="setUniverseMode('connections', event)">Network</button>
                 <button class="control-btn" onclick="toggleFullscreen()">Fullscreen</button>
             </div>
 
@@ -1779,12 +1779,14 @@
         }
 
         // View Mode Functions
-        function setViewMode(mode) {
+        function setViewMode(mode, evt) {
             currentViewMode = mode;
 
-            const buttons = document.querySelectorAll('.mode-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            const candidate = evt?.currentTarget || evt?.target || document.querySelector(`.mode-btn[data-view-mode="${mode}"]`);
+            if (candidate instanceof HTMLElement) {
+                candidate.classList.add('active');
+            }
 
             if (mode === '3d') {
                 document.getElementById('universe-container').style.display = 'block';
@@ -1799,6 +1801,7 @@
 
                 if (animationId) {
                     cancelAnimationFrame(animationId);
+                    animationId = null;
                 }
 
                 setTimeout(() => initCharts(), 100);
@@ -1807,14 +1810,18 @@
             showSuccess('View mode changed to ' + mode.toUpperCase());
         }
 
-        function setUniverseMode(mode) {
+        function setUniverseMode(mode, evt) {
             currentUniverseMode = mode;
+            if (currentViewMode !== '3d' || !controls) return;
 
             // Update button states
-            document.querySelectorAll('.control-btn').forEach(btn => {
+            document.querySelectorAll('.control-btn[data-universe-mode]').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
+            const candidate = evt?.currentTarget || evt?.target || document.querySelector(`.control-btn[data-universe-mode="${mode}"]`);
+            if (candidate instanceof HTMLElement) {
+                candidate.classList.add('active');
+            }
 
             // Apply mode-specific changes
             switch(mode) {
