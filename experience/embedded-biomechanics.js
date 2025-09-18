@@ -18,7 +18,7 @@
             const { stream, unit, precision } = node.dataset;
             if (!stream) return;
             const cfg = STREAM_CONFIG[stream] || {};
-            const decimals = precision ? parseInt(precision, 10) : cfg.precision ?? 0;
+            const decimals = precision && !isNaN(parseInt(precision, 10)) ? parseInt(precision, 10) : cfg.precision ?? 0;
             const min = cfg.min ?? 0;
             const max = cfg.max ?? min + 1;
             const value = Math.random() * (max - min) + min;
