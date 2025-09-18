@@ -1,0 +1,40 @@
+SportsDataIO Unified Summary for NFL and MLB (2024)
+
+Summary:
+
+This file contains a high-level extract of SportsDataIO data for the NFL and MLB.
+The free trial API key (provided by the user) allows access to NFL and MLB endpoints for teams and standings. The endpoints return JSON arrays with team metadata or standings for the 2024 season. College Football and College Basketball endpoints could not be accessed on the free trial (likely due to subscription restrictions).
+
+1. NFL Teams (2024)
+Each record includes team ID, key, city, name, coaching staff, color palette and detailed stadium information. Example entries (first four teams):
+- Arizona Cardinals (TeamID=1, City='Arizona', Head Coach: Jonathan Gannon).
+- Atlanta Falcons (TeamID=2, City='Atlanta', Head Coach: Raheem Morris).
+- Baltimore Ravens (TeamID=3, City='Baltimore', Head Coach: John Harbaugh).
+- Buffalo Bills (TeamID=4, City='Buffalo', Head Coach: Sean McDermott).
+
+2. NFL Standings (2024, SeasonType=1)
+Fields include wins, losses, points for/against, net points, division and conference ranks, home/away records and streaks. Sample records:
+- Buffalo Bills: 13-4 record, 525 points for, 368 points against, net points +157 and first in AFC East.
+- Miami Dolphins: 8-9 record, net points -19, conference rank 10.
+- New York Jets: 5-12 record, net points -66, division rank 3.
+- New England Patriots: 4-13 record, net points -128, division rank 4.
+
+3. MLB Teams (2024)
+Each record includes team ID, key, city, name, league/division, colors and coaching staff. Example entries (first five teams):
+- Los Angeles Dodgers (TeamID=1, League='NL', Head Coach: Dave Roberts).
+- Cincinnati Reds (TeamID=2, League='NL', Head Coach: Terry Francona).
+- Toronto Blue Jays (TeamID=3, League='AL', Head Coach: John Schneider).
+- Pittsburgh Pirates (TeamID=4, League='NL', Head Coach: Don Kelly).
+- Kansas City Royals (TeamID=5, League='AL', Head Coach: Matt Quatraro).
+
+4. MLB Standings (2024, SeasonType=1)
+Fields include wins, losses, percentage, division wins/losses, games behind, home/away and day/night records. Sample records:
+- Cleveland Guardians: 92-69 record, AL Central leaders, runs scored 708 vs. runs against 621.
+- Kansas City Royals: 86-76, 0.531 winning percentage, wild-card rank 2.
+- Detroit Tigers: 86-76, games behind 6.5, net runs +40.
+- Minnesota Twins: 82-80, games behind 10.5, net runs +7.
+- Chicago White Sox: 41-121, last in AL Central, net runs -306.
+
+Notes:
+- Data is subject to the SportsDataIO free trial limitations; some fields like upcoming opponent and player salaries are scrambled or may not be available.
+- College football/basketball endpoints were not accessible with the current free trial, so they are not included.
