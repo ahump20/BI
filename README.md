@@ -134,6 +134,20 @@ wrangler pages deploy
 ./03_AUTOMATION/shell/deploy-production.sh
 ```
 
+## 🤖 Developer Automation: Blaze Autopilot
+
+Accelerate cross-platform launches with the `automation/blaze-autopilot.ts` orchestrator. The script opportunistically fires any
+connector that has credentials in the environment, then prints a summary of what succeeded.
+
+```bash
+pnpm add -D tsx                # one-time setup
+pnpm tsx automation/blaze-autopilot.ts "My Campaign Name"
+```
+
+The orchestrator currently supports GitHub gists, Netlify build hooks, Cloudflare cache purges, Cloudinary uploads, Dropbox,
+Box, Notion, HubSpot, Linear, Render, Stripe checkout sessions, and Zapier webhooks. Set the relevant tokens from the ENV map at
+the bottom of the script and connectors without credentials are skipped automatically.
+
 ## 📚 Documentation
 
 ### For Developers
