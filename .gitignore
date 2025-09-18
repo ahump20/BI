@@ -66,7 +66,6 @@ bower_components/
 # =============================================================================
 # Build and Distribution
 # =============================================================================
-dist/
 build/
 out/
 .next/
@@ -75,6 +74,7 @@ out/
 .parcel-cache/
 .temp/
 tmp/
+dist/data/
 
 # Generated files
 *.generated.*
