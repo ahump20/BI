@@ -548,7 +548,7 @@
                 <li><a href="#dashboard">Dashboard</a></li>
                 <li><a href="#analytics">Analytics</a></li>
                 <li><a href="#teams">Teams</a></li>
-                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="/docs/methods/">Methods &amp; Definitions</a></li>
                 <li><a href="#docs">Docs</a></li>
             </ul>
             <button class="cta-button" onclick="startDemo()">Start Free Trial</button>
@@ -1052,9 +1052,8 @@
         <div class="footer-links">
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
-            <a href="#careers">Careers</a>
-            <a href="#privacy">Privacy</a>
-            <a href="#terms">Terms</a>
+            <a href="/privacy/">Privacy</a>
+            <a href="/terms/">Terms</a>
         </div>
         <div class="copyright">
             © 2025 Blaze Intelligence. Building something that works, one play at a time.
@@ -1237,14 +1236,7 @@
             });
         }
 
-        // Enhanced feed updates with intelligence events
-        updateLiveFeed();
-        setInterval(() => {
-            updateLiveFeed();
-            if (dataCache.websocketConnected) {
-                updateIntelligenceFeed();
-            }
-        }, 5000);
+        // Enhanced feed updates with intelligence events (started via renderUI)
 
         // Tab switching functionality
         window.switchTab = function(tabName) {
@@ -1327,6 +1319,8 @@
             mlModelsActive: 4,
             dataPoints: 2847291
         };
+
+        let uiInitialized = false;
 
         // Initialize Data Stream with WebSocket Simulation
         function initializeDataStream() {
@@ -1571,9 +1565,6 @@
             updateIntelligenceFeed();
         }
         
-        // Initialize advanced data pipeline
-        initializeDataStream();
-        
         // Legacy compatibility
         function updateLiveMetrics() {
             updateAdvancedMetrics();
@@ -1742,12 +1733,7 @@
             console.log('✅ Championship Analysis Complete - Probabilities Updated');
         };
         
-        // Auto-run championship analysis every 45 seconds
-        setInterval(() => {
-            if (Math.random() > 0.7 && dataCache.websocketConnected) {
-                runChampionshipAnalysis();
-            }
-        }, 45000);
+        // Auto-run championship analysis every 45 seconds (scheduled via renderUI)
 
         // Blaze Visual Engine Integration
         class BlazeVisualEngine {
@@ -2237,8 +2223,7 @@
             }
         };
 
-        // Initialize deployment system
-        setTimeout(initializeAutomatedDeploymentSystem, 3000);
+        // Initialize deployment system (scheduled via renderUI)
 
         // Comprehensive Analytics Dashboard Functions
         function initializeComprehensiveAnalytics() {
@@ -2282,15 +2267,66 @@
             console.log('✅ Comprehensive Analytics Refresh: COMPLETE');
         };
 
-        // Initialize comprehensive analytics
-        setTimeout(initializeComprehensiveAnalytics, 4000);
+        // Initialize comprehensive analytics (scheduled via renderUI)
 
-        // Auto-refresh comprehensive analytics
-        setInterval(() => {
-            if (Math.random() > 0.8 && dataCache.websocketConnected) {
-                refreshAllAnalytics();
+        function renderUI() {
+            if (uiInitialized) {
+                return;
             }
-        }, 60000);
+
+            uiInitialized = true;
+
+            updateLiveFeed();
+            setInterval(() => {
+                updateLiveFeed();
+                if (dataCache.websocketConnected) {
+                    updateIntelligenceFeed();
+                }
+            }, 5000);
+
+            initializeDataStream();
+
+            setInterval(() => {
+                if (Math.random() > 0.7 && dataCache.websocketConnected) {
+                    runChampionshipAnalysis();
+                }
+            }, 45000);
+
+            setTimeout(initializeAutomatedDeploymentSystem, 3000);
+            setTimeout(initializeComprehensiveAnalytics, 4000);
+
+            setInterval(() => {
+                if (Math.random() > 0.8 && dataCache.websocketConnected) {
+                    refreshAllAnalytics();
+                }
+            }, 60000);
+        }
+
+        async function initMCP() {
+            try {
+                const response = await fetch('/api/mcp-proxy', {
+                    method: 'POST',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify({ jsonrpc: '2.0', id: 'ping', method: 'ping' })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`MCP ${response.status}`);
+                }
+
+                await response.json();
+            } catch (error) {
+                console.warn('MCP unavailable; continuing without it.', error);
+            } finally {
+                renderUI();
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMCP);
+        } else {
+            initMCP();
+        }
     </script>
     <!-- Blaze WebSocket Integration -->
     <script src="./blaze-websocket-client.js"></script>
