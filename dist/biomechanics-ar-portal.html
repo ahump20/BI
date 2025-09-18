@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biomechanics + AR Control Center | Blaze Intelligence</title>
+    <meta name="description" content="Unified biomechanics and augmented reality coaching environment for Blaze Intelligence. Monitor neuromechanics, AR overlays, and coaching recommendations in real time." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #05070f;
+            --bg-elevated: rgba(12, 16, 29, 0.92);
+            --panel: rgba(16, 22, 40, 0.85);
+            --border: rgba(88, 126, 255, 0.32);
+            --primary: #7c89ff;
+            --accent: #ff6b35;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: radial-gradient(circle at top, rgba(40, 54, 99, 0.3), transparent 45%), var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        header.hero {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            padding: 120px clamp(24px, 6vw, 64px) 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(124, 137, 255, 0.2), transparent 60%),
+                        radial-gradient(circle at 80% 30%, rgba(255, 107, 53, 0.18), transparent 65%);
+            opacity: 0.9;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(124, 137, 255, 0.15);
+            border: 1px solid rgba(124, 137, 255, 0.35);
+            border-radius: 999px;
+            padding: 6px 16px;
+            width: fit-content;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 6vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.1;
+            font-family: 'Orbitron', 'Inter', sans-serif;
+        }
+
+        .hero-description {
+            color: var(--muted);
+            max-width: 600px;
+            font-size: 1.05rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            padding: 12px 28px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, var(--accent), #ff914d);
+            color: #0f172a;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(255, 107, 53, 0.35);
+        }
+
+        .btn-ghost {
+            padding: 12px 24px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: transparent;
+            color: var(--text);
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.25s ease, border-color 0.25s ease;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(148, 163, 184, 0.1);
+            border-color: rgba(148, 163, 184, 0.5);
+        }
+
+        .live-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            background: rgba(52, 211, 153, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            padding: 10px 16px;
+            border-radius: 14px;
+            width: fit-content;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
+            70% { box-shadow: 0 0 0 12px transparent; }
+            100% { box-shadow: 0 0 0 0 transparent; }
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 1;
+            background: rgba(12, 19, 33, 0.85);
+            border: 1px solid rgba(124, 137, 255, 0.2);
+            border-radius: 24px;
+            overflow: hidden;
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #poseCanvasHero {
+            width: 100%;
+            height: 100%;
+        }
+
+        main {
+            padding: 0 clamp(24px, 6vw, 72px) 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .metric-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .metric-card {
+            background: var(--panel);
+            border: 1px solid rgba(124, 137, 255, 0.25);
+            border-radius: 18px;
+            padding: 24px;
+            display: grid;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            inset: -120px -60px auto auto;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(124, 137, 255, 0.32), transparent 60%);
+            opacity: 0.6;
+        }
+
+        .metric-label {
+            color: var(--muted);
+            font-size: 0.9rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .metric-subtext {
+            color: rgba(148, 163, 184, 0.85);
+            font-size: 0.95rem;
+        }
+
+        .modules-grid {
+            display: grid;
+            gap: 28px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        .module {
+            background: var(--panel);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 24px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-height: 240px;
+        }
+
+        .module.large {
+            grid-column: span 2;
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: rgba(148, 163, 184, 0.8);
+        }
+
+        .module-header span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .module-header .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--success);
+        }
+
+        .module canvas {
+            width: 100%;
+            border-radius: 18px;
+            background: rgba(8, 10, 18, 0.8);
+        }
+
+        #poseCanvas {
+            min-height: 320px;
+        }
+
+        .joint-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+            list-style: none;
+        }
+
+        .joint-card {
+            background: rgba(12, 19, 33, 0.9);
+            border: 1px solid rgba(124, 137, 255, 0.24);
+            border-radius: 16px;
+            padding: 14px 16px;
+        }
+
+        .joint-card strong {
+            font-size: 0.95rem;
+        }
+
+        .joint-card span {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .timeline {
+            list-style: none;
+            display: grid;
+            gap: 14px;
+        }
+
+        .timeline-item {
+            background: rgba(8, 10, 18, 0.75);
+            border-radius: 16px;
+            padding: 16px 18px;
+            border: 1px solid rgba(124, 137, 255, 0.2);
+        }
+
+        .timeline-item[data-emphasis="high"] {
+            border-color: rgba(52, 211, 153, 0.35);
+            box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.12);
+        }
+
+        .timeline-item[data-emphasis="medium"] {
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .timeline-time {
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(148, 163, 184, 0.65);
+            margin-bottom: 8px;
+        }
+
+        .timeline-message {
+            font-size: 0.95rem;
+        }
+
+        table.session-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        table.session-table thead {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(148, 163, 184, 0.7);
+        }
+
+        table.session-table th,
+        table.session-table td {
+            padding: 12px 8px;
+            text-align: left;
+        }
+
+        table.session-table tbody tr {
+            border-top: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .badge-live {
+            background: rgba(52, 211, 153, 0.15);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            color: var(--success);
+        }
+
+        .badge-review {
+            background: rgba(255, 107, 53, 0.15);
+            border: 1px solid rgba(255, 107, 53, 0.32);
+            color: var(--accent);
+        }
+
+        .sensor-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .sensor-card {
+            padding: 16px;
+            border-radius: 16px;
+            background: rgba(8, 10, 18, 0.8);
+            border: 1px solid rgba(124, 137, 255, 0.18);
+            display: grid;
+            gap: 8px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 6px;
+            border-radius: 999px;
+            background: rgba(148, 163, 184, 0.18);
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.6s ease;
+        }
+
+        .recommendations {
+            display: grid;
+            gap: 14px;
+            list-style: none;
+        }
+
+        .recommendations li {
+            padding: 16px 18px;
+            border-radius: 16px;
+            background: rgba(12, 19, 33, 0.85);
+            border: 1px solid rgba(124, 137, 255, 0.2);
+        }
+
+        footer.cta {
+            margin-top: 20px;
+            background: linear-gradient(135deg, rgba(124, 137, 255, 0.18), rgba(255, 107, 53, 0.18));
+            border: 1px solid rgba(124, 137, 255, 0.25);
+            border-radius: 24px;
+            padding: clamp(24px, 4vw, 36px);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            text-align: center;
+        }
+
+        footer.cta h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-family: 'Orbitron', 'Inter', sans-serif;
+        }
+
+        footer.cta p {
+            color: rgba(226, 232, 240, 0.85);
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .cta-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 1024px) {
+            header.hero {
+                padding-top: 100px;
+            }
+
+            .module.large {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-label">Unified Command • Live Sync</span>
+            <h1 class="hero-title">Biomechanics + AR Coaching Control Center</h1>
+            <p class="hero-description">
+                Blaze Intelligence fuses neuromechanics, spatial computing, and championship coaching heuristics into one
+                continuous feedback loop. Monitor real-time asymmetry, AR latency, athlete focus cues, and AI generated
+                adjustments from a single mission control.
+            </p>
+            <div class="hero-actions">
+                <a class="btn-primary" href="index.html">Return to Intelligence Home</a>
+                <a class="btn-ghost" href="video-intelligence.html">Launch Video Intelligence Suite</a>
+            </div>
+            <div class="live-status" id="syncStatus">
+                <span class="pulse-dot"></span>
+                <span>Initializing live sync…</span>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <canvas id="poseCanvasHero" width="600" height="400" aria-label="Animated biomechanics preview"></canvas>
+        </div>
+    </header>
+
+    <main>
+        <section class="metric-grid" aria-label="Real-time summary metrics">
+            <article class="metric-card">
+                <span class="metric-label">AR Latency</span>
+                <span class="metric-value" id="metricLatency">--</span>
+                <span class="metric-subtext">Edge compositing pipeline</span>
+            </article>
+            <article class="metric-card">
+                <span class="metric-label">Overlay Confidence</span>
+                <span class="metric-value" id="metricOverlay">--</span>
+                <span class="metric-subtext">Calibration across 33 keypoints</span>
+            </article>
+            <article class="metric-card">
+                <span class="metric-label">Load Index</span>
+                <span class="metric-value" id="metricLoad">--</span>
+                <span class="metric-subtext">Force plate + IMU harmonization</span>
+            </article>
+            <article class="metric-card">
+                <span class="metric-label">Power Output</span>
+                <span class="metric-value" id="metricPower">--</span>
+                <span class="metric-subtext">Explosive efficiency window</span>
+            </article>
+        </section>
+
+        <section class="modules-grid">
+            <article class="module large" aria-label="Biomechanics pose reconstruction">
+                <div class="module-header">
+                    <span>Real-time Mechanics Stream</span>
+                    <span class="status"><span class="pulse-dot" style="width:8px;height:8px;"></span>Streaming</span>
+                </div>
+                <canvas id="poseCanvas" width="960" height="540" aria-label="Biomechanical skeleton visualization"></canvas>
+                <ul class="joint-grid" id="jointGrid" aria-live="polite"></ul>
+            </article>
+
+            <article class="module" aria-label="Coaching timeline">
+                <div class="module-header">
+                    <span>Coaching Timeline</span>
+                    <button class="btn-ghost" id="refreshButton" type="button" style="font-size:0.8rem;padding:6px 14px;">Refresh Now</button>
+                </div>
+                <ul class="timeline" id="timelineFeed"></ul>
+            </article>
+
+            <article class="module" aria-label="Active coaching sessions">
+                <div class="module-header">
+                    <span>Active Sessions</span>
+                    <span class="status" id="sessionCount"></span>
+                </div>
+                <div class="session-table-wrapper" style="overflow-x:auto;">
+                    <table class="session-table" aria-describedby="sessionCount">
+                        <thead>
+                            <tr>
+                                <th scope="col">Athlete</th>
+                                <th scope="col">Focus</th>
+                                <th scope="col">Zone</th>
+                                <th scope="col">Intensity</th>
+                                <th scope="col">Confidence</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sessionTable"></tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="module" aria-label="Sensor network health">
+                <div class="module-header">
+                    <span>Sensor Mesh Health</span>
+                    <span>IMU &bull; Force Plate &bull; Vision</span>
+                </div>
+                <div class="sensor-list" id="sensorList"></div>
+            </article>
+
+            <article class="module" aria-label="AI recommendations">
+                <div class="module-header">
+                    <span>Neural Coaching Notes</span>
+                    <span id="lastUpdated" style="font-size:0.75rem;color:rgba(148,163,184,0.7);"></span>
+                </div>
+                <ul class="recommendations" id="recommendations"></ul>
+            </article>
+        </section>
+    </main>
+
+    <footer class="cta" aria-label="Engagement call to action">
+        <h2>Deploy Blaze Intelligence Inside Your Training Ecosystem</h2>
+        <p>
+            Integrate our biomechanics and augmented reality engines into your field house, practice facility, or player
+            development program. From remote AR overlays to in-person biomechanics labs, Blaze Intelligence delivers the
+            control tower that championship cultures trust.
+        </p>
+        <div class="cta-actions">
+            <a class="btn-primary" href="contact.html">Schedule a System Walkthrough</a>
+            <a class="btn-ghost" href="blaze-intelligence.html">Explore Platform Blueprint</a>
+        </div>
+    </footer>
+
+    <script>
+        const API_ENDPOINT = '/api/biomechanics-ar-sync';
+        const poseCanvas = document.getElementById('poseCanvas');
+        const heroCanvas = document.getElementById('poseCanvasHero');
+        const sessionTable = document.getElementById('sessionTable');
+        const sensorList = document.getElementById('sensorList');
+        const jointGrid = document.getElementById('jointGrid');
+        const timelineFeed = document.getElementById('timelineFeed');
+        const recommendationsEl = document.getElementById('recommendations');
+        const syncStatus = document.getElementById('syncStatus');
+        const sessionCount = document.getElementById('sessionCount');
+        const lastUpdated = document.getElementById('lastUpdated');
+        const refreshButton = document.getElementById('refreshButton');
+
+        let latestPose = null;
+        let animationFrame;
+
+        function setCanvasResolution(canvas) {
+            const ratio = window.devicePixelRatio || 1;
+            const { width, height } = canvas.getBoundingClientRect();
+            canvas.width = Math.round(width * ratio);
+            canvas.height = Math.round(height * ratio);
+            return { width: canvas.width, height: canvas.height, ratio };
+        }
+
+        function drawPose(canvas, pose) {
+            if (!pose) return;
+            const ctx = canvas.getContext('2d');
+            const { width, height, ratio } = setCanvasResolution(canvas);
+            ctx.clearRect(0, 0, width, height);
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            const pointMap = new Map();
+            pose.points.forEach(point => {
+                pointMap.set(point.name, {
+                    x: point.x * width,
+                    y: point.y * height
+                });
+            });
+
+            ctx.strokeStyle = 'rgba(124, 137, 255, 0.85)';
+            ctx.lineWidth = 6 * ratio;
+            pose.segments.forEach(([start, end]) => {
+                const a = pointMap.get(start);
+                const b = pointMap.get(end);
+                if (!a || !b) return;
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.stroke();
+            });
+
+            pose.points.forEach(point => {
+                const x = point.x * width;
+                const y = point.y * height;
+                const gradient = ctx.createRadialGradient(x, y, 0, x, y, 14 * ratio);
+                gradient.addColorStop(0, 'rgba(255, 107, 53, 0.95)');
+                gradient.addColorStop(1, 'rgba(255, 107, 53, 0.05)');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(x, y, 12 * ratio, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        function renderPoseLoop() {
+            if (!latestPose) return;
+            drawPose(poseCanvas, latestPose);
+            drawPose(heroCanvas, latestPose);
+            animationFrame = requestAnimationFrame(renderPoseLoop);
+        }
+
+        function updateMetrics(data) {
+            const { ar, biomechanics } = data;
+            document.getElementById('metricLatency').textContent = `${ar.latencyMs} ms`;
+            document.getElementById('metricOverlay').textContent = `${ar.overlayConfidence}%`;
+            document.getElementById('metricLoad').textContent = `${biomechanics.loadIndex}`;
+            document.getElementById('metricPower').textContent = `${biomechanics.powerOutput}`;
+
+            jointGrid.innerHTML = biomechanics.leadAngles.map(angle => `
+                <li class="joint-card">
+                    <strong>${angle.joint}</strong>
+                    <span>${angle.value}% alignment</span>
+                </li>
+            `).join('');
+        }
+
+        function formatAgo(timestamp) {
+            const date = new Date(timestamp);
+            const diff = Math.floor((Date.now() - date.getTime()) / 60000);
+            if (diff <= 0) return 'just now';
+            if (diff === 1) return '1 min ago';
+            if (diff < 60) return `${diff} min ago`;
+            const hours = Math.floor(diff / 60);
+            return `${hours}h ${diff % 60}m ago`;
+        }
+
+        function updateSessions(sessions) {
+            sessionCount.textContent = `${sessions.length} active modules`;
+            sessionTable.innerHTML = sessions.map(session => `
+                <tr>
+                    <td>${session.athlete}</td>
+                    <td>${session.focus}</td>
+                    <td>${session.zone}</td>
+                    <td>${session.intensity}%</td>
+                    <td>${session.confidence}%</td>
+                    <td>
+                        <span class="badge ${session.live ? 'badge-live' : 'badge-review'}">
+                            ${session.live ? 'Live' : 'Review'}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateSensors(sensors) {
+            sensorList.innerHTML = sensors.map(sensor => `
+                <div class="sensor-card">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <strong>${sensor.id}</strong>
+                        <span style="color:var(--muted);">${sensor.location}</span>
+                    </div>
+                    <div style="display:grid;gap:6px;">
+                        <div>
+                            <span style="font-size:0.75rem;color:var(--muted);">Health</span>
+                            <div class="progress-track"><div class="progress-bar" style="width:${sensor.health}%;"></div></div>
+                        </div>
+                        <div>
+                            <span style="font-size:0.75rem;color:var(--muted);">Battery</span>
+                            <div class="progress-track"><div class="progress-bar" style="width:${sensor.battery}%;background:linear-gradient(90deg,#38bdf8,#7c89ff);"></div></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateTimeline(timeline) {
+            timelineFeed.innerHTML = timeline.map(item => `
+                <li class="timeline-item" data-emphasis="${item.emphasis}">
+                    <div class="timeline-time">${item.ago}</div>
+                    <div class="timeline-message">${item.message}</div>
+                </li>
+            `).join('');
+        }
+
+        function updateRecommendations(recommendations) {
+            recommendationsEl.innerHTML = recommendations.map(note => `<li>${note}</li>`).join('');
+        }
+
+        async function synchronize() {
+            syncStatus.innerHTML = '<span class="pulse-dot"></span><span>Syncing with biomechanics engine…</span>';
+            syncStatus.style.borderColor = 'rgba(124, 137, 255, 0.35)';
+            try {
+                const response = await fetch(API_ENDPOINT, { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`Request failed with ${response.status}`);
+                }
+                const payload = await response.json();
+                latestPose = payload.biomechanics.pose;
+                if (!animationFrame) {
+                    animationFrame = requestAnimationFrame(renderPoseLoop);
+                }
+                updateMetrics(payload);
+                updateSessions(payload.sessions);
+                updateSensors(payload.sensors);
+                updateTimeline(payload.timeline);
+                updateRecommendations(payload.recommendations);
+                const timestamp = new Date(payload.timestamp);
+                lastUpdated.textContent = `Updated ${formatAgo(timestamp)} (${timestamp.toLocaleTimeString()})`;
+                syncStatus.innerHTML = '<span class="pulse-dot"></span><span>Live sync active</span>';
+                syncStatus.style.borderColor = 'rgba(52, 211, 153, 0.35)';
+            } catch (error) {
+                console.error('Biomechanics sync error', error);
+                syncStatus.innerHTML = '<span class="pulse-dot" style="background:var(--danger);"></span><span>Sync issue detected – retrying…</span>';
+                syncStatus.style.borderColor = 'rgba(248, 113, 113, 0.45)';
+            }
+        }
+
+        refreshButton.addEventListener('click', () => {
+            synchronize();
+        });
+
+        window.addEventListener('resize', () => {
+            if (latestPose) {
+                drawPose(poseCanvas, latestPose);
+                drawPose(heroCanvas, latestPose);
+            }
+        });
+
+        synchronize();
+        setInterval(synchronize, 15000);
+    </script>
+</body>
+</html>

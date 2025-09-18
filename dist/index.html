@@ -274,6 +274,44 @@
             margin-bottom: 20px;
         }
 
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+            font-size: 0.85rem;
+            color: #999;
+            gap: 12px;
+        }
+
+        .card-meta span strong {
+            color: #ff6b6b;
+        }
+
+        .card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ff6b6b;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .card-cta::after {
+            content: '\2192';
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card-cta:hover {
+            color: #ff8e53;
+        }
+
+        .card-cta:hover::after {
+            transform: translateX(4px);
+        }
+
         .card-metrics {
             display: flex;
             gap: 20px;
@@ -707,6 +745,25 @@
                             <div class="metric-value">+2.1%</div>
                             <div class="metric-label">Trend</div>
                         </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-icon">🧬</div>
+                    <h3 class="card-title">Biomechanics + AR Hub</h3>
+                    <p class="card-description">Mission control for neural coaching overlays, load symmetry tracking, and AR guided player development.</p>
+                    <div class="card-metrics">
+                        <div class="metric">
+                            <div class="metric-value" id="arLatencyMetric">48ms</div>
+                            <div class="metric-label">AR Latency</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value" id="neuralCoachMetric">95.4%</div>
+                            <div class="metric-label">Neural Confidence</div>
+                        </div>
+                    </div>
+                    <div class="card-meta">
+                        <span>Sensors Online: <strong id="sensorCountMetric">14</strong></span>
+                        <a class="card-cta" href="biomechanics-ar-portal.html">Launch Control Center</a>
                     </div>
                 </div>
             </div>
@@ -1306,7 +1363,7 @@
         // Advanced Live Data Pipeline with Performance Optimization
         let dataCache = {
             performance: { value: 94.2, trend: 'up', lastUpdate: Date.now(), confidence: 96.8 },
-            readiness: { value: 9.1, trend: 'stable', lastUpdate: Date.now() },
+            readiness: { value: 96.4, trend: 'stable', lastUpdate: Date.now() },
             championship: { value: 12.8, trend: 'up', lastUpdate: Date.now() },
             agents: {
                 'cardinals-scout': { status: 'ACTIVE', performance: 98.5, lastSeen: Date.now() },
@@ -1317,7 +1374,10 @@
             liveEvents: [],
             websocketConnected: false,
             mlModelsActive: 4,
-            dataPoints: 2847291
+            dataPoints: 2847291,
+            arLatency: 48,
+            sensorsOnline: 14,
+            neuralCoachConfidence: 95.4
         };
 
         let uiInitialized = false;
@@ -1387,11 +1447,32 @@
                 const clutchFactor = Math.sin(timeOfSeason * Math.PI) * 0.6;
                 const injuryReport = Math.random() > 0.97 ? -0.8 : 0;
                 const momentum = dataCache.performance.trend === 'up' ? 0.2 : -0.1;
-                
+
                 const change = clutchFactor + injuryReport + momentum + (Math.random() - 0.5) * 0.4;
                 dataCache.readiness.value = Math.max(93.8, Math.min(98.9, parseFloat(readinessEl.textContent || '96.5') + change));
-                
+
                 readinessEl.textContent = dataCache.readiness.value.toFixed(1) + '%';
+            }
+
+            const arLatencyEl = document.getElementById('arLatencyMetric');
+            if (arLatencyEl) {
+                const updatedLatency = Math.max(34, Math.min(62, (dataCache.arLatency || 48) + (Math.random() - 0.5) * 1.8));
+                dataCache.arLatency = updatedLatency;
+                arLatencyEl.textContent = updatedLatency.toFixed(0) + 'ms';
+            }
+
+            const neuralCoachEl = document.getElementById('neuralCoachMetric');
+            if (neuralCoachEl) {
+                const updatedConfidence = Math.max(92.5, Math.min(98.9, (dataCache.neuralCoachConfidence || 95.4) + (Math.random() - 0.5) * 0.5));
+                dataCache.neuralCoachConfidence = updatedConfidence;
+                neuralCoachEl.textContent = updatedConfidence.toFixed(1) + '%';
+            }
+
+            const sensorsEl = document.getElementById('sensorCountMetric');
+            if (sensorsEl) {
+                const updatedSensors = Math.max(10, Math.min(18, (dataCache.sensorsOnline || 14) + (Math.random() - 0.5) * 1.2));
+                dataCache.sensorsOnline = updatedSensors;
+                sensorsEl.textContent = Math.round(updatedSensors);
             }
 
             // Championship Probability Advanced Calculations
