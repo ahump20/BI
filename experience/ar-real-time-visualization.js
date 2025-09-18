@@ -226,6 +226,7 @@
     if (intensityInput) {
         intensityInput.addEventListener('input', (event) => {
             const value = parseFloat(event.target.value);
+            if (isNaN(value)) return;
             currentIntensity = value;
             if (intensityLabel) intensityLabel.textContent = value.toFixed(2);
             updateChart();
