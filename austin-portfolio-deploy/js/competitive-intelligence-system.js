@@ -49,7 +49,7 @@ class BlazeCompetitiveIntelligence {
             'second_spectrum': {
                 name: 'Second Spectrum',
                 website: 'https://www.secondspectrum.com',
-                category: 'NBA/Soccer Analytics',
+                category: 'NBA Analytics',
                 marketShare: 0.15,
                 threat_level: 'medium',
                 last_updated: null,
