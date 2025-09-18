@@ -224,8 +224,20 @@
         /* Navigation Menu */
         .nav-menu {
             display: flex;
-            gap: 30px;
             align-items: center;
+            justify-content: flex-end;
+            gap: 40px;
+        }
+
+        .nav-links,
+        .nav-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-cta-group {
+            gap: 16px;
         }
 
         .nav-item {
@@ -253,6 +265,28 @@
 
         .nav-item:hover::after {
             width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--championship-gold));
+            color: #000;
+            padding: 10px 22px;
+            border-radius: 24px;
+            font-weight: 700;
+            box-shadow: 0 12px 32px rgba(191, 87, 0, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(191, 87, 0, 0.45);
+        }
+
+        .nav-cta::after {
+            display: none;
         }
 
         /* HUD Overlay for 3D View */
@@ -447,6 +481,224 @@
             color: #000;
         }
 
+        /* Deployment Hero */
+        .deployment-hero {
+            background: radial-gradient(circle at top left, rgba(191, 87, 0, 0.25), rgba(0, 0, 0, 0.95));
+            border: 1px solid rgba(191, 87, 0, 0.35);
+            border-radius: 30px;
+            padding: 60px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 45px 120px rgba(0, 0, 0, 0.45);
+        }
+
+        .deployment-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(155, 203, 235, 0.25), transparent 55%);
+            pointer-events: none;
+        }
+
+        .hero-intro {
+            max-width: 620px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .deployment-hero-title {
+            font-size: 2.75rem;
+            line-height: 1.1;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--championship-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .hero-cta-grid {
+            position: relative;
+            z-index: 1;
+            margin-top: 40px;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .hero-cta {
+            --accent-color: var(--burnt-orange);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 26px 24px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(155, 203, 235, 0.25);
+            border-left: 4px solid var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+            border-color: rgba(191, 87, 0, 0.6);
+        }
+
+        .hero-cta--main {
+            --accent-color: var(--championship-gold);
+        }
+
+        .hero-cta--3d {
+            --accent-color: var(--cardinal-blue);
+        }
+
+        .hero-cta-label {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .hero-cta-description {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .hero-cta-action {
+            font-weight: 600;
+            color: var(--championship-gold);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-cta-action::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover .hero-cta-action::after {
+            transform: translateX(4px);
+        }
+
+        /* Differentiators Section */
+        .deployment-differentiators {
+            margin-bottom: 70px;
+        }
+
+        .differentiator-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .differentiator-title span {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--championship-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .differentiator-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 780px;
+            margin: 0 auto 40px;
+        }
+
+        .differentiator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .differentiator-card {
+            --accent-color: var(--burnt-orange);
+            background: rgba(0, 0, 0, 0.82);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            border-top: 4px solid var(--accent-color);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .differentiator-card--main {
+            --accent-color: var(--championship-gold);
+        }
+
+        .differentiator-card--3d {
+            --accent-color: var(--cardinal-blue);
+        }
+
+        .differentiator-card h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+        }
+
+        .differentiator-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .differentiator-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .differentiator-card li {
+            position: relative;
+            padding-left: 26px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .differentiator-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--championship-gold);
+            font-weight: 700;
+        }
+
+        .card-link {
+            margin-top: auto;
+            color: var(--championship-gold);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.02em;
+        }
+
+        .card-link::after {
+            content: '↗';
+            transition: transform 0.3s ease;
+        }
+
+        .card-link:hover::after {
+            transform: translate(4px, -4px);
+        }
+
         /* Classic Dashboard Styles */
         .classic-dashboard {
             padding: 120px 40px 40px;
@@ -577,6 +829,23 @@
                 display: none;
             }
 
+            .deployment-hero {
+                padding: 40px 24px;
+                margin-bottom: 50px;
+            }
+
+            .deployment-hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-cta {
+                padding: 22px 20px;
+            }
+
+            .differentiator-title {
+                font-size: 1.6rem;
+            }
+
             .mission-panel {
                 left: 20px;
                 right: 20px;
@@ -681,12 +950,6 @@
             </div>
         </div>
         <nav class="nav-menu">
-            <a href="https://blaze-intelligence-main.netlify.app/" target="_blank" class="nav-item" style="background: linear-gradient(135deg, #BF5700, #FFD700); color: #000; font-weight: 700; padding: 8px 16px; border-radius: 20px;">🏠 Main</a>
-            <a href="embedded-biomechanics.html" class="nav-item">Embedded Biomechanics</a>
-            <a href="ar-real-time-visualization.html" class="nav-item">AR Coaching</a>
-            <a href="live-analytics.html" class="nav-item">Live Analytics</a>
-            <a href="video-intelligence.html" class="nav-item">Video AI</a>
-            <a href="#contact" class="nav-item">Contact</a>
         </nav>
     </div>
 
@@ -783,6 +1046,67 @@
     <!-- Classic Dashboard Container -->
     <div id="classic-container">
         <div class="classic-dashboard">
+            <section class="deployment-hero">
+                <div class="hero-intro">
+                    <h1 class="deployment-hero-title">Choose Your Blaze Intelligence Experience</h1>
+                    <p class="hero-subtitle">Launch the deployment tailored to your role—from unified HQ operations to executive storytelling and immersive demos.</p>
+                </div>
+                <div class="hero-cta-grid">
+                    <a href="https://blaze-intelligence.netlify.app/" target="_blank" rel="noopener noreferrer" class="hero-cta">
+                        <span class="hero-cta-label">Unified Command Center</span>
+                        <span class="hero-cta-description">Operations-grade dashboard that unifies recruiting, NIL, and performance analytics for daily decision cycles.</span>
+                        <span class="hero-cta-action">Launch Unified HQ</span>
+                    </a>
+                    <a href="https://blaze-intelligence-main.netlify.app/" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--main">
+                        <span class="hero-cta-label">Executive Mainline</span>
+                        <span class="hero-cta-description">Investor-ready storyline with curated KPIs, valuations, and go-to-market proof for stakeholders.</span>
+                        <span class="hero-cta-action">Open Executive Main</span>
+                    </a>
+                    <a href="https://blaze-3d.netlify.app/" target="_blank" rel="noopener noreferrer" class="hero-cta hero-cta--3d">
+                        <span class="hero-cta-label">Immersive 3D Showcase</span>
+                        <span class="hero-cta-description">WebGL-powered universe built for live demos, highlight reels, and spatial data exploration.</span>
+                        <span class="hero-cta-action">Enter Immersive 3D</span>
+                    </a>
+                </div>
+            </section>
+
+            <section class="deployment-differentiators">
+                <h2 class="differentiator-title"><span>Deployment Differentiators</span></h2>
+                <p class="differentiator-subtitle">Quickly compare the value of each environment and guide coaches, executives, or partners into the optimal Netlify experience.</p>
+                <div class="differentiator-grid">
+                    <article class="differentiator-card">
+                        <h3>Unified Command Center</h3>
+                        <p>Purpose-built for coaching staffs and analysts who need always-on situational awareness.</p>
+                        <ul>
+                            <li>Live NIL valuations paired with roster and market context.</li>
+                            <li>Automated alerting across recruiting, transfer, and health signals.</li>
+                            <li>Secure workspace tuned for day-to-day program operations.</li>
+                        </ul>
+                        <a href="https://blaze-intelligence.netlify.app/" target="_blank" rel="noopener noreferrer" class="card-link">Explore Unified HQ</a>
+                    </article>
+                    <article class="differentiator-card differentiator-card--main">
+                        <h3>Executive Mainline</h3>
+                        <p>Delivers the polished narrative for investors, athletic directors, and strategic partners.</p>
+                        <ul>
+                            <li>Narrative-first modules featuring sponsor-ready KPIs.</li>
+                            <li>Conversion-focused experiences for fundraising and media deals.</li>
+                            <li>Executive summary flows with embedded partnership CTAs.</li>
+                        </ul>
+                        <a href="https://blaze-intelligence-main.netlify.app/" target="_blank" rel="noopener noreferrer" class="card-link">Visit Executive Main</a>
+                    </article>
+                    <article class="differentiator-card differentiator-card--3d">
+                        <h3>Immersive 3D Showcase</h3>
+                        <p>Transforms Blaze Intelligence into an interactive universe for events, fan activations, and premium demos.</p>
+                        <ul>
+                            <li>Three.js-powered spatial storytelling with cinematic visuals.</li>
+                            <li>Immersive scenes that spotlight prospects, fans, and donors.</li>
+                            <li>Tap-to-explore overlays synchronized with live performance metrics.</li>
+                        </ul>
+                        <a href="https://blaze-3d.netlify.app/" target="_blank" rel="noopener noreferrer" class="card-link">Launch Immersive 3D</a>
+                    </article>
+                </div>
+            </section>
+
             <div class="dashboard-header">
                 <h1 class="dashboard-title">Championship Intelligence Dashboard</h1>
                 <p class="dashboard-subtitle">Real-Time NIL Analytics &amp; Sports Intelligence Platform</p>
