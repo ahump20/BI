@@ -3,15 +3,32 @@
  * Central configuration for all sports data APIs and services
  */
 
+const getEnvVar = (key, fallback) => {
+    if (typeof window !== 'undefined') {
+        const browserEnvSources = [window.BlazeEnv, window.__ENV__, window.__CONFIG__];
+        for (const source of browserEnvSources) {
+            if (source && typeof source === 'object' && source[key]) {
+                return source[key];
+            }
+        }
+    }
+
+    if (typeof process !== 'undefined' && process.env && process.env[key]) {
+        return process.env[key];
+    }
+
+    return fallback;
+};
+
 window.BlazeAPIConfig = {
     // SportsRadar API Configuration
     sportsRadar: {
         // Replace with your actual API keys
         keys: {
-            mlb: process.env?.SPORTRADAR_MLB_KEY || 'YOUR_MLB_API_KEY',
-            nfl: process.env?.SPORTRADAR_NFL_KEY || 'YOUR_NFL_API_KEY',
-            nba: process.env?.SPORTRADAR_NBA_KEY || 'YOUR_NBA_API_KEY',
-            ncaaf: process.env?.SPORTRADAR_NCAAF_KEY || 'YOUR_NCAAF_API_KEY'
+            mlb: getEnvVar('SPORTRADAR_MLB_KEY', 'YOUR_MLB_API_KEY'),
+            nfl: getEnvVar('SPORTRADAR_NFL_KEY', 'YOUR_NFL_API_KEY'),
+            nba: getEnvVar('SPORTRADAR_NBA_KEY', 'YOUR_NBA_API_KEY'),
+            ncaaf: getEnvVar('SPORTRADAR_NCAAF_KEY', 'YOUR_NCAAF_API_KEY')
         },
         endpoints: {
             mlb: {
