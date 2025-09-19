@@ -1,0 +1,2119 @@
+{
+  "version": "2025.02.18",
+  "generated_at": "2025-09-18T16:38:17.775Z",
+  "generated_by": "scripts/build-perfect-game-youth-data.mjs",
+  "sources": [
+    {
+      "provider": "Perfect Game USA",
+      "key": "perfect_game",
+      "last_updated": "2025-02-15",
+      "url": "https://www.perfectgame.org/rankings/",
+      "notes": "Top travel programs compiled from Perfect Game Select Series leaderboards."
+    },
+    {
+      "provider": "USSSA",
+      "key": "usssa",
+      "last_updated": "2025-02-12",
+      "url": "https://usssa.com/baseball/rankings",
+      "notes": "Power ratings compiled from Select 30 Super NIT leaderboards across major regions."
+    },
+    {
+      "provider": "D1Baseball",
+      "key": "d1_baseball",
+      "last_updated": "2025-02-10",
+      "url": "https://d1baseball.com/recruiting",
+      "notes": "Verbal commitments and recruiting intel curated from the D1Baseball recruiting tracker."
+    },
+    {
+      "provider": "Perfect Game & USSSA Showcase Tracker",
+      "key": "event_tracker",
+      "last_updated": "2025-02-16",
+      "url": "https://blaze-intelligence/perfect-game-tracker"
+    }
+  ],
+  "summary": {
+    "total_players": 5,
+    "age_group_coverage": [
+      "14u",
+      "15u",
+      "16u",
+      "17u",
+      "18u"
+    ],
+    "states_tracked": 3,
+    "top_states": [
+      {
+        "state": "TX",
+        "count": 3,
+        "share": 0.6
+      },
+      {
+        "state": "GA",
+        "count": 1,
+        "share": 0.2
+      },
+      {
+        "state": "FL",
+        "count": 1,
+        "share": 0.2
+      }
+    ],
+    "top_programs": [
+      {
+        "team": "Dallas Tigers Polk",
+        "state": "TX",
+        "appearances": 1
+      },
+      {
+        "team": "Georgia Bombers 14U National",
+        "state": "GA",
+        "appearances": 1
+      },
+      {
+        "team": "South Texas Sliders 14U Scout",
+        "state": "TX",
+        "appearances": 1
+      },
+      {
+        "team": "Louisiana Knights Black 14U",
+        "state": "LA",
+        "appearances": 1
+      },
+      {
+        "team": "Tennessee Nationals 14U Prime",
+        "state": "TN",
+        "appearances": 1
+      },
+      {
+        "team": "Texas Twelve Maroon 15U",
+        "state": "TX",
+        "appearances": 1
+      },
+      {
+        "team": "Banditos Scout Team 15U",
+        "state": "TX",
+        "appearances": 1
+      },
+      {
+        "team": "Canes National 15U",
+        "state": "NC",
+        "appearances": 1
+      }
+    ],
+    "top_colleges": [
+      {
+        "college": "LSU",
+        "count": 1
+      },
+      {
+        "college": "Vanderbilt",
+        "count": 1
+      },
+      {
+        "college": "Florida",
+        "count": 1
+      },
+      {
+        "college": "Tennessee",
+        "count": 1
+      },
+      {
+        "college": "Texas",
+        "count": 1
+      }
+    ]
+  },
+  "rankings": {
+    "perfect_game": {
+      "14u": [
+        {
+          "rank": 1,
+          "team": "Dallas Tigers Polk",
+          "state": "TX",
+          "record": "42-6",
+          "rating": 98.4,
+          "last_event": "PG 14U Select World Series Champions",
+          "notable_players": [
+            "Ethan Rodriguez",
+            "Landon Price"
+          ],
+          "pg_id": "pg-team-dtpolk-14u"
+        },
+        {
+          "rank": 2,
+          "team": "Georgia Bombers 14U National",
+          "state": "GA",
+          "record": "39-8",
+          "rating": 96.8,
+          "last_event": "Runner-up PG 14U World Series",
+          "notable_players": [
+            "Miles Porter"
+          ],
+          "pg_id": "pg-team-bombers-14u"
+        },
+        {
+          "rank": 3,
+          "team": "South Texas Sliders 14U Scout",
+          "state": "TX",
+          "record": "36-9",
+          "rating": 94.3,
+          "last_event": "PG South Select Champions",
+          "notable_players": [
+            "Kai Hernandez"
+          ],
+          "pg_id": "pg-team-sliders-14u"
+        },
+        {
+          "rank": 4,
+          "team": "Louisiana Knights Black 14U",
+          "state": "LA",
+          "record": "33-11",
+          "rating": 92.6,
+          "last_event": "PG Deep South Final Four",
+          "notable_players": [
+            "Brennan Dupree"
+          ],
+          "pg_id": "pg-team-knights-14u"
+        },
+        {
+          "rank": 5,
+          "team": "Tennessee Nationals 14U Prime",
+          "state": "TN",
+          "record": "31-12",
+          "rating": 91.8,
+          "last_event": "PG Southeast Elite Semifinalist",
+          "notable_players": [
+            "Hunter Wallace"
+          ],
+          "pg_id": "pg-team-nationals-14u"
+        }
+      ],
+      "15u": [
+        {
+          "rank": 1,
+          "team": "Texas Twelve Maroon 15U",
+          "state": "TX",
+          "record": "44-7",
+          "rating": 99.1,
+          "last_event": "PG 15U National Champions",
+          "notable_players": [
+            "Jackson Miller"
+          ],
+          "pg_id": "pg-team-texastwelve-15u"
+        },
+        {
+          "rank": 2,
+          "team": "Banditos Scout Team 15U",
+          "state": "TX",
+          "record": "41-8",
+          "rating": 97.5,
+          "last_event": "PG South Elite Champions",
+          "notable_players": [
+            "Noah Williams"
+          ],
+          "pg_id": "pg-team-banditos-15u"
+        },
+        {
+          "rank": 3,
+          "team": "Canes National 15U",
+          "state": "NC",
+          "record": "38-10",
+          "rating": 95.4,
+          "last_event": "PG Coastal World Series Champions",
+          "notable_players": [
+            "Aiden Brooks"
+          ],
+          "pg_id": "pg-team-canes-15u"
+        },
+        {
+          "rank": 4,
+          "team": "East Cobb Astros 15U Orange",
+          "state": "GA",
+          "record": "37-12",
+          "rating": 94,
+          "last_event": "PG WWBA 15U National Runner-up",
+          "notable_players": [
+            "Logan Whitaker"
+          ],
+          "pg_id": "pg-team-astros-15u"
+        },
+        {
+          "rank": 5,
+          "team": "Midland Redskins 15U",
+          "state": "OH",
+          "record": "35-13",
+          "rating": 92.9,
+          "last_event": "PG Midwest Elite Champions",
+          "notable_players": [
+            "Grayson Lee"
+          ],
+          "pg_id": "pg-team-midland-15u"
+        }
+      ],
+      "16u": [
+        {
+          "rank": 1,
+          "team": "Georgia Bombers 16U National",
+          "state": "GA",
+          "record": "46-6",
+          "rating": 99.3,
+          "last_event": "PG 16U Elite Champions",
+          "notable_players": [
+            "Mason Carter"
+          ],
+          "pg_id": "pg-team-bombers-16u"
+        },
+        {
+          "rank": 2,
+          "team": "Canes National 16U",
+          "state": "VA",
+          "record": "43-9",
+          "rating": 97.8,
+          "last_event": "PG WWBA 16U Champions",
+          "notable_players": [
+            "Dylan Ashby"
+          ],
+          "pg_id": "pg-team-canes-16u"
+        },
+        {
+          "rank": 3,
+          "team": "Dallas Tigers 16U Polk",
+          "state": "TX",
+          "record": "40-11",
+          "rating": 95.9,
+          "last_event": "PG South Select Runner-up",
+          "notable_players": [
+            "Chase Morgan"
+          ],
+          "pg_id": "pg-team-dtpolk-16u"
+        },
+        {
+          "rank": 4,
+          "team": "USA Prime National 16U",
+          "state": "TX",
+          "record": "38-13",
+          "rating": 94.6,
+          "last_event": "PG All-American Qualifier Champions",
+          "notable_players": [
+            "Jaxon Pierce"
+          ],
+          "pg_id": "pg-team-usaprime-16u"
+        },
+        {
+          "rank": 5,
+          "team": "5 Star National 16U Black",
+          "state": "FL",
+          "record": "36-14",
+          "rating": 93.7,
+          "last_event": "PG Southeast Select Semifinalist",
+          "notable_players": [
+            "Caleb Johnson"
+          ],
+          "pg_id": "pg-team-5star-16u"
+        }
+      ],
+      "17u": [
+        {
+          "rank": 1,
+          "team": "Canes National 17U",
+          "state": "NC",
+          "record": "47-6",
+          "rating": 99.5,
+          "last_event": "PG 17U WWBA National Champions",
+          "notable_players": [
+            "Caleb Johnson"
+          ],
+          "pg_id": "pg-team-canes-17u"
+        },
+        {
+          "rank": 2,
+          "team": "Florida Hurricanes Platinum 17U",
+          "state": "FL",
+          "record": "44-8",
+          "rating": 97.9,
+          "last_event": "PG BCS National Champions",
+          "notable_players": [
+            "Micah Daniels"
+          ],
+          "pg_id": "pg-team-hurricanes-17u"
+        },
+        {
+          "rank": 3,
+          "team": "Banditos Scout Team 17U",
+          "state": "TX",
+          "record": "41-10",
+          "rating": 96.2,
+          "last_event": "PG South Select Champions",
+          "notable_players": [
+            "Noah Williams"
+          ],
+          "pg_id": "pg-team-banditos-17u"
+        },
+        {
+          "rank": 4,
+          "team": "Texas Twelve Maroon 17U",
+          "state": "TX",
+          "record": "39-12",
+          "rating": 94.7,
+          "last_event": "PG Texas Select Finalist",
+          "notable_players": [
+            "Jackson Miller"
+          ],
+          "pg_id": "pg-team-texastwelve-17u"
+        },
+        {
+          "rank": 5,
+          "team": "Tennessee Nationals 17U Prime",
+          "state": "TN",
+          "record": "37-15",
+          "rating": 93.6,
+          "last_event": "PG Southeast Elite Quarterfinalist",
+          "notable_players": [
+            "Hunter Wallace"
+          ],
+          "pg_id": "pg-team-nationals-17u"
+        }
+      ],
+      "18u": [
+        {
+          "rank": 1,
+          "team": "Canes National 18U",
+          "state": "NC",
+          "record": "48-7",
+          "rating": 99.6,
+          "last_event": "PG WWBA 18U National Champions",
+          "notable_players": [
+            "Caleb Johnson"
+          ],
+          "pg_id": "pg-team-canes-18u"
+        },
+        {
+          "rank": 2,
+          "team": "Banditos Black 18U",
+          "state": "TX",
+          "record": "45-9",
+          "rating": 98.1,
+          "last_event": "PG South World Series Champions",
+          "notable_players": [
+            "Noah Williams"
+          ],
+          "pg_id": "pg-team-banditos-18u"
+        },
+        {
+          "rank": 3,
+          "team": "Georgia Bombers 18U Five-Star",
+          "state": "GA",
+          "record": "43-11",
+          "rating": 96.7,
+          "last_event": "PG Elite Champions Cup Winners",
+          "notable_players": [
+            "Mason Carter"
+          ],
+          "pg_id": "pg-team-bombers-18u"
+        },
+        {
+          "rank": 4,
+          "team": "Dallas Patriots 18U Scout",
+          "state": "TX",
+          "record": "41-13",
+          "rating": 95.1,
+          "last_event": "PG Texas Elite Finalist",
+          "notable_players": [
+            "Jackson Miller"
+          ],
+          "pg_id": "pg-team-patriots-18u"
+        },
+        {
+          "rank": 5,
+          "team": "Florida Burn 18U Premier",
+          "state": "FL",
+          "record": "39-14",
+          "rating": 94,
+          "last_event": "PG BCS 18U Runner-up",
+          "notable_players": [
+            "Micah Daniels"
+          ],
+          "pg_id": "pg-team-floridaburn-18u"
+        }
+      ]
+    },
+    "usssa": {
+      "14u": [
+        {
+          "team": "Dallas Tigers Polk",
+          "state": "TX",
+          "power_rating": 1452.3,
+          "games": 48,
+          "usssa_id": "usssa-team-dtpolk-14u",
+          "recent_event": "Select 30 Super NIT Champions",
+          "notable_players": [
+            "Ethan Rodriguez",
+            "Landon Price"
+          ]
+        },
+        {
+          "team": "Georgia Bombers 14U National",
+          "state": "GA",
+          "power_rating": 1436.1,
+          "games": 46,
+          "usssa_id": "usssa-team-bombers-14u",
+          "recent_event": "Southeast Elite Champions",
+          "notable_players": [
+            "Miles Porter"
+          ]
+        },
+        {
+          "team": "South Texas Sliders 14U Scout",
+          "state": "TX",
+          "power_rating": 1412.8,
+          "games": 44,
+          "usssa_id": "usssa-team-sliders-14u",
+          "recent_event": "H-Town Super NIT Champions",
+          "notable_players": [
+            "Kai Hernandez"
+          ]
+        },
+        {
+          "team": "Louisiana Knights Black 14U",
+          "state": "LA",
+          "power_rating": 1398.4,
+          "games": 41,
+          "usssa_id": "usssa-team-knights-14u",
+          "recent_event": "Gulf South Select Finalist",
+          "notable_players": [
+            "Brennan Dupree"
+          ]
+        },
+        {
+          "team": "Tennessee Nationals 14U Prime",
+          "state": "TN",
+          "power_rating": 1387.9,
+          "games": 39,
+          "usssa_id": "usssa-team-nationals-14u",
+          "recent_event": "Music City Major Champions",
+          "notable_players": [
+            "Hunter Wallace"
+          ]
+        }
+      ],
+      "15u": [
+        {
+          "team": "Banditos Scout Team 15U",
+          "state": "TX",
+          "power_rating": 1504.6,
+          "games": 52,
+          "usssa_id": "usssa-team-banditos-15u",
+          "recent_event": "Select 30 Super NIT Champions",
+          "notable_players": [
+            "Noah Williams"
+          ]
+        },
+        {
+          "team": "Texas Twelve Maroon 15U",
+          "state": "TX",
+          "power_rating": 1492.8,
+          "games": 51,
+          "usssa_id": "usssa-team-texastwelve-15u",
+          "recent_event": "Texas State Major Champions",
+          "notable_players": [
+            "Jackson Miller"
+          ]
+        },
+        {
+          "team": "Canes National 15U",
+          "state": "NC",
+          "power_rating": 1471.2,
+          "games": 48,
+          "usssa_id": "usssa-team-canes-15u",
+          "recent_event": "Atlantic Super NIT Champions",
+          "notable_players": [
+            "Aiden Brooks"
+          ]
+        },
+        {
+          "team": "East Cobb Astros 15U Orange",
+          "state": "GA",
+          "power_rating": 1457.9,
+          "games": 47,
+          "usssa_id": "usssa-team-astros-15u",
+          "recent_event": "Southeast Select Runner-up",
+          "notable_players": [
+            "Logan Whitaker"
+          ]
+        },
+        {
+          "team": "Midland Redskins 15U",
+          "state": "OH",
+          "power_rating": 1434.5,
+          "games": 45,
+          "usssa_id": "usssa-team-midland-15u",
+          "recent_event": "Great Lakes Super NIT Champions",
+          "notable_players": [
+            "Grayson Lee"
+          ]
+        }
+      ],
+      "16u": [
+        {
+          "team": "Georgia Bombers 16U National",
+          "state": "GA",
+          "power_rating": 1521.4,
+          "games": 55,
+          "usssa_id": "usssa-team-bombers-16u",
+          "recent_event": "Southeast Elite Champions",
+          "notable_players": [
+            "Mason Carter"
+          ]
+        },
+        {
+          "team": "Canes National 16U",
+          "state": "VA",
+          "power_rating": 1503.8,
+          "games": 52,
+          "usssa_id": "usssa-team-canes-16u",
+          "recent_event": "Atlantic Super NIT Champions",
+          "notable_players": [
+            "Dylan Ashby"
+          ]
+        },
+        {
+          "team": "Dallas Tigers 16U Polk",
+          "state": "TX",
+          "power_rating": 1487.2,
+          "games": 50,
+          "usssa_id": "usssa-team-dtpolk-16u",
+          "recent_event": "Texas Showdown Champions",
+          "notable_players": [
+            "Chase Morgan"
+          ]
+        },
+        {
+          "team": "USA Prime National 16U",
+          "state": "TX",
+          "power_rating": 1476.9,
+          "games": 48,
+          "usssa_id": "usssa-team-usaprime-16u",
+          "recent_event": "Lone Star Select Champions",
+          "notable_players": [
+            "Jaxon Pierce"
+          ]
+        },
+        {
+          "team": "5 Star National 16U Black",
+          "state": "FL",
+          "power_rating": 1464.1,
+          "games": 47,
+          "usssa_id": "usssa-team-5star-16u",
+          "recent_event": "Sunshine State Super NIT Runner-up",
+          "notable_players": [
+            "Caleb Johnson"
+          ]
+        }
+      ],
+      "17u": [
+        {
+          "team": "Florida Hurricanes Platinum 17U",
+          "state": "FL",
+          "power_rating": 1536.2,
+          "games": 56,
+          "usssa_id": "usssa-team-hurricanes-17u",
+          "recent_event": "Sunshine State Elite Champions",
+          "notable_players": [
+            "Caleb Johnson"
+          ]
+        },
+        {
+          "team": "Canes National 17U",
+          "state": "NC",
+          "power_rating": 1528.9,
+          "games": 54,
+          "usssa_id": "usssa-team-canes-17u",
+          "recent_event": "Atlantic Super NIT Champions",
+          "notable_players": [
+            "Micah Daniels"
+          ]
+        },
+        {
+          "team": "Banditos Scout Team 17U",
+          "state": "TX",
+          "power_rating": 1518.5,
+          "games": 53,
+          "usssa_id": "usssa-team-banditos-17u",
+          "recent_event": "Texas Major NIT Champions",
+          "notable_players": [
+            "Noah Williams"
+          ]
+        },
+        {
+          "team": "Texas Twelve Maroon 17U",
+          "state": "TX",
+          "power_rating": 1499.4,
+          "games": 52,
+          "usssa_id": "usssa-team-texastwelve-17u",
+          "recent_event": "Lone Star Elite Finalist",
+          "notable_players": [
+            "Jackson Miller"
+          ]
+        },
+        {
+          "team": "Tennessee Nationals 17U Prime",
+          "state": "TN",
+          "power_rating": 1482.7,
+          "games": 50,
+          "usssa_id": "usssa-team-nationals-17u",
+          "recent_event": "Music City Major Champions",
+          "notable_players": [
+            "Hunter Wallace"
+          ]
+        }
+      ],
+      "18u": [
+        {
+          "team": "Banditos Black 18U",
+          "state": "TX",
+          "power_rating": 1552.4,
+          "games": 58,
+          "usssa_id": "usssa-team-banditos-18u",
+          "recent_event": "Select 30 National Champions",
+          "notable_players": [
+            "Noah Williams"
+          ]
+        },
+        {
+          "team": "Canes National 18U",
+          "state": "NC",
+          "power_rating": 1545.1,
+          "games": 57,
+          "usssa_id": "usssa-team-canes-18u",
+          "recent_event": "Atlantic Super NIT Champions",
+          "notable_players": [
+            "Caleb Johnson"
+          ]
+        },
+        {
+          "team": "Georgia Bombers 18U Five-Star",
+          "state": "GA",
+          "power_rating": 1531.9,
+          "games": 56,
+          "usssa_id": "usssa-team-bombers-18u",
+          "recent_event": "Southeast Elite Champions",
+          "notable_players": [
+            "Mason Carter"
+          ]
+        },
+        {
+          "team": "Dallas Patriots 18U Scout",
+          "state": "TX",
+          "power_rating": 1518.7,
+          "games": 55,
+          "usssa_id": "usssa-team-patriots-18u",
+          "recent_event": "Texas Major Runner-up",
+          "notable_players": [
+            "Jackson Miller"
+          ]
+        },
+        {
+          "team": "Florida Burn 18U Premier",
+          "state": "FL",
+          "power_rating": 1502.6,
+          "games": 54,
+          "usssa_id": "usssa-team-floridaburn-18u",
+          "recent_event": "BCS National Runner-up",
+          "notable_players": [
+            "Micah Daniels"
+          ]
+        }
+      ]
+    },
+    "composite": {
+      "14u": [
+        {
+          "age_group": "14u",
+          "team": "Dallas Tigers Polk",
+          "state": "TX",
+          "perfect_game_rank": 1,
+          "perfect_game_rating": 98.4,
+          "perfect_game_id": "pg-team-dtpolk-14u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1452.3,
+          "usssa_games": 48,
+          "usssa_id": "usssa-team-dtpolk-14u",
+          "composite_score": 2416,
+          "composite_rank": 1
+        },
+        {
+          "age_group": "14u",
+          "team": "Georgia Bombers 14U National",
+          "state": "GA",
+          "perfect_game_rank": 2,
+          "perfect_game_rating": 96.8,
+          "perfect_game_id": "pg-team-bombers-14u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1436.1,
+          "usssa_games": 46,
+          "usssa_id": "usssa-team-bombers-14u",
+          "composite_score": 2384,
+          "composite_rank": 2
+        },
+        {
+          "age_group": "14u",
+          "team": "South Texas Sliders 14U Scout",
+          "state": "TX",
+          "perfect_game_rank": 3,
+          "perfect_game_rating": 94.3,
+          "perfect_game_id": "pg-team-sliders-14u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1412.8,
+          "usssa_games": 44,
+          "usssa_id": "usssa-team-sliders-14u",
+          "composite_score": 2340,
+          "composite_rank": 3
+        },
+        {
+          "age_group": "14u",
+          "team": "Louisiana Knights Black 14U",
+          "state": "LA",
+          "perfect_game_rank": 4,
+          "perfect_game_rating": 92.6,
+          "perfect_game_id": "pg-team-knights-14u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1398.4,
+          "usssa_games": 41,
+          "usssa_id": "usssa-team-knights-14u",
+          "composite_score": 2309,
+          "composite_rank": 4
+        },
+        {
+          "age_group": "14u",
+          "team": "Tennessee Nationals 14U Prime",
+          "state": "TN",
+          "perfect_game_rank": 5,
+          "perfect_game_rating": 91.8,
+          "perfect_game_id": "pg-team-nationals-14u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1387.9,
+          "usssa_games": 39,
+          "usssa_id": "usssa-team-nationals-14u",
+          "composite_score": 2287,
+          "composite_rank": 5
+        }
+      ],
+      "15u": [
+        {
+          "age_group": "15u",
+          "team": "Texas Twelve Maroon 15U",
+          "state": "TX",
+          "perfect_game_rank": 1,
+          "perfect_game_rating": 99.1,
+          "perfect_game_id": "pg-team-texastwelve-15u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1492.8,
+          "usssa_games": 51,
+          "usssa_id": "usssa-team-texastwelve-15u",
+          "composite_score": 2460,
+          "composite_rank": 1
+        },
+        {
+          "age_group": "15u",
+          "team": "Banditos Scout Team 15U",
+          "state": "TX",
+          "perfect_game_rank": 2,
+          "perfect_game_rating": 97.5,
+          "perfect_game_id": "pg-team-banditos-15u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1504.6,
+          "usssa_games": 52,
+          "usssa_id": "usssa-team-banditos-15u",
+          "composite_score": 2456,
+          "composite_rank": 2
+        },
+        {
+          "age_group": "15u",
+          "team": "Canes National 15U",
+          "state": "NC",
+          "perfect_game_rank": 3,
+          "perfect_game_rating": 95.4,
+          "perfect_game_id": "pg-team-canes-15u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1471.2,
+          "usssa_games": 48,
+          "usssa_id": "usssa-team-canes-15u",
+          "composite_score": 2404,
+          "composite_rank": 3
+        },
+        {
+          "age_group": "15u",
+          "team": "East Cobb Astros 15U Orange",
+          "state": "GA",
+          "perfect_game_rank": 4,
+          "perfect_game_rating": 94,
+          "perfect_game_id": "pg-team-astros-15u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1457.9,
+          "usssa_games": 47,
+          "usssa_id": "usssa-team-astros-15u",
+          "composite_score": 2376,
+          "composite_rank": 4
+        },
+        {
+          "age_group": "15u",
+          "team": "Midland Redskins 15U",
+          "state": "OH",
+          "perfect_game_rank": 5,
+          "perfect_game_rating": 92.9,
+          "perfect_game_id": "pg-team-midland-15u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1434.5,
+          "usssa_games": 45,
+          "usssa_id": "usssa-team-midland-15u",
+          "composite_score": 2339,
+          "composite_rank": 5
+        }
+      ],
+      "16u": [
+        {
+          "age_group": "16u",
+          "team": "Georgia Bombers 16U National",
+          "state": "GA",
+          "perfect_game_rank": 1,
+          "perfect_game_rating": 99.3,
+          "perfect_game_id": "pg-team-bombers-16u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1521.4,
+          "usssa_games": 55,
+          "usssa_id": "usssa-team-bombers-16u",
+          "composite_score": 2490,
+          "composite_rank": 1
+        },
+        {
+          "age_group": "16u",
+          "team": "Canes National 16U",
+          "state": "VA",
+          "perfect_game_rank": 2,
+          "perfect_game_rating": 97.8,
+          "perfect_game_id": "pg-team-canes-16u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1503.8,
+          "usssa_games": 52,
+          "usssa_id": "usssa-team-canes-16u",
+          "composite_score": 2457,
+          "composite_rank": 2
+        },
+        {
+          "age_group": "16u",
+          "team": "Dallas Tigers 16U Polk",
+          "state": "TX",
+          "perfect_game_rank": 3,
+          "perfect_game_rating": 95.9,
+          "perfect_game_id": "pg-team-dtpolk-16u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1487.2,
+          "usssa_games": 50,
+          "usssa_id": "usssa-team-dtpolk-16u",
+          "composite_score": 2423,
+          "composite_rank": 3
+        },
+        {
+          "age_group": "16u",
+          "team": "USA Prime National 16U",
+          "state": "TX",
+          "perfect_game_rank": 4,
+          "perfect_game_rating": 94.6,
+          "perfect_game_id": "pg-team-usaprime-16u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1476.9,
+          "usssa_games": 48,
+          "usssa_id": "usssa-team-usaprime-16u",
+          "composite_score": 2398,
+          "composite_rank": 4
+        },
+        {
+          "age_group": "16u",
+          "team": "5 Star National 16U Black",
+          "state": "FL",
+          "perfect_game_rank": 5,
+          "perfect_game_rating": 93.7,
+          "perfect_game_id": "pg-team-5star-16u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1464.1,
+          "usssa_games": 47,
+          "usssa_id": "usssa-team-5star-16u",
+          "composite_score": 2373,
+          "composite_rank": 5
+        }
+      ],
+      "17u": [
+        {
+          "age_group": "17u",
+          "team": "Canes National 17U",
+          "state": "NC",
+          "perfect_game_rank": 1,
+          "perfect_game_rating": 99.5,
+          "perfect_game_id": "pg-team-canes-17u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1528.9,
+          "usssa_games": 54,
+          "usssa_id": "usssa-team-canes-17u",
+          "composite_score": 2498,
+          "composite_rank": 1
+        },
+        {
+          "age_group": "17u",
+          "team": "Florida Hurricanes Platinum 17U",
+          "state": "FL",
+          "perfect_game_rank": 2,
+          "perfect_game_rating": 97.9,
+          "perfect_game_id": "pg-team-hurricanes-17u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1536.2,
+          "usssa_games": 56,
+          "usssa_id": "usssa-team-hurricanes-17u",
+          "composite_score": 2490,
+          "composite_rank": 2
+        },
+        {
+          "age_group": "17u",
+          "team": "Banditos Scout Team 17U",
+          "state": "TX",
+          "perfect_game_rank": 3,
+          "perfect_game_rating": 96.2,
+          "perfect_game_id": "pg-team-banditos-17u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1518.5,
+          "usssa_games": 53,
+          "usssa_id": "usssa-team-banditos-17u",
+          "composite_score": 2456,
+          "composite_rank": 3
+        },
+        {
+          "age_group": "17u",
+          "team": "Texas Twelve Maroon 17U",
+          "state": "TX",
+          "perfect_game_rank": 4,
+          "perfect_game_rating": 94.7,
+          "perfect_game_id": "pg-team-texastwelve-17u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1499.4,
+          "usssa_games": 52,
+          "usssa_id": "usssa-team-texastwelve-17u",
+          "composite_score": 2421,
+          "composite_rank": 4
+        },
+        {
+          "age_group": "17u",
+          "team": "Tennessee Nationals 17U Prime",
+          "state": "TN",
+          "perfect_game_rank": 5,
+          "perfect_game_rating": 93.6,
+          "perfect_game_id": "pg-team-nationals-17u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1482.7,
+          "usssa_games": 50,
+          "usssa_id": "usssa-team-nationals-17u",
+          "composite_score": 2391,
+          "composite_rank": 5
+        }
+      ],
+      "18u": [
+        {
+          "age_group": "18u",
+          "team": "Canes National 18U",
+          "state": "NC",
+          "perfect_game_rank": 1,
+          "perfect_game_rating": 99.6,
+          "perfect_game_id": "pg-team-canes-18u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1545.1,
+          "usssa_games": 57,
+          "usssa_id": "usssa-team-canes-18u",
+          "composite_score": 2515,
+          "composite_rank": 1
+        },
+        {
+          "age_group": "18u",
+          "team": "Banditos Black 18U",
+          "state": "TX",
+          "perfect_game_rank": 2,
+          "perfect_game_rating": 98.1,
+          "perfect_game_id": "pg-team-banditos-18u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1552.4,
+          "usssa_games": 58,
+          "usssa_id": "usssa-team-banditos-18u",
+          "composite_score": 2507,
+          "composite_rank": 2
+        },
+        {
+          "age_group": "18u",
+          "team": "Georgia Bombers 18U Five-Star",
+          "state": "GA",
+          "perfect_game_rank": 3,
+          "perfect_game_rating": 96.7,
+          "perfect_game_id": "pg-team-bombers-18u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1531.9,
+          "usssa_games": 56,
+          "usssa_id": "usssa-team-bombers-18u",
+          "composite_score": 2471,
+          "composite_rank": 3
+        },
+        {
+          "age_group": "18u",
+          "team": "Dallas Patriots 18U Scout",
+          "state": "TX",
+          "perfect_game_rank": 4,
+          "perfect_game_rating": 95.1,
+          "perfect_game_id": "pg-team-patriots-18u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1518.7,
+          "usssa_games": 55,
+          "usssa_id": "usssa-team-patriots-18u",
+          "composite_score": 2442,
+          "composite_rank": 4
+        },
+        {
+          "age_group": "18u",
+          "team": "Florida Burn 18U Premier",
+          "state": "FL",
+          "perfect_game_rank": 5,
+          "perfect_game_rating": 94,
+          "perfect_game_id": "pg-team-floridaburn-18u",
+          "sources": [
+            "perfect_game",
+            "usssa"
+          ],
+          "usssa_power_rating": 1502.6,
+          "usssa_games": 54,
+          "usssa_id": "usssa-team-floridaburn-18u",
+          "composite_score": 2413,
+          "composite_rank": 5
+        }
+      ]
+    }
+  },
+  "players": [
+    {
+      "id": "jackson-miller-2028",
+      "name": "Jackson Miller",
+      "age_group": "15u",
+      "grad_year": 2028,
+      "state": "TX",
+      "bats": "R",
+      "throws": "R",
+      "primary_position": "RHP",
+      "secondary_position": "IF",
+      "travel_team": "Texas Twelve Maroon 15U",
+      "last_event": "2025 PG South Elite",
+      "metrics": {
+        "pitching": {
+          "fastball_velocity": 93,
+          "fastball_spin": 2350,
+          "breaking_ball_spin": 2680,
+          "changeup_velocity": 82,
+          "extension": 6.4
+        },
+        "hitting": {
+          "exit_velocity": 99,
+          "launch_angle_avg": 18,
+          "hard_hit_pct": 62,
+          "contact_pct": 79
+        },
+        "fielding": {
+          "infield_velocity": 90,
+          "arm_strength": 92,
+          "pop_time": null
+        },
+        "athletic": {
+          "sixty_yard": 6.72,
+          "vertical_jump": 32,
+          "sprint_speed": 29.8
+        }
+      },
+      "evaluations": [
+        {
+          "source": "Perfect Game",
+          "grade": 9.5,
+          "summary": "High-octane arm with advanced pitchability and two-way upside."
+        },
+        {
+          "source": "USSSA",
+          "grade": 92,
+          "summary": "Dominant on the mound during Select 30, shows leadership traits."
+        }
+      ],
+      "composite_score": 1251,
+      "perfect_game": {
+        "team": "Texas Twelve Maroon 15U",
+        "team_id": "pg-team-texastwelve-15u",
+        "age_group": "15u",
+        "rank": 1,
+        "rating": 99.1,
+        "state": "TX",
+        "team_slug": "texas-twelve-maroon-15u"
+      },
+      "usssa": {
+        "team": "Dallas Patriots 18U Scout",
+        "team_id": "usssa-team-patriots-18u",
+        "age_group": "18u",
+        "power_rating": 1518.7,
+        "games": 55,
+        "state": "TX"
+      },
+      "commitment": {
+        "player": "Jackson Miller",
+        "position": "RHP/IF",
+        "bats": "R",
+        "throws": "R",
+        "grad_year": 2028,
+        "high_school": "College Station HS (TX)",
+        "travel_team": "Texas Twelve Maroon",
+        "college": "LSU",
+        "division": "D1",
+        "status": "Verbal",
+        "commit_date": "2025-01-18",
+        "scouting_grade": 55,
+        "report_blurb": "Power right-hander with 91-94 mph fastball and advanced slider feel."
+      },
+      "sources": [
+        {
+          "provider": "Perfect Game USA",
+          "detail": "pg-team-texastwelve-15u"
+        },
+        {
+          "provider": "USSSA",
+          "detail": "usssa-team-patriots-18u"
+        },
+        {
+          "provider": "D1Baseball",
+          "detail": "LSU"
+        }
+      ]
+    },
+    {
+      "id": "mason-carter-2027",
+      "name": "Mason Carter",
+      "age_group": "16u",
+      "grad_year": 2027,
+      "state": "GA",
+      "bats": "S",
+      "throws": "R",
+      "primary_position": "SS",
+      "secondary_position": "3B",
+      "travel_team": "Georgia Bombers 16U National",
+      "last_event": "2025 PG WWBA 16U",
+      "metrics": {
+        "pitching": null,
+        "hitting": {
+          "exit_velocity": 101,
+          "launch_angle_avg": 15,
+          "hard_hit_pct": 68,
+          "contact_pct": 84
+        },
+        "fielding": {
+          "infield_velocity": 91,
+          "arm_strength": 93,
+          "pop_time": null
+        },
+        "athletic": {
+          "sixty_yard": 6.54,
+          "vertical_jump": 34,
+          "sprint_speed": 30.4
+        }
+      },
+      "evaluations": [
+        {
+          "source": "Perfect Game",
+          "grade": 9.7,
+          "summary": "Premium defender with plus bat speed and polish from both sides."
+        },
+        {
+          "source": "D1Baseball",
+          "grade": 60,
+          "summary": "Immediate impact shortstop with SEC-ready actions."
+        }
+      ],
+      "composite_score": 1177,
+      "perfect_game": {
+        "team": "Georgia Bombers 16U National",
+        "team_id": "pg-team-bombers-16u",
+        "age_group": "16u",
+        "rank": 1,
+        "rating": 99.3,
+        "state": "GA",
+        "team_slug": "georgia-bombers-16u-national"
+      },
+      "usssa": {
+        "team": "Georgia Bombers 18U Five-Star",
+        "team_id": "usssa-team-bombers-18u",
+        "age_group": "18u",
+        "power_rating": 1531.9,
+        "games": 56,
+        "state": "GA"
+      },
+      "commitment": {
+        "player": "Mason Carter",
+        "position": "SS",
+        "bats": "S",
+        "throws": "R",
+        "grad_year": 2027,
+        "high_school": "Buford HS (GA)",
+        "travel_team": "Georgia Bombers National",
+        "college": "Vanderbilt",
+        "division": "D1",
+        "status": "Verbal",
+        "commit_date": "2024-11-12",
+        "scouting_grade": 60,
+        "report_blurb": "Switch-hitting shortstop with elite actions and top-end speed."
+      },
+      "sources": [
+        {
+          "provider": "Perfect Game USA",
+          "detail": "pg-team-bombers-16u"
+        },
+        {
+          "provider": "USSSA",
+          "detail": "usssa-team-bombers-18u"
+        },
+        {
+          "provider": "D1Baseball",
+          "detail": "Vanderbilt"
+        }
+      ]
+    },
+    {
+      "id": "caleb-johnson-2026",
+      "name": "Caleb Johnson",
+      "age_group": "17u",
+      "grad_year": 2026,
+      "state": "FL",
+      "bats": "L",
+      "throws": "R",
+      "primary_position": "OF",
+      "secondary_position": "CF",
+      "travel_team": "Florida Hurricanes Platinum 17U",
+      "last_event": "2025 PG BCS National",
+      "metrics": {
+        "pitching": null,
+        "hitting": {
+          "exit_velocity": 102,
+          "launch_angle_avg": 19,
+          "hard_hit_pct": 64,
+          "contact_pct": 82
+        },
+        "fielding": {
+          "outfield_velocity": 96,
+          "arm_strength": 95,
+          "pop_time": null
+        },
+        "athletic": {
+          "sixty_yard": 6.41,
+          "vertical_jump": 35,
+          "sprint_speed": 31.2
+        }
+      },
+      "evaluations": [
+        {
+          "source": "Perfect Game",
+          "grade": 9.6,
+          "summary": "Impact bat with leverage and electric speed, projects to stay in center."
+        },
+        {
+          "source": "D1Baseball",
+          "grade": 60,
+          "summary": "Pro-ready athleticism with top-of-the-order profile."
+        }
+      ],
+      "composite_score": 1185,
+      "perfect_game": {
+        "team": "Canes National 17U",
+        "team_id": "pg-team-canes-17u",
+        "age_group": "17u",
+        "rank": 1,
+        "rating": 99.5,
+        "state": "NC",
+        "team_slug": "canes-national-17u"
+      },
+      "usssa": {
+        "team": "Canes National 18U",
+        "team_id": "usssa-team-canes-18u",
+        "age_group": "18u",
+        "power_rating": 1545.1,
+        "games": 57,
+        "state": "NC"
+      },
+      "commitment": {
+        "player": "Caleb Johnson",
+        "position": "OF",
+        "bats": "L",
+        "throws": "R",
+        "grad_year": 2026,
+        "high_school": "IMG Academy (FL)",
+        "travel_team": "Florida Hurricanes Platinum",
+        "college": "Florida",
+        "division": "D1",
+        "status": "Verbal",
+        "commit_date": "2024-09-30",
+        "scouting_grade": 60,
+        "report_blurb": "Impact bat with plus run tool and centerfield defense."
+      },
+      "sources": [
+        {
+          "provider": "Perfect Game USA",
+          "detail": "pg-team-canes-17u"
+        },
+        {
+          "provider": "USSSA",
+          "detail": "usssa-team-canes-18u"
+        },
+        {
+          "provider": "D1Baseball",
+          "detail": "Florida"
+        }
+      ]
+    },
+    {
+      "id": "noah-williams-2025",
+      "name": "Noah Williams",
+      "age_group": "18u",
+      "grad_year": 2025,
+      "state": "TX",
+      "bats": "R",
+      "throws": "R",
+      "primary_position": "RHP",
+      "secondary_position": null,
+      "travel_team": "Banditos Black 18U",
+      "last_event": "2025 PG South World Series",
+      "metrics": {
+        "pitching": {
+          "fastball_velocity": 97,
+          "fastball_spin": 2450,
+          "breaking_ball_spin": 2805,
+          "changeup_velocity": 85,
+          "extension": 6.7
+        },
+        "hitting": null,
+        "fielding": {
+          "arm_strength": 98,
+          "infield_velocity": null,
+          "pop_time": null
+        },
+        "athletic": {
+          "sixty_yard": 6.88,
+          "vertical_jump": 30,
+          "sprint_speed": 28.9
+        }
+      },
+      "evaluations": [
+        {
+          "source": "Perfect Game",
+          "grade": 10,
+          "summary": "Electric arm strength with frontline starter ceiling."
+        },
+        {
+          "source": "D1Baseball",
+          "grade": 65,
+          "summary": "Ready to anchor an SEC weekend rotation early in career."
+        }
+      ],
+      "composite_score": 1236,
+      "perfect_game": {
+        "team": "Banditos Scout Team 15U",
+        "team_id": "pg-team-banditos-15u",
+        "age_group": "15u",
+        "rank": 2,
+        "rating": 97.5,
+        "state": "TX",
+        "team_slug": "banditos-scout-team-15u"
+      },
+      "usssa": {
+        "team": "Banditos Black 18U",
+        "team_id": "usssa-team-banditos-18u",
+        "age_group": "18u",
+        "power_rating": 1552.4,
+        "games": 58,
+        "state": "TX"
+      },
+      "commitment": {
+        "player": "Noah Williams",
+        "position": "RHP",
+        "bats": "R",
+        "throws": "R",
+        "grad_year": 2025,
+        "high_school": "Tomball Memorial HS (TX)",
+        "travel_team": "Banditos Scout Team",
+        "college": "Tennessee",
+        "division": "D1",
+        "status": "Signed",
+        "commit_date": "2024-08-05",
+        "scouting_grade": 65,
+        "report_blurb": "Upper-90s arm with heavy fastball and wipeout breaking ball."
+      },
+      "sources": [
+        {
+          "provider": "Perfect Game USA",
+          "detail": "pg-team-banditos-15u"
+        },
+        {
+          "provider": "USSSA",
+          "detail": "usssa-team-banditos-18u"
+        },
+        {
+          "provider": "D1Baseball",
+          "detail": "Tennessee"
+        }
+      ]
+    },
+    {
+      "id": "ethan-rodriguez-2029",
+      "name": "Ethan Rodriguez",
+      "age_group": "14u",
+      "grad_year": 2029,
+      "state": "TX",
+      "bats": "R",
+      "throws": "R",
+      "primary_position": "C",
+      "secondary_position": "1B",
+      "travel_team": "Dallas Tigers Polk 14U",
+      "last_event": "2025 PG 14U Select World Series",
+      "metrics": {
+        "pitching": null,
+        "hitting": {
+          "exit_velocity": 94,
+          "launch_angle_avg": 17,
+          "hard_hit_pct": 58,
+          "contact_pct": 81
+        },
+        "fielding": {
+          "pop_time": 1.9,
+          "arm_strength": 83,
+          "catcher_throw_velocity": 80
+        },
+        "athletic": {
+          "sixty_yard": 7.15,
+          "vertical_jump": 29,
+          "sprint_speed": 27.6
+        }
+      },
+      "evaluations": [
+        {
+          "source": "Perfect Game",
+          "grade": 9.3,
+          "summary": "Advanced receiver with improving power production."
+        },
+        {
+          "source": "USSSA",
+          "grade": 88,
+          "summary": "Commanded pitching staff throughout Select 30 Championships."
+        }
+      ],
+      "composite_score": 1109,
+      "perfect_game": {
+        "team": "Dallas Tigers Polk",
+        "team_id": "pg-team-dtpolk-14u",
+        "age_group": "14u",
+        "rank": 1,
+        "rating": 98.4,
+        "state": "TX",
+        "team_slug": "dallas-tigers-polk"
+      },
+      "usssa": {
+        "team": "Dallas Tigers Polk",
+        "team_id": "usssa-team-dtpolk-14u",
+        "age_group": "14u",
+        "power_rating": 1452.3,
+        "games": 48,
+        "state": "TX"
+      },
+      "commitment": {
+        "player": "Ethan Rodriguez",
+        "position": "C",
+        "bats": "R",
+        "throws": "R",
+        "grad_year": 2029,
+        "high_school": "Jesuit Dallas (TX)",
+        "travel_team": "Dallas Tigers Polk",
+        "college": "Texas",
+        "division": "D1",
+        "status": "Target",
+        "commit_date": null,
+        "scouting_grade": 50,
+        "report_blurb": "Premium catch-and-throw skills with advanced game-calling for age."
+      },
+      "sources": [
+        {
+          "provider": "Perfect Game USA",
+          "detail": "pg-team-dtpolk-14u"
+        },
+        {
+          "provider": "USSSA",
+          "detail": "usssa-team-dtpolk-14u"
+        },
+        {
+          "provider": "D1Baseball",
+          "detail": "Texas"
+        }
+      ]
+    }
+  ],
+  "commitments": [
+    {
+      "player": "Jackson Miller",
+      "position": "RHP/IF",
+      "bats": "R",
+      "throws": "R",
+      "grad_year": 2028,
+      "high_school": "College Station HS (TX)",
+      "travel_team": "Texas Twelve Maroon",
+      "college": "LSU",
+      "division": "D1",
+      "status": "Verbal",
+      "commit_date": "2025-01-18",
+      "scouting_grade": 55,
+      "report_blurb": "Power right-hander with 91-94 mph fastball and advanced slider feel."
+    },
+    {
+      "player": "Mason Carter",
+      "position": "SS",
+      "bats": "S",
+      "throws": "R",
+      "grad_year": 2027,
+      "high_school": "Buford HS (GA)",
+      "travel_team": "Georgia Bombers National",
+      "college": "Vanderbilt",
+      "division": "D1",
+      "status": "Verbal",
+      "commit_date": "2024-11-12",
+      "scouting_grade": 60,
+      "report_blurb": "Switch-hitting shortstop with elite actions and top-end speed."
+    },
+    {
+      "player": "Caleb Johnson",
+      "position": "OF",
+      "bats": "L",
+      "throws": "R",
+      "grad_year": 2026,
+      "high_school": "IMG Academy (FL)",
+      "travel_team": "Florida Hurricanes Platinum",
+      "college": "Florida",
+      "division": "D1",
+      "status": "Verbal",
+      "commit_date": "2024-09-30",
+      "scouting_grade": 60,
+      "report_blurb": "Impact bat with plus run tool and centerfield defense."
+    },
+    {
+      "player": "Noah Williams",
+      "position": "RHP",
+      "bats": "R",
+      "throws": "R",
+      "grad_year": 2025,
+      "high_school": "Tomball Memorial HS (TX)",
+      "travel_team": "Banditos Scout Team",
+      "college": "Tennessee",
+      "division": "D1",
+      "status": "Signed",
+      "commit_date": "2024-08-05",
+      "scouting_grade": 65,
+      "report_blurb": "Upper-90s arm with heavy fastball and wipeout breaking ball."
+    },
+    {
+      "player": "Ethan Rodriguez",
+      "position": "C",
+      "bats": "R",
+      "throws": "R",
+      "grad_year": 2029,
+      "high_school": "Jesuit Dallas (TX)",
+      "travel_team": "Dallas Tigers Polk",
+      "college": "Texas",
+      "division": "D1",
+      "status": "Target",
+      "commit_date": null,
+      "scouting_grade": 50,
+      "report_blurb": "Premium catch-and-throw skills with advanced game-calling for age."
+    }
+  ],
+  "tournaments": [
+    {
+      "id": "pg-west-elite-2025",
+      "name": "2025 PG West Elite Championship",
+      "sanctioning_body": "Perfect Game",
+      "age_groups": [
+        "14u",
+        "15u"
+      ],
+      "start_date": "2025-03-13",
+      "end_date": "2025-03-17",
+      "location": {
+        "complex": "Goodyear Ballpark Training Complex",
+        "city": "Goodyear",
+        "state": "AZ",
+        "region": "west"
+      },
+      "surface": "Natural Grass",
+      "teams_expected": 48,
+      "scouting_coverage": {
+        "mlb_scouts": 6,
+        "college_programs": 28,
+        "perfect_game_grade": 9.2
+      },
+      "broadcast": "Perfect Game TV",
+      "ranking_impact": {
+        "perfect_game_points": 250,
+        "usssa_power": 80
+      },
+      "notable_programs": [
+        "Dallas Tigers Polk",
+        "Canes National",
+        "USA Prime"
+      ],
+      "metrics_highlights": {
+        "top_exit_velocity": 100.4,
+        "top_pitch_velocity": 94.8,
+        "fastest_sixty": 6.55
+      }
+    },
+    {
+      "id": "pg-south-select-2025",
+      "name": "2025 PG South Select Invitational",
+      "sanctioning_body": "Perfect Game",
+      "age_groups": [
+        "15u",
+        "16u"
+      ],
+      "start_date": "2025-04-18",
+      "end_date": "2025-04-21",
+      "location": {
+        "complex": "Premier Baseball of Texas",
+        "city": "Tomball",
+        "state": "TX",
+        "region": "southwest"
+      },
+      "surface": "Turf & Natural Mix",
+      "teams_expected": 64,
+      "scouting_coverage": {
+        "mlb_scouts": 10,
+        "college_programs": 42,
+        "perfect_game_grade": 9.5
+      },
+      "broadcast": "Perfect Game TV + Blaze Viz",
+      "ranking_impact": {
+        "perfect_game_points": 300,
+        "usssa_power": 95
+      },
+      "notable_programs": [
+        "Banditos",
+        "Texas Twelve",
+        "Georgia Bombers"
+      ],
+      "metrics_highlights": {
+        "top_exit_velocity": 104.2,
+        "top_pitch_velocity": 97.1,
+        "fastest_sixty": 6.42
+      }
+    },
+    {
+      "id": "usssa-select30-finals-2025",
+      "name": "2025 USSSA Select 30 Championships",
+      "sanctioning_body": "USSSA",
+      "age_groups": [
+        "14u",
+        "15u",
+        "16u"
+      ],
+      "start_date": "2025-07-10",
+      "end_date": "2025-07-15",
+      "location": {
+        "complex": "USSSA Space Coast Complex",
+        "city": "Viera",
+        "state": "FL",
+        "region": "southeast"
+      },
+      "surface": "Turf",
+      "teams_expected": 72,
+      "scouting_coverage": {
+        "mlb_scouts": 8,
+        "college_programs": 36,
+        "perfect_game_grade": null
+      },
+      "broadcast": "USSSA Live + Blaze Viz",
+      "ranking_impact": {
+        "perfect_game_points": 180,
+        "usssa_power": 120
+      },
+      "notable_programs": [
+        "South Texas Sliders",
+        "Canes National",
+        "Florida Hurricanes"
+      ],
+      "metrics_highlights": {
+        "top_exit_velocity": 101.8,
+        "top_pitch_velocity": 95.5,
+        "fastest_sixty": 6.48
+      }
+    },
+    {
+      "id": "d1-showcase-summit-2025",
+      "name": "2025 D1 Baseball National Showcase Summit",
+      "sanctioning_body": "D1Baseball",
+      "age_groups": [
+        "17u",
+        "18u"
+      ],
+      "start_date": "2025-08-08",
+      "end_date": "2025-08-12",
+      "location": {
+        "complex": "Hoover Met Complex",
+        "city": "Hoover",
+        "state": "AL",
+        "region": "southeast"
+      },
+      "surface": "Natural Grass",
+      "teams_expected": 40,
+      "scouting_coverage": {
+        "mlb_scouts": 22,
+        "college_programs": 68,
+        "perfect_game_grade": null
+      },
+      "broadcast": "D1Baseball Network",
+      "ranking_impact": {
+        "perfect_game_points": 210,
+        "usssa_power": 60
+      },
+      "notable_programs": [
+        "Canes National",
+        "Banditos",
+        "Florida Burn"
+      ],
+      "metrics_highlights": {
+        "top_exit_velocity": 105.6,
+        "top_pitch_velocity": 98.3,
+        "fastest_sixty": 6.39
+      }
+    }
+  ],
+  "insights": {
+    "player_averages": {
+      "fastball_velocity": 95,
+      "exit_velocity": 99
+    },
+    "composite_trends": [
+      {
+        "age_group": "14u",
+        "median_composite_score": 2340,
+        "programs": [
+          {
+            "team": "Dallas Tigers Polk",
+            "composite_score": 2416,
+            "state": "TX"
+          },
+          {
+            "team": "Georgia Bombers 14U National",
+            "composite_score": 2384,
+            "state": "GA"
+          },
+          {
+            "team": "South Texas Sliders 14U Scout",
+            "composite_score": 2340,
+            "state": "TX"
+          },
+          {
+            "team": "Louisiana Knights Black 14U",
+            "composite_score": 2309,
+            "state": "LA"
+          },
+          {
+            "team": "Tennessee Nationals 14U Prime",
+            "composite_score": 2287,
+            "state": "TN"
+          }
+        ]
+      },
+      {
+        "age_group": "15u",
+        "median_composite_score": 2404,
+        "programs": [
+          {
+            "team": "Texas Twelve Maroon 15U",
+            "composite_score": 2460,
+            "state": "TX"
+          },
+          {
+            "team": "Banditos Scout Team 15U",
+            "composite_score": 2456,
+            "state": "TX"
+          },
+          {
+            "team": "Canes National 15U",
+            "composite_score": 2404,
+            "state": "NC"
+          },
+          {
+            "team": "East Cobb Astros 15U Orange",
+            "composite_score": 2376,
+            "state": "GA"
+          },
+          {
+            "team": "Midland Redskins 15U",
+            "composite_score": 2339,
+            "state": "OH"
+          }
+        ]
+      },
+      {
+        "age_group": "16u",
+        "median_composite_score": 2423,
+        "programs": [
+          {
+            "team": "Georgia Bombers 16U National",
+            "composite_score": 2490,
+            "state": "GA"
+          },
+          {
+            "team": "Canes National 16U",
+            "composite_score": 2457,
+            "state": "VA"
+          },
+          {
+            "team": "Dallas Tigers 16U Polk",
+            "composite_score": 2423,
+            "state": "TX"
+          },
+          {
+            "team": "USA Prime National 16U",
+            "composite_score": 2398,
+            "state": "TX"
+          },
+          {
+            "team": "5 Star National 16U Black",
+            "composite_score": 2373,
+            "state": "FL"
+          }
+        ]
+      },
+      {
+        "age_group": "17u",
+        "median_composite_score": 2456,
+        "programs": [
+          {
+            "team": "Canes National 17U",
+            "composite_score": 2498,
+            "state": "NC"
+          },
+          {
+            "team": "Florida Hurricanes Platinum 17U",
+            "composite_score": 2490,
+            "state": "FL"
+          },
+          {
+            "team": "Banditos Scout Team 17U",
+            "composite_score": 2456,
+            "state": "TX"
+          },
+          {
+            "team": "Texas Twelve Maroon 17U",
+            "composite_score": 2421,
+            "state": "TX"
+          },
+          {
+            "team": "Tennessee Nationals 17U Prime",
+            "composite_score": 2391,
+            "state": "TN"
+          }
+        ]
+      },
+      {
+        "age_group": "18u",
+        "median_composite_score": 2471,
+        "programs": [
+          {
+            "team": "Canes National 18U",
+            "composite_score": 2515,
+            "state": "NC"
+          },
+          {
+            "team": "Banditos Black 18U",
+            "composite_score": 2507,
+            "state": "TX"
+          },
+          {
+            "team": "Georgia Bombers 18U Five-Star",
+            "composite_score": 2471,
+            "state": "GA"
+          },
+          {
+            "team": "Dallas Patriots 18U Scout",
+            "composite_score": 2442,
+            "state": "TX"
+          },
+          {
+            "team": "Florida Burn 18U Premier",
+            "composite_score": 2413,
+            "state": "FL"
+          }
+        ]
+      }
+    ],
+    "upcoming_events": [
+      {
+        "id": "pg-west-elite-2025",
+        "name": "2025 PG West Elite Championship",
+        "start_date": "2025-03-13",
+        "end_date": "2025-03-17",
+        "location": {
+          "complex": "Goodyear Ballpark Training Complex",
+          "city": "Goodyear",
+          "state": "AZ",
+          "region": "west"
+        },
+        "broadcast": "Perfect Game TV",
+        "scouting_coverage": {
+          "mlb_scouts": 6,
+          "college_programs": 28,
+          "perfect_game_grade": 9.2
+        },
+        "ranking_impact": {
+          "perfect_game_points": 250,
+          "usssa_power": 80
+        }
+      },
+      {
+        "id": "pg-south-select-2025",
+        "name": "2025 PG South Select Invitational",
+        "start_date": "2025-04-18",
+        "end_date": "2025-04-21",
+        "location": {
+          "complex": "Premier Baseball of Texas",
+          "city": "Tomball",
+          "state": "TX",
+          "region": "southwest"
+        },
+        "broadcast": "Perfect Game TV + Blaze Viz",
+        "scouting_coverage": {
+          "mlb_scouts": 10,
+          "college_programs": 42,
+          "perfect_game_grade": 9.5
+        },
+        "ranking_impact": {
+          "perfect_game_points": 300,
+          "usssa_power": 95
+        }
+      },
+      {
+        "id": "usssa-select30-finals-2025",
+        "name": "2025 USSSA Select 30 Championships",
+        "start_date": "2025-07-10",
+        "end_date": "2025-07-15",
+        "location": {
+          "complex": "USSSA Space Coast Complex",
+          "city": "Viera",
+          "state": "FL",
+          "region": "southeast"
+        },
+        "broadcast": "USSSA Live + Blaze Viz",
+        "scouting_coverage": {
+          "mlb_scouts": 8,
+          "college_programs": 36,
+          "perfect_game_grade": null
+        },
+        "ranking_impact": {
+          "perfect_game_points": 180,
+          "usssa_power": 120
+        }
+      },
+      {
+        "id": "d1-showcase-summit-2025",
+        "name": "2025 D1 Baseball National Showcase Summit",
+        "start_date": "2025-08-08",
+        "end_date": "2025-08-12",
+        "location": {
+          "complex": "Hoover Met Complex",
+          "city": "Hoover",
+          "state": "AL",
+          "region": "southeast"
+        },
+        "broadcast": "D1Baseball Network",
+        "scouting_coverage": {
+          "mlb_scouts": 22,
+          "college_programs": 68,
+          "perfect_game_grade": null
+        },
+        "ranking_impact": {
+          "perfect_game_points": 210,
+          "usssa_power": 60
+        }
+      }
+    ]
+  }
+}

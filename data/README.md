@@ -47,6 +47,12 @@ All data processing follows strict privacy guidelines:
 3. **Client Data**: Stored securely in `clients/` with access controls
 4. **Cache Management**: Temporary files cleaned automatically
 
+## Youth Baseball Data Hub
+
+- `youth-baseball/raw/` holds curated snapshots from Perfect Game, USSSA Select 30, and D1Baseball recruiting trackers.
+- `youth-baseball/perfect-game-youth-select.json` is the merged and enriched dataset served by the public API layer.
+- Regenerate the aggregate file by running `node scripts/build-perfect-game-youth-data.mjs` from the repository root after updating raw feeds.
+
 ## Data Processing Pipeline
 
 The analytics pipeline processes data through multiple stages:

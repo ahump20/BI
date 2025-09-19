@@ -1,0 +1,269 @@
+{
+  "provider": "Perfect Game USA",
+  "provider_key": "perfect_game",
+  "source_url": "https://www.perfectgame.org/rankings/",
+  "last_updated": "2025-02-15",
+  "notes": "Top travel programs compiled from Perfect Game Select Series leaderboards.",
+  "age_groups": {
+    "14u": [
+      {
+        "rank": 1,
+        "team": "Dallas Tigers Polk",
+        "state": "TX",
+        "record": "42-6",
+        "rating": 98.4,
+        "last_event": "PG 14U Select World Series Champions",
+        "notable_players": ["Ethan Rodriguez", "Landon Price"],
+        "pg_id": "pg-team-dtpolk-14u"
+      },
+      {
+        "rank": 2,
+        "team": "Georgia Bombers 14U National",
+        "state": "GA",
+        "record": "39-8",
+        "rating": 96.8,
+        "last_event": "Runner-up PG 14U World Series",
+        "notable_players": ["Miles Porter"],
+        "pg_id": "pg-team-bombers-14u"
+      },
+      {
+        "rank": 3,
+        "team": "South Texas Sliders 14U Scout",
+        "state": "TX",
+        "record": "36-9",
+        "rating": 94.3,
+        "last_event": "PG South Select Champions",
+        "notable_players": ["Kai Hernandez"],
+        "pg_id": "pg-team-sliders-14u"
+      },
+      {
+        "rank": 4,
+        "team": "Louisiana Knights Black 14U",
+        "state": "LA",
+        "record": "33-11",
+        "rating": 92.6,
+        "last_event": "PG Deep South Final Four",
+        "notable_players": ["Brennan Dupree"],
+        "pg_id": "pg-team-knights-14u"
+      },
+      {
+        "rank": 5,
+        "team": "Tennessee Nationals 14U Prime",
+        "state": "TN",
+        "record": "31-12",
+        "rating": 91.8,
+        "last_event": "PG Southeast Elite Semifinalist",
+        "notable_players": ["Hunter Wallace"],
+        "pg_id": "pg-team-nationals-14u"
+      }
+    ],
+    "15u": [
+      {
+        "rank": 1,
+        "team": "Texas Twelve Maroon 15U",
+        "state": "TX",
+        "record": "44-7",
+        "rating": 99.1,
+        "last_event": "PG 15U National Champions",
+        "notable_players": ["Jackson Miller"],
+        "pg_id": "pg-team-texastwelve-15u"
+      },
+      {
+        "rank": 2,
+        "team": "Banditos Scout Team 15U",
+        "state": "TX",
+        "record": "41-8",
+        "rating": 97.5,
+        "last_event": "PG South Elite Champions",
+        "notable_players": ["Noah Williams"],
+        "pg_id": "pg-team-banditos-15u"
+      },
+      {
+        "rank": 3,
+        "team": "Canes National 15U",
+        "state": "NC",
+        "record": "38-10",
+        "rating": 95.4,
+        "last_event": "PG Coastal World Series Champions",
+        "notable_players": ["Aiden Brooks"],
+        "pg_id": "pg-team-canes-15u"
+      },
+      {
+        "rank": 4,
+        "team": "East Cobb Astros 15U Orange",
+        "state": "GA",
+        "record": "37-12",
+        "rating": 94.0,
+        "last_event": "PG WWBA 15U National Runner-up",
+        "notable_players": ["Logan Whitaker"],
+        "pg_id": "pg-team-astros-15u"
+      },
+      {
+        "rank": 5,
+        "team": "Midland Redskins 15U",
+        "state": "OH",
+        "record": "35-13",
+        "rating": 92.9,
+        "last_event": "PG Midwest Elite Champions",
+        "notable_players": ["Grayson Lee"],
+        "pg_id": "pg-team-midland-15u"
+      }
+    ],
+    "16u": [
+      {
+        "rank": 1,
+        "team": "Georgia Bombers 16U National",
+        "state": "GA",
+        "record": "46-6",
+        "rating": 99.3,
+        "last_event": "PG 16U Elite Champions",
+        "notable_players": ["Mason Carter"],
+        "pg_id": "pg-team-bombers-16u"
+      },
+      {
+        "rank": 2,
+        "team": "Canes National 16U",
+        "state": "VA",
+        "record": "43-9",
+        "rating": 97.8,
+        "last_event": "PG WWBA 16U Champions",
+        "notable_players": ["Dylan Ashby"],
+        "pg_id": "pg-team-canes-16u"
+      },
+      {
+        "rank": 3,
+        "team": "Dallas Tigers 16U Polk",
+        "state": "TX",
+        "record": "40-11",
+        "rating": 95.9,
+        "last_event": "PG South Select Runner-up",
+        "notable_players": ["Chase Morgan"],
+        "pg_id": "pg-team-dtpolk-16u"
+      },
+      {
+        "rank": 4,
+        "team": "USA Prime National 16U",
+        "state": "TX",
+        "record": "38-13",
+        "rating": 94.6,
+        "last_event": "PG All-American Qualifier Champions",
+        "notable_players": ["Jaxon Pierce"],
+        "pg_id": "pg-team-usaprime-16u"
+      },
+      {
+        "rank": 5,
+        "team": "5 Star National 16U Black",
+        "state": "FL",
+        "record": "36-14",
+        "rating": 93.7,
+        "last_event": "PG Southeast Select Semifinalist",
+        "notable_players": ["Caleb Johnson"],
+        "pg_id": "pg-team-5star-16u"
+      }
+    ],
+    "17u": [
+      {
+        "rank": 1,
+        "team": "Canes National 17U",
+        "state": "NC",
+        "record": "47-6",
+        "rating": 99.5,
+        "last_event": "PG 17U WWBA National Champions",
+        "notable_players": ["Caleb Johnson"],
+        "pg_id": "pg-team-canes-17u"
+      },
+      {
+        "rank": 2,
+        "team": "Florida Hurricanes Platinum 17U",
+        "state": "FL",
+        "record": "44-8",
+        "rating": 97.9,
+        "last_event": "PG BCS National Champions",
+        "notable_players": ["Micah Daniels"],
+        "pg_id": "pg-team-hurricanes-17u"
+      },
+      {
+        "rank": 3,
+        "team": "Banditos Scout Team 17U",
+        "state": "TX",
+        "record": "41-10",
+        "rating": 96.2,
+        "last_event": "PG South Select Champions",
+        "notable_players": ["Noah Williams"],
+        "pg_id": "pg-team-banditos-17u"
+      },
+      {
+        "rank": 4,
+        "team": "Texas Twelve Maroon 17U",
+        "state": "TX",
+        "record": "39-12",
+        "rating": 94.7,
+        "last_event": "PG Texas Select Finalist",
+        "notable_players": ["Jackson Miller"],
+        "pg_id": "pg-team-texastwelve-17u"
+      },
+      {
+        "rank": 5,
+        "team": "Tennessee Nationals 17U Prime",
+        "state": "TN",
+        "record": "37-15",
+        "rating": 93.6,
+        "last_event": "PG Southeast Elite Quarterfinalist",
+        "notable_players": ["Hunter Wallace"],
+        "pg_id": "pg-team-nationals-17u"
+      }
+    ],
+    "18u": [
+      {
+        "rank": 1,
+        "team": "Canes National 18U",
+        "state": "NC",
+        "record": "48-7",
+        "rating": 99.6,
+        "last_event": "PG WWBA 18U National Champions",
+        "notable_players": ["Caleb Johnson"],
+        "pg_id": "pg-team-canes-18u"
+      },
+      {
+        "rank": 2,
+        "team": "Banditos Black 18U",
+        "state": "TX",
+        "record": "45-9",
+        "rating": 98.1,
+        "last_event": "PG South World Series Champions",
+        "notable_players": ["Noah Williams"],
+        "pg_id": "pg-team-banditos-18u"
+      },
+      {
+        "rank": 3,
+        "team": "Georgia Bombers 18U Five-Star",
+        "state": "GA",
+        "record": "43-11",
+        "rating": 96.7,
+        "last_event": "PG Elite Champions Cup Winners",
+        "notable_players": ["Mason Carter"],
+        "pg_id": "pg-team-bombers-18u"
+      },
+      {
+        "rank": 4,
+        "team": "Dallas Patriots 18U Scout",
+        "state": "TX",
+        "record": "41-13",
+        "rating": 95.1,
+        "last_event": "PG Texas Elite Finalist",
+        "notable_players": ["Jackson Miller"],
+        "pg_id": "pg-team-patriots-18u"
+      },
+      {
+        "rank": 5,
+        "team": "Florida Burn 18U Premier",
+        "state": "FL",
+        "record": "39-14",
+        "rating": 94.0,
+        "last_event": "PG BCS 18U Runner-up",
+        "notable_players": ["Micah Daniels"],
+        "pg_id": "pg-team-floridaburn-18u"
+      }
+    ]
+  }
+}

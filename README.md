@@ -125,6 +125,20 @@ npm run serve
 npm run mcp-server
 ```
 
+## 🥇 Perfect Game Youth Select API
+
+The youth baseball data service aggregates Perfect Game rankings, USSSA Select 30 power ratings, and D1Baseball recruiting intel into a single dataset.
+
+- **Base URL:** `/api/perfect-game/youth`
+- **Summary:** `GET /api/perfect-game/youth`
+- **Rankings:** `GET /api/perfect-game/youth/rankings?provider=composite&ageGroup=15u`
+- **Players:** `GET /api/perfect-game/youth/players?ageGroup=16u&state=TX&minComposite=250`
+- **Commitments:** `GET /api/perfect-game/youth/commitments?college=lsu`
+- **Tournaments:** `GET /api/perfect-game/youth/tournaments?region=southeast`
+- **Search:** `GET /api/perfect-game/youth/search?q=banditos`
+
+Update the underlying dataset by running `node scripts/build-perfect-game-youth-data.mjs` after modifying the raw source files in `data/youth-baseball/raw/`.
+
 ### Production Deployment
 ```bash
 # Deploy to Cloudflare
