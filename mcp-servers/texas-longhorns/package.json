@@ -1,0 +1,13 @@
+{
+  "name": "texas-longhorns-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server providing Texas Longhorns football and baseball data integrations",
+  "type": "module",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.1",
+    "csv-parse": "^6.1.0",
+    "fast-xml-parser": "^5.2.5"
+  }
+}
