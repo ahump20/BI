@@ -12,9 +12,9 @@
     "dev": "netlify dev"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "hono": "^4.9.8"
   },
-  "devDependencies": {},
   "keywords": [
     "cloudflare",
     "workers",
@@ -23,5 +23,8 @@
     "contact"
   ],
   "author": "Austin Humphrey <ahump20@outlook.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250918.0"
+  }
 }
