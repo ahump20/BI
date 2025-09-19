@@ -7,11 +7,11 @@ import json
 import os
 import sys
 import argparse
-from datetime import datetime
 from typing import List, Dict, Any
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from ingestion.havf import compute_all
+from ingestion.time_utils import utc_now_isoformat
 
 
 class NILAgent:
@@ -34,7 +34,7 @@ class NILAgent:
     def normalize(self, raw: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Normalize to Blaze schema"""
         players = []
-        now_iso = datetime.utcnow().isoformat() + 'Z'
+        now_iso = utc_now_isoformat()
         
         for raw_player in raw.get('players', []):
             player = {
@@ -83,7 +83,7 @@ class NILAgent:
             with open(self.output_path, 'w') as f:
                 json.dump({
                     'league': 'NIL',
-                    'generated_at': datetime.utcnow().isoformat() + 'Z',
+                    'generated_at': utc_now_isoformat(),
                     'players': players
                 }, f, indent=2)
             

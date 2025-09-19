@@ -1,0 +1,33 @@
+name = "blaze-realtime"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+logpush = true
+
+[durable_objects]
+bindings = [
+  { name = "ROOM", class_name = "Room" }
+]
+
+[[queues.producers]]
+binding = "EVENTS"
+queue = "events"
+
+[[queues.consumers]]
+queue = "events"
+consumer = true
+
+[kv_namespaces]
+bindings = [
+  { binding = "CACHE", id = "00000000000000000000000000000000" }
+]
+
+[r2_buckets]
+bindings = [
+  { binding = "REPORTS", bucket_name = "blaze-reports" }
+]
+
+[ai]
+binding = "AI"
+
+[vars]
+MCP_ENDPOINT = "https://mcp-gateway.internal"
