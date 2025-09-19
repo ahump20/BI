@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "season": 2023,
+    "program": "Texas Longhorns",
+    "sport": "baseball",
+    "lastUpdated": "2023-06-12T00:00:00Z",
+    "dataStatus": "historical",
+    "sources": [
+      "University of Texas 2023 baseball media guide and postseason recaps",
+      "NCAA regional and super regional box scores"
+    ],
+    "notes": "Summary data describing Texas' 2023 campaign. Detailed pitch-by-pitch statistics should be ingested from a licensed provider such as D1Baseball before rolling out production endpoints."
+  },
+  "summary": {
+    "overallRecord": "42-22",
+    "conferenceRecord": "15-9",
+    "conference": "Big 12",
+    "regularSeasonTitle": "Co-champions",
+    "postseason": {
+      "big12Tournament": "Eliminated in Saturday bracket play",
+      "ncaaRegional": "Austin Regional champions (3-0)",
+      "ncaaSuperRegional": "Lost to Stanford 1-2 in Palo Alto"
+    },
+    "headCoach": "David Pierce",
+    "ballpark": "UFCU Disch-Falk Field"
+  },
+  "keyPlayers": {
+    "hitters": [
+      { "name": "Dylan Campbell", "position": "OF", "notes": "Program-record 38-game hitting streak; All-Big 12 first team." },
+      { "name": "Peyton Powell", "position": "3B", "notes": "Corner infielder who hit in the middle of the order all season." },
+      { "name": "Porter Brown", "position": "OF", "notes": "TCU transfer supplied left-handed power and clutch postseason at-bats." },
+      { "name": "Garrett Guillemette", "position": "C", "notes": "Southern California transfer who handled the pitching staff." },
+      { "name": "Eric Kennedy", "position": "OF", "notes": "Fifth-year senior spark plug with speed on the bases." }
+    ],
+    "pitchers": [
+      { "name": "Lucas Gordon", "throws": "LHP", "notes": "Friday-night starter and Big 12 Pitcher of the Year." },
+      { "name": "Lebarron Johnson Jr.", "throws": "RHP", "notes": "Power arm who starred in the Austin Regional." },
+      { "name": "Charlie Hurley", "throws": "RHP", "notes": "Transfer innings-eater who stabilized the rotation." },
+      { "name": "Andre Duplantier II", "throws": "RHP", "notes": "Multi-inning relief ace." },
+      { "name": "Zane Morehouse", "throws": "RHP", "notes": "Late-inning reliever deployed in high-leverage spots." }
+    ]
+  },
+  "notableSeries": [
+    { "opponent": "Texas Tech", "result": "Home sweep secured share of the Big 12 regular-season title" },
+    { "opponent": "West Virginia", "result": "Late-season sweep fueled title push" },
+    { "event": "Austin Regional", "result": "Defeated Louisiana, Miami (FL) twice to advance" },
+    { "event": "Stanford Super Regional", "result": "Won opener behind Lebarron Johnson Jr.; dropped the final two games" }
+  ],
+  "updatePlan": {
+    "priority": [
+      "Add per-game box scores and player stat splits using a licensed college baseball feed.",
+      "Track 2024 MLB Draft outcomes for departing players.",
+      "Load 2025 roster once official athletics release is published."
+    ],
+    "recommendedSources": [
+      "D1Baseball team statistics feed",
+      "TexasSports.com roster pages",
+      "Perfect Game scouting reports"
+    ]
+  }
+}

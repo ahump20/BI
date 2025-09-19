@@ -1,0 +1,218 @@
+{
+  "meta": {
+    "season": 2023,
+    "program": "Texas Longhorns",
+    "sport": "football",
+    "lastUpdated": "2024-01-02T00:00:00Z",
+    "dataStatus": "historical",
+    "sources": [
+      "University of Texas 2023 football schedule and game results (public records)",
+      "College Football Playoff semifinal box score vs. Washington (January 1, 2024)"
+    ],
+    "notes": "Game-by-game scoring compiled to support the initial MCP API scaffolding. Update with official 2024 and 2025 statistics once available from licensed data providers."
+  },
+  "summary": {
+    "overallRecord": "12-2",
+    "conferenceRecord": "8-1",
+    "conference": "Big 12",
+    "finalRankingAP": 3,
+    "postseason": "Lost Sugar Bowl (CFP semifinal) to Washington 31-37",
+    "headCoach": "Steve Sarkisian",
+    "offensiveCoordinator": "Kyle Flood",
+    "defensiveCoordinator": "Pete Kwiatkowski"
+  },
+  "statistics": {
+    "gamesPlayed": 14,
+    "pointsFor": 501,
+    "pointsAgainst": 265,
+    "averagePointsFor": 35.79,
+    "averagePointsAgainst": 18.93,
+    "averageMargin": 16.86
+  },
+  "keyPlayers": {
+    "offense": [
+      { "name": "Quinn Ewers", "position": "QB", "notes": "Started 12 games and steered Texas to the College Football Playoff." },
+      { "name": "Jonathon Brooks", "position": "RB", "notes": "Team rushing leader prior to his November knee injury." },
+      { "name": "CJ Baxter Jr.", "position": "RB", "notes": "True freshman who closed the season as the primary ball carrier." },
+      { "name": "Xavier Worthy", "position": "WR", "notes": "All-Big 12 receiver and explosive punt returner." },
+      { "name": "Adonai Mitchell", "position": "WR", "notes": "Georgia transfer who supplied 11 touchdown receptions." },
+      { "name": "Ja'Tavion Sanders", "position": "TE", "notes": "Mismatch tight end and All-Big 12 selection." }
+    ],
+    "defense": [
+      { "name": "T'Vondre Sweat", "position": "DL", "notes": "Big 12 Defensive Player of the Year anchored the interior." },
+      { "name": "Byron Murphy II", "position": "DL", "notes": "Disruptive tackle who demanded double-teams." },
+      { "name": "Jaylan Ford", "position": "LB", "notes": "Team leader in tackles and veteran signal caller." },
+      { "name": "Anthony Hill Jr.", "position": "LB", "notes": "Freshman pass-rush specialist used in pressure packages." },
+      { "name": "Jahdae Barron", "position": "DB", "notes": "Nickel defender who produced multiple takeaways." },
+      { "name": "Jalen Catalon", "position": "DB", "notes": "Transfer safety who opened the season as a starter." }
+    ]
+  },
+  "schedule": [
+    {
+      "date": "2023-09-02",
+      "opponent": "Rice",
+      "location": "Austin, TX",
+      "venue": "Darrell K Royal–Texas Memorial Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": false,
+      "result": "W",
+      "score": { "texas": 37, "opponent": 10 },
+      "recordAfterGame": "1-0"
+    },
+    {
+      "date": "2023-09-09",
+      "opponent": "Alabama",
+      "location": "Tuscaloosa, AL",
+      "venue": "Bryant-Denny Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": false,
+      "result": "W",
+      "score": { "texas": 34, "opponent": 24 },
+      "recordAfterGame": "2-0"
+    },
+    {
+      "date": "2023-09-16",
+      "opponent": "Wyoming",
+      "location": "Austin, TX",
+      "venue": "Darrell K Royal–Texas Memorial Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": false,
+      "result": "W",
+      "score": { "texas": 31, "opponent": 10 },
+      "recordAfterGame": "3-0"
+    },
+    {
+      "date": "2023-09-23",
+      "opponent": "Baylor",
+      "location": "Waco, TX",
+      "venue": "McLane Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": true,
+      "result": "W",
+      "score": { "texas": 38, "opponent": 6 },
+      "recordAfterGame": "4-0"
+    },
+    {
+      "date": "2023-09-30",
+      "opponent": "Kansas",
+      "location": "Austin, TX",
+      "venue": "Darrell K Royal–Texas Memorial Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": true,
+      "result": "W",
+      "score": { "texas": 40, "opponent": 14 },
+      "recordAfterGame": "5-0"
+    },
+    {
+      "date": "2023-10-07",
+      "opponent": "Oklahoma",
+      "location": "Dallas, TX",
+      "venue": "Cotton Bowl",
+      "gameType": "Regular Season",
+      "conferenceGame": true,
+      "result": "L",
+      "score": { "texas": 30, "opponent": 34 },
+      "recordAfterGame": "5-1"
+    },
+    {
+      "date": "2023-10-21",
+      "opponent": "Houston",
+      "location": "Houston, TX",
+      "venue": "TDECU Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": true,
+      "result": "W",
+      "score": { "texas": 31, "opponent": 24 },
+      "recordAfterGame": "6-1"
+    },
+    {
+      "date": "2023-10-28",
+      "opponent": "BYU",
+      "location": "Austin, TX",
+      "venue": "Darrell K Royal–Texas Memorial Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": true,
+      "result": "W",
+      "score": { "texas": 35, "opponent": 6 },
+      "recordAfterGame": "7-1"
+    },
+    {
+      "date": "2023-11-04",
+      "opponent": "Kansas State",
+      "location": "Austin, TX",
+      "venue": "Darrell K Royal–Texas Memorial Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": true,
+      "result": "W",
+      "score": { "texas": 33, "opponent": 30 },
+      "recordAfterGame": "8-1"
+    },
+    {
+      "date": "2023-11-11",
+      "opponent": "TCU",
+      "location": "Fort Worth, TX",
+      "venue": "Amon G. Carter Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": true,
+      "result": "W",
+      "score": { "texas": 29, "opponent": 26 },
+      "recordAfterGame": "9-1"
+    },
+    {
+      "date": "2023-11-18",
+      "opponent": "Iowa State",
+      "location": "Ames, IA",
+      "venue": "Jack Trice Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": true,
+      "result": "W",
+      "score": { "texas": 26, "opponent": 16 },
+      "recordAfterGame": "10-1"
+    },
+    {
+      "date": "2023-11-24",
+      "opponent": "Texas Tech",
+      "location": "Austin, TX",
+      "venue": "Darrell K Royal–Texas Memorial Stadium",
+      "gameType": "Regular Season",
+      "conferenceGame": true,
+      "result": "W",
+      "score": { "texas": 57, "opponent": 7 },
+      "recordAfterGame": "11-1"
+    },
+    {
+      "date": "2023-12-02",
+      "opponent": "Oklahoma State",
+      "location": "Arlington, TX",
+      "venue": "AT&T Stadium",
+      "gameType": "Big 12 Championship",
+      "conferenceGame": true,
+      "result": "W",
+      "score": { "texas": 49, "opponent": 21 },
+      "recordAfterGame": "12-1"
+    },
+    {
+      "date": "2024-01-01",
+      "opponent": "Washington",
+      "location": "New Orleans, LA",
+      "venue": "Caesars Superdome",
+      "gameType": "Sugar Bowl (CFP semifinal)",
+      "conferenceGame": false,
+      "result": "L",
+      "score": { "texas": 31, "opponent": 37 },
+      "recordAfterGame": "12-2"
+    }
+  ],
+  "updatePlan": {
+    "priority": [
+      "Integrate 2024 season statistics once official NCAA data is released.",
+      "Automate roster and depth-chart ingestion using the CollegeFootballData API.",
+      "Map 2025 opponent schedules for matchup insight generation."
+    ],
+    "recommendedSources": [
+      "CollegeFootballData.com API",
+      "Official Texas Athletics releases",
+      "Ourlads depth charts"
+    ]
+  }
+}
