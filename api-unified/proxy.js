@@ -37,7 +37,12 @@ export default async function handler(req, res) {
         response = await callStripe(endpoint, params);
         break;
       case 'sportsradar':
-        response = await callSportsRadar(endpoint, params);
+        response = await callSportsRadar({
+          endpoint,
+          params,
+          method: req.method,
+          body: req.body
+        });
         break;
       case 'hubspot':
         response = await callHubSpot(endpoint, params);
@@ -88,16 +93,92 @@ async function callStripe(endpoint, params) {
   }
 }
 
-async function callSportsRadar(endpoint, params) {
-  const baseUrl = 'https://api.sportradar.us';
-  const response = await fetch(`${baseUrl}/${endpoint}?api_key=${process.env.SPORTSRADAR_MASTER_API_KEY}`, {
-    method: 'GET',
+async function callSportsRadar({ endpoint, params = {}, method = 'GET', body }) {
+  const url = buildSportsRadarUrl(endpoint, params);
+  const fetchOptions = {
+    method: method?.toUpperCase() || 'GET',
     headers: {
-      'Accept': 'application/json'
+      Accept: 'application/json'
+    }
+  };
+
+  if (fetchOptions.method !== 'GET' && fetchOptions.method !== 'HEAD' && body) {
+    fetchOptions.headers['Content-Type'] = 'application/json';
+    fetchOptions.body = typeof body === 'string' ? body : JSON.stringify(body);
+  }
+
+  const response = await fetch(url.toString(), fetchOptions);
+  const contentType = response.headers.get('content-type') || '';
+  const responseBody = await response.text();
+
+  if (!response.ok) {
+    throw new Error(`SportsRadar request failed: ${response.status} ${response.statusText}`);
+  }
+
+  if (contentType.includes('application/json')) {
+    return JSON.parse(responseBody || '{}');
+  }
+
+  return responseBody;
+}
+
+function buildSportsRadarUrl(endpoint, params) {
+  const { sport, path, ...queryParams } = params || {};
+  const targetPath = path || endpoint;
+
+  if (!targetPath) {
+    throw new Error('SportsRadar endpoint is required');
+  }
+
+  const url = createSportsRadarUrl(targetPath);
+
+  Object.entries(queryParams).forEach(([key, value]) => {
+    if (value === undefined || value === null) {
+      return;
+    }
+
+    if (Array.isArray(value)) {
+      value.forEach(item => {
+        if (item !== undefined && item !== null) {
+          url.searchParams.append(key, String(item));
+        }
+      });
+    } else {
+      url.searchParams.set(key, String(value));
     }
   });
-  
-  return response.json();
+
+  const apiKey = resolveSportsRadarKey(sport);
+
+  if (!apiKey) {
+    throw new Error(`SportsRadar API key not configured for ${sport || 'default'} requests`);
+  }
+
+  url.searchParams.set('api_key', apiKey);
+
+  return url;
+}
+
+function createSportsRadarUrl(targetPath) {
+  if (/^https?:\/\//i.test(targetPath)) {
+    return new URL(targetPath);
+  }
+
+  const normalizedPath = String(targetPath).replace(/^\/+/, '');
+  return new URL(normalizedPath, 'https://api.sportradar.us/');
+}
+
+function resolveSportsRadarKey(sport) {
+  const normalizedSport = (sport || '').toLowerCase();
+  const keyMap = {
+    mlb: process.env.SPORTRADAR_MLB_KEY || process.env.SPORTSRADAR_MLB_KEY,
+    nfl: process.env.SPORTRADAR_NFL_KEY || process.env.SPORTSRADAR_NFL_KEY,
+    nba: process.env.SPORTRADAR_NBA_KEY || process.env.SPORTSRADAR_NBA_KEY,
+    ncaaf: process.env.SPORTRADAR_NCAAF_KEY || process.env.SPORTSRADAR_NCAAF_KEY,
+    ncaafb: process.env.SPORTRADAR_NCAAF_KEY || process.env.SPORTSRADAR_NCAAF_KEY
+  };
+
+  return keyMap[normalizedSport] || process.env.SPORTSRADAR_MASTER_API_KEY || process.env.SPORTRADAR_MASTER_API_KEY;
 }
 
 async function callHubSpot(endpoint, params) {
