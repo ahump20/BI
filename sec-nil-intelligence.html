@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEC NIL Intelligence | Blaze Intelligence</title>
+    <meta name="description" content="Monitor SEC NIL valuations, transfer market heat, and collective strength with production-ready embeds built for athletic departments.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/performance-pages.css">
+    <style>
+        .hero__title span {
+            color: var(--blaze-orange);
+        }
+
+        .profile-switcher {
+            display: inline-flex;
+            background: rgba(255, 209, 102, 0.12);
+            border: 1px solid rgba(255, 209, 102, 0.35);
+            border-radius: 999px;
+            padding: 0.45rem;
+            gap: 0.35rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-switcher button {
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 0.55rem 1.35rem;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .profile-switcher button.is-active {
+            background: linear-gradient(135deg, var(--blaze-orange), var(--blaze-gold));
+            color: #05060f;
+            box-shadow: 0 12px 28px rgba(255, 209, 102, 0.35);
+        }
+
+        .profile-switcher button:hover {
+            color: var(--text-primary);
+        }
+
+        .nil-console {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            align-items: stretch;
+        }
+
+        .nil-card {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 209, 102, 0.25);
+            padding: 1.75rem;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .nil-card--chart {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 960px) {
+            .nil-card--chart {
+                grid-column: span 1;
+            }
+        }
+
+        .nil-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .nil-table thead th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: rgba(255, 209, 102, 0.85);
+            border-bottom: 1px solid rgba(255, 209, 102, 0.35);
+        }
+
+        .nil-table tbody td {
+            padding: 0.9rem 1rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            font-size: 0.95rem;
+        }
+
+        .nil-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .nil-table tbody tr:hover {
+            background: rgba(255, 209, 102, 0.08);
+        }
+
+        .nil-table__rank {
+            font-weight: 700;
+            color: var(--blaze-gold);
+        }
+
+        .nil-table__trend {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .nil-table__trend[data-trend="up"] {
+            background: rgba(52, 211, 153, 0.12);
+            color: var(--success);
+        }
+
+        .nil-table__trend[data-trend="down"] {
+            background: rgba(248, 113, 113, 0.12);
+            color: var(--danger);
+        }
+
+        .nil-summary {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .nil-summary__item {
+            padding: 1rem 1.1rem;
+            border-radius: var(--radius-md);
+            background: rgba(4, 7, 16, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .embed-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        .embed-preview {
+            background: linear-gradient(135deg, rgba(255, 209, 102, 0.16), rgba(4, 7, 16, 0.82));
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 209, 102, 0.28);
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.3rem;
+        }
+
+        .preview-metric {
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .preview-metric__label {
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 209, 102, 0.82);
+        }
+
+        .preview-metric__value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-top: 0.35rem;
+        }
+
+        .embed-snippet {
+            background: rgba(4, 7, 16, 0.88);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            padding: 1.75rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .code-block {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            font-family: 'IBM Plex Mono', 'SFMono-Regular', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--blaze-gold);
+            overflow-x: auto;
+        }
+
+        .opportunity-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .opportunity-card {
+            padding: 1.4rem;
+            border-radius: var(--radius-lg);
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 209, 102, 0.25);
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .opportunity-card__title {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .opportunity-card__meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .opportunity-pill {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(255, 209, 102, 0.16);
+            border: 1px solid rgba(255, 209, 102, 0.35);
+            color: var(--blaze-gold);
+        }
+
+        body.embed-mode {
+            background: #05070f;
+        }
+
+        body.embed-mode .global-nav,
+        body.embed-mode .hero,
+        body.embed-mode .section:not(#nil-embed) {
+            display: none !important;
+        }
+
+        body.embed-mode .page-shell {
+            max-width: 480px;
+            margin: 0 auto;
+            padding-top: 1.5rem;
+        }
+
+        body.embed-mode #nil-embed {
+            padding-top: 0;
+        }
+
+        body.embed-mode .embed-grid {
+            grid-template-columns: 1fr;
+        }
+
+        body.embed-mode .embed-snippet {
+            display: none;
+        }
+
+        body.embed-mode .embed-preview {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        }
+    </style>
+</head>
+<body>
+    <header class="global-nav">
+        <div class="global-nav__inner">
+            <a class="nav-logo" href="index.html">
+                <span class="nav-logo__mark">BI</span>
+                Blaze Intelligence
+            </a>
+            <nav class="nav-links">
+                <a href="analytics-intelligence.html">Analytics</a>
+                <a href="sec-nil-intelligence.html" class="active">SEC NIL</a>
+                <a href="video-intelligence.html">Video AI</a>
+                <a href="embedded-biomechanics.html">Biomechanics</a>
+                <a href="ar-real-time-visualization.html">AR Coaching</a>
+                <a href="index.html#contact" class="nav-cta">Talk to us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <span class="hero__eyebrow">SEC NIL operations</span>
+                    <h1 class="hero__title">Command every <span>NIL valuation</span> and collective signal in real time</h1>
+                    <p class="hero__description">
+                        Blaze Intelligence captures SEC NIL deals, booster momentum, and roster impact in one command center.
+                        Operate with full transparency for coaches, collectives, and compliance.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn--primary" href="#nil-console">Review live board</a>
+                        <a class="btn btn--ghost" href="#nil-embed">Copy NIL widget</a>
+                    </div>
+                    <div class="hero-metrics">
+                        <div class="hero-metric">
+                            <div class="hero-metric__label">SEC tracked</div>
+                            <div class="hero-metric__value" data-nil-metric="tracked">$196M</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric__label">Top commit</div>
+                            <div class="hero-metric__value" data-nil-metric="commit">QB • Manning $6.8M</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric__label">Collective health</div>
+                            <div class="hero-metric__value" data-nil-metric="health">92 / 100</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-visual__overlay">
+                        <div class="hero-visual__badge">Market telemetry</div>
+                        <div class="visual-stream">
+                            <div class="stream-card">
+                                <div class="stream-card__label">Focus market</div>
+                                <div class="stream-card__value" data-profile-market>Texas • Horns With Heart</div>
+                                <div class="telemetry-pill" data-profile-market-tag>+12% week</div>
+                            </div>
+                            <div class="stream-card">
+                                <div class="stream-card__label">Hot transfer lane</div>
+                                <div class="stream-card__value" data-profile-transfer>Edge • Alabama</div>
+                                <div class="telemetry-pill" data-profile-transfer-tag>Portal lock</div>
+                            </div>
+                            <div class="stream-card">
+                                <div class="stream-card__label">Funding signal</div>
+                                <div class="stream-card__value" data-profile-signal>Booster sprint</div>
+                                <div class="telemetry-pill" data-profile-signal-tag>$420K pledged</div>
+                            </div>
+                        </div>
+                        <div class="pose-output" style="margin-top: 1.5rem">
+                            <div class="pose-output__title">Actionable insight</div>
+                            <div class="pose-output__list" data-profile-summary>
+                                Texas collective pacing 18% above monthly goal; allocate spotlight to OL to close tier-one tackle.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="nil-console">
+            <div class="section-header">
+                <span class="section-eyebrow">Dynamic NIL leaderboard</span>
+                <h2 class="section-title">Track top programs, surging collectives, and transfer capital</h2>
+                <p class="section-subtitle">Switch between NIL views without losing historical context. Blaze automates adjustments for market swings, commitments, and compliance limits.</p>
+            </div>
+
+            <div class="profile-switcher" role="tablist">
+                <button class="is-active" data-nil-profile="top" aria-selected="true">Top programs</button>
+                <button data-nil-profile="rising">Rising collectives</button>
+                <button data-nil-profile="transfer">Transfer market</button>
+            </div>
+
+            <div class="nil-console">
+                <article class="nil-card nil-card--chart">
+                    <div class="console-title">Valuation momentum</div>
+                    <canvas id="nilChart" height="220"></canvas>
+                </article>
+
+                <article class="nil-card">
+                    <div class="console-title">Program board</div>
+                    <table class="nil-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Program</th>
+                                <th>Total</th>
+                                <th>Avg / Player</th>
+                                <th>Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody data-nil-table></tbody>
+                    </table>
+                </article>
+
+                <article class="nil-card">
+                    <div class="console-title">Operations brief</div>
+                    <div class="nil-summary" data-nil-summary>
+                        <div class="nil-summary__item">Texas collective tracking +$2.1M above baseline—allocate 28% to trenches.</div>
+                        <div class="nil-summary__item">Alabama boosters accelerated pledge cycle to 18 days; hold premium events weekly.</div>
+                        <div class="nil-summary__item">LSU preparing 5-star QB drop; ensure compliance packet triggered 24h prior.</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="nil-embed">
+            <div class="section-header">
+                <span class="section-eyebrow">Embed-ready feed</span>
+                <h2 class="section-title">Drop SEC NIL pulse into donor portals and media kits</h2>
+                <p class="section-subtitle">Authenticated iframe keeps valuations fresh for collectives, donors, and media partners without exposing internal tooling.</p>
+            </div>
+            <div class="embed-grid">
+                <div class="embed-preview">
+                    <div class="embed-preview__header">
+                        <span>SEC NIL Snapshot</span>
+                        <span class="telemetry-pill">Live</span>
+                    </div>
+                    <div class="preview-metric">
+                        <div class="preview-metric__label">Active focus</div>
+                        <div class="preview-metric__value" data-embed-metric="focus">Texas</div>
+                    </div>
+                    <div class="preview-metric">
+                        <div class="preview-metric__label">Collective health</div>
+                        <div class="preview-metric__value" data-embed-metric="health">A- (92)</div>
+                    </div>
+                    <div class="preview-metric">
+                        <div class="preview-metric__label">Portal war chest</div>
+                        <div class="preview-metric__value" data-embed-metric="warChest">$5.6M ready</div>
+                    </div>
+                    <div class="pose-output">
+                        <div class="pose-output__title">Narrative</div>
+                        <div class="pose-output__list" data-embed-story>
+                            Texas, Alabama, and LSU command 54% of SEC NIL flow; boosters shift toward OL + defensive front depth.
+                        </div>
+                    </div>
+                </div>
+                <div class="embed-snippet">
+                    <div class="embed-snippet__label">Copy widget</div>
+                    <div class="code-block">&lt;iframe
+    src="https://blaze-intelligence.netlify.app/sec-nil-intelligence.html?embed=1"
+    style="border:0;width:100%;max-width:420px;height:520px;border-radius:24px"
+    loading="lazy"
+    allow="clipboard-write"
+&gt;&lt;/iframe&gt;</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">
+                        Append <code>&amp;view=transfer</code> to highlight portal momentum or <code>&amp;view=rising</code> for emerging collectives. Refresh cadence: 45 seconds.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <span class="section-eyebrow">Opportunity radar</span>
+                <h2 class="section-title">Align collectives, donors, and roster priorities</h2>
+                <p class="section-subtitle">Prebuilt playbooks surface where to fuel spend, how to communicate, and which athletes benefit immediately.</p>
+            </div>
+            <div class="opportunity-grid">
+                <article class="opportunity-card">
+                    <div class="opportunity-card__title">Trench surge (Texas)</div>
+                    <div>Shift 28% of new dollars into OL anchors; run integrated storytelling for donors and recruits.</div>
+                    <div class="opportunity-card__meta">
+                        <span class="opportunity-pill">High impact</span>
+                        <span class="opportunity-pill">Content sync</span>
+                    </div>
+                </article>
+                <article class="opportunity-card">
+                    <div class="opportunity-card__title">QB splash (LSU)</div>
+                    <div>Prep multimedia reveal and compliance workflow 24 hours before commitment window opens.</div>
+                    <div class="opportunity-card__meta">
+                        <span class="opportunity-pill">Video AI</span>
+                        <span class="opportunity-pill">Compliance</span>
+                    </div>
+                </article>
+                <article class="opportunity-card">
+                    <div class="opportunity-card__title">Edge reload (Alabama)</div>
+                    <div>Portal reserves at $4.1M—time video + biomechanics assessments to speed conversions.</div>
+                    <div class="opportunity-card__meta">
+                        <span class="opportunity-pill">Portal</span>
+                        <span class="opportunity-pill">AR coaching</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" integrity="sha384-zgVqFvHcdbn+tOfevzpW6vPLuP4W5OcQCXPh85Pu0p50bJuCL8WsFaLZlRChJ0aW" crossorigin="anonymous"></script>
+    <script>
+        const nilProfiles = {
+            top: {
+                label: 'Texas',
+                market: 'Texas • Horns With Heart',
+                marketTag: '+12% week',
+                transfer: 'Edge • Alabama',
+                transferTag: 'Portal lock',
+                signal: 'Booster sprint',
+                signalTag: '$420K pledged',
+                summary: [
+                    'Texas collective tracking +$2.1M above baseline—allocate 28% to trenches.',
+                    'Alabama boosters accelerated pledge cycle to 18 days; hold premium events weekly.',
+                    'LSU preparing 5-star QB drop; ensure compliance packet triggered 24h prior.'
+                ],
+                embed: {
+                    focus: 'Texas',
+                    health: 'A- (92)',
+                    warChest: '$5.6M ready',
+                    narrative: 'Texas, Alabama, and LSU command 54% of SEC NIL flow; boosters shift toward OL + defensive front depth.'
+                },
+                metrics: {
+                    tracked: '$196M',
+                    commit: 'QB • Manning $6.8M',
+                    health: '92 / 100'
+                },
+                table: [
+                    { rank: 1, program: 'Texas', total: '$22.0M', avg: '$184K', trend: 'up', trendLabel: '+9%' },
+                    { rank: 2, program: 'Alabama', total: '$18.4M', avg: '$171K', trend: 'up', trendLabel: '+6%' },
+                    { rank: 3, program: 'LSU', total: '$17.9M', avg: '$163K', trend: 'up', trendLabel: '+11%' },
+                    { rank: 4, program: 'Georgia', total: '$15.7M', avg: '$149K', trend: 'flat', trendLabel: 'stable' },
+                    { rank: 5, program: 'Oklahoma', total: '$14.8M', avg: '$138K', trend: 'up', trendLabel: '+4%' },
+                    { rank: 6, program: 'Texas A&M', total: '$14.1M', avg: '$129K', trend: 'down', trendLabel: '-2%' },
+                    { rank: 7, program: 'Tennessee', total: '$13.6M', avg: '$124K', trend: 'up', trendLabel: '+5%' },
+                    { rank: 8, program: 'Florida', total: '$12.8M', avg: '$117K', trend: 'flat', trendLabel: 'steady' }
+                ],
+                chart: {
+                    labels: ['Texas', 'Alabama', 'LSU', 'Georgia', 'Oklahoma', 'Texas A&M', 'Tennessee', 'Florida'],
+                    data: [22.0, 18.4, 17.9, 15.7, 14.8, 14.1, 13.6, 12.8]
+                }
+            },
+            rising: {
+                label: 'Auburn',
+                market: 'Auburn • On To Victory',
+                marketTag: '+18% month',
+                transfer: 'WR • South Carolina',
+                transferTag: 'Visit pending',
+                signal: 'Corporate alignment',
+                signalTag: '$1.2M new',
+                summary: [
+                    'Auburn collective surges—deploy AR coaching + video AI sizzle for portal visitors.',
+                    'South Carolina prepping dual-sport pitch; align biomechanics + NIL deck.',
+                    'Missouri trending 14% month-over-month; ready digital donor lab rollout.'
+                ],
+                embed: {
+                    focus: 'Auburn',
+                    health: 'B+ (86)',
+                    warChest: '$2.9M ready',
+                    narrative: 'Auburn, Missouri, and Arkansas drive the league’s fastest donor growth; expect 22% lift in portal bids.'
+                },
+                metrics: {
+                    tracked: '$196M',
+                    commit: 'WR • Moore $1.4M',
+                    health: '86 / 100'
+                },
+                table: [
+                    { rank: 1, program: 'Auburn', total: '$9.6M', avg: '$108K', trend: 'up', trendLabel: '+18%' },
+                    { rank: 2, program: 'Missouri', total: '$8.4M', avg: '$96K', trend: 'up', trendLabel: '+14%' },
+                    { rank: 3, program: 'Arkansas', total: '$8.1M', avg: '$92K', trend: 'up', trendLabel: '+11%' },
+                    { rank: 4, program: 'South Carolina', total: '$7.4M', avg: '$87K', trend: 'up', trendLabel: '+9%' },
+                    { rank: 5, program: 'Ole Miss', total: '$7.0M', avg: '$84K', trend: 'up', trendLabel: '+6%' },
+                    { rank: 6, program: 'Kentucky', total: '$6.6M', avg: '$79K', trend: 'flat', trendLabel: 'holding' },
+                    { rank: 7, program: 'Mississippi State', total: '$6.1M', avg: '$74K', trend: 'up', trendLabel: '+4%' },
+                    { rank: 8, program: 'Vanderbilt', total: '$5.8M', avg: '$69K', trend: 'up', trendLabel: '+3%' }
+                ],
+                chart: {
+                    labels: ['Auburn', 'Missouri', 'Arkansas', 'South Carolina', 'Ole Miss', 'Kentucky', 'MSU', 'Vanderbilt'],
+                    data: [9.6, 8.4, 8.1, 7.4, 7.0, 6.6, 6.1, 5.8]
+                }
+            },
+            transfer: {
+                label: 'Alabama',
+                market: 'Alabama • Yea Alabama',
+                marketTag: '+7% week',
+                transfer: 'Edge • Portal',
+                transferTag: '$1.6M ready',
+                signal: 'War chest primed',
+                signalTag: '$6.4M in reserve',
+                summary: [
+                    'Prioritize defensive front; pair biomechanics eval with NIL closing offer.',
+                    'Texas prepping for late QB entry—hold $2.1M flex space in budget.',
+                    'Florida exploring multi-sport activation; coordinate AR coaching for evaluation.'
+                ],
+                embed: {
+                    focus: 'Alabama',
+                    health: 'A (90)',
+                    warChest: '$6.4M ready',
+                    narrative: 'Portal heavyweights—Alabama, Texas, and Florida—own 61% of immediate transfer reserves.'
+                },
+                metrics: {
+                    tracked: '$196M',
+                    commit: 'Edge • Johnson $1.9M',
+                    health: '90 / 100'
+                },
+                table: [
+                    { rank: 1, program: 'Alabama', total: '$6.4M war chest', avg: '$260K', trend: 'up', trendLabel: '+12%' },
+                    { rank: 2, program: 'Texas', total: '$5.6M war chest', avg: '$241K', trend: 'up', trendLabel: '+9%' },
+                    { rank: 3, program: 'Florida', total: '$4.8M war chest', avg: '$218K', trend: 'flat', trendLabel: 'steady' },
+                    { rank: 4, program: 'LSU', total: '$4.5M war chest', avg: '$203K', trend: 'up', trendLabel: '+6%' },
+                    { rank: 5, program: 'Georgia', total: '$4.1M war chest', avg: '$198K', trend: 'down', trendLabel: '-3%' },
+                    { rank: 6, program: 'Tennessee', total: '$3.6M war chest', avg: '$182K', trend: 'up', trendLabel: '+5%' },
+                    { rank: 7, program: 'Ole Miss', total: '$3.3M war chest', avg: '$176K', trend: 'up', trendLabel: '+4%' },
+                    { rank: 8, program: 'Oklahoma', total: '$3.1M war chest', avg: '$169K', trend: 'flat', trendLabel: 'steady' }
+                ],
+                chart: {
+                    labels: ['Alabama', 'Texas', 'Florida', 'LSU', 'Georgia', 'Tennessee', 'Ole Miss', 'Oklahoma'],
+                    data: [6.4, 5.6, 4.8, 4.5, 4.1, 3.6, 3.3, 3.1]
+                }
+            }
+        };
+
+        const nilChartCtx = document.getElementById('nilChart');
+        const nilChart = new Chart(nilChartCtx, {
+            type: 'bar',
+            data: {
+                labels: nilProfiles.top.chart.labels,
+                datasets: [{
+                    label: 'Valuation ($M)',
+                    data: nilProfiles.top.chart.data,
+                    backgroundColor: 'rgba(255, 209, 102, 0.4)',
+                    borderColor: 'rgba(255, 209, 102, 0.9)',
+                    borderWidth: 2,
+                    borderRadius: 12
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: 'rgba(255, 209, 102, 0.8)' },
+                        grid: { color: 'rgba(255, 209, 102, 0.1)' }
+                    },
+                    y: {
+                        ticks: { color: 'rgba(255, 209, 102, 0.8)', callback: value => '$' + value + 'M' },
+                        grid: { color: 'rgba(255, 209, 102, 0.1)' }
+                    }
+                }
+            }
+        });
+
+        const profileButtons = document.querySelectorAll('[data-nil-profile]');
+        const tableBody = document.querySelector('[data-nil-table]');
+        const summaryContainer = document.querySelector('[data-nil-summary]');
+
+        function updateNilProfile(key) {
+            const profile = nilProfiles[key];
+            if (!profile) return;
+
+            profileButtons.forEach(btn => {
+                btn.classList.toggle('is-active', btn.dataset.nilProfile === key);
+                btn.setAttribute('aria-selected', btn.dataset.nilProfile === key ? 'true' : 'false');
+            });
+
+            tableBody.innerHTML = '';
+            profile.table.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="nil-table__rank">${row.rank}</td>
+                    <td>${row.program}</td>
+                    <td>${row.total}</td>
+                    <td>${row.avg}</td>
+                    <td><span class="nil-table__trend" data-trend="${row.trend}">${row.trendLabel}</span></td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            summaryContainer.innerHTML = '';
+            profile.summary.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'nil-summary__item';
+                div.textContent = item;
+                summaryContainer.appendChild(div);
+            });
+
+            document.querySelector('[data-profile-market]').textContent = profile.market;
+            document.querySelector('[data-profile-market-tag]').textContent = profile.marketTag;
+            document.querySelector('[data-profile-transfer]').textContent = profile.transfer;
+            document.querySelector('[data-profile-transfer-tag]').textContent = profile.transferTag;
+            document.querySelector('[data-profile-signal]').textContent = profile.signal;
+            document.querySelector('[data-profile-signal-tag]').textContent = profile.signalTag;
+
+            document.querySelector('[data-profile-summary]').innerHTML = '';
+            profile.summary.forEach(item => {
+                const span = document.createElement('span');
+                span.textContent = item;
+                document.querySelector('[data-profile-summary]').appendChild(span);
+            });
+
+            Object.entries(profile.metrics).forEach(([metric, value]) => {
+                const metricEl = document.querySelector(`[data-nil-metric="${metric}"]`);
+                if (metricEl) metricEl.textContent = value;
+            });
+
+            document.querySelector('[data-embed-metric="focus"]').textContent = profile.embed.focus;
+            document.querySelector('[data-embed-metric="health"]').textContent = profile.embed.health;
+            document.querySelector('[data-embed-metric="warChest"]').textContent = profile.embed.warChest;
+            document.querySelector('[data-embed-story]').textContent = profile.embed.narrative;
+
+            nilChart.data.labels = profile.chart.labels;
+            nilChart.data.datasets[0].data = profile.chart.data;
+            nilChart.update();
+        }
+
+        profileButtons.forEach(btn => {
+            btn.addEventListener('click', () => updateNilProfile(btn.dataset.nilProfile));
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        const requestedProfile = params.get('view');
+        const initialProfile = nilProfiles[requestedProfile] ? requestedProfile : 'top';
+        updateNilProfile(initialProfile);
+
+        if (params.get('embed') === '1') {
+            document.body.classList.add('embed-mode');
+            const embedSection = document.getElementById('nil-embed');
+            if (embedSection) {
+                requestAnimationFrame(() => {
+                    embedSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+                });
+            }
+        }
+    </script>
+</body>
+</html>
