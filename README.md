@@ -134,6 +134,38 @@ wrangler pages deploy
 ./03_AUTOMATION/shell/deploy-production.sh
 ```
 
+## 🏈 Texas High School Football API
+
+Blaze Intelligence now aggregates Texas high school football program data by stitching together MaxPreps game results, 247Sports recruiting intel, and Rivals rankings. The service normalizes records, schedules, player profiles, and consensus recruiting rankings into a single payload that can be consumed by dashboards, analytics notebooks, or downstream automations.
+
+**Endpoint**
+
+```http
+GET /api/texas-hs-football/program
+```
+
+**Query Parameters**
+
+- `team` *(optional)* – Friendly team name used for metadata when source pages do not expose it.
+- `season` *(optional)* – Target season, passed through to upstream scrapers when available.
+- `maxprepsTeamPath` *(recommended)* – Path or URL fragment to the MaxPreps program page (e.g. `tx/duncanville/duncanville-panthers/football`).
+- `maxprepsTeamId` *(alternative)* – MaxPreps numeric team identifier if the path is not known.
+- `s247TeamPath` *(optional)* – 247Sports team path or slug for recruiting coverage.
+- `rivalsTeamPath` *(optional)* – Rivals team path or slug for recruiting coverage.
+- `includeSchedule` *(default: true)* – Set to `false` to skip schedule scraping for faster responses.
+- `includePlayerStats` *(default: true)* – Set to `false` to bypass roster parsing.
+- `includeRecruiting` *(default: true)* – Set to `false` to suppress 247Sports and Rivals fetches.
+- `includeRaw` *(default: false)* – When `true`, returns the structured JSON blobs captured from each source.
+- `forceRefresh` *(default: false)* – Bypass the in-memory cache and fetch fresh data.
+
+**Example**
+
+```bash
+curl "http://localhost:5000/api/texas-hs-football/program?team=Duncanville+Panthers&season=2024&maxprepsTeamPath=tx/duncanville/duncanville-panthers/football&s247TeamPath=/college/texas/Season/2024-Football/Commits/&rivalsTeamPath=/teams/football/texas/commitments"
+```
+
+The API responds with a structured object that includes program metadata, records, advanced team stats, normalized schedule results, player summaries, combined recruiting boards, and quick-hit insights such as scoring margins or consensus rankings. All responses are cached for 15 minutes by default to protect upstream sources.
+
 ## 🤖 Developer Automation: Blaze Autopilot
 
 Accelerate cross-platform launches with the `automation/blaze-autopilot.ts` orchestrator. The script opportunistically fires any
