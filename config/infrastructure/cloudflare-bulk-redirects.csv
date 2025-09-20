@@ -1,0 +1,6 @@
+source_url,target_url,status
+https://blaze-io.pages.dev/*,https://blazeintelligence.com/:splat,301
+https://blaze-intelligence.netlify.app/*,https://blazeintelligence.com/:splat,301
+https://blaze-vision-intelligence.pages.dev/*,https://blazeintelligence.com/nil/:splat,301
+https://austin-humphrey-public.pages.dev/*,https://blazeintelligence.com/about/:splat,301
+https://70d41e32.blaze-intelligence-platform.pages.dev/*,https://blazeintelligence.com/coach/:splat,302

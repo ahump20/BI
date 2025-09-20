@@ -8,9 +8,10 @@ import json
 import os
 import sys
 import argparse
-from datetime import datetime
 from typing import Dict, List, Any, Optional
 from statistics import mean
+
+from ingestion.time_utils import utc_now_isoformat
 
 
 def load_league_data() -> Dict[str, Any]:
@@ -67,7 +68,7 @@ def categorize_player_status(readiness_score: Optional[float]) -> str:
 
 def generate_readiness_report(all_data: Dict[str, Any], focus_teams: List[str] = None) -> Dict[str, Any]:
     """Generate comprehensive readiness report"""
-    now_iso = datetime.utcnow().isoformat() + 'Z'
+    now_iso = utc_now_isoformat()
     
     teams_data = []
     players_data = []
