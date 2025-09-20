@@ -1,26 +1,48 @@
 {
-  "name": "blaze-intelligence-api",
-  "version": "1.0.0",
-  "description": "Blaze Intelligence API Services",
-  "main": "contact-form.js",
+  "name": "blaze-intelligence",
+  "version": "0.2.0",
+  "description": "Blaze Intelligence API and developer tooling",
+  "type": "module",
+  "engines": {
+    "node": ">=18.19.0"
+  },
   "scripts": {
-    "deploy:contact": "wrangler deploy contact-form.js --config ../wrangler-contact-api.toml --env production",
-    "deploy:auth": "wrangler deploy auth.js --config ../wrangler-auth-api.toml --env production",
-    "build": "npm run build:site && npm run copy:data",
-    "build:site": "node -e \"console.log('Static site already committed to dist')\"",
-    "copy:data": "mkdir -p dist/data && cp -R data/* dist/data 2>/dev/null || true",
-    "dev": "netlify dev"
+    "build": "tsc --project tsconfig.json",
+    "dev": "tsx watch src/server/index.ts",
+    "start": "node build/server/index.js",
+    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.0.0",
+    "zod": "^3.23.8"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/compression": "^1.7.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-promise": "^6.2.0",
+    "supertest": "^6.3.4",
+    "tsx": "^4.7.1",
+    "typescript": "~5.5.4",
+    "vitest": "^1.6.0"
+  },
   "keywords": [
-    "cloudflare",
-    "workers",
-    "api",
-    "authentication",
-    "contact"
+    "blaze-intelligence",
+    "sports",
+    "analytics",
+    "api"
   ],
   "author": "Austin Humphrey <ahump20@outlook.com>",
   "license": "MIT"
