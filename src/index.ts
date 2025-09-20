@@ -5,24 +5,13 @@ import type { Context } from 'hono';
 import { cors } from 'hono/cors';
 import { cache } from 'hono/cache';
 import healthHandler from '../api/health.js';
-
-// Cloudflare binding types for the unified Worker
-export type Bindings = {
-  CACHE?: KVNamespace;
-  ANALYTICS_CACHE?: KVNamespace;
-  SPORTS_DATA?: KVNamespace;
-  USER_SESSIONS?: KVNamespace;
-  DB?: D1Database;
-  BLAZE_DB?: D1Database;
-  MEDIA?: R2Bucket;
-  MEDIA_STORAGE?: R2Bucket;
-  DATA_STORAGE?: R2Bucket;
-  ScoreHub: DurableObjectNamespace;
-  INGEST?: Queue;
-  CFB_API_KEY?: string;
-  ODDS_API_KEY?: string;
-  ALLOWED_ORIGINS?: string;
-};
+import { ServiceError, ValidationError } from './errors';
+import { calculateNilValuation } from './features/nilValuation';
+import { computeChampionshipProbabilities } from './features/championshipProbability';
+import { buildCharacterAssessment } from './features/characterAssessment';
+import { requireAuth, getAuthenticatedUser, type BlazeVariables } from './security/auth0';
+import { getSentryClient } from './security/sentry';
+import type { Bindings } from './types';
 
 const ORIGINS = {
   marketing: 'https://blaze-io.pages.dev',
@@ -31,7 +20,9 @@ const ORIGINS = {
   pub: 'https://austin-humphrey-public.pages.dev',
 };
 
-const app = new Hono<{ Bindings: Bindings }>();
+const app = new Hono<{ Bindings: Bindings; Variables: BlazeVariables }>();
+const requireUser = requireAuth();
+type BlazeContext = Context<{ Bindings: Bindings; Variables: BlazeVariables }>;
 
 const parseAllowedOrigins = (value?: string) =>
   new Set(
@@ -40,6 +31,39 @@ const parseAllowedOrigins = (value?: string) =>
       .map((origin) => origin.trim())
       .filter((origin) => origin.length > 0)
   );
+
+async function readJsonBody(c: BlazeContext): Promise<unknown> {
+  try {
+    return await c.req.json();
+  } catch (error) {
+    throw new ValidationError('Invalid JSON body', {
+      message: error instanceof Error ? error.message : 'Unable to parse JSON',
+    });
+  }
+}
+
+async function captureError(c: BlazeContext, error: unknown, scope: string) {
+  const sentry = getSentryClient(c.env);
+  if (!sentry) {
+    return;
+  }
+  const user = getAuthenticatedUser(c);
+  await sentry.captureException(error, {
+    tags: { scope },
+    user: user ? { id: user.sub, email: user.email } : undefined,
+    request: { method: c.req.method, url: c.req.url },
+  });
+}
+
+async function respondWithError(c: BlazeContext, error: unknown, scope: string) {
+  if (error instanceof ServiceError) {
+    await captureError(c, error, scope);
+    return c.json({ error: error.message, code: error.code, details: error.details }, error.status);
+  }
+  console.error(scope, error);
+  await captureError(c, error, scope);
+  return c.json({ error: 'Internal server error' }, 500);
+}
 
 app.use('*', async (c, next) => {
   const allowedOrigins = parseAllowedOrigins(c.env.ALLOWED_ORIGINS);
@@ -68,6 +92,27 @@ app.use('*', async (c, next) => {
   });
 
   return handler(c, next);
+});
+
+app.use('*', async (c, next) => {
+  await next();
+  const headers = c.res.headers;
+  headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
+  headers.set('X-Content-Type-Options', 'nosniff');
+  headers.set('X-Frame-Options', 'DENY');
+  headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  headers.set('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+});
+
+app.onError(async (err, c) => {
+  console.error('Unhandled Worker error', err);
+  await captureError(c, err, 'worker');
+
+  if (err instanceof ServiceError) {
+    return c.json({ error: err.message, code: err.code, details: err.details }, err.status);
+  }
+
+  return c.json({ error: 'Internal server error' }, 500);
 });
 
 const nilSummaryCache = cache({ cacheName: 'api', cacheControl: 'max-age=15' });
@@ -101,6 +146,36 @@ app.get('/api/health', (c) => {
 });
 
 app.get('/api/v1/nil/summary', nilSummaryCache, nilSummaryHandler);
+
+app.post('/api/v1/nil/valuation', requireUser, async (c) => {
+  try {
+    const payload = await readJsonBody(c);
+    const result = await calculateNilValuation(c.env, payload);
+    return c.json(result);
+  } catch (error) {
+    return respondWithError(c, error, 'nil_valuation');
+  }
+});
+
+app.post('/api/v1/championship/probability', requireUser, async (c) => {
+  try {
+    const payload = await readJsonBody(c);
+    const result = await computeChampionshipProbabilities(c.env, payload);
+    return c.json(result);
+  } catch (error) {
+    return respondWithError(c, error, 'championship_probability');
+  }
+});
+
+app.post('/api/v1/character/assessment', requireUser, async (c) => {
+  try {
+    const payload = await readJsonBody(c);
+    const result = await buildCharacterAssessment(c.env, payload);
+    return c.json(result);
+  } catch (error) {
+    return respondWithError(c, error, 'character_assessment');
+  }
+});
 
 app.get('/api/v1/scoreboard', scoreboardCache, (c) => scoreboardHandler(c));
 app.get('/api/scoreboard/ncaa', scoreboardCache, (c) =>
@@ -233,7 +308,7 @@ function toNumberWithFallback(value: unknown, fallback = 0): number {
   return numeric ?? fallback;
 }
 
-async function nilSummaryHandler(c: Context<{ Bindings: Bindings }>) {
+async function nilSummaryHandler(c: BlazeContext) {
   const db = getPrimaryDatabase(c.env);
   if (!db) {
     return c.json({ error: 'Database not configured' }, 503);
@@ -244,6 +319,7 @@ async function nilSummaryHandler(c: Context<{ Bindings: Bindings }>) {
     return c.json({ conferences });
   } catch (error) {
     console.error('NIL summary query failed', error);
+    await captureError(c, error, 'nil_summary');
     return c.json({ error: 'Unable to load NIL summary' }, 500);
   }
 }
@@ -270,7 +346,7 @@ async function queryNilSummary(db: D1Database) {
 }
 
 async function scoreboardHandler(
-  c: Context<{ Bindings: Bindings }>,
+  c: BlazeContext,
   overrides: ScoreboardQueryOptions = {}
 ) {
   const db = getPrimaryDatabase(c.env);
@@ -293,11 +369,12 @@ async function scoreboardHandler(
     return c.json({ games });
   } catch (error) {
     console.error('Scoreboard query failed', error);
+    await captureError(c, error, 'scoreboard_query');
     return c.json({ error: 'Unable to load scoreboard' }, 500);
   }
 }
 
-async function scoreboardStreamHandler(c: Context<{ Bindings: Bindings }>) {
+async function scoreboardStreamHandler(c: BlazeContext) {
   const db = getPrimaryDatabase(c.env);
   if (!db) {
     return new Response('Database not configured', { status: 503 });
@@ -323,6 +400,7 @@ async function scoreboardStreamHandler(c: Context<{ Bindings: Bindings }>) {
     });
   } catch (error) {
     console.error('Scoreboard stream failed', error);
+    await captureError(c, error, 'scoreboard_stream');
     return new Response('Unable to establish stream', { status: 500 });
   }
 }
@@ -450,7 +528,7 @@ function createScoreboardStream(
 }
 
 async function oddsHandler(
-  c: Context<{ Bindings: Bindings }>,
+  c: BlazeContext,
   overrides: OddsQueryOptions = {}
 ) {
   const db = getPrimaryDatabase(c.env);
@@ -742,7 +820,7 @@ export default app;
 function createProxy(origin: string, prefix = '') {
   const normalized = prefix && prefix !== '/' ? prefix.replace(/\/$/, '') : prefix;
 
-  return async (c: Context<{ Bindings: Bindings }>) => {
+  return async (c: BlazeContext) => {
     const url = new URL(c.req.url);
     let pathname = url.pathname;
 
