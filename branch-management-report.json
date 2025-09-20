@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-09-20T13:14:07.705Z",
+  "analysis": {
+    "totalBranches": 1,
+    "toMerge": [],
+    "toUpdate": [],
+    "stale": [
+      {
+        "name": "copilot/fix-cec244f0-0633-489b-9c13-c6092cfbdc01",
+        "localExists": false,
+        "remoteExists": false,
+        "lastCommit": "",
+        "lastCommitDate": "",
+        "commitsBehindMain": 0,
+        "commitsAheadMain": 0,
+        "isStale": true,
+        "shouldMerge": false,
+        "shouldUpdate": false
+      }
+    ],
+    "upToDate": [],
+    "errors": []
+  },
+  "results": {
+    "merged": [],
+    "updated": [],
+    "deleted": [],
+    "failed": [
+      "copilot/fix-cec244f0-0633-489b-9c13-c6092cfbdc01"
+    ]
+  },
+  "dryRun": true
+}
