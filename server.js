@@ -48,6 +48,9 @@ app.set('trust proxy', 1);
 // Initialize sports data services
 const sportsData = new SportsDataService();
 const liveSportsAdapter = new LiveSportsAdapter();
+liveSportsAdapter.initialize().catch((error) => {
+  console.warn('⚠️  Live sports adapter initialization failed:', error.message);
+});
 const aiAnalytics = new AIAnalyticsService();
 const cardinalsAPI = new CardinalsDataIntegration();
 const digitalCombineBackend = new DigitalCombineBackend(pool);
@@ -738,6 +741,17 @@ app.get('/api/live-sports/mlb/scoreboard', async (req, res) => {
   } catch (error) {
     console.error('MLB scoreboard error:', error);
     res.status(500).json({ error: 'Failed to fetch MLB scoreboard' });
+  }
+});
+
+app.get('/api/live-sports/mlb/standings', async (req, res) => {
+  try {
+    const { season, group } = req.query;
+    const data = await liveSportsAdapter.getMLBStandings({ season, group });
+    res.json(data);
+  } catch (error) {
+    console.error('MLB standings error:', error);
+    res.status(500).json({ error: 'Failed to fetch MLB standings' });
   }
 });
 

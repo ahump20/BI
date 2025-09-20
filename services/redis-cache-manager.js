@@ -33,7 +33,14 @@ class RedisCacheManager {
       analytics: 'analytics:',
       session: 'session:',
       rate_limit: 'rate:',
-      temp: 'temp:'
+      temp: 'temp:',
+      scoreboard: 'scoreboard:',
+      standings: 'standings:'
+    };
+
+    const parseTtl = (value, fallback) => {
+      const numeric = Number.parseInt(value ?? '', 10);
+      return Number.isFinite(numeric) && numeric > 0 ? numeric : fallback;
     };
 
     this.default_ttl = {
@@ -42,7 +49,9 @@ class RedisCacheManager {
       analytics: 3600, // 1 hour
       session: 86400, // 24 hours
       rate_limit: 900, // 15 minutes
-      temp: 60 // 1 minute
+      temp: 60, // 1 minute
+      scoreboard: parseTtl(process.env.SCOREBOARD_CACHE_TTL, 15),
+      standings: parseTtl(process.env.STANDINGS_CACHE_TTL, 1800)
     };
   }
 
