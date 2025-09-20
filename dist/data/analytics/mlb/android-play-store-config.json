@@ -1,0 +1,234 @@
+{
+  "googlePlayConsole": {
+    "applicationId": "com.blazeintelligence.mobile",
+    "appName": "Blaze Intelligence",
+    "defaultLanguage": "en-US",
+    "version": {
+      "versionCode": 1,
+      "versionName": "1.0.0"
+    },
+    "developer": {
+      "name": "Blaze Intelligence",
+      "email": "ahump20@outlook.com",
+      "website": "https://blaze-intelligence.com",
+      "phone": "+1 (210) 273-5538"
+    }
+  },
+  "storeListingDetails": {
+    "appTitle": "Blaze Intelligence",
+    "shortDescription": "AI-powered sports performance analysis with real-time video insights and championship character assessment.",
+    "fullDescription": "🔥 Blaze Intelligence: Turn Data Into Dominance\n\nRevolutionize your sports performance with cutting-edge AI video analysis that provides real-time insights into your athletic potential.\n\n🚀 ADVANCED AI ANALYSIS\n• Multi-AI processing with ChatGPT 5, Claude Opus 4.1, and Gemini 2.5 Pro\n• Real-time biomechanical analysis with 33 body landmark tracking\n• Micro-expression detection for championship character assessment\n• Live metrics overlay during video recording\n• 94.6% accuracy in performance prediction\n\n⚾ COMPREHENSIVE SPORTS COVERAGE\n• Baseball: MLB Cardinals data integration with Perfect Game prospects\n• Football: NFL Titans analytics and high school recruitment tracking\n• Basketball: NBA Grizzlies insights and college scouting data\n• NCAA Sports: Longhorns performance metrics and team analytics\n\n📊 PROFESSIONAL-GRADE FEATURES\n• Blaze Score calculation for performance optimization\n• Biomechanical assessment (hip rotation, shoulder alignment, knee flexion)\n• Character analysis (grit, determination, focus, composure)\n• Championship potential scoring and personalized recommendations\n• Training data collection for continuous AI improvement\n\n🎯 REAL-TIME PERFORMANCE INSIGHTS\n• Live form scoring during recording sessions\n• Instant confidence and energy level assessment\n• Immediate feedback on technique and mental state\n• Progress tracking with detailed skill breakdown\n• Achievement system with milestone recognition\n\n💪 PERFECT FOR ALL ATHLETES\n• Elite athletes seeking performance optimization\n• Coaches analyzing player development\n• Youth sports teams tracking collective progress\n• High school recruits preparing for college\n• College athletes aiming for professional careers\n• Weekend warriors wanting to improve their game\n\n🔒 SECURE & PRIVATE\n• Encrypted video storage and analysis\n• HIPAA-compliant data handling\n• User-controlled data sharing preferences\n• Professional-grade security standards\n\n🏆 TRUSTED BY CHAMPIONS\nUsed by elite athletes and professional teams worldwide, Blaze Intelligence combines Texas grit with Silicon Valley innovation to deliver championship-level performance analysis.\n\nDownload now and discover why champions choose Blaze Intelligence to unlock their full potential.\n\n#SportsAnalytics #AICoaching #PerformanceOptimization #ChampionshipMindset",
+    "category": "SPORTS",
+    "contentRating": "Everyone",
+    "tags": [
+      "sports",
+      "athletics", 
+      "performance",
+      "AI",
+      "video analysis",
+      "coaching",
+      "training",
+      "baseball",
+      "football",
+      "basketball",
+      "biomechanics",
+      "analytics"
+    ],
+    "targetAudience": {
+      "ageGroup": "13+",
+      "interests": ["Sports", "Fitness", "Technology", "Performance"]
+    }
+  },
+  "graphicAssets": {
+    "appIcon": {
+      "adaptive": "ic_launcher.xml",
+      "legacy": "ic_launcher.png",
+      "sizes": {
+        "512x512": "app-icon-512x512.png",
+        "192x192": "app-icon-192x192.png",
+        "144x144": "app-icon-144x144.png",
+        "96x96": "app-icon-96x96.png",
+        "72x72": "app-icon-72x72.png",
+        "48x48": "app-icon-48x48.png",
+        "36x36": "app-icon-36x36.png"
+      }
+    },
+    "featureGraphic": {
+      "size": "1024x500",
+      "file": "feature-graphic-1024x500.png",
+      "description": "Blaze Intelligence - AI-powered sports performance analysis"
+    },
+    "screenshots": {
+      "phone": {
+        "portrait": [
+          "screenshot-phone-01-camera.png",
+          "screenshot-phone-02-analysis.png",
+          "screenshot-phone-03-dashboard.png", 
+          "screenshot-phone-04-profile.png",
+          "screenshot-phone-05-settings.png"
+        ]
+      },
+      "tablet": {
+        "landscape": [
+          "screenshot-tablet-01-camera.png",
+          "screenshot-tablet-02-analysis.png",
+          "screenshot-tablet-03-dashboard.png"
+        ]
+      }
+    },
+    "promoVideo": {
+      "youtubeUrl": "https://youtube.com/watch?v=blaze-intelligence-promo",
+      "duration": "30s",
+      "description": "See Blaze Intelligence in action - AI-powered sports analysis"
+    }
+  },
+  "pricing": {
+    "type": "Free",
+    "inAppPurchases": [
+      {
+        "id": "premium_analysis",
+        "title": "Premium Analysis Package",
+        "description": "Advanced AI models and detailed analytics",
+        "price": "$9.99",
+        "type": "subscription",
+        "duration": "monthly"
+      },
+      {
+        "id": "team_package",
+        "title": "Team Analytics Package", 
+        "description": "Multi-athlete tracking and team insights",
+        "price": "$29.99",
+        "type": "subscription",
+        "duration": "monthly"
+      },
+      {
+        "id": "pro_coaching",
+        "title": "Professional Coaching Tools",
+        "description": "Advanced coaching features and team management",
+        "price": "$99.99",
+        "type": "subscription",
+        "duration": "monthly"
+      }
+    ]
+  },
+  "appBundle": {
+    "buildType": "appBundle",
+    "signingConfig": {
+      "keyAlias": "blaze-intelligence-key",
+      "keyStore": "blaze-intelligence-keystore.jks",
+      "keyPassword": "KEYSTORE_PASSWORD",
+      "storePassword": "STORE_PASSWORD"
+    },
+    "proguard": {
+      "enabled": true,
+      "minifyEnabled": true,
+      "shrinkResources": true
+    },
+    "splits": {
+      "abi": {
+        "enable": true,
+        "include": ["arm64-v8a", "armeabi-v7a", "x86_64"]
+      },
+      "density": {
+        "enable": true
+      }
+    }
+  },
+  "permissions": {
+    "required": [
+      "android.permission.CAMERA",
+      "android.permission.RECORD_AUDIO",
+      "android.permission.INTERNET",
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.WRITE_EXTERNAL_STORAGE",
+      "android.permission.READ_EXTERNAL_STORAGE"
+    ],
+    "optional": [
+      "android.permission.ACCESS_FINE_LOCATION",
+      "android.permission.VIBRATE"
+    ]
+  },
+  "deviceRequirements": {
+    "minSdkVersion": 21,
+    "targetSdkVersion": 34,
+    "compileSdkVersion": 34,
+    "features": [
+      "android.hardware.camera",
+      "android.hardware.camera.autofocus",
+      "android.hardware.microphone"
+    ],
+    "screenSupport": [
+      "small",
+      "normal", 
+      "large",
+      "xlarge"
+    ]
+  },
+  "testing": {
+    "internalTesting": {
+      "enabled": true,
+      "testers": [
+        "ahump20@outlook.com",
+        "testing@blaze-intelligence.com"
+      ]
+    },
+    "closedTesting": {
+      "enabled": true,
+      "trackName": "Beta Testing",
+      "description": "Beta testing for Blaze Intelligence mobile app"
+    }
+  },
+  "releaseManagement": {
+    "rolloutPercentage": 100,
+    "stagingReleases": true,
+    "gradualRollout": {
+      "enabled": true,
+      "stages": [5, 10, 20, 50, 100]
+    }
+  },
+  "privacyPolicy": {
+    "url": "https://blaze-intelligence.com/privacy-policy"
+  },
+  "dataHandling": {
+    "dataTypes": [
+      {
+        "type": "Personal info",
+        "collected": ["Name", "Email address"],
+        "usage": ["App functionality", "Analytics"],
+        "shared": false
+      },
+      {
+        "type": "Photos and videos",
+        "collected": ["Videos", "Photos"],
+        "usage": ["App functionality", "Analytics"],
+        "shared": false
+      },
+      {
+        "type": "App info and performance",
+        "collected": ["Crash logs", "Diagnostics", "Other app performance data"],
+        "usage": ["Analytics", "Developer communications"],
+        "shared": false
+      }
+    ],
+    "securityPractices": [
+      "Data is encrypted in transit",
+      "Data is encrypted at rest", 
+      "You can request data deletion"
+    ]
+  },
+  "contentRating": {
+    "questionnaire": {
+      "violence": "None",
+      "sexualContent": "None", 
+      "profanity": "None",
+      "drugUse": "None",
+      "gambling": "None",
+      "userGeneratedContent": "Yes - Video uploads",
+      "socialFeatures": "No",
+      "locationSharing": "No"
+    }
+  },
+  "releaseNotes": {
+    "v1.0.0": "🔥 Welcome to Blaze Intelligence!\n\nNew in this release:\n• AI-powered video analysis with real-time insights\n• Biomechanical assessment and character analysis\n• Multi-sport data integration (MLB, NFL, NBA, NCAA)\n• Professional-grade performance analytics\n• Secure video storage and processing\n• Championship potential scoring\n\nReady to turn data into dominance? Start your journey today!"
+  }
+}

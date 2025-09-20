@@ -1,0 +1,101 @@
+{
+  "name": "blaze-ranch-analytics",
+  "version": "1.0.0",
+  "description": "Blaze Ranch Analytics - Where Heritage Meets Intelligence",
+  "main": "blaze-ranch-production.html",
+  "homepage": "https://blaze-intelligence-platform.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahump20/blaze-intelligence-platform"
+  },
+  "keywords": [
+    "sports-analytics",
+    "three.js",
+    "data-visualization", 
+    "mlb",
+    "nfl", 
+    "nba",
+    "ncaa",
+    "cardinals",
+    "titans",
+    "longhorns",
+    "grizzlies"
+  ],
+  "author": {
+    "name": "Austin Humphrey",
+    "email": "ahump20@outlook.com",
+    "url": "https://blaze-intelligence-platform.pages.dev"
+  },
+  "license": "MIT",
+  "scripts": {
+    "dev": "python3 -m http.server 8080",
+    "build": "npm run minify && npm run optimize",
+    "minify": "terser blaze-sports-api.js -o blaze-sports-api.min.js -c -m",
+    "optimize": "node scripts/optimize-assets.js",
+    "deploy": "wrangler pages publish ./",
+    "deploy:staging": "wrangler pages publish ./ --env staging",
+    "deploy:production": "wrangler pages publish ./ --env production",
+    "test": "echo 'Testing Blaze Ranch Analytics...' && node scripts/test-apis.js",
+    "lint": "echo 'Linting HTML/CSS/JS...' && htmlhint *.html",
+    "validate": "node scripts/validate-data.js",
+    "start": "npm run dev",
+    "preview": "npm run build && npm run dev"
+  },
+  "dependencies": {
+    "three": "^0.156.1"
+  },
+  "devDependencies": {
+    "terser": "^5.19.4",
+    "htmlhint": "^1.1.4",
+    "wrangler": "^3.10.1"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ],
+  "config": {
+    "api_endpoints": {
+      "mlb": "https://statsapi.mlb.com/api/v1",
+      "nfl": "https://site.api.espn.com/apis/site/v2/sports/football/nfl",
+      "nba": "https://site.api.espn.com/apis/site/v2/sports/basketball/nba", 
+      "ncaa": "https://site.api.espn.com/apis/site/v2/sports/football/college-football"
+    },
+    "teams": {
+      "cardinals": {
+        "id": 138,
+        "league": "MLB",
+        "colors": ["#C41E3A", "#FFFFFF"]
+      },
+      "titans": {
+        "id": 10,
+        "league": "NFL", 
+        "colors": ["#4B92DB", "#002244"]
+      },
+      "longhorns": {
+        "id": 251,
+        "league": "NCAA",
+        "colors": ["#BF5700", "#FFFFFF"]
+      },
+      "grizzlies": {
+        "id": 15,
+        "league": "NBA",
+        "colors": ["#5D76A9", "#12173F"]
+      }
+    }
+  },
+  "cloudflare": {
+    "account_id": "your-cloudflare-account-id",
+    "zone_id": "your-cloudflare-zone-id",
+    "pages": {
+      "project_name": "blaze-intelligence-platform",
+      "production_branch": "main",
+      "preview_branches": ["development", "staging"]
+    }
+  }
+}

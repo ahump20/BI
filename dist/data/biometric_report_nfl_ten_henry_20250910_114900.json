@@ -1,0 +1,157 @@
+{
+  "player_id": "nfl_ten_henry",
+  "sport": "football",
+  "assessment_timestamp": "2025-09-10T11:49:00.864716",
+  "biometric_summary": {
+    "total_metrics_analyzed": 12,
+    "data_confidence_avg": 0.912,
+    "assessment_period": "24_hours"
+  },
+  "readiness_analysis": {
+    "overall_readiness_score": 55.5,
+    "factor_scores": {
+      "cardiovascular": 49.5,
+      "neuromuscular": 63.2,
+      "recovery": 50.0,
+      "strength_power": 57.8,
+      "flexibility_mobility": 50.0
+    },
+    "readiness_level": "Training Ready",
+    "recommendations": [
+      "Increase aerobic base training - focus on zone 2 cardio 3-4x/week",
+      "Prioritize sleep hygiene and stress management protocols",
+      "Include daily mobility work and targeted stretching routines"
+    ]
+  },
+  "individual_metrics": {
+    "heart_rate_resting": {
+      "value": 55.0084863161524,
+      "unit": "bpm",
+      "classification": "unknown",
+      "percentile": 50,
+      "device": "Polar_H10",
+      "confidence": 0.95
+    },
+    "vo2_max": {
+      "value": 33.33880898083103,
+      "unit": "ml/kg/min",
+      "classification": "needs_improvement",
+      "percentile": 48.6,
+      "device": "Metabolic_Cart",
+      "confidence": 0.85
+    },
+    "body_fat_percentage": {
+      "value": 4.492184449500225,
+      "unit": "%",
+      "classification": "unknown",
+      "percentile": 50,
+      "device": "InBody_970",
+      "confidence": 0.92
+    },
+    "lean_muscle_mass": {
+      "value": 79.74324975690547,
+      "unit": "kg",
+      "classification": "unknown",
+      "percentile": 50,
+      "device": "InBody_970",
+      "confidence": 0.92
+    },
+    "reaction_time": {
+      "value": 0.21728627959370955,
+      "unit": "seconds",
+      "classification": "needs_improvement",
+      "percentile": 61.4,
+      "device": "Blazepod_Trainer",
+      "confidence": 0.98
+    },
+    "vertical_jump": {
+      "value": 29.7081194093938,
+      "unit": "inches",
+      "classification": "needs_improvement",
+      "percentile": 65.0,
+      "device": "ForceDecks_Force_Plate",
+      "confidence": 0.95
+    },
+    "grip_strength": {
+      "value": 112.50493149830909,
+      "unit": "lbs",
+      "classification": "needs_improvement",
+      "percentile": 65.6,
+      "device": "Jamar_Dynamometer",
+      "confidence": 0.97
+    },
+    "peak_power_output": {
+      "value": 863.998545359141,
+      "unit": "watts",
+      "classification": "unknown",
+      "percentile": 50,
+      "device": "Keiser_A300",
+      "confidence": 0.93
+    },
+    "shoulder_internal_rotation": {
+      "value": 7.396338368618811,
+      "unit": "cm",
+      "classification": "unknown",
+      "percentile": 50,
+      "device": "Digital_Goniometer",
+      "confidence": 0.88
+    },
+    "hip_flexion_range": {
+      "value": 44.68674090856495,
+      "unit": "degrees",
+      "classification": "unknown",
+      "percentile": 50,
+      "device": "Functional_Movement_Screen",
+      "confidence": 0.88
+    },
+    "sleep_quality_score": {
+      "value": 94.78024972089518,
+      "unit": "score",
+      "classification": "unknown",
+      "percentile": 50,
+      "device": "Oura_Ring_Gen3",
+      "confidence": 0.82
+    },
+    "heart_rate_variability": {
+      "value": 43.7237709297116,
+      "unit": "ms",
+      "classification": "unknown",
+      "percentile": 50,
+      "device": "Whoop_4.0",
+      "confidence": 0.9
+    }
+  },
+  "injury_risk_assessment": {
+    "overall_risk_level": "low",
+    "risk_factors": [],
+    "monitoring_recommendations": [
+      "Continue daily biometric monitoring",
+      "Alert coaching staff if risk factors increase",
+      "Implement targeted injury prevention protocols"
+    ]
+  },
+  "performance_prediction": {
+    "optimal_performance_window": "after_recovery_session",
+    "prediction_confidence": 0.75,
+    "expected_performance_level": 60.5,
+    "factors_driving_prediction": [
+      "Current biometric readiness profile",
+      "Sport-specific performance requirements",
+      "Historical performance correlation data"
+    ]
+  },
+  "integration_quality": "high",
+  "devices_used": [
+    "Metabolic_Cart",
+    "Whoop_4.0",
+    "Polar_H10",
+    "Jamar_Dynamometer",
+    "Blazepod_Trainer",
+    "Keiser_A300",
+    "InBody_970",
+    "ForceDecks_Force_Plate",
+    "Functional_Movement_Screen",
+    "Oura_Ring_Gen3",
+    "Digital_Goniometer"
+  ]
+}

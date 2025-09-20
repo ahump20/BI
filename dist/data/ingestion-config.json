@@ -1,0 +1,11 @@
+{
+  "lastUpdate": null,
+  "ingestionSchedule": "*/5 * * * *",
+  "priorities": [
+    "cardinals",
+    "titans",
+    "grizzlies",
+    "longhorns"
+  ],
+  "dataRetention": 30
+}

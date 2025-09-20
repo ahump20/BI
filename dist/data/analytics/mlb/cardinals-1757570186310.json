@@ -1,0 +1,36 @@
+{
+  "team": "St. Louis Cardinals",
+  "league": "mlb",
+  "timestamp": "2025-09-11T05:56:26.309Z",
+  "dataPoints": 19,
+  "data": {
+    "schedule": {
+      "league": "MLB",
+      "team": "St. Louis Cardinals",
+      "games": [
+        {
+          "date": "2025-09-11T05:56:26.309Z",
+          "opponent": "Mock Opponent",
+          "home": true,
+          "result": "W 7-3"
+        }
+      ],
+      "lastUpdated": "2025-09-11T05:56:26.309Z"
+    },
+    "stats": {
+      "league": "MLB",
+      "team": "St. Louis Cardinals",
+      "wins": 75,
+      "losses": 45,
+      "percentage": 0.625,
+      "lastUpdated": "2025-09-11T05:56:26.309Z"
+    },
+    "standings": {
+      "league": "MLB",
+      "division": "Mock Division",
+      "position": 2,
+      "gamesBack": 1.5,
+      "lastUpdated": "2025-09-11T05:56:26.310Z"
+    }
+  }
+}

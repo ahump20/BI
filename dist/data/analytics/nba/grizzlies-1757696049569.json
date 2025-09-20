@@ -1,0 +1,36 @@
+{
+  "team": "Memphis Grizzlies",
+  "league": "nba",
+  "timestamp": "2025-09-12T16:54:09.569Z",
+  "dataPoints": 19,
+  "data": {
+    "schedule": {
+      "league": "NBA",
+      "team": "Memphis Grizzlies",
+      "games": [
+        {
+          "date": "2025-09-12T16:54:09.569Z",
+          "opponent": "Mock Opponent",
+          "home": true,
+          "result": "W 7-3"
+        }
+      ],
+      "lastUpdated": "2025-09-12T16:54:09.569Z"
+    },
+    "stats": {
+      "league": "NBA",
+      "team": "Memphis Grizzlies",
+      "wins": 75,
+      "losses": 45,
+      "percentage": 0.625,
+      "lastUpdated": "2025-09-12T16:54:09.569Z"
+    },
+    "standings": {
+      "league": "NBA",
+      "division": "Mock Division",
+      "position": 2,
+      "gamesBack": 1.5,
+      "lastUpdated": "2025-09-12T16:54:09.569Z"
+    }
+  }
+}
