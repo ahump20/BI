@@ -9,11 +9,14 @@
     "build": "npm run build:site && npm run copy:data",
     "build:site": "node -e \"console.log('Static site already committed to dist')\"",
     "copy:data": "mkdir -p dist/data && cp -R data/* dist/data 2>/dev/null || true",
-    "dev": "netlify dev"
+    "dev": "netlify dev",
+    "test": "vitest run"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "hono": "^4.9.8"
+    "hono": "^4.9.8",
+    "jose": "^5.2.0",
+    "zod": "^3.23.8"
   },
   "keywords": [
     "cloudflare",
@@ -25,6 +28,8 @@
   "author": "Austin Humphrey <ahump20@outlook.com>",
   "license": "MIT",
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250918.0"
+    "@cloudflare/workers-types": "^4.20250918.0",
+    "@types/node": "^22.7.4",
+    "vitest": "^1.6.0"
   }
 }
