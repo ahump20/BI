@@ -415,6 +415,11 @@ video-cache/
 processed-videos/
 thumbnails-cache/
 
+# Git automation reports
+branch-management-report.json
+github-repo-analysis.json
+cleanup-report.json
+
 # =============================================================================
 # Local Development Override
 # =============================================================================

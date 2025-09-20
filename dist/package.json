@@ -26,7 +26,11 @@
     "github-analyze": "node scripts/github-repo-analyzer.js",
     "github-cleanup": "node scripts/bulk-repo-operations.js",
     "github-cleanup-execute": "node scripts/bulk-repo-operations.js --execute",
-    "github-plan": "node scripts/github-org-plan.js"
+    "github-plan": "node scripts/github-org-plan.js",
+    "catch-branches": "node scripts/git-branch-manager.js",
+    "catch-branches-execute": "node scripts/git-branch-manager.js --execute",
+    "sync-branches": "node scripts/git-branch-manager.js",
+    "merge-to-main": "node scripts/git-branch-manager.js --execute"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.61.0",

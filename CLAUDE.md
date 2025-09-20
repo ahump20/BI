@@ -31,6 +31,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run github-cleanup-execute` - Execute GitHub repository cleanup
 - `npm run github-plan` - Generate GitHub organization plan
 
+### Git Branch Management
+- `npm run catch-branches` - Analyze and preview branch merge/update operations (dry-run)
+- `npm run catch-branches-execute` - Execute branch merging, updating, and cleanup operations
+- `npm run sync-branches` - Alias for catch-branches (safe preview mode)
+- `npm run merge-to-main` - Alias for catch-branches-execute (executes changes)
+
 ### MCP Server Commands (via Claude Code)
 ```bash
 # Start MCP server
