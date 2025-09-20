@@ -892,6 +892,27 @@
             return games;
         }
 
+        function createScoreboardElement(tag, className, text) {
+            const element = document.createElement(tag);
+            if (className) {
+                element.className = className;
+            }
+            if (text !== undefined && text !== null) {
+                element.textContent = typeof text === 'string' ? text : String(text);
+            }
+            return element;
+        }
+
+        function renderScoreboardMessage(target, heading, status) {
+            if (!target) return;
+            const wrapper = createScoreboardElement('div', 'score-display');
+            wrapper.appendChild(createScoreboardElement('div', 'score-team', heading));
+            if (status) {
+                wrapper.appendChild(createScoreboardElement('div', 'score-status', status));
+            }
+            target.replaceChildren(wrapper);
+        }
+
         function renderScoreboard(payload) {
             const scoreboardContent = document.getElementById('scoreboard-content');
             if (!scoreboardContent) return;
@@ -900,12 +921,7 @@
             const leagueLabel = (scoreboardCurrentParams.league || 'NCAA').toString().toUpperCase();
 
             if (!games.length) {
-                scoreboardContent.innerHTML = `
-                    <div class="score-display">
-                        <div class="score-team">${leagueLabel} Scoreboard</div>
-                        <div class="score-status">No games available</div>
-                    </div>
-                `;
+                renderScoreboardMessage(scoreboardContent, `${leagueLabel} Scoreboard`, 'No games available');
                 return;
             }
 
@@ -919,19 +935,25 @@
                 return normalized.includes('texas');
             };
 
-            scoreboardContent.innerHTML = games.slice(0, 4).map(game => {
+            const fragment = document.createDocumentFragment();
+            games.slice(0, 4).forEach(game => {
                 const isFocus = highlightMatchup(game.home) || highlightMatchup(game.away);
                 const statusLabel = formatGameStatus(game.status, game.start);
-                return `
-                    <div class="score-display${isFocus ? ' highlight-game' : ''}">
-                        <div class="score-team">${game.home || 'Home'}</div>
-                        <div class="score-number">${formatScoreValue(game.homeScore)}</div>
-                        <div class="score-team">vs ${game.away || 'Away'}</div>
-                        <div class="score-number">${formatScoreValue(game.awayScore)}</div>
-                        <div class="score-status">${statusLabel}</div>
-                    </div>
-                `;
-            }).join('');
+                const card = createScoreboardElement('div', 'score-display');
+                if (isFocus) {
+                    card.classList.add('highlight-game');
+                }
+                card.append(
+                    createScoreboardElement('div', 'score-team', game.home || 'Home'),
+                    createScoreboardElement('div', 'score-number', formatScoreValue(game.homeScore)),
+                    createScoreboardElement('div', 'score-team', `vs ${game.away || 'Away'}`),
+                    createScoreboardElement('div', 'score-number', formatScoreValue(game.awayScore)),
+                    createScoreboardElement('div', 'score-status', statusLabel)
+                );
+                fragment.appendChild(card);
+            });
+
+            scoreboardContent.replaceChildren(fragment);
         }
 
         function closeScoreboardStream(options = {}) {
@@ -1728,12 +1750,11 @@
             const params = createScoreboardParams(overrides);
             const leagueLabel = (scoreboardCurrentParams.league || 'NCAA').toString().toUpperCase();
 
-            scoreboardContent.innerHTML = `
-                <div class="score-display">
-                    <div class="score-team">Loading ${leagueLabel} scoreboard…</div>
-                    <div class="score-status">Fetching live data</div>
-                </div>
-            `;
+            renderScoreboardMessage(
+                scoreboardContent,
+                `Loading ${leagueLabel} scoreboard…`,
+                'Fetching live data'
+            );
 
             try {
                 const query = params.toString();
@@ -1750,12 +1771,11 @@
                 return payload;
             } catch (error) {
                 console.error('Scoreboard update failed', error);
-                scoreboardContent.innerHTML = `
-                    <div class="score-display">
-                        <div class="score-team">${leagueLabel} Scoreboard</div>
-                        <div class="score-status">Unavailable</div>
-                    </div>
-                `;
+                renderScoreboardMessage(
+                    scoreboardContent,
+                    `${leagueLabel} Scoreboard`,
+                    'Unavailable'
+                );
                 throw error;
             }
         }
