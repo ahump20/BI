@@ -163,6 +163,57 @@ Returns full roster with HAV-F scores for all players on a team.
 }
 ```
 
+#### GET `/api/longhorns`
+Provides Blaze Intelligence with program-specific datasets for the Texas Longhorns. The route is powered by the Netlify function `netlify/functions/longhorns.js` and serves curated season bundles for football and baseball.
+
+**Query Parameters**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `sport` | `string` | `football` | Supported values: `football`, `baseball`. |
+| `season` | `number` | Latest available | Optional season override. The repository currently includes 2023 data while 2024/2025 ingestion is pending. |
+| `category` | `string` | _none_ | Optional filter returning a single section (`summary`, `schedule`, `keyPlayers`, `updatePlan`, etc.). |
+
+**Example – football schedule**
+
+```bash
+curl "https://blaze-intelligence.netlify.app/api/longhorns?sport=football&category=schedule"
+```
+
+**Response**
+
+```json
+{
+  "sport": "football",
+  "season": 2023,
+  "availableSeasons": [2023],
+  "dataStatus": "historical",
+  "lastUpdated": "2024-01-02T00:00:00Z",
+  "requestedCategory": "schedule",
+  "data": [
+    {
+      "date": "2023-09-02",
+      "opponent": "Rice",
+      "gameType": "Regular Season",
+      "result": "W",
+      "score": { "texas": 37, "opponent": 10 }
+    }
+  ],
+  "metadata": {
+    "summaryAvailable": true,
+    "scheduleAvailable": true,
+    "keyPlayersAvailable": true,
+    "updatePlanIncluded": true
+  }
+}
+```
+
+**Notes**
+
+- Football coverage reflects the 12-2 2023 season (Big 12 title, CFP semifinal appearance). Values are derived from publicly available box scores and should be replaced by licensed feeds before production launch.
+- Baseball coverage summarises the 42-22 2023 campaign (Austin Regional champions, Stanford Super Regional appearance).
+- The `updatePlan` field highlights ingestion tasks (e.g., onboarding 2024/2025 data, automating roster scrapes, wiring news feeds). Surfacing those tasks in internal dashboards will keep stakeholders aware of remaining work.
+
 ---
 
 ### Readiness Data
