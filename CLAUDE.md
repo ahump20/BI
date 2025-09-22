@@ -33,8 +33,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### MCP Server Commands (via Claude Code)
 ```bash
-# Start MCP server
+# Start Cardinals Analytics MCP server
 ./start-cardinals-server.sh
+
+# Start Copilot MCP server for coding assistance
+npm run mcp-copilot
+# or
+./start-copilot-server.sh
+
+# Validate Copilot MCP configuration
+npm run validate-copilot
+
+# Test Copilot MCP integration
+npm run test-copilot-mcp
 
 # Analyze trajectory from baseball stats to business metrics
 /mcp call cardinals-analytics analyzeTrajectory --data path/to/baseball-data.json --comparison path/to/business-metrics.json
@@ -44,6 +55,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # Update portfolio sections with new content
 /mcp call cardinals-analytics updatePortfolio --content "analysis content" --section "analytics"
+
+# Use Copilot MCP tools for coding assistance
+/mcp call blaze-copilot-agent analyze_code --filePath "src/component.tsx" --analysisType "security"
+/mcp call blaze-copilot-agent generate_code --specification "React dashboard component" --language "typescript" --framework "react"
+/mcp call blaze-copilot-agent run_tests --framework "jest" --coverage true
 ```
 
 ## Architecture Overview
