@@ -40,47 +40,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "hono": "^4.9.8",
-    "ioredis": "^5.7.0",
-    "node-fetch": "^3.3.0",
-    "@modelcontextprotocol/sdk": "^1.0.0",
-    "@tensorflow/tfjs": "^4.15.0",
-    "@tensorflow/tfjs-node": "^4.15.0",
-    "@mediapipe/pose": "^0.5.0",
-    "express": "^4.18.2",
-    "ws": "^8.14.2",
-    "three": "^0.160.0",
-    "chart.js": "^4.4.0",
-    "gsap": "^3.12.2",
-    "jsonwebtoken": "^9.0.2",
-    "express-rate-limit": "^7.1.5",
-    "helmet": "^7.1.0",
-    "cors": "^2.8.5"
-  },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250918.0",
-    "@types/node": "^20.10.0",
-    "vitest": "^1.0.0",
-    "eslint": "^8.55.0",
-    "typescript": "^5.3.0"
-  },
-  "keywords": [
-    "sports-analytics",
-    "ai-consciousness", 
-    "multi-ai-integration",
     "cloudflare",
     "workers",
     "api",
     "authentication",
-    "contact",
-    "blaze-intelligence",
-    "championship-analytics",
-    "video-intelligence",
-    "biometric-analysis",
-    "real-time-data"
-  ],
-  "author": "Austin Humphrey <ahump20@outlook.com>",
-  "license": "MIT",
-  "engines": {
-    "node": ">=18.0.0"
-  }
-}

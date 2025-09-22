@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Real-Time Coaching Visualizations | Blaze Intelligence</title>
+    <meta name="description" content="Deliver Blaze Intelligence AR overlays with instant coaching cues, biometric awareness, and adaptive sport-specific visualizations.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/performance-pages.css">
+</head>
+<body>
+    <header class="global-nav">
+        <div class="global-nav__inner">
+            <a class="nav-logo" href="index.html">
+                <span class="nav-logo__mark">BI</span>
+                Blaze Intelligence
+            </a>
+            <nav class="nav-links">
+                <a href="embedded-biomechanics.html">Biomechanics</a>
+                <a href="ar-real-time-visualization.html" class="active">AR Coaching</a>
+                <a href="live-analytics.html">Live Analytics</a>
+                <a href="video-intelligence.html">Video AI</a>
+                <a href="index.html#contact" class="nav-cta">Talk to us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <span class="hero__eyebrow">Spatial coaching overlays</span>
+                    <h1 class="hero__title">Augmented coaching that mirrors <span>live game speed</span></h1>
+                    <p class="hero__description">
+                        Blaze Intelligence blends biomechanics, awareness, and psychological cues into real-time AR visualizations. Deliver the right correction at the exact millisecond athletes can act on it.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn--primary" href="#overlay">See the overlay feed</a>
+                        <a class="btn btn--ghost" href="embedded-biomechanics.html">Embed biomechanics module</a>
+                    </div>
+                    <div class="hero-metrics">
+                        <div class="hero-metric">
+                            <div class="hero-metric__label">Overlay latency</div>
+                            <div class="hero-metric__value" data-ar-stream="latency" data-unit="ms" data-precision="0">38 ms</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric__label">Predictive cues</div>
+                            <div class="hero-metric__value" data-ar-stream="cues">6 active</div>
+                        </div>
+                        <div class="hero-metric">
+                            <div class="hero-metric__label">Sports live</div>
+                            <div class="hero-metric__value" data-ar-stream="sports">3 synced</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-visual__overlay">
+                        <div class="hero-visual__badge">Active AR scenario</div>
+                        <div class="overlay-feed">
+                            <div class="overlay-feed__card">
+                                <div class="overlay-feed__label">Focus athlete</div>
+                                <div class="overlay-feed__value" data-mode-athlete>Pitcher • SEC</div>
+                                <div class="overlay-feed__status" data-mode-status>Green channel: ready</div>
+                            </div>
+                            <div class="overlay-feed__card">
+                                <div class="overlay-feed__label">Priority cue</div>
+                                <div class="overlay-feed__value" data-mode-cue>Release high • +3°</div>
+                                <div class="overlay-feed__status">Voice + haptic prompt</div>
+                            </div>
+                            <div class="overlay-feed__card">
+                                <div class="overlay-feed__label">Impact window</div>
+                                <div class="overlay-feed__value" data-mode-window>0.42 s</div>
+                                <div class="overlay-feed__status">Before stride foot strike</div>
+                            </div>
+                        </div>
+                        <div class="metric-stream" style="margin-top:1.5rem">
+                            <div class="metric-stream__card">
+                                <div class="metric-stream__label">Cognitive load</div>
+                                <div class="metric-stream__value" data-ar-stream="cognitive" data-precision="0">82%</div>
+                                <div class="metric-stream__trend">Optimal focus band</div>
+                            </div>
+                            <div class="metric-stream__card">
+                                <div class="metric-stream__label">Confidence delta</div>
+                                <div class="metric-stream__value" data-ar-stream="confidence" data-precision="1">+4.2</div>
+                                <div class="metric-stream__trend">Secured</div>
+                            </div>
+                            <div class="metric-stream__card">
+                                <div class="metric-stream__label">Risk signal</div>
+                                <div class="metric-stream__value" data-ar-stream="risk" data-precision="1">1.2%</div>
+                                <div class="metric-stream__trend metric-stream__trend--negative">Falling</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="overlay">
+            <div class="section-header">
+                <span class="section-eyebrow">Adaptive spatial intelligence</span>
+                <h2 class="section-title">Switch between sports and coaching personas instantly</h2>
+                <p class="section-subtitle">A single overlay engine powers baseball mounds, basketball hardwoods, and football sideline reads. Tap a sport profile to regenerate cues, telemetry, and the coaching voice.</p>
+            </div>
+
+            <div class="chart-card" style="min-height:420px">
+                <div class="chart-switcher" role="tablist">
+                    <button class="is-active" data-ar-mode="baseball">Baseball</button>
+                    <button data-ar-mode="football">Football</button>
+                    <button data-ar-mode="basketball">Basketball</button>
+                </div>
+                <canvas id="arCorrectionChart" height="220"></canvas>
+                <div class="range-control">
+                    <label for="intensityRange">Session intensity: <span data-intensity-label>0.78</span></label>
+                    <input type="range" id="intensityRange" min="0.4" max="1" step="0.01" value="0.78">
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <span class="section-eyebrow">Coaching workflow</span>
+                <h2 class="section-title">Every overlay anchors to decisive actions</h2>
+                <p class="section-subtitle">Blaze Intelligence keeps every staff member aligned. From bench tablets to headset comms, each cue resolves into a measurable change on the next play.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="timeline-step__label">Pre-play</div>
+                    <div class="timeline-step__title">Intent prediction</div>
+                    <div class="timeline-step__body">AI forecasts the opponent’s primary option and loads counter cues to the overlay HUD.</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-step__label">Live rep</div>
+                    <div class="timeline-step__title">Spatial coaching layer</div>
+                    <div class="timeline-step__body">Overlay paints force arrows, posture outlines, and timing gates synchronized with athlete biomechanics.</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-step__label">Immediate aftermath</div>
+                    <div class="timeline-step__title">Cognitive reinforcement</div>
+                    <div class="timeline-step__body">Voice + haptic cues highlight the key change, reinforcing optimal mechanics while the moment is fresh.</div>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-step__label">Next series</div>
+                    <div class="timeline-step__title">Staff &amp; athlete sync</div>
+                    <div class="timeline-step__body">Staff dashboards, sideline tablets, and athlete wearables display aligned summaries with automatic follow-up tasks.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="callout">
+                <div class="callout__title">Overlay Blaze AR on top of your biomechanical stack</div>
+                <p>Integrate with the embedded biomechanics module for a full-field perspective. Our team handles setup, compliance, and day-of-game orchestration.</p>
+                <div class="callout__actions">
+                    <a class="btn btn--primary" href="index.html#contact">Book an AR strategy session</a>
+                    <a class="btn btn--ghost" href="embedded-biomechanics.html">Review embed-ready lab</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="experience/ar-real-time-visualization.js" defer></script>
+</body>
+</html>

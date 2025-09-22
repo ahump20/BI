@@ -49,7 +49,9 @@ class BlazeCompetitiveIntelligence {
             'second_spectrum': {
                 name: 'Second Spectrum',
                 website: 'https://www.secondspectrum.com',
-                category: 'NBA/Soccer Analytics',
+                // Category changed from 'NBA/Soccer Analytics' to 'NBA Analytics' to reflect current product focus.
+                // If soccer analytics should be tracked, consider adding a separate entry or updating this field.
+                category: 'NBA Analytics',
                 marketShare: 0.15,
                 threat_level: 'medium',
                 last_updated: null,

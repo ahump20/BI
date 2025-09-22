@@ -27,6 +27,14 @@ X_REDIRECT_URI=https://blaze-intelligence.pages.dev/auth/callback
 
 # Webhook Security
 WEBHOOK_SIGNING_KEY=generate_random_32_char_string
+
+# HubSpot Integration
+HS_BASE_URL=
+HS_API_KEY=
+
+# Baseball Data API
+BASEBALL_BASE_URL=
+BASEBALL_API_KEY=
 ```
 
 ### X API v2 OAuth 2.0
