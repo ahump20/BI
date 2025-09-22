@@ -39,8 +39,18 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "hono": "^4.9.8",
+    "hono": "^4.9.8"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "sports",
+    "analytics",
+    "ai",
     "cloudflare",
     "workers",
     "api",
-    "authentication",
+    "authentication"
+  ],
+  "author": "Blaze Intelligence",
+  "license": "MIT"
+}
