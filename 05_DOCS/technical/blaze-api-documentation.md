@@ -163,6 +163,40 @@ Returns full roster with HAV-F scores for all players on a team.
 }
 ```
 
+### Social Intelligence
+
+#### GET `/api/social-intelligence`
+Returns categorized X (Twitter) coverage for priority teams, segmented into `official`, `fan`, and `media` channels. Requires the `team` query parameter (see `/api/social-intelligence/teams`) and an `X_BEARER_TOKEN` secret configured in the deployment environment.【F:api-unified/social-media-intelligence.js†L69-L154】
+
+**Query Parameters**:
+- `team` (string, required): One of `st-louis-cardinals`, `texas-longhorns-football`, `texas-longhorns-baseball`, `tennessee-titans`, `baltimore-orioles`, or `memphis-grizzlies`.
+- `limit` (integer, optional): Max posts to return per category (default 12, max 50).
+- `hours` (integer, optional): Restrict the search window to the last *n* hours (max 168).
+- `lang` (string, optional): ISO language code, defaults to `en`; use `any` to disable filtering.
+
+**Response (abridged)**:
+```json
+{
+  "team": {
+    "slug": "st-louis-cardinals",
+    "name": "St. Louis Cardinals",
+    "league": "MLB"
+  },
+  "categories": {
+    "official": { "items": [ /* normalized posts */ ] },
+    "fan": { "items": [ /* normalized posts */ ] },
+    "media": { "items": [ /* normalized posts */ ] }
+  },
+  "usage": {
+    "source": "x",
+    "rateLimit": { "remaining": 423 }
+  }
+}
+```
+
+#### GET `/api/social-intelligence/teams`
+Returns the supported team slugs, names, and leagues for client pickers and dashboards.【F:api-unified/social-media-intelligence.js†L56-L96】
+
 ---
 
 ### Readiness Data
