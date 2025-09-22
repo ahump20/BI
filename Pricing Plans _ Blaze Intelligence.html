@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://blaze-intelligence.netlify.app/pricing.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans | Blaze Intelligence</title>
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#BF5700">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Transparent pricing for championship-level sports intelligence. 67-80% cost savings vs traditional scouting.">
+    <meta name="keywords" content="sports analytics pricing, NIL calculator, championship intelligence subscription">
+
+    <!-- Essential Libraries -->
+    <script src="./Pricing Plans _ Blaze Intelligence_files/chart.min.js"></script>
+    <script src="./Pricing Plans _ Blaze Intelligence_files/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --primary-orange: #BF5700;
+            --cardinal-blue: #9BCBEB;
+            --deep-navy: #002244;
+            --grizzly-teal: #00B2A9;
+            --championship-gold: #FFD700;
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #e0e6ed;
+            --text-secondary: #8892b0;
+            --border-radius: 12px;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--primary-orange);
+            padding: 0 2rem;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            z-index: 10000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-orange), var(--championship-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-right: 3rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            transition: var(--transition-smooth);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .nav-link:hover {
+            color: var(--championship-gold);
+            background: rgba(191, 87, 0, 0.15);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-top: 70px;
+            padding: 5rem 2rem 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1), rgba(255, 215, 0, 0.05));
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-orange), var(--championship-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Pricing Cards */
+        .pricing-section {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .toggle-option {
+            padding: 0.8rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-weight: 600;
+        }
+
+        .toggle-option:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .toggle-option:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .toggle-option.active {
+            background: var(--primary-orange);
+            color: white;
+            border-color: var(--primary-orange);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--championship-gold);
+            transform: scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--championship-gold);
+            color: var(--deep-navy);
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--championship-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-period {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--grizzly-teal);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-orange), var(--championship-gold));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.4);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            background: transparent;
+            color: var(--primary-orange);
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary-orange);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        /* ROI Section */
+        .roi-section {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .roi-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .roi-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--championship-gold);
+        }
+
+        .roi-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .comparison-card {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-orange);
+        }
+
+        .savings-highlight {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--grizzly-teal);
+            margin: 1rem 0;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: var(--primary-orange);
+        }
+
+        .faq-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            background: rgba(191, 87, 0, 0.1);
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition-smooth);
+        }
+
+        .faq-question:hover {
+            background: rgba(191, 87, 0, 0.2);
+        }
+
+        .faq-answer {
+            padding: 1.5rem 2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body data-new-gr-c-s-check-loaded="14.1252.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1252.0">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">🔥 Blaze Intelligence</div>
+        <div style="margin-left: auto;">
+            <a href="https://blaze-intelligence.netlify.app/" class="nav-link">← Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 class="hero-title">Championship Pricing</h1>
+        <p class="hero-subtitle">Transparent, competitive pricing designed for teams and organizations. Save 67-80% compared to traditional scouting methods while gaining championship-level insights.</p>
+    </section>
+
+    <!-- Pricing Toggle -->
+    <section class="pricing-section">
+        <div class="pricing-toggle">
+            <div class="toggle-option active" data-period="monthly">Monthly</div>
+            <div class="toggle-option" data-period="annual">Annual (20% Off)</div>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="pricing-grid">
+            <!-- Starter Plan -->
+            <div class="pricing-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                <h3 class="plan-name">Scout</h3>
+                <p class="plan-description">Perfect for individual coaches and small teams getting started with sports intelligence.</p>
+                <div class="plan-price" data-monthly="$99" data-annual="$79">$99</div>
+                <div class="plan-period">per month</div>
+                <ul class="features-list">
+                    <li>Basic Analytics Dashboard</li>
+                    <li>NIL Calculator (Standard)</li>
+                    <li>Up to 5 Athletes</li>
+                    <li>Basic Character Assessment</li>
+                    <li>Email Support</li>
+                    <li>Mobile App Access</li>
+                    <li>Basic Reporting</li>
+                </ul>
+                <button class="btn-secondary">Start Free Trial</button>
+            </div>
+
+            <!-- Professional Plan -->
+            <div class="pricing-card featured" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                <h3 class="plan-name">Professional</h3>
+                <p class="plan-description">Comprehensive platform for high school and college programs seeking competitive advantage.</p>
+                <div class="plan-price" data-monthly="$299" data-annual="$239">$299</div>
+                <div class="plan-period">per month</div>
+                <ul class="features-list">
+                    <li>Advanced RTI Dashboard</li>
+                    <li>NIL Calculator (Advanced)</li>
+                    <li>Up to 50 Athletes</li>
+                    <li>Full Character Assessment</li>
+                    <li>Video Intelligence Upload</li>
+                    <li>Hawk-Eye Precision Tracking</li>
+                    <li>3D Visualizations</li>
+                    <li>Priority Support</li>
+                    <li>Custom Reports</li>
+                    <li>Team Collaboration</li>
+                </ul>
+                <button class="btn-primary">Start Free Trial</button>
+            </div>
+
+            <!-- Elite Plan -->
+            <div class="pricing-card" style="opacity: 1; transform: translateY(0px); transition: opacity 0.6s, transform 0.6s;">
+                <h3 class="plan-name">Championship</h3>
+                <p class="plan-description">Elite-level platform for professional organizations and major college programs.</p>
+                <div class="plan-price" data-monthly="$599" data-annual="$479">$599</div>
+                <div class="plan-period">per month</div>
+                <ul class="features-list">
+                    <li>Complete Intelligence Suite</li>
+                    <li>NIL Calculator (Professional)</li>
+                    <li>Unlimited Athletes</li>
+                    <li>Micro-Expression Analysis</li>
+                    <li>Real-Time Pattern Recognition</li>
+                    <li>Executive Dashboard</li>
+                    <li>Multi-Team Management</li>
+                    <li>API Access</li>
+                    <li>White-Label Options</li>
+                    <li>Dedicated Account Manager</li>
+                    <li>Custom Integrations</li>
+                </ul>
+                <button class="btn-secondary">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Section -->
+    <section class="roi-section">
+        <div class="roi-container">
+            <h2 class="roi-title">Proven Cost Savings</h2>
+            <p class="roi-subtitle">Blaze Intelligence delivers 67-80% cost savings compared to traditional scouting methods</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h3 class="comparison-title">Traditional Scouting</h3>
+                    <p>Manual data collection, subjective evaluations, limited coverage</p>
+                    <div class="savings-highlight">$15,000-$50,000</div>
+                    <p>Annual cost per program</p>
+                </div>
+
+                <div class="comparison-card">
+                    <h3 class="comparison-title">Blaze Intelligence</h3>
+                    <p>Automated analytics, objective insights, comprehensive coverage</p>
+                    <div class="savings-highlight">$1,200-$7,200</div>
+                    <p>Annual subscription</p>
+                </div>
+
+                <div class="comparison-card">
+                    <h3 class="comparison-title">Your Savings</h3>
+                    <p>Immediate cost reduction with superior analytical capabilities</p>
+                    <div class="savings-highlight">67-80%</div>
+                    <p>Cost reduction vs traditional methods</p>
+                </div>
+            </div>
+
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 2rem;">
+                * Savings calculations based on industry benchmarks. See <a href="https://blaze-intelligence.netlify.app/methods.html" style="color: var(--championship-gold);">Methods &amp; Definitions</a> for detailed methodology.
+            </p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <div class="faq-question">What's included in the free trial?</div>
+            <div class="faq-answer">All plans include a 14-day free trial with full access to platform features. No credit card required to start.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Can I upgrade or downgrade my plan?</div>
+            <div class="faq-answer">Yes, you can change your subscription plan at any time. Upgrades take effect immediately, and downgrades apply at your next billing cycle.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Do you offer custom enterprise solutions?</div>
+            <div class="faq-answer">Yes, we provide custom solutions for large organizations, professional teams, and multi-program institutions. Contact our sales team for details.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What sports are supported?</div>
+            <div class="faq-answer">We support MLB, NFL, NBA, NCAA football &amp; baseball, high school football, and Perfect Game youth baseball. International prospects from Latin America, Japan, South Korea, and KBO are also included.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Is there an additional cost for video analysis?</div>
+            <div class="faq-answer">Video intelligence upload and analysis are included in Professional and Championship plans. Scout plan users can upgrade to add this feature.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">What kind of support do you provide?</div>
+            <div class="faq-answer">All plans include comprehensive support. Scout gets email support, Professional gets priority support, and Championship includes a dedicated account manager.</div>
+        </div>
+    </section>
+
+    <script>
+        // Pricing toggle functionality
+        const toggleOptions = document.querySelectorAll('.toggle-option');
+        const priceElements = document.querySelectorAll('.plan-price');
+
+        toggleOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Update active state
+                toggleOptions.forEach(t => t.classList.remove('active'));
+                option.classList.add('active');
+
+                // Update prices
+                const period = option.dataset.period;
+                priceElements.forEach(price => {
+                    if (period === 'annual') {
+                        price.textContent = price.dataset.annual;
+                    } else {
+                        price.textContent = price.dataset.monthly;
+                    }
+                });
+            });
+        });
+
+        // FAQ toggle functionality
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = answer.classList.contains('active');
+
+                // Close all answers
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+
+                // Open clicked answer if it wasn't active
+                if (!isActive) {
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // Animate pricing cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe pricing cards
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+<script async="" src="./Pricing Plans _ Blaze Intelligence_files/proxy.js" data-collect-dnt="true"></script><script async="" src="./Pricing Plans _ Blaze Intelligence_files/auto-events.js" data-extensions="pdf,csv,docx,xlsx,zip,doc,xls"></script>
+<div id="speechify-global-notifications"><template shadowrootmode="open"><div id="speechify-global-notifications-root" style="position: fixed; top: 0px; left: 0px; height: 100vh; z-index: 2147483644; width: 0vw;"></div></template></div><div id="speechify-hover-player-shadow-root"><template shadowrootmode="open"><div id="speechify-hover-player-container"></div></template></div><div id="speechify-settings-modal" style="position: absolute; bottom: 0px; right: 0px;"><template shadowrootmode="open"><div id="speechify-settings-modal-root" style="position: fixed; z-index: 2147483646; top: 0px; left: 0px; height: fit-content; font-size: initial;"></div></template></div><div id="speechify-screenshot-mode" style="position: fixed; top: 0px; right: 0px; width: 100%; min-height: 100%; z-index: 2147483640; display: none !important;"><template shadowrootmode="open"><div id="speechify-screenshot-mode-root" style="width: 100%; height: 100%; position: relative;"></div></template></div></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

@@ -1,0 +1,840 @@
+TableID,TableName,Name,DataType,Size,Nullable,Description,IsInCSV,Scrambled
+5002000,Conference,ConferenceID,integer,32,False,The unique ID of the team's conference,False,False
+5002000,Conference,Name,string,50,False,The name of the team's conference,True,False
+5002000,Conference,Teams,Team[],,True,The teams that play within this conference,True,False
+5002000,Conference,ConferenceName,string,50,True,The name of the team's parent conference (e.g. SEC; Big Ten; etc),True,False
+5002000,Conference,DivisionName,string,50,True,The name of the team's division (e.g. East; West; Atlantic; etc). Note: Not all conferences have divisons,False,False
+5003000,Team,TeamID,integer,32,False,The unique ID of the team,False,False
+5003000,Team,[Key],string,10,False,A unique abbreviation of the team (e.g. OAE; TAS; UAD; KAF; etc.)  Note: Due to being selected for uniqueness; these are not always a match with broadcaster abbreviations. For that use case; use ShortDisplayName,False,False
+5003000,Team,Active,boolean,,False,Whether or not this team is active,True,False
+5003000,Team,School,string,50,True,The name of the school as used in college sports (e.g. SMU; South Florida; Stony Brook; UCLA; etc.),True,False
+5003000,Team,Name,string,50,True,The mascot of the team (e.g. Sooners; Red Raiders; Trojans; Wildcats; etc.),True,False
+5003000,Team,StadiumID,integer,32,False,The unique ID of the stadium that the team plays its home games at,False,False
+5003000,Team,ApRank,integer,32,True,The rank of the team assigned to them by the Associated Press (AP),False,False
+5003000,Team,Wins,integer,32,True,Total number of wins by the team,False,False
+5003000,Team,Losses,integer,32,True,The total number of losses by the team in the current season,False,False
+5003000,Team,ConferenceWins,integer,32,True,The total number of conference wins by the team,False,False
+5003000,Team,ConferenceLosses,integer,32,True,The total number of conference losses by the team,False,False
+5003000,Team,GlobalTeamID,integer,32,False,A globally unique ID for the team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5003000,Team,CoachesRank,integer,32,True,The Coaches Rank of the team,False,False
+5003000,Team,PlayoffRank,integer,32,True,The CFP Rank of the team,False,False
+5003000,Team,TeamLogoUrl,string,100,True,The url of the team logo image,False,False
+5003000,Team,ConferenceID,integer,32,True,The unique ID of the team's conference,False,False
+5003000,Team,Conference,string,50,True,The name of the team's parent conference (e.g. SEC; Big Ten; etc),False,False
+5003000,Team,ShortDisplayName,string,10,True,The shortened name of the team,False,False
+5003000,Team,RankWeek,integer,32,True,The week that the AP Rank/CoachesRank was last updated,False,False
+5003000,Team,RankSeason,integer,32,True,The season that the AP Rank/CoachesRank was last updated,False,False
+5003000,Team,RankSeasonType,integer,32,True,The season type that the AP Rank/CoachesRank was last updated,False,False
+5003000,Team,PrimaryColor,string,6,True,The team's primary color. (This is not licensed for public or commercial use),False,False
+5003000,Team,SecondaryColor,string,6,True,The team's secondary color. (This is not licensed for public or commercial use),False,False
+5003000,Team,TertiaryColor,string,6,True,The team's tertiary color. (This is not licensed for public or commercial use),False,False
+5003000,Team,QuaternaryColor,string,6,True,The team's quaternary color. (This is not licensed for public or commercial use),False,False
+5044000,TeamBasic,TeamID,integer,32,False,The unique ID of the team,False,False
+5044000,TeamBasic,Key,string,10,False,A unique abbreviation of the team (e.g. OAE; TAS; UAD; KAF; etc.) These are not recommended for front end use as they may not match common usage; see the ShortDisplayName instead.,False,False
+5044000,TeamBasic,Active,boolean,,False,Whether or not this team is active,True,False
+5044000,TeamBasic,School,string,50,True,The name of the school as used in college sports (e.g. SMU; South Florida; Stony Brook; UCLA; etc.),False,False
+5044000,TeamBasic,Name,string,50,True,The full name of the stadium,False,False
+5044000,TeamBasic,StadiumID,integer,32,False,The unique ID of the stadium that the team plays its home games at,False,False
+5044000,TeamBasic,GlobalTeamID,integer,32,False,A globally unique ID for the team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5044000,TeamBasic,TeamLogoUrl,string,100,True,The url of the team logo image,False,False
+5044000,TeamBasic,ConferenceID,integer,32,True,The unique ID of the team's conference,False,False
+5044000,TeamBasic,Conference,string,50,True,The name of the team's parent conference (e.g. SEC; Big Ten; etc),False,False
+5044000,TeamBasic,ShortDisplayName,string,10,True,The shortened name of the team - recommended for front end applications. May not be unique; if you need a 100% unique letter identifier see the Key field in this table.,False,False
+5044000,TeamBasic,PrimaryColor,string,6,True,The team's primary color. (This is not licensed for public or commercial use),False,False
+5044000,TeamBasic,SecondaryColor,string,6,True,The team's secondary color. (This is not licensed for public or commercial use),False,False
+5044000,TeamBasic,TertiaryColor,string,6,True,The team's tertiary color. (This is not licensed for public or commercial use),False,False
+5044000,TeamBasic,QuaternaryColor,string,6,True,The team's quaternary color. (This is not licensed for public or commercial use),False,False
+5004000,Stadium,StadiumID,integer,32,False,The unique ID of the stadium,True,False
+5004000,Stadium,Active,boolean,,False,Whether or not this stadium is the home venue for an active team,True,False
+5004000,Stadium,Name,string,50,False,The full name of the stadium,True,False
+5004000,Stadium,Dome,boolean,,False,Indicates whether this stadium is a dome,True,False
+5004000,Stadium,City,string,50,True,The city where the stadium is located,True,False
+5004000,Stadium,State,string,10,True,The US state where the stadium is located  Note: if stadium is outside United States; this value is NULL,False,False
+5004000,Stadium,GeoLat,decimal,32,True,The geographic latitude coordinate of this venue,False,False
+5004000,Stadium,GeoLong,decimal,32,True,The geographic longitude coordinate of this venue,False,False
+5006000,Game,GameID,integer,32,False,The unique ID of this game,True,False
+5006000,Game,Season,integer,32,False,The College Football season of the game,True,False
+5006000,Game,SeasonType,integer,32,False,The type of season that this record corresponds to (1=Regular Season; 2=Preseason; 3=Postseason; 4=Offseason; 5=AllStar).,True,False
+5006000,Game,Week,integer,32,True,The week of the game,False,False
+5006000,Game,Status,string,20,True,The status of the game. Possible values include: Scheduled; InProgress; Final; F/OT; Suspended; Postponed; Delayed; Canceled; Forfeit,False,False
+5006000,Game,Day,date,,True,The date of the game,True,False
+5006000,Game,DateTime,datetime,,True,The date and time of the game (in US Eastern Time),False,False
+5006000,Game,AwayTeam,string,10,False,The abbreviation [Key] of the away team,False,False
+5006000,Game,HomeTeam,string,10,False,The abbreviation [Key] of the home team,False,False
+5006000,Game,AwayTeamID,integer,32,False,The unique ID of the away team,True,False
+5006000,Game,HomeTeamID,integer,32,False,The unique ID of the home team,True,False
+5006000,Game,AwayTeamName,string,100,True,The name of the away team,True,False
+5006000,Game,HomeTeamName,string,100,True,The name of the home team,True,False
+5006000,Game,AwayTeamScore,integer,32,True,Total number of points the away team scored in this game,True,True
+5006000,Game,HomeTeamScore,integer,32,True,Total number of points the home team scored in this game,True,True
+5006000,Game,Period,string,10,True,The current quarter in the game  (Possible Values: 1; 2; 3; 4; Half; OT; F; F/OT; NULL),False,False
+5006000,Game,TimeRemainingMinutes,integer,32,True,Total number of minutes remaining in the quarter,False,False
+5006000,Game,TimeRemainingSeconds,integer,32,True,Total number of seconds remaining in the quarter,False,False
+5006000,Game,PointSpread,decimal,32,True,The oddsmaker Point Spread at game start from the perspective of the HomeTeam. Note: negative numbers indicate the HomeTeam is favored; positive numbers indicate the AwayTeam is favored,False,True
+5006000,Game,OverUnder,decimal,32,True,The sportsbook's total points line at game start,False,True
+5006000,Game,AwayTeamMoneyLine,integer,32,True,The sportsbook's moneyline for the away team,False,True
+5006000,Game,HomeTeamMoneyLine,integer,32,True,The sportsbook's moneyline for the home team,False,True
+5006000,Game,Updated,datetime,,True,The timestamp of when this game was last updated (US Eastern Time),True,False
+5006000,Game,Created,datetime,,True,The timestamp of when this game was first created (in US Eastern Time),False,False
+5006000,Game,GlobalGameID,integer,32,False,A globally unique ID for this game.  Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5006000,Game,GlobalAwayTeamID,integer,32,False,A globally unique ID for the away team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5006000,Game,GlobalHomeTeamID,integer,32,False,A globally unique ID for the home team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5006000,Game,StadiumID,integer,32,True,The unique ID of the stadium/venue where this game was played,False,False
+5006000,Game,Stadium,Stadium,,True,The details of the stadium where this game is played,True,False
+5006000,Game,YardLine,integer,32,True,The yard line that the ball is on at the current state of the game,False,True
+5006000,Game,YardLineTerritory,string,10,False,The team's side of the field that the ball is on,False,True
+5006000,Game,Down,integer,32,True,The current down,True,True
+5006000,Game,Distance,integer,32,True,The current distance to a first down,True,True
+5006000,Game,Possession,string,10,False,Which team currently has possession of the ball,True,True
+5006000,Game,Periods,Period[],,True,The details of the periods (quarters & overtime) for this game,True,False
+5006000,Game,IsClosed,boolean,,False,Indicates whether the game is over and the final score has been verified,False,False
+5006000,Game,GameEndDateTime,datetime,,True,The date and time that the game ended (in US Eastern Time),False,False
+5006000,Game,Title,string,50,True,The title of the game (e.g. Rose Bowl; Citrus Bowl; etc),True,False
+5006000,Game,HomeRotationNumber,integer,32,True,Rotation number of home team for this game,True,True
+5006000,Game,AwayRotationNumber,integer,32,True,Rotation number of away team for this game,True,True
+5006000,Game,Channel,string,10,True,The television station broadcasting the game,True,False
+5006000,Game,NeutralVenue,boolean,,True,Indicates whether this game is played in a neutral venue,True,False
+5006000,Game,AwayPointSpreadPayout,integer,32,True,The sportsbook's point spread payout for the away team,False,True
+5006000,Game,HomePointSpreadPayout,integer,32,True,The point spread payout for the home team,True,True
+5006000,Game,OverPayout,integer,32,True,The sportsbook's payout for the over in the total points line,False,True
+5006000,Game,UnderPayout,integer,32,True,The sportsbook's payout for the under,False,True
+5006000,Game,DateTimeUTC,datetime,,True,The date and time of the game (in UTC),False,True
+5006000,Game,Attendance,integer,32,True,The total number of people who attended the game,False,
+5046000,ScoreBasic,GameID,integer,32,False,The unique ID of this game,True,False
+5046000,ScoreBasic,Season,integer,32,False,The College Football season of the game,True,False
+5046000,ScoreBasic,SeasonType,integer,32,False,The type of season that this record corresponds to (1=Regular Season; 2=Preseason; 3=Postseason; 4=Offseason; 5=AllStar).,True,False
+5046000,ScoreBasic,Week,integer,32,True,The week of the game,False,False
+5046000,ScoreBasic,Status,string,20,True,The status of the game. Possible values include: Scheduled; InProgress; Final; F/OT; Suspended; Postponed; Delayed; Canceled; Forfeit,False,False
+5046000,ScoreBasic,Day,date,,True,The date of the game,True,False
+5046000,ScoreBasic,DateTime,datetime,,True,The date and time of the game (in US Eastern Time),False,False
+5046000,ScoreBasic,AwayTeam,string,10,False,The abbreviation [Key] of the away team,False,False
+5046000,ScoreBasic,HomeTeam,string,10,False,The abbreviation [Key] of the home team,False,False
+5046000,ScoreBasic,AwayTeamID,integer,32,False,The unique ID of the away team,True,False
+5046000,ScoreBasic,HomeTeamID,integer,32,False,The unique ID of the home team,True,False
+5046000,ScoreBasic,AwayTeamName,string,100,True,The name of the away team,True,False
+5046000,ScoreBasic,HomeTeamName,string,100,True,The name of the home team,True,False
+5046000,ScoreBasic,AwayTeamScore,integer,32,True,Total number of points the away team scored in this game,True,True
+5046000,ScoreBasic,HomeTeamScore,integer,32,True,Total number of points the home team scored in this game,True,True
+5046000,ScoreBasic,Updated,datetime,,True,The timestamp of when this game was last updated (US Eastern Time),True,False
+5046000,ScoreBasic,Created,datetime,,True,The timestamp of when this game was first created (in US Eastern Time),False,False
+5046000,ScoreBasic,GlobalGameID,integer,32,False,A globally unique ID for this game.  Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5046000,ScoreBasic,GlobalAwayTeamID,integer,32,False,A globally unique ID for the away team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5046000,ScoreBasic,GlobalHomeTeamID,integer,32,False,A globally unique ID for the home team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5046000,ScoreBasic,StadiumID,integer,32,True,The unique ID of the stadium/venue where this game was played,False,False
+5046000,ScoreBasic,IsClosed,boolean,,False,Indicates whether the game is over and the final score has been verified,False,False
+5046000,ScoreBasic,GameEndDateTime,datetime,,True,The date and time that the game ended (in US Eastern Time),False,False
+5046000,ScoreBasic,Title,string,50,True,The title of the game (e.g. Rose Bowl; Citrus Bowl; etc),True,False
+5046000,ScoreBasic,NeutralVenue,boolean,,True,Indicates whether this game is played in a neutral venue,True,False
+5046000,ScoreBasic,DateTimeUTC,datetime,,True,The date and time of the game (in UTC),False,True
+5043000,ScheduleBasic,GameID,integer,32,False,The unique ID of this game,True,False
+5043000,ScheduleBasic,Season,integer,32,False,The College Football season of the game,True,False
+5043000,ScheduleBasic,SeasonType,integer,32,False,The type of season that this record corresponds to (1=Regular Season; 2=Preseason; 3=Postseason; 4=Offseason; 5=AllStar).,True,False
+5043000,ScheduleBasic,Week,integer,32,True,The week of the game,False,False
+5043000,ScheduleBasic,Status,string,20,True,The status of the game. Possible values include: Scheduled; InProgress; Final; F/OT; Suspended; Postponed; Delayed; Canceled; Forfeit,False,False
+5043000,ScheduleBasic,Day,date,,True,The date of the game,True,False
+5043000,ScheduleBasic,DateTime,datetime,,True,The date and time of the game (in US Eastern Time),False,False
+5043000,ScheduleBasic,AwayTeam,string,10,False,The abbreviation [Key] of the away team,False,False
+5043000,ScheduleBasic,HomeTeam,string,10,False,The abbreviation [Key] of the home team,False,False
+5043000,ScheduleBasic,AwayTeamID,integer,32,False,The unique ID of the away team,True,False
+5043000,ScheduleBasic,HomeTeamID,integer,32,False,The unique ID of the home team,True,False
+5043000,ScheduleBasic,AwayTeamName,string,100,True,The name of the away team,True,False
+5043000,ScheduleBasic,HomeTeamName,string,100,True,The name of the home team,True,False
+5043000,ScheduleBasic,AwayTeamScore,integer,32,True,Total number of points the away team scored in this game,True,True
+5043000,ScheduleBasic,HomeTeamScore,integer,32,True,Total number of points the home team scored in this game,True,True
+5043000,ScheduleBasic,Updated,datetime,,True,The timestamp of when this game was last updated (US Eastern Time),True,False
+5043000,ScheduleBasic,Created,datetime,,True,The timestamp of when this game was first created (in US Eastern Time),False,False
+5043000,ScheduleBasic,GlobalGameID,integer,32,False,A globally unique ID for this game.  Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5043000,ScheduleBasic,GlobalAwayTeamID,integer,32,False,A globally unique ID for the away team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5043000,ScheduleBasic,GlobalHomeTeamID,integer,32,False,A globally unique ID for the home team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5043000,ScheduleBasic,StadiumID,integer,32,True,The unique ID of the stadium/venue where this game was played,False,False
+5043000,ScheduleBasic,IsClosed,boolean,,False,Indicates whether the game is over and the final score has been verified,False,False
+5043000,ScheduleBasic,GameEndDateTime,datetime,,True,The date and time that the game ended (in US Eastern Time),False,False
+5043000,ScheduleBasic,Title,string,50,True,The title of the game (e.g. Rose Bowl; Citrus Bowl; etc),True,False
+5043000,ScheduleBasic,NeutralVenue,boolean,,True,Indicates whether this game is played in a neutral venue,True,False
+5043000,ScheduleBasic,DateTimeUTC,datetime,,True,The date and time of the game (in UTC),False,True
+5007000,Period,PeriodID,integer,32,False,Unique ID for each period,False,False
+5007000,Period,GameID,integer,32,False,The unique ID of this game,False,False
+5007000,Period,Number,integer,32,False,The Number (Order) of the Period in the scope of the Game.,True,False
+5007000,Period,Name,string,10,False,The name of the period (possible values: 1; 2; 3; 4; OT; Final; F/OT),False,False
+5007000,Period,AwayScore,integer,32,True,The total points scored by the away team in this period,False,True
+5007000,Period,HomeScore,integer,32,True,The total points scored by the home team in this period,False,True
+5008000,Player,PlayerID,integer,32,False,The unique ID of the player as assigned by SportsDataIO. Note: this ID remains with the player their entire collegiate career,False,False
+5008000,Player,FirstName,string,50,True,The player's first name,False,False
+5008000,Player,LastName,string,50,True,The player's last name,False,False
+5008000,Player,TeamID,integer,32,True,The unique ID of the team associated with this player,False,False
+5008000,Player,Team,string,10,True,The abbreviation [Key] of the team that the player is on. Note: If this player is a free agent; this field is NULL,False,False
+5008000,Player,Jersey,integer,32,True,The player's jersey number,False,False
+5008000,Player,Position,string,10,True,The player's primary position. Possible values: C; CB; DB; DE; DL; DT; FB; G; K; KR; LB; LS; NT; OL; OLB; OT; P; PR; QB; RB; S; SS; TE; WR,False,False
+5008000,Player,PositionCategory,string,3,True,The category (Offense; Defense or Special Teams) of the players position (OFF; DEF; ST),True,False
+5008000,Player,Class,string,50,True,The class of the player.  Possible values: Freshman; Sophomore; Junior; Senior; Graduate Student; as well as Redshirt for all classes,False,False
+5008000,Player,Height,integer,32,True,The player's height in inches,False,False
+5008000,Player,Weight,integer,32,True,The player's weight in pounds (lbs),False,False
+5008000,Player,BirthCity,string,50,True,The city in which the player was born,False,False
+5008000,Player,BirthState,string,50,True,The state in which the player was born,False,False
+5008000,Player,Updated,datetime,,True,The timestamp of when this player was last updated (US Eastern Time),False,False
+5008000,Player,Created,datetime,,True,The updated date and time of the player,True,False
+5008000,Player,GlobalTeamID,integer,32,True,A globally unique ID for the player's team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5008000,Player,InjuryStatus,string,50,True,Indicates the player's injury status (possible values include: Probable; Questionable; Doubtful; Out),True,False
+5008000,Player,InjuryBodyPart,string,50,True,The body part that is injured (Knee; Groin; Calf; Hamstring; etc.),True,False
+5008000,Player,InjuryStartDate,date,,True,The day that the injury started or first discovered,False,False
+5008000,Player,InjuryNotes,string,250,True,Brief description of the player's injury and expected availability,False,False
+5045000,PlayerBasic,PlayerID,integer,32,False,The unique ID of the player as assigned by SportsDataIO. Note: this ID remains with the player their entire collegiate career,False,False
+5045000,PlayerBasic,FirstName,string,50,True,The player's first name,False,False
+5045000,PlayerBasic,LastName,string,50,True,The player's last name,False,False
+5045000,PlayerBasic,TeamID,integer,32,True,The unique ID of the team associated with this player,False,False
+5045000,PlayerBasic,Team,string,10,True,The abbreviation [Key] of the team that the player is on Note: If this player is a free agent; this field is NULL,False,False
+5045000,PlayerBasic,Jersey,integer,32,True,The player's jersey number,False,False
+5045000,PlayerBasic,Position,string,10,True,The player's primary position. Possible values: C; CB; DB; DE; DL; DT; FB; G; K; KR; LB; LS; NT; OL; OLB; OT; P; PR; QB; RB; S; SS; TE; WR,False,False
+5045000,PlayerBasic,PositionCategory,string,3,True,The category (Offense; Defense or Special Teams) of the players position (OFF; DEF; ST),True,False
+5045000,PlayerBasic,Class,string,50,True,The class of the player.  Possible values: Freshman; Sophomore; Junior; Senior; Graduate Student; as well as Redshirt for all classes,False,False
+5045000,PlayerBasic,Height,integer,32,True,The player's height in inches,False,False
+5045000,PlayerBasic,Weight,integer,32,True,The player's weight in pounds (lbs),False,False
+5045000,PlayerBasic,BirthCity,string,50,True,The city in which the player was born,False,False
+5045000,PlayerBasic,BirthState,string,50,True,The state in which the player was born,False,False
+5045000,PlayerBasic,Updated,datetime,,True,The timestamp of when this player was last updated (US Eastern Time),False,False
+5045000,PlayerBasic,Created,datetime,,True,The date and time the player was created (US Eastern Time),False,False
+5045000,PlayerBasic,GlobalTeamID,integer,32,True,A globally unique ID for the player's team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5011000,PlayerGame,StatID,integer,32,False,The unique ID of the stats associated with the player in this game,False,False
+5011000,PlayerGame,TeamID,integer,32,True,The unique ID of the team associated with this player,False,False
+5011000,PlayerGame,PlayerID,integer,32,True,The unique ID of the player as assigned by SportsDataIO. Note: this ID remains with the player their entire collegiate career,False,False
+5011000,PlayerGame,SeasonType,integer,32,True,The type of season that this record corresponds to (1=Regular Season; 2=Preseason; 3=Postseason; 4=Offseason; 5=AllStar).,True,False
+5011000,PlayerGame,Season,integer,32,True,The college football season of the game,True,False
+5011000,PlayerGame,Name,string,50,True,The player's full name,False,False
+5011000,PlayerGame,Team,string,10,True,The abbreviation [Key] of the team that the player is on,False,False
+5011000,PlayerGame,Position,string,10,True,The player's primary position. Possible values: C; CB; DB; DE; DL; DT; FB; G; K; KR; LB; LS; NT; OL; OLB; OT; P; PR; QB; RB; S; SS; TE; WR,False,False
+5011000,PlayerGame,PositionCategory,string,10,True,The category (Offense; Defense or Special Teams) of the players position (OFF; DEF; ST),True,False
+5011000,PlayerGame,InjuryStatus,string,50,True,Indicates the player's injury status (possible values include: Probable; Questionable; Doubtful; Out),True,False
+5011000,PlayerGame,InjuryBodyPart,string,50,True,The body part that is injured (Knee; Groin; Calf; Hamstring; etc.),True,False
+5011000,PlayerGame,InjuryStartDate,date,,True,The day that the injury started or was first discovered.,False,False
+5011000,PlayerGame,InjuryNotes,string,250,True,Brief description of the player's injury and expected availability.,True,False
+5011000,PlayerGame,GlobalTeamID,integer,32,True,A globally unique ID for this player's team. This value is guaranteed to be unique across all sports/leagues.,False,False
+5011000,PlayerGame,DraftKingsPosition,string,10,True,The DraftKings player position for this game.,False,False
+5011000,PlayerGame,DraftKingsSalary,integer,32,True,A DraftKings salary for the next "standard" slate this game is in. NOTE: this may change as slates start & this value changes to the next slate's salary.,False,True
+5011000,PlayerGame,Week,integer,32,True,The NFL week of the game (weeks 18-21 denote playoff games),True,False
+5011000,PlayerGame,GameID,integer,32,True,The unique ID of this game,True,False
+5011000,PlayerGame,OpponentID,integer,32,True,The unique ID of the team's opponent,True,False
+5011000,PlayerGame,Opponent,string,10,True,The name of the opponent ,True,False
+5011000,PlayerGame,Day,date,,True,The day of the game,True,False
+5011000,PlayerGame,DateTime,datetime,,True,The date and time of the game,True,False
+5011000,PlayerGame,HomeOrAway,string,4,True,Whether the team is home or away,True,False
+5011000,PlayerGame,IsGameOver,boolean,,False,Whether the game is over (true/false),True,False
+5011000,PlayerGame,GlobalGameID,integer,32,True,A globally unique ID for this game. This value is guaranteed to be unique across all sports/leagues.,False,False
+5011000,PlayerGame,GlobalOpponentID,integer,32,True,A globally unique ID for this opponent. This value is guaranteed to be unique across all sports/leagues.,True,False
+5011000,PlayerGame,Updated,datetime,,True,The updated date and time of the stat.,True,False
+5011000,PlayerGame,Created,datetime,,True,The date and time of the created stat.,True,False
+5011000,PlayerGame,Games,integer,32,True,Indicates whether or not a player has recorded any stats for a given game.,True,False
+5011000,PlayerGame,FantasyPoints,decimal,32,True,Total fantasy points,True,True
+5011000,PlayerGame,PassingAttempts,decimal,32,True,Total passing attempts,True,True
+5011000,PlayerGame,PassingCompletions,decimal,32,True,Total passing completions,True,True
+5011000,PlayerGame,PassingYards,decimal,32,True,Total passing yards,True,True
+5011000,PlayerGame,PassingCompletionPercentage,decimal,32,True,Total passing completion percentage,True,True
+5011000,PlayerGame,PassingYardsPerAttempt,decimal,32,True,Total passing yards per attempts,True,True
+5011000,PlayerGame,PassingYardsPerCompletion,decimal,32,True,Total passing yards per completion,True,True
+5011000,PlayerGame,PassingTouchdowns,decimal,32,True,Total passing touchdowns,True,True
+5011000,PlayerGame,PassingInterceptions,decimal,32,True,Total passing interceptions,True,True
+5011000,PlayerGame,PassingRating,decimal,32,True,Total passing rating,True,True
+5011000,PlayerGame,RushingAttempts,decimal,32,True,Total rushing attempts,True,True
+5011000,PlayerGame,RushingYards,decimal,32,True,Total rushing yards,True,True
+5011000,PlayerGame,RushingYardsPerAttempt,decimal,32,True,Total rushing yards per attempt,True,True
+5011000,PlayerGame,RushingTouchdowns,decimal,32,True,Total rushing touchdowns,True,True
+5011000,PlayerGame,RushingLong,decimal,32,True,Longest rushing attempt,True,True
+5011000,PlayerGame,Receptions,decimal,32,True,Total receptions,True,True
+5011000,PlayerGame,ReceivingYards,decimal,32,True,Total receiving yards,True,True
+5011000,PlayerGame,ReceivingYardsPerReception,decimal,32,True,Total receiving yards per reception,True,True
+5011000,PlayerGame,ReceivingTouchdowns,decimal,32,True,Total receiving touchdowns,True,True
+5011000,PlayerGame,ReceivingLong,decimal,32,True,Long receiving reception,True,True
+5011000,PlayerGame,PuntReturns,decimal,32,True,Total punt returns,True,True
+5011000,PlayerGame,PuntReturnYards,decimal,32,True,Total punt return yards,True,True
+5011000,PlayerGame,PuntReturnYardsPerAttempt,decimal,32,True,Total punt return yards per attempt,True,True
+5011000,PlayerGame,PuntReturnTouchdowns,decimal,32,True,Total punt return touchdowns,True,True
+5011000,PlayerGame,PuntReturnLong,decimal,32,True,Longest punt return,True,True
+5011000,PlayerGame,KickReturns,decimal,32,True,Total kick returns,True,True
+5011000,PlayerGame,KickReturnYards,decimal,32,True,Total kick return yards,True,True
+5011000,PlayerGame,KickReturnYardsPerAttempt,decimal,32,True,Total kick return yards per attempt,True,True
+5011000,PlayerGame,KickReturnTouchdowns,decimal,32,True,Total kick return touchdowns,True,True
+5011000,PlayerGame,KickReturnLong,decimal,32,True,Longest kick return ,True,True
+5011000,PlayerGame,Punts,decimal,32,True,Total punts,True,True
+5011000,PlayerGame,PuntYards,decimal,32,True,Total punt yards,True,True
+5011000,PlayerGame,PuntAverage,decimal,32,True,Total punt average,True,True
+5011000,PlayerGame,PuntLong,decimal,32,True,Longest punt,True,True
+5011000,PlayerGame,FieldGoalsAttempted,decimal,32,True,Total field goals attempted,True,True
+5011000,PlayerGame,FieldGoalsMade,decimal,32,True,Total field goals made,True,True
+5011000,PlayerGame,FieldGoalPercentage,decimal,32,True,Total field goal percentage,True,True
+5011000,PlayerGame,FieldGoalsLongestMade,decimal,32,True,Longest field goal made,True,True
+5011000,PlayerGame,ExtraPointsAttempted,decimal,32,True,Total extra points attempted,True,True
+5011000,PlayerGame,ExtraPointsMade,decimal,32,True,Total extra points made,True,True
+5011000,PlayerGame,Interceptions,decimal,32,True,Total interceptions,True,True
+5011000,PlayerGame,InterceptionReturnYards,decimal,32,True,Total interception return yards,True,True
+5011000,PlayerGame,InterceptionReturnTouchdowns,decimal,32,True,Total interception return touchdowns,True,True
+5011000,PlayerGame,SoloTackles,decimal,32,True,Total Solo Tackles,True,True
+5011000,PlayerGame,AssistedTackles,decimal,32,True,Total Assisted Tackles,True,True
+5011000,PlayerGame,TacklesForLoss,decimal,32,True,Total Tackles for a loss of yardage,True,True
+5011000,PlayerGame,Sacks,decimal,32,True,Total Quarterback Sacks,True,True
+5011000,PlayerGame,PassesDefended,decimal,32,True,Total Passes Defended,True,True
+5011000,PlayerGame,FumblesRecovered,decimal,32,True,Total Fumble Recoveries,True,True
+5011000,PlayerGame,FumbleReturnTouchdowns,decimal,32,True,Total Fumbles Recovered and returned for a touchdown,True,True
+5011000,PlayerGame,QuarterbackHurries,decimal,32,True,Total Quarterback Hurries. NOTE: This field is deprecated as of 2021.,True,True
+5011000,PlayerGame,Fumbles,decimal,32,True,Total Fumbles,True,True
+5011000,PlayerGame,FumblesLost,decimal,32,True,Total Fumbles Lost,True,True
+5012000,TeamGame,StatID,integer,32,False,The unique ID of the stats associated with the team in this game,False,False
+5012000,TeamGame,TeamID,integer,32,True,The unique ID of the team,True,False
+5012000,TeamGame,SeasonType,integer,32,True,The type of season that this record corresponds to (1=Regular Season; 2=Preseason; 3=Postseason; 4=Offseason; 5=AllStar).,True,False
+5012000,TeamGame,Season,integer,32,True,The college football season of the game,False,False
+5012000,TeamGame,Name,string,50,True,The team's full name,False,False
+5012000,TeamGame,Team,string,10,True,The abbreviation [Key] of the team,False,False
+5012000,TeamGame,Score,integer,32,True,Total points scored by the team in the game,False,True
+5012000,TeamGame,OpponentScore,integer,32,True,Total points scored by the opponent team,False,True
+5012000,TeamGame,FirstDowns,integer,32,True,Total first downs converted by the team in the game,False,True
+5012000,TeamGame,ThirdDownConversions,integer,32,True,Total third down conversions by the team in the game,False,True
+5012000,TeamGame,ThirdDownAttempts,integer,32,True,Total third down attempts by the team in the game,False,True
+5012000,TeamGame,FourthDownConversions,integer,32,True,Total fourth down conversions by the team in the game,False,True
+5012000,TeamGame,FourthDownAttempts,integer,32,True,Total fourth down attempts by the team in the game,False,True
+5012000,TeamGame,Penalties,integer,32,True,Total penalties committed by the team in the game,False,True
+5012000,TeamGame,PenaltyYards,integer,32,True,Total penalties yards enforced against the team in the game,False,True
+5012000,TeamGame,TimeOfPossessionMinutes,integer,32,True,Total number of minutes the team possessed the ball for in the game,False,True
+5012000,TeamGame,TimeOfPossessionSeconds,integer,32,True,Total number of seconds the team possessed the ball for in the game,False,True
+5012000,TeamGame,GlobalTeamID,integer,32,True,A globally unique ID for the team. Note: This value is guaranteed to be unique across all sports/leagues.,False,False
+5012000,TeamGame,Week,integer,32,True,The NFL week of the game (weeks 18-21 denote playoff games),True,False
+5012000,TeamGame,GameID,integer,32,True,The unique ID of this game,True,False
+5012000,TeamGame,OpponentID,integer,32,True,The unique ID of the team's opponent,True,False
+5012000,TeamGame,Opponent,string,10,True,The name of the opponent ,True,False
+5012000,TeamGame,Day,date,,True,The day of the game,True,False
+5012000,TeamGame,DateTime,datetime,,True,The date and time of the game,True,False
+5012000,TeamGame,HomeOrAway,string,4,True,Whether the team is home or away,True,False
+5012000,TeamGame,IsGameOver,boolean,,False,Whether the game is over (true/false),True,False
+5012000,TeamGame,GlobalGameID,integer,32,True,A globally unique ID for this game. This value is guaranteed to be unique across all sports/leagues.,False,False
+5012000,TeamGame,GlobalOpponentID,integer,32,True,A globally unique ID for this opponent. This value is guaranteed to be unique across all sports/leagues.,True,False
+5012000,TeamGame,Updated,datetime,,True,The updated date and time of the stat.,True,False
+5012000,TeamGame,Created,datetime,,True,The date and time of the created stat.,True,False
+5012000,TeamGame,Games,integer,32,True,Indicates whether or not a player has recorded any stats for a given game.,True,False
+5012000,TeamGame,FantasyPoints,decimal,32,True,Total fantasy points,True,True
+5012000,TeamGame,PassingAttempts,decimal,32,True,Total passing attempts,True,True
+5012000,TeamGame,PassingCompletions,decimal,32,True,Total passing completions,True,True
+5012000,TeamGame,PassingYards,decimal,32,True,Total passing yards,True,True
+5012000,TeamGame,PassingCompletionPercentage,decimal,32,True,Total passing completion percentage,True,True
+5012000,TeamGame,PassingYardsPerAttempt,decimal,32,True,Total passing yards per attempts,True,True
+5012000,TeamGame,PassingYardsPerCompletion,decimal,32,True,Total passing yards per completion,True,True
+5012000,TeamGame,PassingTouchdowns,decimal,32,True,Total passing touchdowns,True,True
+5012000,TeamGame,PassingInterceptions,decimal,32,True,Total passing interceptions,True,True
+5012000,TeamGame,PassingRating,decimal,32,True,Total passing rating,True,True
+5012000,TeamGame,RushingAttempts,decimal,32,True,Total rushing attempts,True,True
+5012000,TeamGame,RushingYards,decimal,32,True,Total rushing yards,True,True
+5012000,TeamGame,RushingYardsPerAttempt,decimal,32,True,Total rushing yards per attempt,True,True
+5012000,TeamGame,RushingTouchdowns,decimal,32,True,Total rushing touchdowns,True,True
+5012000,TeamGame,RushingLong,decimal,32,True,Longest rushing attempt,True,True
+5012000,TeamGame,Receptions,decimal,32,True,Total receptions,True,True
+5012000,TeamGame,ReceivingYards,decimal,32,True,Total receiving yards,True,True
+5012000,TeamGame,ReceivingYardsPerReception,decimal,32,True,Total receiving yards per reception,True,True
+5012000,TeamGame,ReceivingTouchdowns,decimal,32,True,Total receiving touchdowns,True,True
+5012000,TeamGame,ReceivingLong,decimal,32,True,Long receiving reception,True,True
+5012000,TeamGame,PuntReturns,decimal,32,True,Total punt returns,True,True
+5012000,TeamGame,PuntReturnYards,decimal,32,True,Total punt return yards,True,True
+5012000,TeamGame,PuntReturnYardsPerAttempt,decimal,32,True,Total punt return yards per attempt,True,True
+5012000,TeamGame,PuntReturnTouchdowns,decimal,32,True,Total punt return touchdowns,True,True
+5012000,TeamGame,PuntReturnLong,decimal,32,True,Longest punt return,True,True
+5012000,TeamGame,KickReturns,decimal,32,True,Total kick returns,True,True
+5012000,TeamGame,KickReturnYards,decimal,32,True,Total kick return yards,True,True
+5012000,TeamGame,KickReturnYardsPerAttempt,decimal,32,True,Total kick return yards per attempt,True,True
+5012000,TeamGame,KickReturnTouchdowns,decimal,32,True,Total kick return touchdowns,True,True
+5012000,TeamGame,KickReturnLong,decimal,32,True,Longest kick return ,True,True
+5012000,TeamGame,Punts,decimal,32,True,Total punts,True,True
+5012000,TeamGame,PuntYards,decimal,32,True,Total punt yards,True,True
+5012000,TeamGame,PuntAverage,decimal,32,True,Total punt average,True,True
+5012000,TeamGame,PuntLong,decimal,32,True,Longest punt,True,True
+5012000,TeamGame,FieldGoalsAttempted,decimal,32,True,Total field goals attempted,True,True
+5012000,TeamGame,FieldGoalsMade,decimal,32,True,Total field goals made,True,True
+5012000,TeamGame,FieldGoalPercentage,decimal,32,True,Total field goal percentage,True,True
+5012000,TeamGame,FieldGoalsLongestMade,decimal,32,True,Longest field goal made,True,True
+5012000,TeamGame,ExtraPointsAttempted,decimal,32,True,Total extra points attempted,True,True
+5012000,TeamGame,ExtraPointsMade,decimal,32,True,Total extra points made,True,True
+5012000,TeamGame,Interceptions,decimal,32,True,Total interceptions,True,True
+5012000,TeamGame,InterceptionReturnYards,decimal,32,True,Total interception return yards,True,True
+5012000,TeamGame,InterceptionReturnTouchdowns,decimal,32,True,Total interception return touchdowns,True,True
+5012000,TeamGame,SoloTackles,decimal,32,True,Total Solo Tackles,True,True
+5012000,TeamGame,AssistedTackles,decimal,32,True,Total Assisted Tackles,True,True
+5012000,TeamGame,TacklesForLoss,decimal,32,True,Total Tackles for a loss of yardage,True,True
+5012000,TeamGame,Sacks,decimal,32,True,Total Quarterback Sacks,True,True
+5012000,TeamGame,PassesDefended,decimal,32,True,Total Passes Defended,True,True
+5012000,TeamGame,FumblesRecovered,decimal,32,True,Total Fumble Recoveries,True,True
+5012000,TeamGame,FumbleReturnTouchdowns,decimal,32,True,Total Fumbles Recovered and returned for a touchdown,True,True
+5012000,TeamGame,QuarterbackHurries,decimal,32,True,Total Quarterback Hurries. NOTE: This field is deprecated as of 2021.,True,True
+5012000,TeamGame,Fumbles,decimal,32,True,Total Fumbles,True,True
+5012000,TeamGame,FumblesLost,decimal,32,True,Total Fumbles Lost,True,True
+5013000,PlayerSeason,StatID,integer,32,False,The unique ID of the stats associated with the player in this season,False,False
+5013000,PlayerSeason,TeamID,integer,32,True,The unique ID of the team associated with this player,False,False
+5013000,PlayerSeason,PlayerID,integer,32,True,The unique ID of the player as assigned by SportsDataIO. Note: this ID remains with the player their entire collegiate career,False,False
+5013000,PlayerSeason,SeasonType,integer,32,True,The type of season that this record corresponds to (1=Regular Season; 2=Preseason; 3=Postseason; 4=Offseason; 5=AllStar).,True,False
+5013000,PlayerSeason,Season,integer,32,True,The college football season of the game,False,False
+5013000,PlayerSeason,Name,string,50,True,The player's full name,False,False
+5013000,PlayerSeason,Team,string,10,True,The abbreviation [Key] of the team that the player is on,False,False
+5013000,PlayerSeason,Position,string,10,True,Player's position in the starting lineup (if started); otherwise the position he substituted for,True,False
+5013000,PlayerSeason,PositionCategory,string,10,True,The category (Offense; Defense or Special Teams) of the players position (OFF; DEF; ST),True,False
+5013000,PlayerSeason,GlobalTeamID,integer,32,True,A globally unique ID for the player's team. Note: This value is guaranteed to be unique across all sports/leagues.,False,False
+5013000,PlayerSeason,Updated,datetime,,True,The updated date and time of the stat.,True,False
+5013000,PlayerSeason,Created,datetime,,True,The date and time of the created stat.,True,False
+5013000,PlayerSeason,Games,integer,32,True,Indicates whether or not a player has recorded any stats for a given game.,True,False
+5013000,PlayerSeason,FantasyPoints,decimal,32,True,Total fantasy points,True,True
+5013000,PlayerSeason,PassingAttempts,decimal,32,True,Total passing attempts,True,True
+5013000,PlayerSeason,PassingCompletions,decimal,32,True,Total passing completions,True,True
+5013000,PlayerSeason,PassingYards,decimal,32,True,Total passing yards,True,True
+5013000,PlayerSeason,PassingCompletionPercentage,decimal,32,True,Total passing completion percentage,True,True
+5013000,PlayerSeason,PassingYardsPerAttempt,decimal,32,True,Total passing yards per attempts,True,True
+5013000,PlayerSeason,PassingYardsPerCompletion,decimal,32,True,Total passing yards per completion,True,True
+5013000,PlayerSeason,PassingTouchdowns,decimal,32,True,Total passing touchdowns,True,True
+5013000,PlayerSeason,PassingInterceptions,decimal,32,True,Total passing interceptions,True,True
+5013000,PlayerSeason,PassingRating,decimal,32,True,Total passing rating,True,True
+5013000,PlayerSeason,RushingAttempts,decimal,32,True,Total rushing attempts,True,True
+5013000,PlayerSeason,RushingYards,decimal,32,True,Total rushing yards,True,True
+5013000,PlayerSeason,RushingYardsPerAttempt,decimal,32,True,Total rushing yards per attempt,True,True
+5013000,PlayerSeason,RushingTouchdowns,decimal,32,True,Total rushing touchdowns,True,True
+5013000,PlayerSeason,RushingLong,decimal,32,True,Longest rushing attempt,True,True
+5013000,PlayerSeason,Receptions,decimal,32,True,Total receptions,True,True
+5013000,PlayerSeason,ReceivingYards,decimal,32,True,Total receiving yards,True,True
+5013000,PlayerSeason,ReceivingYardsPerReception,decimal,32,True,Total receiving yards per reception,True,True
+5013000,PlayerSeason,ReceivingTouchdowns,decimal,32,True,Total receiving touchdowns,True,True
+5013000,PlayerSeason,ReceivingLong,decimal,32,True,Long receiving reception,True,True
+5013000,PlayerSeason,PuntReturns,decimal,32,True,Total punt returns,True,True
+5013000,PlayerSeason,PuntReturnYards,decimal,32,True,Total punt return yards,True,True
+5013000,PlayerSeason,PuntReturnYardsPerAttempt,decimal,32,True,Total punt return yards per attempt,True,True
+5013000,PlayerSeason,PuntReturnTouchdowns,decimal,32,True,Total punt return touchdowns,True,True
+5013000,PlayerSeason,PuntReturnLong,decimal,32,True,Longest punt return,True,True
+5013000,PlayerSeason,KickReturns,decimal,32,True,Total kick returns,True,True
+5013000,PlayerSeason,KickReturnYards,decimal,32,True,Total kick return yards,True,True
+5013000,PlayerSeason,KickReturnYardsPerAttempt,decimal,32,True,Total kick return yards per attempt,True,True
+5013000,PlayerSeason,KickReturnTouchdowns,decimal,32,True,Total kick return touchdowns,True,True
+5013000,PlayerSeason,KickReturnLong,decimal,32,True,Longest kick return ,True,True
+5013000,PlayerSeason,Punts,decimal,32,True,Total punts,True,True
+5013000,PlayerSeason,PuntYards,decimal,32,True,Total punt yards,True,True
+5013000,PlayerSeason,PuntAverage,decimal,32,True,Total punt average,True,True
+5013000,PlayerSeason,PuntLong,decimal,32,True,Longest punt,True,True
+5013000,PlayerSeason,FieldGoalsAttempted,decimal,32,True,Total field goals attempted,True,True
+5013000,PlayerSeason,FieldGoalsMade,decimal,32,True,Total field goals made,True,True
+5013000,PlayerSeason,FieldGoalPercentage,decimal,32,True,Total field goal percentage,True,True
+5013000,PlayerSeason,FieldGoalsLongestMade,decimal,32,True,Longest field goal made,True,True
+5013000,PlayerSeason,ExtraPointsAttempted,decimal,32,True,Total extra points attempted,True,True
+5013000,PlayerSeason,ExtraPointsMade,decimal,32,True,Total extra points made,True,True
+5013000,PlayerSeason,Interceptions,decimal,32,True,Total interceptions,True,True
+5013000,PlayerSeason,InterceptionReturnYards,decimal,32,True,Total interception return yards,True,True
+5013000,PlayerSeason,InterceptionReturnTouchdowns,decimal,32,True,Total interception return touchdowns,True,True
+5013000,PlayerSeason,SoloTackles,decimal,32,True,Total Solo Tackles,True,True
+5013000,PlayerSeason,AssistedTackles,decimal,32,True,Total Assisted Tackles,True,True
+5013000,PlayerSeason,TacklesForLoss,decimal,32,True,Total Tackles for a loss of yardage,True,True
+5013000,PlayerSeason,Sacks,decimal,32,True,Total Quarterback Sacks,True,True
+5013000,PlayerSeason,PassesDefended,decimal,32,True,Total Passes Defended,True,True
+5013000,PlayerSeason,FumblesRecovered,decimal,32,True,Total Fumble Recoveries,True,True
+5013000,PlayerSeason,FumbleReturnTouchdowns,decimal,32,True,Total Fumbles Recovered and returned for a touchdown,True,True
+5013000,PlayerSeason,QuarterbackHurries,decimal,32,True,Total Quarterback Hurries. NOTE: This field is deprecated as of 2021.,True,True
+5013000,PlayerSeason,Fumbles,decimal,32,True,Total Fumbles,True,True
+5013000,PlayerSeason,FumblesLost,decimal,32,True,Total Fumbles Lost,True,True
+5014000,TeamSeason,StatID,integer,32,False,The unique ID of the stats associated with the team in this season,False,False
+5014000,TeamSeason,TeamID,integer,32,True,The unique ID of the team,True,False
+5014000,TeamSeason,SeasonType,integer,32,True,The type of season that this record corresponds to (1=Regular Season; 2=Preseason; 3=Postseason; 4=Offseason; 5=AllStar).,True,False
+5014000,TeamSeason,Season,integer,32,True,The college football season of the game,False,False
+5014000,TeamSeason,Name,string,50,True,The team's full name,False,False
+5014000,TeamSeason,Team,string,10,True,The abbreviation [Key] of the team,False,False
+5014000,TeamSeason,Wins,integer,32,True,Total number of wins by the team in the season,False,False
+5014000,TeamSeason,Losses,integer,32,True,The total number of losses by the team in the season,False,False
+5014000,TeamSeason,PointsFor,integer,32,True,Total points scored by the team in the season,False,False
+5014000,TeamSeason,PointsAgainst,integer,32,True,Total points scored against the team in the season,False,False
+5014000,TeamSeason,ConferenceWins,integer,32,True,The total number of conference wins by the team,False,False
+5014000,TeamSeason,ConferenceLosses,integer,32,True,The total number of conference losses by the team,False,False
+5014000,TeamSeason,ConferencePointsFor,integer,32,True,Total conference points scored by the team,False,False
+5014000,TeamSeason,ConferencePointsAgainst,integer,32,True,Total conference points against the team,False,False
+5014000,TeamSeason,HomeWins,integer,32,True,Total home wins by the team in the season,False,False
+5014000,TeamSeason,HomeLosses,integer,32,True,Total home losses by the team in the season,False,False
+5014000,TeamSeason,RoadWins,integer,32,True,Total road wins by the team in the season,False,False
+5014000,TeamSeason,RoadLosses,integer,32,True,Total road losses by the team in the season,False,False
+5014000,TeamSeason,Streak,integer,32,True,The current winning or losing streak of the team in the season. A positive number indicates a winning streak; and a negative number indicates a losing streak.,False,False
+5014000,TeamSeason,Score,integer,32,True,Total points scored by the team in the season,False,False
+5014000,TeamSeason,OpponentScore,integer,32,True,Total points scored by the opponent team,False,False
+5014000,TeamSeason,FirstDowns,integer,32,True,Total first downs converted by the team in the season,False,True
+5014000,TeamSeason,ThirdDownConversions,integer,32,True,Total third down conversions by the team in the season,False,True
+5014000,TeamSeason,ThirdDownAttempts,integer,32,True,Total third down attempts by the team in the season,False,True
+5014000,TeamSeason,FourthDownConversions,integer,32,True,Total fourth down conversions by the team in the season,False,True
+5014000,TeamSeason,FourthDownAttempts,integer,32,True,Total fourth down attempts by the team in the season,False,True
+5014000,TeamSeason,Penalties,integer,32,True,Total penalties committed by the team in the season,False,True
+5014000,TeamSeason,PenaltyYards,integer,32,True,Total penalties yards enforced against the team in the season,False,True
+5014000,TeamSeason,TimeOfPossessionMinutes,integer,32,True,Total number of minutes the team possessed the ball for in the season,False,True
+5014000,TeamSeason,TimeOfPossessionSeconds,integer,32,True,Total number of seconds the team possessed the ball for in the season,False,True
+5014000,TeamSeason,GlobalTeamID,integer,32,True,A globally unique ID for the team. Note: This value is guaranteed to be unique across all sports/leagues.,False,False
+5014000,TeamSeason,ConferenceRank,integer,32,True,This field is deprecated.,True,False
+5014000,TeamSeason,DivisionRank,integer,32,True,This field is deprecated.,True,False
+5014000,TeamSeason,Updated,datetime,,True,The updated date and time of the stat.,True,False
+5014000,TeamSeason,Created,datetime,,True,The date and time of the created stat.,True,False
+5014000,TeamSeason,Games,integer,32,True,Indicates whether or not a player has recorded any stats for a given game.,True,False
+5014000,TeamSeason,FantasyPoints,decimal,32,True,Total fantasy points,True,True
+5014000,TeamSeason,PassingAttempts,decimal,32,True,Total passing attempts,True,True
+5014000,TeamSeason,PassingCompletions,decimal,32,True,Total passing completions,True,True
+5014000,TeamSeason,PassingYards,decimal,32,True,Total passing yards,True,True
+5014000,TeamSeason,PassingCompletionPercentage,decimal,32,True,Total passing completion percentage,True,True
+5014000,TeamSeason,PassingYardsPerAttempt,decimal,32,True,Total passing yards per attempts,True,True
+5014000,TeamSeason,PassingYardsPerCompletion,decimal,32,True,Total passing yards per completion,True,True
+5014000,TeamSeason,PassingTouchdowns,decimal,32,True,Total passing touchdowns,True,True
+5014000,TeamSeason,PassingInterceptions,decimal,32,True,Total passing interceptions,True,True
+5014000,TeamSeason,PassingRating,decimal,32,True,Total passing rating,True,True
+5014000,TeamSeason,RushingAttempts,decimal,32,True,Total rushing attempts,True,True
+5014000,TeamSeason,RushingYards,decimal,32,True,Total rushing yards,True,True
+5014000,TeamSeason,RushingYardsPerAttempt,decimal,32,True,Total rushing yards per attempt,True,True
+5014000,TeamSeason,RushingTouchdowns,decimal,32,True,Total rushing touchdowns,True,True
+5014000,TeamSeason,RushingLong,decimal,32,True,Longest rushing attempt,True,True
+5014000,TeamSeason,Receptions,decimal,32,True,Total receptions,True,True
+5014000,TeamSeason,ReceivingYards,decimal,32,True,Total receiving yards,True,True
+5014000,TeamSeason,ReceivingYardsPerReception,decimal,32,True,Total receiving yards per reception,True,True
+5014000,TeamSeason,ReceivingTouchdowns,decimal,32,True,Total receiving touchdowns,True,True
+5014000,TeamSeason,ReceivingLong,decimal,32,True,Long receiving reception,True,True
+5014000,TeamSeason,PuntReturns,decimal,32,True,Total punt returns,True,True
+5014000,TeamSeason,PuntReturnYards,decimal,32,True,Total punt return yards,True,True
+5014000,TeamSeason,PuntReturnYardsPerAttempt,decimal,32,True,Total punt return yards per attempt,True,True
+5014000,TeamSeason,PuntReturnTouchdowns,decimal,32,True,Total punt return touchdowns,True,True
+5014000,TeamSeason,PuntReturnLong,decimal,32,True,Longest punt return,True,True
+5014000,TeamSeason,KickReturns,decimal,32,True,Total kick returns,True,True
+5014000,TeamSeason,KickReturnYards,decimal,32,True,Total kick return yards,True,True
+5014000,TeamSeason,KickReturnYardsPerAttempt,decimal,32,True,Total kick return yards per attempt,True,True
+5014000,TeamSeason,KickReturnTouchdowns,decimal,32,True,Total kick return touchdowns,True,True
+5014000,TeamSeason,KickReturnLong,decimal,32,True,Longest kick return ,True,True
+5014000,TeamSeason,Punts,decimal,32,True,Total punts,True,True
+5014000,TeamSeason,PuntYards,decimal,32,True,Total punt yards,True,True
+5014000,TeamSeason,PuntAverage,decimal,32,True,Total punt average,True,True
+5014000,TeamSeason,PuntLong,decimal,32,True,Longest punt,True,True
+5014000,TeamSeason,FieldGoalsAttempted,decimal,32,True,Total field goals attempted,True,True
+5014000,TeamSeason,FieldGoalsMade,decimal,32,True,Total field goals made,True,True
+5014000,TeamSeason,FieldGoalPercentage,decimal,32,True,Total field goal percentage,True,True
+5014000,TeamSeason,FieldGoalsLongestMade,decimal,32,True,Longest field goal made,True,True
+5014000,TeamSeason,ExtraPointsAttempted,decimal,32,True,Total extra points attempted,True,True
+5014000,TeamSeason,ExtraPointsMade,decimal,32,True,Total extra points made,True,True
+5014000,TeamSeason,Interceptions,decimal,32,True,Total interceptions,True,True
+5014000,TeamSeason,InterceptionReturnYards,decimal,32,True,Total interception return yards,True,True
+5014000,TeamSeason,InterceptionReturnTouchdowns,decimal,32,True,Total interception return touchdowns,True,True
+5014000,TeamSeason,SoloTackles,decimal,32,True,Total Solo Tackles,True,True
+5014000,TeamSeason,AssistedTackles,decimal,32,True,Total Assisted Tackles,True,True
+5014000,TeamSeason,TacklesForLoss,decimal,32,True,Total Tackles for a loss of yardage,True,True
+5014000,TeamSeason,Sacks,decimal,32,True,Total Quarterback Sacks,True,True
+5014000,TeamSeason,PassesDefended,decimal,32,True,Total Passes Defended,True,True
+5014000,TeamSeason,FumblesRecovered,decimal,32,True,Total Fumble Recoveries,True,True
+5014000,TeamSeason,FumbleReturnTouchdowns,decimal,32,True,Total Fumbles Recovered and returned for a touchdown,True,True
+5014000,TeamSeason,QuarterbackHurries,decimal,32,True,Total Quarterback Hurries. NOTE: This field is deprecated as of 2021.,True,True
+5014000,TeamSeason,Fumbles,decimal,32,True,Total Fumbles,True,True
+5014000,TeamSeason,FumblesLost,decimal,32,True,Total Fumbles Lost,True,True
+5019000,BoxScore,Game,Game,,True,The game details of this box score,True,False
+5019000,BoxScore,Periods,Period[],,True,The details of the periods (quarters & overtime) for this box score,False,False
+5019000,BoxScore,PlayerGames,PlayerGame[],,True,The player game stats of this box score,True,False
+5019000,BoxScore,TeamGames,TeamGame[],,True,The team game stats of this box score,True,False
+5019000,BoxScore,ScoringPlays,ScoringPlay[],,True,The plays in which either team scoring during the game,True,False
+5020000,ScoringPlay,ScoringPlayID,integer,32,False,The unique id of the scoring play,True,False
+5020000,ScoringPlay,GameID,integer,32,False,The unique ID of this game,False,False
+5020000,ScoringPlay,Period,string,10,False,The period of the score,True,False
+5020000,ScoringPlay,TimeRemainingMinutes,integer,32,True,Total number of minutes remaining in the quarter when the scoring play happened,False,True
+5020000,ScoringPlay,TimeRemainingSeconds,integer,32,True,Total number of seconds remaining in the quarter when the scoring play happened,False,True
+5020000,ScoringPlay,Description,string,500,False,The description of the play,False,True
+5020000,ScoringPlay,DriveSummary,string,100,False,The summary of the drive in plays; yards and time elapsed,False,True
+5020000,ScoringPlay,HomeTeamScore,integer,32,True,The score of the home team after the play,True,True
+5020000,ScoringPlay,AwayTeamScore,integer,32,True,Total number of points of the away team after the play,False,True
+5020000,ScoringPlay,ScoringTeamID,integer,32,True,The ID of the team who scord on the play,False,False
+5020000,ScoringPlay,ScoringType,string,20,False,The type of score on the play (ex. TD; FG; SF; D2P for Touchdown; Field Goal; Safety; Defensive 2pt conversion respectively),False,True
+5020000,ScoringPlay,Sequence,integer,20,False,The order in which the scoring plays happened,False,True
+5021000,GameInfo,GameId,integer,32,False,The unique ID of this game,False,False
+5021000,GameInfo,Season,integer,32,False,The college football season of the game,False,False
+5021000,GameInfo,SeasonType,integer,32,False,The type of season that this record corresponds to (1=Regular Season; 2=Preseason; 3=Postseason; 4=Offseason; 5=AllStar).,True,False
+5021000,GameInfo,Week,integer,32,True,The week of the game,False,False
+5021000,GameInfo,Day,date,,True,The date of the game,False,False
+5021000,GameInfo,DateTime,datetime,,True,The date and time of the game (in US Eastern Time),False,False
+5021000,GameInfo,Status,string,10,True,The status of the game. Possible values include: Scheduled; InProgress; Final; F/OT; Suspended; Postponed; Delayed; Canceled; Forfeit,False,False
+5021000,GameInfo,AwayTeamId,integer,32,True,The unique ID of the away team,False,False
+5021000,GameInfo,HomeTeamId,integer,32,True,The unique ID of the home team,False,False
+5021000,GameInfo,AwayTeamName,string,50,True,The name of the away team,False,False
+5021000,GameInfo,HomeTeamName,string,50,True,The name of the home team,False,False
+5021000,GameInfo,GlobalGameId,integer,32,False,A globally unique ID for this game.  Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5021000,GameInfo,GlobalAwayTeamId,integer,32,True,A globally unique ID for the away team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5021000,GameInfo,GlobalHomeTeamId,integer,32,True,A globally unique ID for the home team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5021000,GameInfo,PregameOdds,GameOdd[],,True,List of Pregame Odds from different sportsbooks,True,False
+5021000,GameInfo,LiveOdds,GameOdd[],,True,List of Live Odds from different sportsbooks,True,False
+5021000,GameInfo,HomeTeamScore,integer,,True,Score of the home team (updated after game ends to allow for resolving bets),True,True
+5021000,GameInfo,AwayTeamScore,integer,,True,Score of the away team (updated after game ends to allow for resolving bets),True,True
+5021000,GameInfo,TotalScore,integer,,True,The total points scored by both teams in the game tied to this event (updated after game ends to allow for resolving bets),False,True
+5021000,GameInfo,HomeRotationNumber,integer,32,True,Rotation number of home team for this game,True,True
+5021000,GameInfo,AwayRotationNumber,integer,32,True,Rotation number of away team for this game,True,True
+5021000,GameInfo,AlternateMarketPregameOdds,GameOdd[],,True,List of Alternate Market Pregame Odds from different sportsbooks,True,False
+5022000,GameOdd,GameOddId,integer,32,False,Unique ID of this odd,True,False
+5022000,GameOdd,Sportsbook,string,25,False,The name of the sportsbook,False,True
+5022000,GameOdd,GameId,integer,32,False,The unique ID of this game,False,False
+5022000,GameOdd,Created,datetime,,False,The timestamp of when these odds were first created (in US Eastern Time),False,False
+5022000,GameOdd,Updated,datetime,,False,The timestamp of when these odds were last updated; based on US Eastern Time (EST/EDT). If these are the latest odds for this game; and they have not been updated within the last few minutes; then it indicates that there were problems connecting to the sportsbook,True,False
+5022000,GameOdd,HomeMoneyLine,integer,32,True,The sportsbook's moneyline for the home team,False,True
+5022000,GameOdd,AwayMoneyLine,integer,32,True,The sportsbook's moneyline for the away team,False,True
+5022000,GameOdd,DrawMoneyLine,integer,32,True,The sportsbook's moneyline for a draw,False,True
+5022000,GameOdd,HomePointSpread,decimal,32,True,The sportsbook's point spread for the home team,True,True
+5022000,GameOdd,AwayPointSpread,decimal,32,True,The sportsbook's point spread for the away team,True,True
+5022000,GameOdd,HomePointSpreadPayout,integer,32,True,The sportsbook's point spread payout for the home team,True,True
+5022000,GameOdd,AwayPointSpreadPayout,integer,32,True,The sportsbook's point spread payout for the away team,True,True
+5022000,GameOdd,OverUnder,decimal,32,True,The sportsbook's total points line at game start,False,True
+5022000,GameOdd,OverPayout,integer,32,True,The sportsbook's payout for the over in the total points line,False,True
+5022000,GameOdd,UnderPayout,integer,32,True,The sportsbook's payout for the under,True,True
+5022000,GameOdd,SportsbookId,integer,32,True,The unique ID of the sportsbook,False,False
+5022000,GameOdd,OddType,string,32,True,The market type of the odd (ex: live; pregame; etc),False,False
+5022000,GameOdd,SportsbookUrl,string,500,True,The URL for sportsbook event,True,False
+5022000,GameOdd,Unlisted,datetime,,True,The timestamp of when these odds were no longer seen (US Eastern Time),False,False
+5047000,GameOddOutcome,GameOddId,integer,32,False,Unique ID of this odd,True,False
+5047000,GameOddOutcome,GameOddResultTypeId,integer,32,True,The GameOddResultType of this outcome as an integer,True,False
+5047000,GameOddOutcome,GameOddResultType,string,100,True,The string identifier of the GameOddResultType of this outcome (e.g. Won; Lost; Push; Not Resulted; Incomplete),True,False
+5047000,GameOddOutcome,OddType,string,500,True,The market type of the odd (ex: live; pregame; 1st-5th Inning; etc),True,False
+5047000,GameOddOutcome,GameOddType,string,100,True,The GameOddOutcomeType of this outcome as a string,True,False
+5047000,GameOddOutcome,BetValue,decimal,32,True,The value that was bet in this outcome (if applicable),True,False
+5047000,GameOddOutcome,ActualValue,decimal,32,True,The value that actually occurred in game (if applicable),True,False
+5048000,GameOddResult,GameOddID,integer,32,False,Unique ID of this odd,True,False
+5048000,GameOddResult,Sportsbook,string,25,False,The name of the sportsbook,False,True
+5048000,GameOddResult,GameID,integer,32,False,The unique ID of this game,False,False
+5048000,GameOddResult,Created,datetime,,False,The timestamp of when these odds were first created (in US Eastern Time),False,False
+5048000,GameOddResult,Updated,datetime,,False,The timestamp of when these odds were last updated; based on US Eastern Time (EST/EDT). If these are the latest odds for this game; and they have not been updated within the last few minutes; then it indicates that there were problems connecting to the sportsbook,True,False
+5048000,GameOddResult,HomeMoneyLine,integer,32,True,The sportsbook's moneyline for the home team,False,True
+5048000,GameOddResult,AwayMoneyLine,integer,32,True,The sportsbook's moneyline for the away team,False,True
+5048000,GameOddResult,DrawMoneyLine,integer,32,True,The sportsbook's moneyline for a draw,False,True
+5048000,GameOddResult,HomePointSpread,decimal,32,True,The sportsbook's point spread for the home team,True,True
+5048000,GameOddResult,AwayPointSpread,decimal,32,True,The sportsbook's point spread for the away team,True,True
+5048000,GameOddResult,HomePointSpreadPayout,integer,32,True,The sportsbook's point spread payout for the home team,True,True
+5048000,GameOddResult,AwayPointSpreadPayout,integer,32,True,The sportsbook's point spread payout for the away team,True,True
+5048000,GameOddResult,OverUnder,decimal,32,True,The sportsbook's total points line at game start,False,True
+5048000,GameOddResult,OverPayout,integer,32,True,The sportsbook's payout for the over in the total points line,False,True
+5048000,GameOddResult,UnderPayout,integer,32,True,The sportsbook's payout for the under,True,True
+5048000,GameOddResult,SportsbookID,integer,32,True,The unique ID of the sportsbook,False,False
+5048000,GameOddResult,SportsbookUrl,string,500,True,The URL for sportsbook event,True,False
+5048000,GameOddResult,OddType,string,32,True,The market type of the odd (ex: live; pregame; 1st-5th Inning; etc),False,False
+5048000,GameOddResult,GameOddOutcomeResults,GameOddOutcome[],,True,The list of outcomes under this Game Odd Record with results,True,False
+5049000,GameInfoResult,GameID,integer,32,False,The unique ID of this game,False,False
+5049000,GameInfoResult,Season,integer,32,False,The college football season of the game,False,False
+5049000,GameInfoResult,SeasonType,integer,32,False,The type of season that this record corresponds to (1=Regular Season; 2=Preseason; 3=Postseason; 4=Offseason; 5=AllStar).,True,False
+5049000,GameInfoResult,Week,integer,32,True,The week of the game related to this result,False,False
+5049000,GameInfoResult,Day,date,,True,The date of the game,False,False
+5049000,GameInfoResult,DateTime,datetime,,True,The date and time of the game (in US Eastern Time),False,False
+5049000,GameInfoResult,Status,string,25,True,The status of the game. Possible values include: Scheduled; InProgress; Final; F/OT; Suspended; Postponed; Delayed; Canceled; Forfeit,False,False
+5049000,GameInfoResult,AwayTeamID,integer,32,True,The unique ID of the away team,False,False
+5049000,GameInfoResult,HomeTeamID,integer,32,True,The unique ID of the home team,False,False
+5049000,GameInfoResult,AwayTeamName,string,50,True,The name of the away team,False,False
+5049000,GameInfoResult,HomeTeamName,string,50,True,The name of the home team,False,False
+5049000,GameInfoResult,GlobalGameID,integer,32,True,A globally unique ID for this game. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5049000,GameInfoResult,GlobalAwayTeamID,integer,32,True,A globally unique ID for the away team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5049000,GameInfoResult,GlobalHomeTeamID,integer,32,True,A globally unique ID for the home team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5049000,GameInfoResult,PregameOdds,GameOddResult[],,True,List of Pregame Odds from different sportsbooks with results,True,False
+5049000,GameInfoResult,HomeTeamScore,integer,32,True,Score of the home team (updated after game ends to allow for resolving bets),True,True
+5049000,GameInfoResult,AwayTeamScore,integer,32,True,Score of the away team (updated after game ends to allow for resolving bets),True,True
+5049000,GameInfoResult,TotalScore,integer,32,True,The total points scored by both teams in the game tied to this event (updated after game ends to allow for resolving bets),False,True
+5049000,GameInfoResult,HomeRotationNumber,integer,32,True,Rotation number of home team for this game,True,True
+5049000,GameInfoResult,AwayRotationNumber,integer,32,True,Rotation number of away team for this game,True,True
+5049000,GameInfoResult,AlternateMarketPregameOdds,GameOddResult[],,True,List of Alternate Market Pregame Odds from different sportsbooks with results,True,False
+5049000,GameInfoResult,Period,string,10,True,The current quarter in the game (Possible Values: 1; 2; 3; 4; Half; OT; F; F/OT; NULL),False,False
+5049000,GameInfoResult,TimeRemainingMinutes,integer,32,True,Total number of minutes remaining in the quarter,False,False
+5049000,GameInfoResult,TimeRemainingSeconds,integer,32,True,Total number of seconds remaining in the quarter,False,False
+5049000,GameInfoResult,Periods,Period[],,True,The details of the periods (quarters & overtime) for this game,True,False
+5049000,GameInfoResult,IsClosed,boolean,,False,Indicates whether the game is over and the final score has been verified,False,False
+5049000,GameInfoResult,LiveOdds,GameOddResult[],,True,List of Live Odds from different sportsbooks with results,False,False
+5023000,DfsSlate,SlateID,integer,32,False,The unique ID of the slate,False,False
+5023000,DfsSlate,Operator,string,20,True,The name of the operator who is running contests for this slate.  Possible values: FanDuel; DraftKings; Yahoo; FantasyDraft; etc.,False,False
+5023000,DfsSlate,OperatorSlateID,integer,32,True,Unique ID of a slate (assigned by the operator).,True,False
+5023000,DfsSlate,OperatorName,string,50,True,The name of the slate (assigned by the operator). Possible values: Main; Express; Arcade; Late Night; etc.,True,False
+5023000,DfsSlate,OperatorDay,date,,True,The day (in EST/EDT) that the slate begins (assigned by the operator).,True,False
+5023000,DfsSlate,OperatorStartTime,datetime,,True,The date/time (in EST/EDT) that the slate begins (assigned by the operator).,True,False
+5023000,DfsSlate,NumberOfGames,integer,32,True,The number of actual games that this slate covers.,True,False
+5023000,DfsSlate,IsMultiDaySlate,boolean,,True,Whether this slate uses games that take place on different days,False,False
+5023000,DfsSlate,RemovedByOperator,boolean,,True,Indicates whether this slate was removed/deleted by the operator,False,False
+5023000,DfsSlate,OperatorGameType,string,50,True,The game type of the slate. Will often be null as most operators only have one game type.,True,False
+5023000,DfsSlate,DfsSlateGames,DfsSlateGame[],,True,The games that are included in this slate,True,False
+5023000,DfsSlate,DfsSlatePlayers,DfsSlatePlayer[],,True,The players that are included in this slate,True,False
+5023000,DfsSlate,SlateRosterSlots,string[],,True,The positions that need to be filled for this particular slate,True,False
+5023000,DfsSlate,SalaryCap,integer,,True,The salary cap for the current slate (is null for slates with no salary cap such a Tiers gametypes),True,False
+5024000,DfsSlateGame,SlateGameID,integer,32,False,The unique ID of a SlateGame as assigned by SportsDataIO,False,False
+5024000,DfsSlateGame,SlateID,integer,32,False,The unique ID of the slate that this SlateGame refers to,False,False
+5024000,DfsSlateGame,GameID,integer,32,True,The unique ID of this game that this SlateGame refers to,False,False
+5024000,DfsSlateGame,Game,Game,,True,The details of the game that this SlateGame refers to,False,False
+5024000,DfsSlateGame,OperatorGameID,integer,32,True,Unique ID of a SlateGame (assigned by the operator),False,False
+5024000,DfsSlateGame,RemovedByOperator,boolean,,True,Indicates whether this slate was removed/deleted by the operator,False,True
+5025000,DfsSlatePlayer,SlatePlayerID,integer,32,False,The unique ID of a SlatePlayer as assigned by SportsDataIO,False,False
+5025000,DfsSlatePlayer,SlateID,integer,32,False,The unique ID of the slate that this SlateGame refers to,False,False
+5025000,DfsSlatePlayer,SlateGameID,integer,32,True,The unique ID of the SlateGame that this SlatePlayer refers to as assigned by SportsDataIO,False,False
+5025000,DfsSlatePlayer,PlayerID,integer,32,True,The unique ID of the player as assigned by SportsDataIO that this slate player refers to. Note: this ID remains with the player their entire collegiate career,False,False
+5025000,DfsSlatePlayer,PlayerGameProjectionStatID,integer,32,True,The SportsDataIO StatID that this SlatePlayer refers to. This points to data in the respective sports' projected player game stats feeds.,True,False
+5025000,DfsSlatePlayer,OperatorPlayerID,string,25,True,Unique ID of the Player (assigned by the operator).,True,False
+5025000,DfsSlatePlayer,OperatorSlatePlayerID,string,50,True,Unique ID of the SlatePlayer (assigned by the operator).,True,False
+5025000,DfsSlatePlayer,OperatorPlayerName,string,50,True,The player's name (assigned by the operator).,True,False
+5025000,DfsSlatePlayer,OperatorPosition,string,10,True,The player's eligible positions for the contest (assigned by the operator).,True,False
+5025000,DfsSlatePlayer,OperatorSalary,integer,32,True,The player's salary for the contest (assigned by the operator).,True,False
+5025000,DfsSlatePlayer,OperatorRosterSlots,string[],,True,The player's eligible positions to be played in the contest (assigned by the operator). This would include UTIL; etc plays for those that are eligible.,True,False
+5025000,DfsSlatePlayer,RemovedByOperator,boolean,,True,Indicates whether this slate was removed/deleted by the operator,False,True
+5025000,DfsSlatePlayer,Team,string,10,True,The abbreviation [Key] of the team that the player is on. Note: If this player is a free agent; this field is NULL,False,False
+5025000,DfsSlatePlayer,TeamID,integer,32,True,The unique ID of the team associated with this player,False,False
+5027000,TeamTrends,Team,string,50,True,The abbreviation [Key] of the team,False,False
+5027000,TeamTrends,TeamID,integer,32,True,The unique ID of the team,False,False
+5027000,TeamTrends,UpcomingGame,Game,,True,The most recent future game for the team,False,False
+5027000,TeamTrends,TeamGameTrends,TeamGameTrends[],,True,The collection of Game Trends for this team,True,False
+5028000,TeamGameTrends,Scope,string,50,False,The type of Trend (e.g. Last 5 games; Last 10 games; Last 5 home games; etc.),True,False
+5028000,TeamGameTrends,TeamID,integer,32,False,The unique ID of the team,False,False
+5028000,TeamGameTrends,Team,string,50,False,The abbreviation [Key] of the team,False,False
+5028000,TeamGameTrends,OpponentID,integer,32,True,The unique ID of the team's opponent,False,False
+5028000,TeamGameTrends,Opponent,string,50,True,The abreviation [Key] of the opponent team,False,False
+5028000,TeamGameTrends,Wins,integer,32,False,Total number of wins by the team relating to the scope. Examples of scopes include: Last 3 Games; Last 5 Home Games; Last 10 Games as Favorite; etc.,False,True
+5028000,TeamGameTrends,Losses,integer,32,False,The total number of losses by the team relating to the scope. Examples of scopes include: Last 3 Games; Last 5 Home Games; Last 10 Games as Favorite; etc.,False,True
+5028000,TeamGameTrends,Ties,integer,32,False,Total number of ties by the team relating to the scope. Examples of scopes include: Last 3 Games; Last 5 Home Games; Last 10 Games as Favorite; etc.,False,True
+5028000,TeamGameTrends,WinsAgainstTheSpread,integer,32,True,Total number of wins against the spread relating to the scope. Examples of scopes include: Last 3 Games; Last 5 Home Games; Last 10 Games as Favorite; etc.,False,True
+5028000,TeamGameTrends,LossesAgainstTheSpread,integer,32,True,Losses by the team against the spread relating to the scope. Examples of scopes include: Last 3 Games; Last 5 Home Games; Last 10 Games as Favorite; etc.,False,True
+5028000,TeamGameTrends,PushesAgainstTheSpread,integer,32,True,Total number of pushes against the spread relating to the scope. Examples of scopes include: Last 3 Games; Last 5 Home Games; Last 10 Games as Favorite; etc.,False,True
+5028000,TeamGameTrends,Overs,integer,32,True,Amount of times the total score goes over the total points line,False,True
+5028000,TeamGameTrends,Unders,integer,32,True,Amount of times the total score goes under the total points line,False,True
+5028000,TeamGameTrends,OverUnderPushes,integer,32,True,Amount of times the total score pushes the total points line,False,True
+5028000,TeamGameTrends,AverageScore,decimal,32,True,The average points scored by the team,False,True
+5028000,TeamGameTrends,AverageOpponentScore,decimal,32,True,The average points scored by the opposing team,False,True
+5029000,MatchupTrends,UpcomingGame,Game,,True,The most recent future game for the team and their opponent,False,False
+5029000,MatchupTrends,TeamTrends,TeamTrends[],,True,The collection of team trends between each team,True,False
+5029000,MatchupTrends,TeamMatchupTrends,TeamGameTrends[],,True,The collection of team game trends against the opponent,False,False
+5029000,MatchupTrends,OpponentMatchupTrends,TeamGameTrends[],,True,The collection of opponent game trends against team,True,False
+5029000,MatchupTrends,PreviousGames,Game[],,True,The collection of last 10 game scores between each team,True,False
+5030000,BettingEvent,BettingEventID,int,32,False,The unique ID assocated with the betting event,False,False
+5030000,BettingEvent,Name,string,32,True,The name of this betting event,False,False
+5030000,BettingEvent,Season,int,32,True,The college football season of the game,False,False
+5030000,BettingEvent,BettingEventTypeID,int,32,False,The ID associated with the type of betting event - Game or Future,False,False
+5030000,BettingEvent,BettingEventType,string,32,False,Indicates the type of betting event - Game or Future,False,False
+5030000,BettingEvent,StartDate,datetime,,True,The furthest forward time any book has a market set to close for this betting event,True,False
+5030000,BettingEvent,Created,datetime,,True,The created date of this betting event,True,False
+5030000,BettingEvent,Updated,datetime,,True,The last updated timestamp of this betting event (US Eastern Time),False,False
+5030000,BettingEvent,GameID,int,32,True,The unique ID of this game tied to this event,False,False
+5030000,BettingEvent,GlobalGameID,int,32,True,A globally unique ID for this game tied to this event. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5030000,BettingEvent,GameStatus,string,32,True,The status of the game tied to this event,True,True
+5030000,BettingEvent,AwayTeam,string,32,True,The abbreviation [Key] of the away team tied to this event,False,False
+5030000,BettingEvent,HomeTeam,string,32,True,The abbreviation [Key] of the home team,False,False
+5030000,BettingEvent,AwayTeamID,int,32,True,The unique ID of the away team tied to this event,False,False
+5030000,BettingEvent,HomeTeamID,int,32,True,The unique ID of the home team,False,False
+5030000,BettingEvent,GlobalAwayTeamID,int,32,True,A globally unique ID for the away team tied this event. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5030000,BettingEvent,GlobalHomeTeamID,int,32,True,A globally unique ID for the home team. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5030000,BettingEvent,AwayTeamScore,int,32,True,The away team score of the game tied to this event (post-game),True,True
+5030000,BettingEvent,HomeTeamScore,int,32,True,The home team score of the game tied to this event (postgame),False,True
+5030000,BettingEvent,TotalScore,int,32,True,The total points scored by both teams in the game tied to this event (updated after game ends to allow for resolving bets),False,True
+5030000,BettingEvent,AwayRotationNumber,int,32,True,The away team rotation number of the game tied to this event,True,False
+5030000,BettingEvent,HomeRotationNumber,int,32,True,Rotation number of home team tied to this event,False,False
+5030000,BettingEvent,BettingMarkets,BettingMarket[],32,True,The list of betting markets for this event,True,False
+5030000,BettingEvent,GameStartTime,datetime,32,True,The date and time the connected game starts; where applicable,True,False
+5031000,BettingMarket,BettingMarketID,int,32,False,The unique ID associated with the betting market,False,False
+5031000,BettingMarket,BettingEventID,int,32,False,The unique ID assocated with the betting event,False,False
+5031000,BettingMarket,BettingMarketTypeID,int,32,True,ID that distinguishes the different types of Market Types,False,False
+5031000,BettingMarket,BettingMarketType,string,32,True,The type of Market Type (e.g. Player Prop; Team Prop; Game Prop; etc.),False,False
+5031000,BettingMarket,BettingBetTypeID,int,32,True,The ID associated with the name of the bet type within a market,False,False
+5031000,BettingMarket,BettingBetType,string,32,True,The name of the bet type within a market (e.g. Total Points; Moneyline; Spread; etc.),False,False
+5031000,BettingMarket,BettingPeriodTypeID,int,32,True,The BettingPeriodTypeID of this type of market which we can result,False,False
+5031000,BettingMarket,BettingPeriodType,string,32,True,The BettingPeriodType of this market (e.g. Full Game; 1st Quarter; Overtime; Regular Season),False,False
+5031000,BettingMarket,Name,string,32,True,The generic name of this market,True,False
+5031000,BettingMarket,TeamID,int,32,True,The unique ID of the team associated with this betting market,False,False
+5031000,BettingMarket,TeamKey,string,32,True,The key of the team tied to this market (if applicable),False,False
+5031000,BettingMarket,PlayerID,int,32,True,The unique ID of the player as assigned by SportsDataIO tied this market (if applicable). Note: this ID remains with the player their entire collegiate career,False,False
+5031000,BettingMarket,PlayerName,string,32,True,The name of the player tied to this market (if applicable),True,False
+5031000,BettingMarket,Created,datetime,32,True,The created date of this market,True,False
+5031000,BettingMarket,Updated,datetime,32,True,The last updated timestamp of this market (US Eastern Time),False,False
+5031000,BettingMarket,AvailableSportsbooks,Sportsbook[],32,True,The sportsbooks that have published odds within this market,False,False
+5031000,BettingMarket,AnyBetsAvailable,bool,32,True,A field that returns "True" if there are any available bets to make within the market in question. If there are no bets available to make; the field returns "False",False,False
+5031000,BettingMarket,BettingOutcomes,BettingOutcome[],32,True,The list of betting outcomes from each sportsbook in this market,True,False
+5031000,BettingMarket,ConsensusOutcomes,ConsensusOutcome[],32,True,The single set of consesnus outcomes of this market,True,False
+5031000,BettingMarket,IsArchived,bool,,,Indicates if the BettingOutcomes have been moved to the archives,False,False
+5031000,BettingMarket,ArchiveLocation,string,250,,If IsArchived is true; this returns the URL that can be used to retrieve the archived BettingOutcomes. An API Key and Sportsbook Grouping will be required to retrieve this information. If IsArchived is false; this returns an emtpy string,False,False
+5032000,BettingOutcome,BettingOutcomeID,int,32,True,The unique ID associated with this specific outcome,False,False
+5032000,BettingOutcome,BettingMarketID,int,32,True,The unique ID associated with the betting market,False,False
+5032000,BettingOutcome,SportsBook,Sportsbook,32,True,The sportsbook offering this outcome for betting,True,False
+5032000,BettingOutcome,BettingOutcomeTypeID,int,32,True,The BettingOutcomeTypeID of this outcome,True,False
+5032000,BettingOutcome,BettingOutcomeType,string,32,True,Name of Betting Outcome Type (e.g. Home; Away; Under; Over),False,False
+5032000,BettingOutcome,PayoutAmerican,int,32,True,The american odds payout ,True,True
+5032000,BettingOutcome,PayoutDecimal,decimal,32,True,The decimal odds payout,True,True
+5032000,BettingOutcome,Value,decimal,32,True,The number associated with the outcome (spread; total; etc),False,True
+5032000,BettingOutcome,Participant,string,32,True,The name of the participant (typically team or player) associated with the outcome.  NOTE: This is provided by the sportsbook. In the case of Player odds; we highly recommend using PlayerID as names of players can be inconsistent between sportsbooks.,False,False
+5032000,BettingOutcome,IsAvailable,bool,32,True,Denotes whether or not the betting outcome is currently available,False,False
+5032000,BettingOutcome,IsAlternate,bool,32,True,Denotes whether or not the betting outcome is an alternate line,False,False
+5032000,BettingOutcome,Created,datetime,32,True,The created date of the outcome,True,False
+5032000,BettingOutcome,Updated,datetime,32,True,The last updated timestamp of this outcome (US Eastern Time),False,False
+5032000,BettingOutcome,Unlisted,datetime,32,True,The timestamp of when this outcome was unlisted (no longer available for bets),False,False
+5032000,BettingOutcome,TeamID,int,32,True,The unique ID of the team associated with this betting outcome,False,False
+5032000,BettingOutcome,PlayerID,int,32,True,The unique ID of the player as assigned by SportsDataIO tied this outcome (if applicable). Note: this ID remains with the player their entire collegiate career,False,False
+5032000,BettingOutcome,GlobalTeamID,int,32,True,A globally unique ID for the team tied this outcome. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5032000,BettingOutcome,SportsbookUrl,string,500,True,The URL for sportsbook event,True,True
+5032000,BettingOutcome,IsInPlay,bool,1,True,Denotes whether the betting outcome is a live line (i.e. the outcome was created after the start of the game),False,False
+5032000,BettingOutcome,SportsbookMarketID,string,100,True,The market ID of a given sportsbook when available for deep links,False,True
+5032000,BettingOutcome,SportsbookOutcomeID,string,100,True,The outcome ID of a given sportsbook when available for deep links,False,True
+5033000,Sportsbook,SportsbookID,int,32,False,The unique ID of the sportsbook,False,False
+5033000,Sportsbook,Name,string,32,False,The name of the sportsbooks,True,True
+5034000,ConsensusOutcome,NumberOfSportsbooks,int,32,False,The number of sportsbooks odds that went into creating this consensus outcome,True,True
+5034000,ConsensusOutcome,BettingOutcomeID,int,32,True,The unique ID associated with this specific outcome,False,False
+5034000,ConsensusOutcome,BettingMarketID,int,32,True,The unique ID associated with the betting market,False,False
+5034000,ConsensusOutcome,SportsBook,Sportsbook,32,True,The sportsbook offering this outcome for betting,True,False
+5034000,ConsensusOutcome,BettingOutcomeTypeID,int,32,True,The BettingOutcomeTypeID of this outcome,True,False
+5034000,ConsensusOutcome,BettingOutcomeType,string,32,True,Name of Betting Outcome Type (e.g. Home; Away; Under; Over),False,False
+5034000,ConsensusOutcome,PayoutAmerican,int,32,True,The american odds payout ,True,True
+5034000,ConsensusOutcome,PayoutDecimal,decimal,32,True,The decimal odds payout,True,True
+5034000,ConsensusOutcome,Value,decimal,32,True,The number associated with the outcome (spread; total; etc),False,True
+5034000,ConsensusOutcome,Participant,string,32,True,The name of the participant (typically team or player) associated with the outcome.  NOTE: This is provided by the sportsbook. In the case of Player odds; we highly recommend using PlayerID as names of players can be inconsistent between sportsbooks.,False,False
+5034000,ConsensusOutcome,IsAvailable,bool,32,True,Denotes whether or not the betting outcome is currently available,False,False
+5034000,ConsensusOutcome,IsAlternate,bool,32,True,Denotes whether or not the betting outcome is an alternate line,False,False
+5034000,ConsensusOutcome,Created,datetime,32,True,The created date of the outcome,True,False
+5034000,ConsensusOutcome,Updated,datetime,32,True,The last updated timestamp of this outcome (US Eastern Time),False,False
+5034000,ConsensusOutcome,Unlisted,datetime,32,True,The timestamp of when this outcome was unlisted (no longer available for bets),False,False
+5034000,ConsensusOutcome,TeamID,int,32,True,The unique ID of the team associated with this betting outcome,False,False
+5034000,ConsensusOutcome,PlayerID,int,32,True,The unique ID of the player as assigned by SportsDataIO tied this outcome (if applicable). Note: this ID remains with the player their entire collegiate career,False,False
+5034000,ConsensusOutcome,GlobalTeamID,int,32,True,A globally unique ID for the team tied this outcome. Note: This value is guaranteed to be unique across all sports/leagues,False,False
+5034000,ConsensusOutcome,SportsbookUrl,string,500,True,The URL for sportsbook event,True,True
+5034000,ConsensusOutcome,IsInPlay,bool,1,True,Denotes whether the betting outcome is a live line (i.e. the outcome was created after the start of the game),False,False
+5034000,ConsensusOutcome,SportsbookMarketID,string,100,True,The market ID of a given sportsbook when available for deep links,False,True
+5034000,ConsensusOutcome,SportsbookOutcomeID,string,100,True,The outcome ID of a given sportsbook when available for deep links,False,True
+5035000,BettingEntityMetadata,RecordId,integer,32,False,The id of the record.  Unique only within the same entity type (i.e. BettingMarketType Ids overlap with BettingBetType Ids),True,False
+5035000,BettingEntityMetadata,Name,string,100,False,Denotes the name of the *Type  (e.g. Betting Market Type; Betting Event Type; Betting Period Type),False,False
+5035000,BettingEntityMetadata,Active,bool,32,True,Whether or not this market is currently is use,False,False
+5036000,BettingEntityMetadataCollection,BettingBetTypes,BettingEntityMetadata[],,True,The list of the bet types that can be found within a market,False,False
+5036000,BettingEntityMetadataCollection,BettingMarketTypes,BettingEntityMetadata[],,True,A list of the possible Market Types within a Betting Event (e.g. Game Line; Team prop; Player Future; etc.),False,False
+5036000,BettingEntityMetadataCollection,BettingPeriodTypes,BettingEntityMetadata[],,True,A list of the possible BettingPeriodTypes (e.g. Full Game; Regulation; 1st Quarter),False,False
+5036000,BettingEntityMetadataCollection,BettingEventTypes,BettingEntityMetadata[],,True,A list of the possible BettingEventTypes - Game or Future,False,False
+5036000,BettingEntityMetadataCollection,BettingOutcomeTypes,BettingEntityMetadata[],,True,A list of the possible BettingOutcomeTypes (e.g. Home; Away; Under; Over),False,False
+5036000,BettingEntityMetadataCollection,ResultedMarketMetaData,BettingResultingMetadata[],,True,A list of the combinations of BettingMarketTypeID; BettingBetTypeID; and BettingPeriodTypeID that will be resulted,True,False
+5036000,BettingEntityMetadataCollection,BettingResultTypes,BettingEntityMetadata[],,True,A list of the possible BettingResultTypes (e.g. Win; Loss; Push; Not Resulted; Incomplete),False,False
+5037000,GameBettingSplit,GameID,integer,32,False,The unique ID of this game tied to this split,False,False
+5037000,GameBettingSplit,SeasonType,integer,32,False,The type of season that this record corresponds to (1=Regular Season; 2=Preseason; 3=Postseason; 4=Offseason; 5=AllStar).,False,False
+5037000,GameBettingSplit,Season,integer,32,False,The college football season of the game,False,False
+5037000,GameBettingSplit,Week,integer,32,False,The week of the game related to this betting split,False,False
+5037000,GameBettingSplit,Day,datetime,32,True,The date of the game,False,False
+5037000,GameBettingSplit,AwayTeam,string,32,True,The abbreviation [Key] of the away team tied to this split,False,False
+5037000,GameBettingSplit,HomeTeam,string,32,True,The abbreviation [Key] of the home team,False,False
+5037000,GameBettingSplit,BettingMarketSplits,BettingMarketSplit[],32,False,Shows the Market Types that have splits included for them in a given game,False,False
+5038000,BettingMarketSplit,BettingMarketID,integer,32,False,The unique ID associated with the betting market,False,False
+5038000,BettingMarketSplit,BettingEventID,integer,32,False,The unique ID assocated with the betting event,False,False
+5038000,BettingMarketSplit,BettingMarketTypeID,integer,32,False,ID that distinguishes the different types of Market Types,False,False
+5038000,BettingMarketSplit,BettingMarketType,string,100,False,The type of Market Type (e.g. Player Prop; Team Prop; Game Prop; etc.),False,False
+5038000,BettingMarketSplit,BettingBetTypeID,integer,32,False,The ID associated with the name of the bet type within a market,False,False
+5038000,BettingMarketSplit,BettingBetType,string,100,False,The name of the bet type within a market (e.g. Total Points; Moneyline; Spread; etc.),False,False
+5038000,BettingMarketSplit,BettingPeriodTypeID,integer,32,False,The BettingPeriodTypeID of this type of market which we can result,False,False
+5038000,BettingMarketSplit,BettingPeriodType,string,100,False,The BettingPeriodType of this market (e.g. Full Game; 1st Quarter; Overtime; Regular Season),False,False
+5038000,BettingMarketSplit,TeamID,integer,32,True,The unique ID of the team associated with this betting market split,False,False
+5038000,BettingMarketSplit,TeamKey,string,32,True,The key of the team tied to this market (if applicable),False,False
+5038000,BettingMarketSplit,PlayerID,integer,32,True,The unique ID of the player as assigned by SportsDataIO tied this split (if applicable). Note: this ID remains with the player their entire collegiate career,False,False
+5038000,BettingMarketSplit,PlayerName,string,100,True,The full name of the player associated (where applicable),True,False
+5038000,BettingMarketSplit,BettingSplits,BettingSplit[],32,False,A list of betting splits for a given game,False,False
+5039000,BettingSplit,BettingMarketSplitID,integer,32,False,The unique ID assciated with the betting split,False,False
+5039000,BettingSplit,BettingMarketID,integer,32,False,The unique ID associated with the betting market,False,False
+5039000,BettingSplit,BettingOutcomeTypeID,integer,32,True,The BettingOutcomeTypeID of this outcome,False,False
+5039000,BettingSplit,BettingOutcomeType,string,32,True,Name of Betting Outcome Type (e.g. Home; Away; Under; Over),False,False
+5039000,BettingSplit,BetPercentage,integer,32,True,The percentage of the bets on this market taken by this type of bet,True,True
+5039000,BettingSplit,MoneyPercentage,integer,32,True,The percentage of the money placed in wagers on this market taken by this type of bet,True,True
+5039000,BettingSplit,Created,datetime,32,False,The timestamp this set of values was first seen,True,False
+5039000,BettingSplit,LastSeen,datetime,32,False,The timestamp this set of values was last seen (in US Eastern Time),False,False
+5040000,BettingMarketResult,BettingMarketID,integer,32,False,The unique ID associated with the betting market,False,False
+5040000,BettingMarketResult,BettingMarketTypeID,integer,32,False,ID that distinguishes the different types of Market Types,False,False
+5040000,BettingMarketResult,BettingMarketType,string,100,False,The type of Market Type (e.g. Player Prop; Team Prop; Game Prop; etc.),False,False
+5040000,BettingMarketResult,BettingBetTypeID,integer,32,False,The ID associated with the name of the bet type within a market,False,False
+5040000,BettingMarketResult,BettingBetType,string,100,False,The name of the bet type within a market (e.g. Total Points; Moneyline; Spread; etc.),False,False
+5040000,BettingMarketResult,BettingPeriodTypeID,integer,32,False,The BettingPeriodTypeID of this type of market which we can result,False,False
+5040000,BettingMarketResult,BettingPeriodType,string,100,False,The BettingPeriodType of this market (e.g. Full Game; 1st Quarter; Overtime; Regular Season),False,False
+5040000,BettingMarketResult,Name,string,100,True,The generic name of this market,True,False
+5040000,BettingMarketResult,TeamID,integer,32,True,The unique ID of the team associated with this betting market result,False,False
+5040000,BettingMarketResult,TeamKey,string,10,True,The key of the team tied to this market (if applicable),False,False
+5040000,BettingMarketResult,PlayerID,integer,32,True,The unique ID of the player as assigned by SportsDataIO tied this market result (if applicable). Note: this ID remains with the player their entire collegiate career,False,False
+5040000,BettingMarketResult,PlayerName,string,100,True,The name of the player tied to this market (if applicable),True,False
+5040000,BettingMarketResult,BettingOutcomeResults,BettingOutcomeResult[],,True,The list of outcomes under this market with results,True,False
+5040000,BettingMarketResult,IsMarketResultingSupported,bool,32,False,Indicates whether resulting is supported for this kind of BettingMarket,True,False
+5041000,BettingOutcomeResult,BettingOutcomeID,integer,32,False,The unique ID associated with this specific outcome,False,False
+5041000,BettingOutcomeResult,BettingResultTypeID,integer,32,True,The BettingResultTypeID of this outcome,False,True
+5041000,BettingOutcomeResult,BettingResultType,string,100,True,A list of the possible BettingResultTypes (e.g. Win; Loss; Push; Not Resulted; Incomplete),False,True
+5041000,BettingOutcomeResult,BettingOutcomeTypeID,int,32,True,The BettingOutcomeTypeID of this outcome,True,False
+5041000,BettingOutcomeResult,BettingOutcomeType,string,32,True,Name of Betting Outcome Type (e.g. Home; Away; Under; Over),False,False
+5041000,BettingOutcomeResult,BetValue,decimal,32,True,The value that was bet in this outcome (if applicable),True,True
+5041000,BettingOutcomeResult,ActualValue,decimal,32,True,The value that actually occurred in game (if applicable),True,True
+5042000,BettingResultingMetadata,BettingMarketTypeId,integer,32,False,ID that distinguishes the different types of Market Types,False,False
+5042000,BettingResultingMetadata,BettingBetTypeId,integer,32,False,The ID associated with the name of the bet type within a market,False,False
+5042000,BettingResultingMetadata,BettingPeriodTypeId,integer,32,False,The BettingPeriodTypeID of this type of market which we can result,True,False
