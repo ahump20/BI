@@ -422,19 +422,8 @@ function averageDefined(values: Array<number | null | undefined>): number | unde
   return filtered.reduce((acc, value) => acc + value, 0) / filtered.length;
 }
 
-function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
-}
-
-function coalesce(value: number | null | undefined) {
-  return typeof value === 'number' && Number.isFinite(value) ? value : 0;
-}
-
-function round(value: number, precision: number) {
-  const factor = 10 ** precision;
-  return Math.round((value + Number.EPSILON) * factor) / factor;
-}
-
+// Utility functions imported from shared module
+import { clamp, coalesce, round } from '../../utils/math';
 function formatCurrency(value: number) {
   if (value >= 1_000_000) {
     return `${round(value / 1_000_000, 2)}M`;
