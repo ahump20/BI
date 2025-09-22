@@ -31,6 +31,7 @@ import MonitoringDashboard from './src/backend/monitoring-dashboard.js';
 import BackupSystem from './src/backend/backup-system.js';
 import ballDontLieService from './src/services/ballDontLieService.js';
 import aiAnalyticsService from './src/services/aiAnalyticsService.js';
+import perfectGameYouthRoutes from './routes/perfectGameYouthRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -123,6 +124,9 @@ app.use('/api/auth', authRoutes);
 
 // Subscription routes (auth required for most)
 app.use('/api/stripe', subscriptionRoutes);
+
+// Perfect Game youth baseball API (public)
+app.use('/api/perfect-game/youth', perfectGameYouthRoutes);
 
 // Add tracking middleware for authenticated requests
 app.use('/api/protected', authenticateToken, trackApiUsage);

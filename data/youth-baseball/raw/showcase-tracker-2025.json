@@ -1,0 +1,136 @@
+{
+  "provider": "Perfect Game & USSSA Showcase Tracker",
+  "provider_key": "event_tracker",
+  "source_url": "https://blaze-intelligence/perfect-game-tracker",
+  "last_updated": "2025-02-16",
+  "events": [
+    {
+      "id": "pg-west-elite-2025",
+      "name": "2025 PG West Elite Championship",
+      "sanctioning_body": "Perfect Game",
+      "age_groups": ["14u", "15u"],
+      "start_date": "2025-03-13",
+      "end_date": "2025-03-17",
+      "location": {
+        "complex": "Goodyear Ballpark Training Complex",
+        "city": "Goodyear",
+        "state": "AZ",
+        "region": "west"
+      },
+      "surface": "Natural Grass",
+      "teams_expected": 48,
+      "scouting_coverage": {
+        "mlb_scouts": 6,
+        "college_programs": 28,
+        "perfect_game_grade": 9.2
+      },
+      "broadcast": "Perfect Game TV",
+      "ranking_impact": {
+        "perfect_game_points": 250,
+        "usssa_power": 80
+      },
+      "notable_programs": ["Dallas Tigers Polk", "Canes National", "USA Prime"],
+      "metrics_highlights": {
+        "top_exit_velocity": 100.4,
+        "top_pitch_velocity": 94.8,
+        "fastest_sixty": 6.55
+      }
+    },
+    {
+      "id": "pg-south-select-2025",
+      "name": "2025 PG South Select Invitational",
+      "sanctioning_body": "Perfect Game",
+      "age_groups": ["15u", "16u"],
+      "start_date": "2025-04-18",
+      "end_date": "2025-04-21",
+      "location": {
+        "complex": "Premier Baseball of Texas",
+        "city": "Tomball",
+        "state": "TX",
+        "region": "southwest"
+      },
+      "surface": "Turf & Natural Mix",
+      "teams_expected": 64,
+      "scouting_coverage": {
+        "mlb_scouts": 10,
+        "college_programs": 42,
+        "perfect_game_grade": 9.5
+      },
+      "broadcast": "Perfect Game TV + Blaze Viz",
+      "ranking_impact": {
+        "perfect_game_points": 300,
+        "usssa_power": 95
+      },
+      "notable_programs": ["Banditos", "Texas Twelve", "Georgia Bombers"],
+      "metrics_highlights": {
+        "top_exit_velocity": 104.2,
+        "top_pitch_velocity": 97.1,
+        "fastest_sixty": 6.42
+      }
+    },
+    {
+      "id": "usssa-select30-finals-2025",
+      "name": "2025 USSSA Select 30 Championships",
+      "sanctioning_body": "USSSA",
+      "age_groups": ["14u", "15u", "16u"],
+      "start_date": "2025-07-10",
+      "end_date": "2025-07-15",
+      "location": {
+        "complex": "USSSA Space Coast Complex",
+        "city": "Viera",
+        "state": "FL",
+        "region": "southeast"
+      },
+      "surface": "Turf",
+      "teams_expected": 72,
+      "scouting_coverage": {
+        "mlb_scouts": 8,
+        "college_programs": 36,
+        "perfect_game_grade": null
+      },
+      "broadcast": "USSSA Live + Blaze Viz",
+      "ranking_impact": {
+        "perfect_game_points": 180,
+        "usssa_power": 120
+      },
+      "notable_programs": ["South Texas Sliders", "Canes National", "Florida Hurricanes"],
+      "metrics_highlights": {
+        "top_exit_velocity": 101.8,
+        "top_pitch_velocity": 95.5,
+        "fastest_sixty": 6.48
+      }
+    },
+    {
+      "id": "d1-showcase-summit-2025",
+      "name": "2025 D1 Baseball National Showcase Summit",
+      "sanctioning_body": "D1Baseball",
+      "age_groups": ["17u", "18u"],
+      "start_date": "2025-08-08",
+      "end_date": "2025-08-12",
+      "location": {
+        "complex": "Hoover Met Complex",
+        "city": "Hoover",
+        "state": "AL",
+        "region": "southeast"
+      },
+      "surface": "Natural Grass",
+      "teams_expected": 40,
+      "scouting_coverage": {
+        "mlb_scouts": 22,
+        "college_programs": 68,
+        "perfect_game_grade": null
+      },
+      "broadcast": "D1Baseball Network",
+      "ranking_impact": {
+        "perfect_game_points": 210,
+        "usssa_power": 60
+      },
+      "notable_programs": ["Canes National", "Banditos", "Florida Burn"],
+      "metrics_highlights": {
+        "top_exit_velocity": 105.6,
+        "top_pitch_velocity": 98.3,
+        "fastest_sixty": 6.39
+      }
+    }
+  ]
+}

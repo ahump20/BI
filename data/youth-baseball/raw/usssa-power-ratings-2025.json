@@ -1,0 +1,244 @@
+{
+  "provider": "USSSA",
+  "provider_key": "usssa",
+  "source_url": "https://usssa.com/baseball/rankings",
+  "last_updated": "2025-02-12",
+  "notes": "Power ratings compiled from Select 30 Super NIT leaderboards across major regions.",
+  "age_groups": {
+    "14u": [
+      {
+        "team": "Dallas Tigers Polk",
+        "state": "TX",
+        "power_rating": 1452.3,
+        "games": 48,
+        "usssa_id": "usssa-team-dtpolk-14u",
+        "recent_event": "Select 30 Super NIT Champions",
+        "notable_players": ["Ethan Rodriguez", "Landon Price"]
+      },
+      {
+        "team": "Georgia Bombers 14U National",
+        "state": "GA",
+        "power_rating": 1436.1,
+        "games": 46,
+        "usssa_id": "usssa-team-bombers-14u",
+        "recent_event": "Southeast Elite Champions",
+        "notable_players": ["Miles Porter"]
+      },
+      {
+        "team": "South Texas Sliders 14U Scout",
+        "state": "TX",
+        "power_rating": 1412.8,
+        "games": 44,
+        "usssa_id": "usssa-team-sliders-14u",
+        "recent_event": "H-Town Super NIT Champions",
+        "notable_players": ["Kai Hernandez"]
+      },
+      {
+        "team": "Louisiana Knights Black 14U",
+        "state": "LA",
+        "power_rating": 1398.4,
+        "games": 41,
+        "usssa_id": "usssa-team-knights-14u",
+        "recent_event": "Gulf South Select Finalist",
+        "notable_players": ["Brennan Dupree"]
+      },
+      {
+        "team": "Tennessee Nationals 14U Prime",
+        "state": "TN",
+        "power_rating": 1387.9,
+        "games": 39,
+        "usssa_id": "usssa-team-nationals-14u",
+        "recent_event": "Music City Major Champions",
+        "notable_players": ["Hunter Wallace"]
+      }
+    ],
+    "15u": [
+      {
+        "team": "Banditos Scout Team 15U",
+        "state": "TX",
+        "power_rating": 1504.6,
+        "games": 52,
+        "usssa_id": "usssa-team-banditos-15u",
+        "recent_event": "Select 30 Super NIT Champions",
+        "notable_players": ["Noah Williams"]
+      },
+      {
+        "team": "Texas Twelve Maroon 15U",
+        "state": "TX",
+        "power_rating": 1492.8,
+        "games": 51,
+        "usssa_id": "usssa-team-texastwelve-15u",
+        "recent_event": "Texas State Major Champions",
+        "notable_players": ["Jackson Miller"]
+      },
+      {
+        "team": "Canes National 15U",
+        "state": "NC",
+        "power_rating": 1471.2,
+        "games": 48,
+        "usssa_id": "usssa-team-canes-15u",
+        "recent_event": "Atlantic Super NIT Champions",
+        "notable_players": ["Aiden Brooks"]
+      },
+      {
+        "team": "East Cobb Astros 15U Orange",
+        "state": "GA",
+        "power_rating": 1457.9,
+        "games": 47,
+        "usssa_id": "usssa-team-astros-15u",
+        "recent_event": "Southeast Select Runner-up",
+        "notable_players": ["Logan Whitaker"]
+      },
+      {
+        "team": "Midland Redskins 15U",
+        "state": "OH",
+        "power_rating": 1434.5,
+        "games": 45,
+        "usssa_id": "usssa-team-midland-15u",
+        "recent_event": "Great Lakes Super NIT Champions",
+        "notable_players": ["Grayson Lee"]
+      }
+    ],
+    "16u": [
+      {
+        "team": "Georgia Bombers 16U National",
+        "state": "GA",
+        "power_rating": 1521.4,
+        "games": 55,
+        "usssa_id": "usssa-team-bombers-16u",
+        "recent_event": "Southeast Elite Champions",
+        "notable_players": ["Mason Carter"]
+      },
+      {
+        "team": "Canes National 16U",
+        "state": "VA",
+        "power_rating": 1503.8,
+        "games": 52,
+        "usssa_id": "usssa-team-canes-16u",
+        "recent_event": "Atlantic Super NIT Champions",
+        "notable_players": ["Dylan Ashby"]
+      },
+      {
+        "team": "Dallas Tigers 16U Polk",
+        "state": "TX",
+        "power_rating": 1487.2,
+        "games": 50,
+        "usssa_id": "usssa-team-dtpolk-16u",
+        "recent_event": "Texas Showdown Champions",
+        "notable_players": ["Chase Morgan"]
+      },
+      {
+        "team": "USA Prime National 16U",
+        "state": "TX",
+        "power_rating": 1476.9,
+        "games": 48,
+        "usssa_id": "usssa-team-usaprime-16u",
+        "recent_event": "Lone Star Select Champions",
+        "notable_players": ["Jaxon Pierce"]
+      },
+      {
+        "team": "5 Star National 16U Black",
+        "state": "FL",
+        "power_rating": 1464.1,
+        "games": 47,
+        "usssa_id": "usssa-team-5star-16u",
+        "recent_event": "Sunshine State Super NIT Runner-up",
+        "notable_players": ["Caleb Johnson"]
+      }
+    ],
+    "17u": [
+      {
+        "team": "Florida Hurricanes Platinum 17U",
+        "state": "FL",
+        "power_rating": 1536.2,
+        "games": 56,
+        "usssa_id": "usssa-team-hurricanes-17u",
+        "recent_event": "Sunshine State Elite Champions",
+        "notable_players": ["Caleb Johnson"]
+      },
+      {
+        "team": "Canes National 17U",
+        "state": "NC",
+        "power_rating": 1528.9,
+        "games": 54,
+        "usssa_id": "usssa-team-canes-17u",
+        "recent_event": "Atlantic Super NIT Champions",
+        "notable_players": ["Micah Daniels"]
+      },
+      {
+        "team": "Banditos Scout Team 17U",
+        "state": "TX",
+        "power_rating": 1518.5,
+        "games": 53,
+        "usssa_id": "usssa-team-banditos-17u",
+        "recent_event": "Texas Major NIT Champions",
+        "notable_players": ["Noah Williams"]
+      },
+      {
+        "team": "Texas Twelve Maroon 17U",
+        "state": "TX",
+        "power_rating": 1499.4,
+        "games": 52,
+        "usssa_id": "usssa-team-texastwelve-17u",
+        "recent_event": "Lone Star Elite Finalist",
+        "notable_players": ["Jackson Miller"]
+      },
+      {
+        "team": "Tennessee Nationals 17U Prime",
+        "state": "TN",
+        "power_rating": 1482.7,
+        "games": 50,
+        "usssa_id": "usssa-team-nationals-17u",
+        "recent_event": "Music City Major Champions",
+        "notable_players": ["Hunter Wallace"]
+      }
+    ],
+    "18u": [
+      {
+        "team": "Banditos Black 18U",
+        "state": "TX",
+        "power_rating": 1552.4,
+        "games": 58,
+        "usssa_id": "usssa-team-banditos-18u",
+        "recent_event": "Select 30 National Champions",
+        "notable_players": ["Noah Williams"]
+      },
+      {
+        "team": "Canes National 18U",
+        "state": "NC",
+        "power_rating": 1545.1,
+        "games": 57,
+        "usssa_id": "usssa-team-canes-18u",
+        "recent_event": "Atlantic Super NIT Champions",
+        "notable_players": ["Caleb Johnson"]
+      },
+      {
+        "team": "Georgia Bombers 18U Five-Star",
+        "state": "GA",
+        "power_rating": 1531.9,
+        "games": 56,
+        "usssa_id": "usssa-team-bombers-18u",
+        "recent_event": "Southeast Elite Champions",
+        "notable_players": ["Mason Carter"]
+      },
+      {
+        "team": "Dallas Patriots 18U Scout",
+        "state": "TX",
+        "power_rating": 1518.7,
+        "games": 55,
+        "usssa_id": "usssa-team-patriots-18u",
+        "recent_event": "Texas Major Runner-up",
+        "notable_players": ["Jackson Miller"]
+      },
+      {
+        "team": "Florida Burn 18U Premier",
+        "state": "FL",
+        "power_rating": 1502.6,
+        "games": 54,
+        "usssa_id": "usssa-team-floridaburn-18u",
+        "recent_event": "BCS National Runner-up",
+        "notable_players": ["Micah Daniels"]
+      }
+    ]
+  }
+}
