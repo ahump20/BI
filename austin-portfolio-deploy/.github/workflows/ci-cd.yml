@@ -493,7 +493,7 @@ jobs:
           
           # Update timestamp
           data = {
-            'last_updated': datetime.datetime.utcnow().isoformat(),
+            'last_updated': datetime.datetime.now(datetime.timezone.utc).isoformat(),
             'status': 'updated'
           }
           

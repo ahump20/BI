@@ -7,9 +7,14 @@ Unifies team data from multiple leagues into a standardized JSON format.
 import json
 import csv
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Any, Optional
+
+def current_utc_iso() -> str:
+    """Return the current UTC timestamp in ISO 8601 format with Z suffix."""
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
 
 def generate_team_id(league: str, team_name: str) -> str:
     """Generate a consistent team_id from league and team name."""
@@ -69,7 +74,7 @@ def process_mlb_teams(file_path: str) -> List[Dict[str, Any]]:
             "division": None,  # Could be added later (AL/NL, divisions)
             "market": market,
             "aliases": create_aliases(team_name, market),
-            "last_updated_iso": datetime.utcnow().isoformat() + "Z"
+            "last_updated_iso": current_utc_iso()
         }
         processed.append(processed_team)
     
@@ -94,7 +99,7 @@ def process_nfl_teams(file_path: str) -> List[Dict[str, Any]]:
             "division": None,  # Could be added later (AFC/NFC, divisions)
             "market": market,
             "aliases": create_aliases(team_name, market),
-            "last_updated_iso": datetime.utcnow().isoformat() + "Z"
+            "last_updated_iso": current_utc_iso()
         }
         processed.append(processed_team)
     
@@ -119,7 +124,7 @@ def process_fcs_teams(file_path: str) -> List[Dict[str, Any]]:
             "division": None,
             "market": market,
             "aliases": create_aliases(team_name, market),
-            "last_updated_iso": datetime.utcnow().isoformat() + "Z"
+            "last_updated_iso": current_utc_iso()
         }
         processed.append(processed_team)
     
@@ -144,7 +149,7 @@ def process_fbs_teams(file_path: str) -> List[Dict[str, Any]]:
             "division": None,
             "market": market,
             "aliases": create_aliases(team_name, market),
-            "last_updated_iso": datetime.utcnow().isoformat() + "Z"
+            "last_updated_iso": current_utc_iso()
         }
         processed.append(processed_team)
     
