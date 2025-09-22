@@ -554,13 +554,17 @@
 
             connectToConsciousnessStream() {
                 // Try to connect to real consciousness stream
+                let eventSource;
                 try {
-                    const eventSource = new EventSource('/consciousness-stream.js');
+                    eventSource = new EventSource('/consciousness-stream.js');
                     eventSource.onmessage = (event) => {
                         const data = JSON.parse(event.data);
                         this.processConsciousnessData(data);
                     };
                 } catch (error) {
+                    if (eventSource && typeof eventSource.close === 'function') {
+                        eventSource.close();
+                    }
                     console.log('Consciousness stream not available, using simulation');
                 }
             }
