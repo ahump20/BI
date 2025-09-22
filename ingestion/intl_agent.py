@@ -8,7 +8,7 @@ import json
 import os
 import sys
 import argparse
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Any
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -35,7 +35,7 @@ class InternationalAgent:
     def normalize(self, raw: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Normalize to Blaze schema"""
         players = []
-        now_iso = datetime.utcnow().isoformat() + 'Z'
+        now_iso = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
         
         for raw_player in raw.get('players', []):
             player = {
@@ -84,7 +84,7 @@ class InternationalAgent:
             with open(self.output_path, 'w') as f:
                 json.dump({
                     'league': 'International',
-                    'generated_at': datetime.utcnow().isoformat() + 'Z',
+                    'generated_at': datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
                     'players': players
                 }, f, indent=2)
             

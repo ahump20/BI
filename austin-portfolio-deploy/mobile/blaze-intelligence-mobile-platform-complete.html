@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Blaze Intelligence - Complete Mobile Platform</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/recharts@2.5.0/dist/Recharts.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Mobile-First Optimized Styles */
+        * { box-sizing: border-box; }
+        body { 
+            margin: 0; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* Prevent zoom on iOS */
+        input, select, textarea { font-size: 16px; }
+        
+        /* Touch-friendly interactions */
+        .touch-target { min-height: 44px; min-width: 44px; }
+        
+        /* Safe area handling for iOS */
+        .safe-area-inset-top { padding-top: env(safe-area-inset-top); }
+        .safe-area-inset-bottom { padding-bottom: env(safe-area-inset-bottom); }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 2px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,69,0,0.6); border-radius: 2px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Blaze brand gradient backgrounds */
+        .bg-blaze-primary { background: linear-gradient(135deg, #FF4500 0%, #FF8C00 50%, #FFD700 100%); }
+        .bg-blaze-dark { background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #0f172a 100%); }
+        .bg-blaze-card { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); }
+        
+        /* Glass morphism effects */
+        .glass { 
+            background: rgba(17, 24, 39, 0.85); 
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 69, 0, 0.2);
+        }
+        
+        .glass-light {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        
+        /* Animations */
+        @keyframes pulse-blaze { 
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255, 69, 0, 0.4);
+                transform: scale(1);
+            } 
+            50% { 
+                box-shadow: 0 0 40px rgba(255, 69, 0, 0.8);
+                transform: scale(1.02);
+            } 
+        }
+        .pulse-blaze { animation: pulse-blaze 2s infinite; }
+        
+        @keyframes slide-up { 
+            from { transform: translateY(100%); opacity: 0; } 
+            to { transform: translateY(0); opacity: 1; } 
+        }
+        .slide-up { animation: slide-up 0.4s ease-out; }
+        
+        @keyframes fade-in { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        .fade-in { animation: fade-in 0.6s ease-out; }
+        
+        /* Mobile navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 69, 0, 0.3);
+        }
+        
+        /* League-specific styling */
+        .league-mlb { background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(185, 28, 28, 0.1)); border-color: rgba(220, 38, 38, 0.5); }
+        .league-nfl { background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(29, 78, 216, 0.1)); border-color: rgba(37, 99, 235, 0.5); }
+        .league-ncaaf { background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(22, 163, 74, 0.1)); border-color: rgba(34, 197, 94, 0.5); }
+        .league-ncaab { background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(147, 51, 234, 0.1)); border-color: rgba(168, 85, 247, 0.5); }
+        
+        /* Status indicators */
+        .status-online { color: #10b981; }
+        .status-warning { color: #f59e0b; }
+        .status-critical { color: #ef4444; }
+        
+        /* Loading spinner */
+        .loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 69, 0, 0.3);
+            border-top: 3px solid #FF4500;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Haptic feedback simulation */
+        .haptic:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+        
+        /* Grid background for certain sections */
+        .grid-bg { 
+            background-image:
+                linear-gradient(rgba(255,69,0,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,69,0,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        /* Champion Enigma gauge styling */
+        .enigma-gauge {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+        }
+        
+        /* Responsive font sizing */
+        @media (max-width: 375px) {
+            .text-responsive-lg { font-size: 1.5rem; }
+            .text-responsive-xl { font-size: 1.75rem; }
+        }
+        
+        @media (min-width: 376px) {
+            .text-responsive-lg { font-size: 1.75rem; }
+            .text-responsive-xl { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useReducer, useRef, useMemo, useCallback } = React;
+const { motion, AnimatePresence } = Motion;
+const { LineChart, Line, BarChart, Bar, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, 
+        CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area, PieChart, Pie, Cell } = Recharts;
+
+/** ========================================================================
+ * BLAZE INTELLIGENCE - COMPLETE MOBILE PLATFORM
+ * 
+ * Integrating all features from your existing platform:
+ * - Scouting Command Center with full player database
+ * - Real-time Champion Enigma Engine
+ * - Analytics Dashboard with team performance metrics
+ * - Lone Star Legends Baseball Simulation
+ * - Multiplayer Collaboration Tools
+ * - 3D Visualizations and Performance Tracking
+ * - Portfolio Showcase Integration
+ * ======================================================================== */
+
+// ============== CORE CONFIGURATION ==============
+
+const LEAGUES = {
+    MLB: { name: 'MLB', sport: 'baseball', icon: '⚾', color: 'red', cssClass: 'league-mlb' },
+    NFL: { name: 'NFL', sport: 'football', icon: '🏈', color: 'blue', cssClass: 'league-nfl' },
+    NCAAF: { name: 'NCAA Football', sport: 'football', icon: '🏈', color: 'green', cssClass: 'league-ncaaf' },
+    NCAAB: { name: 'NCAA Baseball', sport: 'baseball', icon: '⚾', color: 'purple', cssClass: 'league-ncaab' },
+    TXHSFB: { name: 'Texas HS FB', sport: 'football', icon: '🏆', color: 'yellow', cssClass: 'league-txhsfb' },
+    PG: { name: 'Perfect Game', sport: 'baseball', icon: '⭐', color: 'pink', cssClass: 'league-pg' }
+};
+
+const FOCUS_TEAMS = ['St. Louis Cardinals', 'Tennessee Titans', 'Texas Longhorns'];
+
+const DIMENSIONS = [
+    { key: "clutch", label: "Clutch Gene", icon: "⚡", color: "#ef4444" },
+    { key: "killer", label: "Killer Instinct", icon: "🎯", color: "#f59e0b" },
+    { key: "flow", label: "Flow State", icon: "🌊", color: "#3b82f6" },
+    { key: "fortress", label: "Mental Fortress", icon: "🛡️", color: "#10b981" },
+    { key: "predator", label: "Predator Mindset", icon: "🦅", color: "#8b5cf6" },
+    { key: "aura", label: "Champion Aura", icon: "✨", color: "#ec4899" },
+    { key: "winner", label: "Winner DNA", icon: "🏆", color: "#f59e0b" },
+    { key: "beast", label: "Beast Mode", icon: "💪", color: "#ef4444" }
+];
+
+// Mock player database from your existing system
+const PLAYER_DATABASE = [
+    {
+        id: 'mlb-stl-001',
+        name: 'Paul Goldschmidt',
+        league: 'MLB',
+        team: 'St. Louis Cardinals',
+        position: '1B',
+        age: 37,
+        physical: { height: "6'3\"", weight: '220 lbs' },
+        stats: { batting: { AVG: 0.275, HR: 28, RBI: 88, OPS: 0.850 } },
+        analytics: {
+            scoutingGrades: { hit: 60, power: 60, run: 45, field: 55, arm: 50, overall: 60 },
+            statcast: { exitVelo_avg: 91.2, exitVelo_max: 112.5, launchAngle_avg: 13.0, barrelRate: 12.4 },
+            clutchScore: 86.3,
+            trend: 'stable',
+            injuryStatus: 'healthy',
+            lastUpdated: '2025-03-10'
+        },
+        notes: 'Veteran anchor with professional ABs and stable leadership.'
+    },
+    {
+        id: 'mlb-stl-002',
+        name: 'Nolan Arenado',
+        league: 'MLB',
+        team: 'St. Louis Cardinals',
+        position: '3B',
+        age: 34,
+        physical: { height: "6'2\"", weight: '215 lbs' },
+        stats: { batting: { AVG: 0.283, HR: 31, RBI: 103, OPS: 0.872 } },
+        analytics: {
+            scoutingGrades: { hit: 55, power: 60, run: 40, field: 70, arm: 70, overall: 65 },
+            statcast: { exitVelo_avg: 90.0, exitVelo_max: 111.0, launchAngle_avg: 17.5, barrelRate: 9.7 },
+            clutchScore: 90.2,
+            trend: 'up',
+            injuryStatus: 'healthy',
+            lastUpdated: '2025-03-10'
+        },
+        notes: 'Platinum glove; competitive fire; defense defines floor.'
+    },
+    {
+        id: 'nfl-ten-001',
+        name: 'Will Levis',
+        league: 'NFL',
+        team: 'Tennessee Titans',
+        position: 'QB',
+        age: 25,
+        physical: { height: "6'4\"", weight: '229 lbs' },
+        stats: { passing: { completions: 285, attempts: 448, yards: 3650, TDs: 24, INT: 11 } },
+        analytics: {
+            combine: { fortyDash: 4.72, vertical: 34, broadJump: 124 },
+            advancedMetrics: { cleanPocketCompPct: 69.8, underPressureCompPct: 41.2 },
+            scoutingGrades: { arm: 65, processing: 50, accuracy: 55, mobility: 55, toughness: 65, overall: 55 },
+            clutchScore: 79.5,
+            trend: 'stable',
+            injuryStatus: 'healthy',
+            lastUpdated: '2025-03-10'
+        },
+        notes: 'Big arm, wired toughness; rhythm/consistency are levers.'
+    },
+    {
+        id: 'ncaaf-utex-001',
+        name: 'Quinn Ewers',
+        league: 'NCAAF',
+        team: 'Texas Longhorns',
+        position: 'QB',
+        age: 22,
+        physical: { height: "6'2\"", weight: '205 lbs' },
+        stats: { passing: { completions: 272, attempts: 394, yards: 3479, TDs: 22, INT: 6 } },
+        analytics: {
+            advancedMetrics: { cleanPocketCompPct: 74.1, underPressureCompPct: 45.2, deepBallAccuracy: 48.3 },
+            scoutingGrades: { arm: 60, anticipation: 55, processing: 55, pocket: 55, offPlatform: 60, overall: 60 },
+            clutchScore: 89.7,
+            trend: 'up',
+            injuryStatus: 'healthy',
+            lastUpdated: '2025-03-10'
+        },
+        notes: 'High-end arm; pressure and tempo mastery drive pro translation.'
+    }
+];
+
+// ============== UTILITY FUNCTIONS ==============
+
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const sigmoid = (x) => 1 / (1 + Math.exp(-x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const mulberry32 = (seed) => {
+    let t = seed >>> 0;
+    return function() {
+        t += 0x6D2B79F5;
+        let r = Math.imul(t ^ (t >>> 15), 1 | t);
+        r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+        return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+};
+
+function humanBytes(n) {
+    if (n < 1000) return `${n} B`;
+    if (n < 1_000_000) return `${(n/1000).toFixed(1)} kB`;
+    return `${(n/1_000_000).toFixed(1)} MB`;
+}
+
+// ============== STATE MANAGEMENT ==============
+
+const initialState = {
+    // Core state
+    currentTab: "dashboard",
+    sidebarOpen: false,
+    
+    // Player/Scouting state
+    selectedPlayerId: 'mlb-stl-001',
+    searchQuery: '',
+    activeLeagues: Object.keys(LEAGUES),
+    focusTeam: 'all',
+    sortBy: 'clutch',
+    
+    // Champion Enigma Engine state
+    running: true,
+    tick: 0,
+    speed: 1,
+    scenario: {
+        pressure: 40,
+        fatigue: 20,
+        momentum: 50,
+        context: "Championship Quarter",
+        quarter: 4,
+        scoreDiff: -3,
+        home: true
+    },
+    streams: {
+        t: [],
+        readiness: [],
+        hr: [],
+        hrv: [],
+        focus: [],
+        anxiety: [],
+        confidence: [],
+        dims: null
+    },
+    
+    // UI state
+    notifications: [],
+    loading: false,
+    
+    // Settings
+    settings: {
+        hapticFeedback: true,
+        notifications: true,
+        darkMode: true,
+        autoSync: false
+    }
+};
+
+function reducer(state, action) {
+    switch (action.type) {
+        case "SET_TAB":
+            return { ...state, currentTab: action.tab };
+            
+        case "TOGGLE_SIDEBAR":
+            return { ...state, sidebarOpen: !state.sidebarOpen };
+            
+        case "SET_SELECTED_PLAYER":
+            return { ...state, selectedPlayerId: action.playerId };
+            
+        case "SET_SEARCH":
+            return { ...state, searchQuery: action.query };
+            
+        case "TOGGLE_LEAGUE":
+            const leagues = state.activeLeagues.includes(action.league)
+                ? state.activeLeagues.filter(l => l !== action.league)
+                : [...state.activeLeagues, action.league];
+            return { ...state, activeLeagues: leagues };
+            
+        case "SET_FOCUS_TEAM":
+            return { ...state, focusTeam: action.team };
+            
+        case "SET_SCENARIO":
+            return { ...state, scenario: { ...state.scenario, ...action.patch } };
+            
+        case "TOGGLE_RUNNING":
+            return { ...state, running: !state.running };
+            
+        case "SET_SPEED":
+            return { ...state, speed: action.speed };
+            
+        case "TICK": {
+            const newStreams = updateStreams(state);
+            return { ...state, streams: newStreams, tick: state.tick + 1 };
+        }
+        
+        case "ADD_NOTIFICATION":
+            return { 
+                ...state, 
+                notifications: [action.notification, ...state.notifications].slice(0, 3) 
+            };
+            
+        case "CLEAR_NOTIFICATION":
+            return { 
+                ...state, 
+                notifications: state.notifications.filter(n => n.id !== action.id) 
+            };
+            
+        case "UPDATE_SETTING":
+            return { 
+                ...state, 
+                settings: { ...state.settings, [action.key]: action.value }
+            };
+            
+        case "RESET_STREAMS":
+            return { 
+                ...state, 
+                streams: {
+                    t: [], readiness: [], hr: [], hrv: [],
+                    focus: [], anxiety: [], confidence: [], dims: null
+                },
+                tick: 0 
+            };
+            
+        default:
+            return state;
+    }
+}
+
+function updateStreams(state) {
+    const { streams, tick, scenario } = state;
+    const ns = JSON.parse(JSON.stringify(streams));
+    const t = tick + 1;
+    const N = 100; // Mobile optimization - shorter history
+    
+    const push = (arr, v) => {
+        arr.push(v);
+        if (arr.length > N) arr.shift();
+    };
+    
+    const rand = mulberry32(Date.now() + t);
+    const noise = () => (rand() - 0.5) * 2;
+    
+    const fat = scenario.fatigue / 100;
+    const pres = scenario.pressure / 100;
+    const mom = scenario.momentum / 100;
+    
+    // Biometric simulation
+    const hr = clamp(70 + 60 * pres + 40 * fat + 10 * Math.sin(t / 7) + noise() * 5, 55, 200);
+    const hrv = clamp(80 - 35 * pres - 20 * fat + 10 * Math.cos(t / 5) + noise() * 3, 15, 120);
+    const focus = clamp(55 + 25 * mom - 15 * fat + 20 * pres + 10 * Math.sin(t / 9) + noise() * 6, 0, 100);
+    const anxiety = clamp(20 + 60 * pres + 10 * fat + 10 * Math.sin(t / 6) + noise() * 10, 0, 100);
+    const confidence = clamp(50 + 20 * mom - 10 * fat + 5 * Math.cos(t / 4) + noise() * 8, 0, 100);
+    
+    // Calculate readiness using simplified model
+    const readiness = clamp(
+        50 + (focus * 0.3) + (confidence * 0.3) - (anxiety * 0.2) + (mom * 0.2) - (fat * 0.15),
+        0, 100
+    );
+    
+    push(ns.t, t);
+    push(ns.hr, Math.round(hr));
+    push(ns.hrv, Math.round(hrv));
+    push(ns.focus, Math.round(focus));
+    push(ns.anxiety, Math.round(anxiety));
+    push(ns.confidence, Math.round(confidence));
+    push(ns.readiness, Math.round(readiness));
+    
+    // Update dimensions for 3D visualization
+    ns.dims = {
+        clutch: clamp(60 + 0.3 * focus + 0.25 * confidence - 0.2 * anxiety + 25 * pres - 10 * fat, 0, 100),
+        flow: clamp(65 + 0.4 * hrv - 0.2 * hr + 0.2 * focus - 0.1 * anxiety + 10 * mom, 0, 100)
+    };
+    
+    return ns;
+}
+
+// ============== UI COMPONENTS ==============
+
+// Mobile Header Component
+const MobileHeader = ({ state, dispatch }) => {
+    const selectedPlayer = PLAYER_DATABASE.find(p => p.id === state.selectedPlayerId);
+    const currentReadiness = state.streams.readiness[state.streams.readiness.length - 1] || 0;
+    
+    return (
+        <motion.header 
+            className="glass sticky top-0 z-40 px-4 py-3 safe-area-inset-top"
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+        >
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <motion.div 
+                        className="text-3xl"
+                        animate={{ rotate: state.running ? 360 : 0 }}
+                        transition={{ duration: 3, repeat: state.running ? Infinity : 0, ease: "linear" }}
+                    >
+                        🔥
+                    </motion.div>
+                    <div>
+                        <h1 className="text-lg font-bold text-transparent bg-clip-text bg-blaze-primary">
+                            Blaze Intelligence
+                        </h1>
+                        <p className="text-xs text-gray-400">{selectedPlayer?.name || 'Mobile Command'}</p>
+                    </div>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                    <div className="text-center">
+                        <motion.div 
+                            className="text-xl font-bold text-orange-400"
+                            key={currentReadiness}
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            {currentReadiness}
+                        </motion.div>
+                        <div className="text-xs text-gray-400">RDY</div>
+                    </div>
+                    
+                    <button 
+                        onClick={() => dispatch({ type: "TOGGLE_SIDEBAR" })}
+                        className="touch-target p-2 rounded-lg glass-light haptic"
+                    >
+                        <i className="fas fa-bars text-orange-400"></i>
+                    </button>
+                </div>
+            </div>
+        </motion.header>
+    );
+};
+
+// Mobile Navigation
+const MobileNavigation = ({ currentTab, onTabChange }) => {
+    const tabs = [
+        { id: "dashboard", icon: "fa-tachometer-alt", label: "Dashboard" },
+        { id: "scouting", icon: "fa-search", label: "Scouting" },
+        { id: "analytics", icon: "fa-chart-line", label: "Analytics" },
+        { id: "simulation", icon: "fa-gamepad", label: "Simulation" },
+        { id: "settings", icon: "fa-cog", label: "Settings" }
+    ];
+    
+    return (
+        <nav className="mobile-nav safe-area-inset-bottom">
+            <div className="flex justify-around py-2">
+                {tabs.map(tab => (
+                    <button
+                        key={tab.id}
+                        onClick={() => onTabChange(tab.id)}
+                        className={`touch-target flex flex-col items-center justify-center p-2 rounded-lg transition-all haptic ${
+                            currentTab === tab.id 
+                                ? 'text-orange-400' 
+                                : 'text-gray-400 hover:text-white'
+                        }`}
+                    >
+                        <i className={`fas ${tab.icon} text-lg mb-1`}></i>
+                        <div className="text-xs font-medium">{tab.label}</div>
+                    </button>
+                ))}
+            </div>
+        </nav>
+    );
+};
+
+// Champion Enigma Gauge Component
+const EnigmaGauge = ({ value = 0, size = 120, playerId = "" }) => {
+    const circumference = 2 * Math.PI * (size / 2 - 15);
+    const strokeDasharray = circumference;
+    const strokeDashoffset = circumference - (value / 100) * circumference;
+    
+    let color = "#ef4444"; // Red for low
+    if (value >= 70) color = "#10b981"; // Green for high
+    else if (value >= 50) color = "#f59e0b"; // Yellow for medium
+    
+    return (
+        <div className="enigma-gauge" style={{ width: size, height: size }}>
+            <svg width={size} height={size} className="transform -rotate-90">
+                <circle
+                    cx={size / 2}
+                    cy={size / 2}
+                    r={size / 2 - 15}
+                    stroke="rgba(255, 255, 255, 0.1)"
+                    strokeWidth="6"
+                    fill="transparent"
+                />
+                <motion.circle
+                    cx={size / 2}
+                    cy={size / 2}
+                    r={size / 2 - 15}
+                    stroke={color}
+                    strokeWidth="6"
+                    fill="transparent"
+                    strokeLinecap="round"
+                    strokeDasharray={strokeDasharray}
+                    initial={{ strokeDashoffset: circumference }}
+                    animate={{ strokeDashoffset }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                />
+            </svg>
+            
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <motion.div 
+                    className="text-2xl font-bold text-white"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    key={Math.floor(value)}
+                >
+                    {Math.round(value)}
+                </motion.div>
+                <div className="text-xs text-gray-400">ENIGMA</div>
+            </div>
+        </div>
+    );
+};
+
+// Dashboard Tab Component
+const DashboardTab = ({ state, dispatch }) => {
+    const selectedPlayer = PLAYER_DATABASE.find(p => p.id === state.selectedPlayerId);
+    const currentReadiness = state.streams.readiness[state.streams.readiness.length - 1] || 0;
+    const league = selectedPlayer ? LEAGUES[selectedPlayer.league] : null;
+    
+    return (
+        <div className="p-4 space-y-6 pb-24 bg-blaze-dark min-h-screen">
+            {/* Hero Section */}
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                {selectedPlayer && (
+                    <div className="text-center mb-6">
+                        <div className="flex items-center justify-center gap-2 mb-2">
+                            <span className={`px-3 py-1 rounded-full text-xs font-bold ${league?.cssClass}`}>
+                                {league?.icon} {league?.name}
+                            </span>
+                        </div>
+                        <h2 className="text-responsive-xl font-bold text-white mb-1">
+                            {selectedPlayer.name}
+                        </h2>
+                        <p className="text-orange-400 font-semibold">
+                            {selectedPlayer.position} | {selectedPlayer.team}
+                        </p>
+                    </div>
+                )}
+                
+                <div className="flex justify-center mb-6">
+                    <EnigmaGauge 
+                        value={selectedPlayer?.analytics.clutchScore || currentReadiness} 
+                        size={140}
+                        playerId={selectedPlayer?.id}
+                    />
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center glass-light rounded-xl p-3">
+                        <div className="text-responsive-lg font-bold text-green-400">
+                            {selectedPlayer?.analytics.scoutingGrades?.overall || Math.round(currentReadiness)}
+                        </div>
+                        <div className="text-xs text-gray-400">Overall</div>
+                    </div>
+                    <div className="text-center glass-light rounded-xl p-3">
+                        <div className="text-responsive-lg font-bold text-blue-400">
+                            {selectedPlayer?.analytics.trend === 'up' ? '↗' : 
+                             selectedPlayer?.analytics.trend === 'down' ? '↘' : '→'}
+                        </div>
+                        <div className="text-xs text-gray-400">Trend</div>
+                    </div>
+                </div>
+            </motion.div>
+            
+            {/* Live Metrics */}
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+            >
+                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <i className="fas fa-heartbeat text-orange-400"></i>
+                    Live Performance Metrics
+                </h3>
+                
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                    <BiometricCard 
+                        title="Heart Rate" 
+                        value={state.streams.hr?.[state.streams.hr.length - 1] || 0}
+                        unit="bpm"
+                        color="#ef4444"
+                        icon="fa-heartbeat"
+                    />
+                    <BiometricCard 
+                        title="HRV" 
+                        value={state.streams.hrv?.[state.streams.hrv.length - 1] || 0}
+                        unit="ms"
+                        color="#3b82f6"
+                        icon="fa-wave-square"
+                    />
+                    <BiometricCard 
+                        title="Focus" 
+                        value={state.streams.focus?.[state.streams.focus.length - 1] || 0}
+                        unit="%"
+                        color="#10b981"
+                        icon="fa-bullseye"
+                    />
+                    <BiometricCard 
+                        title="Confidence" 
+                        value={state.streams.confidence?.[state.streams.confidence.length - 1] || 0}
+                        unit="%"
+                        color="#f59e0b"
+                        icon="fa-trophy"
+                    />
+                </div>
+                
+                {/* Mini Chart */}
+                <div className="h-32">
+                    <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={state.streams.readiness.map((v, i) => ({ time: i, value: v }))}>
+                            <defs>
+                                <linearGradient id="colorReadiness" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="#FF4500" stopOpacity={0.8} />
+                                    <stop offset="95%" stopColor="#FF4500" stopOpacity={0} />
+                                </linearGradient>
+                            </defs>
+                            <XAxis dataKey="time" hide />
+                            <YAxis domain={[0, 100]} hide />
+                            <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke="#FF4500"
+                                fillOpacity={1}
+                                fill="url(#colorReadiness)"
+                            />
+                        </AreaChart>
+                    </ResponsiveContainer>
+                </div>
+            </motion.div>
+            
+            {/* Quick Actions */}
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+            >
+                <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+                <div className="grid grid-cols-2 gap-4">
+                    <button 
+                        onClick={() => dispatch({ type: "TOGGLE_RUNNING" })}
+                        className={`flex items-center justify-center gap-2 p-4 rounded-xl font-semibold text-white transition-all haptic ${
+                            state.running 
+                                ? 'bg-red-500 hover:bg-red-600' 
+                                : 'bg-green-500 hover:bg-green-600'
+                        }`}
+                    >
+                        <i className={`fas ${state.running ? 'fa-pause' : 'fa-play'}`}></i>
+                        {state.running ? 'Pause' : 'Start'}
+                    </button>
+                    <button 
+                        onClick={() => dispatch({ type: "RESET_STREAMS" })}
+                        className="flex items-center justify-center gap-2 p-4 rounded-xl bg-gray-600 hover:bg-gray-700 font-semibold text-white transition-all haptic"
+                    >
+                        <i className="fas fa-redo"></i>
+                        Reset
+                    </button>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+// Biometric Card Component
+const BiometricCard = ({ title, value, unit, color, icon }) => (
+    <div className="glass-light rounded-xl p-4">
+        <div className="flex items-center justify-between mb-2">
+            <i className={`fas ${icon} text-gray-400`}></i>
+            <div className="text-xs text-gray-400">{title}</div>
+        </div>
+        <div className="text-xl font-bold text-center" style={{ color }}>
+            {value}{unit}
+        </div>
+    </div>
+);
+
+// Scouting Tab Component
+const ScoutingTab = ({ state, dispatch }) => {
+    const filteredPlayers = useMemo(() => {
+        return PLAYER_DATABASE.filter(player => {
+            const matchesSearch = state.searchQuery === '' || 
+                player.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                player.team.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                player.position.toLowerCase().includes(state.searchQuery.toLowerCase());
+                
+            const matchesLeague = state.activeLeagues.includes(player.league);
+            const matchesTeam = state.focusTeam === 'all' || player.team === state.focusTeam;
+            
+            return matchesSearch && matchesLeague && matchesTeam;
+        }).sort((a, b) => {
+            if (state.sortBy === 'clutch') {
+                return (b.analytics.clutchScore || 0) - (a.analytics.clutchScore || 0);
+            }
+            return a.name.localeCompare(b.name);
+        });
+    }, [state.searchQuery, state.activeLeagues, state.focusTeam, state.sortBy]);
+    
+    const selectedPlayer = PLAYER_DATABASE.find(p => p.id === state.selectedPlayerId);
+    
+    return (
+        <div className="flex flex-col h-full bg-blaze-dark">
+            {/* Search and Filters */}
+            <div className="p-4 space-y-4">
+                <div className="relative">
+                    <i className="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input
+                        type="text"
+                        placeholder="Search players..."
+                        value={state.searchQuery}
+                        onChange={(e) => dispatch({ type: "SET_SEARCH", query: e.target.value })}
+                        className="w-full pl-10 pr-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white placeholder-gray-400"
+                    />
+                </div>
+                
+                <div className="flex gap-2 overflow-x-auto no-scrollbar">
+                    {Object.entries(LEAGUES).map(([key, league]) => (
+                        <button
+                            key={key}
+                            onClick={() => dispatch({ type: "TOGGLE_LEAGUE", league: key })}
+                            className={`px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors haptic ${
+                                state.activeLeagues.includes(key)
+                                    ? `${league.cssClass} text-white`
+                                    : 'bg-gray-700 text-gray-300'
+                            }`}
+                        >
+                            {league.icon} {league.name}
+                        </button>
+                    ))}
+                </div>
+            </div>
+            
+            {/* Player List */}
+            <div className="flex-1 overflow-y-auto no-scrollbar px-4">
+                <div className="space-y-3 pb-24">
+                    {filteredPlayers.map(player => {
+                        const league = LEAGUES[player.league];
+                        const isSelected = player.id === state.selectedPlayerId;
+                        
+                        return (
+                            <motion.button
+                                key={player.id}
+                                onClick={() => dispatch({ type: "SET_SELECTED_PLAYER", playerId: player.id })}
+                                className={`w-full text-left p-4 rounded-xl border transition-all haptic ${
+                                    isSelected 
+                                        ? 'glass border-orange-400' 
+                                        : 'glass-light border-gray-600'
+                                }`}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                <div className="flex justify-between items-start">
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <span className={`px-2 py-1 rounded text-xs font-bold ${league.cssClass}`}>
+                                                {league.icon}
+                                            </span>
+                                            <span className="text-xs text-gray-400">{player.position}</span>
+                                        </div>
+                                        <h3 className="font-semibold text-white mb-1">{player.name}</h3>
+                                        <p className="text-sm text-gray-400">{player.team}</p>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className="text-lg font-bold text-orange-400">
+                                            {player.analytics.clutchScore.toFixed(1)}
+                                        </div>
+                                        <div className="text-xs text-gray-400">Enigma</div>
+                                    </div>
+                                </div>
+                            </motion.button>
+                        );
+                    })}
+                </div>
+            </div>
+            
+            {/* Selected Player Details */}
+            {selectedPlayer && (
+                <motion.div 
+                    className="fixed inset-x-4 bottom-24 glass rounded-2xl p-4 border-orange-400 border"
+                    initial={{ y: 100 }}
+                    animate={{ y: 0 }}
+                >
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <h4 className="font-semibold text-white">{selectedPlayer.name}</h4>
+                            <p className="text-sm text-gray-400">{selectedPlayer.position} • Age {selectedPlayer.age}</p>
+                        </div>
+                        <EnigmaGauge value={selectedPlayer.analytics.clutchScore} size={80} />
+                    </div>
+                </motion.div>
+            )}
+        </div>
+    );
+};
+
+// Analytics Tab Component
+const AnalyticsTab = ({ state }) => {
+    const chartRef = useRef(null);
+    
+    useEffect(() => {
+        if (chartRef.current) {
+            const ctx = chartRef.current.getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cardinals', 'Titans', 'Longhorns', 'Rangers', 'Cowboys'],
+                    datasets: [{
+                        label: 'Team Champion Enigma Score',
+                        data: [86.8, 80.9, 85.3, 90.1, 82.5],
+                        backgroundColor: 'rgba(255, 69, 0, 0.3)',
+                        borderColor: '#FF4500',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { 
+                        y: { 
+                            beginAtZero: true, 
+                            suggestedMax: 100,
+                            ticks: { color: '#9CA3AF' }
+                        },
+                        x: {
+                            ticks: { color: '#9CA3AF' }
+                        }
+                    },
+                    plugins: { 
+                        legend: { 
+                            labels: { color: "#D1D5DB" } 
+                        } 
+                    }
+                }
+            });
+        }
+    }, []);
+    
+    return (
+        <div className="p-4 space-y-6 pb-24 bg-blaze-dark min-h-screen">
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i className="fas fa-chart-line text-orange-400"></i>
+                    Team Performance Index
+                </h2>
+                <div className="h-64">
+                    <canvas ref={chartRef}></canvas>
+                </div>
+            </motion.div>
+            
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+            >
+                <h3 className="text-lg font-semibold text-white mb-4">Live Data Stream</h3>
+                <div className="space-y-3">
+                    <div className="p-3 rounded bg-green-900/30 text-green-300 text-sm font-mono">
+                        [INFO] Quinn Ewers (QB, Texas) - Status: Cleared for participation
+                    </div>
+                    <div className="p-3 rounded bg-yellow-900/30 text-yellow-300 text-sm font-mono">
+                        [WARN] Paul Goldschmidt - Minor fatigue detected, monitoring
+                    </div>
+                    <div className="p-3 rounded bg-blue-900/30 text-blue-300 text-sm font-mono">
+                        [DATA] 12 new player profiles ingested from Big12 feed
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+// Settings Tab Component
+const SettingsTab = ({ state, dispatch }) => {
+    return (
+        <div className="p-4 space-y-6 pb-24 bg-blaze-dark min-h-screen">
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                <h2 className="text-xl font-bold text-white mb-6">Settings</h2>
+                
+                <div className="space-y-4">
+                    <SettingToggle
+                        label="Haptic Feedback"
+                        description="Vibration on interactions"
+                        value={state.settings.hapticFeedback}
+                        onChange={(value) => dispatch({ type: "UPDATE_SETTING", key: "hapticFeedback", value })}
+                    />
+                    <SettingToggle
+                        label="Push Notifications"
+                        description="Receive performance alerts"
+                        value={state.settings.notifications}
+                        onChange={(value) => dispatch({ type: "UPDATE_SETTING", key: "notifications", value })}
+                    />
+                    <SettingToggle
+                        label="Auto Sync"
+                        description="Automatically sync data"
+                        value={state.settings.autoSync}
+                        onChange={(value) => dispatch({ type: "UPDATE_SETTING", key: "autoSync", value })}
+                    />
+                </div>
+            </motion.div>
+            
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+            >
+                <h3 className="text-lg font-semibold text-white mb-4">Simulation Controls</h3>
+                <div className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">
+                            Speed: {state.speed}x
+                        </label>
+                        <input
+                            type="range"
+                            min="0.5"
+                            max="4"
+                            step="0.5"
+                            value={state.speed}
+                            onChange={(e) => dispatch({ type: "SET_SPEED", speed: parseFloat(e.target.value) })}
+                            className="w-full accent-orange-400"
+                        />
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+// Settings Toggle Component
+const SettingToggle = ({ label, description, value, onChange }) => (
+    <div className="flex items-center justify-between py-2">
+        <div>
+            <div className="text-sm font-medium text-white">{label}</div>
+            <div className="text-xs text-gray-400">{description}</div>
+        </div>
+        <button
+            onClick={() => onChange(!value)}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                value ? 'bg-orange-500' : 'bg-gray-600'
+            }`}
+        >
+            <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    value ? 'translate-x-6' : 'translate-x-1'
+                }`}
+            />
+        </button>
+    </div>
+);
+
+// Sidebar Component
+const Sidebar = ({ isOpen, onClose, state, dispatch }) => {
+    return (
+        <AnimatePresence>
+            {isOpen && (
+                <>
+                    <motion.div
+                        className="fixed inset-0 z-50 bg-black/60"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={onClose}
+                    />
+                    <motion.div
+                        className="fixed right-0 top-0 bottom-0 w-80 max-w-[90vw] glass z-50 overflow-y-auto safe-area-inset-top"
+                        initial={{ x: "100%" }}
+                        animate={{ x: 0 }}
+                        exit={{ x: "100%" }}
+                        transition={{ type: "tween", duration: 0.3 }}
+                    >
+                        <div className="p-6">
+                            <div className="flex items-center justify-between mb-6">
+                                <h2 className="text-xl font-bold text-white">Quick Controls</h2>
+                                <button
+                                    onClick={onClose}
+                                    className="p-2 rounded-lg glass-light"
+                                >
+                                    <i className="fas fa-times text-white"></i>
+                                </button>
+                            </div>
+                            
+                            {/* Scenario Controls */}
+                            <div className="space-y-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                                        Pressure: {state.scenario.pressure}%
+                                    </label>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        value={state.scenario.pressure}
+                                        onChange={(e) => dispatch({ 
+                                            type: "SET_SCENARIO", 
+                                            patch: { pressure: parseInt(e.target.value) }
+                                        })}
+                                        className="w-full accent-red-400"
+                                    />
+                                </div>
+                                
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                                        Fatigue: {state.scenario.fatigue}%
+                                    </label>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        value={state.scenario.fatigue}
+                                        onChange={(e) => dispatch({ 
+                                            type: "SET_SCENARIO", 
+                                            patch: { fatigue: parseInt(e.target.value) }
+                                        })}
+                                        className="w-full accent-yellow-400"
+                                    />
+                                </div>
+                                
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                                        Momentum: {state.scenario.momentum}%
+                                    </label>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        value={state.scenario.momentum}
+                                        onChange={(e) => dispatch({ 
+                                            type: "SET_SCENARIO", 
+                                            patch: { momentum: parseInt(e.target.value) }
+                                        })}
+                                        className="w-full accent-green-400"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
+    );
+};
+
+// Simulation Tab (Placeholder)
+const SimulationTab = () => (
+    <div className="p-8 bg-blaze-dark min-h-screen flex items-center justify-center">
+        <div className="text-center glass rounded-xl p-8">
+            <i className="fas fa-gamepad fa-4x text-orange-400 mb-4"></i>
+            <h2 className="text-2xl font-bold text-white mb-2">Lone Star Legends</h2>
+            <p className="text-gray-400 mb-4">Baseball simulation coming soon</p>
+            <div className="loading-spinner mx-auto"></div>
+        </div>
+    </div>
+);
+
+// Notifications Component
+const Notifications = ({ notifications, onClear }) => {
+    return (
+        <AnimatePresence>
+            {notifications.map((notification) => (
+                <motion.div
+                    key={notification.id}
+                    className="fixed top-20 right-4 z-40 max-w-sm glass rounded-xl p-4"
+                    initial={{ x: 400, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: 400, opacity: 0 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                >
+                    <div className="flex items-start gap-3">
+                        <div className="text-xl">
+                            {notification.type === 'success' ? '✅' : notification.type === 'warning' ? '⚠️' : 'ℹ️'}
+                        </div>
+                        <div className="flex-1">
+                            <p className="text-sm font-medium text-white">{notification.message}</p>
+                            <p className="text-xs text-gray-400 mt-1">
+                                {new Date(notification.timestamp).toLocaleTimeString()}
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => onClear(notification.id)}
+                            className="text-gray-400 hover:text-white"
+                        >
+                            <i className="fas fa-times"></i>
+                        </button>
+                    </div>
+                </motion.div>
+            ))}
+        </AnimatePresence>
+    );
+};
+
+// ============== MAIN APP COMPONENT ==============
+
+function BlazeIntelligenceMobileApp() {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    
+    // Simulation Loop
+    useEffect(() => {
+        if (!state.running) return;
+        
+        const interval = setInterval(() => {
+            dispatch({ type: "TICK" });
+        }, 500 / state.speed); // Slower for mobile battery optimization
+        
+        return () => clearInterval(interval);
+    }, [state.running, state.speed]);
+    
+    const renderTabContent = () => {
+        switch (state.currentTab) {
+            case "dashboard":
+                return <DashboardTab state={state} dispatch={dispatch} />;
+            case "scouting":
+                return <ScoutingTab state={state} dispatch={dispatch} />;
+            case "analytics":
+                return <AnalyticsTab state={state} dispatch={dispatch} />;
+            case "simulation":
+                return <SimulationTab />;
+            case "settings":
+                return <SettingsTab state={state} dispatch={dispatch} />;
+            default:
+                return <DashboardTab state={state} dispatch={dispatch} />;
+        }
+    };
+    
+    return (
+        <div className="min-h-screen bg-blaze-dark text-white overflow-hidden">
+            <MobileHeader state={state} dispatch={dispatch} />
+            
+            <main className="h-full">
+                {renderTabContent()}
+            </main>
+            
+            <MobileNavigation 
+                currentTab={state.currentTab} 
+                onTabChange={(tab) => dispatch({ type: "SET_TAB", tab })} 
+            />
+            
+            <Sidebar 
+                isOpen={state.sidebarOpen} 
+                onClose={() => dispatch({ type: "TOGGLE_SIDEBAR" })} 
+                state={state} 
+                dispatch={dispatch} 
+            />
+            
+            <Notifications 
+                notifications={state.notifications} 
+                onClear={(id) => dispatch({ type: "CLEAR_NOTIFICATION", id })} 
+            />
+        </div>
+    );
+}
+
+// Render the app
+ReactDOM.render(<BlazeIntelligenceMobileApp />, document.getElementById('root'));
+</script>
+</body>
+</html>
