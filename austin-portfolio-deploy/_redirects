@@ -6,6 +6,12 @@
 /perfect-game     /perfect-game.html                  200
 /recruiting       /recruiting-hq.html                 200
 
+# NIL section
+/sec-nil          /sec-nil.html                       200
+/sec-nil-analytics /sec-nil-analytics.html            200
+/nil-calculator   /nil-calculator.html                200
+/pricing          /nil-calculator.html                200
+
 # Legacy redirects
 /platform         /index.html                         301
 /dashboard        /texas-football-authority.html      301
