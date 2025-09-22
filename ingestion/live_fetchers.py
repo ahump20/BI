@@ -56,16 +56,18 @@ class BaseLiveFetcher:
 
 class MLBLiveFetcher(BaseLiveFetcher):
     """Fetch live MLB data from Baseball Savant/Statcast"""
-    
+
     def __init__(self):
         super().__init__(rate_limit=1.0)  # 1 second between requests
         self.base_url = "https://baseballsavant.mlb.com"
-        self.api_url = "https://statsapi.mlb.com/api/v1"
+        self.api_url = os.getenv("BASEBALL_BASE_URL", "https://statsapi.mlb.com/api/v1")
+        self.api_key = os.getenv("BASEBALL_API_KEY")
     
     def get_team_roster(self, team_abbr: str = "STL") -> List[Dict[str, Any]]:
         """Get current roster for a team"""
         # First get team ID
-        teams_response = self._retry_request(f"{self.api_url}/teams")
+        headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else None
+        teams_response = self._retry_request(f"{self.api_url}/teams", headers=headers)
         teams_data = teams_response.json()
         
         team_id = None
@@ -78,15 +80,17 @@ class MLBLiveFetcher(BaseLiveFetcher):
             raise ValueError(f"Team {team_abbr} not found")
         
         # Get roster
-        roster_response = self._retry_request(f"{self.api_url}/teams/{team_id}/roster/Active")
+        roster_response = self._retry_request(f"{self.api_url}/teams/{team_id}/roster/Active", headers=headers)
         roster_data = roster_response.json()
         
         return roster_data.get("roster", [])
     
     def get_player_stats(self, player_id: str, season: str = "2024") -> Dict[str, Any]:
         """Get player stats from MLB Stats API"""
+        headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else None
         stats_response = self._retry_request(
             f"{self.api_url}/people/{player_id}/stats",
+            headers=headers,
             params={"stats": "season", "season": season}
         )
         return stats_response.json()

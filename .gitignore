@@ -66,7 +66,6 @@ bower_components/
 # =============================================================================
 # Build and Distribution
 # =============================================================================
-dist/
 build/
 out/
 .next/
@@ -75,6 +74,7 @@ out/
 .parcel-cache/
 .temp/
 tmp/
+dist/data/
 
 # Generated files
 *.generated.*
@@ -263,7 +263,8 @@ analytics-cache/
 # Deployment and CI/CD
 # =============================================================================
 .vercel/
-.netlify/
+.netlify/*
+!.netlify/config
 .firebase/
 
 # Terraform
@@ -351,6 +352,14 @@ OLD_*/
 # =============================================================================
 *.tar.gz
 *.zip
+
+# Binary Documents and Backups
+*.pdf
+*.bak
+*.backup
+
+# Allow documentation PDFs
+!docs/**/*.pdf
 
 # =============================================================================
 # Python Environments
@@ -455,5 +464,4 @@ secrets.env
 
 # Platform-specific
 .vercel/
-.netlify/
 wrangler.toml.local

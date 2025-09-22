@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Championship Sports Analytics</title>
+
+    <!-- Load SportsDataIO Integration -->
+    <script>
+        // Inline the entire SportsDataIO configuration for Replit
+        const SPORTSDATAIO_CONFIG = {
+            apiKey: '6ca2adb39404482da5406f0a6cd7aa37',
+            baseUrls: {
+                nfl: 'https://api.sportsdata.io/v3/nfl',
+                mlb: 'https://api.sportsdata.io/v3/mlb',
+                nba: 'https://api.sportsdata.io/v3/nba',
+                ncaaFootball: 'https://api.sportsdata.io/v3/cfb',
+                ncaaBasketball: 'https://api.sportsdata.io/v3/cbb'
+            }
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary-orange: #BF5700;
+            --championship-gold: #FFD700;
+            --cardinal-blue: #9BCBEB;
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #e0e6ed;
+            --text-secondary: #8892b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary-orange), var(--championship-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #4ade80;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .team-card {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--primary-orange);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .sport-icon {
+            font-size: 2rem;
+        }
+
+        .team-name {
+            color: var(--cardinal-blue);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .team-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            color: var(--championship-gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .api-status {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .status-item {
+            text-align: center;
+        }
+
+        .status-value {
+            display: block;
+            font-size: 2rem;
+            color: var(--championship-gold);
+            font-weight: bold;
+        }
+
+        .status-label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(191, 87, 0, 0.2);
+            border-top-color: var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid #ff4757;
+            color: #ff4757;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 Blaze Intelligence</h1>
+            <p class="subtitle">Championship Sports Analytics Platform</p>
+            <div class="live-indicator">
+                <span class="pulse"></span>
+                <span>LIVE DATA</span>
+            </div>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading championship data...</p>
+        </div>
+
+        <div id="teams-container" class="teams-grid" style="display: none;"></div>
+
+        <div id="api-status" class="api-status" style="display: none;">
+            <h3>API Performance Metrics</h3>
+            <div class="status-grid" id="status-grid"></div>
+        </div>
+
+        <div id="error-container"></div>
+    </div>
+
+    <script>
+        // Championship teams configuration
+        const FEATURED_TEAMS = {
+            mlb: { key: 'STL', name: 'Cardinals', icon: '⚾' },
+            nfl: { key: 'TEN', name: 'Titans', icon: '🏈' },
+            nba: { key: 'MEM', name: 'Grizzlies', icon: '🏀' },
+            ncaaFootball: { school: 'Texas', name: 'Longhorns', icon: '🏈' }
+        };
+
+        // API metrics
+        let apiMetrics = {
+            totalRequests: 0,
+            successfulRequests: 0,
+            failedRequests: 0,
+            averageResponseTime: 0,
+            lastUpdate: null
+        };
+
+        // Make API request
+        async function fetchSportsData(sport, endpoint) {
+            const startTime = Date.now();
+            apiMetrics.totalRequests++;
+
+            try {
+                const baseUrl = SPORTSDATAIO_CONFIG.baseUrls[sport];
+                const url = `${baseUrl}/${endpoint}?key=${SPORTSDATAIO_CONFIG.apiKey}`;
+
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // Update metrics
+                const responseTime = Date.now() - startTime;
+                apiMetrics.successfulRequests++;
+                apiMetrics.averageResponseTime =
+                    (apiMetrics.averageResponseTime * (apiMetrics.successfulRequests - 1) + responseTime) /
+                    apiMetrics.successfulRequests;
+                apiMetrics.lastUpdate = new Date().toISOString();
+
+                return data;
+            } catch (error) {
+                apiMetrics.failedRequests++;
+                console.error(`API Error [${sport}/${endpoint}]:`, error);
+                throw error;
+            }
+        }
+
+        // Load Cardinals data
+        async function loadCardinalsData() {
+            try {
+                const [teams, standings] = await Promise.all([
+                    fetchSportsData('mlb', 'scores/json/Teams'),
+                    fetchSportsData('mlb', 'scores/json/Standings/2024')
+                ]);
+
+                const cardinals = teams.find(t => t.Key === 'STL');
+                const cardinalsStanding = standings.find(s => s.Key === 'STL');
+
+                return {
+                    team: cardinals,
+                    record: cardinalsStanding ? `${cardinalsStanding.Wins}-${cardinalsStanding.Losses}` : 'N/A',
+                    divisionRank: cardinalsStanding?.DivisionRank || 'N/A',
+                    winPct: cardinalsStanding ? (cardinalsStanding.Percentage * 100).toFixed(1) + '%' : 'N/A'
+                };
+            } catch (error) {
+                console.error('Cardinals data error:', error);
+                return null;
+            }
+        }
+
+        // Load Titans data
+        async function loadTitansData() {
+            try {
+                const [teams, standings] = await Promise.all([
+                    fetchSportsData('nfl', 'scores/json/Teams'),
+                    fetchSportsData('nfl', 'scores/json/Standings/2024')
+                ]);
+
+                const titans = teams.find(t => t.Key === 'TEN');
+                const titansStanding = standings.find(s => s.Team === 'TEN');
+
+                return {
+                    team: titans,
+                    record: titansStanding ? `${titansStanding.Wins}-${titansStanding.Losses}` : 'N/A',
+                    divisionRank: titansStanding?.DivisionRank || 'N/A',
+                    conferenceRank: titansStanding?.ConferenceRank || 'N/A'
+                };
+            } catch (error) {
+                console.error('Titans data error:', error);
+                return null;
+            }
+        }
+
+        // Load Grizzlies data
+        async function loadGrizzliesData() {
+            try {
+                const [teams, standings] = await Promise.all([
+                    fetchSportsData('nba', 'scores/json/Teams'),
+                    fetchSportsData('nba', 'scores/json/Standings/2025')
+                ]);
+
+                const grizzlies = teams.find(t => t.Key === 'MEM');
+                const grizzliesStanding = standings.find(s => s.Key === 'MEM');
+
+                return {
+                    team: grizzlies,
+                    record: grizzliesStanding ? `${grizzliesStanding.Wins}-${grizzliesStanding.Losses}` : 'N/A',
+                    conferenceRank: grizzliesStanding?.ConferenceRank || 'N/A',
+                    winPct: grizzliesStanding ? (grizzliesStanding.Percentage * 100).toFixed(1) + '%' : 'N/A'
+                };
+            } catch (error) {
+                console.error('Grizzlies data error:', error);
+                return null;
+            }
+        }
+
+        // Load Longhorns data
+        async function loadLonghornsData() {
+            try {
+                const teams = await fetchSportsData('ncaaFootball', 'scores/json/Teams');
+                const texas = teams.find(t => t.School === 'Texas' || t.Name === 'Longhorns');
+
+                return {
+                    team: texas,
+                    record: texas ? `${texas.Wins || 0}-${texas.Losses || 0}` : 'N/A',
+                    apRank: texas?.ApRank ? `#${texas.ApRank}` : 'NR',
+                    conference: texas?.Conference || 'SEC'
+                };
+            } catch (error) {
+                console.error('Longhorns data error:', error);
+                return null;
+            }
+        }
+
+        // Create team card HTML
+        function createTeamCard(sport, data) {
+            const team = FEATURED_TEAMS[sport];
+
+            if (!data) {
+                return `
+                    <div class="team-card">
+                        <div class="team-header">
+                            <span class="sport-icon">${team.icon}</span>
+                            <span class="team-name">${team.name}</span>
+                        </div>
+                        <div class="error">Failed to load data</div>
+                    </div>
+                `;
+            }
+
+            const stats = {
+                mlb: [
+                    { label: 'Record', value: data.record },
+                    { label: 'Division', value: data.divisionRank },
+                    { label: 'Win %', value: data.winPct },
+                    { label: 'League', value: 'NL Central' }
+                ],
+                nfl: [
+                    { label: 'Record', value: data.record },
+                    { label: 'Division', value: data.divisionRank },
+                    { label: 'Conference', value: data.conferenceRank },
+                    { label: 'Division', value: 'AFC South' }
+                ],
+                nba: [
+                    { label: 'Record', value: data.record },
+                    { label: 'Conference', value: data.conferenceRank },
+                    { label: 'Win %', value: data.winPct },
+                    { label: 'Division', value: 'Southwest' }
+                ],
+                ncaaFootball: [
+                    { label: 'Record', value: data.record },
+                    { label: 'AP Rank', value: data.apRank },
+                    { label: 'Conference', value: data.conference },
+                    { label: 'Division', value: 'SEC' }
+                ]
+            };
+
+            return `
+                <div class="team-card">
+                    <div class="team-header">
+                        <span class="sport-icon">${team.icon}</span>
+                        <span class="team-name">${team.name}</span>
+                    </div>
+                    <div class="team-stats">
+                        ${stats[sport].map(stat => `
+                            <div class="stat">
+                                <span class="stat-label">${stat.label}</span>
+                                <span class="stat-value">${stat.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Update API status display
+        function updateApiStatus() {
+            const statusGrid = document.getElementById('status-grid');
+            const successRate = apiMetrics.totalRequests > 0
+                ? ((apiMetrics.successfulRequests / apiMetrics.totalRequests) * 100).toFixed(1)
+                : 0;
+
+            statusGrid.innerHTML = `
+                <div class="status-item">
+                    <span class="status-value">${apiMetrics.totalRequests}</span>
+                    <span class="status-label">Total Requests</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-value">${successRate}%</span>
+                    <span class="status-label">Success Rate</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-value">${Math.round(apiMetrics.averageResponseTime)}ms</span>
+                    <span class="status-label">Avg Response</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-value">${apiMetrics.failedRequests}</span>
+                    <span class="status-label">Failed Requests</span>
+                </div>
+            `;
+
+            document.getElementById('api-status').style.display = 'block';
+        }
+
+        // Load all championship data
+        async function loadChampionshipData() {
+            console.log('🔥 Loading Championship Data...');
+
+            try {
+                // Load all teams in parallel
+                const [cardinalsData, titansData, grizzliesData, longhornsData] = await Promise.all([
+                    loadCardinalsData(),
+                    loadTitansData(),
+                    loadGrizzliesData(),
+                    loadLonghornsData()
+                ]);
+
+                // Create team cards
+                const teamsContainer = document.getElementById('teams-container');
+                teamsContainer.innerHTML =
+                    createTeamCard('mlb', cardinalsData) +
+                    createTeamCard('nfl', titansData) +
+                    createTeamCard('nba', grizzliesData) +
+                    createTeamCard('ncaaFootball', longhornsData);
+
+                // Show teams and hide loading
+                document.getElementById('loading').style.display = 'none';
+                teamsContainer.style.display = 'grid';
+
+                // Update API status
+                updateApiStatus();
+
+                console.log('✅ Championship data loaded successfully');
+
+            } catch (error) {
+                console.error('❌ Error loading championship data:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error-container').innerHTML = `
+                    <div class="error">
+                        <strong>Error loading data:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Auto-refresh data every 30 seconds
+        function startAutoRefresh() {
+            setInterval(() => {
+                console.log('🔄 Refreshing data...');
+                loadChampionshipData();
+            }, 30000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🔥 Blaze Intelligence Replit Deployment');
+            console.log('📊 API Key:', SPORTSDATAIO_CONFIG.apiKey.substring(0, 8) + '...');
+
+            loadChampionshipData();
+            startAutoRefresh();
+        });
+    </script>
+</body>
+</html>
