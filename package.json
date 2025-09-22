@@ -1,6 +1,7 @@
 {
   "name": "blaze-intelligence-api",
   "version": "1.0.0",
+  "type": "module",
   "description": "Blaze Intelligence API Services",
   "main": "contact-form.js",
   "scripts": {
@@ -9,10 +10,19 @@
     "build": "npm run build:site && npm run copy:data",
     "build:site": "node -e \"console.log('Static site already committed to dist')\"",
     "copy:data": "mkdir -p dist/data && cp -R data/* dist/data 2>/dev/null || true",
-    "dev": "netlify dev"
+    "dev": "netlify dev",
+    "git:status": "node scripts/git-operations.js status",
+    "git:commit": "node scripts/git-operations.js commit",
+    "git:pull": "node scripts/git-operations.js pull --execute",
+    "git:push": "node scripts/git-operations.js push --execute",
+    "git:rebase": "node scripts/git-operations.js rebase --execute",
+    "git:sync": "node scripts/git-operations.js sync --execute",
+    "git:sync-safe": "node scripts/git-operations.js sync",
+    "git:help": "node scripts/git-operations.js"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "chalk": "^5.3.0"
   },
   "devDependencies": {},
   "keywords": [
