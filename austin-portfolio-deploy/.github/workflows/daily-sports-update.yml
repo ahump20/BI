@@ -1,0 +1,95 @@
+name: Daily Sports Data Update
+
+on:
+  schedule:
+    # Run at 6 AM CT (11 AM UTC) every day
+    - cron: '0 11 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-sports-data:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install dependencies
+      run: npm ci || npm install
+
+    - name: Run sports data updater
+      run: node daily-sports-data-updater.js --now
+      env:
+        NODE_ENV: production
+
+    - name: Generate update report
+      run: |
+        echo "## 📊 Daily Sports Data Update Report" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Date:** $(date +'%B %d, %Y')" >> $GITHUB_STEP_SUMMARY
+        echo "**Time:** $(date +'%I:%M %p %Z')" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Sports Updated:" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Texas High School Football (Dave Campbell's)" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Perfect Game Baseball Texas Region" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ NCAA Football (P5 & G5)" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ NFL (All 32 Teams)" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ MLB (All 30 Teams)" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ College Baseball (P5 & G5)" >> $GITHUB_STEP_SUMMARY
+
+    - name: Commit and push if changed
+      run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add -A
+        if git diff --quiet && git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "🔄 Daily sports data update - $(date +'%Y-%m-%d %I:%M %p CT')"
+          git push
+        fi
+
+    - name: Deploy to Cloudflare Pages
+      if: success()
+      run: |
+        npm install -g wrangler
+        wrangler pages deploy . --project-name=blaze-intelligence --compatibility-date=2025-09-22
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      continue-on-error: true
+
+    - name: Deploy to Netlify
+      if: success()
+      run: |
+        npm install -g netlify-cli
+        netlify deploy --prod --dir=. --site=${{ secrets.NETLIFY_SITE_ID }}
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      continue-on-error: true
+
+    - name: Send notification on failure
+      if: failure()
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: '⚠️ Daily Sports Update Failed - ' + new Date().toLocaleDateString(),
+            body: 'The daily sports data update workflow failed. Please check the [workflow logs](' + context.serverUrl + '/' + context.repo.owner + '/' + context.repo.repo + '/actions/runs/' + context.runId + ').',
+            labels: ['automated', 'bug', 'data-update']
+          })
