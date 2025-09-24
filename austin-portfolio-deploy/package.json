@@ -1,18 +1,13 @@
 {
-  "name": "blaze-intelligence-simple",
+  "name": "blaze-intelligence",
   "version": "1.0.0",
-  "description": "Simple interface, sophisticated backend",
-  "main": "simple-blaze-server.js",
+  "description": "Blaze Intelligence - The Deep South Sports Authority",
+  "main": "index.html",
+  "type": "module",
   "scripts": {
-    "start": "node simple-blaze-server.js",
-    "dev": "nodemon simple-blaze-server.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1"
-  },
-  "engines": {
-    "node": ">=14.0.0"
+    "start": "npx live-server --port=8000 --entry-file=index.html",
+    "dev": "npx live-server --port=8000 --entry-file=index.html",
+    "deploy": "echo 'Deploying to production...'",
+    "test": "echo 'Running tests...'"
   }
 }
