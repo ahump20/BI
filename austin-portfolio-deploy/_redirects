@@ -2,8 +2,8 @@
 # The Deep South Sports Authority - Texas Football & SEC Analytics
 
 # Primary domain redirects
-https://blaze-intelligence.netlify.app/* https://blaze-intelligence.com/:splat 301!
-https://blazesportsintel.com/* https://blaze-intelligence.com/:splat 301!
+https://blaze-intelligence.netlify.app/* https://blazesportsintel.com/:splat 301!
+https://blaze-intelligence.com/* https://blazesportsintel.com/:splat 301!
 
 # Main sections - Texas Football Authority & SEC Analytics
 /texas-football    /texas-football-authority.html    200
@@ -31,6 +31,15 @@ https://blazesportsintel.com/* https://blaze-intelligence.com/:splat 301!
 /grizzlies /grizzlies-intelligence.html 200
 /orioles /orioles-executive-championship.html 200
 /baltimore /baltimore-intelligence.html 200
+
+# New Subpages
+/sports-authority-structure  /sports-authority-structure.html  200
+/comprehensive-coverage      /comprehensive-sports-coverage.html  200
+/blazedraft                 /blazedraft.html                   200
+/blazescout                 /blazescout.html                   200
+/login                      /login.html                        200
+/signup                     /signup.html                       200
+/subscribe                  /subscribe.html                    200
 
 # Legacy redirects
 /platform         /index.html                         301
