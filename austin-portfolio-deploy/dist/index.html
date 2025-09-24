@@ -1,53 +1,954 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="UTF-8">
+<html><head></head><body>   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blaze Intelligence | Elite Sports Analytics Platform</title>
-    <meta name="description" content="Where Texas heritage meets algorithmic excellence. Transform data into championships with AI-powered sports intelligence.">
+    <title>Blaze Intelligence - The Deep South's Sports Intelligence Hub</title>
+    <meta name="description" content="The Dave Campbell's of SEC/Texas/Deep South sports. Definitive intelligence from youth leagues to the pros. Friday Night Lights to Sunday in the Show.">
     
-    <!-- Preconnect to CDNs -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Blaze Intelligence - Deep South Sports Authority">
+    <meta property="og:description" content="Championship intelligence for SEC, Texas, and Deep South athletics. From Perfect Game to the Pros.">
+    <meta property="og:image" content="/public/assets/images/deep-south-authority.png">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
     
-    <!-- Optimized font loading -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Inline critical CSS -->
+    <!-- Three.js for Hero Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+    
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <style>
-        :root{--burnt-orange:#BF5700;--cardinal-blue:#9BCBEB;--deep-navy:#002244;--teal:#00B2A9}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#fff;line-height:1.6}
-        .loading{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a0a;display:flex;align-items:center;justify-content:center;z-index:9999}
+        :root {
+            /* Deep South Authority Color Palette */
+            --burnt-orange: #BF5700;     /* Texas Heritage */
+            --sec-crimson: #9E1B32;      /* Alabama/SEC Power */
+            --magnolia-white: #FAFAFA;   /* Southern Elegance */
+            --gulf-blue: #003087;        /* Coastal Connection */
+            --lsu-purple: #461D7C;       /* Louisiana */
+            --georgia-red: #BA0C2F;      /* Georgia */
+            --ole-miss-navy: #14213D;    /* Mississippi */
+            --volunteer-orange: #FF8200;  /* Tennessee */
+            
+            /* Background Colors */
+            --deep-navy: #0A0E1B;
+            --field-green: #1B3D1B;
+            --stadium-lights: #FFD700;
+            
+            /* Typography */
+            --font-headline: 'Oswald', sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-data: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--deep-navy) 0%, var(--field-green) 100%);
+            color: var(--magnolia-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 27, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--burnt-orange);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--magnolia-white);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--burnt-orange);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 5%;
+            margin-top: 80px;
+            background: radial-gradient(ellipse at center, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1200px;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .hero-title {
+            font-family: var(--font-headline);
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--stadium-lights) 50%, var(--sec-crimson) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 60px rgba(191, 87, 0, 0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--magnolia-white);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            color: rgba(250, 250, 250, 0.8);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(191, 87, 0, 0.1);
+            border-color: var(--burnt-orange);
+        }
+        
+        .stat-number {
+            font-family: var(--font-data);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--magnolia-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .cta-primary, .cta-secondary {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .cta-primary {
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            border: none;
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.4);
+        }
+        
+        .cta-secondary {
+            background: transparent;
+            color: var(--burnt-orange);
+            border: 2px solid var(--burnt-orange);
+        }
+        
+        .cta-secondary:hover {
+            background: var(--burnt-orange);
+            color: white;
+        }
+        
+        /* Regional Authority Section */
+        .authority-section {
+            padding: 5rem 5%;
+            background: linear-gradient(180deg, transparent 0%, rgba(20, 33, 61, 0.5) 100%);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-family: var(--font-headline);
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--magnolia-white);
+            opacity: 0.9;
+        }
+        
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .coverage-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coverage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--sec-crimson));
+        }
+        
+        .coverage-card:hover {
+            transform: translateY(-10px);
+            background: rgba(191, 87, 0, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .coverage-icon {
+            font-size: 2.5rem;
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+        }
+        
+        .coverage-title {
+            font-family: var(--font-headline);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--magnolia-white);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .coverage-description {
+            color: rgba(250, 250, 250, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .coverage-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(191, 87, 0, 0.2);
+        }
+        
+        .coverage-stat {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .coverage-stat-number {
+            font-family: var(--font-data);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--stadium-lights);
+            display: block;
+        }
+        
+        .coverage-stat-label {
+            font-size: 0.75rem;
+            color: rgba(250, 250, 250, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 5rem 5%;
+            background: rgba(10, 14, 27, 0.7);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            background: rgba(191, 87, 0, 0.05);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--burnt-orange);
+            flex-shrink: 0;
+        }
+        
+        .feature-content h3 {
+            font-family: var(--font-headline);
+            font-size: 1.3rem;
+            color: var(--magnolia-white);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .feature-content p {
+            color: rgba(250, 250, 250, 0.7);
+            line-height: 1.6;
+        }
+        
+        /* Live Ticker */
+        .ticker-container {
+            background: var(--burnt-orange);
+            padding: 1rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .ticker {
+            display: inline-block;
+            animation: scroll 30s linear infinite;
+            font-family: var(--font-data);
+            font-size: 0.9rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            border-right: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--deep-navy);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 2px solid var(--burnt-orange);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-family: var(--font-headline);
+            font-size: 2rem;
+            color: var(--burnt-orange);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-tagline {
+            color: var(--magnolia-white);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: rgba(250, 250, 250, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .footer-copyright {
+            color: rgba(250, 250, 250, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
-    
-    <!-- Defer non-critical CSS -->
-    <link rel="preload" href="css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/main.css"></noscript>
-</head>
-<body>
-    <div class="loading" id="loading">
-        <div class="loader">Loading Blaze Intelligence...</div>
+
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <nav>
+            <a href="/" class="logo">
+                <i class="fas fa-fire"></i>
+                Blaze Intelligence
+            </a>
+            <ul class="nav-links">
+                <li><a href="#texas-football">Texas Football</a></li>
+                <li><a href="#sec-command">SEC Command</a></li>
+                <li><a href="#perfect-game">Perfect Game</a></li>
+                <li><a href="#mlb-pipeline">MLB Pipeline</a></li>
+                <li><a href="#recruiting">Recruiting</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+            </ul>
+        </nav>
     </div>
     
-    <main id="app"></main>
+    <!-- Live Ticker -->
+    <div class="ticker-container">
+        <div class="ticker">
+            <span class="ticker-item">🏈 BREAKING: 5-Star QB Commits to Texas</span>
+            <span class="ticker-item">⚾ Perfect Game: Austin Elite Wins National Championship</span>
+            <span class="ticker-item">🏈 SEC: Alabama vs Georgia Preview</span>
+            <span class="ticker-item">⚾ MLB Draft: 3 Texas Prospects in First Round</span>
+            <span class="ticker-item">🏈 Friday Night: Westlake vs Lake Travis Tonight</span>
+            <span class="ticker-item">📊 Targeting 94.6% Prediction Accuracy - Beta Testing</span>
+        </div>
+    </div>
     
-    <!-- Optimized script loading -->
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Sports Intelligence Since 2024</div>
+            <h1 class="hero-title">The Deep South's<br>Sports Intelligence Hub</h1>
+            <p class="hero-subtitle">From Friday Night Lights to Sunday in the Show</p>
+            <p class="hero-description">
+                The Dave Campbell's of SEC, Texas, and Deep South athletics. Comprehensive intelligence 
+                covering every snap, every pitch, every prospect from youth leagues through the pros. 
+                Where championship tradition meets next-generation analytics.
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-number">2,847</span>
+                    <span class="stat-label">Teams Tracked</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">Target: 94.6%*</span>
+                    <span class="stat-label">Prediction Goal</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">States Covered</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Live Updates</span>
+                </div>
+            </div>
+            <div class="disclaimer-notice" style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: rgba(250, 250, 250, 0.6);">
+                *Performance targets based on internal testing. Individual results may vary. <a href="/methods-and-definitions" style="color: var(--burnt-orange);">See Methods & Definitions</a>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="#coverage" class="cta-primary">
+                    <i class="fas fa-chart-line"></i>
+                    Access Deep South Intelligence
+                </a>
+                <a href="/demo" class="cta-secondary">
+                    <i class="fas fa-play"></i>
+                    Watch Demo
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Regional Authority Section -->
+    <section class="authority-section" id="coverage">
+        <div class="section-header">
+            <h2 class="section-title">Complete Regional Coverage</h2>
+            <p class="section-subtitle">Every Level. Every League. Every Game That Matters.</p>
+        </div>
+        
+        <div class="coverage-grid">
+            <!-- Texas HS Football -->
+            <div class="coverage-card">
+                <i class="fas fa-football-ball coverage-icon"></i>
+                <h3 class="coverage-title">Texas HS Football</h3>
+                <p class="coverage-description">
+                    Complete UIL coverage from 6A to 1A. Real-time analytics, recruiting intelligence, 
+                    and playoff predictions for every Friday night.
+                </p>
+                <div class="coverage-stats">
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">1,200+</span>
+                        <span class="coverage-stat-label">Schools</span>
+                    </div>
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">15K+</span>
+                        <span class="coverage-stat-label">Players</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SEC Command Center -->
+            <div class="coverage-card">
+                <i class="fas fa-trophy coverage-icon"></i>
+                <h3 class="coverage-title">SEC Command</h3>
+                <p class="coverage-description">
+                    The most dominant conference in college football. Complete coverage of all 14 teams, 
+                    recruiting battles, and championship races.
+                </p>
+                <div class="coverage-stats">
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">14</span>
+                        <span class="coverage-stat-label">Teams</span>
+                    </div>
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">2,100+</span>
+                        <span class="coverage-stat-label">Athletes</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Perfect Game Baseball -->
+            <div class="coverage-card">
+                <i class="fas fa-baseball-ball coverage-icon"></i>
+                <h3 class="coverage-title">Perfect Game</h3>
+                <p class="coverage-description">
+                    Elite youth baseball from select teams to showcases. Track velocity, exit velo, 
+                    and prospect rankings from 9U to 18U.
+                </p>
+                <div class="coverage-stats">
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">500+</span>
+                        <span class="coverage-stat-label">Teams</span>
+                    </div>
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">10K+</span>
+                        <span class="coverage-stat-label">Prospects</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MLB Pipeline -->
+            <div class="coverage-card">
+                <i class="fas fa-chart-line coverage-icon"></i>
+                <h3 class="coverage-title">MLB Pipeline</h3>
+                <p class="coverage-description">
+                    Track Deep South prospects from high school to The Show. Draft analysis, 
+                    minor league performance, and MLB projections.
+                </p>
+                <div class="coverage-stats">
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">300+</span>
+                        <span class="coverage-stat-label">Prospects</span>
+                    </div>
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">30</span>
+                        <span class="coverage-stat-label">MLB Teams</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Big 12 Coverage -->
+            <div class="coverage-card">
+                <i class="fas fa-university coverage-icon"></i>
+                <h3 class="coverage-title">Big 12 Football</h3>
+                <p class="coverage-description">
+                    Texas, Oklahoma, and the expanded Big 12. Complete coverage of the conference 
+                    reshaping college athletics.
+                </p>
+                <div class="coverage-stats">
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">14</span>
+                        <span class="coverage-stat-label">Teams</span>
+                    </div>
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">1,800+</span>
+                        <span class="coverage-stat-label">Athletes</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recruiting Intelligence -->
+            <div class="coverage-card">
+                <i class="fas fa-star coverage-icon"></i>
+                <h3 class="coverage-title">Recruiting HQ</h3>
+                <p class="coverage-description">
+                    5-star tracking, commitment predictions, and NIL valuations. The most comprehensive 
+                    recruiting intelligence in the South.
+                </p>
+                <div class="coverage-stats">
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">5,000+</span>
+                        <span class="coverage-stat-label">Recruits</span>
+                    </div>
+                    <div class="coverage-stat">
+                        <span class="coverage-stat-number">250+</span>
+                        <span class="coverage-stat-label">Colleges</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2 class="section-title">Why We're The Authority</h2>
+            <p class="section-subtitle">Technology Meets Tradition. Data Meets Dominance.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-brain feature-icon"></i>
+                <div class="feature-content">
+                    <h3>AI-Powered Predictions</h3>
+                    <p>Advanced machine learning models trained on extensive play data,
+                    combining traditional scouting with next-gen analytics. Performance targets under development.</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-database feature-icon"></i>
+                <div class="feature-content">
+                    <h3>Historical Database</h3>
+                    <p>15+ years of Deep South sports data. Every game, every stat, every recruit. 
+                    The most comprehensive archive in the region.</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-video feature-icon"></i>
+                <div class="feature-content">
+                    <h3>Vision AI Coaching</h3>
+                    <p>Biomechanical analysis and character assessment through micro-expression detection. 
+                    See what scouts see, know what winners know.</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-bolt feature-icon"></i>
+                <div class="feature-content">
+                    <h3>Real-Time Intelligence</h3>
+                    <p>Live updates during games, instant recruiting news, and breaking developments. 
+                    Never miss a moment that matters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Blaze Intelligence</div>
+            <p class="footer-tagline">The Deep South's Premier Sports Intelligence Hub</p>
+            <div class="footer-links">
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/media">Media Kit</a>
+                <a href="/api">Developer API</a>
+                <a href="/careers">Careers</a>
+                <a href="/coppa-compliance">Youth Data Policy</a>
+            </div>
+            <p class="footer-copyright">
+                © 2025 Blaze Intelligence. All Rights Reserved. 
+                <br>From Friday Night Lights to Sunday in the Show.
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Background Animation -->
     <script>
-        // Remove loading screen when ready
-        window.addEventListener('load', function() {
-            document.getElementById('loading').style.display = 'none';
+        // Three.js stadium lights effect
+        if (window.THREE) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.domElement.style.position = 'fixed';
+            renderer.domElement.style.top = '0';
+            renderer.domElement.style.left = '0';
+            renderer.domElement.style.zIndex = '-1';
+            renderer.domElement.style.pointerEvents = 'none';
+            document.body.appendChild(renderer.domElement);
+            
+            // Create stadium lights effect
+            const lights = [];
+            for (let i = 0; i < 50; i++) {
+                const geometry = new THREE.SphereGeometry(0.5, 8, 8);
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: 0xFFD700,
+                    transparent: true,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+                const light = new THREE.Mesh(geometry, material);
+                
+                light.position.x = (Math.random() - 0.5) * 100;
+                light.position.y = (Math.random() - 0.5) * 100;
+                light.position.z = (Math.random() - 0.5) * 100;
+                
+                scene.add(light);
+                lights.push(light);
+            }
+            
+            camera.position.z = 30;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                lights.forEach((light, i) => {
+                    light.position.y += Math.sin(Date.now() * 0.001 + i) * 0.01;
+                    light.material.opacity = Math.sin(Date.now() * 0.002 + i) * 0.3 + 0.3;
+                });
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        
+        // GSAP Animations
+        if (window.gsap) {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate hero content on load
+            gsap.from('.hero-badge', { opacity: 0, y: 20, duration: 1, delay: 0.2 });
+            gsap.from('.hero-title', { opacity: 0, y: 30, duration: 1, delay: 0.4 });
+            gsap.from('.hero-subtitle', { opacity: 0, y: 20, duration: 1, delay: 0.6 });
+            gsap.from('.hero-description', { opacity: 0, y: 20, duration: 1, delay: 0.8 });
+            gsap.from('.stat-card', { 
+                opacity: 0, 
+                y: 30, 
+                duration: 0.8, 
+                stagger: 0.1, 
+                delay: 1 
+            });
+            
+            // Animate coverage cards on scroll
+            gsap.from('.coverage-card', {
+                scrollTrigger: {
+                    trigger: '.coverage-grid',
+                    start: 'top 80%'
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                stagger: 0.1
+            });
+            
+            // Animate features on scroll
+            gsap.from('.feature-card', {
+                scrollTrigger: {
+                    trigger: '.features-grid',
+                    start: 'top 80%'
+                },
+                opacity: 0,
+                x: -30,
+                duration: 0.8,
+                stagger: 0.15
+            });
+        }
+        
+        // Dynamic stat updates
+        function updateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                if (!isNaN(finalValue.replace(/[^0-9]/g, ''))) {
+                    const numericValue = parseInt(finalValue.replace(/[^0-9]/g, ''));
+                    let currentValue = 0;
+                    const increment = numericValue / 100;
+                    
+                    const timer = setInterval(() => {
+                        currentValue += increment;
+                        if (currentValue >= numericValue) {
+                            currentValue = numericValue;
+                            clearInterval(timer);
+                            stat.textContent = finalValue;
+                        } else {
+                            stat.textContent = Math.floor(currentValue).toLocaleString();
+                        }
+                    }, 20);
+                }
+            });
+        }
+        
+        // Run stats animation when in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
         });
+        
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) observer.observe(heroStats);
     </script>
-    
-    <!-- Core modules with defer -->
-    <script defer="" src="js/api-config.js"></script>
-    <script defer="" src="js/sports-data-hub.js"></script>
-    <script defer="" src="js/team-intelligence-cards.js"></script>
-    <script defer="" src="js/live-scoreboard-integration.js"></script>
-    <script defer="" src="js/subdomain-router.js"></script>
-    
-    <!-- Load main app -->
-    <script defer="" src="js/app.js"></script>
-
 
 </body></html>
