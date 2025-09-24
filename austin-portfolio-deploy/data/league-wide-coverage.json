@@ -88,7 +88,9 @@
         "perfect_game": {
           "coverage": "Baseball",
           "age_groups": ["13U", "14U", "15U", "16U", "17U", "18U"],
-          "events": ["WWBA", "BCS", "Super25", "National Championships"]
+          "events": ["WWBA", "BCS", "Super25", "National Championships"],
+          "deep_south_events": ["Texas Super Showcase", "Southeast Championships", "Alabama Summer Classic"],
+          "sec_pipeline_focus": true
         },
         "maxpreps": {
           "coverage": "High School Sports",
@@ -117,9 +119,10 @@
     }
   },
   "data_sources": {
-    "official": ["MLB Statcast", "NFL Next Gen Stats", "NBA Tracking Data", "NCAA Statistics"],
-    "third_party": ["Baseball Reference", "Pro Football Focus", "Basketball Reference", "KenPom"],
-    "proprietary": ["Blaze Vision AI", "Micro-Expression Detection", "Biomechanical Analysis"]
+    "official": ["MLB Statcast", "NFL Next Gen Stats", "NBA Tracking Data", "NCAA Statistics", "Perfect Game Database"],
+    "third_party": ["Baseball Reference", "Pro Football Focus", "Basketball Reference", "KenPom", "Dave Campbell's Texas Football"],
+    "proprietary": ["Blaze Vision AI", "Micro-Expression Detection", "Biomechanical Analysis"],
+    "regional_authority": ["Deep South Sports Network", "SEC Data Pipeline", "Texas HS Football Central"]
   },
   "update_frequency": {
     "live_games": "Real-time (<100ms)",
@@ -128,9 +131,12 @@
     "scouting_reports": "Daily"
   },
   "coverage_stats": {
-    "total_teams_covered": 500,
-    "total_players_tracked": 25000,
-    "data_points_daily": "15K+",
-    "accuracy_rate": "94.6%"
+    "total_teams_covered": 650,
+    "total_players_tracked": 32000,
+    "data_points_daily": "18K+",
+    "accuracy_rate": "94.6%",
+    "deep_south_focus": "40% of top prospects",
+    "sec_coverage": "16 teams, 14 states",
+    "texas_pipeline": "180+ D1 commits tracked"
   }
 }

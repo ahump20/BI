@@ -44,8 +44,8 @@ class NextGenVisualizationEngine {
             await this.initializeSpatialComputing();
             await this.initialize4DVisualization();
 
-            // Create competitive advantage demos
-            await this.createCompetitiveAdvantageShowcase();
+            // Create competitive advantage demos - DISABLED per user request
+            // await this.createCompetitiveAdvantageShowcase();
 
             this.isInitialized = true;
             console.log('🏆 Next-Gen Visualization Engine: Championship Mode Activated');

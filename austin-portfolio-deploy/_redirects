@@ -1,20 +1,69 @@
-# Netlify redirects for Deep South Sports Authority
+# Blaze Intelligence Enhanced Redirects - September 2025
 
-# Main sections
-/texas-football    /texas-football-authority.html    200
-/sec              /sec-command.html                   200
-/perfect-game     /perfect-game.html                  200
-/recruiting       /recruiting-hq.html                 200
+# Core broken link fixes
+/methods-and-definitions.html   /methods-and-definitions.html    301
+/methods-and-definitions/       /methods-and-definitions.html    301
+/rankings                       /football-rankings.html          301
+/football-rankings              /football-rankings.html          301
 
-# NIL section
-/sec-nil          /sec-nil.html                       200
-/sec-nil-analytics /sec-nil-analytics.html            200
-/nil-calculator   /nil-calculator.html                200
-/pricing          /nil-calculator.html                200
+# API documentation consolidation
+/api                            /api-docs.html                   301
+/api/docs                       /api-docs.html                   301
+/docs                           /api-docs.html                   301
 
-# Legacy redirects
-/platform         /index.html                         301
-/dashboard        /texas-football-authority.html      301
+# Team dashboard routing (the missing functionality)
+/cardinals/*                    /cardinals.html                  200
+/titans/*                       /titans.html                     200
+/longhorns/*                    /longhorns.html                  200
+/grizzlies/*                    /grizzlies.html                  200
 
-# API endpoints (if using Netlify Functions)
-/api/*            /.netlify/functions/:splat          200
+# Sports routing consolidation
+/football                       /football-rankings.html          301
+/baseball                       /perfect-game.html               301
+/basketball                     /grizzlies.html                  301
+
+# Legacy patterns
+/blazesportsintel               /                                301
+/home                           /                                301
+
+# Perfect Game analytics (from ChatGPT 5 fixes)
+/perfect-game-analytics/*       /perfect-game.html               200
+
+# Team page routing - All 300+ teams
+# MLB Teams (30 teams across 6 divisions)
+/teams/mlb/*                    /teams/mlb/:splat                200
+/mlb/*                          /teams/mlb/:splat                301
+
+# NFL Teams (32 teams across 8 divisions)
+/teams/nfl/*                    /teams/nfl/:splat                200
+/nfl/*                          /teams/nfl/:splat                301
+
+# NCAA Football (134 teams across all conferences)
+/teams/ncaa-football/*          /teams/ncaa-football/:splat      200
+/ncaa-football/*                /teams/ncaa-football/:splat      301
+/college-football/*             /teams/ncaa-football/:splat      301
+
+# College Baseball (106 teams across all conferences)
+/teams/college-baseball/*       /teams/college-baseball/:splat   200
+/college-baseball/*             /teams/college-baseball/:splat   301
+
+# Conference shortcuts
+/sec                            /teams/ncaa-football/sec/        301
+/big-ten                        /teams/ncaa-football/big-ten/    301
+/big-12                         /teams/ncaa-football/big-12/     301
+/acc                            /teams/ncaa-football/acc/        301
+
+# Division shortcuts
+/afc-north                      /teams/nfl/afc-north/            301
+/nfc-south                      /teams/nfl/nfc-south/            301
+/al-central                     /teams/mlb/al-central/           301
+/nl-west                        /teams/mlb/nl-west/              301
+
+# Texas HS Football and Perfect Game routing
+/texas-hs-football/*           /texas-hs-football.html          200
+/perfect-game-texas/*          /perfect-game-texas.html         200
+/texas-football                /texas-hs-football.html          301
+/perfect-game                  /perfect-game-texas.html         301
+
+# API functions
+/api/*                          /.netlify/functions/:splat       200
