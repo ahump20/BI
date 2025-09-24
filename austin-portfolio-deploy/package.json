@@ -3,14 +3,9 @@
   "version": "1.0.0",
   "description": "Simple interface, sophisticated backend",
   "main": "simple-blaze-server.js",
-  "type": "module",
   "scripts": {
     "start": "node simple-blaze-server.js",
-    "dev": "nodemon simple-blaze-server.js",
-    "update-data": "node daily-sports-data-updater.js --now",
-    "update-schedule": "node daily-sports-data-updater.js --schedule",
-    "deploy": "netlify deploy --prod",
-    "daily-update": "npm run update-data && npm run deploy"
+    "dev": "nodemon simple-blaze-server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
