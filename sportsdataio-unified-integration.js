@@ -10,6 +10,8 @@
  * This unified file contains the complete SportsDataIO integration for:
  * - Replit: https://blaze-intelligence.replit.app
  * - Netlify: https://blaze-intelligence.netlify.app
+ * - Primary Domain: https://blaze-intelligence.com
+ * - Sports Domain: https://blazesportsintel.com
  * - GitHub Pages: Multiple repositories
  *
  * API KEY: 6ca2adb39404482da5406f0a6cd7aa37
@@ -737,6 +739,14 @@ const DEPLOYMENT_CONFIG = {
     {
       url: 'https://blaze-intelligence.netlify.app',
       siteId: '03417c09-4088-4dd8-8fdb-c5b29e3e58ba'
+    },
+    {
+      url: 'https://blaze-intelligence.com',
+      siteId: 'MAIN_DOMAIN'
+    },
+    {
+      url: 'https://blazesportsintel.com',
+      siteId: 'SPORTS_DOMAIN'
     },
     {
       url: 'https://blaze-3d.netlify.app',
