@@ -1,0 +1,118 @@
+{
+  "timestamp": "2025-09-25T22:29:43.498Z",
+  "lastUpdate": "2025-09-25 17:29 CDT",
+  "featuredTeams": {
+    "cardinals": {
+      "sport": "MLB",
+      "displayName": "St. Louis Cardinals",
+      "record": "83-79",
+      "winPercentage": 0.512,
+      "divisionRank": 2,
+      "leagueRank": 8,
+      "runsScored": 672,
+      "homeRecord": "44-37",
+      "awayRecord": "39-42",
+      "status": "Season Complete",
+      "trend": "steady",
+      "color": "#C41E3A"
+    },
+    "titans": {
+      "sport": "NFL",
+      "displayName": "Tennessee Titans",
+      "record": "3-14",
+      "divisionRank": 4,
+      "conferenceRank": 16,
+      "pointsFor": 311,
+      "pointsAgainst": 460,
+      "differential": -149,
+      "streak": -6,
+      "status": "Rebuilding Phase",
+      "trend": "declining",
+      "color": "#0C2340"
+    },
+    "grizzlies": {
+      "sport": "NBA",
+      "displayName": "Memphis Grizzlies",
+      "record": "27-55",
+      "winPercentage": 0.329,
+      "conferenceRank": 1,
+      "divisionRank": 0,
+      "homeRecord": "9-32",
+      "awayRecord": "18-23",
+      "lastTenRecord": "3-7",
+      "status": "Development Season",
+      "trend": "rebuilding",
+      "color": "#5D76A9"
+    },
+    "longhorns": {
+      "sport": "NCAA Football",
+      "displayName": "Texas Longhorns",
+      "conference": "SEC",
+      "record": "13-2",
+      "season": "2024",
+      "ranking": "#3 CFP Final",
+      "bowlGame": "CFP Semifinal",
+      "nextSeason": "2025 SEC Schedule",
+      "status": "Championship Contender",
+      "trend": "rising",
+      "color": "#BF5700"
+    }
+  },
+  "analytics": {
+    "performanceIndex": "42.1",
+    "championshipProbability": "45.2%",
+    "trendAnalysis": "positive",
+    "recommendations": [
+      "Address titans defensive vulnerabilities",
+      "Focus on improving grizzlies offensive production",
+      "Capitalize on longhorns SEC momentum"
+    ]
+  },
+  "mlbPredictions": {
+    "season": "2025",
+    "projectedWins": 78,
+    "projectedLosses": 71,
+    "playoffProbability": "68.4%",
+    "divisionWinProbability": "63.3%",
+    "championshipProbability": "17.7%",
+    "strengthOfSchedule": "0.542",
+    "modelConfidence": "84.6%",
+    "keyFactors": [
+      "Strong offensive lineup",
+      "Improved pitching rotation",
+      "Veteran leadership",
+      "Favorable schedule"
+    ]
+  },
+  "deepSouthInsights": {
+    "region": "Texas + SEC Pipeline",
+    "focus": "Baseball → Football → Basketball → Track & Field",
+    "philosophy": "Dave Campbell's model for comprehensive Deep South coverage",
+    "specialization": [
+      "Perfect Game youth baseball pipeline",
+      "Texas high school football authority",
+      "SEC conference intelligence",
+      "Character-driven recruitment analytics"
+    ]
+  },
+  "liveFeeds": [
+    {
+      "type": "analysis",
+      "priority": "high",
+      "message": "Longhorns positioned for SEC dominance in 2025 season",
+      "timestamp": "2025-09-25T17:25:00Z"
+    },
+    {
+      "type": "data",
+      "priority": "medium",
+      "message": "Cardinals off-season moves show commitment to 2025 playoff push",
+      "timestamp": "2025-09-25T17:20:00Z"
+    },
+    {
+      "type": "insight",
+      "priority": "medium",
+      "message": "Grizzlies development focus paying dividends in young talent acquisition",
+      "timestamp": "2025-09-25T17:15:00Z"
+    }
+  ]
+}
