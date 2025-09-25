@@ -1342,3 +1342,30 @@
     </script>
 </body>
 </html>
+<script>
+// Austin Portfolio - Blaze Intelligence Data Integration
+document.addEventListener('DOMContentLoaded', function() {
+    // Load live achievement data
+    fetch('blaze-integration/data/austin-portfolio-deployment.json')
+        .then(response => response.json())
+        .then(data => {
+            // Update professional stats if elements exist
+            updateAchievementStats(data.professional_achievements);
+        })
+        .catch(error => console.log('Blaze data loading in offline mode'));
+    
+    function updateAchievementStats(stats) {
+        // Update DOM elements with live stats
+        const elements = {
+            'system-validation': stats.system_validation,
+            'teams-deployed': stats.teams_deployed,
+            'championship-status': stats.championship_readiness
+        };
+        
+        Object.entries(elements).forEach(([id, value]) => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = value;
+        });
+    }
+});
+</script>
