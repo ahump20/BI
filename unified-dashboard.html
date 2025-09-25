@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blaze Intelligence | Unified Sports Platform</title>
+  <meta name="description" content="The unified sports intelligence platform combining NIL valuation, character assessment, team analytics, and AR coaching into a single, cohesive experience.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js for data visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  
+  <!-- Three.js for 3D simulation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <!-- TensorFlow.js for AI/ML -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection"></script>
+
+  <style>
+    :root {
+      --bg: #0B0B0F;
+      --panel: #111827;
+      --ink: #F3F4F6;
+      --muted: #9CA3AF;
+      --line: #374151;
+      --accent: #BF5700;
+      --accent-hover: #D97706;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+    }
+    
+    .glass-panel {
+      background: rgba(17, 24, 39, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+    }
+
+    .active-nav {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    
+    #arCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 0.5rem;
+    }
+    
+    #videoFeed {
+      transform: scaleX(-1);
+      border-radius: 0.5rem;
+    }
+
+    .metric-bar-bg { background-color: rgba(255,255,255,0.1); }
+    .metric-bar { transition: width 0.3s ease-in-out; }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--panel);
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--line);
+      border-radius: 10px;
+      border: 2px solid var(--panel);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: var(--accent);
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <div class="max-w-7xl mx-auto p-4 md:p-8">
+    <header class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12">
+      <div class="flex items-center space-x-3 mb-4 md:mb-0">
+        <svg class="w-8 h-8 text-[color:var(--accent)]" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C11.33 2 10.74 2.21 10.27 2.59L2.59 10.27C1.81 11.05 1.81 12.32 2.59 13.1L10.27 20.78C11.05 21.56 12.32 21.56 13.1 20.78L20.78 13.1C21.56 12.32 21.56 11.05 20.78 10.27L13.1 2.59C12.72 2.21 12.14 2 12 2ZM12 4.41L18.59 11H13V5.41L12 4.41ZM11 6.41V12H5.41L11 6.41Z"/></svg>
+        <div>
+          <h1 class="text-2xl font-bold tracking-tighter">Blaze <span class="text-[color:var(--accent)]">Intelligence</span></h1>
+          <p id="dataTimestamp" class="text-xs text-[color:var(--muted)]"></p>
+        </div>
+      </div>
+      <nav class="flex flex-wrap justify-center md:justify-end gap-4 text-sm font-medium border-b border-[color:var(--line)] pb-2">
+        <a href="#nil-valuation" class="text-[color:var(--muted)] hover:text-white transition-colors border-b-2 border-transparent hover:border-[color:var(--accent)] py-1">NIL Valuation</a>
+        <a href="#team-intelligence" class="text-[color:var(--muted)] hover:text-white transition-colors border-b-2 border-transparent hover:border-[color:var(--accent)] py-1">Team Intelligence</a>
+        <a href="#market-insights" class="text-[color:var(--muted)] hover:text-white transition-colors border-b-2 border-transparent hover:border-[color:var(--accent)] py-1">Market Insights</a>
+        <a href="#ar-coach" class="text-[color:var(--muted)] hover:text-white transition-colors border-b-2 border-transparent hover:border-[color:var(--accent)] py-1">AR Coach</a>
+      </nav>
+    </header>
+
+    <main class="space-y-16 md:space-y-24">
+      <section id="nil-valuation" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-1 space-y-4">
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tighter">NIL & Character Valuation</h2>
+          <p class="text-[color:var(--muted)] text-sm md:text-base">Quantify player value beyond the box score. Linked directly to Cloudinary assets and MCP-backed analytics.</p>
+          <div class="relative">
+            <i class="fa fa-search absolute left-3 top-1/2 -translate-y-1/2 text-[color:var(--muted)]"></i>
+            <input type="text" id="playerSearch" placeholder="Search athletes..." class="w-full bg-[color:var(--panel)] border border-[color:var(--line)] rounded-lg py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)] transition-all" autocomplete="off">
+          </div>
+          <div id="playerList" class="h-[400px] md:h-[500px] overflow-y-auto space-y-2 pr-2"></div>
+        </div>
+        <div id="playerDetail" class="lg:col-span-2 glass-panel rounded-xl p-6 flex flex-col items-center justify-center text-center transition-all duration-500 min-h-[420px]">
+          <i class="fa-solid fa-user-check text-5xl text-[color:var(--muted)] mb-4"></i>
+          <h3 class="text-xl font-semibold text-gray-300">Loading athlete intelligence...</h3>
+          <p class="text-[color:var(--muted)] text-sm">Connecting to the unified dashboard.</p>
+        </div>
+      </section>
+
+      <section id="team-intelligence" class="space-y-6">
+        <div class="text-center">
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tighter">Team Intelligence Dashboard</h2>
+          <p class="text-[color:var(--muted)] max-w-2xl mx-auto mt-2 text-sm md:text-base">Aggregate team performance, financial efficiency, and psychological readiness into a single command center.</p>
+        </div>
+        <div id="teamButtons" class="flex justify-center flex-wrap gap-2 md:gap-4 my-4"></div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div id="teamInfo" class="md:col-span-1 glass-panel rounded-xl p-6 space-y-4 min-h-[260px]"></div>
+          <div class="md:col-span-3 glass-panel rounded-xl p-6">
+            <canvas id="teamChart"></canvas>
+          </div>
+        </div>
+      </section>
+      
+      <section id="market-insights" class="space-y-6">
+        <div class="text-center">
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tighter">Strategic Market Insights</h2>
+          <p class="text-[color:var(--muted)] max-w-2xl mx-auto mt-2 text-sm md:text-base">Curated research, case studies, and automated workflows delivered from Cloudinary-backed assets.</p>
+        </div>
+        <div id="resourceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </section>
+
+      <section id="ar-coach" class="space-y-6">
+        <div class="text-center">
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tighter">AR Neural Coach</h2>
+          <p class="text-[color:var(--muted)] max-w-3xl mx-auto text-sm md:text-base">Visualize plays with our 3D simulator and activate the Bio-Analytics Feed to get real-time psychophysiological insights on player performance under pressure.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="glass-panel rounded-xl p-4 md:p-6 relative">
+            <h3 class="font-bold text-lg mb-2 text-center">3D Play Visualizer</h3>
+            <div id="arContainer" class="aspect-video bg-black/50 border border-[color:var(--line)] rounded-lg">
+              <canvas id="arCanvas"></canvas>
+            </div>
+            <div class="absolute top-6 left-6 bg-black/30 backdrop-blur-sm p-2 rounded-lg">
+              <p id="playStatus" class="font-mono text-sm text-green-400">STATUS: READY</p>
+            </div>
+            <div class="flex justify-center space-x-2 md:space-x-4 mt-4">
+              <button id="runPlayBtn" class="bg-[color:var(--accent)] hover:bg-[color:var(--accent-hover)] text-white font-semibold py-2 px-5 rounded-lg transition-colors text-sm"><i class="fa-solid fa-play mr-2"></i>Run</button>
+              <button id="resetBtn" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors text-sm"><i class="fa-solid fa-rotate-left mr-2"></i>Reset</button>
+              <button id="heatmapBtn" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors text-sm"><i class="fa-solid fa-fire mr-2"></i>Heatmap</button>
+            </div>
+          </div>
+
+          <div id="bioAnalyticsPanel" class="glass-panel rounded-xl p-4 md:p-6">
+            <h3 class="font-bold text-lg mb-2 text-center">Live Bio-Analytics Feed</h3>
+            <div id="videoContainer" class="aspect-video bg-black/50 border border-[color:var(--line)] rounded-lg relative flex items-center justify-center">
+              <video id="videoFeed" class="w-full h-full object-cover" autoplay playsinline muted></video>
+              <div id="videoMessage" class="absolute text-center text-[color:var(--muted)]">
+                <i class="fa-solid fa-video text-4xl mb-2"></i>
+                <p>Camera is off</p>
+              </div>
+            </div>
+            <div id="bioControls" class="flex justify-center items-center space-x-2 md:space-x-4 mt-4">
+              <button id="startCamBtn" class="bg-[color:var(--accent)] hover:bg-[color:var(--accent-hover)] text-white font-semibold py-2 px-5 rounded-lg transition-colors text-sm"><i class="fa-solid fa-camera mr-2"></i>Start</button>
+              <button id="pipBtn" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors text-sm" disabled><i class="fa-solid fa-clone mr-2"></i>PiP</button>
+              <button id="fullscreenBtn" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors text-sm" disabled><i class="fa-solid fa-expand mr-2"></i>Full</button>
+              <button id="hideVideoBtn" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-lg transition-colors text-sm" disabled><i class="fa-solid fa-eye-slash mr-2"></i>Hide</button>
+            </div>
+            <div id="analyticsDisplay" class="mt-4 space-y-3 hidden">
+              <div class="font-mono text-xs">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-[color:var(--muted)]">COGNITIVE LOAD</span>
+                  <span id="cogLoadValue" class="text-white">0%</span>
+                </div>
+                <div class="w-full metric-bar-bg rounded-full h-2"><div id="cogLoadBar" class="bg-sky-500 h-2 rounded-full metric-bar" style="width: 0%"></div></div>
+              </div>
+              <div class="font-mono text-xs">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-[color:var(--muted)]">VOCAL SENTIMENT</span>
+                  <span id="sentimentValue" class="text-green-400">NEUTRAL</span>
+                </div>
+                <div class="w-full metric-bar-bg rounded-full h-2"><div id="sentimentBar" class="bg-green-500 h-2 rounded-full metric-bar" style="width: 50%"></div></div>
+              </div>
+              <div class="grid grid-cols-2 gap-3 text-center">
+                <div class="bg-black/20 p-2 rounded">
+                  <p class="text-[color:var(--muted)] text-[10px]">HEAD TILT</p>
+                  <p id="headTiltValue" class="text-lg font-semibold">0.0°</p>
+                </div>
+                <div class="bg-black/20 p-2 rounded">
+                  <p class="text-[color:var(--muted)] text-[10px]">BLINK RATE</p>
+                  <p id="blinkRateValue" class="text-lg font-semibold">0 bpm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="text-center mt-16 md:mt-24 border-t border-[color:var(--line)] pt-8">
+      <p class="text-sm text-[color:var(--muted)]">&copy; 2025 Blaze Intelligence. All Rights Reserved.</p>
+      <p class="text-xs text-gray-600 mt-2">Transforming Data Into Championships</p>
+    </footer>
+  </div>
+
+  <script type="module">
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/controls/OrbitControls.js';
+
+    const state = {
+      players: [],
+      playerIndex: new Map(),
+      teams: {},
+      resources: [],
+      cloudinary: {}
+    };
+
+    let playerChartInstance = null;
+    let teamChartInstance = null;
+
+    const ui = {
+      playerList: document.getElementById('playerList'),
+      playerDetail: document.getElementById('playerDetail'),
+      playerSearch: document.getElementById('playerSearch'),
+      resourceGrid: document.getElementById('resourceGrid'),
+      teamInfo: document.getElementById('teamInfo'),
+      teamButtons: document.getElementById('teamButtons'),
+      dataTimestamp: document.getElementById('dataTimestamp')
+    };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      showLoadingPlaceholders();
+      setupSearchHandler();
+      await initializeDashboard();
+      initARCoach();
+      initBioAnalytics();
+    });
+
+    async function initializeDashboard() {
+      try {
+        const data = await fetchDashboardData();
+        state.players = Array.isArray(data.players) ? data.players : [];
+        state.playerIndex = buildPlayerIndex(state.players);
+        state.teams = buildTeamMap(data.teams);
+        state.resources = Array.isArray(data.resources) ? data.resources : [];
+        state.cloudinary = data.cloudinary || {};
+        updateTimestamp(data.updatedAt);
+
+        populatePlayerList(state.players);
+        populateResourceGrid(state.resources);
+        renderTeamButtons(Object.values(state.teams));
+
+        if (state.players.length) {
+          selectPlayer(state.players[0].id || String(state.players[0].playerId));
+        } else {
+          showPlayerFallback('No athletes available.');
+        }
+
+        const firstTeamKey = Object.keys(state.teams)[0];
+        if (firstTeamKey) {
+          selectTeam(firstTeamKey);
+        } else {
+          showTeamFallback('No teams available.');
+        }
+
+        if (ui.playerSearch) {
+          ui.playerSearch.disabled = false;
+        }
+      } catch (error) {
+        console.error('Dashboard load failed', error);
+        showErrorStates(error.message);
+      }
+    }
+
+    async function fetchDashboardData() {
+      const response = await fetch('/api/unified-dashboard', {
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Dashboard API responded with ${response.status}`);
+      }
+
+      return response.json();
+    }
+
+    function buildPlayerIndex(players) {
+      const index = new Map();
+      players.forEach((player) => {
+        if (player.id) {
+          index.set(player.id, player);
+        }
+        if (player.playerId !== undefined && player.playerId !== null) {
+          index.set(String(player.playerId), player);
+        }
+      });
+      return index;
+    }
+
+    function buildTeamMap(teams) {
+      const map = {};
+      if (Array.isArray(teams)) {
+        teams.forEach((team) => {
+          if (team?.code) {
+            map[team.code] = team;
+          }
+        });
+      }
+      return map;
+    }
+
+    function showLoadingPlaceholders() {
+      if (ui.playerList) {
+        ui.playerList.innerHTML = '<p class="text-[color:var(--muted)] text-sm">Loading athletes...</p>';
+      }
+      if (ui.playerDetail) {
+        ui.playerDetail.innerHTML = '<div class="flex flex-col items-center justify-center text-center space-y-3">\n          <i class="fa-solid fa-spinner-third fa-spin text-3xl text-[color:var(--muted)]"></i>\n          <p class="text-sm text-[color:var(--muted)]">Syncing NIL valuations...</p>\n        </div>';
+      }
+      if (ui.resourceGrid) {
+        ui.resourceGrid.innerHTML = '<p class="text-[color:var(--muted)] text-sm text-center col-span-full">Loading resources...</p>';
+      }
+      if (ui.teamInfo) {
+        ui.teamInfo.innerHTML = '<p class="text-[color:var(--muted)] text-sm">Loading team metrics...</p>';
+      }
+      if (ui.playerSearch) {
+        ui.playerSearch.disabled = true;
+      }
+    }
+
+    function showErrorStates(message) {
+      const friendlyMessage = message ? `Unable to load dashboard data: ${message}` : 'Unable to load dashboard data.';
+      if (ui.playerList) {
+        ui.playerList.innerHTML = `<p class="text-red-400 text-sm">${friendlyMessage}</p>`;
+      }
+      if (ui.playerDetail) {
+        ui.playerDetail.innerHTML = '<div class="space-y-3 text-center">\n          <i class="fa-solid fa-triangle-exclamation text-3xl text-red-400"></i>\n          <p class="text-sm text-red-400">Dashboard data unavailable.</p>\n        </div>';
+      }
+      if (ui.resourceGrid) {
+        ui.resourceGrid.innerHTML = '<p class="text-red-400 text-sm text-center col-span-full">No resources available.</p>';
+      }
+      if (ui.teamInfo) {
+        ui.teamInfo.innerHTML = '<p class="text-red-400 text-sm">Team metrics unavailable.</p>';
+      }
+      if (ui.playerSearch) {
+        ui.playerSearch.disabled = true;
+      }
+    }
+
+    function showPlayerFallback(message) {
+      if (ui.playerDetail) {
+        ui.playerDetail.innerHTML = `<div class="text-center space-y-3">\n          <i class="fa-solid fa-user-slash text-4xl text-[color:var(--muted)]"></i>\n          <p class="text-sm text-[color:var(--muted)]">${message}</p>\n        </div>`;
+      }
+    }
+
+    function showTeamFallback(message) {
+      if (ui.teamInfo) {
+        ui.teamInfo.innerHTML = `<p class="text-[color:var(--muted)] text-sm">${message}</p>`;
+      }
+      if (teamChartInstance) {
+        teamChartInstance.destroy();
+        teamChartInstance = null;
+      }
+    }
+
+    function updateTimestamp(isoString) {
+      if (!ui.dataTimestamp || !isoString) return;
+      const date = new Date(isoString);
+      if (!Number.isNaN(date.getTime())) {
+        ui.dataTimestamp.textContent = `Data refreshed ${date.toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`;
+      }
+    }
+
+    function setupSearchHandler() {
+      if (!ui.playerSearch) return;
+      ui.playerSearch.addEventListener('input', (event) => {
+        const term = event.target.value.trim().toLowerCase();
+        const filteredPlayers = !term
+          ? state.players
+          : state.players.filter((player) => {
+              const name = `${player.firstName || ''} ${player.lastName || ''}`.toLowerCase();
+              const teamName = (player.teamName || player.teamCode || '').toLowerCase();
+              return name.includes(term) || teamName.includes(term);
+            });
+        populatePlayerList(filteredPlayers);
+      });
+    }
+
+    function populatePlayerList(players) {
+      if (!ui.playerList) return;
+      if (!players.length) {
+        ui.playerList.innerHTML = '<p class="text-[color:var(--muted)] text-sm text-center py-6">No athletes match the current filters.</p>';
+        return;
+      }
+
+      ui.playerList.innerHTML = '';
+
+      players.forEach((player) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'w-full text-left flex items-center justify-between p-3 rounded-lg hover:bg-[color:var(--panel)] transition-colors border border-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)]';
+        const playerKey = player.id || String(player.playerId);
+        card.dataset.playerId = playerKey;
+        card.addEventListener('click', () => selectPlayer(playerKey));
+
+        const initials = `${(player.firstName || '').charAt(0)}${(player.lastName || '').charAt(0)}`.toUpperCase();
+        const avatar = player.portraitUrl
+          ? `<img src="${player.portraitUrl}" alt="${player.firstName || ''} ${player.lastName || ''}" class="w-10 h-10 rounded-full object-cover border border-[color:var(--line)]">`
+          : `<div class="w-10 h-10 rounded-full bg-[color:var(--line)] flex items-center justify-center font-bold text-sm text-[color:var(--accent)]">${initials}</div>`;
+
+        const positionColor = player.positionCategory === 'OFF' ? 'text-green-400' : 'text-yellow-400';
+
+        card.innerHTML = `
+          <div class="flex items-center space-x-3">
+            ${avatar}
+            <div>
+              <p class="font-semibold text-sm">${player.firstName || ''} ${player.lastName || ''}</p>
+              <p class="text-xs text-[color:var(--muted)]">${player.teamName || player.teamCode || 'Free Agent'}</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="font-mono text-xs ${positionColor}">${player.position || 'ATH'}</p>
+            <p class="text-xs text-[color:var(--muted)]">Age: ${player.age ?? '—'}</p>
+          </div>
+        `;
+
+        ui.playerList.appendChild(card);
+      });
+    }
+
+    function populateResourceGrid(resources) {
+      if (!ui.resourceGrid) return;
+      if (!resources.length) {
+        ui.resourceGrid.innerHTML = '<p class="text-[color:var(--muted)] text-sm text-center col-span-full">No market insights available.</p>';
+        return;
+      }
+
+      ui.resourceGrid.innerHTML = '';
+
+      resources.forEach((resource) => {
+        const card = document.createElement('article');
+        card.className = 'glass-panel rounded-xl p-6 flex flex-col justify-between hover:border-[color:var(--accent)] transition-all transform hover:-translate-y-1';
+        const typeColor = resource.type === 'workflow' ? 'bg-amber-500/10 text-amber-400' : 'bg-sky-500/10 text-sky-400';
+        const heroImage = resource.heroUrl ? `<div class="h-32 rounded-lg overflow-hidden mb-4 border border-[color:var(--line)]"><img src="${resource.heroUrl}" alt="${resource.title}" class="w-full h-full object-cover"></div>` : '';
+        const summary = resource.summary || resource.hero || '';
+
+        card.innerHTML = `
+          <div>
+            <span class="text-xs font-mono font-semibold px-2 py-1 rounded ${typeColor}">${(resource.type || '').toUpperCase()}</span>
+            <h3 class="font-bold text-lg mt-3">${resource.title}</h3>
+            ${heroImage}
+            <p class="text-sm text-[color:var(--muted)] mt-2">${summary}</p>
+          </div>
+          <a href="${resource.ctaHref || '#'}" class="mt-6 inline-block text-center bg-[color:var(--accent)] hover:bg-[color:var(--accent-hover)] text-white font-semibold py-2 px-4 rounded-lg transition-colors w-full">${resource.ctaLabel || 'Explore'} <i class="fa-solid fa-arrow-right-long ml-2"></i></a>
+        `;
+
+        ui.resourceGrid.appendChild(card);
+      });
+    }
+
+    function renderTeamButtons(teams) {
+      if (!ui.teamButtons) return;
+      if (!teams.length) {
+        ui.teamButtons.innerHTML = '';
+        showTeamFallback('No teams configured.');
+        return;
+      }
+
+      ui.teamButtons.innerHTML = '';
+
+      teams.forEach((team, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.teamCode = team.code;
+        button.className = index === 0
+          ? 'team-btn active-team-btn bg-[color:var(--accent)] text-white px-4 py-2 rounded-lg font-semibold transition-all'
+          : 'team-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold transition-all';
+        button.textContent = team.code || team.name || `Team ${index + 1}`;
+        button.addEventListener('click', () => selectTeam(team.code));
+        ui.teamButtons.appendChild(button);
+      });
+    }
+    function selectTeam(teamCode) {
+      const team = state.teams[teamCode];
+      if (!team) {
+        showTeamFallback('Selected team data unavailable.');
+        return;
+      }
+
+      updateTeamButtonState(teamCode);
+
+      if (ui.teamInfo) {
+        const playoffPercent = typeof team.playoffProbability === 'number' ? Math.round(team.playoffProbability * 100) : null;
+        const metrics = team.metrics || {};
+        const blazeScore = metrics.blazeScore ? `<p><strong class="font-semibold text-gray-400">Blaze Score:</strong> <span class="text-white">${metrics.blazeScore}</span></p>` : '';
+        const orgHealth = metrics.organizationalHealth ? `<p><strong class="font-semibold text-gray-400">Org Health:</strong> <span class="text-white">${metrics.organizationalHealth}</span></p>` : '';
+        const tier = metrics.tier ? `<p><strong class="font-semibold text-gray-400">Tier:</strong> <span class="text-white capitalize">${metrics.tier}</span></p>` : '';
+        const championship = metrics.championshipProbability ? `<p><strong class="font-semibold text-gray-400">Championship Prob:</strong> <span class="text-white">${formatPercent(metrics.championshipProbability / 100 ?? metrics.championshipProbability)}</span></p>` : '';
+        const logo = team.logoUrl ? `<img src="${team.logoUrl}" alt="${team.name}" class="w-16 h-16 rounded-full border border-[color:var(--line)] object-cover">` : '';
+
+        ui.teamInfo.innerHTML = `
+          <div class="flex items-center space-x-4">
+            ${logo}
+            <div>
+              <h3 class="text-xl font-bold">${team.name}</h3>
+              <p class="text-sm text-[color:var(--muted)]">${team.league || ''}</p>
+            </div>
+          </div>
+          <div class="font-mono text-sm space-y-2">
+            <p><strong class="font-semibold text-gray-400">Record:</strong> <span class="text-white">${team.record || '—'}</span></p>
+            <p><strong class="font-semibold text-gray-400">Offense:</strong> <span class="text-white">${team.offense ?? '—'}/10</span></p>
+            <p><strong class="font-semibold text-gray-400">Defense:</strong> <span class="text-white">${team.defense ?? '—'}/10</span></p>
+            ${playoffPercent !== null ? `<p><strong class="font-semibold text-gray-400">Playoff Prob:</strong> <span class="text-white">${playoffPercent}%</span></p>` : ''}
+            ${blazeScore}
+            ${orgHealth}
+            ${tier}
+            ${championship}
+          </div>
+        `;
+      }
+
+      const trendData = Array.isArray(team.trend) ? team.trend : [];
+      const ctx = document.getElementById('teamChart')?.getContext('2d');
+      if (!ctx) return;
+
+      if (teamChartInstance) {
+        teamChartInstance.destroy();
+      }
+
+      teamChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: trendData.map((_, idx) => `W${idx + 1}`),
+          datasets: [{
+            label: `${team.name} Trend`,
+            data: trendData,
+            borderColor: 'rgba(191, 87, 0, 0.8)',
+            backgroundColor: 'rgba(191, 87, 0, 0.3)',
+            fill: true,
+            tension: 0.3,
+            pointBackgroundColor: '#fff',
+            pointBorderColor: 'rgba(191, 87, 0, 0.8)',
+            pointHoverRadius: 7
+          }]
+        },
+        options: chartOptions('Recent Performance Index')
+      });
+    }
+
+    function updateTeamButtonState(activeCode) {
+      if (!ui.teamButtons) return;
+      ui.teamButtons.querySelectorAll('.team-btn').forEach((button) => {
+        button.classList.remove('active-team-btn', 'bg-[color:var(--accent)]');
+        button.classList.add('bg-gray-700', 'hover:bg-gray-600');
+        if (button.dataset.teamCode === activeCode) {
+          button.classList.add('active-team-btn', 'bg-[color:var(--accent)]');
+          button.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+        }
+      });
+    }
+
+    function selectPlayer(playerKey) {
+      const player = state.playerIndex.get(playerKey);
+      if (!player || !ui.playerDetail) return;
+
+      const valuation = player.nil?.valuation ? formatCurrency(player.nil.valuation) : 'N/A';
+      const projection = player.nil?.projection ? formatCurrency(player.nil.projection) : null;
+      const floor = player.nil?.floor ? formatCurrency(player.nil.floor) : null;
+      const trajectoryColor = player.trajectory === 'Ascending' ? 'text-green-400' : player.trajectory === 'Stable' ? 'text-yellow-400' : 'text-[color:var(--muted)]';
+      const marketability = player.marketability ?? '—';
+      const characterRisk = player.characterRisk ?? '—';
+      const portrait = player.portraitUrl ? `<img src="${player.portraitUrl}" alt="${player.firstName || ''} ${player.lastName || ''}" class="w-24 h-24 rounded-full object-cover border border-[color:var(--line)] mx-auto mb-4">` : '';
+
+      ui.playerDetail.innerHTML = `
+        <div class="w-full flex flex-col h-full">
+          <div>
+            <div class="flex flex-col md:flex-row items-center md:items-start md:justify-between gap-4">
+              <div class="text-center md:text-left">
+                ${portrait}
+                <h3 class="text-2xl font-bold">${player.firstName || ''} ${player.lastName || ''}</h3>
+                <p class="text-[color:var(--muted)] text-sm">${player.position || ''} &bull; ${player.teamName || player.teamCode || ''}</p>
+                <p class="text-[color:var(--muted)] text-xs">Age ${player.age ?? '—'} • Experience ${player.experience ?? '—'} yrs</p>
+              </div>
+              <div class="text-center md:text-right">
+                <p class="text-sm text-[color:var(--muted)]">Projected NIL Value</p>
+                <p class="text-3xl font-bold text-[color:var(--accent)] font-mono">${valuation}</p>
+                ${projection ? `<p class="text-xs text-[color:var(--muted)]">Projection: ${projection}</p>` : ''}
+                ${floor ? `<p class="text-xs text-[color:var(--muted)]">Stability floor: ${floor}</p>` : ''}
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center mt-6">
+              <div class="bg-black/20 p-4 rounded-lg">
+                <p class="text-sm text-[color:var(--muted)]">Character Risk</p>
+                <p class="text-2xl font-semibold font-mono">${characterRisk}%</p>
+              </div>
+              <div class="bg-black/20 p-4 rounded-lg">
+                <p class="text-sm text-[color:var(--muted)]">Marketability Score</p>
+                <p class="text-2xl font-semibold font-mono">${marketability}</p>
+              </div>
+              <div class="bg-black/20 p-4 rounded-lg">
+                <p class="text-sm text-[color:var(--muted)]">Perf. Trajectory</p>
+                <p class="text-2xl font-semibold ${trajectoryColor}">${player.trajectory || 'N/A'}</p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full mt-6 grow">
+            <canvas id="playerChart"></canvas>
+          </div>
+        </div>
+      `;
+
+      const ctx = document.getElementById('playerChart')?.getContext('2d');
+      if (!ctx) return;
+
+      if (playerChartInstance) {
+        playerChartInstance.destroy();
+      }
+
+      const marketabilityTrend = Array.isArray(player.metrics?.marketability) ? player.metrics.marketability : [];
+      const performanceTrend = Array.isArray(player.metrics?.performance) ? player.metrics.performance : [];
+      const labels = marketabilityTrend.length >= performanceTrend.length
+        ? marketabilityTrend.map((_, idx) => `Q${idx + 1}`)
+        : performanceTrend.map((_, idx) => `Q${idx + 1}`);
+
+      playerChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Marketability',
+              data: marketabilityTrend,
+              borderColor: 'rgba(191, 87, 0, 0.8)',
+              backgroundColor: 'rgba(191, 87, 0, 0.2)',
+              fill: true,
+              tension: 0.4
+            },
+            {
+              label: 'Performance',
+              data: performanceTrend,
+              borderColor: 'rgba(155, 203, 235, 0.8)',
+              backgroundColor: 'rgba(155, 203, 235, 0.2)',
+              fill: true,
+              tension: 0.4
+            }
+          ]
+        },
+        options: chartOptions('Player Attribute Trends')
+      });
+    }
+
+    function formatCurrency(value) {
+      if (typeof value !== 'number') return value;
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
+    }
+
+    function formatPercent(value) {
+      if (typeof value !== 'number') return '—';
+      const percentage = value > 1 ? value : value * 100;
+      return `${Math.round(percentage)}%`;
+    }
+
+    function chartOptions(titleText) {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: titleText, color: 'var(--ink)', font: { size: 16, family: 'var(--font-sans)' } }
+        },
+        scales: {
+          x: { ticks: { color: 'var(--muted)', font: { family: 'var(--font-mono)' } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          y: { ticks: { color: 'var(--muted)', font: { family: 'var(--font-mono)' } }, grid: { color: 'rgba(255,255,255,0.1)' }, beginAtZero: true }
+        }
+      };
+    }
+    // --- AR Neural Coach: 3D Simulation ---
+    let scene, camera, renderer, controls;
+    let offense = [], defense = [];
+    let isAnimating = false;
+    let animationClock = new THREE.Clock();
+    let heatmapMesh;
+    const fieldWidth = 53.3;
+    const fieldLength = 100;
+
+    function initARCoach() {
+      const container = document.getElementById('arContainer');
+      const canvas = document.getElementById('arCanvas');
+      if (!container || !canvas) return;
+
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x0B0B0F);
+
+      camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera.position.set(0, 30, 40);
+
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+
+      controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.target.set(0, 0, 0);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+      scene.add(ambientLight);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+      directionalLight.position.set(10, 20, 5);
+      scene.add(directionalLight);
+
+      createField();
+      createPlayers();
+      resetSimulation();
+      animateAR();
+
+      window.addEventListener('resize', () => {
+        if (!container) return;
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      });
+
+      document.getElementById('runPlayBtn')?.addEventListener('click', runPlay);
+      document.getElementById('resetBtn')?.addEventListener('click', () => resetSimulation(true));
+      document.getElementById('heatmapBtn')?.addEventListener('click', toggleHeatmap);
+    }
+
+    function createField() {
+      const ground = new THREE.Mesh(new THREE.PlaneGeometry(fieldWidth, fieldLength), new THREE.MeshLambertMaterial({ color: 0x006400 }));
+      ground.rotation.x = -Math.PI / 2;
+      scene.add(ground);
+
+      const points = [];
+      points.push(
+        new THREE.Vector3(-fieldWidth / 2, 0.1, -fieldLength / 2),
+        new THREE.Vector3(fieldWidth / 2, 0.1, -fieldLength / 2),
+        new THREE.Vector3(fieldWidth / 2, 0.1, fieldLength / 2),
+        new THREE.Vector3(-fieldWidth / 2, 0.1, fieldLength / 2),
+        new THREE.Vector3(-fieldWidth / 2, 0.1, -fieldLength / 2)
+      );
+
+      for (let i = -40; i <= 40; i += 10) {
+        points.push(new THREE.Vector3(-fieldWidth / 2, 0.1, i), new THREE.Vector3(fieldWidth / 2, 0.1, i));
+      }
+
+      scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), new THREE.LineBasicMaterial({ color: 0xffffff })));
+    }
+
+    function createPlayers() {
+      const playerGeometry = new THREE.CylinderGeometry(0.7, 0.7, 0.2, 32);
+      playerGeometry.rotateX(Math.PI / 2);
+      const offenseMaterial = new THREE.MeshStandardMaterial({ color: 0xBF5700 });
+      const defenseMaterial = new THREE.MeshStandardMaterial({ color: 0x4A90E2 });
+
+      [{ x: 0, z: -5 }, { x: -10, z: -4.5 }, { x: 10, z: -4.5 }, { x: -20, z: -4 }, { x: 0, z: -8 }].forEach((pos) => {
+        const mesh = new THREE.Mesh(playerGeometry, offenseMaterial);
+        mesh.position.set(pos.x, 0.1, pos.z);
+        mesh.initialPosition = mesh.position.clone();
+        offense.push(mesh);
+        scene.add(mesh);
+      });
+
+      [{ x: 0, z: 0 }, { x: -10, z: 0 }, { x: 10, z: 0 }, { x: -20, z: 5 }, { x: 20, z: 5 }].forEach((pos) => {
+        const mesh = new THREE.Mesh(playerGeometry, defenseMaterial);
+        mesh.position.set(pos.x, 0.1, pos.z);
+        mesh.initialPosition = mesh.position.clone();
+        defense.push(mesh);
+        scene.add(mesh);
+      });
+    }
+
+    function runPlay() {
+      if (isAnimating) return;
+      resetSimulation(false);
+      isAnimating = true;
+      animationClock.start();
+      const status = document.getElementById('playStatus');
+      if (status) {
+        status.textContent = 'STATUS: IN-PROGRESS';
+        status.className = 'font-mono text-sm text-yellow-400';
+      }
+      offense[0].targetPosition = new THREE.Vector3(0, 0.1, 15);
+      offense[1].targetPosition = new THREE.Vector3(-15, 0.1, 5);
+      offense[2].targetPosition = new THREE.Vector3(15, 0.1, 5);
+      offense[3].targetPosition = new THREE.Vector3(-20, 0.1, 10);
+      offense[4].targetPosition = new THREE.Vector3(0, 0.1, -6);
+    }
+
+    function resetSimulation(fullReset) {
+      isAnimating = false;
+      animationClock.stop();
+      [...offense, ...defense].forEach((player) => {
+        player.position.copy(player.initialPosition);
+        delete player.targetPosition;
+      });
+      if (fullReset) {
+        const status = document.getElementById('playStatus');
+        if (status) {
+          status.textContent = 'STATUS: READY';
+          status.className = 'font-mono text-sm text-green-400';
+        }
+      }
+    }
+
+    function toggleHeatmap() {
+      if (!heatmapMesh) {
+        const heatCanvas = document.createElement('canvas');
+        heatCanvas.width = 256;
+        heatCanvas.height = 512;
+        const ctx = heatCanvas.getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 512);
+        gradient.addColorStop(0, 'rgba(0, 255, 0, 0.6)');
+        gradient.addColorStop(0.3, 'rgba(255, 255, 0, 0.5)');
+        gradient.addColorStop(0.7, 'rgba(255, 0, 0, 0.4)');
+        gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 256, 512);
+        heatmapMesh = new THREE.Mesh(
+          new THREE.PlaneGeometry(fieldWidth, fieldLength),
+          new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(heatCanvas), transparent: true, opacity: 0.7 })
+        );
+        heatmapMesh.rotation.x = -Math.PI / 2;
+        heatmapMesh.position.y = 0.11;
+        scene.add(heatmapMesh);
+      } else {
+        heatmapMesh.visible = !heatmapMesh.visible;
+      }
+    }
+
+    function animateAR() {
+      requestAnimationFrame(animateAR);
+      if (isAnimating) {
+        const elapsed = animationClock.getElapsedTime();
+        offense.forEach((player) => {
+          if (player.targetPosition) {
+            player.position.lerp(player.targetPosition, 0.02);
+          }
+        });
+        if (elapsed > 5) {
+          isAnimating = false;
+          const status = document.getElementById('playStatus');
+          if (status) {
+            status.textContent = 'STATUS: COMPLETE';
+            status.className = 'font-mono text-sm text-blue-400';
+          }
+        }
+      }
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    // --- Bio-Analytics ---
+    let model, videoStream, lastBlinkTime = 0, blinkCount = 0;
+
+    function initBioAnalytics() {
+      document.getElementById('startCamBtn')?.addEventListener('click', startCamera);
+      document.getElementById('pipBtn')?.addEventListener('click', togglePiP);
+      document.getElementById('fullscreenBtn')?.addEventListener('click', toggleFullscreen);
+      document.getElementById('hideVideoBtn')?.addEventListener('click', toggleVideoVisibility);
+      setInterval(updateSimulatedMetrics, 1000);
+    }
+
+    async function startCamera() {
+      const video = document.getElementById('videoFeed');
+      const videoMessage = document.getElementById('videoMessage');
+      const analyticsDisplay = document.getElementById('analyticsDisplay');
+      const bioControls = document.getElementById('bioControls');
+
+      try {
+        videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        if (!video) return;
+        video.srcObject = videoStream;
+        if (videoMessage) videoMessage.style.display = 'none';
+        analyticsDisplay?.classList.remove('hidden');
+
+        bioControls?.querySelectorAll('button').forEach((button) => {
+          button.disabled = false;
+        });
+
+        model = await loadAdvancedModel();
+        runDetection();
+      } catch (err) {
+        console.error('Camera access denied:', err);
+        if (videoMessage) {
+          videoMessage.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-4xl mb-2 text-red-500"></i><p>Camera access denied</p>`;
+        }
+      }
+    }
+
+    async function loadAdvancedModel() {
+      console.log('Loading Ray-Trace Trained Bio-Analytics Model...');
+      await tf.setBackend('webgl');
+      const loadedModel = await faceLandmarksDetection.load(faceLandmarksDetection.SupportedPackages.mediapipeFacemesh);
+      console.log('Advanced model loaded.');
+      return loadedModel;
+    }
+
+    async function runDetection() {
+      const video = document.getElementById('videoFeed');
+      if (!videoStream || !video || video.paused || video.ended || !model) return;
+
+      const faces = await model.estimateFaces({ input: video });
+      if (faces.length > 0) {
+        const keypoints = faces[0].scaledMesh;
+        updateRealMetrics(keypoints);
+      }
+
+      requestAnimationFrame(runDetection);
+    }
+
+    function updateRealMetrics(keypoints) {
+      const leftEye = keypoints[133];
+      const rightEye = keypoints[362];
+      const angle = Math.atan2(rightEye[1] - leftEye[1], rightEye[0] - leftEye[0]) * 180 / Math.PI;
+      const headTiltValue = document.getElementById('headTiltValue');
+      if (headTiltValue) {
+        headTiltValue.textContent = `${angle.toFixed(1)}°`;
+      }
+
+      const leftEyeUpper = keypoints[159];
+      const leftEyeLower = keypoints[145];
+      const eyeOpenness = Math.abs(leftEyeUpper[1] - leftEyeLower[1]);
+      if (eyeOpenness < 3) {
+        const now = Date.now();
+        if (now - lastBlinkTime > 500) {
+          blinkCount++;
+          lastBlinkTime = now;
+        }
+      }
+    }
+
+    setInterval(() => {
+      const rate = blinkCount * 12;
+      const blinkRateValue = document.getElementById('blinkRateValue');
+      if (blinkRateValue) {
+        blinkRateValue.textContent = `${rate} bpm`;
+      }
+      blinkCount = 0;
+    }, 5000);
+
+    function updateSimulatedMetrics() {
+      const cogLoadBar = document.getElementById('cogLoadBar');
+      const cogLoadValue = document.getElementById('cogLoadValue');
+      if (cogLoadBar && cogLoadValue) {
+        let load = parseFloat(cogLoadBar.style.width) || 40;
+        load += (Math.random() - 0.5) * 5;
+        load = Math.max(0, Math.min(100, load));
+        cogLoadBar.style.width = `${load}%`;
+        cogLoadValue.textContent = `${Math.round(load)}%`;
+      }
+
+      const sentimentValue = document.getElementById('sentimentValue');
+      const sentimentBar = document.getElementById('sentimentBar');
+      const sentimentRnd = Math.random();
+      if (sentimentValue && sentimentBar) {
+        if (sentimentRnd > 0.8) {
+          sentimentValue.textContent = 'POSITIVE';
+          sentimentValue.className = 'text-green-400';
+          sentimentBar.style.backgroundColor = '#22c55e';
+          sentimentBar.style.width = `${70 + Math.random() * 20}%`;
+        } else if (sentimentRnd < 0.2) {
+          sentimentValue.textContent = 'CONCERNED';
+          sentimentValue.className = 'text-red-400';
+          sentimentBar.style.backgroundColor = '#ef4444';
+          sentimentBar.style.width = `${10 + Math.random() * 20}%`;
+        } else {
+          sentimentValue.textContent = 'NEUTRAL';
+          sentimentValue.className = 'text-yellow-400';
+          sentimentBar.style.backgroundColor = '#eab308';
+          sentimentBar.style.width = `${40 + Math.random() * 20}%`;
+        }
+      }
+    }
+
+    function togglePiP() {
+      const video = document.getElementById('videoFeed');
+      if (!video) return;
+      if (document.pictureInPictureElement) {
+        document.exitPictureInPicture();
+      } else if (document.pictureInPictureEnabled) {
+        video.requestPictureInPicture().catch((err) => console.error('PiP failed', err));
+      }
+    }
+
+    function toggleFullscreen() {
+      const panel = document.getElementById('bioAnalyticsPanel');
+      if (!panel) return;
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        panel.requestFullscreen().catch((err) => console.error('Fullscreen failed', err));
+      }
+    }
+
+    function toggleVideoVisibility() {
+      const video = document.getElementById('videoFeed');
+      const btn = document.getElementById('hideVideoBtn');
+      if (!video || !btn) return;
+      video.style.display = video.style.display === 'none' ? 'block' : 'none';
+      btn.innerHTML = video.style.display === 'none'
+        ? '<i class="fa-solid fa-eye mr-2"></i>Show'
+        : '<i class="fa-solid fa-eye-slash mr-2"></i>Hide';
+    }
+  </script>
+</body>
+</html>

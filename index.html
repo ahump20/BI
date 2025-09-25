@@ -558,6 +558,10 @@
             --accent-color: var(--championship-gold);
         }
 
+        .hero-cta--dashboard {
+            --accent-color: var(--cardinal-blue);
+        }
+
         .hero-cta--3d {
             --accent-color: var(--cardinal-blue);
         }
@@ -1037,6 +1041,14 @@
             </div>
         </div>
         <nav class="nav-menu">
+            <div class="nav-links">
+                <a href="#classic-container" class="nav-item">Classic HQ</a>
+                <a href="#universe-container" class="nav-item">3D Universe</a>
+                <a href="#deployments" class="nav-item">Deployments</a>
+            </div>
+            <div class="nav-cta-group">
+                <a href="unified-dashboard.html" class="nav-item nav-cta">Launch Unified Dashboard</a>
+            </div>
         </nav>
     </div>
 
@@ -1133,12 +1145,17 @@
     <!-- Classic Dashboard Container -->
     <div id="classic-container">
         <div class="classic-dashboard">
-            <section class="deployment-hero">
+            <section id="deployments" class="deployment-hero">
                 <div class="hero-intro">
                     <h1 class="deployment-hero-title">Choose Your Blaze Intelligence Experience</h1>
                     <p class="hero-subtitle">Launch the deployment tailored to your role—from unified HQ operations to executive storytelling and immersive demos.</p>
                 </div>
                 <div class="hero-cta-grid">
+                    <a href="unified-dashboard.html" class="hero-cta hero-cta--dashboard">
+                        <span class="hero-cta-label">Unified Dashboard</span>
+                        <span class="hero-cta-description">Explore the Gemini 2.5 Pro-powered layout with live Cloudinary assets and NIL intelligence.</span>
+                        <span class="hero-cta-action">View On-Platform Demo</span>
+                    </a>
                     <a href="https://blaze-intelligence.netlify.app/" target="_blank" rel="noopener noreferrer" class="hero-cta">
                         <span class="hero-cta-label">Unified Command Center</span>
                         <span class="hero-cta-description">Operations-grade dashboard that unifies recruiting, NIL, and performance analytics for daily decision cycles.</span>
