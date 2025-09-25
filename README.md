@@ -154,6 +154,7 @@ the bottom of the script and connectors without credentials are skipped automati
 - [API Documentation](05_DOCS/technical/api-docs.md)
 - [System Architecture](05_DOCS/technical/architecture.md)
 - [Deployment Guide](05_DOCS/deployment/production-guide.md)
+- [Unified Dashboard Blueprint](unified-dashboard.html) — live Cloudinary-backed NIL + team intelligence experience powered by `/api/unified-dashboard`.
 
 ### For Business
 - [Business Overview](05_DOCS/business/overview.md)
