@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-log() { echo "[\$(date +'%Y-%m-%d %H:%M:%S')] $*"; }
-warn() { echo "[\$(date +'%Y-%m-%d %H:%M:%S')] WARN: $*" >&2; }
+log() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] $*"; }
+warn() { echo "[$(date +'%Y-%m-%d %H:%M:%S')] WARN: $*" >&2; }
 
 log "🚀 Blaze Intelligence multi-platform deployment starting"
 
