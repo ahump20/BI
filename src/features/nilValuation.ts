@@ -368,7 +368,7 @@ function buildNarrative(
     recommendations.push('Expand earned media and digital storytelling to offset limited target share.');
   }
   if (metrics.turnovers > 8) {
-    recommendations.push('Prioritise ball security programming to protect valuation floor.');
+    recommendations.push('Prioritize ball security programming to protect valuation floor.');
   }
   if (valuation.ceiling - valuation.expectedValue > 150_000) {
     recommendations.push('Bundle long-term incentives with breakout escalators to capture upside.');
