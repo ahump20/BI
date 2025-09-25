@@ -1,4 +1,4 @@
-DEPLOYMENT MANIFEST - Thu Sep 25 14:36:14 CDT 2025
+DEPLOYMENT MANIFEST - Thu Sep 25 14:49:21 CDT 2025
 ========================================
 Essential Files:
 - index.html
@@ -16,13 +16,13 @@ Essential Files:
 
 CSS Directory (all files):
 drwxr-xr-x    4 AustinHumphrey  staff    128 Sep 25 03:23 .
-drwxr-xr-x  580 AustinHumphrey  staff  18560 Sep 25 14:35 ..
+drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
 -rw-r--r--    1 AustinHumphrey  staff  10531 Sep 25 01:43 blaze-brand-system.css
 -rw-r--r--    1 AustinHumphrey  staff  21731 Sep 25 03:23 blaze-revolutionary-command-center.css
 
 JS Directory (all files):
 drwxr-xr-x  116 AustinHumphrey  staff   3712 Sep 25 14:11 .
-drwxr-xr-x  580 AustinHumphrey  staff  18560 Sep 25 14:35 ..
+drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
 -rw-r--r--    1 AustinHumphrey  staff    626 Sep 25 02:15 ab-testing.js
 -rw-r--r--    1 AustinHumphrey  staff  36014 Sep 25 02:15 accessibility-enhancer.js
 -rw-r--r--    1 AustinHumphrey  staff  11166 Sep 25 02:15 analytics-config.js
@@ -140,7 +140,7 @@ drwxr-xr-x    7 AustinHumphrey  staff    224 Sep 25 02:15 disabled-popups
 
 Data Directory:
 drwxr-xr-x   32 AustinHumphrey  staff   1024 Sep 25 02:15 .
-drwxr-xr-x  580 AustinHumphrey  staff  18560 Sep 25 14:35 ..
+drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
 drwxr-xr-x   12 AustinHumphrey  staff    384 Sep 25 02:15 analytics
 -rw-r--r--    1 AustinHumphrey  staff   2756 Sep 25 01:43 api-implementation-roadmap.json
 -rw-r--r--    1 AustinHumphrey  staff   4535 Sep 25 01:43 api-integration-blueprint.json
@@ -151,7 +151,7 @@ drwxr-xr-x   12 AustinHumphrey  staff    384 Sep 25 02:15 analytics
 drwxr-xr-x    3 AustinHumphrey  staff     96 Sep 22 10:43 catalog
 drwxr-xr-x    3 AustinHumphrey  staff     96 Sep 22 10:43 cfb
 drwxr-xr-x    3 AustinHumphrey  staff     96 Sep 22 10:43 clients
--rw-r--r--    1 AustinHumphrey  staff   1511 Sep 25 14:30 dashboard-config.json
+-rw-r--r--    1 AustinHumphrey  staff   1511 Sep 25 14:40 dashboard-config.json
 drwxr-xr-x   11 AustinHumphrey  staff    352 Sep 25 01:35 demo
 -rw-r--r--    1 AustinHumphrey  staff   4260 Sep 25 01:43 deployment-validation-sept22.json.backup
 -rw-r--r--    1 AustinHumphrey  staff    803 Sep 25 01:43 insights.json
