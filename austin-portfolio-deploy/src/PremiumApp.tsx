@@ -48,9 +48,6 @@ const PremiumApp: React.FC = () => {
 
   return (
     <div className="premium-app">
-      {/* ===== PREMIUM APP STYLES ===== */}
-      <style jsx global>{`
-        /* ===== GLOBAL CHAMPIONSHIP STYLES ===== */
         * {
           margin: 0;
           padding: 0;

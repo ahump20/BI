@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#500000">
+    <title>Blaze Sports Intel - Mobile Championship Experience | Texas Deep South Sports Authority</title>
+    <meta name="description" content="The ultimate mobile sports intelligence platform - Texas HS Football through SEC/MLB/NFL. Real-time analytics, 3D visualizations, and championship-grade performance data.">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style">
+    <link rel="preload" href="https://cdn.skypack.dev/three@0.145.0" as="script">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Critical CSS -->
+    <style>
+        /* ===== MOBILE-FIRST CORE SYSTEM ===== */
+        :root {
+            --blaze-primary: #BF5700;
+            --blaze-secondary: #9BCBEB;
+            --blaze-dark: #002244;
+            --blaze-accent: #00B2A9;
+            --blaze-success: #00ff88;
+            --blaze-warning: #ffaa00;
+            --blaze-danger: #ff4444;
+            --blaze-black: #000000;
+            --blaze-white: #ffffff;
+
+            --mobile-padding: 16px;
+            --mobile-header-height: 60px;
+            --mobile-nav-height: 56px;
+            --mobile-safe-area-top: env(safe-area-inset-top);
+            --mobile-safe-area-bottom: env(safe-area-inset-bottom);
+
+            --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.2);
+            --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 16px;
+            --border-radius-xl: 24px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, var(--blaze-black) 0%, #1a0000 50%, var(--blaze-black) 100%);
+            color: var(--blaze-white);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            padding-top: var(--mobile-safe-area-top);
+            padding-bottom: var(--mobile-safe-area-bottom);
+        }
+
+        /* ===== MOBILE APP STRUCTURE ===== */
+        .mobile-app-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-header {
+            height: var(--mobile-header-height);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            padding: 0 var(--mobile-padding);
+            position: fixed;
+            top: var(--mobile-safe-area-top);
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .mobile-header .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--blaze-primary), #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .mobile-header .controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+        }
+
+        .mobile-control-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blaze-white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .mobile-control-btn:hover,
+        .mobile-control-btn.active {
+            background: var(--blaze-primary);
+            border-color: var(--blaze-primary);
+            transform: scale(1.05);
+        }
+
+        .main-content {
+            flex: 1;
+            position: relative;
+            margin-top: var(--mobile-header-height);
+            margin-bottom: var(--mobile-nav-height);
+            overflow: hidden;
+        }
+
+        .mobile-navigation {
+            height: var(--mobile-nav-height);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: fixed;
+            bottom: var(--mobile-safe-area-bottom);
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 var(--mobile-padding);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            min-width: 60px;
+        }
+
+        .nav-item.active {
+            color: var(--blaze-primary);
+            background: rgba(191, 87, 0, 0.1);
+        }
+
+        .nav-item .icon {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        /* ===== 3D CANVAS SYSTEM ===== */
+        #mobile-canvas-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #mobile-canvas-container canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+            touch-action: none;
+        }
+
+        /* ===== PERFORMANCE OVERLAY ===== */
+        .mobile-performance-overlay {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-md);
+            padding: 12px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 10px;
+            min-width: 120px;
+            z-index: 500;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-performance-overlay.visible {
+            transform: translateX(0);
+        }
+
+        .mobile-performance-overlay .perf-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .mobile-performance-overlay .perf-value {
+            color: var(--blaze-success);
+            font-weight: 600;
+        }
+
+        .mobile-performance-overlay .perf-value.warning {
+            color: var(--blaze-warning);
+        }
+
+        .mobile-performance-overlay .perf-value.danger {
+            color: var(--blaze-danger);
+        }
+
+        /* ===== MOBILE CONTROLS PANEL ===== */
+        .mobile-controls-panel {
+            position: absolute;
+            bottom: 80px;
+            left: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-lg);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 800;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .mobile-controls-panel.visible {
+            transform: translateY(0);
+        }
+
+        .controls-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .controls-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--blaze-primary);
+        }
+
+        .close-controls {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: var(--blaze-white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .close-controls:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .mobile-control-group {
+            margin-bottom: 20px;
+        }
+
+        .mobile-control-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mobile-toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+
+        .mobile-toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .mobile-toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 28px;
+        }
+
+        .mobile-toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--blaze-white);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        input:checked + .mobile-toggle-slider {
+            background-color: var(--blaze-primary);
+        }
+
+        input:checked + .mobile-toggle-slider:before {
+            transform: translateX(22px);
+        }
+
+        .mobile-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 10px 0;
+        }
+
+        .mobile-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--blaze-primary);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(191, 87, 0, 0.4);
+        }
+
+        .mobile-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--blaze-primary);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(191, 87, 0, 0.4);
+        }
+
+        .slider-value-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .slider-current-value {
+            color: var(--blaze-primary);
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        /* ===== QUALITY PRESET BUTTONS ===== */
+        .mobile-quality-presets {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .mobile-preset-btn {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-md);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .mobile-preset-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .mobile-preset-btn.active {
+            background: var(--blaze-primary);
+            border-color: var(--blaze-primary);
+            color: var(--blaze-white);
+            transform: scale(1.02);
+        }
+
+        .mobile-preset-btn .preset-icon {
+            font-size: 14px;
+        }
+
+        /* ===== LOADING OVERLAY ===== */
+        .mobile-loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--blaze-black) 0%, #1a0000 50%, var(--blaze-dark) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .mobile-loading-overlay.hidden {
+            opacity: 0;
+            transform: scale(1.1);
+            pointer-events: none;
+        }
+
+        .loading-logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--blaze-primary), #ff6600, var(--blaze-warning));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            from { text-shadow: 0 0 20px rgba(191, 87, 0, 0.5); }
+            to { text-shadow: 0 0 40px rgba(191, 87, 0, 0.8); }
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--blaze-primary);
+            border-radius: 50%;
+            animation: spin 1.2s linear infinite;
+            margin-bottom: 24px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            max-width: 280px;
+            line-height: 1.5;
+        }
+
+        .loading-progress {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .loading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blaze-primary), var(--blaze-warning));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* ===== TOUCH CONTROLS ===== */
+        .touch-controls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 300;
+        }
+
+        .touch-control-zone {
+            position: absolute;
+            pointer-events: all;
+            touch-action: none;
+        }
+
+        .zoom-control {
+            bottom: 140px;
+            right: 20px;
+            width: 50px;
+            height: 120px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            gap: 20px;
+        }
+
+        .zoom-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blaze-white);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .zoom-btn:active {
+            background: var(--blaze-primary);
+            transform: scale(0.95);
+        }
+
+        .rotation-control {
+            bottom: 140px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .rotation-handle {
+            width: 20px;
+            height: 20px;
+            background: var(--blaze-primary);
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        /* ===== GESTURE FEEDBACK ===== */
+        .gesture-feedback {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--blaze-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease;
+        }
+
+        .gesture-feedback.active {
+            opacity: 0.6;
+            transform: scale(1);
+        }
+
+        /* ===== NOTIFICATION SYSTEM ===== */
+        .mobile-notification {
+            position: fixed;
+            top: calc(var(--mobile-header-height) + var(--mobile-safe-area-top) + 16px);
+            left: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--blaze-success);
+            border-radius: var(--border-radius-md);
+            padding: 16px;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1500;
+        }
+
+        .mobile-notification.show {
+            transform: translateY(0);
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .notification-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--blaze-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blaze-black);
+            font-size: 16px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .notification-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--blaze-white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .notification-subtext {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 4px;
+        }
+
+        /* ===== ACTION BUTTONS ===== */
+        .mobile-action-buttons {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 600;
+        }
+
+        .mobile-action-btn {
+            padding: 12px 16px;
+            background: linear-gradient(135deg, var(--blaze-primary), #cc4600);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-md);
+            color: var(--blaze-white);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .mobile-action-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .mobile-action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .mobile-action-btn:hover:before,
+        .mobile-action-btn:focus:before {
+            left: 100%;
+        }
+
+        /* ===== RESPONSIVE BREAKPOINTS ===== */
+        @media (max-width: 480px) {
+            :root {
+                --mobile-padding: 12px;
+            }
+
+            .mobile-header .logo {
+                font-size: 16px;
+            }
+
+            .mobile-controls-panel {
+                bottom: 70px;
+                max-height: 250px;
+            }
+
+            .mobile-action-buttons {
+                flex-wrap: wrap;
+                max-width: calc(100% - 32px);
+            }
+
+            .mobile-action-btn {
+                flex: 1;
+                min-width: 70px;
+                font-size: 10px;
+                padding: 10px 12px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav-item {
+                min-width: 50px;
+                font-size: 10px;
+            }
+
+            .nav-item .icon {
+                font-size: 18px;
+            }
+
+            .mobile-quality-presets {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== LANDSCAPE MODE ===== */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .mobile-header {
+                height: 50px;
+            }
+
+            .mobile-navigation {
+                height: 50px;
+            }
+
+            .main-content {
+                margin-top: 50px;
+                margin-bottom: 50px;
+            }
+
+            .mobile-controls-panel {
+                bottom: 60px;
+                max-height: 200px;
+            }
+
+            .mobile-action-buttons {
+                bottom: 10px;
+            }
+        }
+
+        /* ===== HIGH CONTRAST MODE ===== */
+        @media (prefers-contrast: high) {
+            .mobile-header,
+            .mobile-navigation,
+            .mobile-controls-panel {
+                background: rgba(0, 0, 0, 1);
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+
+            .mobile-toggle-slider {
+                background-color: rgba(255, 255, 255, 0.5);
+            }
+
+            .mobile-control-btn,
+            .mobile-preset-btn {
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        /* ===== REDUCED MOTION ===== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .loading-spinner {
+                animation: none;
+            }
+
+            .logoGlow {
+                animation: none;
+            }
+        }
+
+        /* ===== DARK MODE SYSTEM ===== */
+        @media (prefers-color-scheme: light) {
+            /* Override for light mode if needed - keeping dark for sports theme */
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile App Container -->
+    <div class="mobile-app-container">
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <div class="logo">BLAZE SPORTS INTEL</div>
+            <div class="controls">
+                <button class="mobile-control-btn" id="performanceToggle" aria-label="Toggle Performance Monitor">
+                    📊
+                </button>
+                <button class="mobile-control-btn" id="controlsToggle" aria-label="Toggle Graphics Controls">
+                    ⚙️
+                </button>
+                <button class="mobile-control-btn" id="fullscreenToggle" aria-label="Toggle Fullscreen">
+                    ⛶
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- 3D Canvas Container -->
+            <div id="mobile-canvas-container">
+                <!-- Canvas will be inserted here -->
+            </div>
+
+            <!-- Performance Overlay -->
+            <div class="mobile-performance-overlay" id="mobilePerformanceOverlay">
+                <div class="perf-row">
+                    <span>FPS:</span>
+                    <span class="perf-value" id="mobileFPS">60</span>
+                </div>
+                <div class="perf-row">
+                    <span>Frame:</span>
+                    <span class="perf-value" id="mobileFrameTime">16.7ms</span>
+                </div>
+                <div class="perf-row">
+                    <span>Triangles:</span>
+                    <span class="perf-value" id="mobileTriangles">0</span>
+                </div>
+                <div class="perf-row">
+                    <span>Draws:</span>
+                    <span class="perf-value" id="mobileDrawCalls">0</span>
+                </div>
+                <div class="perf-row">
+                    <span>Battery:</span>
+                    <span class="perf-value" id="mobileBattery">100%</span>
+                </div>
+                <div class="perf-row">
+                    <span>Quality:</span>
+                    <span class="perf-value" id="mobileQuality">Ultra</span>
+                </div>
+            </div>
+
+            <!-- Touch Controls -->
+            <div class="touch-controls">
+                <div class="touch-control-zone zoom-control">
+                    <button class="zoom-btn" id="zoomIn" aria-label="Zoom In">+</button>
+                    <button class="zoom-btn" id="zoomOut" aria-label="Zoom Out">−</button>
+                </div>
+                <div class="touch-control-zone rotation-control" id="rotationControl">
+                    <div class="rotation-handle" id="rotationHandle"></div>
+                </div>
+            </div>
+
+            <!-- Mobile Action Buttons -->
+            <div class="mobile-action-buttons">
+                <button class="mobile-action-btn" id="touchdownBtn">🏈 TD</button>
+                <button class="mobile-action-btn" id="cameraBtn">📷 CAM</button>
+                <button class="mobile-action-btn" id="nightBtn">🌙 NIGHT</button>
+            </div>
+
+            <!-- Gesture Feedback -->
+            <div class="gesture-feedback" id="gestureFeedback"></div>
+        </main>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-navigation">
+            <div class="nav-item active" data-tab="stadium">
+                <div class="icon">🏟️</div>
+                <div>Stadium</div>
+            </div>
+            <div class="nav-item" data-tab="analytics">
+                <div class="icon">📊</div>
+                <div>Analytics</div>
+            </div>
+            <div class="nav-item" data-tab="teams">
+                <div class="icon">🏈</div>
+                <div>Teams</div>
+            </div>
+            <div class="nav-item" data-tab="settings">
+                <div class="icon">⚙️</div>
+                <div>Settings</div>
+            </div>
+        </nav>
+
+        <!-- Mobile Controls Panel -->
+        <div class="mobile-controls-panel" id="mobileControlsPanel">
+            <div class="controls-header">
+                <div class="controls-title">Graphics Settings</div>
+                <button class="close-controls" id="closeControlsBtn">×</button>
+            </div>
+
+            <div class="mobile-control-group">
+                <label class="mobile-control-label">Ray Tracing</label>
+                <label class="mobile-toggle-switch">
+                    <input type="checkbox" id="mobileRayTracingToggle" checked>
+                    <span class="mobile-toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="mobile-control-group">
+                <label class="mobile-control-label">Volumetric Lighting</label>
+                <label class="mobile-toggle-switch">
+                    <input type="checkbox" id="mobileVolumetricToggle" checked>
+                    <span class="mobile-toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="mobile-control-group">
+                <label class="mobile-control-label">SSAO</label>
+                <label class="mobile-toggle-switch">
+                    <input type="checkbox" id="mobileSSAOToggle" checked>
+                    <span class="mobile-toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="mobile-control-group">
+                <label class="mobile-control-label">Bloom Intensity</label>
+                <input type="range" min="0" max="3" value="1.5" step="0.1" class="mobile-slider" id="mobileBloomSlider">
+                <div class="slider-value-display">
+                    <span>0</span>
+                    <span class="slider-current-value" id="mobileBloomValue">1.5</span>
+                    <span>3</span>
+                </div>
+            </div>
+
+            <div class="mobile-control-group">
+                <label class="mobile-control-label">Exposure</label>
+                <input type="range" min="0.5" max="2" value="1.2" step="0.1" class="mobile-slider" id="mobileExposureSlider">
+                <div class="slider-value-display">
+                    <span>0.5</span>
+                    <span class="slider-current-value" id="mobileExposureValue">1.2</span>
+                    <span>2.0</span>
+                </div>
+            </div>
+
+            <div class="mobile-quality-presets">
+                <button class="mobile-preset-btn" data-quality="low">
+                    <span class="preset-icon">🔋</span>
+                    <span>Battery Saver</span>
+                </button>
+                <button class="mobile-preset-btn" data-quality="medium">
+                    <span class="preset-icon">⚡</span>
+                    <span>Balanced</span>
+                </button>
+                <button class="mobile-preset-btn" data-quality="high">
+                    <span class="preset-icon">💎</span>
+                    <span>High Quality</span>
+                </button>
+                <button class="mobile-preset-btn active" data-quality="ultra">
+                    <span class="preset-icon">🏆</span>
+                    <span>Championship</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Loading Overlay -->
+        <div class="mobile-loading-overlay" id="mobileLoadingOverlay">
+            <div class="loading-logo">BLAZE SPORTS INTEL</div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text" id="loadingText">Initializing Ultra Graphics...</div>
+            <div class="loading-progress">
+                <div class="loading-progress-bar" id="loadingProgressBar"></div>
+            </div>
+        </div>
+
+        <!-- Mobile Notification -->
+        <div class="mobile-notification" id="mobileNotification">
+            <div class="notification-content">
+                <div class="notification-icon" id="notificationIcon">🏈</div>
+                <div>
+                    <div class="notification-text" id="notificationText">Touchdown!</div>
+                    <div class="notification-subtext" id="notificationSubtext">Championship celebration activated</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Graphics Engine Script -->
+    <script type="module">
+        // Import Three.js and dependencies
+        import * as THREE from 'https://cdn.skypack.dev/three@0.145.0';
+        import { EffectComposer } from 'https://cdn.skypack.dev/three@0.145.0/examples/jsm/postprocessing/EffectComposer';
+        import { RenderPass } from 'https://cdn.skypack.dev/three@0.145.0/examples/jsm/postprocessing/RenderPass';
+        import { UnrealBloomPass } from 'https://cdn.skypack.dev/three@0.145.0/examples/jsm/postprocessing/UnrealBloomPass';
+        import { SSAOPass } from 'https://cdn.skypack.dev/three@0.145.0/examples/jsm/postprocessing/SSAOPass';
+        import { SMAAPass } from 'https://cdn.skypack.dev/three@0.145.0/examples/jsm/postprocessing/SMAAPass';
+
+        /**
+         * BLAZE SPORTS INTEL - MOBILE ULTRA GRAPHICS ENGINE
+         * Championship-grade 3D graphics optimized for mobile devices
+         * Battery-aware performance scaling with full desktop features
+         */
+        class MobileBlazeGraphicsEngine {
+            constructor(container) {
+                this.container = container;
+                this.scene = new THREE.Scene();
+                this.clock = new THREE.Clock();
+                this.isInitialized = false;
+
+                // Mobile-specific performance tracking
+                this.performanceMetrics = {
+                    fps: 60,
+                    frameTime: 16.67,
+                    batteryLevel: 1.0,
+                    isLowPowerMode: false,
+                    devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+                    qualityLevel: 'ultra'
+                };
+
+                // Touch and gesture handling
+                this.touchState = {
+                    isActive: false,
+                    startX: 0,
+                    startY: 0,
+                    scale: 1,
+                    rotation: 0,
+                    lastTouchTime: 0
+                };
+
+                // Camera control system
+                this.cameraControls = {
+                    zoom: 1,
+                    rotation: { x: 0, y: 0 },
+                    position: { x: 0, y: 150, z: 300 },
+                    cinematicMode: false,
+                    autoRotate: true,
+                    cameraProgress: 0
+                };
+
+                // Mobile-optimized render settings
+                this.renderSettings = {
+                    rayTracingEnabled: true,
+                    volumetricLightingEnabled: true,
+                    ssaoEnabled: true,
+                    bloomEnabled: true,
+                    shadowsEnabled: true,
+                    particleCount: 25000, // Reduced for mobile
+                    maxLights: 6,
+                    shadowMapSize: 1024
+                };
+
+                // Initialize all systems
+                this.initMobileDetection();
+                this.initRenderer();
+                this.initCamera();
+                this.initLighting();
+                this.initPostProcessing();
+                this.initStadiumScene();
+                this.initTouchControls();
+                this.initPerformanceMonitoring();
+
+                // Start render loop
+                this.animate();
+            }
+
+            initMobileDetection() {
+                // Detect mobile device capabilities
+                const ua = navigator.userAgent;
+                this.isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+                this.isTablet = /iPad|Android.*(?=.*\btablet\b)/i.test(ua);
+                this.isIOS = /iPad|iPhone|iPod/.test(ua);
+                this.isAndroid = /Android/.test(ua);
+
+                // Check for low-power mode indicators
+                this.checkBatteryStatus();
+
+                // Adjust settings based on device
+                if (this.isMobile && !this.isTablet) {
+                    this.renderSettings.particleCount = 15000;
+                    this.renderSettings.shadowMapSize = 512;
+                    this.renderSettings.maxLights = 4;
+                }
+
+                // Listen for battery changes
+                if (navigator.getBattery) {
+                    navigator.getBattery().then(battery => {
+                        this.battery = battery;
+                        battery.addEventListener('levelchange', () => this.checkBatteryStatus());
+                        battery.addEventListener('chargingchange', () => this.checkBatteryStatus());
+                    });
+                }
+            }
+
+            checkBatteryStatus() {
+                if (this.battery) {
+                    this.performanceMetrics.batteryLevel = this.battery.level;
+                    this.performanceMetrics.isLowPowerMode = this.battery.level < 0.2;
+
+                    // Automatically reduce quality on low battery
+                    if (this.performanceMetrics.isLowPowerMode && this.performanceMetrics.qualityLevel !== 'low') {
+                        this.setQualityPreset('low');
+                        this.showNotification('🔋 Battery Saver', 'Quality reduced to save power');
+                    }
+                }
+            }
+
+            initRenderer() {
+                // Mobile-optimized WebGL renderer
+                const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+                this.renderer = new THREE.WebGLRenderer({
+                    antialias: false, // Use SMAA for better mobile performance
+                    alpha: false,
+                    powerPreference: this.isMobile ? "default" : "high-performance",
+                    stencil: false,
+                    depth: true,
+                    logarithmicDepthBuffer: !this.isMobile, // Disable on mobile
+                    preserveDrawingBuffer: false
+                });
+
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.setPixelRatio(pixelRatio);
+                this.renderer.shadowMap.enabled = this.renderSettings.shadowsEnabled;
+                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                this.renderer.toneMappingExposure = 1.2;
+                this.renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+                // Mobile-specific optimizations
+                this.renderer.info.autoReset = false;
+                this.renderer.physicallyCorrectLights = true;
+
+                this.container.appendChild(this.renderer.domElement);
+            }
+
+            initCamera() {
+                const aspect = window.innerWidth / window.innerHeight;
+                this.camera = new THREE.PerspectiveCamera(65, aspect, 0.1, 5000); // Wider FOV for mobile
+                this.camera.position.set(
+                    this.cameraControls.position.x,
+                    this.cameraControls.position.y,
+                    this.cameraControls.position.z
+                );
+                this.camera.lookAt(0, 0, 0);
+
+                // Cinematic camera path
+                this.cameraPath = new THREE.CatmullRomCurve3([
+                    new THREE.Vector3(0, 150, 300),
+                    new THREE.Vector3(200, 100, 200),
+                    new THREE.Vector3(300, 80, 0),
+                    new THREE.Vector3(200, 100, -200),
+                    new THREE.Vector3(0, 150, -300),
+                    new THREE.Vector3(-200, 100, -200),
+                    new THREE.Vector3(-300, 80, 0),
+                    new THREE.Vector3(-200, 100, 200),
+                    new THREE.Vector3(0, 150, 300)
+                ]);
+                this.cameraPath.closed = true;
+            }
+
+            initLighting() {
+                // Mobile-optimized lighting setup
+                this.scene.fog = new THREE.FogExp2(0x111122, 0.0008);
+
+                // Ambient lighting
+                const ambientLight = new THREE.AmbientLight(0x404050, 0.4);
+                this.scene.add(ambientLight);
+
+                // Stadium lights with reduced count for mobile
+                this.stadiumLights = [];
+                const lightPositions = [
+                    { x: -250, y: 200, z: -250 },
+                    { x: 250, y: 200, z: -250 },
+                    { x: -250, y: 200, z: 250 },
+                    { x: 250, y: 200, z: 250 }
+                ];
+
+                lightPositions.forEach((pos, index) => {
+                    if (index >= this.renderSettings.maxLights) return;
+
+                    const light = new THREE.SpotLight(0xffffff, 300000, 800, Math.PI / 5, 0.4, 1.8);
+                    light.position.set(pos.x, pos.y, pos.z);
+                    light.target.position.set(0, 0, 0);
+                    light.castShadow = this.renderSettings.shadowsEnabled;
+
+                    if (light.castShadow) {
+                        light.shadow.mapSize.width = this.renderSettings.shadowMapSize;
+                        light.shadow.mapSize.height = this.renderSettings.shadowMapSize;
+                        light.shadow.camera.near = 10;
+                        light.shadow.camera.far = 800;
+                        light.shadow.bias = -0.0005;
+                    }
+
+                    this.scene.add(light);
+                    this.scene.add(light.target);
+                    this.stadiumLights.push(light);
+
+                    // Add light cones with reduced complexity for mobile
+                    if (this.renderSettings.volumetricLightingEnabled) {
+                        const coneGeometry = new THREE.ConeGeometry(80, 250, this.isMobile ? 16 : 32, 1, true);
+                        const coneMaterial = new THREE.MeshBasicMaterial({
+                            color: 0xffffcc,
+                            transparent: true,
+                            opacity: 0.08,
+                            side: THREE.DoubleSide,
+                            blending: THREE.AdditiveBlending
+                        });
+                        const cone = new THREE.Mesh(coneGeometry, coneMaterial);
+                        cone.position.copy(light.position);
+                        cone.lookAt(0, 0, 0);
+                        this.scene.add(cone);
+                    }
+                });
+            }
+
+            initPostProcessing() {
+                // Mobile-optimized post-processing pipeline
+                this.composer = new EffectComposer(this.renderer);
+
+                // Main render pass
+                const renderPass = new RenderPass(this.scene, this.camera);
+                this.composer.addPass(renderPass);
+
+                // Conditional SSAO for mobile performance
+                if (this.renderSettings.ssaoEnabled && !this.performanceMetrics.isLowPowerMode) {
+                    this.ssaoPass = new SSAOPass(
+                        this.scene,
+                        this.camera,
+                        window.innerWidth,
+                        window.innerHeight
+                    );
+                    this.ssaoPass.kernelRadius = this.isMobile ? 8 : 16;
+                    this.ssaoPass.minDistance = 0.008;
+                    this.ssaoPass.maxDistance = 0.08;
+                    this.composer.addPass(this.ssaoPass);
+                }
+
+                // Optimized bloom effect
+                if (this.renderSettings.bloomEnabled) {
+                    this.bloomPass = new UnrealBloomPass(
+                        new THREE.Vector2(window.innerWidth, window.innerHeight),
+                        1.2, // Reduced strength for mobile
+                        0.3, // Reduced radius
+                        0.88 // Higher threshold
+                    );
+                    this.composer.addPass(this.bloomPass);
+                }
+
+                // SMAA for mobile-friendly anti-aliasing
+                this.smaaPass = new SMAAPass(
+                    window.innerWidth * this.renderer.getPixelRatio(),
+                    window.innerHeight * this.renderer.getPixelRatio()
+                );
+                this.composer.addPass(this.smaaPass);
+            }
+
+            initStadiumScene() {
+                // Create stadium with mobile-optimized geometry
+                this.createField();
+                this.createStadiumStructure();
+                this.createScoreboards();
+                this.createCrowd();
+            }
+
+            createField() {
+                // Stadium field
+                const fieldGeometry = new THREE.PlaneGeometry(500, 300);
+                const fieldMaterial = new THREE.MeshPhysicalMaterial({
+                    color: 0x2d5016,
+                    metalness: 0.0,
+                    roughness: 0.8,
+                    clearcoat: 0.1,
+                    clearcoatRoughness: 0.5
+                });
+
+                const field = new THREE.Mesh(fieldGeometry, fieldMaterial);
+                field.rotation.x = -Math.PI / 2;
+                field.receiveShadow = true;
+                this.scene.add(field);
+
+                // Field lines with optimized geometry
+                this.createFieldLines();
+            }
+
+            createFieldLines() {
+                const lineMaterial = new THREE.MeshBasicMaterial({
+                    color: 0xffffff,
+                    transparent: true,
+                    opacity: 0.9
+                });
+
+                // Yard lines
+                for (let i = -200; i <= 200; i += 40) {
+                    const lineGeometry = new THREE.PlaneGeometry(300, 2);
+                    const line = new THREE.Mesh(lineGeometry, lineMaterial);
+                    line.rotation.x = -Math.PI / 2;
+                    line.position.set(i, 0.1, 0);
+                    this.scene.add(line);
+                }
+            }
+
+            createStadiumStructure() {
+                // Simplified stadium bowl for mobile
+                const bowlGeometry = new THREE.CylinderGeometry(350, 450, 180, this.isMobile ? 32 : 64, 1, true);
+                const bowlMaterial = new THREE.MeshLambertMaterial({
+                    color: 0x333344,
+                    side: THREE.DoubleSide
+                });
+                const bowl = new THREE.Mesh(bowlGeometry, bowlMaterial);
+                bowl.position.y = 90;
+                this.scene.add(bowl);
+            }
+
+            createScoreboards() {
+                // Mobile-optimized scoreboards
+                const screenGeometry = new THREE.PlaneGeometry(80, 50);
+                const screenMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x00ff00,
+                    emissive: 0x004400,
+                    emissiveIntensity: 0.8
+                });
+
+                const scoreboard1 = new THREE.Mesh(screenGeometry, screenMaterial);
+                scoreboard1.position.set(0, 180, -400);
+                this.scene.add(scoreboard1);
+
+                const scoreboard2 = new THREE.Mesh(screenGeometry, screenMaterial);
+                scoreboard2.position.set(0, 180, 400);
+                scoreboard2.rotation.y = Math.PI;
+                this.scene.add(scoreboard2);
+            }
+
+            createCrowd() {
+                // Mobile-optimized particle crowd
+                const crowdCount = this.renderSettings.particleCount;
+                const positions = new Float32Array(crowdCount * 3);
+                const colors = new Float32Array(crowdCount * 3);
+
+                const maroonColor = new THREE.Color(0x500000);
+                const whiteColor = new THREE.Color(0xffffff);
+
+                for (let i = 0; i < crowdCount; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const radius = 280 + Math.random() * 170;
+                    const height = 20 + Math.random() * 160;
+
+                    positions[i * 3] = Math.cos(angle) * radius;
+                    positions[i * 3 + 1] = height;
+                    positions[i * 3 + 2] = Math.sin(angle) * radius;
+
+                    const color = Math.random() > 0.5 ? maroonColor : whiteColor;
+                    colors[i * 3] = color.r;
+                    colors[i * 3 + 1] = color.g;
+                    colors[i * 3 + 2] = color.b;
+                }
+
+                const crowdGeometry = new THREE.BufferGeometry();
+                crowdGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                crowdGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+                const crowdMaterial = new THREE.PointsMaterial({
+                    size: this.isMobile ? 1.5 : 2,
+                    vertexColors: true,
+                    blending: THREE.AdditiveBlending
+                });
+
+                this.crowd = new THREE.Points(crowdGeometry, crowdMaterial);
+                this.scene.add(this.crowd);
+            }
+
+            initTouchControls() {
+                const canvas = this.renderer.domElement;
+                let pointers = new Map();
+                let lastPinchDistance = 0;
+                let lastRotation = 0;
+
+                // Touch start
+                canvas.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.touchState.isActive = true;
+                    this.touchState.lastTouchTime = Date.now();
+
+                    Array.from(e.touches).forEach(touch => {
+                        pointers.set(touch.identifier, {
+                            x: touch.clientX,
+                            y: touch.clientY
+                        });
+                    });
+
+                    if (e.touches.length === 1) {
+                        this.touchState.startX = e.touches[0].clientX;
+                        this.touchState.startY = e.touches[0].clientY;
+                        this.showGestureFeedback(e.touches[0].clientX, e.touches[0].clientY);
+                    }
+                }, { passive: false });
+
+                // Touch move
+                canvas.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+
+                    if (e.touches.length === 1) {
+                        // Single finger - rotate camera
+                        const deltaX = e.touches[0].clientX - this.touchState.startX;
+                        const deltaY = e.touches[0].clientY - this.touchState.startY;
+
+                        this.cameraControls.rotation.y += deltaX * 0.005;
+                        this.cameraControls.rotation.x += deltaY * 0.005;
+
+                        this.touchState.startX = e.touches[0].clientX;
+                        this.touchState.startY = e.touches[0].clientY;
+
+                    } else if (e.touches.length === 2) {
+                        // Two fingers - pinch zoom and rotate
+                        const touch1 = e.touches[0];
+                        const touch2 = e.touches[1];
+
+                        const dx = touch2.clientX - touch1.clientX;
+                        const dy = touch2.clientY - touch1.clientY;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (lastPinchDistance > 0) {
+                            const pinchScale = distance / lastPinchDistance;
+                            this.cameraControls.zoom = Math.max(0.5, Math.min(3, this.cameraControls.zoom * pinchScale));
+                        }
+
+                        lastPinchDistance = distance;
+                    }
+                }, { passive: false });
+
+                // Touch end
+                canvas.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+
+                    Array.from(e.changedTouches).forEach(touch => {
+                        pointers.delete(touch.identifier);
+                    });
+
+                    if (e.touches.length === 0) {
+                        this.touchState.isActive = false;
+                        lastPinchDistance = 0;
+                        this.hideGestureFeedback();
+
+                        // Check for tap gestures
+                        const touchDuration = Date.now() - this.touchState.lastTouchTime;
+                        if (touchDuration < 300) {
+                            this.handleTap();
+                        }
+                    }
+                }, { passive: false });
+
+                // Prevent context menu on long press
+                canvas.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                });
+            }
+
+            handleTap() {
+                // Toggle auto-rotation on tap
+                this.cameraControls.autoRotate = !this.cameraControls.autoRotate;
+                this.showNotification('📷 Camera', this.cameraControls.autoRotate ? 'Auto-rotation enabled' : 'Manual control');
+            }
+
+            showGestureFeedback(x, y) {
+                const feedback = document.getElementById('gestureFeedback');
+                feedback.style.left = (x - 50) + 'px';
+                feedback.style.top = (y - 50) + 'px';
+                feedback.classList.add('active');
+            }
+
+            hideGestureFeedback() {
+                const feedback = document.getElementById('gestureFeedback');
+                feedback.classList.remove('active');
+            }
+
+            initPerformanceMonitoring() {
+                // Mobile-specific performance monitoring
+                this.performanceInterval = setInterval(() => {
+                    this.updatePerformanceMetrics();
+                    this.adaptiveQualityScaling();
+                }, 1000);
+
+                // Monitor device orientation
+                if (window.DeviceOrientationEvent) {
+                    window.addEventListener('deviceorientation', (e) => {
+                        // Could use orientation data for camera tilt effects
+                    });
+                }
+            }
+
+            updatePerformanceMetrics() {
+                const now = performance.now();
+                this.performanceMetrics.frameTime = now - (this.lastFrameTime || now);
+                this.performanceMetrics.fps = Math.round(1000 / Math.max(this.performanceMetrics.frameTime, 1));
+                this.lastFrameTime = now;
+
+                // Update UI
+                document.getElementById('mobileFPS').textContent = this.performanceMetrics.fps;
+                document.getElementById('mobileFrameTime').textContent = this.performanceMetrics.frameTime.toFixed(1) + 'ms';
+
+                if (this.renderer.info) {
+                    document.getElementById('mobileTriangles').textContent = this.renderer.info.render.triangles.toLocaleString();
+                    document.getElementById('mobileDrawCalls').textContent = this.renderer.info.render.calls;
+                }
+
+                if (this.battery) {
+                    document.getElementById('mobileBattery').textContent = Math.round(this.battery.level * 100) + '%';
+                }
+
+                document.getElementById('mobileQuality').textContent = this.performanceMetrics.qualityLevel.charAt(0).toUpperCase() + this.performanceMetrics.qualityLevel.slice(1);
+
+                // Update performance indicators
+                const fpsElement = document.getElementById('mobileFPS');
+                fpsElement.className = 'perf-value';
+                if (this.performanceMetrics.fps >= 55) {
+                    fpsElement.classList.add('good');
+                } else if (this.performanceMetrics.fps >= 30) {
+                    fpsElement.classList.add('warning');
+                } else {
+                    fpsElement.classList.add('danger');
+                }
+            }
+
+            adaptiveQualityScaling() {
+                // Automatically adjust quality based on performance
+                if (this.performanceMetrics.fps < 25 && this.performanceMetrics.qualityLevel !== 'low') {
+                    this.setQualityPreset('medium');
+                    this.showNotification('⚡ Performance', 'Quality reduced to maintain framerate');
+                } else if (this.performanceMetrics.fps > 55 && this.performanceMetrics.qualityLevel === 'low') {
+                    this.setQualityPreset('medium');
+                    this.showNotification('💎 Performance', 'Quality increased - smooth performance detected');
+                }
+            }
+
+            setQualityPreset(quality) {
+                const presets = {
+                    low: {
+                        rayTracing: false,
+                        volumetric: false,
+                        ssao: false,
+                        bloom: false,
+                        shadows: false,
+                        particleCount: 8000,
+                        exposure: 1.0,
+                        pixelRatio: 1
+                    },
+                    medium: {
+                        rayTracing: false,
+                        volumetric: true,
+                        ssao: false,
+                        bloom: true,
+                        shadows: true,
+                        particleCount: 15000,
+                        exposure: 1.1,
+                        pixelRatio: Math.min(window.devicePixelRatio || 1, 1.5)
+                    },
+                    high: {
+                        rayTracing: false,
+                        volumetric: true,
+                        ssao: true,
+                        bloom: true,
+                        shadows: true,
+                        particleCount: 25000,
+                        exposure: 1.2,
+                        pixelRatio: Math.min(window.devicePixelRatio || 1, 2)
+                    },
+                    ultra: {
+                        rayTracing: true,
+                        volumetric: true,
+                        ssao: true,
+                        bloom: true,
+                        shadows: true,
+                        particleCount: 30000,
+                        exposure: 1.2,
+                        pixelRatio: Math.min(window.devicePixelRatio || 1, 2)
+                    }
+                };
+
+                const preset = presets[quality];
+                if (!preset) return;
+
+                this.performanceMetrics.qualityLevel = quality;
+
+                // Update render settings
+                this.renderSettings.rayTracingEnabled = preset.rayTracing;
+                this.renderSettings.volumetricLightingEnabled = preset.volumetric;
+                this.renderSettings.ssaoEnabled = preset.ssao;
+                this.renderSettings.bloomEnabled = preset.bloom;
+                this.renderSettings.shadowsEnabled = preset.shadows;
+
+                // Update renderer
+                this.renderer.setPixelRatio(preset.pixelRatio);
+                this.renderer.toneMappingExposure = preset.exposure;
+                this.renderer.shadowMap.enabled = preset.shadows;
+
+                // Update post-processing
+                if (this.ssaoPass) {
+                    this.ssaoPass.enabled = preset.ssao;
+                }
+                if (this.bloomPass) {
+                    this.bloomPass.enabled = preset.bloom;
+                }
+
+                // Update UI
+                document.querySelectorAll('.mobile-preset-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.quality === quality) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+
+            triggerTouchdownCelebration() {
+                // Mobile-optimized celebration effects
+                this.showNotification('🏈 Touchdown!', 'Championship celebration activated');
+
+                // Flash stadium lights
+                this.stadiumLights.forEach((light, index) => {
+                    setTimeout(() => {
+                        const originalIntensity = light.intensity;
+                        light.intensity = originalIntensity * 1.5;
+                        setTimeout(() => {
+                            light.intensity = originalIntensity;
+                        }, 200);
+                    }, index * 100);
+                });
+
+                // Trigger haptic feedback if available
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100, 50, 200]);
+                }
+            }
+
+            showNotification(title, subtitle = '') {
+                const notification = document.getElementById('mobileNotification');
+                const titleEl = document.getElementById('notificationText');
+                const subtitleEl = document.getElementById('notificationSubtext');
+
+                titleEl.textContent = title;
+                subtitleEl.textContent = subtitle;
+
+                notification.classList.add('show');
+
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+
+            handleResize() {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+
+                this.camera.aspect = width / height;
+                this.camera.updateProjectionMatrix();
+
+                this.renderer.setSize(width, height);
+                this.composer.setSize(width, height);
+
+                // Update post-processing passes
+                if (this.ssaoPass) {
+                    this.ssaoPass.setSize(width, height);
+                }
+                if (this.smaaPass) {
+                    this.smaaPass.setSize(width * this.renderer.getPixelRatio(), height * this.renderer.getPixelRatio());
+                }
+            }
+
+            animate() {
+                requestAnimationFrame(() => this.animate());
+
+                const delta = this.clock.getDelta();
+                const elapsed = this.clock.getElapsedTime();
+
+                // Update camera
+                if (this.cameraControls.autoRotate) {
+                    this.cameraControls.cameraProgress += delta * 0.015;
+                    if (this.cameraControls.cameraProgress > 1) {
+                        this.cameraControls.cameraProgress = 0;
+                    }
+
+                    const point = this.cameraPath.getPoint(this.cameraControls.cameraProgress);
+                    this.camera.position.lerp(point, 0.02);
+                    this.camera.lookAt(0, 30, 0);
+                } else {
+                    // Manual camera control
+                    const radius = 300 * this.cameraControls.zoom;
+                    this.camera.position.x = radius * Math.sin(this.cameraControls.rotation.y) * Math.cos(this.cameraControls.rotation.x);
+                    this.camera.position.z = radius * Math.cos(this.cameraControls.rotation.y) * Math.cos(this.cameraControls.rotation.x);
+                    this.camera.position.y = 150 + radius * Math.sin(this.cameraControls.rotation.x);
+                    this.camera.lookAt(0, 30, 0);
+                }
+
+                // Animate crowd
+                if (this.crowd) {
+                    const positions = this.crowd.geometry.attributes.position.array;
+                    for (let i = 1; i < positions.length; i += 3) {
+                        const originalY = 20 + (i / 3) % 160;
+                        positions[i] = originalY + Math.sin(elapsed * 1.5 + i * 0.002) * 3;
+                    }
+                    this.crowd.geometry.attributes.position.needsUpdate = true;
+                }
+
+                // Stadium light animation
+                this.stadiumLights.forEach((light, index) => {
+                    light.intensity = 300000 + Math.sin(elapsed * 0.5 + index) * 30000;
+                });
+
+                // Reset renderer info for next frame
+                this.renderer.info.reset();
+
+                // Render
+                this.composer.render(delta);
+            }
+
+            getPerformanceStats() {
+                return this.performanceMetrics;
+            }
+        }
+
+        // Initialize Mobile Graphics Engine
+        let mobileGraphicsEngine;
+        let isControlsVisible = false;
+        let isPerformanceVisible = false;
+        let loadingProgress = 0;
+
+        // Loading sequence
+        function initializeApp() {
+            const loadingOverlay = document.getElementById('mobileLoadingOverlay');
+            const loadingText = document.getElementById('loadingText');
+            const loadingBar = document.getElementById('loadingProgressBar');
+
+            const loadingSteps = [
+                { text: 'Checking device capabilities...', duration: 500 },
+                { text: 'Initializing WebGL renderer...', duration: 800 },
+                { text: 'Loading stadium geometry...', duration: 600 },
+                { text: 'Setting up lighting system...', duration: 400 },
+                { text: 'Optimizing for mobile...', duration: 700 },
+                { text: 'Starting championship experience...', duration: 300 }
+            ];
+
+            let currentStep = 0;
+
+            function processLoadingStep() {
+                if (currentStep >= loadingSteps.length) {
+                    // Initialize graphics engine
+                    const container = document.getElementById('mobile-canvas-container');
+                    try {
+                        mobileGraphicsEngine = new MobileBlazeGraphicsEngine(container);
+
+                        // Hide loading screen
+                        setTimeout(() => {
+                            loadingOverlay.classList.add('hidden');
+                        }, 500);
+
+                    } catch (error) {
+                        console.error('Failed to initialize mobile graphics engine:', error);
+                        loadingText.textContent = 'Initialization failed - Please refresh';
+                    }
+                    return;
+                }
+
+                const step = loadingSteps[currentStep];
+                loadingText.textContent = step.text;
+                loadingProgress = ((currentStep + 1) / loadingSteps.length) * 100;
+                loadingBar.style.width = loadingProgress + '%';
+
+                setTimeout(() => {
+                    currentStep++;
+                    processLoadingStep();
+                }, step.duration);
+            }
+
+            processLoadingStep();
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start initialization
+            setTimeout(initializeApp, 500);
+
+            // Header controls
+            document.getElementById('performanceToggle').addEventListener('click', () => {
+                isPerformanceVisible = !isPerformanceVisible;
+                const overlay = document.getElementById('mobilePerformanceOverlay');
+                overlay.classList.toggle('visible', isPerformanceVisible);
+                document.getElementById('performanceToggle').classList.toggle('active', isPerformanceVisible);
+            });
+
+            document.getElementById('controlsToggle').addEventListener('click', () => {
+                isControlsVisible = !isControlsVisible;
+                const panel = document.getElementById('mobileControlsPanel');
+                panel.classList.toggle('visible', isControlsVisible);
+                document.getElementById('controlsToggle').classList.toggle('active', isControlsVisible);
+            });
+
+            document.getElementById('fullscreenToggle').addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+
+            document.getElementById('closeControlsBtn').addEventListener('click', () => {
+                isControlsVisible = false;
+                document.getElementById('mobileControlsPanel').classList.remove('visible');
+                document.getElementById('controlsToggle').classList.remove('active');
+            });
+
+            // Graphics controls
+            document.getElementById('mobileRayTracingToggle').addEventListener('change', (e) => {
+                if (mobileGraphicsEngine) {
+                    mobileGraphicsEngine.renderSettings.rayTracingEnabled = e.target.checked;
+                }
+            });
+
+            document.getElementById('mobileVolumetricToggle').addEventListener('change', (e) => {
+                if (mobileGraphicsEngine) {
+                    mobileGraphicsEngine.renderSettings.volumetricLightingEnabled = e.target.checked;
+                }
+            });
+
+            document.getElementById('mobileSSAOToggle').addEventListener('change', (e) => {
+                if (mobileGraphicsEngine && mobileGraphicsEngine.ssaoPass) {
+                    mobileGraphicsEngine.ssaoPass.enabled = e.target.checked;
+                }
+            });
+
+            document.getElementById('mobileBloomSlider').addEventListener('input', (e) => {
+                const value = parseFloat(e.target.value);
+                document.getElementById('mobileBloomValue').textContent = value.toFixed(1);
+                if (mobileGraphicsEngine && mobileGraphicsEngine.bloomPass) {
+                    mobileGraphicsEngine.bloomPass.strength = value;
+                }
+            });
+
+            document.getElementById('mobileExposureSlider').addEventListener('input', (e) => {
+                const value = parseFloat(e.target.value);
+                document.getElementById('mobileExposureValue').textContent = value.toFixed(1);
+                if (mobileGraphicsEngine && mobileGraphicsEngine.renderer) {
+                    mobileGraphicsEngine.renderer.toneMappingExposure = value;
+                }
+            });
+
+            // Quality presets
+            document.querySelectorAll('.mobile-preset-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const quality = e.currentTarget.dataset.quality;
+                    if (mobileGraphicsEngine) {
+                        mobileGraphicsEngine.setQualityPreset(quality);
+                    }
+                });
+            });
+
+            // Action buttons
+            document.getElementById('touchdownBtn').addEventListener('click', () => {
+                if (mobileGraphicsEngine) {
+                    mobileGraphicsEngine.triggerTouchdownCelebration();
+                }
+            });
+
+            document.getElementById('cameraBtn').addEventListener('click', () => {
+                if (mobileGraphicsEngine) {
+                    mobileGraphicsEngine.cameraControls.cinematicMode = !mobileGraphicsEngine.cameraControls.cinematicMode;
+                    mobileGraphicsEngine.showNotification('📷 Camera', mobileGraphicsEngine.cameraControls.cinematicMode ? 'Cinematic mode' : 'Manual control');
+                }
+            });
+
+            document.getElementById('nightBtn').addEventListener('click', () => {
+                if (mobileGraphicsEngine) {
+                    // Toggle fog color for day/night
+                    const currentColor = mobileGraphicsEngine.scene.fog.color.getHex();
+                    mobileGraphicsEngine.scene.fog.color.setHex(currentColor === 0x111122 ? 0x8899aa : 0x111122);
+                    mobileGraphicsEngine.showNotification('🌙 Lighting', currentColor === 0x111122 ? 'Day mode' : 'Night mode');
+                }
+            });
+
+            // Touch controls
+            document.getElementById('zoomIn').addEventListener('click', () => {
+                if (mobileGraphicsEngine) {
+                    mobileGraphicsEngine.cameraControls.zoom = Math.max(0.5, mobileGraphicsEngine.cameraControls.zoom - 0.2);
+                }
+            });
+
+            document.getElementById('zoomOut').addEventListener('click', () => {
+                if (mobileGraphicsEngine) {
+                    mobileGraphicsEngine.cameraControls.zoom = Math.min(3, mobileGraphicsEngine.cameraControls.zoom + 0.2);
+                }
+            });
+
+            // Navigation tabs
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+
+                    const tab = e.currentTarget.dataset.tab;
+                    // Handle tab switching logic here
+                    console.log('Switched to tab:', tab);
+                });
+            });
+
+            // Window resize handler
+            window.addEventListener('resize', () => {
+                if (mobileGraphicsEngine) {
+                    mobileGraphicsEngine.handleResize();
+                }
+            });
+
+            // Device orientation change
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    if (mobileGraphicsEngine) {
+                        mobileGraphicsEngine.handleResize();
+                    }
+                }, 500);
+            });
+
+            // Prevent zoom on double tap
+            document.addEventListener('touchstart', (e) => {
+                if (e.touches.length > 1) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', (e) => {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    e.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+        });
+
+        // Service Worker Registration for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, OPTIONS
+  Access-Control-Allow-Headers: Content-Type
+
+/*.js
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/*.css
+  Content-Type: text/css; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/*.json
+  Content-Type: application/json; charset=utf-8
+  Cache-Control: public, max-age=300
+
+/*.html
+  Content-Type: text/html; charset=utf-8
+  Cache-Control: public, max-age=300
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/images/*
+  Cache-Control: public, max-age=86400

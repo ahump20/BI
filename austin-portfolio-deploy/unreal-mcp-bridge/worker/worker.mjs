@@ -17,9 +17,28 @@ export default {
       if (!apiKey || apiKey !== (await env.API_KEY)) return bad("unauthorized", 401);
       const body = await req.json().catch(() => null);
       if (!body || typeof body !== "object") return bad("invalid JSON body");
-      // Minimal spec validation
-      const { type, team, text, colors } = body;
+
+      // Enhanced spec validation for sports render types
+      const { type, team, text, colors, sport, player, weather, timeOfDay, crowdDensity,
+              moment, visualizationType, datasets, outcomes, confidence } = body;
+
       if (!type) return bad("missing spec.type");
+
+      // Validate sports-specific render types
+      const validTypes = [
+        'championship-stadium', 'player-spotlight', 'analytics-visualization',
+        'game-moment', 'monte-carlo-simulation', 'reel', 'package', 'highlight'
+      ];
+
+      if (!validTypes.includes(type)) {
+        return bad(`invalid render type: ${type}`);
+      }
+
+      // Type-specific validation
+      if (type === 'championship-stadium' && !sport) return bad("missing sport for stadium render");
+      if (type === 'player-spotlight' && !player) return bad("missing player for spotlight render");
+      if (type === 'analytics-visualization' && !datasets) return bad("missing datasets for analytics");
+      if (type === 'monte-carlo-simulation' && !outcomes) return bad("missing outcomes for simulation");
       const id = crypto.randomUUID();
       const now = Date.now();
       const spec = JSON.stringify(body);

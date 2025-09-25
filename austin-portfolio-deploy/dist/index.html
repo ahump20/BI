@@ -2,80 +2,339 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#002244">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Deep South Sports Intelligence Platform</title>
+    <meta name="description" content="Professional sports intelligence platform with advanced analytics for coaches, scouts, and programs">
 
-    <title>🔥 Blaze Intelligence OS | The Deep South Sports Authority [BETA]</title>
-    <meta name="description" content="Championship intelligence platform for Texas & SEC sports. From Friday Night Lights to the NFL. AI predictions and analytics in active development.">
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <!-- Three.js for 3D visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
 
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- BlazeVision AI Core Systems -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1675469404/pose.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1640029074/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-    <!-- Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Blaze Ultra-High Fidelity Graphics System -->
+    <!-- Core Enhancement System -->
+    <script src="js/blaze-championship-shaders.js"></script>
+    <script src="js/blaze-gpu-particle-system.js"></script>
+    <script src="js/blaze-pbr-materials.js"></script>
+    <script src="js/blaze-holographic-data-viz.js"></script>
+    <script src="js/blaze-championship-vfx.js"></script>
+    <script src="js/championship-60fps-optimization-engine.js"></script>
 
-    <!-- PWA Integration -->
-    <link rel="manifest" href="/manifest-blazeos.json">
-    <script src="/ios-pwa-bridge.js" defer></script>
+    <!-- Ultra-HD Advanced Systems -->
+    <script src="js/blaze-raytracing-engine.js"></script>
+    <script src="js/blaze-atmospheric-engine.js"></script>
+    <script src="js/blaze-photorealistic-materials.js"></script>
+    <script src="js/blaze-real-data-integration.js"></script>
+
+    <!-- Master Integration System -->
+    <script src="js/blaze-ultra-hd-master-integration.js"></script>
 
     <style>
-        :root {
-            --burnt-orange: #BF5700;
-            --burnt-orange-light: #FF7A00;
-            --sec-crimson: #9E1B32;
-            --titans-navy: #002244;
-            --field-green: #2D5016;
-            --championship-gold: #FFD700;
-            --texas-brown: #3F2A14;
-            --dark-field: #0A0E05;
-            --stadium-lights: #FFF8DC;
-            --glass: rgba(0, 34, 68, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.1);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: linear-gradient(135deg, var(--dark-field) 0%, var(--titans-navy) 50%, var(--field-green) 100%);
-            color: var(--stadium-lights);
-            min-height: 100vh;
-            position: relative;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
             overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
         }
 
-        /* Stadium Lights Animation Background */
-        .stadium-lights {
+        #three-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: -1;
             pointer-events: none;
-            z-index: 0;
-            opacity: 0.3;
-            background:
-                radial-gradient(circle at 20% 30%, rgba(191, 87, 0, 0.2) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(158, 27, 50, 0.2) 0%, transparent 40%);
         }
 
-        .header {
-            background: var(--glass);
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--burnt-orange);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-logo h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 50%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-logo p {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #b0b0b0;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #BF5700;
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.3);
+        }
+
+        .form-input::placeholder {
+            color: #606060;
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .form-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.4);
+        }
+
+        .form-button:active {
+            transform: translateY(0);
+        }
+
+        .form-button.secondary {
+            background: transparent;
+            border: 2px solid #BF5700;
+            color: #BF5700;
+            margin-top: 0.5rem;
+        }
+
+        .form-link {
+            text-align: center;
+            margin-top: 2rem;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .form-link a {
+            color: #BF5700;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .form-link a:hover {
+            color: #FF8C00;
+        }
+
+        .onboarding-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .onboarding-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(191, 87, 0, 0.2);
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+        .progress-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(191, 87, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #606060;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.active {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            border-color: #BF5700;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .progress-step.completed {
+            background: #00B2A9;
+            border-color: #00B2A9;
+            color: white;
+        }
+
+        .onboarding-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .onboarding-description {
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option:hover {
+            background: rgba(0, 0, 0, 0.4);
+            border-color: rgba(191, 87, 0, 0.4);
+        }
+
+        .radio-option.selected {
+            background: rgba(191, 87, 0, 0.1);
+            border-color: #BF5700;
+        }
+
+        .radio-input {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            accent-color: #BF5700;
+        }
+
+        .radio-label {
+            flex: 1;
+        }
+
+        .radio-title {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .radio-desc {
+            color: #808080;
+            font-size: 0.875rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .dashboard-container {
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .dashboard-header {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+            padding: 1rem 2rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 1rem 2rem;
         }
 
         .header-content {
@@ -84,1261 +343,2834 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
-        .logo-section {
+        .header-logo {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
 
-        .logo-icon {
+        .header-logo h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #BF5700;
+        }
+
+        .nav-link.active {
+            color: #FF8C00;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .dashboard-main {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .welcome-subtitle {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.2);
+        }
+
+        .stat-label {
+            color: #808080;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            color: #00B2A9;
+            font-size: 0.875rem;
+        }
+
+        .tools-section {
+            margin-top: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .error-message {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .success-message {
+            background: rgba(0, 178, 169, 0.1);
+            border: 1px solid rgba(0, 178, 169, 0.3);
+            color: #00B2A9;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Preserve existing styles for tools */
+        .hero {
+            min-height: auto;
+            padding: 2rem;
+        }
+
+        .hero-badge {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            width: 100%;
+            padding: 2rem 0;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(191, 87, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .value-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-metric {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .metric-label {
+            color: #808080;
+            font-size: 0.875rem;
+        }
+
+        .metric-value {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-left: auto;
+        }
+
+        .live-demo-section {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .demo-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .interactive-tool {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-badge {
+            background: linear-gradient(135deg, #00B2A9 0%, #00D4AA 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tool-badge.live {
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            animation: pulse 2s infinite;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-label {
+            color: #a0a0a0;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .input-field {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #BF5700;
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 10px rgba(191, 87, 0, 0.3);
+        }
+
+        select.input-field {
+            cursor: pointer;
+        }
+
+        select.input-field option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(191, 87, 0, 0.4);
+        }
+
+        .result-display {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border: 2px solid #BF5700;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            color: #a0a0a0;
+            font-size: 1rem;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00B2A9 0%, #00D4AA 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.4);
+            display: none;
+            z-index: 1000;
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-nav {
+                display: none;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* BlazeVision AI Championship System Styles */
+        .vision-ai-system {
+            display: none;
+            min-height: 100vh;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+
+        .vision-ai-system.active {
+            display: block;
+        }
+
+        .ai-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 16px 0;
+        }
+
+        .ai-header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .ai-logo {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            box-shadow: 0 4px 20px rgba(191, 87, 0, 0.4);
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--burnt-orange), var(--championship-gold));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .logo-subtitle {
-            font-size: 0.75rem;
-            color: var(--championship-gold);
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-item {
-            color: var(--stadium-lights);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-item::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--burnt-orange);
-            transition: width 0.3s ease;
-        }
-
-        .nav-item:hover::after,
-        .nav-item.active::after {
-            width: 100%;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-section {
-            text-align: center;
-            padding: 4rem 0;
-            position: relative;
-        }
-
-        .hero-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 700;
-            text-transform: uppercase;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--burnt-orange), var(--championship-gold), var(--sec-crimson));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 40px rgba(191, 87, 0, 0.3);
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1rem, 4vw, 1.25rem);
-            color: var(--stadium-lights);
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 3rem 0;
-        }
-
-        .stat-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .stat-card::before {
+        .ai-logo::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--burnt-orange), var(--sec-crimson));
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            animation: shimmer 3s linear infinite;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(191, 87, 0, 0.2);
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
-        .stat-value {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--burnt-orange);
-            margin-bottom: 0.5rem;
+        .ai-title h1 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
         }
 
-        .stat-label {
-            font-size: 0.875rem;
+        .ai-title .tagline {
+            font-size: 11px;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.8;
+            letter-spacing: 0.15em;
+            color: #FF8C00;
+            opacity: 0.9;
         }
 
-        .main-dashboard {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        @media (min-width: 1024px) {
-            .main-dashboard {
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-
-        .dashboard-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .card-header {
+        .ai-status {
             display: flex;
-            justify-content: space-between;
+            gap: 20px;
             align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--glass-border);
         }
 
-        .card-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00B2A9;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .status-dot.active {
+            background: #39FF14;
+        }
+
+        .status-dot.processing {
+            background: #FFD700;
+        }
+
+        .status-dot.standby {
+            background: #FF8C00;
+            opacity: 0.5;
+        }
+
+        .status-text {
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--championship-gold);
+            letter-spacing: 0.05em;
         }
 
-        .live-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.25rem 0.75rem;
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid #EF4444;
+        .vision-workspace {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 32px 40px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 32px;
+            min-height: calc(100vh - 120px);
+        }
+
+        .vision-chamber {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
             border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #EF4444;
-            animation: pulse 2s infinite;
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+        .chamber-header {
+            margin-bottom: 20px;
+        }
+
+        .chamber-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .live-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
         .live-dot {
-            width: 8px;
-            height: 8px;
-            background: #EF4444;
+            width: 5px;
+            height: 5px;
+            background: #ef4444;
             border-radius: 50%;
-            animation: blink 1s infinite;
+            animation: livePulse 1.5s ease-in-out infinite;
         }
 
-        @keyframes blink {
+        @keyframes livePulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            50% { opacity: 0.3; }
         }
 
-        .scoreboard {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .chamber-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            line-height: 1.6;
         }
 
-        .game-card {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1rem;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .game-card:hover {
-            background: rgba(0, 0, 0, 0.5);
-            transform: translateX(5px);
-        }
-
-        .team-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .team-info.away {
-            justify-content: flex-end;
-        }
-
-        .team-logo {
-            width: 32px;
-            height: 32px;
-            background: var(--glass);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.875rem;
-        }
-
-        .team-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .team-record {
-            font-size: 0.75rem;
-            opacity: 0.7;
-        }
-
-        .score {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.25rem;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-            min-width: 80px;
-            text-align: center;
-        }
-
-        .vision-ai-section {
-            margin-top: 2rem;
-        }
-
-        .ai-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .ai-feature {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1.25rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .ai-feature:hover {
-            background: rgba(191, 87, 0, 0.1);
-            border-color: var(--burnt-orange);
-        }
-
-        .ai-feature-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-            color: var(--burnt-orange);
-        }
-
-        .ai-feature-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .ai-feature-desc {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            line-height: 1.4;
-        }
-
-        .nil-calculator {
-            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1), rgba(158, 27, 50, 0.1));
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .nil-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .form-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.8;
-        }
-
-        .form-input {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            padding: 0.75rem;
-            color: var(--stadium-lights);
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--burnt-orange);
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .calculate-btn {
-            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
-        }
-
-        .calculate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
-        }
-
-        .nil-result {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid var(--championship-gold);
-            border-radius: 8px;
-            text-align: center;
-            display: none;
-        }
-
-        .nil-result.active {
-            display: block;
-        }
-
-        .nil-value {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--championship-gold);
-            margin-bottom: 0.5rem;
-        }
-
-        .recruiting-section {
-            margin-top: 2rem;
-        }
-
-        .recruit-table {
-            width: 100%;
-            margin-top: 1rem;
-            border-collapse: collapse;
-        }
-
-        .recruit-table th {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 0.75rem;
-            text-align: left;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid var(--burnt-orange);
-        }
-
-        .recruit-table td {
-            padding: 0.75rem;
-            border-bottom: 1px solid var(--glass-border);
-            font-size: 0.9rem;
-        }
-
-        .recruit-table tr:hover {
-            background: rgba(191, 87, 0, 0.05);
-        }
-
-        .star-rating {
-            color: var(--championship-gold);
-            font-size: 0.875rem;
-        }
-
-        .footer {
-            margin-top: 4rem;
-            padding: 2rem 0;
-            border-top: 1px solid var(--glass-border);
-            text-align: center;
-            opacity: 0.8;
-            font-size: 0.875rem;
-        }
-
-        .accuracy-meter {
-            width: 100%;
-            height: 24px;
-            background: rgba(0, 0, 0, 0.3);
+        .vision-display {
+            position: relative;
             border-radius: 12px;
             overflow: hidden;
-            position: relative;
-            margin-top: 0.5rem;
+            height: 500px;
+            background: #000;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
         }
 
-        .accuracy-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--burnt-orange), var(--championship-gold));
-            width: 94.6%;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 0.75rem;
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--dark-field);
-        }
-
-        #stadium-canvas {
+        #videoElement,
+        #poseCanvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 400px;
-            opacity: 0.3;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #poseCanvas {
+            z-index: 2;
+        }
+
+        .hud-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 10;
             pointer-events: none;
-            z-index: -1;
         }
 
-        .sec-standings {
-            margin-top: 1.5rem;
+        .hud-metrics {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            justify-content: space-between;
         }
 
-        .standings-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .team-standing {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--glass-border);
+        .hud-panel {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
             border-radius: 8px;
-            padding: 0.75rem;
+            padding: 12px 16px;
+        }
+
+        .hud-metric {
+            text-align: center;
+        }
+
+        .hud-label {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 4px;
+        }
+
+        .hud-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        .hud-value.critical {
+            color: #ef4444;
+        }
+
+        .hud-value.optimal {
+            color: #39FF14;
+        }
+
+        .bio-analysis {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+            max-width: 280px;
+        }
+
+        .bio-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #FF8C00;
+            margin-bottom: 12px;
+        }
+
+        .bio-metric {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .metric-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: #FFD700;
+        }
+
+        .metric-bar {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .metric-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #BF5700, #FF8C00);
+            transition: width 0.3s ease;
+        }
+
+        .vision-controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .vision-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .team-standing:hover {
-            background: rgba(0, 0, 0, 0.5);
-            border-color: var(--sec-crimson);
+        .vision-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
         }
 
-        .team-standing-name {
+        .vision-btn.primary {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            border: none;
+        }
+
+        .vision-btn.primary:hover {
+            box-shadow: 0 5px 20px rgba(191, 87, 0, 0.4);
+        }
+
+        .vision-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .control-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .control-module {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
+            border-radius: 16px;
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .module-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .module-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .protocol-selector {
+            margin-bottom: 16px;
+        }
+
+        .protocol-label {
+            font-size: 10px;
             font-weight: 600;
-            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
+            display: block;
         }
 
-        .team-standing-record {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.875rem;
-            opacity: 0.9;
+        .protocol-dropdown {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 12px;
+            cursor: pointer;
         }
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
+        .protocol-dropdown:focus {
+            outline: none;
+            border-color: #BF5700;
+            box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.2);
+        }
 
-            .nav-menu {
-                justify-content: center;
-                width: 100%;
-            }
+        .coaching-feed {
+            max-height: 200px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+        .coaching-message {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #FF8C00;
+            border-radius: 6px;
+        }
 
-            .main-dashboard {
+        .coaching-message.success {
+            border-left-color: #00B2A9;
+            background: rgba(0, 178, 169, 0.05);
+        }
+
+        .coaching-message.warning {
+            border-left-color: #FFA726;
+            background: rgba(255, 167, 38, 0.05);
+        }
+
+        .message-type {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #FF8C00;
+            margin-bottom: 4px;
+        }
+
+        .message-content {
+            font-size: 11px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .performance-stat {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .performance-stat:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .stat-name {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD700 0%, #FF8C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-trend {
+            font-size: 9px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .trend-positive {
+            color: #00B2A9;
+        }
+
+        .trend-negative {
+            color: #ef4444;
+        }
+
+        .texas-protocols {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+        }
+
+        .protocol-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #FFD700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .protocol-description {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 1200px) {
+            .vision-workspace {
                 grid-template-columns: 1fr;
             }
 
-            .hero-title {
-                font-size: 2rem;
+            .control-sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
             }
         }
 
-        .loading-skeleton {
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.05) 75%);
-            background-size: 400% 100%;
-            animation: loading 1.5s ease-in-out infinite;
-            border-radius: 4px;
-            height: 20px;
-            margin: 0.5rem 0;
-        }
+        @media (max-width: 768px) {
+            .vision-workspace {
+                padding: 20px;
+            }
 
-        @keyframes loading {
-            0% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+            .control-sidebar {
+                grid-template-columns: 1fr;
+            }
 
-        /* Beta Badge */
-        .beta-badge {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            z-index: 9999;
-            animation: pulse 2s infinite;
-            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
-        }
-
-        .beta-badge::after {
-            content: 'Performance claims being validated';
-            font-size: 0.7rem;
-            display: block;
-            font-weight: normal;
-            margin-top: 2px;
-        }
-
-        /* Transparency Dashboard */
-        .transparency-section {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        .data-sources {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-        }
-
-        .data-sources h4 {
-            color: var(--championship-gold);
-            margin-bottom: 1rem;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .data-sources ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .data-sources li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--glass-border);
-            font-size: 0.875rem;
-            opacity: 0.9;
-        }
-
-        .disclaimer-notice {
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid var(--burnt-orange);
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1rem 0;
-            font-size: 0.875rem;
-        }
-
-        .disclaimer-notice strong {
-            color: var(--burnt-orange);
+            .vision-display {
+                height: 350px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="stadium-lights"></div>
-    <div class="beta-badge">BETA</div>
+    <!-- Three.js 3D Background Container -->
+    <div id="three-container"></div>
 
-    <header class="header">
-        <div class="header-content">
-            <div class="logo-section">
-                <div class="logo-icon">🔥</div>
-                <div class="logo-text">
-                    <div class="logo-title">Blaze Intelligence</div>
-                    <div class="logo-subtitle">The Deep South Sports Authority</div>
+    <!-- React Root -->
+    <div id="root"></div>
+
+    <!-- Notification for feedback -->
+    <div id="notification" class="notification">
+        <span id="notification-text">Feature activated!</span>
+    </div>
+
+    <!-- BlazeVision AI System -->
+    <div id="visionAISystem" class="vision-ai-system">
+        <header class="ai-header">
+            <div class="ai-header-content">
+                <div class="ai-brand">
+                    <div class="ai-logo">🔥</div>
+                    <div class="ai-title">
+                        <h1>BlazeVision AI</h1>
+                        <p class="tagline">Deep South Sports Intelligence</p>
+                    </div>
+                </div>
+                <div class="ai-status">
+                    <div class="status-indicator">
+                        <div class="status-dot standby" id="aiStatusDot"></div>
+                        <span class="status-text" id="aiStatusText">Neural Core</span>
+                    </div>
+                    <div class="status-indicator">
+                        <div class="status-dot standby" id="visionStatusDot"></div>
+                        <span class="status-text" id="visionStatusText">Vision Track</span>
+                    </div>
+                    <div class="status-indicator">
+                        <div class="status-dot standby" id="performanceStatusDot"></div>
+                        <span class="status-text" id="performanceStatusText">Performance</span>
+                    </div>
+                    <button class="form-button secondary" onclick="exitVisionAI()" style="padding: 0.5rem 1rem; margin-left: 1rem;">
+                        ← Back to Dashboard
+                    </button>
                 </div>
             </div>
-            <nav class="nav-menu">
-                <a href="#dashboard" class="nav-item active">Dashboard</a>
-                <a href="#vision-ai" class="nav-item">Vision AI</a>
-                <a href="#nil" class="nav-item">NIL Tracker</a>
-                <a href="#recruiting" class="nav-item">Recruiting</a>
-                <a href="#betting" class="nav-item">Betting Intel</a>
-            </nav>
+        </header>
+
+        <div class="vision-workspace">
+            <section class="vision-chamber">
+                <div class="chamber-header">
+                    <h2 class="chamber-title">
+                        Texas Sports Biomechanics Lab
+                        <span class="live-badge">
+                            <span class="live-dot"></span>
+                            LIVE
+                        </span>
+                    </h2>
+                    <p class="chamber-subtitle">
+                        Where champions perfect their craft through AI-powered precision • 33-point skeletal tracking for Deep South athletics
+                    </p>
+                </div>
+
+                <div class="vision-display">
+                    <video id="videoElement" autoplay playsinline></video>
+                    <canvas id="poseCanvas"></canvas>
+
+                    <div class="hud-overlay">
+                        <div class="hud-metrics">
+                            <div class="hud-panel">
+                                <div class="hud-metric">
+                                    <div class="hud-label">Form Score</div>
+                                    <div class="hud-value" id="formScore">100</div>
+                                </div>
+                            </div>
+                            <div class="hud-panel">
+                                <div class="hud-metric">
+                                    <div class="hud-label">Reps</div>
+                                    <div class="hud-value" id="repCount">0</div>
+                                </div>
+                            </div>
+                            <div class="hud-panel">
+                                <div class="hud-metric">
+                                    <div class="hud-label">Velocity</div>
+                                    <div class="hud-value" id="velocityDisplay">0.0</div>
+                                </div>
+                            </div>
+                            <div class="hud-panel">
+                                <div class="hud-metric">
+                                    <div class="hud-label">AI Conf</div>
+                                    <div class="hud-value" id="confidenceLevel">0%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bio-analysis">
+                            <div class="bio-title">Kinetic Chain Analysis</div>
+                            <div class="bio-metric">
+                                <span class="metric-label">Hip Rotation</span>
+                                <span class="metric-value" id="hipRotationValue">0°</span>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" id="hipRotationBar" style="width: 0%"></div>
+                            </div>
+                            <div class="bio-metric">
+                                <span class="metric-label">Shoulder Tilt</span>
+                                <span class="metric-value" id="shoulderTiltValue">0°</span>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" id="shoulderTiltBar" style="width: 0%"></div>
+                            </div>
+                            <div class="bio-metric">
+                                <span class="metric-label">Weight Transfer</span>
+                                <span class="metric-value" id="weightTransferValue">0%</span>
+                            </div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" id="weightTransferBar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vision-controls">
+                    <button class="vision-btn primary" id="engageVisionBtn">🔥 Engage System</button>
+                    <button class="vision-btn" id="pauseVisionBtn" disabled>⏸️ Pause</button>
+                    <button class="vision-btn" id="recordBtn">📹 Record</button>
+                    <button class="vision-btn" id="compareBtn">📊 Compare Elite</button>
+                </div>
+            </section>
+
+            <aside class="control-sidebar">
+                <div class="control-module">
+                    <div class="module-header">
+                        <div class="module-icon">🏈</div>
+                        <h3 class="module-title">Texas Sports Protocols</h3>
+                    </div>
+                    <div class="protocol-selector">
+                        <label class="protocol-label">Select Training Protocol</label>
+                        <select class="protocol-dropdown" id="sportProtocol">
+                            <optgroup label="Texas Football">
+                                <option value="qb_pocket">QB Pocket Presence</option>
+                                <option value="qb_release">Quick Release Training</option>
+                                <option value="wr_routes">WR Route Precision</option>
+                                <option value="rb_vision">RB Vision & Cuts</option>
+                                <option value="ol_footwork">O-Line Footwork</option>
+                            </optgroup>
+                            <optgroup label="Texas Baseball">
+                                <option value="hitting_power" selected>Power Hitting Mechanics</option>
+                                <option value="hitting_contact">Contact Hitting</option>
+                                <option value="pitching_velocity">Velocity Training</option>
+                                <option value="pitching_command">Command & Control</option>
+                                <option value="fielding_infield">Infield Mechanics</option>
+                            </optgroup>
+                            <optgroup label="Basketball">
+                                <option value="shooting_form">Elite Shooting Form</option>
+                                <option value="defensive_stance">Defensive Stance</option>
+                                <option value="ball_handling">Advanced Handles</option>
+                            </optgroup>
+                            <optgroup label="Track & Field">
+                                <option value="sprint_mechanics">Sprint Mechanics</option>
+                                <option value="hurdle_form">Hurdle Technique</option>
+                                <option value="throwing_form">Throwing Events</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="texas-protocols">
+                        <div class="protocol-title">Friday Night Lights Focus</div>
+                        <div class="protocol-description">
+                            Specialized training protocols designed for Texas high school and college athletics. From 6A powerhouses to SEC championship preparation.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-module">
+                    <div class="module-header">
+                        <div class="module-icon">🧠</div>
+                        <h3 class="module-title">AI Coaching Feed</h3>
+                    </div>
+                    <div class="coaching-feed" id="coachingFeed">
+                        <div class="coaching-message">
+                            <div class="message-type">System Ready</div>
+                            <div class="message-content">
+                                Texas sports intelligence online. Position yourself in frame and select your protocol. Champions are built through perfect repetition.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-module">
+                    <div class="module-header">
+                        <div class="module-icon">📊</div>
+                        <h3 class="module-title">Performance Matrix</h3>
+                    </div>
+                    <div class="performance-grid">
+                        <div class="performance-stat">
+                            <div class="stat-name">Power Output</div>
+                            <div class="stat-value" id="powerOutput">0</div>
+                            <div class="stat-trend trend-positive">+12%</div>
+                        </div>
+                        <div class="performance-stat">
+                            <div class="stat-name">Consistency</div>
+                            <div class="stat-value" id="consistency">0%</div>
+                            <div class="stat-trend trend-positive">+5%</div>
+                        </div>
+                        <div class="performance-stat">
+                            <div class="stat-name">Precision</div>
+                            <div class="stat-value" id="precision">0%</div>
+                            <div class="stat-trend trend-negative">-2%</div>
+                        </div>
+                        <div class="performance-stat">
+                            <div class="stat-name">Tempo</div>
+                            <div class="stat-value" id="tempoControl">0.0s</div>
+                            <div class="stat-trend trend-positive">+0.1s</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
         </div>
-    </header>
+    </div>
 
-    <div class="container">
-        <section class="hero-section">
-            <canvas id="stadium-canvas"></canvas>
-            <h1 class="hero-title">Championship Intelligence Command Center</h1>
-            <p class="hero-subtitle">From Friday Night Lights to the Big Leagues. Texas-bred, SEC-powered, Championship-driven.</p>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
 
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value" style="font-size: 1.8rem;">BETA</div>
-                    <div class="stat-label">AI Predictions in Testing</div>
-                    <div class="stat-disclaimer" style="font-size: 0.75rem; opacity: 0.8; margin-top: 0.5rem;">Performance metrics under evaluation</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">4</div>
-                    <div class="stat-label">Featured Teams</div>
-                    <div class="stat-subtitle" style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.5rem;">Cardinals • Titans • Longhorns • Grizzlies</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">Texas</div>
-                    <div class="stat-label">Primary Coverage</div>
-                    <div class="stat-subtitle" style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.5rem;">SEC expansion planned</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">30s</div>
-                    <div class="stat-label">Refresh Interval</div>
-                    <div class="stat-subtitle" style="font-size: 0.8rem; opacity: 0.8; margin-top: 0.5rem;">During active sessions</div>
-                </div>
-            </div>
-        </section>
+        // Auth Context
+        const AuthContext = React.createContext(null);
 
-        <div class="main-dashboard" id="dashboard">
-            <div class="dashboard-card">
-                <div class="card-header">
-                    <h2 class="card-title">Live Championship Tracker</h2>
-                    <div class="live-indicator">
-                        <div class="live-dot"></div>
-                        LIVE
-                    </div>
-                </div>
+        // Mock authentication service
+        const authService = {
+            login: async (email, password) => {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                if (email && password) {
+                    const user = {
+                        id: '1',
+                        email,
+                        name: email.split('@')[0],
+                        role: 'premium',
+                        onboarded: localStorage.getItem('onboarded') === 'true'
+                    };
+                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('token', 'mock-jwt-token');
+                    return { success: true, user };
+                }
+                return { success: false, error: 'Invalid credentials' };
+            },
 
-                <div class="scoreboard">
-                    <!-- Cardinals Spring Training -->
-                    <div class="game-card">
-                        <div class="team-info">
-                            <div class="team-logo" style="background: #C41E3A;">STL</div>
-                            <div>
-                                <div class="team-name">Cardinals</div>
-                                <div class="team-record">Spring Training</div>
-                            </div>
-                        </div>
-                        <div class="score">Feb 20</div>
-                        <div class="team-info away">
-                            <div>
-                                <div class="team-name">vs Marlins</div>
-                                <div class="team-record">Jupiter, FL</div>
-                            </div>
-                            <div class="team-logo" style="background: #00A3E0;">MIA</div>
-                        </div>
-                    </div>
+            signup: async (email, password, name) => {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                if (email && password && name) {
+                    const user = {
+                        id: '1',
+                        email,
+                        name,
+                        role: 'trial',
+                        onboarded: false
+                    };
+                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('token', 'mock-jwt-token');
+                    return { success: true, user };
+                }
+                return { success: false, error: 'Signup failed' };
+            },
 
-                    <!-- Titans Offseason -->
-                    <div class="game-card">
-                        <div class="team-info">
-                            <div class="team-logo" style="background: var(--titans-navy);">TEN</div>
-                            <div>
-                                <div class="team-name">Titans</div>
-                                <div class="team-record">2024: 6-11</div>
-                            </div>
-                        </div>
-                        <div class="score">Draft #1</div>
-                        <div class="team-info away">
-                            <div>
-                                <div class="team-name">NFL Draft</div>
-                                <div class="team-record">April 24-26</div>
-                            </div>
-                            <div class="team-logo" style="background: var(--championship-gold);">🏈</div>
-                        </div>
-                    </div>
+            logout: () => {
+                localStorage.removeItem('user');
+                localStorage.removeItem('token');
+                localStorage.removeItem('onboarded');
+            },
 
-                    <!-- Longhorns Basketball -->
-                    <div class="game-card">
-                        <div class="team-info">
-                            <div class="team-logo" style="background: var(--burnt-orange);">TEX</div>
-                            <div>
-                                <div class="team-name">Longhorns</div>
-                                <div class="team-record">15-6 (4-4 SEC)</div>
-                            </div>
-                        </div>
-                        <div class="score">Tomorrow</div>
-                        <div class="team-info away">
-                            <div>
-                                <div class="team-name">@ Kentucky</div>
-                                <div class="team-record">14-7 (5-3 SEC)</div>
-                            </div>
-                            <div class="team-logo" style="background: #0033A0;">UK</div>
-                        </div>
-                    </div>
+            getCurrentUser: () => {
+                const userStr = localStorage.getItem('user');
+                return userStr ? JSON.parse(userStr) : null;
+            }
+        };
 
-                    <!-- Grizzlies NBA -->
-                    <div class="game-card">
-                        <div class="team-info">
-                            <div class="team-logo" style="background: #12173F;">MEM</div>
-                            <div>
-                                <div class="team-name">Grizzlies</div>
-                                <div class="team-record">24-26</div>
-                            </div>
-                        </div>
-                        <div class="score">105-102</div>
-                        <div class="team-info away">
-                            <div>
-                                <div class="team-name">Lakers</div>
-                                <div class="team-record">W</div>
-                            </div>
-                            <div class="team-logo" style="background: #552583;">LAL</div>
-                        </div>
-                    </div>
-                </div>
+        // Login Component
+        const LoginForm = ({ onSwitch }) => {
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('');
+            const [error, setError] = useState('');
+            const [loading, setLoading] = useState(false);
+            const { login } = React.useContext(AuthContext);
 
-                <div class="sec-standings">
-                    <h3 class="card-title" style="font-size: 1.25rem;">SEC Football Championship Race 2025</h3>
-                    <div class="standings-grid">
-                        <div class="team-standing">
-                            <span class="team-standing-name">Texas</span>
-                            <span class="team-standing-record">Preseason #3</span>
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setError('');
+                setLoading(true);
+
+                const result = await authService.login(email, password);
+
+                if (result.success) {
+                    login(result.user);
+                } else {
+                    setError(result.error || 'Login failed');
+                }
+
+                setLoading(false);
+            };
+
+            return (
+                <div className="auth-container">
+                    <div className="auth-card">
+                        <div className="auth-logo">
+                            <h1>Blaze Intelligence</h1>
+                            <p>Deep South Sports Authority</p>
                         </div>
-                        <div class="team-standing">
-                            <span class="team-standing-name">Georgia</span>
-                            <span class="team-standing-record">Preseason #1</span>
-                        </div>
-                        <div class="team-standing">
-                            <span class="team-standing-name">Alabama</span>
-                            <span class="team-standing-record">Preseason #5</span>
-                        </div>
-                        <div class="team-standing">
-                            <span class="team-standing-name">LSU</span>
-                            <span class="team-standing-record">Preseason #8</span>
-                        </div>
-                        <div class="team-standing">
-                            <span class="team-standing-name">Tennessee</span>
-                            <span class="team-standing-record">Preseason #6</span>
-                        </div>
-                        <div class="team-standing">
-                            <span class="team-standing-name">Ole Miss</span>
-                            <span class="team-standing-record">Preseason #9</span>
+
+                        {error && <div className="error-message">{error}</div>}
+
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label className="form-label">Email Address</label>
+                                <input
+                                    type="email"
+                                    className="form-input"
+                                    placeholder="coach@team.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">Password</label>
+                                <input
+                                    type="password"
+                                    className="form-input"
+                                    placeholder="••••••••"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <button type="submit" className="form-button" disabled={loading}>
+                                {loading ? 'Logging in...' : 'Login to Dashboard'}
+                            </button>
+                        </form>
+
+                        <div className="form-link">
+                            Don't have an account? <a href="#" onClick={(e) => { e.preventDefault(); onSwitch(); }}>Sign up</a>
                         </div>
                     </div>
                 </div>
-            </div>
+            );
+        };
 
-            <div class="dashboard-card">
-                <div class="vision-ai-section" id="vision-ai">
-                    <div class="card-header">
-                        <h2 class="card-title">Vision AI Coaching</h2>
-                    </div>
-                    <div class="ai-features">
-                        <div class="ai-feature">
-                            <div class="ai-feature-icon">🎯</div>
-                            <div class="ai-feature-title">Biomechanics</div>
-                            <div class="ai-feature-desc">Real-time form analysis</div>
+        // Signup Component
+        const SignupForm = ({ onSwitch }) => {
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('');
+            const [name, setName] = useState('');
+            const [organization, setOrganization] = useState('');
+            const [error, setError] = useState('');
+            const [loading, setLoading] = useState(false);
+            const { login } = React.useContext(AuthContext);
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setError('');
+                setLoading(true);
+
+                const result = await authService.signup(email, password, name);
+
+                if (result.success) {
+                    login(result.user);
+                } else {
+                    setError(result.error || 'Signup failed');
+                }
+
+                setLoading(false);
+            };
+
+            return (
+                <div className="auth-container">
+                    <div className="auth-card">
+                        <div className="auth-logo">
+                            <h1>Blaze Intelligence</h1>
+                            <p>Start Your Free Trial</p>
                         </div>
-                        <div class="ai-feature">
-                            <div class="ai-feature-icon">👁️</div>
-                            <div class="ai-feature-title">Micro-Expression</div>
-                            <div class="ai-feature-desc">Character assessment AI</div>
-                        </div>
-                        <div class="ai-feature">
-                            <div class="ai-feature-icon">📊</div>
-                            <div class="ai-feature-title">Metrics</div>
-                            <div class="ai-feature-desc">Performance tracking</div>
-                        </div>
-                        <div class="ai-feature">
-                            <div class="ai-feature-icon">🥽</div>
-                            <div class="ai-feature-title">AR Training</div>
-                            <div class="ai-feature-desc">Immersive coaching</div>
+
+                        {error && <div className="error-message">{error}</div>}
+
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label className="form-label">Full Name</label>
+                                <input
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="John Smith"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">Organization</label>
+                                <input
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Texas High School"
+                                    value={organization}
+                                    onChange={(e) => setOrganization(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">Email Address</label>
+                                <input
+                                    type="email"
+                                    className="form-input"
+                                    placeholder="coach@team.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">Password</label>
+                                <input
+                                    type="password"
+                                    className="form-input"
+                                    placeholder="Minimum 8 characters"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    minLength="8"
+                                    required
+                                />
+                            </div>
+
+                            <button type="submit" className="form-button" disabled={loading}>
+                                {loading ? 'Creating Account...' : 'Start Free Trial'}
+                            </button>
+                        </form>
+
+                        <div className="form-link">
+                            Already have an account? <a href="#" onClick={(e) => { e.preventDefault(); onSwitch(); }}>Login</a>
                         </div>
                     </div>
                 </div>
+            );
+        };
 
-                <div class="nil-calculator" id="nil">
-                    <div class="card-header" style="margin-bottom: 1rem;">
-                        <h2 class="card-title" style="font-size: 1.25rem;">NIL Valuation Calculator</h2>
+        // Onboarding Component
+        const OnboardingFlow = ({ onComplete }) => {
+            const [step, setStep] = useState(1);
+            const [data, setData] = useState({
+                role: '',
+                sports: [],
+                teamSize: '',
+                goals: []
+            });
+
+            const handleNext = () => {
+                if (step < 4) {
+                    setStep(step + 1);
+                } else {
+                    // Complete onboarding
+                    localStorage.setItem('onboarded', 'true');
+                    const user = authService.getCurrentUser();
+                    if (user) {
+                        user.onboarded = true;
+                        user.onboardingData = data;
+                        localStorage.setItem('user', JSON.stringify(user));
+                    }
+                    onComplete();
+                }
+            };
+
+            const handleBack = () => {
+                if (step > 1) {
+                    setStep(step - 1);
+                }
+            };
+
+            return (
+                <div className="onboarding-container">
+                    <div className="onboarding-card">
+                        <div className="progress-bar">
+                            {[1, 2, 3, 4].map(num => (
+                                <div
+                                    key={num}
+                                    className={`progress-step ${step === num ? 'active' : ''} ${step > num ? 'completed' : ''}`}
+                                >
+                                    {step > num ? '✓' : num}
+                                </div>
+                            ))}
+                        </div>
+
+                        {step === 1 && (
+                            <>
+                                <h2 className="onboarding-title">Welcome to Blaze Intelligence</h2>
+                                <p className="onboarding-description">
+                                    Let's get you set up with the perfect analytics tools for your program.
+                                    First, tell us about your role.
+                                </p>
+                                <div className="radio-group">
+                                    {['Head Coach', 'Assistant Coach', 'Scout', 'Athletic Director', 'Analyst'].map(role => (
+                                        <div
+                                            key={role}
+                                            className={`radio-option ${data.role === role ? 'selected' : ''}`}
+                                            onClick={() => setData({...data, role})}
+                                        >
+                                            <input
+                                                type="radio"
+                                                className="radio-input"
+                                                checked={data.role === role}
+                                                onChange={() => setData({...data, role})}
+                                            />
+                                            <div className="radio-label">
+                                                <div className="radio-title">{role}</div>
+                                                <div className="radio-desc">
+                                                    {role === 'Head Coach' && 'Lead program strategy and development'}
+                                                    {role === 'Assistant Coach' && 'Support coaching and player development'}
+                                                    {role === 'Scout' && 'Evaluate talent and opponents'}
+                                                    {role === 'Athletic Director' && 'Oversee athletic programs'}
+                                                    {role === 'Analyst' && 'Provide data-driven insights'}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                        {step === 2 && (
+                            <>
+                                <h2 className="onboarding-title">Which sports do you work with?</h2>
+                                <p className="onboarding-description">
+                                    Select all the sports you need analytics for. We'll customize your dashboard accordingly.
+                                </p>
+                                <div className="radio-group">
+                                    {['Football', 'Baseball', 'Basketball', 'Track & Field', 'Multiple Sports'].map(sport => (
+                                        <div
+                                            key={sport}
+                                            className={`radio-option ${data.sports.includes(sport) ? 'selected' : ''}`}
+                                            onClick={() => {
+                                                const sports = data.sports.includes(sport)
+                                                    ? data.sports.filter(s => s !== sport)
+                                                    : [...data.sports, sport];
+                                                setData({...data, sports});
+                                            }}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                className="radio-input"
+                                                checked={data.sports.includes(sport)}
+                                                onChange={() => {}}
+                                            />
+                                            <div className="radio-label">
+                                                <div className="radio-title">{sport}</div>
+                                                <div className="radio-desc">
+                                                    {sport === 'Football' && 'Advanced play calling and formation analysis'}
+                                                    {sport === 'Baseball' && 'Pitch tracking and player development'}
+                                                    {sport === 'Basketball' && 'Shot analytics and lineup optimization'}
+                                                    {sport === 'Track & Field' && 'Performance tracking and recruitment'}
+                                                    {sport === 'Multiple Sports' && 'Comprehensive multi-sport analytics'}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                        {step === 3 && (
+                            <>
+                                <h2 className="onboarding-title">Tell us about your program</h2>
+                                <p className="onboarding-description">
+                                    This helps us provide the right scale of analytics for your needs.
+                                </p>
+                                <div className="form-group">
+                                    <label className="form-label">Team Size</label>
+                                    <select
+                                        className="form-input"
+                                        value={data.teamSize}
+                                        onChange={(e) => setData({...data, teamSize: e.target.value})}
+                                    >
+                                        <option value="">Select team size</option>
+                                        <option value="small">1-25 athletes</option>
+                                        <option value="medium">26-50 athletes</option>
+                                        <option value="large">51-100 athletes</option>
+                                        <option value="xlarge">100+ athletes</option>
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Competition Level</label>
+                                    <div className="radio-group">
+                                        {['High School', 'College D1', 'College D2/D3', 'Professional', 'Youth/Club'].map(level => (
+                                            <div
+                                                key={level}
+                                                className={`radio-option ${data.level === level ? 'selected' : ''}`}
+                                                onClick={() => setData({...data, level})}
+                                            >
+                                                <input
+                                                    type="radio"
+                                                    className="radio-input"
+                                                    checked={data.level === level}
+                                                    onChange={() => setData({...data, level})}
+                                                />
+                                                <div className="radio-label">
+                                                    <div className="radio-title">{level}</div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {step === 4 && (
+                            <>
+                                <h2 className="onboarding-title">What are your primary goals?</h2>
+                                <p className="onboarding-description">
+                                    Select your top priorities so we can highlight the most relevant features.
+                                </p>
+                                <div className="radio-group">
+                                    {[
+                                        'Player Development & Performance',
+                                        'Recruiting & Scouting',
+                                        'Game Strategy & Preparation',
+                                        'NIL Valuation & Management',
+                                        'Championship Analytics'
+                                    ].map(goal => (
+                                        <div
+                                            key={goal}
+                                            className={`radio-option ${data.goals.includes(goal) ? 'selected' : ''}`}
+                                            onClick={() => {
+                                                const goals = data.goals.includes(goal)
+                                                    ? data.goals.filter(g => g !== goal)
+                                                    : [...data.goals, goal];
+                                                setData({...data, goals});
+                                            }}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                className="radio-input"
+                                                checked={data.goals.includes(goal)}
+                                                onChange={() => {}}
+                                            />
+                                            <div className="radio-label">
+                                                <div className="radio-title">{goal}</div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                        <div className="button-group">
+                            {step > 1 && (
+                                <button className="form-button secondary" onClick={handleBack}>
+                                    Back
+                                </button>
+                            )}
+                            <button className="form-button" onClick={handleNext}>
+                                {step === 4 ? 'Complete Setup' : 'Continue'}
+                            </button>
+                        </div>
                     </div>
-                    <div class="nil-form">
-                        <div class="form-group">
-                            <label class="form-label">Sport</label>
-                            <select class="form-input" id="nil-sport">
+                </div>
+            );
+        };
+
+        // Dashboard Component (includes analytics tools)
+        const Dashboard = () => {
+            const { user, logout } = React.useContext(AuthContext);
+            const [activeSection, setActiveSection] = useState('overview');
+
+            return (
+                <div className="dashboard-container">
+                    <header className="dashboard-header">
+                        <div className="header-content">
+                            <div className="header-logo">
+                                <h2>Blaze Intelligence</h2>
+                            </div>
+                            <nav className="header-nav">
+                                <a
+                                    href="#"
+                                    className={`nav-link ${activeSection === 'overview' ? 'active' : ''}`}
+                                    onClick={(e) => { e.preventDefault(); setActiveSection('overview'); }}
+                                >
+                                    Overview
+                                </a>
+                                <a
+                                    href="#"
+                                    className={`nav-link ${activeSection === 'analytics' ? 'active' : ''}`}
+                                    onClick={(e) => { e.preventDefault(); setActiveSection('analytics'); }}
+                                >
+                                    Analytics Tools
+                                </a>
+                                <a
+                                    href="blazevision-ai.html"
+                                    className={`nav-link ${activeSection === 'vision' ? 'active' : ''}`}
+                                    target="_self"
+                                >
+                                    🔥 BlazeVision AI
+                                </a>
+                                <a
+                                    href="#"
+                                    className={`nav-link ${activeSection === 'reports' ? 'active' : ''}`}
+                                    onClick={(e) => { e.preventDefault(); setActiveSection('reports'); }}
+                                >
+                                    Reports
+                                </a>
+                                <a
+                                    href="#"
+                                    className={`nav-link ${activeSection === 'settings' ? 'active' : ''}`}
+                                    onClick={(e) => { e.preventDefault(); setActiveSection('settings'); }}
+                                >
+                                    Settings
+                                </a>
+                            </nav>
+                            <div className="user-menu">
+                                <div className="user-avatar">
+                                    {user?.name?.charAt(0).toUpperCase()}
+                                </div>
+                                <button className="form-button secondary" onClick={logout} style={{ padding: '0.5rem 1rem', marginTop: 0 }}>
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className="dashboard-main">
+                        {activeSection === 'overview' && (
+                            <>
+                                <div className="welcome-section">
+                                    <h1 className="welcome-title">Welcome back, {user?.name}!</h1>
+                                    <p className="welcome-subtitle">
+                                        Your Deep South Sports Intelligence Hub is ready for today's analysis
+                                    </p>
+                                </div>
+
+                                <div className="stats-grid">
+                                    <div className="stat-card">
+                                        <div className="stat-label">Teams Analyzed</div>
+                                        <div className="stat-value">47</div>
+                                        <div className="stat-change">+5 this week</div>
+                                    </div>
+                                    <div className="stat-card">
+                                        <div className="stat-label">Predictions Made</div>
+                                        <div className="stat-value">128</div>
+                                        <div className="stat-change">73.2% accuracy</div>
+                                    </div>
+                                    <div className="stat-card">
+                                        <div className="stat-label">NIL Valuations</div>
+                                        <div className="stat-value">235</div>
+                                        <div className="stat-change">$2.3M total value</div>
+                                    </div>
+                                    <div className="stat-card">
+                                        <div className="stat-label">Players Tracked</div>
+                                        <div className="stat-value">1,847</div>
+                                        <div className="stat-change">+89 recruits added</div>
+                                    </div>
+                                </div>
+
+                                <div className="tools-section">
+                                    <div className="section-header">
+                                        <h2 className="section-title">Quick Actions</h2>
+                                        <button
+                                            className="form-button"
+                                            style={{ width: 'auto', padding: '0.75rem 1.5rem' }}
+                                            onClick={() => setActiveSection('analytics')}
+                                        >
+                                            View All Tools
+                                        </button>
+                                    </div>
+
+                                    <div className="value-grid">
+                                        <div className="value-card" onClick={() => { setActiveSection('analytics'); showNotification('Opening NIL Calculator'); }}>
+                                            <div className="value-icon">💰</div>
+                                            <h3 className="value-title">NIL Valuation</h3>
+                                            <p className="value-description">
+                                                Calculate athlete valuations based on performance and social metrics
+                                            </p>
+                                        </div>
+                                        <div className="value-card" onClick={() => { setActiveSection('analytics'); showNotification('Opening Game Predictions'); }}>
+                                            <div className="value-icon">🎯</div>
+                                            <h3 className="value-title">Game Predictions</h3>
+                                            <p className="value-description">
+                                                ML-powered predictions with 73.2% historical accuracy
+                                            </p>
+                                        </div>
+                                        <div className="value-card" onClick={() => showNotification('Recruiting Pipeline Loading')}>
+                                            <div className="value-icon">📊</div>
+                                            <h3 className="value-title">Recruiting Pipeline</h3>
+                                            <p className="value-description">
+                                                Track prospects from youth leagues through professional draft
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {activeSection === 'analytics' && (
+                            <>
+                                <div className="hero">
+                                    <div className="hero-badge">🔥 THE DEEP SOUTH SPORTS AUTHORITY</div>
+                                    <h1 className="section-title" style={{ fontSize: '2rem', marginBottom: '2rem' }}>
+                                        Analytics Tools Suite
+                                    </h1>
+
+                                    <div className="live-demo-section">
+                                        <div className="demo-header">
+                                            <h2 className="demo-title">Interactive Intelligence Tools</h2>
+                                            <p style={{color: '#a0a0a0', fontSize: '1.1rem'}}>
+                                                Professional-grade analytics for your program
+                                            </p>
+                                        </div>
+
+                                        <NILCalculator />
+                                        <GamePrediction />
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {activeSection === 'reports' && (
+                            <div>
+                                <h2 className="section-title">Reports & Insights</h2>
+                                <p style={{ color: '#b0b0b0', marginBottom: '2rem' }}>
+                                    Comprehensive analytics reports and historical data analysis
+                                </p>
+                                <div className="stats-grid">
+                                    <div className="stat-card">
+                                        <div className="stat-label">Weekly Report</div>
+                                        <div className="stat-value">Ready</div>
+                                        <div className="stat-change">Download PDF</div>
+                                    </div>
+                                    <div className="stat-card">
+                                        <div className="stat-label">Season Overview</div>
+                                        <div className="stat-value">82%</div>
+                                        <div className="stat-change">Win rate improvement</div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeSection === 'settings' && (
+                            <div>
+                                <h2 className="section-title">Account Settings</h2>
+                                <div className="form-group">
+                                    <label className="form-label">Email</label>
+                                    <input type="email" className="form-input" value={user?.email} readOnly />
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Name</label>
+                                    <input type="text" className="form-input" value={user?.name} readOnly />
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Subscription</label>
+                                    <input type="text" className="form-input" value="Premium Trial" readOnly />
+                                </div>
+                            </div>
+                        )}
+                    </main>
+                </div>
+            );
+        };
+
+        // NIL Calculator Component (from previous implementation)
+        const NILCalculator = () => {
+            const [sport, setSport] = useState('football');
+            const [position, setPosition] = useState('qb');
+            const [followers, setFollowers] = useState(10000);
+            const [rating, setRating] = useState(85);
+            const [nilValue, setNilValue] = useState(null);
+            const [breakdown, setBreakdown] = useState(null);
+
+            const calculateNIL = () => {
+                let baseValue = 5000;
+                const sportMultipliers = {
+                    'football': 2.5,
+                    'basketball': 2.0,
+                    'baseball': 1.5
+                };
+
+                const positionMultipliers = {
+                    'qb': 3.0,
+                    'rb': 2.0,
+                    'wr': 2.2,
+                    'ol': 1.5,
+                    'dl': 1.8,
+                    'lb': 1.7,
+                    'db': 1.6,
+                    'pg': 2.5,
+                    'sg': 2.0,
+                    'pf': 1.8,
+                    'c': 1.7,
+                    'p': 2.2,
+                    'c_base': 1.8,
+                    'if': 1.5,
+                    'of': 1.6
+                };
+
+                let calculatedValue = baseValue;
+                const sportBonus = calculatedValue * (sportMultipliers[sport] || 1);
+                const positionBonus = sportBonus * (positionMultipliers[position] || 1);
+                const followerBonus = positionBonus * (1 + (followers / 50000));
+                const performanceBonus = followerBonus * (rating / 50);
+
+                const finalValue = Math.round(performanceBonus * (0.9 + Math.random() * 0.2));
+
+                setNilValue(finalValue);
+                setBreakdown({
+                    base: baseValue,
+                    sport: Math.round(sportBonus - baseValue),
+                    position: Math.round(positionBonus - sportBonus),
+                    social: Math.round(followerBonus - positionBonus),
+                    performance: Math.round(performanceBonus - followerBonus)
+                });
+
+                showNotification('NIL Valuation calculated successfully!');
+            };
+
+            return (
+                <div className="interactive-tool">
+                    <div className="tool-header">
+                        <h3 className="tool-title">NIL Valuation Calculator</h3>
+                        <span className="tool-badge live">LIVE DEMO</span>
+                    </div>
+                    <div className="input-grid">
+                        <div className="input-group">
+                            <label className="input-label">Sport</label>
+                            <select
+                                className="input-field"
+                                value={sport}
+                                onChange={(e) => setSport(e.target.value)}
+                            >
                                 <option value="football">Football</option>
                                 <option value="basketball">Basketball</option>
                                 <option value="baseball">Baseball</option>
-                                <option value="track">Track & Field</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Social Media Followers</label>
-                            <input type="number" class="form-input" id="nil-followers" placeholder="Total followers" value="50000">
+                        <div className="input-group">
+                            <label className="input-label">Position</label>
+                            <select
+                                className="input-field"
+                                value={position}
+                                onChange={(e) => setPosition(e.target.value)}
+                            >
+                                {sport === 'football' && (
+                                    <>
+                                        <option value="qb">QB - Quarterback</option>
+                                        <option value="rb">RB - Running Back</option>
+                                        <option value="wr">WR - Wide Receiver</option>
+                                        <option value="ol">OL - Offensive Line</option>
+                                        <option value="dl">DL - Defensive Line</option>
+                                        <option value="lb">LB - Linebacker</option>
+                                        <option value="db">DB - Defensive Back</option>
+                                    </>
+                                )}
+                                {sport === 'basketball' && (
+                                    <>
+                                        <option value="pg">PG - Point Guard</option>
+                                        <option value="sg">SG - Shooting Guard</option>
+                                        <option value="pf">PF - Power Forward</option>
+                                        <option value="c">C - Center</option>
+                                    </>
+                                )}
+                                {sport === 'baseball' && (
+                                    <>
+                                        <option value="p">P - Pitcher</option>
+                                        <option value="c_base">C - Catcher</option>
+                                        <option value="if">IF - Infielder</option>
+                                        <option value="of">OF - Outfielder</option>
+                                    </>
+                                )}
+                            </select>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Performance Rating (1-10)</label>
-                            <input type="number" class="form-input" id="nil-performance" min="1" max="10" value="8">
+                        <div className="input-group">
+                            <label className="input-label">Social Media Followers</label>
+                            <input
+                                type="number"
+                                className="input-field"
+                                placeholder="10000"
+                                value={followers}
+                                onChange={(e) => setFollowers(parseInt(e.target.value) || 0)}
+                                min="0"
+                                max="10000000"
+                            />
                         </div>
-                        <button class="calculate-btn" onclick="calculateNIL()">Calculate NIL Value</button>
-                        <div class="nil-result" id="nil-result">
-                            <div class="nil-value">$0</div>
-                            <div style="font-size: 0.875rem; opacity: 0.8;">Estimated Annual Value</div>
+                        <div className="input-group">
+                            <label className="input-label">Performance Rating (1-100)</label>
+                            <input
+                                type="number"
+                                className="input-field"
+                                placeholder="85"
+                                value={rating}
+                                onChange={(e) => setRating(Math.min(100, Math.max(1, parseInt(e.target.value) || 0)))}
+                                min="1"
+                                max="100"
+                            />
                         </div>
                     </div>
+                    <button className="calculate-btn" onClick={calculateNIL}>
+                        Calculate NIL Value
+                    </button>
+                    {nilValue && (
+                        <div className="result-display">
+                            <div className="result-value">${nilValue.toLocaleString()}</div>
+                            <div className="result-label">Estimated Annual NIL Value</div>
+                        </div>
+                    )}
                 </div>
+            );
+        };
 
-                <div class="recruiting-section" id="recruiting">
-                    <div class="card-header" style="margin-bottom: 1rem;">
-                        <h2 class="card-title" style="font-size: 1.25rem;">Texas HS Football Recruiting</h2>
+        // Game Prediction Component (from previous implementation)
+        const GamePrediction = () => {
+            const [homeTeam, setHomeTeam] = useState('texas');
+            const [awayTeam, setAwayTeam] = useState('oklahoma');
+            const [weather, setWeather] = useState('clear');
+            const [gameTime, setGameTime] = useState('night');
+            const [prediction, setPrediction] = useState(null);
+
+            const predictGame = () => {
+                const teamRatings = {
+                    'texas': 92,
+                    'alabama': 95,
+                    'georgia': 94,
+                    'lsu': 88,
+                    'texasam': 86,
+                    'oklahoma': 87,
+                    'auburn': 83,
+                    'florida': 84,
+                    'tennessee': 85,
+                    'arkansas': 80
+                };
+
+                const teamNames = {
+                    'texas': 'Texas Longhorns',
+                    'alabama': 'Alabama',
+                    'georgia': 'Georgia',
+                    'lsu': 'LSU',
+                    'texasam': 'Texas A&M',
+                    'oklahoma': 'Oklahoma',
+                    'auburn': 'Auburn',
+                    'florida': 'Florida',
+                    'tennessee': 'Tennessee',
+                    'arkansas': 'Arkansas'
+                };
+
+                let homeRating = teamRatings[homeTeam] || 80;
+                let awayRating = teamRatings[awayTeam] || 80;
+
+                homeRating += 3;
+
+                if (weather === 'rain') {
+                    homeRating -= 1;
+                    awayRating -= 1;
+                }
+
+                if (gameTime === 'primetime') {
+                    const pressureAdjust = Math.random() * 2 - 1;
+                    homeRating += pressureAdjust;
+                    awayRating -= pressureAdjust;
+                }
+
+                const ratingDiff = homeRating - awayRating;
+                const winProb = 50 + (ratingDiff * 2.5);
+                const boundedProb = Math.max(5, Math.min(95, winProb));
+
+                const totalPoints = 45 + (Math.random() * 20);
+                const homeScore = Math.round(totalPoints * (homeRating / (homeRating + awayRating)) + (ratingDiff * 0.3));
+                const awayScore = Math.round(totalPoints - homeScore);
+
+                setPrediction({
+                    probability: boundedProb.toFixed(1),
+                    homeScore,
+                    awayScore,
+                    homeName: teamNames[homeTeam],
+                    awayName: teamNames[awayTeam],
+                    totalPoints: homeScore + awayScore,
+                    spread: homeScore - awayScore
+                });
+
+                showNotification('Game prediction generated!');
+            };
+
+            return (
+                <div className="interactive-tool">
+                    <div className="tool-header">
+                        <h3 className="tool-title">Game Prediction Engine</h3>
+                        <span className="tool-badge">ML POWERED</span>
                     </div>
-                    <table class="recruit-table">
-                        <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>School</th>
-                                <th>Class</th>
-                                <th>Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Jonah Williams</td>
-                                <td>Southlake Carroll</td>
-                                <td>6A-DI</td>
-                                <td class="star-rating">⭐⭐⭐⭐⭐</td>
-                            </tr>
-                            <tr>
-                                <td>Marcus Johnson</td>
-                                <td>DeSoto</td>
-                                <td>6A-DII</td>
-                                <td class="star-rating">⭐⭐⭐⭐⭐</td>
-                            </tr>
-                            <tr>
-                                <td>Dylan Rodriguez</td>
-                                <td>Katy</td>
-                                <td>6A-DI</td>
-                                <td class="star-rating">⭐⭐⭐⭐</td>
-                            </tr>
-                            <tr>
-                                <td>Jamal Thompson</td>
-                                <td>North Shore</td>
-                                <td>6A-DI</td>
-                                <td class="star-rating">⭐⭐⭐⭐</td>
-                            </tr>
-                            <tr>
-                                <td>Tyler Mitchell</td>
-                                <td>Westlake</td>
-                                <td>6A-DI</td>
-                                <td class="star-rating">⭐⭐⭐⭐</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className="input-grid">
+                        <div className="input-group">
+                            <label className="input-label">Home Team</label>
+                            <select
+                                className="input-field"
+                                value={homeTeam}
+                                onChange={(e) => setHomeTeam(e.target.value)}
+                            >
+                                <option value="texas">Texas Longhorns</option>
+                                <option value="alabama">Alabama</option>
+                                <option value="georgia">Georgia</option>
+                                <option value="lsu">LSU</option>
+                                <option value="texasam">Texas A&M</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Away Team</label>
+                            <select
+                                className="input-field"
+                                value={awayTeam}
+                                onChange={(e) => setAwayTeam(e.target.value)}
+                            >
+                                <option value="oklahoma">Oklahoma</option>
+                                <option value="auburn">Auburn</option>
+                                <option value="florida">Florida</option>
+                                <option value="tennessee">Tennessee</option>
+                                <option value="arkansas">Arkansas</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Weather</label>
+                            <select
+                                className="input-field"
+                                value={weather}
+                                onChange={(e) => setWeather(e.target.value)}
+                            >
+                                <option value="clear">Clear</option>
+                                <option value="rain">Rain</option>
+                                <option value="cold">Cold (&lt;40°F)</option>
+                                <option value="hot">Hot (&gt;90°F)</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Time</label>
+                            <select
+                                className="input-field"
+                                value={gameTime}
+                                onChange={(e) => setGameTime(e.target.value)}
+                            >
+                                <option value="day">Day Game</option>
+                                <option value="night">Night Game</option>
+                                <option value="primetime">Prime Time</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button className="calculate-btn" onClick={predictGame}>
+                        Run Prediction
+                    </button>
+                    {prediction && (
+                        <div className="result-display">
+                            <div className="result-value">{prediction.probability}% {prediction.homeName}</div>
+                            <div className="result-label">
+                                Predicted: {prediction.homeName} {prediction.homeScore} - {prediction.awayScore} {prediction.awayName}
+                            </div>
+                        </div>
+                    )}
                 </div>
-            </div>
-        </div>
+            );
+        };
 
-        <div class="transparency-section">
-            <div class="card-header">
-                <h2 class="card-title">Data Transparency & Sources</h2>
-            </div>
+        // Main App Component
+        const App = () => {
+            const [user, setUser] = useState(authService.getCurrentUser());
+            const [authMode, setAuthMode] = useState('login');
 
-            <div class="disclaimer-notice">
-                <strong>Beta Performance Notice:</strong> This platform is in active development. Performance metrics, prediction accuracy, and data coverage are being continuously validated. Claims are subject to change as we complete testing phases.
-            </div>
+            const login = (userData) => {
+                setUser(userData);
+            };
 
-            <div class="data-sources">
-                <h4>Current Data Sources & Limitations</h4>
-                <ul>
-                    <li><strong>MLB Cardinals:</strong> Spring training data (February-March 2025) - Historical season data available</li>
-                    <li><strong>NFL Titans:</strong> 2024 season data - Draft and offseason updates</li>
-                    <li><strong>Texas Longhorns:</strong> Current SEC season data - Basketball and football coverage</li>
-                    <li><strong>Memphis Grizzlies:</strong> Current NBA season data - Real-time game results</li>
-                    <li><strong>Vision AI:</strong> Computer vision models in beta testing phase</li>
-                    <li><strong>NIL Calculator:</strong> Algorithmic estimates - Not professional financial advice</li>
-                    <li><strong>Perfect Game Integration:</strong> API integration planned for Q2 2025</li>
-                    <li><strong>Dave Campbell's Data:</strong> Texas HS football partnership under development</li>
-                </ul>
-            </div>
+            const logout = () => {
+                authService.logout();
+                setUser(null);
+            };
 
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0, 0, 0, 0.3); border-radius: 12px;">
-                <h4 style="color: var(--championship-gold); margin-bottom: 1rem;">Performance Validation Status</h4>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <div>
-                        <strong style="color: var(--burnt-orange);">AI Predictions:</strong>
-                        <div style="font-size: 0.875rem;">Testing phase - Accuracy being measured</div>
-                    </div>
-                    <div>
-                        <strong style="color: var(--burnt-orange);">Data Refresh:</strong>
-                        <div style="font-size: 0.875rem;">30-second intervals during active use</div>
-                    </div>
-                    <div>
-                        <strong style="color: var(--burnt-orange);">Coverage Area:</strong>
-                        <div style="font-size: 0.875rem;">Texas primary, SEC expansion planned</div>
-                    </div>
-                    <div>
-                        <strong style="color: var(--burnt-orange);">Feature Status:</strong>
-                        <div style="font-size: 0.875rem;">Core features operational, advanced features in development</div>
-                    </div>
-                </div>
-            </div>
+            useEffect(() => {
+                // Initialize Three.js background
+                initThreeJSBackground();
+            }, []);
 
-            <div style="margin-top: 1rem; text-align: center; font-size: 0.875rem; opacity: 0.8;">
-                <p>For methodology details, performance benchmarks, and data accuracy reports, contact: <a href="mailto:ahump20@outlook.com" style="color: var(--burnt-orange);">ahump20@outlook.com</a></p>
-                <p style="margin-top: 0.5rem;">Updated: January 20, 2025 | Next Review: February 1, 2025</p>
-            </div>
-        </div>
+            return (
+                <AuthContext.Provider value={{ user, login, logout }}>
+                    {!user ? (
+                        authMode === 'login' ? (
+                            <LoginForm onSwitch={() => setAuthMode('signup')} />
+                        ) : (
+                            <SignupForm onSwitch={() => setAuthMode('login')} />
+                        )
+                    ) : !user.onboarded ? (
+                        <OnboardingFlow onComplete={() => {
+                            const updatedUser = authService.getCurrentUser();
+                            setUser(updatedUser);
+                        }} />
+                    ) : (
+                        <Dashboard />
+                    )}
+                </AuthContext.Provider>
+            );
+        };
 
-        <footer class="footer">
-            <p>&copy; 2025 Blaze Intelligence | The Deep South Sports Authority</p>
-            <p style="margin-top: 0.5rem;">From Friday Night Lights to Championship Glory</p>
-            <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">[BETA] Performance claims under active validation</p>
-        </footer>
-    </div>
+        // Helper Functions
+        function showNotification(text) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+            notificationText.textContent = text;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
 
-    <script>
-        // Three.js Stadium Visualization
-        function initStadiumVisualization() {
-            const canvas = document.getElementById('stadium-canvas');
-            if (!canvas) return;
+        // Three.js Background
+        function initThreeJSBackground() {
+            const container = document.getElementById('three-container');
+            if (!container || typeof THREE === 'undefined') return;
 
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 400, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, 400);
-            renderer.setPixelRatio(window.devicePixelRatio);
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 
-            // Create field
-            const fieldGeometry = new THREE.BoxGeometry(100, 0.5, 60);
-            const fieldMaterial = new THREE.MeshBasicMaterial({
-                color: 0x2D5016,
-                transparent: true,
-                opacity: 0.3
-            });
-            const field = new THREE.Mesh(fieldGeometry, fieldMaterial);
-            scene.add(field);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
 
-            // Add yard lines
-            const lineMaterial = new THREE.LineBasicMaterial({ color: 0xFFFFFF, opacity: 0.3, transparent: true });
-            for (let i = -40; i <= 40; i += 10) {
-                const points = [];
-                points.push(new THREE.Vector3(i, 0.3, -30));
-                points.push(new THREE.Vector3(i, 0.3, 30));
-                const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-                const line = new THREE.Line(lineGeometry, lineMaterial);
-                scene.add(line);
-            }
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+            scene.add(ambientLight);
 
-            // Add goalposts
-            const goalpostMaterial = new THREE.MeshBasicMaterial({ color: 0xFFD700 });
-            const postGeometry = new THREE.CylinderGeometry(0.2, 0.2, 10);
-
-            const leftPost1 = new THREE.Mesh(postGeometry, goalpostMaterial);
-            leftPost1.position.set(-45, 5, -5);
-            scene.add(leftPost1);
-
-            const leftPost2 = new THREE.Mesh(postGeometry, goalpostMaterial);
-            leftPost2.position.set(-45, 5, 5);
-            scene.add(leftPost2);
-
-            const rightPost1 = new THREE.Mesh(postGeometry, goalpostMaterial);
-            rightPost1.position.set(45, 5, -5);
-            scene.add(rightPost1);
-
-            const rightPost2 = new THREE.Mesh(postGeometry, goalpostMaterial);
-            rightPost2.position.set(45, 5, 5);
-            scene.add(rightPost2);
-
-            // Add floating data particles
-            const particlesCount = 200;
-            const particlesPositions = new Float32Array(particlesCount * 3);
-            for (let i = 0; i < particlesCount * 3; i += 3) {
-                particlesPositions[i] = (Math.random() - 0.5) * 100;
-                particlesPositions[i + 1] = Math.random() * 20;
-                particlesPositions[i + 2] = (Math.random() - 0.5) * 60;
-            }
+            const pointLight = new THREE.PointLight(0xBF5700, 1);
+            pointLight.position.set(10, 10, 10);
+            scene.add(pointLight);
 
             const particlesGeometry = new THREE.BufferGeometry();
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlesPositions, 3));
+            const particlesCount = 1500;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 100;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
             const particlesMaterial = new THREE.PointsMaterial({
                 size: 0.5,
                 color: 0xBF5700,
                 transparent: true,
-                opacity: 0.6,
+                opacity: 0.3,
                 blending: THREE.AdditiveBlending
             });
 
-            const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particles);
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
 
-            camera.position.set(0, 30, 60);
-            camera.lookAt(0, 0, 0);
+            camera.position.z = 30;
 
             function animate() {
                 requestAnimationFrame(animate);
-
-                // Rotate field slightly
-                field.rotation.y += 0.0005;
-
-                // Float particles
-                particles.rotation.y += 0.001;
-
+                particlesMesh.rotation.x += 0.0003;
+                particlesMesh.rotation.y += 0.0005;
                 renderer.render(scene, camera);
             }
 
-            animate();
-
-            // Handle resize
             window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / 400;
+                camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, 400);
+                renderer.setSize(window.innerWidth, window.innerHeight);
             });
+
+            animate();
         }
 
-        // NIL Calculator
-        function calculateNIL() {
-            const sport = document.getElementById('nil-sport').value;
-            const followers = parseInt(document.getElementById('nil-followers').value) || 0;
-            const performance = parseInt(document.getElementById('nil-performance').value) || 5;
+        // Global functions for Vision AI integration
+        window.showVisionAI = function() {
+            document.getElementById('root').style.display = 'none';
+            document.getElementById('visionAISystem').classList.add('active');
 
-            let baseValue = 0;
-            switch(sport) {
-                case 'football': baseValue = 50000; break;
-                case 'basketball': baseValue = 35000; break;
-                case 'baseball': baseValue = 20000; break;
-                case 'track': baseValue = 15000; break;
+            // Initialize Vision AI system
+            if (!window.blazeVisionAI) {
+                window.blazeVisionAI = new BlazeVisionAI();
+            }
+        };
+
+        window.exitVisionAI = function() {
+            document.getElementById('visionAISystem').classList.remove('active');
+            document.getElementById('root').style.display = 'block';
+
+            // Cleanup Vision AI
+            if (window.blazeVisionAI) {
+                window.blazeVisionAI.cleanup();
+            }
+        };
+
+        // Render React App
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+
+    <!-- BlazeVision AI JavaScript -->
+    <script>
+        class BlazeVisionAI {
+            constructor() {
+                this.videoElement = document.getElementById('videoElement');
+                this.poseCanvas = document.getElementById('poseCanvas');
+                this.poseCtx = this.poseCanvas.getContext('2d');
+
+                this.isEngaged = false;
+                this.isPaused = false;
+                this.isRecording = false;
+                this.currentProtocol = 'hitting_power';
+
+                // MediaPipe pose detection
+                this.pose = null;
+                this.camera = null;
+
+                // Performance metrics
+                this.metrics = {
+                    formScore: 100,
+                    repCount: 0,
+                    velocity: 0,
+                    confidence: 0,
+                    hipRotation: 0,
+                    shoulderTilt: 0,
+                    weightTransfer: 0,
+                    power: 0,
+                    consistency: 95,
+                    precision: 88,
+                    tempo: 1.2
+                };
+
+                // Movement analysis
+                this.previousLandmarks = null;
+                this.landmarkHistory = [];
+                this.movementPhase = 'ready';
+
+                // Texas Sports Protocols
+                this.texasProtocols = {
+                    'hitting_power': {
+                        name: "Texas Power Hitting",
+                        description: "Build the swing that conquers Friday Night Lights",
+                        coaching: [
+                            "Launch angle is earned, not forced - stay through the zone",
+                            "Your hips are the engine, hands are the steering wheel",
+                            "From Little League to the Show - perfect the fundamentals",
+                            "Every swing writes your legacy - make it count",
+                            "Texas baseball - where legends are forged"
+                        ]
+                    },
+                    'qb_pocket': {
+                        name: "Texas QB Pocket Mastery",
+                        description: "Command the pocket like a championship quarterback",
+                        coaching: [
+                            "Feel the rush without fear - champion QBs thrive under pressure",
+                            "Your base is your foundation - wide feet, calm mind",
+                            "Read the defense, trust your progressions",
+                            "From 6A to D1 - pocket presence separates the elite",
+                            "Friday night lights demand championship precision"
+                        ]
+                    },
+                    'pitching_velocity': {
+                        name: "Texas Velocity Development",
+                        description: "Unleash the heat with perfect mechanics",
+                        coaching: [
+                            "Stride length creates the runway for velocity",
+                            "Hip-shoulder separation is your power multiplier",
+                            "Block that front side - convert momentum to rotation",
+                            "From Perfect Game showcases to MLB dreams",
+                            "Texas arms throw heat - mechanics make it happen"
+                        ]
+                    }
+                };
+
+                this.initializeSystem();
             }
 
-            const followerMultiplier = Math.log10(followers + 1) / 5;
-            const performanceMultiplier = performance / 10;
+            async initializeSystem() {
+                console.log("Initializing BlazeVision AI...");
 
-            const nilValue = Math.round(baseValue * (1 + followerMultiplier) * (1 + performanceMultiplier));
+                // Update status indicators
+                this.updateStatus('aiStatusDot', 'processing', 'Initializing...');
 
-            const resultDiv = document.getElementById('nil-result');
-            resultDiv.classList.add('active');
-            resultDiv.querySelector('.nil-value').textContent = `$${nilValue.toLocaleString()}`;
-        }
-
-        // Auto-refresh data every 30 seconds
-        function refreshLiveData() {
-            // Add loading skeleton effect to scores
-            const scoreElements = document.querySelectorAll('.score');
-            scoreElements.forEach(el => {
-                el.classList.add('loading-skeleton');
-                setTimeout(() => el.classList.remove('loading-skeleton'), 1000);
-            });
-        }
-
-        // Service Worker Registration
-        async function registerServiceWorker() {
-            if ('serviceWorker' in navigator) {
                 try {
-                    const registration = await navigator.serviceWorker.register('/service-worker-blazeos.js', {
-                        scope: '/'
-                    });
-
-                    console.log('🔥 Blaze OS Service Worker registered:', registration);
-
-                    // Handle updates
-                    registration.addEventListener('updatefound', () => {
-                        const newWorker = registration.installing;
-                        newWorker.addEventListener('statechange', () => {
-                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                // Show update available notification
-                                showUpdateNotification();
+                    // Initialize MediaPipe Pose (if available)
+                    if (typeof Pose !== 'undefined') {
+                        this.pose = new Pose({
+                            locateFile: (file) => {
+                                return `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1675469404/${file}`;
                             }
                         });
-                    });
 
-                    // Listen for messages from service worker
-                    navigator.serviceWorker.addEventListener('message', event => {
-                        if (event.data && event.data.type === 'PERFORMANCE_UPDATE') {
-                            console.log('📊 Performance metrics:', event.data.data);
-                        }
-                    });
+                        this.pose.setOptions({
+                            modelComplexity: 2,
+                            smoothLandmarks: true,
+                            enableSegmentation: false,
+                            smoothSegmentation: false,
+                            minDetectionConfidence: 0.7,
+                            minTrackingConfidence: 0.7
+                        });
+
+                        this.pose.onResults(this.onPoseResults.bind(this));
+
+                        this.updateStatus('aiStatusDot', 'active', 'Neural Core Online');
+                    } else {
+                        console.log("MediaPipe not available - running in demo mode");
+                        this.updateStatus('aiStatusDot', 'active', 'Demo Mode');
+                        this.startDemoMode();
+                    }
 
                 } catch (error) {
-                    console.error('Service worker registration failed:', error);
+                    console.error("Vision AI initialization error:", error);
+                    this.updateStatus('aiStatusDot', 'standby', 'Error');
+                }
+
+                this.setupEventListeners();
+                this.startMetricsUpdate();
+                this.updateDisplay();
+            }
+
+            setupEventListeners() {
+                document.getElementById('engageVisionBtn').addEventListener('click', () => this.engageSystem());
+                document.getElementById('pauseVisionBtn').addEventListener('click', () => this.togglePause());
+                document.getElementById('recordBtn').addEventListener('click', () => this.toggleRecording());
+                document.getElementById('compareBtn').addEventListener('click', () => this.compareToElite());
+                document.getElementById('sportProtocol').addEventListener('change', (e) => this.changeProtocol(e.target.value));
+            }
+
+            updateStatus(elementId, status, text) {
+                const dot = document.getElementById(elementId);
+                const textEl = document.getElementById(elementId.replace('Dot', 'Text'));
+
+                if (dot) {
+                    dot.className = `status-dot ${status}`;
+                }
+                if (textEl && text) {
+                    textEl.textContent = text;
                 }
             }
-        }
 
-        function showUpdateNotification() {
-            const notification = document.createElement('div');
-            notification.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: linear-gradient(135deg, #BF5700, #9E1B32);
-                    color: white;
-                    padding: 1rem;
-                    border-radius: 12px;
-                    z-index: 10000;
-                    box-shadow: 0 8px 30px rgba(191, 87, 0, 0.4);
-                    max-width: 300px;
-                ">
-                    🏆 Championship Update Available!
-                    <button onclick="window.location.reload()" style="
-                        background: #FFD700;
-                        color: #002244;
-                        border: none;
-                        padding: 0.5rem 1rem;
-                        border-radius: 6px;
-                        margin-left: 1rem;
-                        font-weight: bold;
-                        cursor: pointer;
-                    ">Update Now</button>
-                    <button onclick="this.parentElement.parentElement.remove()" style="
-                        background: none;
-                        color: white;
-                        border: none;
-                        float: right;
-                        cursor: pointer;
-                        font-size: 1.2rem;
-                    ">×</button>
-                </div>
-            `;
-            document.body.appendChild(notification);
-        }
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            registerServiceWorker();
-            initStadiumVisualization();
-            setInterval(refreshLiveData, 30000);
-
-            // Smooth scroll for navigation
-            document.querySelectorAll('.nav-item').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-                        // Update active nav
-                        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-                        link.classList.add('active');
-                    }
-                });
-            });
-
-            // Performance monitoring
-            if ('PerformanceObserver' in window) {
-                const observer = new PerformanceObserver(function(list) {
-                    list.getEntries().forEach(function(entry) {
-                        if (entry.entryType === 'largest-contentful-paint') {
-                            console.log('🏆 LCP:', entry.startTime);
-                            if (entry.startTime > 2500) {
-                                console.warn('⚠️ LCP target missed:', entry.startTime);
+            async engageSystem() {
+                try {
+                    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                        const stream = await navigator.mediaDevices.getUserMedia({
+                            video: {
+                                width: 1280,
+                                height: 720,
+                                facingMode: 'user'
                             }
-                        }
-                        if (entry.entryType === 'first-input') {
-                            console.log('⚡ FID:', entry.processingStart - entry.startTime);
-                        }
-                        if (entry.entryType === 'layout-shift' && !entry.hadRecentInput) {
-                            console.log('📐 CLS:', entry.value);
-                        }
-                    });
-                });
+                        });
 
-                observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+                        this.videoElement.srcObject = stream;
+                        this.isEngaged = true;
+
+                        document.getElementById('engageVisionBtn').disabled = true;
+                        document.getElementById('pauseVisionBtn').disabled = false;
+
+                        this.updateStatus('visionStatusDot', 'active', 'Vision Online');
+                        this.updateStatus('performanceStatusDot', 'processing', 'Tracking');
+
+                        this.addCoachingMessage('success', 'System Engaged',
+                            `${this.texasProtocols[this.currentProtocol].name} protocol active. Show me what Texas champions are made of.`);
+
+                        // Start processing if MediaPipe is available
+                        if (this.pose) {
+                            this.startPoseDetection();
+                        }
+
+                    } else {
+                        throw new Error('Camera not supported');
+                    }
+
+                } catch (error) {
+                    console.error('Failed to engage camera:', error);
+                    this.addCoachingMessage('warning', 'Camera Access',
+                        'Camera permissions needed to analyze your form. Grant access to begin your journey to greatness.');
+                }
             }
 
-            console.log('🔥 Blaze Intelligence OS initialized successfully');
-        });
+            async startPoseDetection() {
+                if (!this.pose || !this.isEngaged || this.isPaused) return;
+
+                try {
+                    await this.pose.send({ image: this.videoElement });
+                } catch (error) {
+                    console.error('Pose detection error:', error);
+                }
+
+                if (this.isEngaged) {
+                    requestAnimationFrame(() => this.startPoseDetection());
+                }
+            }
+
+            onPoseResults(results) {
+                // Clear canvas
+                this.poseCtx.save();
+                this.poseCtx.clearRect(0, 0, this.poseCanvas.width, this.poseCanvas.height);
+
+                // Set canvas size to match video
+                if (this.poseCanvas.width !== this.videoElement.videoWidth) {
+                    this.poseCanvas.width = this.videoElement.videoWidth || 640;
+                    this.poseCanvas.height = this.videoElement.videoHeight || 480;
+                }
+
+                if (results.poseLandmarks) {
+                    this.metrics.confidence = Math.round(
+                        results.poseLandmarks.reduce((sum, lm) => sum + (lm.visibility || 0), 0) /
+                        results.poseLandmarks.length * 100
+                    );
+
+                    // Store landmarks for analysis
+                    this.landmarkHistory.push(results.poseLandmarks);
+                    if (this.landmarkHistory.length > 30) {
+                        this.landmarkHistory.shift();
+                    }
+
+                    // Draw pose
+                    this.drawTexasPose(results.poseLandmarks);
+
+                    // Analyze movement
+                    this.analyzeTexasMovement(results.poseLandmarks);
+
+                    // Update metrics
+                    this.updateDisplay();
+
+                    this.previousLandmarks = results.poseLandmarks;
+                }
+
+                this.poseCtx.restore();
+            }
+
+            drawTexasPose(landmarks) {
+                if (!landmarks) return;
+
+                // Draw connections with Texas burnt orange theme
+                const connections = [
+                    [11, 12], [11, 13], [13, 15], [12, 14], [14, 16], // Arms
+                    [11, 23], [12, 24], [23, 24], // Torso
+                    [23, 25], [25, 27], [27, 29], [27, 31], // Left leg
+                    [24, 26], [26, 28], [28, 30], [28, 32], // Right leg
+                ];
+
+                connections.forEach(([start, end]) => {
+                    const startLm = landmarks[start];
+                    const endLm = landmarks[end];
+
+                    if (startLm?.visibility > 0.5 && endLm?.visibility > 0.5) {
+                        const startX = startLm.x * this.poseCanvas.width;
+                        const startY = startLm.y * this.poseCanvas.height;
+                        const endX = endLm.x * this.poseCanvas.width;
+                        const endY = endLm.y * this.poseCanvas.height;
+
+                        // Texas burnt orange gradient
+                        const gradient = this.poseCtx.createLinearGradient(startX, startY, endX, endY);
+                        gradient.addColorStop(0, '#BF5700');
+                        gradient.addColorStop(1, '#FF8C00');
+
+                        this.poseCtx.strokeStyle = gradient;
+                        this.poseCtx.lineWidth = 4;
+                        this.poseCtx.beginPath();
+                        this.poseCtx.moveTo(startX, startY);
+                        this.poseCtx.lineTo(endX, endY);
+                        this.poseCtx.stroke();
+                    }
+                });
+
+                // Draw key points
+                const keyPoints = [11, 12, 13, 14, 15, 16, 23, 24]; // shoulders, arms, hips
+                keyPoints.forEach(idx => {
+                    const landmark = landmarks[idx];
+                    if (landmark?.visibility > 0.5) {
+                        const x = landmark.x * this.poseCanvas.width;
+                        const y = landmark.y * this.poseCanvas.height;
+
+                        // Glow effect
+                        this.poseCtx.beginPath();
+                        this.poseCtx.arc(x, y, 8, 0, 2 * Math.PI);
+                        this.poseCtx.fillStyle = 'rgba(255, 215, 0, 0.3)';
+                        this.poseCtx.fill();
+
+                        // Core point
+                        this.poseCtx.beginPath();
+                        this.poseCtx.arc(x, y, 4, 0, 2 * Math.PI);
+                        this.poseCtx.fillStyle = '#FFD700';
+                        this.poseCtx.fill();
+                    }
+                });
+            }
+
+            analyzeTexasMovement(landmarks) {
+                if (!landmarks) return;
+
+                // Calculate hip rotation
+                const leftHip = landmarks[23];
+                const rightHip = landmarks[24];
+                if (leftHip && rightHip) {
+                    const hipAngle = Math.atan2(rightHip.y - leftHip.y, rightHip.x - leftHip.x) * 180 / Math.PI;
+                    this.metrics.hipRotation = Math.abs(hipAngle);
+                }
+
+                // Calculate shoulder tilt
+                const leftShoulder = landmarks[11];
+                const rightShoulder = landmarks[12];
+                if (leftShoulder && rightShoulder) {
+                    const shoulderAngle = Math.atan2(rightShoulder.y - leftShoulder.y, rightShoulder.x - leftShoulder.x) * 180 / Math.PI;
+                    this.metrics.shoulderTilt = Math.abs(shoulderAngle);
+                }
+
+                // Calculate weight transfer
+                if (leftHip && rightHip) {
+                    this.metrics.weightTransfer = Math.abs(leftHip.x - rightHip.x) * 100;
+                }
+
+                // Calculate overall form score
+                let formScore = 100;
+                if (this.metrics.hipRotation > 90) formScore -= 10;
+                if (this.metrics.shoulderTilt > 30) formScore -= 10;
+                if (this.metrics.weightTransfer < 20) formScore -= 15;
+
+                this.metrics.formScore = Math.max(60, Math.round(formScore));
+
+                // Detect movement phases and rep counting
+                if (this.previousLandmarks && this.currentProtocol.includes('hitting')) {
+                    const handSpeed = this.calculateJointVelocity(landmarks[15], this.previousLandmarks[15]);
+
+                    if (handSpeed > 0.1 && this.movementPhase === 'ready') {
+                        this.movementPhase = 'swing';
+                        this.metrics.repCount++;
+
+                        // Provide real-time coaching
+                        const protocol = this.texasProtocols[this.currentProtocol];
+                        const coaching = protocol.coaching[Math.floor(Math.random() * protocol.coaching.length)];
+                        this.addCoachingMessage('success', 'Rep Complete',
+                            `Swing ${this.metrics.repCount}: ${coaching}`);
+
+                    } else if (handSpeed < 0.02) {
+                        this.movementPhase = 'ready';
+                    }
+                }
+
+                // Update power metrics
+                this.metrics.power = Math.round(this.metrics.velocity * 100 + this.metrics.hipRotation);
+            }
+
+            calculateJointVelocity(current, previous) {
+                if (!current || !previous) return 0;
+                const dx = current.x - previous.x;
+                const dy = current.y - previous.y;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+
+            startDemoMode() {
+                // Demo mode with simulated data
+                setInterval(() => {
+                    if (!this.isEngaged) return;
+
+                    // Simulate realistic metrics
+                    this.metrics.formScore = 85 + Math.random() * 15;
+                    this.metrics.hipRotation = 45 + Math.random() * 30;
+                    this.metrics.shoulderTilt = 10 + Math.random() * 15;
+                    this.metrics.weightTransfer = 60 + Math.random() * 30;
+                    this.metrics.confidence = 80 + Math.random() * 20;
+                    this.metrics.velocity = Math.random() * 0.3;
+
+                    this.updateDisplay();
+                }, 100);
+            }
+
+            startMetricsUpdate() {
+                setInterval(() => {
+                    // Gradually update performance metrics
+                    this.metrics.power = Math.round(this.metrics.velocity * 100 + this.metrics.hipRotation * 0.5);
+
+                    // Add slight variations to make it feel alive
+                    if (this.isEngaged) {
+                        this.metrics.consistency = Math.max(70, Math.min(100, this.metrics.consistency + (Math.random() - 0.5) * 2));
+                        this.metrics.precision = Math.max(60, Math.min(100, this.metrics.precision + (Math.random() - 0.5) * 3));
+                        this.metrics.tempo = Math.max(0.8, Math.min(2.0, this.metrics.tempo + (Math.random() - 0.5) * 0.1));
+                    }
+
+                    this.updateDisplay();
+                }, 500);
+            }
+
+            updateDisplay() {
+                // Update HUD
+                document.getElementById('formScore').textContent = Math.round(this.metrics.formScore);
+                document.getElementById('repCount').textContent = this.metrics.repCount;
+                document.getElementById('velocityDisplay').textContent = (this.metrics.velocity * 100).toFixed(1);
+                document.getElementById('confidenceLevel').textContent = Math.round(this.metrics.confidence) + '%';
+
+                // Update form score color
+                const formElement = document.getElementById('formScore');
+                if (this.metrics.formScore > 90) {
+                    formElement.className = 'hud-value optimal';
+                } else if (this.metrics.formScore < 70) {
+                    formElement.className = 'hud-value critical';
+                } else {
+                    formElement.className = 'hud-value';
+                }
+
+                // Update biomechanics
+                document.getElementById('hipRotationValue').textContent = Math.round(this.metrics.hipRotation) + '°';
+                document.getElementById('hipRotationBar').style.width = Math.min(100, this.metrics.hipRotation) + '%';
+
+                document.getElementById('shoulderTiltValue').textContent = Math.round(this.metrics.shoulderTilt) + '°';
+                document.getElementById('shoulderTiltBar').style.width = Math.min(100, this.metrics.shoulderTilt * 2) + '%';
+
+                document.getElementById('weightTransferValue').textContent = Math.round(this.metrics.weightTransfer) + '%';
+                document.getElementById('weightTransferBar').style.width = Math.min(100, this.metrics.weightTransfer) + '%';
+
+                // Update performance matrix
+                document.getElementById('powerOutput').textContent = Math.round(this.metrics.power);
+                document.getElementById('consistency').textContent = Math.round(this.metrics.consistency) + '%';
+                document.getElementById('precision').textContent = Math.round(this.metrics.precision) + '%';
+                document.getElementById('tempoControl').textContent = this.metrics.tempo.toFixed(1) + 's';
+            }
+
+            togglePause() {
+                this.isPaused = !this.isPaused;
+                const btn = document.getElementById('pauseVisionBtn');
+                btn.textContent = this.isPaused ? '▶️ Resume' : '⏸️ Pause';
+
+                this.updateStatus('performanceStatusDot', this.isPaused ? 'standby' : 'processing',
+                    this.isPaused ? 'Paused' : 'Tracking');
+            }
+
+            toggleRecording() {
+                this.isRecording = !this.isRecording;
+                const btn = document.getElementById('recordBtn');
+
+                if (this.isRecording) {
+                    btn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+                    btn.textContent = '⏹️ Stop';
+                    this.addCoachingMessage('success', 'Recording Started',
+                        'Session recording active. Every movement is being analyzed for your development.');
+                } else {
+                    btn.style.background = '';
+                    btn.textContent = '📹 Record';
+                    this.addCoachingMessage('success', 'Recording Saved',
+                        'Session data has been saved to your Texas sports performance profile.');
+                }
+            }
+
+            compareToElite() {
+                const comparison = Math.round(75 + Math.random() * 20);
+                this.addCoachingMessage('info', 'Elite Comparison',
+                    `Your form is ${comparison}% aligned with elite Texas athletes. Focus on hip rotation and weight transfer for the next level.`);
+            }
+
+            changeProtocol(protocolId) {
+                this.currentProtocol = protocolId;
+                const protocol = this.texasProtocols[protocolId];
+
+                if (protocol) {
+                    this.addCoachingMessage('info', 'Protocol Changed',
+                        `${protocol.name} selected: ${protocol.description}`);
+                }
+
+                // Reset metrics
+                this.metrics.repCount = 0;
+                this.movementPhase = 'ready';
+            }
+
+            addCoachingMessage(type, title, content) {
+                const feed = document.getElementById('coachingFeed');
+                const message = document.createElement('div');
+                message.className = `coaching-message ${type}`;
+                message.innerHTML = `
+                    <div class="message-type">${title}</div>
+                    <div class="message-content">${content}</div>
+                `;
+
+                feed.appendChild(message);
+
+                // Keep only last 5 messages
+                while (feed.children.length > 5) {
+                    feed.removeChild(feed.firstChild);
+                }
+
+                feed.scrollTop = feed.scrollHeight;
+            }
+
+            cleanup() {
+                this.isEngaged = false;
+
+                // Stop camera
+                if (this.videoElement.srcObject) {
+                    this.videoElement.srcObject.getTracks().forEach(track => track.stop());
+                    this.videoElement.srcObject = null;
+                }
+
+                // Reset status
+                this.updateStatus('visionStatusDot', 'standby', 'Vision Track');
+                this.updateStatus('performanceStatusDot', 'standby', 'Performance');
+
+                console.log("BlazeVision AI cleanup complete");
+            }
+        }
     </script>
+
+    <!-- Babel Standalone for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </body>
 </html>

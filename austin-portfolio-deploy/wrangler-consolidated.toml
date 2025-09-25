@@ -1,0 +1,130 @@
+name = "blazesportsintel"
+compatibility_date = "2024-09-25"
+pages_build_output_dir = "."
+
+# Production environment configuration
+[env.production]
+name = "blazesportsintel-production"
+
+# Custom domain routes
+[[env.production.routes]]
+pattern = "blazesportsintel.com/*"
+custom_domain = true
+
+[[env.production.routes]]
+pattern = "www.blazesportsintel.com/*"
+custom_domain = true
+
+# R2 Storage bindings for media and data
+[[r2_buckets]]
+binding = "BLAZE_STORAGE"
+bucket_name = "blaze-intelligence-data"
+
+[[r2_buckets]]
+binding = "MEDIA_STORAGE"
+bucket_name = "blaze-media-assets"
+
+[[r2_buckets]]
+binding = "SPORTS_DATA"
+bucket_name = "blaze-sports-data-lake"
+
+# KV Namespaces for caching
+[[kv_namespaces]]
+binding = "CACHE_KV"
+id = "championship_analytics_cache"
+preview_id = "championship_analytics_preview"
+
+# D1 Database for sports data
+[[d1_databases]]
+binding = "SPORTS_DB"
+database_name = "blaze-sports-data"
+database_id = "sports-data-production"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+API_VERSION = "2.0.0"
+SITE_URL = "https://blazesportsintel.com"
+CACHE_TTL_SECONDS = "300"
+ENABLE_CACHE = "true"
+CORS_ORIGINS = "https://blazesportsintel.com,https://www.blazesportsintel.com"
+ENABLE_3D_GRAPHICS = "true"
+
+# Headers for proper JavaScript loading and caching
+[[headers]]
+for = "*.js"
+[headers.values]
+Cache-Control = "public, max-age=3600"
+Content-Type = "application/javascript; charset=utf-8"
+Access-Control-Allow-Origin = "*"
+
+[[headers]]
+for = "*.css"
+[headers.values]
+Cache-Control = "public, max-age=3600"
+Content-Type = "text/css; charset=utf-8"
+
+[[headers]]
+for = "*.json"
+[headers.values]
+Cache-Control = "public, max-age=300"
+Content-Type = "application/json; charset=utf-8"
+
+[[headers]]
+for = "*.html"
+[headers.values]
+Cache-Control = "public, max-age=300"
+Content-Type = "text/html; charset=utf-8"
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+
+# Redirects from pages.dev to custom domain
+[[redirects]]
+from = "https://blazesportsintel.pages.dev/*"
+to = "https://blazesportsintel.com/:splat"
+status = 301
+
+[[redirects]]
+from = "https://blaze-intelligence.pages.dev/*"
+to = "https://blazesportsintel.com/:splat"
+status = 301
+
+[[redirects]]
+from = "http://blazesportsintel.com/*"
+to = "https://blazesportsintel.com/:splat"
+status = 301
+
+[[redirects]]
+from = "http://www.blazesportsintel.com/*"
+to = "https://blazesportsintel.com/:splat"
+status = 301
+
+# Site configuration
+[site]
+bucket = "./site"
+include = ["*"]
+exclude = [
+    "node_modules",
+    ".git",
+    "*.md",
+    ".*",
+    "package*.json",
+    "tsconfig.json",
+    "*.ts",
+    "wrangler*.toml",
+    "index-updated-league-wide.html"
+]
+
+# Build configuration
+[build]
+command = ""
+watch_paths = ["**/*.html", "**/*.js", "**/*.css", "data/**/*.json"]
+
+# Functions for API endpoints
+[[rules]]
+type = "asset"
+fallthrough = true
+
+[[rules]]
+type = "function"
+pattern = "/api/*"

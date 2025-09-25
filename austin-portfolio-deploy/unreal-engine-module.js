@@ -6,16 +6,20 @@
 class UnrealEngineIntegration {
     constructor() {
         this.config = {
-            apiBase: window.location.origin,
+            wsUrl: 'ws://localhost:8765', // WebSocket bridge server
+            wsSecureUrl: 'wss://blaze-mcp-bridge.blazesportsintel.com',
             apiKey: 'blaze-intelligence-unreal-2025',
             r2PublicBase: 'https://media.blazesportsintel.com',
-            pollInterval: 2000,
-            maxPollDuration: 300000 // 5 minutes
+            reconnectInterval: 3000,
+            maxReconnectAttempts: 10
         };
 
+        this.ws = null;
         this.activeJobs = new Map();
         this.renderHistory = [];
         this.isConnected = false;
+        this.reconnectAttempts = 0;
+        this.messageQueue = [];
 
         this.init();
     }
@@ -23,11 +27,8 @@ class UnrealEngineIntegration {
     async init() {
         console.log('🎬 Initializing Unreal Engine 5.5 Integration...');
 
-        // Check connection status
-        await this.checkConnection();
-
-        // Set up periodic health checks
-        setInterval(() => this.checkConnection(), 10000);
+        // Connect to WebSocket bridge
+        await this.connectWebSocket();
 
         // Initialize UI if present
         this.initializeUI();
@@ -36,140 +37,273 @@ class UnrealEngineIntegration {
     }
 
     /**
-     * Check connection to the Unreal MCP bridge
+     * Connect to the WebSocket MCP bridge
      */
-    async checkConnection() {
-        try {
-            const response = await fetch(`${this.config.apiBase}/api/health`);
-            this.isConnected = response.ok;
-            this.updateConnectionStatus(this.isConnected);
-            return this.isConnected;
-        } catch (error) {
-            this.isConnected = false;
-            this.updateConnectionStatus(false);
-            return false;
+    async connectWebSocket() {
+        return new Promise((resolve) => {
+            try {
+                // Use secure WebSocket if on HTTPS
+                const wsUrl = window.location.protocol === 'https:'
+                    ? this.config.wsSecureUrl
+                    : this.config.wsUrl;
+
+                console.log(`🔌 Connecting to MCP Bridge: ${wsUrl}`);
+                this.ws = new WebSocket(wsUrl);
+
+                this.ws.onopen = () => {
+                    console.log('✅ Connected to Unreal MCP Bridge');
+                    this.isConnected = true;
+                    this.reconnectAttempts = 0;
+                    this.updateConnectionStatus(true);
+
+                    // Process any queued messages
+                    while (this.messageQueue.length > 0) {
+                        const msg = this.messageQueue.shift();
+                        this.ws.send(JSON.stringify(msg));
+                    }
+
+                    resolve(true);
+                };
+
+                this.ws.onmessage = (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        this.handleServerMessage(data);
+                    } catch (error) {
+                        console.error('Failed to parse server message:', error);
+                    }
+                };
+
+                this.ws.onerror = (error) => {
+                    console.error('❌ WebSocket error:', error);
+                    this.isConnected = false;
+                    this.updateConnectionStatus(false);
+                };
+
+                this.ws.onclose = () => {
+                    console.log('🔌 WebSocket disconnected');
+                    this.isConnected = false;
+                    this.updateConnectionStatus(false);
+
+                    // Attempt to reconnect
+                    if (this.reconnectAttempts < this.config.maxReconnectAttempts) {
+                        this.reconnectAttempts++;
+                        console.log(`Reconnecting... (attempt ${this.reconnectAttempts})`);
+                        setTimeout(() => this.connectWebSocket(), this.config.reconnectInterval);
+                    }
+                };
+            } catch (error) {
+                console.error('Failed to connect to WebSocket:', error);
+                this.isConnected = false;
+                this.updateConnectionStatus(false);
+                resolve(false);
+            }
+        });
+    }
+
+    /**
+     * Handle messages from the MCP bridge server
+     */
+    handleServerMessage(data) {
+        console.log('📨 Server message:', data.type);
+
+        switch(data.type) {
+            case 'connection':
+                console.log('Server features:', data.features);
+                break;
+
+            case 'render_queued':
+                this.activeJobs.set(data.jobId, {
+                    id: data.jobId,
+                    spec: data.spec,
+                    status: 'queued',
+                    progress: 0,
+                    startTime: Date.now()
+                });
+
+                // Resolve pending render request if exists
+                if (this.pendingRenderRequest) {
+                    this.pendingRenderRequest.resolve(data.jobId);
+                    this.pendingRenderRequest = null;
+                }
+
+                this.onJobSubmitted(data.jobId, data.spec);
+                break;
+
+            case 'render_started':
+                this.updateJobStatus(data.jobId, 'processing');
+                break;
+
+            case 'progress':
+                this.updateJobProgress(data.jobId, data.progress, data.stage);
+                break;
+
+            case 'render_complete':
+                this.completeJob(data.jobId, data);
+                break;
+
+            case 'error':
+                console.error('Server error:', data.message);
+                this.onJobFailed(data.jobId || null, data.message);
+                break;
+
+            case 'live_data':
+                this.onLiveDataReceived(data);
+                break;
         }
     }
 
     /**
-     * Submit a render request to Unreal Engine
+     * Send message to MCP bridge (with queueing if disconnected)
+     */
+    sendMessage(message) {
+        if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+            this.ws.send(JSON.stringify(message));
+        } else {
+            console.log('⏳ Queueing message (not connected)');
+            this.messageQueue.push(message);
+        }
+    }
+
+    /**
+     * Submit a render request to Unreal Engine via MCP Bridge
      */
     async submitRender(spec) {
+        if (!this.isConnected) {
+            console.warn('⚠️ Not connected to MCP Bridge. Attempting to connect...');
+            await this.connectWebSocket();
+            if (!this.isConnected) {
+                throw new Error('Unable to connect to Unreal Engine MCP Bridge');
+            }
+        }
+
         // Ensure spec has required fields
         const renderSpec = {
-            type: spec.type || 'title-card',
+            type: 'render',
+            renderType: spec.type || 'title-card',
             team: spec.team || 'cardinals',
             text: spec.text || 'Blaze Sports Intel',
             colors: spec.colors || {
                 primary: '#BF5700',
                 secondary: '#FFFFFF'
             },
-            quality: spec.quality || 'cinematic',
-            resolution: spec.resolution || '4K',
+            quality: spec.quality || 'production',
+            resolution: spec.resolution || '3840x2160',
             engine: 'unreal-5.5',
             timestamp: Date.now()
         };
 
-        try {
-            const response = await fetch(`${this.config.apiBase}/api/render`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-API-Key': this.config.apiKey
+        // Add sports-specific parameters based on render type
+        if (spec.type === 'championship-stadium') {
+            renderSpec.stadium = spec.stadium || 'busch_stadium';
+            renderSpec.weather = spec.weather || 'clear';
+            renderSpec.timeOfDay = spec.timeOfDay || 'night';
+            renderSpec.crowdDensity = spec.crowdDensity || 0.85;
+        } else if (spec.type === 'player-spotlight') {
+            renderSpec.playerName = spec.playerName || 'Player';
+            renderSpec.action = spec.action || 'hero_pose';
+            renderSpec.statsOverlay = spec.statsOverlay !== false;
+            renderSpec.stats = spec.stats || {};
+        } else if (spec.type === 'analytics-visualization') {
+            renderSpec.visualizationType = spec.visualizationType || 'heatmap';
+            renderSpec.data = spec.data;
+            renderSpec.style = spec.style || 'holographic';
+        } else if (spec.type === 'game-moment') {
+            renderSpec.momentType = spec.momentType;
+            renderSpec.teams = spec.teams;
+            renderSpec.description = spec.description;
+            renderSpec.cinematicMode = spec.cinematicMode !== false;
+        } else if (spec.type === 'monte-carlo') {
+            renderSpec.simulations = spec.simulations || 10000;
+            renderSpec.scenario = spec.scenario || 'playoff_odds';
+            renderSpec.teams = spec.teams || ['Cardinals', 'Yankees'];
+            renderSpec.visualizationStyle = spec.visualizationStyle || 'probability_cloud';
+        }
+
+        // Send render request via WebSocket
+        this.sendMessage(renderSpec);
+
+        // Generate a temporary job ID (server will assign actual ID)
+        const tempJobId = `temp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+        // Return a promise that resolves when we get confirmation
+        return new Promise((resolve, reject) => {
+            // Set a timeout for response
+            const timeout = setTimeout(() => {
+                reject(new Error('Render request timeout'));
+            }, 10000);
+
+            // Store promise handlers for when we get server response
+            this.pendingRenderRequest = {
+                resolve: (jobId) => {
+                    clearTimeout(timeout);
+                    resolve(jobId);
                 },
-                body: JSON.stringify(renderSpec)
-            });
+                reject: (error) => {
+                    clearTimeout(timeout);
+                    reject(error);
+                },
+                tempJobId: tempJobId,
+                spec: renderSpec
+            };
+        });
+    }
 
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-
-            const result = await response.json();
-
-            if (result.ok && result.id) {
-                // Track the job
-                this.activeJobs.set(result.id, {
-                    id: result.id,
-                    spec: renderSpec,
-                    status: 'queued',
-                    startTime: Date.now()
-                });
-
-                // Start polling for status
-                this.pollJobStatus(result.id);
-
-                // Trigger UI update
-                this.onJobSubmitted(result.id, renderSpec);
-
-                return result.id;
-            }
-
-            throw new Error('Invalid response from server');
-        } catch (error) {
-            console.error('❌ Render submission failed:', error);
-            this.onJobFailed(null, error.message);
-            throw error;
+    /**
+     * Update job status
+     */
+    updateJobStatus(jobId, status) {
+        const job = this.activeJobs.get(jobId);
+        if (job) {
+            job.status = status;
+            console.log(`📊 Job ${jobId}: ${status}`);
         }
     }
 
     /**
-     * Poll for job status updates
+     * Update job progress
      */
-    async pollJobStatus(jobId) {
-        const startTime = Date.now();
+    updateJobProgress(jobId, progress, stage) {
+        const job = this.activeJobs.get(jobId);
+        if (job) {
+            job.progress = progress;
+            job.stage = stage;
+            console.log(`⚡ Job ${jobId}: ${progress}% - ${stage}`);
+            this.onJobProgress(jobId, progress, stage);
+        }
+    }
 
-        const interval = setInterval(async () => {
-            try {
-                const response = await fetch(`${this.config.apiBase}/api/render/status?id=${jobId}`);
-                const data = await response.json();
+    /**
+     * Complete a render job
+     */
+    completeJob(jobId, data) {
+        const job = this.activeJobs.get(jobId);
+        if (job) {
+            job.status = 'completed';
+            job.progress = 100;
+            job.outputUrl = data.outputUrl;
+            job.duration = data.duration;
+            job.completedAt = Date.now();
 
-                if (!data.ok) {
-                    throw new Error('Status check failed');
-                }
+            // Move to history
+            this.renderHistory.unshift(job);
+            this.activeJobs.delete(jobId);
 
-                const job = this.activeJobs.get(jobId);
-                if (job) {
-                    job.status = data.status;
-                    job.progress = data.progress || 0;
+            // Trigger completion callback
+            this.onJobCompleted(jobId, job);
+        }
+    }
 
-                    if (data.status === 'done' && data.r2_key) {
-                        clearInterval(interval);
-                        job.url = `${this.config.r2PublicBase}/${data.r2_key}`;
-                        job.duration = data.duration_s;
-                        job.completedAt = Date.now();
-
-                        // Move to history
-                        this.renderHistory.unshift(job);
-                        this.activeJobs.delete(jobId);
-
-                        // Trigger completion callback
-                        this.onJobCompleted(jobId, job);
-                    } else if (data.status === 'failed') {
-                        clearInterval(interval);
-                        job.error = data.error || 'Unknown error';
-
-                        // Move to history with failed status
-                        this.renderHistory.unshift(job);
-                        this.activeJobs.delete(jobId);
-
-                        // Trigger failure callback
-                        this.onJobFailed(jobId, job.error);
-                    } else if (data.status === 'processing') {
-                        // Update progress
-                        this.onJobProgress(jobId, job.progress);
-                    }
-                }
-
-                // Stop polling after max duration
-                if (Date.now() - startTime > this.config.maxPollDuration) {
-                    clearInterval(interval);
-                    console.warn(`⏱️ Job ${jobId} polling timeout`);
-                    this.onJobTimeout(jobId);
-                }
-            } catch (error) {
-                console.error('Poll error:', error);
-            }
-        }, this.config.pollInterval);
+    /**
+     * Handle live data from MCP bridge
+     */
+    onLiveDataReceived(data) {
+        console.log('📊 Live data received:', data.dataType);
+        // Can be used to update real-time visualizations
+        // Broadcast live data to any listening components
+        if (window.BlazeIntelligence && window.BlazeIntelligence.onLiveData) {
+            window.BlazeIntelligence.onLiveData(data);
+        }
     }
 
     /**
@@ -381,6 +515,73 @@ class UnrealEngineIntegration {
                 'Unreal Engine Connected' :
                 'Unreal Engine Offline';
         }
+    }
+
+    /**
+     * Render a championship stadium scene
+     */
+    async renderChampionshipStadium(options = {}) {
+        return this.submitRender({
+            type: 'championship-stadium',
+            sport: options.sport || 'baseball',
+            team: options.team || 'cardinals',
+            weather: options.weather || 'clear',
+            timeOfDay: options.timeOfDay || 'night',
+            crowdDensity: options.crowdDensity || 0.85
+        });
+    }
+
+    /**
+     * Render a player spotlight
+     */
+    async renderPlayerSpotlight(playerName, options = {}) {
+        return this.submitRender({
+            type: 'player-spotlight',
+            playerName: playerName,
+            team: options.team || 'cardinals',
+            sport: options.sport || 'baseball',
+            action: options.action || 'hero_pose',
+            statsOverlay: options.statsOverlay !== false
+        });
+    }
+
+    /**
+     * Render analytics visualization
+     */
+    async renderAnalytics(data, options = {}) {
+        return this.submitRender({
+            type: 'analytics-visualization',
+            data: data,
+            visualizationType: options.type || 'heatmap',
+            sport: options.sport || 'baseball',
+            style: options.style || 'holographic'
+        });
+    }
+
+    /**
+     * Render a game moment
+     */
+    async renderGameMoment(momentType, teams, description, options = {}) {
+        return this.submitRender({
+            type: 'game-moment',
+            momentType: momentType,
+            teams: teams,
+            description: description,
+            sport: options.sport || 'baseball',
+            cinematicMode: options.cinematicMode !== false
+        });
+    }
+
+    /**
+     * Render Monte Carlo visualization
+     */
+    async renderMonteCarlo(simulationData, options = {}) {
+        return this.submitRender({
+            type: 'monte-carlo',
+            simulationData: simulationData,
+            visualizationStyle: options.style || 'probability_cloud',
+            team: options.team
+        });
     }
 
     // Event callbacks (can be overridden)

@@ -1,1 +1,6 @@
-(function() {    'use strict';    const ABTesting = {        init: function() {            console.log('A/B Testing: Disabled - All content must be honest and verified');        }    };})();
+/**
+ * A/B Testing Configuration
+ * Placeholder for testing framework setup
+ */
+
+console.log('A/B testing configuration loaded');

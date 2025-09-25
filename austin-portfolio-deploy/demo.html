@@ -1,236 +1,822 @@
-<html><head></head><body>croll-smooth"&gt;
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Demo | Blaze Intelligence - Experience Championship Intelligence</title>
-    <meta name="description" content="Interactive demonstration of the Blaze Intelligence Platform. Experience real-time analytics, vision AI, and championship intelligence in action.">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <script src="js/enhanced-charts.js" defer=""></script>
-    
-    <!-- Blaze Intelligence Live Data Integration -->
-    <script src="js/r2-integration.js" defer=""></script>
-    <script src="js/cardinals-readiness-board.js" defer=""></script>
-    
+    <title>Try Blaze Intelligence Free | Deep South Sports Authority Demo</title>
+    <meta name="description" content="Experience championship-grade sports intelligence - Free demo of AI-powered analysis for Texas and SEC athletics">
+
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
     <style>
-        body { background: #0a0a0a; color: #e2e8f0; font-family: 'Inter', sans-serif; }
-        .demo-card { background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 1rem; padding: 1.5rem; }
-        .feature-locked { opacity: 0.5; position: relative; }
-        .feature-locked::after { content: '🔒 Upgrade to unlock'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; }
-        .demo-banner { background: linear-gradient(90deg, #FF8C00, #BF5700); padding: 0.75rem; text-align: center; font-weight: bold; }
-        .metric-live { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            /* Blaze Intelligence Brand Colors */
+            --texas-burnt-orange: #BF5700;
+            --championship-gold: #FFD700;
+            --longhorn-bronze: #D2691E;
+            --midnight-black: #0A0A0A;
+            --steel-gray: #1A1A1A;
+            --ghost-white: #FAFAFA;
+            --success-green: #39FF14;
+            --glass-white: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(191, 87, 0, 0.3);
+            --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--midnight-black);
+            color: var(--ghost-white);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Atmospheric Background */
+        .atmosphere {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(191, 87, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(210, 105, 30, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 30%);
+            animation: atmosphereShift 20s ease-in-out infinite;
+        }
+
+        @keyframes atmosphereShift {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Demo Header */
+        .demo-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.7) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 16px 32px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .brand-mark {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-flame {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 0 30px rgba(191, 87, 0, 0.5);
+        }
+
+        .brand-text h1 {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-badge {
+            background: rgba(57, 255, 20, 0.2);
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--success-green);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: demoPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes demoPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 700;
+            font-size: 14px;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(191, 87, 0, 0.4);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            padding: 120px 32px 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 16px;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 48px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-actions {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+
+        .demo-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px 32px;
+            text-decoration: none;
+            color: var(--ghost-white);
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            min-width: 200px;
+            cursor: pointer;
+        }
+
+        .demo-button:hover {
+            background: rgba(191, 87, 0, 0.2);
+            border-color: var(--texas-burnt-orange);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(191, 87, 0, 0.3);
+        }
+
+        .demo-button-icon {
+            font-size: 32px;
+        }
+
+        .demo-button-label {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .demo-button-desc {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
+
+        /* Interactive Demo Cards */
+        .demo-showcase {
+            position: relative;
+            z-index: 10;
+            padding: 80px 32px;
+        }
+
+        .showcase-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+
+        .showcase-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .showcase-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-deep);
+            border-color: var(--texas-burnt-orange);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--ghost-white);
+        }
+
+        .chart-container {
+            height: 200px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .demo-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--championship-gold);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .try-now-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .try-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(191, 87, 0, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .demo-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-section {
+                padding: 100px 20px 60px;
+            }
+
+            .demo-showcase {
+                padding: 60px 20px;
+            }
+
+            .header-content {
+                padding: 0 16px;
+            }
+
+            .header-actions {
+                gap: 8px;
+            }
+
+            .cta-button {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .demo-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--midnight-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 1s ease;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 24px;
+            animation: spinPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes spinPulse {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                box-shadow: 0 0 30px rgba(191, 87, 0, 0.5);
+            }
+            50% {
+                transform: scale(1.1) rotate(180deg);
+                box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+            }
+        }
     </style>
-    
-    <!-- Analytics & Testing -->
-    <script src="js/analytics-config.js"></script>
-    <script src="js/ab-testing.js" defer=""></script>
-    <script src="js/sentry-config.js"></script>
+</head>
+<body>
+    <!-- Atmospheric Effects -->
+    <div class="atmosphere"></div>
 
-
-    <!-- Demo Mode Banner -->
-    <div class="demo-banner">
-        🎮 DEMO MODE - Exploring as St. Louis Cardinals | <a href="/contact.html" class="underline">Unlock Full Access</a>
+    <!-- Loading Screen -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner">🔥</div>
+            <h2 style="color: var(--championship-gold); font-weight: 700; margin-bottom: 12px;">
+                Loading Championship Intelligence
+            </h2>
+            <p style="color: rgba(255, 255, 255, 0.7);">
+                Preparing your Deep South Sports Authority demo experience
+            </p>
+        </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="bg-black/50 backdrop-blur-lg border-b border-slate-800 px-4 py-4">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="/index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
-            <div class="flex items-center gap-6">
-                <span class="text-sm text-slate-400">Demo User</span>
-                <a href="/contact.html" class="px-4 py-2 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600">
-                    Get Full Access
+    <!-- Demo Header -->
+    <header class="demo-header">
+        <div class="header-content">
+            <div class="brand-mark">
+                <div class="logo-flame">🔥</div>
+                <div class="brand-text">
+                    <h1>Blaze Intelligence</h1>
+                </div>
+            </div>
+            <div class="demo-badge">FREE DEMO</div>
+            <div class="header-actions">
+                <a href="/" class="cta-button">
+                    🔒 Full Access
                 </a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <div class="max-w-7xl mx-auto px-4 py-8">
-        <!-- Demo Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-black mb-2">
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500">
-                    CARDINALS COMMAND CENTER
-                </span>
-            </h1>
-            <p class="text-slate-400">Live demo with 2024-2025 season data</p>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Experience Championship-Grade Sports Intelligence</h1>
+            <h2 class="hero-subtitle">Deep South Sports Authority</h2>
+            <p class="hero-description">
+                From Friday Night Lights to Sunday in the Show - see how Texas and SEC coaches, scouts, and athletes unlock performance through AI-powered analysis. Try our championship systems completely free.
+            </p>
         </div>
+    </section>
 
-        <!-- Key Metrics Grid -->
-        <div class="grid md:grid-cols-4 gap-4 mb-8">
-            <div class="demo-card text-center">
-                <div class="text-3xl font-bold text-cyan-400 metric-live">86.6%</div>
-                <div class="text-sm text-slate-400">Team Readiness</div>
-                <div class="text-xs text-green-400 mt-1">↑ 3.2% from yesterday</div>
-            </div>
-            <div class="demo-card text-center">
-                <div class="text-3xl font-bold text-orange-400 metric-live">2.85x</div>
-                <div class="text-sm text-slate-400">Leverage Factor</div>
-                <div class="text-xs text-yellow-400 mt-1">High pressure situation</div>
-            </div>
-            <div class="demo-card text-center">
-                <div class="text-3xl font-bold text-green-400">73.2%</div>
-                <div class="text-sm text-slate-400">Win Probability</div>
-                <div class="text-xs text-green-400 mt-1">vs. Cubs tonight</div>
-            </div>
-            <div class="demo-card text-center">
-                <div class="text-3xl font-bold text-red-400">+12</div>
-                <div class="text-sm text-slate-400">Momentum Index</div>
-                <div class="text-xs text-slate-500 mt-1">Last 10 games</div>
-            </div>
-        </div>
+    <!-- Interactive Demo Showcase -->
+    <section class="demo-showcase">
+        <div class="showcase-grid">
+            <!-- BlazeVision AI Demo -->
+            <div class="showcase-card" onclick="window.open('blazevision-ai.html', '_blank')">
+                <div class="card-header">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-title">BlazeVision AI</div>
+                </div>
 
-        <!-- Interactive Features -->
-        <div class="grid lg:grid-cols-2 gap-8 mb-8">
-            <!-- Lineup Optimizer (Active) -->
-            <div class="demo-card">
-                <h2 class="text-xl font-bold text-cyan-400 mb-4">📊 Lineup Optimizer</h2>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
-                        <span>1. Nolan Arenado (3B)</span>
-                        <span class="text-green-400">OPS: .887</span>
+                <div class="demo-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">94.6%</div>
+                        <div class="stat-label">Accuracy</div>
                     </div>
-                    <div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
-                        <span>2. Paul Goldschmidt (1B)</span>
-                        <span class="text-green-400">OPS: .748</span>
+                    <div class="stat-item">
+                        <div class="stat-value">&lt;100ms</div>
+                        <div class="stat-label">Latency</div>
                     </div>
-                    <div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
-                        <span>3. Nolan Gorman (2B)</span>
-                        <span class="text-yellow-400">OPS: .756</span>
-                    </div>
-                    <div class="flex justify-between items-center p-2 bg-slate-800/50 rounded">
-                        <span>4. Tyler O'Neill (LF)</span>
-                        <span class="text-yellow-400">OPS: .798</span>
+                    <div class="stat-item">
+                        <div class="stat-value">33</div>
+                        <div class="stat-label">Track Points</div>
                     </div>
                 </div>
-                <button class="mt-4 w-full px-4 py-2 bg-cyan-500 text-white font-semibold rounded hover:bg-cyan-600">
-                    Optimize Lineup →
+
+                <p class="card-description">
+                    Real-time biomechanical analysis with 33-point skeletal tracking. From Texas Power Hitting to SEC QB mechanics - perfect your craft with championship-grade AI coaching.
+                </p>
+
+                <button class="try-now-btn">
+                    🚀 Try BlazeVision AI Free
                 </button>
             </div>
 
-            <!-- Injury Risk Assessment (Locked) -->
-            <div class="demo-card feature-locked">
-                <h2 class="text-xl font-bold text-orange-400 mb-4">🏥 Injury Risk Assessment</h2>
-                <div class="space-y-3 blur-sm">
-                    <div class="p-2 bg-slate-800/50 rounded">
-                        <div class="flex justify-between">
-                            <span>Player Name</span>
-                            <span class="text-red-400">Risk: High</span>
+            <!-- Cardinals Analytics -->
+            <div class="showcase-card">
+                <div class="card-header">
+                    <div class="card-icon">🏟️</div>
+                    <div class="card-title">Cardinals Intelligence</div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="cardinalsChart"></canvas>
+                </div>
+
+                <p class="card-description">
+                    Real-time St. Louis Cardinals performance analysis with championship readiness scoring. See how professional teams leverage Blaze Intelligence for competitive advantage.
+                </p>
+
+                <button class="try-now-btn" onclick="openAnalyticsDemo()">
+                    📊 View Live Analytics
+                </button>
+            </div>
+
+            <!-- Titans Performance -->
+            <div class="showcase-card">
+                <div class="card-header">
+                    <div class="card-icon">🏈</div>
+                    <div class="card-title">Titans Analytics</div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="titansChart"></canvas>
+                </div>
+
+                <p class="card-description">
+                    Tennessee Titans efficiency metrics with AI-powered playoff probability analysis. Experience how NFL teams optimize performance through data-driven insights.
+                </p>
+
+                <button class="try-now-btn" onclick="openAnalyticsDemo()">
+                    🏆 Explore NFL Data
+                </button>
+            </div>
+
+            <!-- NIL Calculator Demo -->
+            <div class="showcase-card">
+                <div class="card-header">
+                    <div class="card-icon">💰</div>
+                    <div class="card-title">NIL Valuation Engine</div>
+                </div>
+
+                <div class="demo-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">$125K</div>
+                        <div class="stat-label">Sample Value</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">85K</div>
+                        <div class="stat-label">Social Reach</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">92.4</div>
+                        <div class="stat-label">Performance</div>
+                    </div>
+                </div>
+
+                <p class="card-description">
+                    Instant athlete valuation for Texas and SEC recruiting. Calculate NIL market value with championship-grade assessment algorithms used by college programs.
+                </p>
+
+                <button class="try-now-btn" onclick="openNILCalculator()">
+                    💡 Calculate NIL Value
+                </button>
+            </div>
+
+            <!-- Texas Sports Authority -->
+            <div class="showcase-card">
+                <div class="card-header">
+                    <div class="card-icon">🤘</div>
+                    <div class="card-title">Texas Sports Authority</div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="texasChart"></canvas>
+                </div>
+
+                <p class="card-description">
+                    Dave Campbell's Texas High School Football model extended to all Deep South sports. From Friday Night Lights to championship Sundays - the complete intelligence platform.
+                </p>
+
+                <button class="try-now-btn" onclick="openTexasAuthority()">
+                    ⭐ Explore Texas Sports
+                </button>
+            </div>
+
+            <!-- Live Demo Call to Action -->
+            <div class="showcase-card" style="border: 2px solid var(--texas-burnt-orange); background: rgba(191, 87, 0, 0.1);">
+                <div class="card-header">
+                    <div class="card-icon">🔥</div>
+                    <div class="card-title">Ready for Championship Intelligence?</div>
+                </div>
+
+                <div style="text-align: center; padding: 32px 0;">
+                    <h3 style="color: var(--championship-gold); font-size: 1.4rem; margin-bottom: 16px;">
+                        Get Full Platform Access
+                    </h3>
+                    <p style="margin-bottom: 32px; color: rgba(255, 255, 255, 0.8);">
+                        Join coaches, scouts, and athletes using Blaze Intelligence to unlock championship performance. Full authentication unlocks advanced features, custom analytics, and real-time data feeds.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px;">
+                        <div class="stat-item">
+                            <div class="stat-value">2.8M+</div>
+                            <div class="stat-label">Data Points</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">24/7</div>
+                            <div class="stat-label">Analytics</div>
                         </div>
                     </div>
-                    <div class="p-2 bg-slate-800/50 rounded">
-                        <div class="flex justify-between">
-                            <span>Player Name</span>
-                            <span class="text-yellow-400">Risk: Medium</span>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Performance Chart -->
-        <div class="demo-card mb-8">
-            <h2 class="text-xl font-bold text-cyan-400 mb-4">📈 Season Performance Trend</h2>
-            <div id="performance-chart" style="height: 300px; position: relative;">
-                <!-- Chart will be rendered here -->
+                <button class="try-now-btn" onclick="window.location.href='/'">
+                    🚀 Start Free Trial
+                </button>
             </div>
         </div>
-
-        <!-- Feature Comparison -->
-        <div class="demo-card mb-8">
-            <h2 class="text-xl font-bold text-orange-400 mb-4">🎯 Demo vs Full Access</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <h3 class="font-semibold text-green-400 mb-3">✅ Available in Demo</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li>• Basic lineup optimization</li>
-                        <li>• Team readiness metrics</li>
-                        <li>• Win probability calculator</li>
-                        <li>• Historical performance data</li>
-                        <li>• Basic player statistics</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-cyan-400 mb-3">🔒 Full Access Features</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li>• Real-time injury risk AI</li>
-                        <li>• Advanced biomechanical analysis</li>
-                        <li>• Micro-expression detection</li>
-                        <li>• Custom alerts &amp; notifications</li>
-                        <li>• API access for integration</li>
-                        <li>• Unlimited historical data</li>
-                        <li>• Export reports &amp; insights</li>
-                        <li>• Priority support</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- CTA Section -->
-        <div class="text-center p-8 bg-gradient-to-r from-orange-500/10 to-cyan-500/10 rounded-2xl border border-cyan-500/30">
-            <h2 class="text-3xl font-bold mb-4">Ready for Championship-Level Analytics?</h2>
-            <p class="text-slate-300 mb-6">Join teams using Blaze Intelligence to gain competitive advantage</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/contact.html" class="px-8 py-4 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600">
-                    Start 14-Day Free Trial
-                </a>
-                <a href="/savings-calculator.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
-                    Calculate Your Savings
-                </a>
-            </div>
-            <p class="text-sm text-slate-400 mt-4">No credit card required • Setup in 5 minutes</p>
-        </div>
-    </div>
+    </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            lucide.createIcons();
-            
-            // Simulate live data updates
-            function updateMetrics() {
-                const readiness = document.querySelector('.metric-live');
-                if (readiness) {
-                    const current = parseFloat(readiness.textContent);
-                    const change = (Math.random() - 0.5) * 2;
-                    readiness.textContent = (current + change).toFixed(1) + '%';
+        // Demo System Controller
+        class BlazeIntelligenceDemo {
+            constructor() {
+                this.charts = {};
+                this.initializeDemo();
+            }
+
+            initializeDemo() {
+                // Hide loading screen after delay
+                setTimeout(() => {
+                    const loading = document.getElementById('loadingOverlay');
+                    loading.style.opacity = '0';
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                    }, 1000);
+                }, 1500);
+
+                // Initialize demo charts
+                setTimeout(() => {
+                    this.initializeCharts();
+                }, 2000);
+
+                console.log("🔥 Blaze Intelligence Demo Ready");
+            }
+
+            initializeCharts() {
+                // Cardinals Performance Chart
+                const cardinalsCtx = document.getElementById('cardinalsChart');
+                if (cardinalsCtx) {
+                    this.charts.cardinals = new Chart(cardinalsCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                            datasets: [{
+                                label: 'Performance Score',
+                                data: [78, 82, 85, 88, 91, 94],
+                                borderColor: '#BF5700',
+                                backgroundColor: 'rgba(191, 87, 0, 0.1)',
+                                tension: 0.4,
+                                fill: true,
+                                pointBackgroundColor: '#FFD700',
+                                pointBorderColor: '#BF5700',
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: false,
+                                    min: 70,
+                                    max: 100,
+                                    grid: { color: 'rgba(255,255,255,0.1)' },
+                                    ticks: { color: '#FFD700', font: { size: 10 } }
+                                },
+                                x: {
+                                    grid: { color: 'rgba(255,255,255,0.1)' },
+                                    ticks: { color: '#FFD700', font: { size: 10 } }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Titans Analytics Chart
+                const titansCtx = document.getElementById('titansChart');
+                if (titansCtx) {
+                    this.charts.titans = new Chart(titansCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Off Eff', 'Def Eff', 'T.O.P.', 'Red Zone'],
+                            datasets: [{
+                                label: 'Efficiency %',
+                                data: [76, 68, 82, 74],
+                                backgroundColor: [
+                                    'rgba(191, 87, 0, 0.8)',
+                                    'rgba(255, 215, 0, 0.8)',
+                                    'rgba(210, 105, 30, 0.8)',
+                                    'rgba(191, 87, 0, 0.6)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    grid: { color: 'rgba(255,255,255,0.1)' },
+                                    ticks: { color: '#FFD700', font: { size: 10 } }
+                                },
+                                x: {
+                                    grid: { color: 'rgba(255,255,255,0.1)' },
+                                    ticks: { color: '#FFD700', font: { size: 9 } }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Texas Sports Chart
+                const texasCtx = document.getElementById('texasChart');
+                if (texasCtx) {
+                    this.charts.texas = new Chart(texasCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Football', 'Baseball', 'Basketball', 'Track'],
+                            datasets: [{
+                                data: [35, 28, 22, 15],
+                                backgroundColor: [
+                                    '#BF5700',
+                                    '#FFD700',
+                                    '#D2691E',
+                                    'rgba(191, 87, 0, 0.6)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        color: '#FFD700',
+                                        font: { size: 9 }
+                                    }
+                                }
+                            }
+                        }
+                    });
                 }
             }
-            
-            // Update every 5 seconds for demo effect
-            setInterval(updateMetrics, 5000);
-            
-            // Create performance chart
-            if (typeof enhancedCharts !== 'undefined') {
-                const chartData = [
-                    { label: 'Apr', value: 68, color: '#FF6B6B' },
-                    { label: 'May', value: 72, color: '#4ECDC4' },
-                    { label: 'Jun', value: 75, color: '#45B7D1' },
-                    { label: 'Jul', value: 71, color: '#FFA500' },
-                    { label: 'Aug', value: 78, color: '#95E1D3' },
-                    { label: 'Sep', value: 76, color: '#A8E6CF' }
-                ];
-                
-                enhancedCharts.createBarChart('performance-chart', chartData, {
-                    title: 'Monthly Win Rate %',
-                    benchmark: 50
-                });
-            }
-            
-            // Demo interactions
-            document.querySelector('button').addEventListener('click', function() {
-                alert('🎯 Lineup optimized! In full version, this would provide AI-powered recommendations based on matchups, fatigue, and performance trends.');
-            });
-            
-            // Track demo usage
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'demo_view', {
-                    'demo_type': 'cardinals_dashboard',
-                    'features_viewed': 'lineup_optimizer'
-                });
-            }
+        }
+
+        // Demo navigation functions
+        function openAnalyticsDemo() {
+            // Open authenticated platform for full analytics
+            window.open('/', '_blank');
+        }
+
+        function openNILCalculator() {
+            // Direct to NIL calculator (could be in authenticated area)
+            window.open('/', '_blank');
+        }
+
+        function openTexasAuthority() {
+            // Open Texas sports section
+            window.open('/', '_blank');
+        }
+
+        // Initialize demo when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            window.blazeDemo = new BlazeIntelligenceDemo();
         });
     </script>
-
-</body></html>
+</body>
+</html>

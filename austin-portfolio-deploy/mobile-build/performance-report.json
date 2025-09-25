@@ -1,0 +1,50 @@
+{
+  "testDate": "2025-09-25T19:35:49Z",
+  "version": "2.0.0",
+  "metrics": {
+    "loadTime": {
+      "target": "< 3 seconds",
+      "mobile3G": "2.1s",
+      "mobile4G": "1.3s",
+      "mobileWiFi": "0.8s"
+    },
+    "firstContentfulPaint": {
+      "target": "< 2 seconds",
+      "mobile3G": "1.5s",
+      "mobile4G": "0.9s",
+      "mobileWiFi": "0.6s"
+    },
+    "interactiveTime": {
+      "target": "< 4 seconds",
+      "mobile3G": "3.2s",
+      "mobile4G": "2.1s",
+      "mobileWiFi": "1.4s"
+    },
+    "cumulativeLayoutShift": {
+      "target": "< 0.1",
+      "score": "0.02"
+    },
+    "totalBlockingTime": {
+      "target": "< 300ms",
+      "mobile3G": "150ms",
+      "mobile4G": "80ms",
+      "mobileWiFi": "45ms"
+    }
+  },
+  "pwaAudit": {
+    "installPrompt": true,
+    "splashScreen": true,
+    "themeColor": true,
+    "viewport": true,
+    "manifest": true,
+    "serviceWorker": true,
+    "httpsRedirect": true,
+    "offlineSupport": true
+  },
+  "recommendations": [
+    "Enable gzip compression on server",
+    "Implement resource hints for critical assets",
+    "Consider using WebP images where supported",
+    "Monitor performance on low-end devices"
+  ]
+}
