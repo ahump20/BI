@@ -1,0 +1,14 @@
+name = "bsi-unreal-mcp-bridge"
+main = "worker.mjs"
+compatibility_date = "2024-09-01"
+
+[vars]
+# Set at deploy: API_KEY (for site), RUNNER_KEY (for the render node)
+# Example:
+#   wrangler secret put API_KEY
+#   wrangler secret put RUNNER_KEY
+
+[[d1_databases]]
+binding = "BSI_DB"
+database_name = "bsi_unreal_mcp"
+database_id = "bsi_unreal_mcp-db"

@@ -1,0 +1,21 @@
+{
+  "name": "@blazesportsintel/sources",
+  "version": "1.0.0",
+  "description": "Data source adapters for sports leagues and organizations",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "node --test src/**/*.test.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "zod": "^3.23.8",
+    "@blazesportsintel/schema": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  }
+}
