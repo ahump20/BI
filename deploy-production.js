@@ -114,7 +114,7 @@ class ProductionDeployment {
         const branch = execSync('git branch --show-current', { encoding: 'utf8' }).trim();
         
         console.log(`   📍 Branch: ${branch}`);
-        console.log(`   📊 Uncommitted changes: ${status.split('\\n').filter(l => l.trim()).length}`);
+        console.log(`   📊 Uncommitted changes: ${status.split('\n').filter(l => l.trim()).length}`);
         
         // For this deployment, we'll allow uncommitted changes since we're in a working branch
         console.log('   ✅ Git status validated (working branch deployment)');
