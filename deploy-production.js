@@ -147,7 +147,7 @@ class ProductionDeployment {
         // Simulate the deployment process since we can't actually deploy in this environment
         await new Promise(resolve => setTimeout(resolve, 3000));
         
-        const buildId = Math.random().toString(36).substr(2, 8);
+        const buildId = Math.random().toString(36).substring(2, 10);
         const deploymentUrl = `https://${buildId}.blaze-intelligence.pages.dev`;
         
         console.log(`   ✅ Deployment simulated successfully`);
