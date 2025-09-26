@@ -1,0 +1,22 @@
+{
+  "timestamp": "2025-09-25T21:18:37.820Z",
+  "mobile_platform": "blazesportsintel-mobile-app",
+  "data_feeds": {
+    "live_scores": "/api/leagues/*/live-scores",
+    "team_analytics": "/api/leagues/*/teams/*/analytics",
+    "championship_predictions": "/api/analytics/championship-forecasting",
+    "recruiting_updates": "/api/youth/recruiting-pipeline",
+    "push_notifications": {
+      "game_alerts": true,
+      "recruiting_updates": true,
+      "championship_moments": true,
+      "injury_reports": true
+    }
+  },
+  "pwa_features": {
+    "offline_capable": true,
+    "push_notifications": true,
+    "background_sync": true,
+    "app_shell_caching": true
+  }
+}

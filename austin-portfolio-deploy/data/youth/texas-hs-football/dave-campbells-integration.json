@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-09-25T21:18:37.817Z",
+  "system": "TEXAS_HS_FOOTBALL_AUTHORITY",
+  "model": "dave_campbells_equivalent",
+  "uil_classifications": [
+    "6A-DI",
+    "6A-DII",
+    "5A-DI",
+    "5A-DII",
+    "4A-DI",
+    "4A-DII",
+    "3A-DI",
+    "3A-DII",
+    "2A-DI",
+    "2A-DII",
+    "1A-11",
+    "1A-6"
+  ],
+  "coverage": {
+    "districts": 140,
+    "schools": 1300,
+    "regions": 4,
+    "state_championships": 12
+  },
+  "authority_features": {
+    "complete_classification_tracking": true,
+    "district_alignment_monitoring": true,
+    "playoff_bracket_generation": true,
+    "recruiting_pipeline_identification": true,
+    "friday_night_lights_coverage": true,
+    "state_championship_analytics": true
+  },
+  "deep_south_integration": {
+    "college_pipeline": [
+      "UT",
+      "A&M",
+      "TECH",
+      "TCU",
+      "BAY",
+      "HOU",
+      "SMU"
+    ],
+    "recruiting_corridors": [
+      "I-35",
+      "I-45",
+      "I-10",
+      "I-20"
+    ],
+    "talent_density_mapping": true
+  }
+}
