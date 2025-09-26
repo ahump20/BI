@@ -239,7 +239,7 @@ claude mcp add hawkeye-innovations -- node mcp-servers/hawkeye-innovations/index
 ## 📞 Contact & Support
 
 **Austin Humphrey** - Founder & Chief Intelligence Officer
-- 📧 Email: ahump20@outlook.com
+- 📧 Email: austin@blazesportsintel.com
 - 📱 Phone: (210) 273-5538
 - 💼 LinkedIn: [john-humphrey-2033](https://linkedin.com/in/john-humphrey-2033)
 
