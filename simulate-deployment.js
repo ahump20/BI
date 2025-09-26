@@ -161,7 +161,7 @@ class DeploymentSimulator {
         console.log('   📤 Uploading to Cloudflare Pages...');
         await new Promise(resolve => setTimeout(resolve, 2000));
         
-        const buildId = Math.random().toString(36).substr(2, 8);
+        const buildId = Math.random().toString(36).substring(2, 10);
         const deploymentUrl = `https://${buildId}.blaze-intelligence.pages.dev`;
         
         console.log('   ✅ Upload complete');
