@@ -15,7 +15,7 @@ class SportsDataHub {
                     ncaaf: 'https://api.sportradar.us/ncaafb/trial/v1/en',
                     nba: 'https://api.sportradar.us/nba/trial/v8/en'
                 },
-                apiKey: null // Will be set from environment
+                proxyConfigured: false
             },
             references: {
                 baseballReference: {
@@ -85,49 +85,76 @@ class SportsDataHub {
             ]
         };
 
+        this.sportsRadarProxyEndpoint = null;
+
         this.init();
     }
 
     async init() {
         console.log('🏟️ Initializing Sports Data Hub...');
-        await this.loadApiKeys();
+        this.configureSportsRadarProxy();
         this.setupEventListeners();
         console.log('✅ Sports Data Hub initialized');
     }
 
-    async loadApiKeys() {
+    configureSportsRadarProxy() {
         try {
-            // Try to load from environment or localStorage
-            this.dataSources.sportsRadar.apiKey = 
-                localStorage.getItem('SPORTRADAR_API_KEY') || 
-                process.env?.SPORTRADAR_API_KEY || 
-                'demo_key'; // Fallback for demo
+            this.sportsRadarProxyEndpoint = this.resolveSportsRadarProxyEndpoint();
+            this.dataSources.sportsRadar.proxyConfigured = Boolean(this.sportsRadarProxyEndpoint);
+
+            if (this.dataSources.sportsRadar.proxyConfigured) {
+                console.log('🔐 SportsRadar requests routed through secure proxy');
+            } else {
+                console.warn('SportsRadar proxy not configured, using fallback data');
+            }
         } catch (error) {
-            console.warn('API keys not configured, using demo mode');
+            console.warn('Unable to configure SportsRadar proxy, using fallback data', error);
+            this.dataSources.sportsRadar.proxyConfigured = false;
         }
     }
 
     // SportsRadar API Integration
     async fetchSportsRadarData(sport, endpoint, params = {}) {
         const baseUrl = this.dataSources.sportsRadar.baseUrls[sport];
-        const apiKey = this.dataSources.sportsRadar.apiKey;
-        
-        if (!baseUrl || !apiKey) {
-            console.warn(`SportsRadar ${sport} not configured`);
+
+        if (!baseUrl || !this.dataSources.sportsRadar.proxyConfigured) {
+            console.warn(`SportsRadar ${sport} not configured or proxy unavailable`);
             return this.getFallbackData(sport, endpoint);
         }
 
-        const url = `${baseUrl}${endpoint}?api_key=${apiKey}`;
-        const cacheKey = this.getCacheKey('sportradar', sport, endpoint, params);
-        
+        const sanitizedParams = { ...params };
+        delete sanitizedParams.api_key;
+        delete sanitizedParams.apiKey;
+
+        let path;
+        let proxyUrl;
+
+        try {
+            path = this.normalizeSportsRadarPath(`${baseUrl}${endpoint}`);
+            proxyUrl = this.buildSportsRadarProxyUrl({
+                sport,
+                path,
+                query: sanitizedParams
+            });
+        } catch (configurationError) {
+            console.error('SportsRadar proxy configuration error:', configurationError);
+            return this.getFallbackData(sport, endpoint);
+        }
+
+        const cacheKey = this.getCacheKey('sportradar', sport, path, sanitizedParams);
+
         // Check cache
         const cached = this.getFromCache(cacheKey);
         if (cached) return cached;
 
         try {
-            const response = await fetch(url);
+            const response = await fetch(proxyUrl, {
+                headers: {
+                    Accept: 'application/json'
+                }
+            });
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            
+
             const data = await response.json();
             this.setCache(cacheKey, data);
             return data;
@@ -135,6 +162,82 @@ class SportsDataHub {
             console.error(`SportsRadar API error:`, error);
             return this.getFallbackData(sport, endpoint);
         }
+    }
+
+    resolveSportsRadarProxyEndpoint() {
+        const defaultProxy = '/api/proxy';
+
+        if (typeof window === 'undefined') {
+            return defaultProxy;
+        }
+
+        const config = window.BlazeAPIConfig || {};
+
+        return config?.proxies?.sportsRadar
+            || config?.sportsRadar?.proxyEndpoint
+            || config?.cloudflare?.apiProxy
+            || config?.cloudflare?.api
+            || defaultProxy;
+    }
+
+    normalizeSportsRadarPath(fullUrl) {
+        if (!fullUrl) return '';
+
+        const stripped = fullUrl.replace(/^https?:\/\/api\.sportradar\.us\/?/i, '');
+        return stripped.replace(/^\/+/, '');
+    }
+
+    buildSportsRadarProxyUrl({ sport, path, query = {} }) {
+        if (!sport || !path) {
+            throw new Error('Sport and path are required for SportsRadar proxy requests');
+        }
+
+        const base = this.sportsRadarProxyEndpoint || '/api/proxy';
+        const url = this.createUrl(base);
+
+        url.searchParams.set('service', 'sportsradar');
+        url.searchParams.set('sport', sport);
+        url.searchParams.set('path', path);
+
+        this.appendQueryParams(url, query);
+
+        return url.toString();
+    }
+
+    createUrl(base) {
+        if (/^https?:\/\//i.test(base)) {
+            return new URL(base);
+        }
+
+        const origin = (typeof window !== 'undefined' && window.location?.origin)
+            ? window.location.origin
+            : 'http://localhost';
+
+        return new URL(base, origin);
+    }
+
+    appendQueryParams(url, params = {}) {
+        Object.entries(params).forEach(([key, value]) => {
+            if (value === undefined || value === null) {
+                return;
+            }
+
+            if (Array.isArray(value)) {
+                value.forEach(item => {
+                    if (item !== undefined && item !== null) {
+                        url.searchParams.append(key, String(item));
+                    }
+                });
+                return;
+            }
+
+            if (typeof value === 'object') {
+                url.searchParams.set(key, JSON.stringify(value));
+                return;
+            }
+
+            url.searchParams.set(key, String(value));
+        });
     }
 
     // MLB Stats API (free, no key required)

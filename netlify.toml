@@ -3,6 +3,12 @@
   publish = "dist"
   functions = "netlify/functions"
 
+[functions]
+  included_files = [
+    "data/dashboard/**",
+    "src/team-metrics.json"
+  ]
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"

@@ -32,6 +32,8 @@ import BackupSystem from './src/backend/backup-system.js';
 import ballDontLieService from './src/services/ballDontLieService.js';
 import aiAnalyticsService from './src/services/aiAnalyticsService.js';
 
+import TexasHighSchoolFootballService from './services/highschool/texasHighSchoolFootballService.js';
+
 // Load environment variables
 dotenv.config();
 
@@ -52,6 +54,7 @@ liveSportsAdapter.initialize().catch((error) => {
   console.warn('⚠️  Live sports adapter initialization failed:', error.message);
 });
 const aiAnalytics = new AIAnalyticsService();
+const texasHsService = new TexasHighSchoolFootballService();
 const cardinalsAPI = new CardinalsDataIntegration();
 const digitalCombineBackend = new DigitalCombineBackend(pool);
 const instrumentation = new InstrumentationManager(process.env.NODE_ENV || 'development');
@@ -1467,6 +1470,52 @@ app.get('/api/cfb/rankings', async (req, res) => {
   } catch (error) {
     console.error('CFB rankings error:', error);
     res.status(500).json({ error: 'Failed to fetch CFB rankings', source: 'CollegeFootballData API' });
+  }
+});
+
+// Texas High School Football Unified API
+app.get('/api/texas-hs-football/program', async (req, res) => {
+  const {
+    team,
+    season,
+    maxprepsTeamPath,
+    maxprepsTeamId,
+    includeSchedule,
+    includePlayerStats,
+    includeRecruiting,
+    includeRaw,
+    forceRefresh
+  } = req.query;
+
+  const s247TeamPath = req.query.s247TeamPath || req.query.twentyFourSevenTeamPath;
+  const rivalsTeamPath = req.query.rivalsTeamPath || req.query.rivalsPath;
+
+  if (!maxprepsTeamPath && !maxprepsTeamId && !s247TeamPath && !rivalsTeamPath) {
+    return res.status(400).json({ error: 'At least one source identifier (MaxPreps, 247Sports, or Rivals) is required.' });
+  }
+
+  try {
+    const data = await texasHsService.getProgramData({
+      team,
+      season,
+      maxprepsTeamPath,
+      maxprepsTeamId,
+      twentyFourSevenTeamPath: s247TeamPath,
+      rivalsTeamPath,
+      includeSchedule: includeSchedule !== 'false',
+      includePlayerStats: includePlayerStats !== 'false',
+      includeRecruiting: includeRecruiting !== 'false',
+      includeRaw: includeRaw === 'true',
+      forceRefresh: forceRefresh === 'true'
+    });
+
+    res.json(data);
+  } catch (error) {
+    console.error('Texas HS football API error:', error);
+    res.status(500).json({
+      error: 'Failed to fetch Texas high school football data',
+      details: error.message
+    });
   }
 });
 

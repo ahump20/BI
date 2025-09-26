@@ -1,0 +1,39 @@
+{
+  "mcpServers": {
+    "blaze-copilot-agent": {
+      "command": "node",
+      "args": ["copilot-mcp-server.js"],
+      "cwd": "/home/runner/work/BI/BI",
+      "env": {
+        "NODE_ENV": "development",
+        "DEBUG": "copilot:*",
+        "BLAZE_PROJECT_ROOT": "/home/runner/work/BI/BI",
+        "MCP_SERVER_NAME": "blaze-copilot-agent"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/runner/work/BI/BI"],
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "$GITHUB_TOKEN_FINE"
+      }
+    },
+    "cardinals-analytics": {
+      "command": "node",
+      "args": ["cardinals-analytics-server.js"],
+      "cwd": "/home/runner/work/BI/BI",
+      "env": {
+        "NODE_ENV": "development",
+        "DEBUG": "cardinals:*"
+      }
+    }
+  },
+  "globalShortcut": "Ctrl+Shift+C"
+}

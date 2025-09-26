@@ -1,0 +1,255 @@
+{
+  "updatedAt": "2025-09-12T10:00:00Z",
+  "cloudinary": {
+    "cloudName": "blaze-intel",
+    "assetFolder": "blaze-intelligence",
+    "transformations": {
+      "playerCard": "c_fill,g_auto,f_auto,q_auto:eco,w_256,h_256,r_max,b_rgb:0b0b0f",
+      "teamLogo": "c_pad,f_auto,q_auto,w_180,h_180,b_rgb:0b0b0f",
+      "resourceHero": "c_fill,g_auto,f_auto,q_auto,w_480,h_320,r_16"
+    }
+  },
+  "players": [
+    {
+      "id": "quinn-ewers",
+      "playerId": 25345,
+      "teamCode": "UT",
+      "teamName": "Texas Longhorns",
+      "firstName": "Quinn",
+      "lastName": "Ewers",
+      "position": "QB",
+      "positionCategory": "OFF",
+      "status": "Active",
+      "height": "6'3\"",
+      "weight": 210,
+      "age": 22,
+      "experience": 3,
+      "college": "Texas",
+      "marketability": 89,
+      "characterRisk": 9,
+      "trajectory": "Ascending",
+      "nil": {
+        "valuation": 585000,
+        "projection": 642000,
+        "floor": 470000
+      },
+      "metrics": {
+        "marketability": [72, 81, 87, 92],
+        "performance": [74, 80, 88, 94]
+      },
+      "portraitPublicId": "athletes/college/quinn_ewers_press"
+    },
+    {
+      "id": "will-levis",
+      "playerId": 26019,
+      "teamCode": "TEN",
+      "teamName": "Tennessee Titans",
+      "firstName": "Will",
+      "lastName": "Levis",
+      "position": "QB",
+      "positionCategory": "OFF",
+      "status": "Active",
+      "height": "6'4\"",
+      "weight": 232,
+      "age": 26,
+      "experience": 2,
+      "college": "Kentucky",
+      "marketability": 77,
+      "characterRisk": 14,
+      "trajectory": "Ascending",
+      "nil": {
+        "valuation": 325000,
+        "projection": 358000,
+        "floor": 270000
+      },
+      "metrics": {
+        "marketability": [58, 64, 73, 77],
+        "performance": [62, 70, 74, 79]
+      },
+      "portraitPublicId": "athletes/nfl/will_levis_szn"
+    },
+    {
+      "id": "calvin-ridley",
+      "playerId": 24248,
+      "teamCode": "TEN",
+      "teamName": "Tennessee Titans",
+      "firstName": "Calvin",
+      "lastName": "Ridley",
+      "position": "WR",
+      "positionCategory": "OFF",
+      "status": "Active",
+      "height": "6'1\"",
+      "weight": 190,
+      "age": 30,
+      "experience": 6,
+      "college": "Alabama",
+      "marketability": 83,
+      "characterRisk": 16,
+      "trajectory": "Stable",
+      "nil": {
+        "valuation": 410000,
+        "projection": 436000,
+        "floor": 345000
+      },
+      "metrics": {
+        "marketability": [68, 70, 78, 83],
+        "performance": [71, 75, 80, 82]
+      },
+      "portraitPublicId": "athletes/nfl/calvin_ridley_route"
+    },
+    {
+      "id": "masyn-winn",
+      "playerId": 25346,
+      "teamCode": "STL",
+      "teamName": "St. Louis Cardinals",
+      "firstName": "Masyn",
+      "lastName": "Winn",
+      "position": "SS",
+      "positionCategory": "IF",
+      "status": "Active",
+      "height": "5'11\"",
+      "weight": 180,
+      "age": 23,
+      "experience": 2,
+      "college": "",
+      "marketability": 82,
+      "characterRisk": 8,
+      "trajectory": "Ascending",
+      "nil": {
+        "valuation": 295000,
+        "projection": 332000,
+        "floor": 240000
+      },
+      "metrics": {
+        "marketability": [60, 68, 78, 82],
+        "performance": [64, 71, 81, 86]
+      },
+      "portraitPublicId": "athletes/mlb/masyn_winn_throw"
+    },
+    {
+      "id": "kirk-cousins",
+      "playerId": 21786,
+      "teamCode": "ATL",
+      "teamName": "Atlanta Falcons",
+      "firstName": "Kirk",
+      "lastName": "Cousins",
+      "position": "QB",
+      "positionCategory": "OFF",
+      "status": "Active",
+      "height": "6'3\"",
+      "weight": 205,
+      "age": 37,
+      "experience": 13,
+      "college": "Michigan State",
+      "marketability": 74,
+      "characterRisk": 6,
+      "trajectory": "Stable",
+      "nil": {
+        "valuation": 285000,
+        "projection": 298000,
+        "floor": 240000
+      },
+      "metrics": {
+        "marketability": [65, 69, 72, 74],
+        "performance": [68, 72, 73, 74]
+      },
+      "portraitPublicId": "athletes/nfl/kirk_cousins_prep"
+    },
+    {
+      "id": "aaron-rodgers",
+      "playerId": 21831,
+      "teamCode": "NYJ",
+      "teamName": "New York Jets",
+      "firstName": "Aaron",
+      "lastName": "Rodgers",
+      "position": "QB",
+      "positionCategory": "OFF",
+      "status": "Active",
+      "height": "6'2\"",
+      "weight": 225,
+      "age": 41,
+      "experience": 21,
+      "college": "California",
+      "marketability": 91,
+      "characterRisk": 7,
+      "trajectory": "Stable",
+      "nil": {
+        "valuation": 720000,
+        "projection": 680000,
+        "floor": 520000
+      },
+      "metrics": {
+        "marketability": [88, 89, 90, 91],
+        "performance": [85, 87, 88, 88]
+      },
+      "portraitPublicId": "athletes/nfl/aaron_rodgers_focus"
+    }
+  ],
+  "teams": [
+    {
+      "code": "UT",
+      "name": "Texas Longhorns",
+      "league": "NCAA Football",
+      "record": "10-2",
+      "offense": 8.5,
+      "defense": 7.8,
+      "playoffProbability": 0.82,
+      "trend": [6, 7, 5, 8, 9, 8, 7, 9, 10, 9],
+      "logoPublicId": "teams/ncaa/texas_longhorns_shield"
+    },
+    {
+      "code": "STL",
+      "name": "St. Louis Cardinals",
+      "league": "MLB",
+      "record": "88-74",
+      "offense": 7.2,
+      "defense": 8.1,
+      "playoffProbability": 0.65,
+      "trend": [5, 6, 8, 7, 6, 8, 9, 8, 7, 8],
+      "logoPublicId": "teams/mlb/stl_cardinals_home"
+    },
+    {
+      "code": "TEN",
+      "name": "Tennessee Titans",
+      "league": "NFL",
+      "record": "9-8",
+      "offense": 6.8,
+      "defense": 7.5,
+      "playoffProbability": 0.45,
+      "trend": [7, 5, 4, 6, 8, 7, 5, 6, 8, 7],
+      "logoPublicId": "teams/nfl/ten_titans_primary"
+    }
+  ],
+  "resources": [
+    {
+      "slug": "backyard-baseball-guide",
+      "title": "Recreating Backyard Baseball 2001 Development Guide",
+      "type": "blog",
+      "hero": "Guide to remaking Backyard Baseball 2001",
+      "summary": "How Blaze Intelligence rebuilt the Backyard Baseball pipeline with Cloudinary-driven sprite automation and simulation QA.",
+      "ctaLabel": "Read Guide",
+      "ctaHref": "https://blaze-intelligence.netlify.app/resources/backyard-baseball",
+      "heroPublicId": "marketing/playbook_backyard_baseball"
+    },
+    {
+      "slug": "mlb-case-study-mental-performance",
+      "title": "MLB Case Study: Measuring the Immeasurable",
+      "type": "blog",
+      "hero": "Why mental performance drives championships",
+      "summary": "Cardinals leadership dashboard that ties biometric resilience to roster construction with unified MCP analytics.",
+      "ctaLabel": "Read Case Study",
+      "ctaHref": "https://blaze-intelligence.netlify.app/resources/mlb-case-study",
+      "heroPublicId": "marketing/case_study_cardinals_focus"
+    },
+    {
+      "slug": "agent-inbox-automation",
+      "title": "Automated Agent Inbox Pipeline",
+      "type": "workflow",
+      "hero": "From email to CRM in one click",
+      "summary": "Cloudinary templating + MCP triggers deliver ready-made assets whenever a lead hits the inbox.",
+      "ctaLabel": "View Workflow",
+      "ctaHref": "https://blaze-intelligence.netlify.app/resources/agent-inbox",
+      "heroPublicId": "marketing/workflow_agent_inbox"
+    }
+  ]
+}

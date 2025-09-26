@@ -6,13 +6,8 @@
 window.BlazeAPIConfig = {
     // SportsRadar API Configuration
     sportsRadar: {
-        // Replace with your actual API keys
-        keys: {
-            mlb: process.env?.SPORTRADAR_MLB_KEY || 'YOUR_MLB_API_KEY',
-            nfl: process.env?.SPORTRADAR_NFL_KEY || 'YOUR_NFL_API_KEY',
-            nba: process.env?.SPORTRADAR_NBA_KEY || 'YOUR_NBA_API_KEY',
-            ncaaf: process.env?.SPORTRADAR_NCAAF_KEY || 'YOUR_NCAAF_API_KEY'
-        },
+        // Requests are routed through a secure server-side proxy
+        proxyEndpoint: '/api/proxy',
         endpoints: {
             mlb: {
                 base: 'https://api.sportradar.us/mlb/trial/v7/en',
@@ -112,6 +107,11 @@ window.BlazeAPIConfig = {
         analytics: 'https://blaze-analytics.humphrey-austin20.workers.dev'
     },
 
+    // Secure proxy endpoints for third-party integrations
+    proxies: {
+        sportsRadar: '/api/proxy'
+    },
+
     // Rate Limiting Configuration
     rateLimits: {
         sportsRadar: {
@@ -173,7 +173,7 @@ window.BlazeAPIConfig = {
 
     // Feature Flags
     features: {
-        enableSportsRadar: false, // Set to true when API keys are configured
+        enableSportsRadar: false, // Set to true when secure proxy is configured
         enableRealTimeStreaming: true,
         enableAdvancedAnalytics: true,
         enablePerfectGameIntegration: true,
@@ -198,41 +198,21 @@ window.BlazeAPIConfig = {
 
     // Initialize Configuration
     init: function() {
-        // Check for environment variables or localStorage overrides
-        if (typeof localStorage !== 'undefined') {
-            // Check for stored API keys
-            const storedKeys = {
-                mlb: localStorage.getItem('SPORTRADAR_MLB_KEY'),
-                nfl: localStorage.getItem('SPORTRADAR_NFL_KEY'),
-                nba: localStorage.getItem('SPORTRADAR_NBA_KEY'),
-                ncaaf: localStorage.getItem('SPORTRADAR_NCAAF_KEY')
-            };
-
-            // Update keys if found
-            Object.keys(storedKeys).forEach(sport => {
-                if (storedKeys[sport]) {
-                    this.sportsRadar.keys[sport] = storedKeys[sport];
-                    this.features.enableSportsRadar = true;
-                }
-            });
+        if (this.sportsRadar?.proxyEndpoint || this.proxies?.sportsRadar) {
+            this.features.enableSportsRadar = true;
         }
 
         console.log('🔧 Blaze API Configuration initialized');
-        console.log(`📊 SportsRadar: ${this.features.enableSportsRadar ? 'Enabled' : 'Disabled (No API keys)'}`);
+        console.log(`📊 SportsRadar: ${this.features.enableSportsRadar ? 'Enabled via secure proxy' : 'Disabled (Proxy not configured)'}`);
         console.log(`🎯 Features enabled:`, Object.entries(this.features)
             .filter(([_, enabled]) => enabled)
             .map(([feature]) => feature.replace('enable', ''))
             .join(', '));
     },
 
-    // Helper method to save API keys
+    // Helper method retained for backwards compatibility
     saveAPIKey: function(sport, key) {
-        if (typeof localStorage !== 'undefined') {
-            localStorage.setItem(`SPORTRADAR_${sport.toUpperCase()}_KEY`, key);
-            this.sportsRadar.keys[sport] = key;
-            this.features.enableSportsRadar = true;
-            console.log(`✅ ${sport.toUpperCase()} API key saved`);
-        }
+        console.warn('SportsRadar API keys are managed on the server via a secure proxy. Update your environment configuration instead.');
     },
 
     // Helper method to construct URLs
