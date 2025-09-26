@@ -99,7 +99,11 @@ class ContinuousDelivery {
         }
 
         // File structure validation
-        const requiredFiles = ['../package.json', '../index.html', '../api/live-connections.js'];
+        const requiredFiles = [
+            path.resolve(__dirname, '../package.json'),
+            path.resolve(__dirname, '../index.html'),
+            path.resolve(__dirname, '../api/live-connections.js')
+        ];
         for (const file of requiredFiles) {
             try {
                 await fs.access(file);
