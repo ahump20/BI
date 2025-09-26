@@ -1,0 +1,119 @@
+# NIL Valuation Pipeline Configuration
+
+# Database Configuration
+database:
+  host: localhost
+  port: 5432
+  name: nil_valuation
+  user: postgres
+  password: ${DB_PASSWORD}
+  pool_size: 10
+  echo: false
+
+# Redis Configuration
+redis:
+  host: localhost
+  port: 6379
+  db: 0
+  password: ${REDIS_PASSWORD}
+  cache_ttl: 3600  # 1 hour
+
+# S3 Storage Configuration (Mock)
+storage:
+  type: local  # or 's3' for real AWS S3
+  local_path: ./data/mock_s3
+  s3_bucket: nil-valuation-data
+  s3_region: us-east-1
+
+# ETL Configuration
+etl:
+  batch_size: 1000
+  retry_attempts: 3
+  timeout_seconds: 300
+  
+  # Data Sources
+  data_sources:
+    box_scores:
+      api_endpoint: ${BOX_SCORES_API_URL}
+      rate_limit: 100  # requests per minute
+    social_media:
+      twitter_api_key: ${TWITTER_API_KEY}
+      instagram_api_key: ${INSTAGRAM_API_KEY}
+      tiktok_api_key: ${TIKTOK_API_KEY}
+      rate_limit: 300
+    google_trends:
+      api_key: ${GOOGLE_TRENDS_API_KEY}
+      rate_limit: 1000
+
+# Feature Engineering Configuration
+features:
+  attention_score:
+    social_weight: 0.6
+    search_weight: 0.4
+    decay_factor: 0.95  # Daily decay
+  performance_index:
+    recency_weight: 0.3
+    consistency_weight: 0.4
+    peak_weight: 0.3
+  market_context:
+    school_tiers:
+      tier_1: ["Texas", "Alabama", "Georgia", "Ohio State", "USC", "LSU"]
+      tier_2: ["Auburn", "Texas A&M", "Florida", "Oklahoma", "Michigan"]
+      tier_3: ["Vanderbilt", "Kentucky", "Arkansas", "Missouri"]
+
+# Model Configuration
+models:
+  attention_predictor:
+    model_type: "lstm"
+    sequence_length: 30
+    hidden_units: 128
+    dropout: 0.2
+    learning_rate: 0.001
+  
+  nil_value_predictor:
+    model_type: "lightgbm"
+    n_estimators: 1000
+    max_depth: 8
+    learning_rate: 0.05
+    feature_fraction: 0.8
+    bagging_fraction: 0.8
+    lambda_l1: 0.1
+    lambda_l2: 0.1
+  
+  bayesian_shrinkage:
+    min_sample_size: 10
+    shrinkage_factor: 0.8
+    confidence_level: 0.9
+
+# API Configuration
+api:
+  host: 0.0.0.0
+  port: 8000
+  workers: 4
+  cache_ttl: 1800  # 30 minutes
+  rate_limit:
+    per_minute: 100
+    per_hour: 1000
+
+# Logging Configuration
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: ./logs/nil_pipeline.log
+  max_size_mb: 100
+  backup_count: 5
+
+# Monitoring Configuration
+monitoring:
+  sentry_dsn: ${SENTRY_DSN}
+  health_check_interval: 300  # 5 minutes
+  alert_thresholds:
+    model_drift: 0.1
+    prediction_confidence: 0.5
+    data_quality_score: 0.8
+
+# Compliance & Disclaimers
+compliance:
+  disclaimer: "Estimated value, not contractual. For informational purposes only."
+  data_retention_days: 365
+  audit_log_retention_days: 2555  # 7 years
