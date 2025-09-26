@@ -22,13 +22,15 @@ interface PremiumDashboardProps {
   className?: string;
   theme?: 'dark' | 'light';
   interactive?: boolean;
+  metricsConnected?: boolean;
 }
 
 // ===== PREMIUM DASHBOARD COMPONENT =====
 export const PremiumDashboard: React.FC<PremiumDashboardProps> = ({
   className = '',
   theme = 'dark',
-  interactive = true
+  interactive = true,
+  metricsConnected = false
 }) => {
   const [metrics, setMetrics] = useState<MetricsData>({
     accuracy: 70.2,
@@ -247,7 +249,7 @@ export const PremiumDashboard: React.FC<PremiumDashboardProps> = ({
   return (
     <div className={`premium-dashboard ${className}`}>
       {/* ===== PREMIUM CSS STYLES ===== */}
-      <style jsx>{`
+      <style>{`
         .premium-dashboard {
           max-width: 1600px;
           margin: 0 auto;

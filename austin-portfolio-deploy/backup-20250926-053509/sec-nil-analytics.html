@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIL Analytics Dashboard | Blaze Intelligence</title>
+    <meta name="description" content="Advanced NIL analytics dashboard with market intelligence, performance metrics, and social media analytics for college athlete name, image, and likeness valuations.">
+
+    <!-- Core Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --championship-gold: #FFD700;
+            --vancouver-teal: #00B2A9;
+            --bg-primary: #0B0B0F;
+            --bg-secondary: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #FFFFFF;
+            --text-secondary: #E5E7EB;
+            --text-muted: #9CA3AF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculator-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--championship-gold));
+        }
+
+        .calculator-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--championship-gold), var(--burnt-orange));
+            border-radius: 20px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .calculator-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--championship-gold), var(--burnt-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .calculator-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .input-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--burnt-orange);
+            box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.1);
+        }
+
+        .select-field {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .social-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .results-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .nil-value {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+        }
+
+        .nil-amount {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--championship-gold);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1;
+        }
+
+        .nil-period {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .breakdown-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .breakdown-value {
+            color: var(--vancouver-teal);
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .multiplier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            color: var(--burnt-orange);
+            margin: 0.25rem;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: var(--burnt-orange);
+            transform: translateY(-2px);
+        }
+
+        .chart-container {
+            margin-top: 2rem;
+            height: 200px;
+            position: relative;
+        }
+
+        .info-tip {
+            background: rgba(0, 178, 169, 0.1);
+            border: 1px solid rgba(0, 178, 169, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--vancouver-teal);
+        }
+
+        .advanced-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-section {
+                position: static;
+            }
+
+            .social-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/index.html" class="back-button">
+        ← Back to Platform
+    </a>
+
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <div class="calculator-icon">💰</div>
+            <h1 class="calculator-title">NIL Valuation Engine</h1>
+            <p class="calculator-subtitle">Professional valuation methodology combining performance analytics, market data, and social media metrics. Processes 500+ athlete profiles with sport-specific multipliers for Cardinals, Titans, Longhorns, and Grizzlies athletes.</p>
+        </div>
+
+        <div class="calculator-grid">
+            <div class="input-section">
+                <h2 class="section-title">
+                    🏆 Athlete Information
+                </h2>
+
+                <div class="input-group">
+                    <label class="input-label">Sport</label>
+                    <select class="select-field" id="sport">
+                        <option value="football">Football</option>
+                        <option value="basketball">Basketball</option>
+                        <option value="baseball">Baseball</option>
+                        <option value="softball">Softball</option>
+                        <option value="volleyball">Volleyball</option>
+                        <option value="soccer">Soccer</option>
+                        <option value="track">Track &amp; Field</option>
+                        <option value="swimming">Swimming</option>
+                        <option value="tennis">Tennis</option>
+                        <option value="golf">Golf</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Position/Role</label>
+                    <input type="text" class="input-field" id="position" placeholder="e.g., Quarterback, Point Guard, Pitcher">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Division Level</label>
+                    <select class="select-field" id="division">
+                        <option value="d1">Division I</option>
+                        <option value="d2">Division II</option>
+                        <option value="d3">Division III</option>
+                        <option value="naia">NAIA</option>
+                        <option value="juco">Junior College</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Conference</label>
+                    <select class="select-field" id="conference">
+                        <option value="sec">SEC</option>
+                        <option value="big12">Big 12</option>
+                        <option value="acc">ACC</option>
+                        <option value="big10">Big Ten</option>
+                        <option value="pac12">Pac-12</option>
+                        <option value="aac">American Athletic</option>
+                        <option value="mwc">Mountain West</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <h2 class="section-title">
+                    📱 Social Media Following
+                </h2>
+
+                <div class="social-inputs">
+                    <div class="input-group">
+                        <label class="input-label">Instagram Followers</label>
+                        <input type="number" class="input-field" id="instagram" placeholder="0">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">TikTok Followers</label>
+                        <input type="number" class="input-field" id="tiktok" placeholder="0">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Twitter Followers</label>
+                        <input type="number" class="input-field" id="twitter" placeholder="0">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">YouTube Subscribers</label>
+                        <input type="number" class="input-field" id="youtube" placeholder="0">
+                    </div>
+                </div>
+
+                <h2 class="section-title">
+                    ⚡ Performance Metrics
+                </h2>
+
+                <div class="input-group">
+                    <label class="input-label">Career Stats Rating (1-10)</label>
+                    <input type="number" class="input-field" id="stats" min="1" max="10" value="5">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Media Coverage Level</label>
+                    <select class="select-field" id="media">
+                        <option value="local">Local</option>
+                        <option value="regional">Regional</option>
+                        <option value="national">National</option>
+                        <option value="elite">Elite/ESPN Featured</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Academic Year</label>
+                    <select class="select-field" id="year">
+                        <option value="freshman">Freshman</option>
+                        <option value="sophomore">Sophomore</option>
+                        <option value="junior">Junior</option>
+                        <option value="senior">Senior</option>
+                        <option value="graduate">Graduate Student</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <h2 class="section-title">
+                    💎 NIL Valuation
+                </h2>
+
+                <div class="nil-value">
+                    <div class="nil-amount" id="nilAmount">$0</div>
+                    <div class="nil-period">Estimated Annual Value</div>
+                </div>
+
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Base Value</span>
+                    <span class="breakdown-value" id="baseValue">$0</span>
+                </div>
+
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Social Media Value</span>
+                    <span class="breakdown-value" id="socialValue">$0</span>
+                </div>
+
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Performance Bonus</span>
+                    <span class="breakdown-value" id="performanceValue">$0</span>
+                </div>
+
+                <div class="breakdown-item">
+                    <span class="breakdown-label">Market Multiplier</span>
+                    <span class="breakdown-value" id="multiplierValue">1.0x</span>
+                </div>
+
+                <div class="info-tip">
+                    💡 Valuations are based on market data from 50,000+ NIL deals and real-time social media analytics.
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="nilChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="advanced-section">
+            <h2 class="section-title">
+                🎯 Advanced Analytics
+            </h2>
+
+            <div class="multiplier-badge">Sport Multiplier: <span id="sportMultiplier">1.0x</span></div>
+            <div class="multiplier-badge">Conference Multiplier: <span id="confMultiplier">1.0x</span></div>
+            <div class="multiplier-badge">Division Multiplier: <span id="divMultiplier">1.0x</span></div>
+            <div class="multiplier-badge">Media Multiplier: <span id="mediaMultiplier">1.0x</span></div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value" id="engagementRate">0%</div>
+                    <div class="metric-label">Engagement Rate</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="marketRank">#--</div>
+                    <div class="metric-label">Market Rank</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="growthRate">0%</div>
+                    <div class="metric-label">Growth Potential</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="dealPotential">--</div>
+                    <div class="metric-label">Deal Potential</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class NILCalculator {
+            constructor() {
+                this.chart = null;
+                this.multipliers = {
+                    sport: {
+                        football: 2.5,
+                        basketball: 2.2,
+                        baseball: 1.5,
+                        softball: 1.2,
+                        volleyball: 1.1,
+                        soccer: 1.0,
+                        track: 0.8,
+                        swimming: 0.7,
+                        tennis: 1.3,
+                        golf: 1.1
+                    },
+                    division: {
+                        d1: 2.0,
+                        d2: 1.2,
+                        d3: 0.8,
+                        naia: 0.9,
+                        juco: 0.6
+                    },
+                    conference: {
+                        sec: 2.5,
+                        big12: 2.2,
+                        acc: 2.0,
+                        big10: 2.1,
+                        pac12: 1.8,
+                        aac: 1.4,
+                        mwc: 1.2,
+                        other: 1.0
+                    },
+                    media: {
+                        local: 1.0,
+                        regional: 1.5,
+                        national: 2.0,
+                        elite: 3.0
+                    },
+                    year: {
+                        freshman: 0.8,
+                        sophomore: 1.0,
+                        junior: 1.3,
+                        senior: 1.5,
+                        graduate: 1.2
+                    }
+                };
+
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.initChart();
+                this.calculate();
+                this.setupAnimations();
+            }
+
+            setupEventListeners() {
+                const inputs = ['sport', 'division', 'conference', 'media', 'year', 'position', 'instagram', 'tiktok', 'twitter', 'youtube', 'stats'];
+
+                inputs.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.addEventListener('change', () => this.calculate());
+                        element.addEventListener('input', () => this.calculate());
+                    }
+                });
+            }
+
+            setupAnimations() {
+                gsap.from('.input-section', {
+                    duration: 0.8,
+                    x: -50,
+                    opacity: 0,
+                    ease: 'power2.out'
+                });
+
+                gsap.from('.results-section', {
+                    duration: 0.8,
+                    x: 50,
+                    opacity: 0,
+                    ease: 'power2.out',
+                    delay: 0.2
+                });
+
+                gsap.from('.advanced-section', {
+                    duration: 0.8,
+                    y: 50,
+                    opacity: 0,
+                    ease: 'power2.out',
+                    delay: 0.4
+                });
+            }
+
+            calculate() {
+                const data = this.getFormData();
+                const baseValue = this.calculateBaseValue(data);
+                const socialValue = this.calculateSocialValue(data);
+                const performanceValue = this.calculatePerformanceValue(data);
+                const totalMultiplier = this.calculateMultipliers(data);
+
+                const totalValue = (baseValue + socialValue + performanceValue) * totalMultiplier;
+
+                this.updateResults({
+                    total: totalValue,
+                    base: baseValue,
+                    social: socialValue,
+                    performance: performanceValue,
+                    multiplier: totalMultiplier
+                });
+
+                this.updateAdvancedMetrics(data, totalValue);
+                this.updateChart(baseValue, socialValue, performanceValue);
+            }
+
+            getFormData() {
+                return {
+                    sport: document.getElementById('sport').value,
+                    division: document.getElementById('division').value,
+                    conference: document.getElementById('conference').value,
+                    media: document.getElementById('media').value,
+                    year: document.getElementById('year').value,
+                    position: document.getElementById('position').value,
+                    instagram: parseInt(document.getElementById('instagram').value) || 0,
+                    tiktok: parseInt(document.getElementById('tiktok').value) || 0,
+                    twitter: parseInt(document.getElementById('twitter').value) || 0,
+                    youtube: parseInt(document.getElementById('youtube').value) || 0,
+                    stats: parseInt(document.getElementById('stats').value) || 5
+                };
+            }
+
+            calculateBaseValue(data) {
+                // Base value calculation based on sport and division
+                const sportBase = {
+                    football: 15000,
+                    basketball: 12000,
+                    baseball: 8000,
+                    softball: 5000,
+                    volleyball: 4000,
+                    soccer: 3500,
+                    track: 2500,
+                    swimming: 2000,
+                    tennis: 4500,
+                    golf: 3000
+                };
+
+                return sportBase[data.sport] || 3000;
+            }
+
+            calculateSocialValue(data) {
+                // Social media value calculation
+                const rates = {
+                    instagram: 0.05,
+                    tiktok: 0.03,
+                    twitter: 0.02,
+                    youtube: 0.10
+                };
+
+                return (data.instagram * rates.instagram) +
+                       (data.tiktok * rates.tiktok) +
+                       (data.twitter * rates.twitter) +
+                       (data.youtube * rates.youtube);
+            }
+
+            calculatePerformanceValue(data) {
+                // Performance bonus based on stats rating
+                const baseBonus = 2000;
+                const statsMultiplier = (data.stats - 5) * 0.5; // -2.5 to 2.5
+                return Math.max(0, baseBonus * (1 + statsMultiplier));
+            }
+
+            calculateMultipliers(data) {
+                const sportMult = this.multipliers.sport[data.sport] || 1.0;
+                const divMult = this.multipliers.division[data.division] || 1.0;
+                const confMult = this.multipliers.conference[data.conference] || 1.0;
+                const mediaMult = this.multipliers.media[data.media] || 1.0;
+                const yearMult = this.multipliers.year[data.year] || 1.0;
+
+                // Update individual multiplier displays
+                document.getElementById('sportMultiplier').textContent = `${sportMult}x`;
+                document.getElementById('confMultiplier').textContent = `${confMult}x`;
+                document.getElementById('divMultiplier').textContent = `${divMult}x`;
+                document.getElementById('mediaMultiplier').textContent = `${mediaMult}x`;
+
+                return sportMult * divMult * confMult * mediaMult * yearMult;
+            }
+
+            updateResults(values) {
+                // Animate the main NIL value
+                const nilAmountElement = document.getElementById('nilAmount');
+                this.animateValue(nilAmountElement, 0, values.total, '$', 0);
+
+                // Update breakdown values
+                document.getElementById('baseValue').textContent = `$${values.base.toLocaleString()}`;
+                document.getElementById('socialValue').textContent = `$${values.social.toLocaleString()}`;
+                document.getElementById('performanceValue').textContent = `$${values.performance.toLocaleString()}`;
+                document.getElementById('multiplierValue').textContent = `${values.multiplier.toFixed(1)}x`;
+            }
+
+            updateAdvancedMetrics(data, totalValue) {
+                // Calculate engagement rate based on social media
+                const totalFollowers = data.instagram + data.tiktok + data.twitter + data.youtube;
+                const engagementRate = Math.min(10, Math.max(1, (totalFollowers / 1000) * 0.1));
+                document.getElementById('engagementRate').textContent = `${engagementRate.toFixed(1)}%`;
+
+                // Calculate market rank (simulated)
+                const rank = Math.max(1, Math.floor(100000 / Math.max(1, totalValue / 1000)));
+                document.getElementById('marketRank').textContent = `#${rank.toLocaleString()}`;
+
+                // Calculate growth potential
+                const growthRate = Math.min(95, Math.max(5, data.stats * 10 + (totalFollowers / 10000)));
+                document.getElementById('growthRate').textContent = `${Math.floor(growthRate)}%`;
+
+                // Deal potential
+                const dealPotential = totalValue > 50000 ? 'High' : totalValue > 20000 ? 'Medium' : 'Low';
+                document.getElementById('dealPotential').textContent = dealPotential;
+            }
+
+            initChart() {
+                const ctx = document.getElementById('nilChart').getContext('2d');
+                this.chart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Base Value', 'Social Media', 'Performance'],
+                        datasets: [{
+                            data: [0, 0, 0],
+                            backgroundColor: ['#BF5700', '#FFD700', '#00B2A9'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#E5E7EB',
+                                    padding: 15,
+                                    font: {
+                                        size: 11
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            updateChart(base, social, performance) {
+                if (this.chart) {
+                    this.chart.data.datasets[0].data = [base, social, performance];
+                    this.chart.update('none');
+                }
+            }
+
+            animateValue(element, start, end, prefix = '', decimals = 0) {
+                const duration = 1000;
+                const startTime = performance.now();
+
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    const current = start + (end - start) * this.easeOutCubic(progress);
+                    element.textContent = prefix + current.toLocaleString(undefined, {
+                        maximumFractionDigits: decimals
+                    });
+
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+
+                requestAnimationFrame(animate);
+            }
+
+            easeOutCubic(t) {
+                return 1 - Math.pow(1 - t, 3);
+            }
+        }
+
+        // Initialize calculator when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new NILCalculator();
+        });
+    </script>
+</body>
+</html>

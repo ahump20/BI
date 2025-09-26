@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Sports Coverage - Blaze Intelligence | The Deep South Sports Authority</title>
+    <meta name="description" content="From Little League to The League - complete sports coverage across all levels with specialized intelligence services.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Three.js for Professional Background Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r168/three.min.js"></script>
+
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            /* DCTF Authority Color Palette */
+            --burnt-orange: #BF5700;
+            --sec-crimson: #9B2222;
+            --cardinal-blue: #9BCBEB;
+            --deep-teal: #00B2A9;
+            --mississippi-white: #F8F8FF;
+            --georgia-clay: #C65D00;
+            --texas-navy: #002244;
+            --louisiana-bayou: #1B4332;
+            --friday-lights: #FFD700;
+            --stadium-black: #0A0A0A;
+
+            /* Typography */
+            --font-headline: 'Bebas Neue', 'Oswald', sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-data: 'JetBrains Mono', monospace;
+            --font-letterman: 'Oswald', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(180deg, var(--stadium-black) 0%, var(--texas-navy) 50%, var(--louisiana-bayou) 100%);
+            color: var(--mississippi-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Three.js Background Container */
+        #three-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        /* Navigation */
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--burnt-orange);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--mississippi-white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--burnt-orange);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-family: var(--font-headline);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            color: var(--burnt-orange);
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--cardinal-blue);
+            font-weight: 600;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+        }
+
+        /* Coverage Grid */
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Levels Section */
+        .levels-section {
+            grid-column: 1 / -1;
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: var(--font-headline);
+            font-size: 3.5rem;
+            color: var(--friday-lights);
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--cardinal-blue);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .level-card {
+            background: linear-gradient(145deg, rgba(191, 87, 0, 0.15), rgba(0, 34, 68, 0.25));
+            border: 2px solid var(--burnt-orange);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .level-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(191, 87, 0, 0.3);
+            border-color: var(--friday-lights);
+        }
+
+        .level-title {
+            font-family: var(--font-headline);
+            font-size: 2.2rem;
+            color: var(--mississippi-white);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .level-description {
+            color: var(--cardinal-blue);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .level-features {
+            list-style: none;
+        }
+
+        .level-features li {
+            background: rgba(248, 248, 255, 0.05);
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border-left: 3px solid var(--deep-teal);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        /* Intelligence Services */
+        .intelligence-section {
+            grid-column: 1 / -1;
+            margin: 4rem 0;
+        }
+
+        .intelligence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .intelligence-card {
+            background: linear-gradient(135deg, rgba(155, 34, 34, 0.2), rgba(0, 178, 169, 0.1));
+            border: 2px solid var(--sec-crimson);
+            border-radius: 12px;
+            padding: 1.8rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .intelligence-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(155, 34, 34, 0.4);
+        }
+
+        .intelligence-icon {
+            font-size: 2.5rem;
+            color: var(--friday-lights);
+            margin-bottom: 1rem;
+        }
+
+        .intelligence-title {
+            font-family: var(--font-letterman);
+            font-size: 1.5rem;
+            color: var(--mississippi-white);
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .intelligence-description {
+            color: var(--cardinal-blue);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .premium-badge {
+            background: linear-gradient(45deg, var(--burnt-orange), var(--friday-lights));
+            color: var(--stadium-black);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-top: 0.8rem;
+            display: inline-block;
+        }
+
+        /* Back to Home Button */
+        .back-home {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-home:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(191, 87, 0, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .coverage-grid,
+            .levels-grid,
+            .intelligence-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .level-card,
+            .intelligence-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="three-background"></div>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">BLAZE INTELLIGENCE</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/texas-football">Texas Football</a></li>
+                <li><a href="/sec">SEC Command</a></li>
+                <li><a href="/perfect-game">Perfect Game</a></li>
+                <li><a href="/recruiting">Recruiting HQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">COMPREHENSIVE SPORTS COVERAGE</h1>
+            <p class="hero-subtitle">From Little League to The League</p>
+        </section>
+
+        <div class="coverage-grid">
+            <!-- LEVELS Section -->
+            <section class="levels-section">
+                <div class="section-header">
+                    <h2 class="section-title">LEVELS</h2>
+                    <p class="section-subtitle">Complete Player Development Pipeline</p>
+                </div>
+                <div class="levels-grid">
+                    <div class="level-card">
+                        <h3 class="level-title">LITTLE LEAGUE</h3>
+                        <p class="level-description">Foundation development and youth baseball excellence</p>
+                        <ul class="level-features">
+                            <li>Age-appropriate skill development</li>
+                            <li>Travel team tracking</li>
+                            <li>Tournament coverage</li>
+                            <li>Future prospect identification</li>
+                        </ul>
+                    </div>
+                    <div class="level-card">
+                        <h3 class="level-title">HIGH SCHOOL</h3>
+                        <p class="level-description">Friday Night Lights and diamond dominance</p>
+                        <ul class="level-features">
+                            <li>State championship coverage</li>
+                            <li>Regional rankings</li>
+                            <li>Playoff tracking</li>
+                            <li>College recruitment pipeline</li>
+                        </ul>
+                    </div>
+                    <div class="level-card">
+                        <h3 class="level-title">COLLEGE/SEC</h3>
+                        <p class="level-description">Elite collegiate competition and SEC dominance</p>
+                        <ul class="level-features">
+                            <li>SEC tournament coverage</li>
+                            <li>College World Series</li>
+                            <li>Draft prospect analysis</li>
+                            <li>Transfer portal tracking</li>
+                        </ul>
+                    </div>
+                    <div class="level-card">
+                        <h3 class="level-title">MILB/MLB</h3>
+                        <p class="level-description">Professional baseball and The Show</p>
+                        <ul class="level-features">
+                            <li>Minor league development</li>
+                            <li>MLB prospect rankings</li>
+                            <li>Advanced analytics</li>
+                            <li>Performance tracking</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INTELLIGENCE Section -->
+            <section class="intelligence-section">
+                <div class="section-header">
+                    <h2 class="section-title">INTELLIGENCE</h2>
+                    <p class="section-subtitle">Championship-Grade Analytics & Insights</p>
+                </div>
+                <div class="intelligence-grid">
+                    <div class="intelligence-card">
+                        <div class="intelligence-icon">🏆</div>
+                        <h3 class="intelligence-title">Prospect Rankings</h3>
+                        <p class="intelligence-description">Comprehensive player evaluations across all levels</p>
+                        <span class="premium-badge">PREMIUM</span>
+                    </div>
+                    <div class="intelligence-card">
+                        <div class="intelligence-icon">🥇</div>
+                        <h3 class="intelligence-title">PG Select</h3>
+                        <p class="intelligence-description">Perfect Game elite prospect identification</p>
+                        <span class="premium-badge">EXCLUSIVE</span>
+                    </div>
+                    <div class="intelligence-card">
+                        <div class="intelligence-icon">🏈</div>
+                        <h3 class="intelligence-title">SEC Football</h3>
+                        <p class="intelligence-description">Deep South football intelligence authority</p>
+                        <span class="premium-badge">AUTHORITY</span>
+                    </div>
+                    <div class="intelligence-card">
+                        <div class="intelligence-icon">📊</div>
+                        <h3 class="intelligence-title">Scout Reports</h3>
+                        <p class="intelligence-description">Professional-grade scouting analysis</p>
+                        <span class="premium-badge">PRO</span>
+                    </div>
+                    <div class="intelligence-card">
+                        <div class="intelligence-icon">⚾</div>
+                        <h3 class="intelligence-title">MLB Draft</h3>
+                        <p class="intelligence-description">Draft prospect comprehensive coverage</p>
+                        <span class="premium-badge">INSIDER</span>
+                    </div>
+                    <div class="intelligence-card">
+                        <div class="intelligence-icon">🎯</div>
+                        <h3 class="intelligence-title">Showcases</h3>
+                        <p class="intelligence-description">Elite showcase and combine coverage</p>
+                        <span class="premium-badge">LIVE</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Back to Home Button -->
+    <a href="/" class="back-home">
+        <i class="fas fa-home"></i> Back to Home
+    </a>
+
+    <script>
+        // Three.js Background with Baseball/Football Theme
+        function initThreeBackground() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('three-background').appendChild(renderer.domElement);
+
+            // Create geometric shapes representing sports equipment
+            const geometries = [
+                new THREE.SphereGeometry(0.1, 8, 6), // Baseball
+                new THREE.BoxGeometry(0.2, 0.1, 0.05), // Football-ish
+                new THREE.RingGeometry(0.05, 0.15, 8) // Ring/Target
+            ];
+
+            const materials = [
+                new THREE.MeshBasicMaterial({ color: 0xBF5700, transparent: true, opacity: 0.6 }),
+                new THREE.MeshBasicMaterial({ color: 0x9BCBEB, transparent: true, opacity: 0.4 }),
+                new THREE.MeshBasicMaterial({ color: 0xFFD700, transparent: true, opacity: 0.5 })
+            ];
+
+            const meshes = [];
+            for (let i = 0; i < 80; i++) {
+                const geometry = geometries[i % geometries.length];
+                const material = materials[i % materials.length];
+                const mesh = new THREE.Mesh(geometry, material);
+
+                mesh.position.x = (Math.random() - 0.5) * 30;
+                mesh.position.y = (Math.random() - 0.5) * 30;
+                mesh.position.z = (Math.random() - 0.5) * 30;
+
+                mesh.rotation.x = Math.random() * Math.PI;
+                mesh.rotation.y = Math.random() * Math.PI;
+
+                scene.add(mesh);
+                meshes.push(mesh);
+            }
+
+            camera.position.z = 10;
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                meshes.forEach((mesh, index) => {
+                    mesh.rotation.x += 0.01 * (index % 3 + 1);
+                    mesh.rotation.y += 0.01 * (index % 2 + 1);
+
+                    // Gentle floating motion
+                    mesh.position.y += Math.sin(Date.now() * 0.001 + index) * 0.001;
+                });
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // GSAP Animations
+        function initAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero animation
+            gsap.from('.hero-title', {
+                y: 100,
+                opacity: 0,
+                duration: 1.5,
+                ease: 'power3.out'
+            });
+
+            gsap.from('.hero-subtitle', {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.3,
+                ease: 'power3.out'
+            });
+
+            // Level cards animation
+            gsap.from('.level-card', {
+                y: 80,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.levels-grid',
+                    start: 'top 80%'
+                }
+            });
+
+            // Intelligence cards animation
+            gsap.from('.intelligence-card', {
+                scale: 0.8,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'back.out(1.7)',
+                scrollTrigger: {
+                    trigger: '.intelligence-grid',
+                    start: 'top 70%'
+                }
+            });
+
+            // Section headers animation
+            gsap.from('.section-title', {
+                x: -100,
+                opacity: 0,
+                duration: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.section-title',
+                    start: 'top 85%'
+                }
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initThreeBackground();
+            initAnimations();
+        });
+    </script>
+</body>
+</html>

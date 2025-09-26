@@ -1,0 +1,691 @@
+/**
+ * 🎲 Enhanced Monte Carlo Visualizer Styles
+ * Deep South Sports Intelligence Hub - Championship-grade styling
+ * Optimized for all device types with responsive design
+ */
+
+/* ===== MONTE CARLO VISUALIZER CONTAINER ===== */
+#mcProbabilityCloud {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    min-height: 400px;
+    background: radial-gradient(circle at center, #001122 0%, #000000 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(191, 87, 0, 0.3); /* Burnt orange border */
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(155, 203, 235, 0.1); /* Cardinal blue glow */
+    transition: all 0.3s ease;
+}
+
+#mcProbabilityCloud:hover {
+    border-color: rgba(191, 87, 0, 0.6);
+    box-shadow:
+        0 12px 48px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(191, 87, 0, 0.2);
+}
+
+#mcProbabilityCloud canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    transition: cursor 0.1s ease;
+}
+
+#mcProbabilityCloud canvas:active {
+    cursor: grabbing;
+}
+
+/* ===== LOADING STATES ===== */
+.mc-visualizer-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #9BCBEB;
+    font-family: 'JetBrains Mono', monospace;
+    z-index: 100;
+}
+
+.mc-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(155, 203, 235, 0.2);
+    border-top: 3px solid #BF5700;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.mc-loading-text {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 12px;
+    opacity: 0.8;
+}
+
+/* ===== CONTROLS PANEL ===== */
+#mcVisualizerControls {
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    background: linear-gradient(135deg, rgba(0, 34, 68, 0.95) 0%, rgba(0, 0, 0, 0.95) 100%) !important;
+    color: #ffffff !important;
+    padding: 16px !important;
+    border-radius: 12px !important;
+    font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+    font-size: 12px !important;
+    z-index: 1000 !important;
+    max-width: 240px !important;
+    border: 1px solid rgba(191, 87, 0, 0.3);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(155, 203, 235, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+#mcVisualizerControls:hover {
+    border-color: rgba(191, 87, 0, 0.6);
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.9),
+        0 0 20px rgba(191, 87, 0, 0.2);
+}
+
+.mc-controls-title {
+    margin-bottom: 12px !important;
+    font-weight: bold !important;
+    color: #BF5700 !important;
+    text-shadow: 0 0 8px rgba(191, 87, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mc-controls-section {
+    margin-bottom: 8px;
+}
+
+.mc-controls-label {
+    color: #9BCBEB;
+    font-weight: 500;
+}
+
+.mc-controls-value {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.mc-controls-divider {
+    margin: 12px 0 !important;
+    border: none !important;
+    border-top: 1px solid rgba(155, 203, 235, 0.2) !important;
+}
+
+.mc-controls-shortcuts {
+    font-size: 10px !important;
+    line-height: 1.6 !important;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.mc-controls-shortcuts div {
+    margin-bottom: 2px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mc-controls-shortcuts .key {
+    background: rgba(191, 87, 0, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #BF5700;
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* ===== TEAM COLOR SCHEMES ===== */
+.mc-visualizer-cardinals {
+    --primary-color: #C21E26;
+    --secondary-color: #FFD100;
+    --accent-color: #FFFFFF;
+    --background-color: #8B4513;
+}
+
+.mc-visualizer-titans {
+    --primary-color: #0C2340;
+    --secondary-color: #4B92DB;
+    --accent-color: #FFFFFF;
+    --background-color: #C8102E;
+}
+
+.mc-visualizer-longhorns {
+    --primary-color: #BF5700;
+    --secondary-color: #FFFFFF;
+    --accent-color: #FFD700;
+    --background-color: #333F48;
+}
+
+.mc-visualizer-grizzlies {
+    --primary-color: #5D76A9;
+    --secondary-color: #F5B112;
+    --accent-color: #FFFFFF;
+    --background-color: #12264B;
+}
+
+.mc-visualizer-deepSouth {
+    --primary-color: #BF5700;
+    --secondary-color: #9BCBEB;
+    --accent-color: #FFD700;
+    --background-color: #002244;
+}
+
+/* ===== PARTICLE TOOLTIP ===== */
+.mc-particle-tooltip {
+    position: absolute;
+    background: linear-gradient(135deg, rgba(0, 34, 68, 0.95) 0%, rgba(0, 0, 0, 0.95) 100%);
+    color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    z-index: 2000;
+    pointer-events: none;
+    border: 1px solid rgba(191, 87, 0, 0.4);
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(155, 203, 235, 0.1);
+    backdrop-filter: blur(8px);
+    max-width: 200px;
+    line-height: 1.4;
+    transition: opacity 0.2s ease;
+}
+
+.mc-particle-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(0, 34, 68, 0.95);
+}
+
+.mc-tooltip-probability {
+    color: #BF5700;
+    font-weight: 600;
+}
+
+.mc-tooltip-confidence {
+    color: #9BCBEB;
+    font-weight: 500;
+}
+
+.mc-tooltip-cluster {
+    color: #FFD700;
+    font-size: 10px;
+    opacity: 0.8;
+}
+
+/* ===== PERFORMANCE INDICATORS ===== */
+.mc-performance-indicator {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(155, 203, 235, 0.2);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.mc-fps-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.mc-fps-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.mc-fps-dot.good { background-color: #00FF88; }
+.mc-fps-dot.warning { background-color: #FFAA00; }
+.mc-fps-dot.poor { background-color: #FF4488; }
+
+.mc-particle-count {
+    color: #9BCBEB;
+    font-size: 9px;
+}
+
+/* ===== FULLSCREEN STYLES ===== */
+.mc-visualizer-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+.mc-visualizer-fullscreen #mcVisualizerControls {
+    top: 20px !important;
+    right: 20px !important;
+}
+
+/* ===== PAUSE OVERLAY ===== */
+.mc-pause-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.mc-pause-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.mc-pause-text {
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 600;
+    text-shadow: 0 0 20px rgba(191, 87, 0, 0.8);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    #mcProbabilityCloud {
+        height: 400px;
+        border-radius: 8px;
+        border-width: 1px;
+    }
+
+    #mcVisualizerControls {
+        top: 8px !important;
+        right: 8px !important;
+        padding: 12px !important;
+        font-size: 10px !important;
+        max-width: 180px !important;
+        border-radius: 8px !important;
+    }
+
+    .mc-controls-shortcuts {
+        display: none; /* Hide keyboard shortcuts on mobile */
+    }
+
+    .mc-performance-indicator {
+        bottom: 8px;
+        left: 8px;
+        padding: 6px 8px;
+        font-size: 9px;
+    }
+
+    .mc-particle-tooltip {
+        font-size: 10px;
+        padding: 8px 12px;
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    #mcProbabilityCloud {
+        height: 300px;
+        border-radius: 6px;
+    }
+
+    #mcVisualizerControls {
+        font-size: 9px !important;
+        padding: 8px !important;
+        max-width: 140px !important;
+    }
+
+    .mc-controls-title {
+        font-size: 10px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .mc-performance-indicator {
+        display: none; /* Hide performance indicator on very small screens */
+    }
+}
+
+/* ===== HIGH DPI DISPLAYS ===== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    #mcProbabilityCloud {
+        border-width: 1px; /* Thinner borders on high DPI */
+    }
+
+    .mc-particle-tooltip {
+        border-width: 0.5px;
+    }
+
+    #mcVisualizerControls {
+        border-width: 0.5px;
+    }
+}
+
+/* ===== DARK MODE ENHANCEMENTS ===== */
+@media (prefers-color-scheme: dark) {
+    #mcProbabilityCloud {
+        background: radial-gradient(circle at center, #001133 0%, #000000 100%);
+    }
+
+    .mc-visualizer-loading {
+        color: #FFFFFF;
+    }
+
+    .mc-loading-spinner {
+        border-color: rgba(255, 255, 255, 0.2);
+        border-top-color: #BF5700;
+    }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    .mc-loading-spinner {
+        animation: none;
+    }
+
+    .mc-pause-text {
+        animation: none;
+    }
+
+    #mcProbabilityCloud,
+    #mcVisualizerControls,
+    .mc-performance-indicator {
+        transition: none;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    #mcProbabilityCloud {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 2px solid #000000 !important;
+        page-break-inside: avoid;
+    }
+
+    #mcVisualizerControls,
+    .mc-performance-indicator,
+    .mc-particle-tooltip {
+        display: none !important;
+    }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+.mc-visualizer-high-contrast {
+    filter: contrast(150%) brightness(110%);
+}
+
+.mc-visualizer-focus-outline {
+    outline: 2px solid #BF5700;
+    outline-offset: 2px;
+}
+
+/* Screen reader only content */
+.mc-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ===== ANIMATION CLASSES ===== */
+.mc-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.mc-fade-out {
+    animation: fadeOut 0.3s ease-in-out;
+}
+
+.mc-slide-in-right {
+    animation: slideInRight 0.4s ease-out;
+}
+
+.mc-bounce-in {
+    animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    70% {
+        transform: scale(0.9);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.mc-hidden {
+    display: none !important;
+}
+
+.mc-invisible {
+    visibility: hidden !important;
+}
+
+.mc-no-pointer-events {
+    pointer-events: none !important;
+}
+
+.mc-pointer-events-all {
+    pointer-events: all !important;
+}
+
+.mc-text-center {
+    text-align: center !important;
+}
+
+.mc-font-mono {
+    font-family: 'JetBrains Mono', 'Courier New', monospace !important;
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+.mc-custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.mc-custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.mc-custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #BF5700, #9BCBEB);
+    border-radius: 4px;
+}
+
+.mc-custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #D16A00, #B5D4F0);
+}
+
+/* ===== STATUS INDICATORS ===== */
+.mc-status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.mc-status-success {
+    background: rgba(0, 255, 136, 0.2);
+    color: #00FF88;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.mc-status-warning {
+    background: rgba(255, 170, 0, 0.2);
+    color: #FFAA00;
+    border: 1px solid rgba(255, 170, 0, 0.3);
+}
+
+.mc-status-error {
+    background: rgba(255, 68, 136, 0.2);
+    color: #FF4488;
+    border: 1px solid rgba(255, 68, 136, 0.3);
+}
+
+.mc-status-info {
+    background: rgba(155, 203, 235, 0.2);
+    color: #9BCBEB;
+    border: 1px solid rgba(155, 203, 235, 0.3);
+}
+
+/* ===== ERROR STATES ===== */
+.mc-error-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #FF4488;
+    font-family: 'JetBrains Mono', monospace;
+    z-index: 100;
+    max-width: 300px;
+}
+
+.mc-error-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.mc-error-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.mc-error-message {
+    font-size: 12px;
+    opacity: 0.8;
+    line-height: 1.4;
+    margin-bottom: 16px;
+}
+
+.mc-error-retry {
+    background: linear-gradient(135deg, #BF5700 0%, #D16A00 100%);
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mc-error-retry:hover {
+    background: linear-gradient(135deg, #D16A00 0%, #E37B00 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(191, 87, 0, 0.4);
+}
+
+.mc-error-retry:active {
+    transform: translateY(0);
+}
+
+/* ===== DEVELOPMENT INDICATORS ===== */
+.mc-dev-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(45deg, #FF4488, #FFAA00);
+    color: #ffffff;
+    padding: 4px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    z-index: 10000;
+    border-bottom-right-radius: 6px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.mc-dev-indicator::before {
+    content: '🚧 ';
+}

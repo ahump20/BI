@@ -1,4 +1,4 @@
-DEPLOYMENT MANIFEST - Thu Sep 25 14:49:21 CDT 2025
+DEPLOYMENT MANIFEST - Fri Sep 26 15:29:53 CDT 2025
 ========================================
 Essential Files:
 - index.html
@@ -15,16 +15,20 @@ Essential Files:
 - championship-system-integration.js
 
 CSS Directory (all files):
-drwxr-xr-x    4 AustinHumphrey  staff    128 Sep 25 03:23 .
-drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
+drwxr-xr-x    7 AustinHumphrey  staff    224 Sep 26 15:19 .
+drwxr-xr-x  645 AustinHumphrey  staff  20640 Sep 26 15:28 ..
+-rw-r--r--    1 AustinHumphrey  staff   7847 Sep 25 16:15 advanced-analytics.css
 -rw-r--r--    1 AustinHumphrey  staff  10531 Sep 25 01:43 blaze-brand-system.css
+-rw-r--r--    1 AustinHumphrey  staff  14308 Sep 26 15:19 blaze-components.css
+-rw-r--r--    1 AustinHumphrey  staff  13097 Sep 26 15:19 blaze-design-system.css
 -rw-r--r--    1 AustinHumphrey  staff  21731 Sep 25 03:23 blaze-revolutionary-command-center.css
 
 JS Directory (all files):
-drwxr-xr-x  116 AustinHumphrey  staff   3712 Sep 25 14:11 .
-drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
+drwxr-xr-x  140 AustinHumphrey  staff   4480 Sep 26 15:26 .
+drwxr-xr-x  645 AustinHumphrey  staff  20640 Sep 26 15:28 ..
 -rw-r--r--    1 AustinHumphrey  staff    626 Sep 25 02:15 ab-testing.js
 -rw-r--r--    1 AustinHumphrey  staff  36014 Sep 25 02:15 accessibility-enhancer.js
+-rw-r--r--    1 AustinHumphrey  staff  34461 Sep 25 16:14 advanced-sports-analytics.js
 -rw-r--r--    1 AustinHumphrey  staff  11166 Sep 25 02:15 analytics-config.js
 -rw-r--r--    1 AustinHumphrey  staff  23604 Sep 25 02:15 analytics-tracker.js
 -rw-r--r--    1 AustinHumphrey  staff   9956 Sep 25 02:15 api-config.js
@@ -33,6 +37,7 @@ drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
 -rw-r--r--    1 AustinHumphrey  staff  69040 Sep 25 02:15 blaze-3d-charts.js
 -rw-r--r--    1 AustinHumphrey  staff  69040 Sep 22 10:43 blaze-3d-charts.js.backup
 -rw-r--r--    1 AustinHumphrey  staff  30326 Sep 25 13:50 blaze-3d-data-viz.js
+-rw-r--r--    1 AustinHumphrey  staff  26332 Sep 26 15:19 blaze-3d-graphics.js
 -rw-r--r--    1 AustinHumphrey  staff  38916 Sep 25 02:15 blaze-advanced-3d-visualizations.js
 -rw-r--r--    1 AustinHumphrey  staff  20218 Sep 25 02:15 blaze-advanced-analytics-engine.js
 -rw-r--r--    1 AustinHumphrey  staff  13652 Sep 25 02:15 blaze-advanced-analytics.js
@@ -51,23 +56,32 @@ drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
 -rw-r--r--    1 AustinHumphrey  staff  19119 Sep 25 07:34 blaze-championship-post-processing.js
 -rw-r--r--    1 AustinHumphrey  staff  14843 Sep 25 07:32 blaze-championship-shaders.js
 -rw-r--r--    1 AustinHumphrey  staff  33109 Sep 25 13:48 blaze-championship-vfx.js
+-rw-r--r--    1 AustinHumphrey  staff  26545 Sep 25 16:38 blaze-cinematic-cameras.js
+-rw-r--r--    1 AustinHumphrey  staff  27256 Sep 25 16:35 blaze-crowd-simulation.js
 -rw-r--r--    1 AustinHumphrey  staff  33777 Sep 25 02:15 blaze-data-visualizations.js
 -rw-r--r--    1 AustinHumphrey  staff  33777 Sep 22 10:43 blaze-data-visualizations.js.backup
+-rw-r--r--    1 AustinHumphrey  staff  20606 Sep 26 15:19 blaze-design-system.js
 -rw-r--r--    1 AustinHumphrey  staff  22059 Sep 25 02:15 blaze-enhanced-3d-engine.js
+-rw-r--r--    1 AustinHumphrey  staff  40987 Sep 26 09:52 blaze-enhanced-monte-carlo-engine.js
 -rw-r--r--    1 AustinHumphrey  staff  31809 Sep 25 02:15 blaze-enhanced-visualizations.js
 -rw-r--r--    1 AustinHumphrey  staff  43396 Sep 25 02:15 blaze-enterprise-onboarding.js
 -rw-r--r--    1 AustinHumphrey  staff  18797 Sep 25 02:15 blaze-gpu-accelerated-engine.js
 -rw-r--r--    1 AustinHumphrey  staff  20586 Sep 25 07:35 blaze-gpu-particle-system.js
 -rw-r--r--    1 AustinHumphrey  staff  25764 Sep 25 13:56 blaze-graphics-integration-test.js
+-rw-r--r--    1 AustinHumphrey  staff  27687 Sep 25 16:47 blaze-graphics-orchestrator.js
 -rw-r--r--    1 AustinHumphrey  staff  23060 Sep 25 07:39 blaze-holographic-data.js
 -rw-r--r--    1 AustinHumphrey  staff  25870 Sep 25 02:15 blaze-interactive-demo.js
 -rw-r--r--    1 AustinHumphrey  staff  48841 Sep 25 02:15 blaze-interactive-maps.js
 -rw-r--r--    1 AustinHumphrey  staff  48841 Sep 22 10:43 blaze-interactive-maps.js.backup
+-rw-r--r--    1 AustinHumphrey  staff  52990 Sep 26 09:49 blaze-league-wide-data-manager.js
 -rw-r--r--    1 AustinHumphrey  staff  26523 Sep 25 02:15 blaze-live-chat.js
 -rw-r--r--    1 AustinHumphrey  staff  26523 Sep 22 10:43 blaze-live-chat.js.backup
+-rw-r--r--    1 AustinHumphrey  staff  28020 Sep 25 22:52 blaze-mobile-3d-optimizer.js
 -rw-r--r--    1 AustinHumphrey  staff  32113 Sep 25 02:15 blaze-mobile-optimization.js
 -rw-r--r--    1 AustinHumphrey  staff  28070 Sep 25 02:15 blaze-modern-ui.js
+-rw-r--r--    1 AustinHumphrey  staff  33214 Sep 26 10:11 blaze-monte-carlo-engine.js
 -rw-r--r--    1 AustinHumphrey  staff  13100 Sep 25 02:15 blaze-navigation.js
+-rw-r--r--    1 AustinHumphrey  staff  36421 Sep 25 16:44 blaze-neural-animation.js
 -rw-r--r--    1 AustinHumphrey  staff  42627 Sep 25 02:15 blaze-nil-calculator-advanced.js
 -rw-r--r--    1 AustinHumphrey  staff  19385 Sep 25 13:46 blaze-pbr-materials.js
 -rw-r--r--    1 AustinHumphrey  staff  17161 Sep 25 02:15 blaze-performance-monitor.js
@@ -75,8 +89,10 @@ drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
 -rw-r--r--    1 AustinHumphrey  staff  38316 Sep 22 10:43 blaze-performance-monitoring.js.backup
 -rw-r--r--    1 AustinHumphrey  staff  22524 Sep 25 13:54 blaze-performance-optimizer.js
 -rw-r--r--    1 AustinHumphrey  staff  35423 Sep 25 14:07 blaze-photorealistic-materials.js
+-rw-r--r--    1 AustinHumphrey  staff  31738 Sep 26 09:44 blaze-playoff-probability-engine.js
 -rw-r--r--    1 AustinHumphrey  staff  30024 Sep 25 02:15 blaze-pressure-analytics.js
 -rw-r--r--    1 AustinHumphrey  staff  14507 Sep 25 02:15 blaze-pressure-data-adapter.js
+-rw-r--r--    1 AustinHumphrey  staff  26755 Sep 25 16:33 blaze-raytracing-effects.js
 -rw-r--r--    1 AustinHumphrey  staff  23551 Sep 25 14:03 blaze-raytracing-engine.js
 -rw-r--r--    1 AustinHumphrey  staff  22376 Sep 25 14:09 blaze-real-data-integration.js
 -rw-r--r--    1 AustinHumphrey  staff  11410 Sep 25 02:15 blaze-real-time-data.js
@@ -93,9 +109,16 @@ drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
 -rw-r--r--    1 AustinHumphrey  staff  25764 Sep 25 14:11 blaze-ultra-hd-master-integration.js
 -rw-r--r--    1 AustinHumphrey  staff  13197 Sep 25 02:15 blaze-unified-data.js
 -rw-r--r--    1 AustinHumphrey  staff  19145 Sep 25 02:15 blaze-vision-ai-enhanced.js
+-rw-r--r--    1 AustinHumphrey  staff  22713 Sep 25 16:32 blaze-volumetric-rendering.js
+-rw-r--r--    1 AustinHumphrey  staff  40192 Sep 25 16:41 blaze-weather-systems.js
 -rw-r--r--    1 AustinHumphrey  staff  13390 Sep 25 02:15 blaze-websocket-client.js
 -rw-r--r--    1 AustinHumphrey  staff  15810 Sep 25 02:15 cardinals-readiness-board.js
 -rw-r--r--    1 AustinHumphrey  staff  22077 Sep 25 07:41 championship-60fps-optimization-engine.js
+-rw-r--r--    1 AustinHumphrey  staff  27390 Sep 26 15:21 championship-data-engine.js
+-rw-r--r--    1 AustinHumphrey  staff  17180 Sep 25 22:50 championship-data-integration.js
+-rw-r--r--    1 AustinHumphrey  staff  21850 Sep 25 22:58 championship-data-validator.js
+-rw-r--r--    1 AustinHumphrey  staff  42855 Sep 26 15:23 championship-monte-carlo-visualizer.js
+-rw-r--r--    1 AustinHumphrey  staff  48662 Sep 26 15:26 championship-scenario-simulator.js
 -rw-r--r--    1 AustinHumphrey  staff  40111 Sep 25 02:15 client-onboarding-automation.js
 -rw-r--r--    1 AustinHumphrey  staff  40111 Sep 22 10:43 client-onboarding-automation.js.backup
 -rw-r--r--    1 AustinHumphrey  staff  33401 Sep 25 02:15 competitive-intelligence-system.js
@@ -106,6 +129,7 @@ drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
 -rw-r--r--    1 AustinHumphrey  staff  21238 Sep 22 10:43 data-refresh-pipeline.js.backup
 -rw-r--r--    1 AustinHumphrey  staff   7921 Sep 25 02:15 data-sync.js
 drwxr-xr-x    7 AustinHumphrey  staff    224 Sep 25 02:15 disabled-popups
+-rw-r--r--    1 AustinHumphrey  staff  18476 Sep 25 22:52 dual-validation-system.js
 -rw-r--r--    1 AustinHumphrey  staff   8464 Sep 25 02:15 dynamic-timestamps.js
 -rw-r--r--    1 AustinHumphrey  staff  11715 Sep 25 02:15 enhanced-charts.js
 -rw-r--r--    1 AustinHumphrey  staff  13378 Sep 25 02:15 enhanced-three-visualization.js
@@ -121,6 +145,8 @@ drwxr-xr-x    7 AustinHumphrey  staff    224 Sep 25 02:15 disabled-popups
 -rw-r--r--    1 AustinHumphrey  staff  22557 Sep 25 02:15 live-sports-connector.js
 -rw-r--r--    1 AustinHumphrey  staff  22557 Sep 22 10:43 live-sports-connector.js.backup
 -rw-r--r--    1 AustinHumphrey  staff  23931 Sep 25 02:15 mlb-live-integration.js
+-rw-r--r--    1 AustinHumphrey  staff  30666 Sep 26 09:58 nil-uncertainty-engine.js
+-rw-r--r--    1 AustinHumphrey  staff  28395 Sep 26 10:03 nil-uncertainty-test-suite.js
 -rw-r--r--    1 AustinHumphrey  staff  23142 Sep 25 02:15 payment-processor.js
 -rw-r--r--    1 AustinHumphrey  staff  13777 Sep 25 02:15 perfect-game-integration.js
 -rw-r--r--    1 AustinHumphrey  staff  12221 Sep 25 02:15 performance-benchmark.js
@@ -135,32 +161,39 @@ drwxr-xr-x    7 AustinHumphrey  staff    224 Sep 25 02:15 disabled-popups
 -rw-r--r--    1 AustinHumphrey  staff  18571 Sep 25 02:15 system-dashboard.js
 -rw-r--r--    1 AustinHumphrey  staff  28773 Sep 25 02:15 team-intelligence-cards.js
 -rw-r--r--    1 AustinHumphrey  staff  28773 Sep 22 10:43 team-intelligence-cards.js.backup
+-rw-r--r--    1 AustinHumphrey  staff  21338 Sep 25 22:49 three-championship-optimization.js
 -rw-r--r--    1 AustinHumphrey  staff  13447 Sep 25 02:15 three-professional-background.js
 -rw-r--r--    1 AustinHumphrey  staff  16098 Sep 25 02:15 websocket-grit-streaming.js
 
 Data Directory:
-drwxr-xr-x   32 AustinHumphrey  staff   1024 Sep 25 02:15 .
-drwxr-xr-x  583 AustinHumphrey  staff  18656 Sep 25 14:47 ..
-drwxr-xr-x   12 AustinHumphrey  staff    384 Sep 25 02:15 analytics
+drwxr-xr-x   39 AustinHumphrey  staff   1248 Sep 25 17:30 .
+drwxr-xr-x  645 AustinHumphrey  staff  20640 Sep 26 15:28 ..
+drwxr-xr-x   17 AustinHumphrey  staff    544 Sep 25 16:18 analytics
 -rw-r--r--    1 AustinHumphrey  staff   2756 Sep 25 01:43 api-implementation-roadmap.json
 -rw-r--r--    1 AustinHumphrey  staff   4535 Sep 25 01:43 api-integration-blueprint.json
+drwxr-xr-x    2 AustinHumphrey  staff     64 Sep 25 16:18 backups
 -rw-r--r--    1 AustinHumphrey  staff  18238 Sep 25 01:43 blaze-asana-workspace-config.json
 -rw-r--r--    1 AustinHumphrey  staff   1255 Sep 25 02:15 blaze-metrics.json
 -rw-r--r--    1 AustinHumphrey  staff   1255 Sep 25 01:43 blaze-metrics.json.backup
 -rw-r--r--    1 AustinHumphrey  staff   7290 Sep 25 01:43 blog-index.json
 drwxr-xr-x    3 AustinHumphrey  staff     96 Sep 22 10:43 catalog
 drwxr-xr-x    3 AustinHumphrey  staff     96 Sep 22 10:43 cfb
+-rw-r--r--    1 AustinHumphrey  staff   3337 Sep 25 17:30 championship-live.json
 drwxr-xr-x    3 AustinHumphrey  staff     96 Sep 22 10:43 clients
--rw-r--r--    1 AustinHumphrey  staff   1511 Sep 25 14:40 dashboard-config.json
+-rw-r--r--    1 AustinHumphrey  staff   1511 Sep 26 15:20 dashboard-config.json
 drwxr-xr-x   11 AustinHumphrey  staff    352 Sep 25 01:35 demo
 -rw-r--r--    1 AustinHumphrey  staff   4260 Sep 25 01:43 deployment-validation-sept22.json.backup
 -rw-r--r--    1 AustinHumphrey  staff    803 Sep 25 01:43 insights.json
 -rw-r--r--    1 AustinHumphrey  staff   8361 Sep 25 01:43 integrated-analytics.json
 -rw-r--r--    1 AustinHumphrey  staff   8361 Sep 25 01:43 integrated-analytics.json.backup
+drwxr-xr-x    5 AustinHumphrey  staff    160 Sep 25 16:18 international
 -rw-r--r--    1 AustinHumphrey  staff   5087 Sep 25 01:43 league-wide-coverage.json
 -rw-r--r--    1 AustinHumphrey  staff   5087 Sep 25 01:43 league-wide-coverage.json.backup
+drwxr-xr-x    6 AustinHumphrey  staff    192 Sep 25 16:18 leagues
 drwxr-xr-x   10 AustinHumphrey  staff    320 Sep 22 10:43 live
+drwxr-xr-x    2 AustinHumphrey  staff     64 Sep 25 16:18 live-updates
 drwxr-xr-x    3 AustinHumphrey  staff     96 Sep 22 10:43 mlb
+drwxr-xr-x    3 AustinHumphrey  staff     96 Sep 25 16:18 mobile-feeds
 -rw-r--r--    1 AustinHumphrey  staff   2040 Sep 25 01:43 monitoring-report.json
 drwxr-xr-x    3 AustinHumphrey  staff     96 Sep 22 10:43 nfl
 -rw-r--r--    1 AustinHumphrey  staff   1446 Sep 25 01:43 optimization-config.json
@@ -170,6 +203,7 @@ drwxr-xr-x    3 AustinHumphrey  staff     96 Sep 25 02:15 sports
 -rw-r--r--    1 AustinHumphrey  staff   3298 Sep 25 01:43 verified-competitive-analysis-2025.json
 -rw-r--r--    1 AustinHumphrey  staff   6144 Sep 25 01:43 videos.json
 -rw-r--r--    1 AustinHumphrey  staff   6144 Sep 25 01:43 videos.json.backup
+drwxr-xr-x    4 AustinHumphrey  staff    128 Sep 25 16:18 youth
 drwxr-xr-x   10 AustinHumphrey  staff    320 Sep 22 10:43 youth-baseball
 
 Images & Assets:

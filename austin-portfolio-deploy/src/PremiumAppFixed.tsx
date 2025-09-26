@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PremiumDashboard from './components/PremiumDashboard';
+import { PremiumDashboard } from './components/PremiumDashboard';
 
 // ===== CHAMPIONSHIP APP INTERFACE =====
 interface AppState {
@@ -103,7 +103,8 @@ const PremiumApp: React.FC = () => {
       {/* Main Content */}
       <main className="premium-content">
         <PremiumDashboard
-          theme={appState.theme}
+          theme={appState.theme === 'championship' ? 'dark' : 'light'}
+          interactive={true}
           metricsConnected={appState.metricsConnected}
         />
       </main>

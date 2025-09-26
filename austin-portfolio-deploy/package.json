@@ -4,10 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "echo 'Deploying static HTML files'",
     "preview": "vite preview",
-    "serve": "vite preview --port 8000",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name=blaze-intelligence"
+    "serve": "python3 -m http.server 8000",
+    "deploy": "wrangler pages deploy . --project-name=blazesportsintel"
   },
   "dependencies": {
     "@react-three/drei": "^9.88.0",
@@ -22,7 +22,7 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
-    "@cloudflare/workerd-darwin-arm64": "^1.20250924.0",
+    "@cloudflare/workerd-darwin-arm64": "^1.20250926.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@types/three": "^0.159.0",
@@ -34,5 +34,8 @@
     "vite": "^5.0.8",
     "workerd": "^1.20250924.0",
     "wrangler": "^4.40.0"
+  },
+  "optionalDependencies": {
+    "@cloudflare/workerd-darwin-arm64": "^1.20250926.0"
   }
 }

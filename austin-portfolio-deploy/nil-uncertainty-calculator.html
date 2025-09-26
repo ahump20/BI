@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIL Uncertainty Modeling | Blaze Intelligence</title>
+    <meta name="description" content="Advanced Monte Carlo NIL valuation system with confidence intervals, uncertainty modeling, and comprehensive risk analysis for Deep South athletics.">
+
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --championship-gold: #FFD700;
+            --vancouver-teal: #00B2A9;
+            --cardinal-blue: #9BCBEB;
+            --bg-primary: #0B0B0F;
+            --bg-secondary: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #FFFFFF;
+            --text-secondary: #E5E7EB;
+            --text-muted: #9CA3AF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--championship-gold), var(--vancouver-teal));
+        }
+
+        .platform-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--championship-gold), var(--burnt-orange));
+            border-radius: 25px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--championship-gold), var(--burnt-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .brand-tagline {
+            font-size: 1rem;
+            color: var(--vancouver-teal);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr 350px;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .input-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .visualization-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .results-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--burnt-orange);
+            box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.1);
+        }
+
+        .select-field {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .simulation-button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--championship-gold));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .simulation-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(191, 87, 0, 0.3);
+        }
+
+        .simulation-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .threejs-container {
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .chart-container {
+            height: 250px;
+            position: relative;
+        }
+
+        .main-value-display {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+        }
+
+        .nil-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--championship-gold);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1;
+        }
+
+        .confidence-interval {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .metric-value {
+            color: var(--vancouver-teal);
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .risk-indicator {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .risk-low { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+        .risk-moderate { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+        .risk-high { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+
+        .scenario-tabs {
+            display: flex;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 0.25rem;
+        }
+
+        .scenario-tab {
+            flex: 1;
+            padding: 0.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-tab.active {
+            background: var(--burnt-orange);
+            color: white;
+        }
+
+        .simulation-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--championship-gold));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background: var(--burnt-orange);
+            transform: translateY(-2px);
+        }
+
+        .info-panel {
+            background: rgba(0, 178, 169, 0.1);
+            border: 1px solid rgba(0, 178, 169, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--vancouver-teal);
+        }
+
+        .advanced-metrics {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .metric-card-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--burnt-orange);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--burnt-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 1200px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .input-panel, .results-panel {
+                position: static;
+            }
+
+            .main-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/index.html" class="back-button">
+        ← Back to Platform
+    </a>
+
+    <div class="main-container">
+        <div class="header-section">
+            <div class="platform-icon">🎲</div>
+            <h1 class="main-title">NIL Uncertainty Modeling</h1>
+            <p class="subtitle">
+                Advanced Monte Carlo simulation engine providing institutional-grade NIL valuations with comprehensive uncertainty quantification.
+                Processes 10,000+ scenarios to generate confidence intervals and risk-adjusted valuations for Deep South athletics.
+            </p>
+            <div class="brand-tagline">The Deep South's Sports Intelligence Hub</div>
+        </div>
+
+        <div class="grid-layout">
+            <!-- Input Panel -->
+            <div class="input-panel">
+                <h2 class="section-title">
+                    🏈 Athlete Profile
+                </h2>
+
+                <div class="input-group">
+                    <label class="input-label">Athlete Name</label>
+                    <input type="text" class="input-field" id="athleteName" placeholder="Enter athlete name">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Sport</label>
+                    <select class="select-field" id="sport">
+                        <option value="football">Football</option>
+                        <option value="basketball">Basketball</option>
+                        <option value="baseball">Baseball</option>
+                        <option value="track">Track & Field</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Position</label>
+                    <input type="text" class="input-field" id="position" placeholder="e.g., Quarterback, Pitcher">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Program</label>
+                    <select class="select-field" id="program">
+                        <option value="Texas Longhorns">Texas Longhorns</option>
+                        <option value="Alabama Crimson Tide">Alabama Crimson Tide</option>
+                        <option value="Georgia Bulldogs">Georgia Bulldogs</option>
+                        <option value="LSU Tigers">LSU Tigers</option>
+                        <option value="Texas A&M Aggies">Texas A&M Aggies</option>
+                        <option value="Auburn Tigers">Auburn Tigers</option>
+                        <option value="Florida Gators">Florida Gators</option>
+                        <option value="Tennessee Volunteers">Tennessee Volunteers</option>
+                        <option value="Arkansas Razorbacks">Arkansas Razorbacks</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Current Year</label>
+                    <select class="select-field" id="currentYear">
+                        <option value="freshman">Freshman</option>
+                        <option value="sophomore">Sophomore</option>
+                        <option value="junior">Junior</option>
+                        <option value="senior">Senior</option>
+                        <option value="graduate">Graduate Student</option>
+                    </select>
+                </div>
+
+                <h2 class="section-title">
+                    📱 Social Media
+                </h2>
+
+                <div class="social-grid">
+                    <div class="input-group">
+                        <label class="input-label">Instagram</label>
+                        <input type="number" class="input-field" id="instagram" placeholder="0">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">TikTok</label>
+                        <input type="number" class="input-field" id="tiktok" placeholder="0">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Twitter</label>
+                        <input type="number" class="input-field" id="twitter" placeholder="0">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">YouTube</label>
+                        <input type="number" class="input-field" id="youtube" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Performance Rating (1-10)</label>
+                    <input type="number" class="input-field" id="performanceRating" min="1" max="10" value="7">
+                </div>
+
+                <button class="simulation-button" id="runSimulation">
+                    🎲 Run Monte Carlo Simulation
+                </button>
+
+                <div class="simulation-progress" id="progressContainer" style="display: none;">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <div class="loading-spinner" id="loadingSpinner"></div>
+
+                <div class="info-panel">
+                    💡 Simulation processes 10,000+ scenarios considering performance volatility, market conditions, transfer portal risks, and regional factors specific to Texas/Deep South athletics.
+                </div>
+            </div>
+
+            <!-- Visualization Section -->
+            <div class="visualization-section">
+                <h2 class="section-title">
+                    📊 Uncertainty Visualization
+                </h2>
+
+                <div class="scenario-tabs">
+                    <button class="scenario-tab active" data-scenario="distribution">Distribution</button>
+                    <button class="scenario-tab" data-scenario="timeline">Timeline</button>
+                    <button class="scenario-tab" data-scenario="scenarios">Scenarios</button>
+                    <button class="scenario-tab" data-scenario="3d">3D Cloud</button>
+                </div>
+
+                <div class="threejs-container" id="threejsContainer" style="display: none;">
+                    <!-- Three.js 3D visualization will be rendered here -->
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="uncertaintyChart"></canvas>
+                </div>
+
+                <div class="info-panel">
+                    <strong>Visualization Guide:</strong><br>
+                    • Distribution: Probability density of NIL values<br>
+                    • Timeline: 4-year projection with confidence bands<br>
+                    • Scenarios: Best/worst case analysis<br>
+                    • 3D Cloud: Interactive uncertainty space
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel">
+                <h2 class="section-title">
+                    💎 Valuation Results
+                </h2>
+
+                <div class="main-value-display">
+                    <div class="nil-value" id="expectedValue">$0</div>
+                    <div class="confidence-interval" id="confidenceInterval">95% CI: $0 - $0</div>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Risk Rating</span>
+                    <span class="risk-indicator risk-moderate" id="riskRating">Calculating...</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Value at Risk (95%)</span>
+                    <span class="metric-value" id="valueAtRisk">$0</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Probability of Loss</span>
+                    <span class="metric-value" id="probabilityOfLoss">0%</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Max Drawdown</span>
+                    <span class="metric-value" id="maxDrawdown">0%</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Volatility (CV)</span>
+                    <span class="metric-value" id="volatility">0%</span>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 2rem;">
+                    🎯 Scenario Analysis
+                </h2>
+
+                <div class="metric-row">
+                    <span class="metric-label">Best Case (95th %ile)</span>
+                    <span class="metric-value" id="bestCase">$0</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Most Likely (50th %ile)</span>
+                    <span class="metric-value" id="mostLikely">$0</span>
+                </div>
+
+                <div class="metric-row">
+                    <span class="metric-label">Worst Case (5th %ile)</span>
+                    <span class="metric-value" id="worstCase">$0</span>
+                </div>
+
+                <div class="info-panel">
+                    <strong>Strategy Recommendation:</strong><br>
+                    <span id="strategyRecommendation">Run simulation for personalized strategy</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Metrics Section -->
+        <div class="advanced-metrics">
+            <h2 class="section-title">
+                🔬 Advanced Risk Analytics
+            </h2>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-card-value" id="sharpeRatio">--</div>
+                    <div class="metric-card-label">Risk-Adjusted Return</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-card-value" id="expectedShortfall">$0</div>
+                    <div class="metric-card-label">Expected Shortfall</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-card-value" id="skewness">--</div>
+                    <div class="metric-card-label">Distribution Skew</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-card-value" id="kurtosis">--</div>
+                    <div class="metric-card-label">Tail Risk</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/nil-uncertainty-engine.js"></script>
+    <script>
+        class NILUncertaintyCalculator {
+            constructor() {
+                this.engine = new NILUncertaintyEngine();
+                this.currentResults = null;
+                this.chart = null;
+                this.scene = null;
+                this.camera = null;
+                this.renderer = null;
+                this.currentVisualization = 'distribution';
+
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.initializeChart();
+                this.setupAnimations();
+                console.log('🎲 NIL Uncertainty Calculator initialized');
+            }
+
+            setupEventListeners() {
+                // Simulation button
+                document.getElementById('runSimulation').addEventListener('click', () => this.runSimulation());
+
+                // Scenario tabs
+                document.querySelectorAll('.scenario-tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => this.switchVisualization(e.target.dataset.scenario));
+                });
+
+                // Auto-update on input changes (optional quick calculation)
+                const inputs = ['sport', 'position', 'program', 'currentYear', 'performanceRating'];
+                inputs.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.addEventListener('change', () => this.quickEstimate());
+                    }
+                });
+            }
+
+            setupAnimations() {
+                gsap.from('.input-panel', {
+                    duration: 0.8,
+                    x: -50,
+                    opacity: 0,
+                    ease: 'power2.out'
+                });
+
+                gsap.from('.visualization-section', {
+                    duration: 0.8,
+                    y: 30,
+                    opacity: 0,
+                    ease: 'power2.out',
+                    delay: 0.2
+                });
+
+                gsap.from('.results-panel', {
+                    duration: 0.8,
+                    x: 50,
+                    opacity: 0,
+                    ease: 'power2.out',
+                    delay: 0.4
+                });
+            }
+
+            async runSimulation() {
+                const athleteData = this.getAthleteData();
+                const button = document.getElementById('runSimulation');
+                const spinner = document.getElementById('loadingSpinner');
+                const progressContainer = document.getElementById('progressContainer');
+                const progressBar = document.getElementById('progressBar');
+
+                // Disable button and show loading
+                button.disabled = true;
+                button.textContent = 'Running Simulation...';
+                spinner.style.display = 'block';
+                progressContainer.style.display = 'block';
+
+                try {
+                    // Animate progress bar
+                    this.animateProgress(progressBar, 8000); // 8 second animation
+
+                    console.log('🎯 Starting Monte Carlo simulation...');
+                    const results = await this.engine.simulateNILValuation(athleteData, {
+                        iterations: 10000,
+                        timeHorizon: 4,
+                        confidenceLevels: [80, 90, 95]
+                    });
+
+                    this.currentResults = results;
+                    console.log('✅ Simulation completed', results);
+
+                    // Update all displays
+                    this.updateResultsDisplay(results);
+                    this.updateVisualization(results);
+                    this.updateAdvancedMetrics(results);
+
+                    // Generate report
+                    const report = this.engine.generateUncertaintyReport(results, athleteData);
+                    console.log('📊 Uncertainty report generated', report);
+
+                } catch (error) {
+                    console.error('❌ Simulation failed:', error);
+                    alert('Simulation failed. Please check your inputs and try again.');
+                } finally {
+                    // Reset UI
+                    button.disabled = false;
+                    button.textContent = '🎲 Run Monte Carlo Simulation';
+                    spinner.style.display = 'none';
+                    progressContainer.style.display = 'none';
+                    progressBar.style.width = '0%';
+                }
+            }
+
+            getAthleteData() {
+                return {
+                    name: document.getElementById('athleteName').value || 'Athlete',
+                    sport: document.getElementById('sport').value,
+                    position: document.getElementById('position').value,
+                    program: document.getElementById('program').value,
+                    currentYear: document.getElementById('currentYear').value,
+                    socialMedia: {
+                        instagram: parseInt(document.getElementById('instagram').value) || 0,
+                        tiktok: parseInt(document.getElementById('tiktok').value) || 0,
+                        twitter: parseInt(document.getElementById('twitter').value) || 0,
+                        youtube: parseInt(document.getElementById('youtube').value) || 0
+                    },
+                    performanceRating: parseInt(document.getElementById('performanceRating').value) || 7
+                };
+            }
+
+            updateResultsDisplay(results) {
+                const summary = results.summary;
+                const riskMetrics = results.riskMetrics;
+                const scenarios = results.scenarioAnalysis;
+
+                // Main value display
+                document.getElementById('expectedValue').textContent = `$${Math.round(summary.mean).toLocaleString()}`;
+                const ci95 = summary.confidenceIntervals[95];
+                document.getElementById('confidenceInterval').textContent =
+                    `95% CI: $${Math.round(ci95.lower).toLocaleString()} - $${Math.round(ci95.upper).toLocaleString()}`;
+
+                // Risk metrics
+                const riskRating = this.calculateRiskRating(riskMetrics);
+                const riskElement = document.getElementById('riskRating');
+                riskElement.textContent = riskRating;
+                riskElement.className = `risk-indicator ${this.getRiskClass(riskRating)}`;
+
+                document.getElementById('valueAtRisk').textContent = `$${Math.round(riskMetrics.valueAtRisk.var95).toLocaleString()}`;
+                document.getElementById('probabilityOfLoss').textContent = `${(riskMetrics.probabilityOfLoss * 100).toFixed(1)}%`;
+                document.getElementById('maxDrawdown').textContent = `${(riskMetrics.maxDrawdown * 100).toFixed(1)}%`;
+                document.getElementById('volatility').textContent = `${(summary.standardDeviation / summary.mean * 100).toFixed(1)}%`;
+
+                // Scenario analysis
+                document.getElementById('bestCase').textContent = `$${Math.round(scenarios.bestCase.value).toLocaleString()}`;
+                document.getElementById('mostLikely').textContent = `$${Math.round(scenarios.mostLikely.value).toLocaleString()}`;
+                document.getElementById('worstCase').textContent = `$${Math.round(scenarios.worstCase.value).toLocaleString()}`;
+
+                // Strategy recommendation
+                document.getElementById('strategyRecommendation').textContent = this.generateStrategyRecommendation(results);
+            }
+
+            updateAdvancedMetrics(results) {
+                const summary = results.summary;
+                const riskMetrics = results.riskMetrics;
+
+                // Risk-adjusted return (Sharpe-like ratio)
+                document.getElementById('sharpeRatio').textContent = riskMetrics.riskAdjustedReturn.toFixed(2);
+
+                // Expected shortfall
+                document.getElementById('expectedShortfall').textContent = `$${Math.round(riskMetrics.expectedShortfall.es95).toLocaleString()}`;
+
+                // Calculate skewness and kurtosis
+                const skewness = this.calculateSkewness(results);
+                const kurtosis = this.calculateKurtosis(results);
+
+                document.getElementById('skewness').textContent = skewness.toFixed(2);
+                document.getElementById('kurtosis').textContent = kurtosis.toFixed(2);
+            }
+
+            switchVisualization(type) {
+                // Update active tab
+                document.querySelectorAll('.scenario-tab').forEach(tab => tab.classList.remove('active'));
+                document.querySelector(`[data-scenario="${type}"]`).classList.add('active');
+
+                this.currentVisualization = type;
+
+                // Show/hide 3D container
+                const threejsContainer = document.getElementById('threejsContainer');
+                const chartContainer = document.querySelector('.chart-container');
+
+                if (type === '3d') {
+                    threejsContainer.style.display = 'block';
+                    chartContainer.style.display = 'none';
+                    this.init3DVisualization();
+                } else {
+                    threejsContainer.style.display = 'none';
+                    chartContainer.style.display = 'block';
+                    this.updateChartVisualization(type);
+                }
+            }
+
+            initializeChart() {
+                const ctx = document.getElementById('uncertaintyChart').getContext('2d');
+                this.chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: []
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                labels: { color: '#E5E7EB' }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: { color: '#9CA3AF' },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            },
+                            y: {
+                                ticks: { color: '#9CA3AF' },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            updateVisualization(results) {
+                this.updateChartVisualization(this.currentVisualization);
+            }
+
+            updateChartVisualization(type) {
+                if (!this.currentResults) return;
+
+                switch (type) {
+                    case 'distribution':
+                        this.renderDistributionChart();
+                        break;
+                    case 'timeline':
+                        this.renderTimelineChart();
+                        break;
+                    case 'scenarios':
+                        this.renderScenariosChart();
+                        break;
+                }
+            }
+
+            renderDistributionChart() {
+                const results = this.currentResults;
+
+                // Create histogram data
+                const bins = 50;
+                const values = Array.from({length: 1000}, () =>
+                    this.sampleFromDistribution(results.summary)
+                );
+
+                const histogram = this.createHistogram(values, bins);
+
+                this.chart.data = {
+                    labels: histogram.labels,
+                    datasets: [{
+                        label: 'Probability Density',
+                        data: histogram.data,
+                        backgroundColor: 'rgba(191, 87, 0, 0.6)',
+                        borderColor: '#BF5700',
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                };
+
+                this.chart.options.scales.x.title = { display: true, text: 'NIL Value ($)', color: '#E5E7EB' };
+                this.chart.options.scales.y.title = { display: true, text: 'Probability', color: '#E5E7EB' };
+                this.chart.update();
+            }
+
+            renderTimelineChart() {
+                const results = this.currentResults;
+
+                const years = ['Year 1', 'Year 2', 'Year 3', 'Year 4'];
+                const expectedValues = results.yearlyAnalysis.map(year => year.mean);
+                const upperBound = results.yearlyAnalysis.map(year => year.confidenceIntervals[95].upper);
+                const lowerBound = results.yearlyAnalysis.map(year => year.confidenceIntervals[95].lower);
+
+                this.chart.data = {
+                    labels: years,
+                    datasets: [
+                        {
+                            label: 'Expected Value',
+                            data: expectedValues,
+                            borderColor: '#FFD700',
+                            backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                            borderWidth: 3
+                        },
+                        {
+                            label: '95% Upper Bound',
+                            data: upperBound,
+                            borderColor: '#00B2A9',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            borderDash: [5, 5]
+                        },
+                        {
+                            label: '95% Lower Bound',
+                            data: lowerBound,
+                            borderColor: '#00B2A9',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            borderDash: [5, 5]
+                        }
+                    ]
+                };
+
+                this.chart.options.scales.x.title = { display: true, text: 'Academic Year', color: '#E5E7EB' };
+                this.chart.options.scales.y.title = { display: true, text: 'NIL Value ($)', color: '#E5E7EB' };
+                this.chart.update();
+            }
+
+            renderScenariosChart() {
+                const scenarios = this.currentResults.scenarioAnalysis;
+
+                const labels = ['Worst Case', 'Pessimistic', 'Most Likely', 'Optimistic', 'Best Case'];
+                const values = [
+                    scenarios.worstCase.value,
+                    scenarios.pessimistic.value,
+                    scenarios.mostLikely.value,
+                    scenarios.optimistic.value,
+                    scenarios.bestCase.value
+                ];
+                const colors = ['#EF4444', '#F59E0B', '#FFD700', '#10B981', '#00B2A9'];
+
+                this.chart.data = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Scenario Values',
+                        data: values,
+                        backgroundColor: colors,
+                        borderColor: colors,
+                        borderWidth: 2
+                    }]
+                };
+
+                this.chart.options.scales.x.title = { display: true, text: 'Scenario', color: '#E5E7EB' };
+                this.chart.options.scales.y.title = { display: true, text: 'NIL Value ($)', color: '#E5E7EB' };
+                this.chart.update();
+            }
+
+            init3DVisualization() {
+                if (!this.currentResults) return;
+
+                const container = document.getElementById('threejsContainer');
+
+                // Clear existing renderer
+                if (this.renderer) {
+                    container.removeChild(this.renderer.domElement);
+                }
+
+                // Setup Three.js scene
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+                this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+                this.renderer.setSize(container.clientWidth, container.clientHeight);
+                this.renderer.setClearColor(0x000000, 0);
+                container.appendChild(this.renderer.domElement);
+
+                // Create uncertainty cloud
+                this.create3DUncertaintyCloud();
+
+                this.camera.position.z = 5;
+                this.animate3D();
+            }
+
+            create3DUncertaintyCloud() {
+                // Generate point cloud based on simulation results
+                const results = this.currentResults;
+                const pointCount = 1000;
+
+                const geometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(pointCount * 3);
+                const colors = new Float32Array(pointCount * 3);
+
+                for (let i = 0; i < pointCount; i++) {
+                    // Sample from distribution
+                    const value = this.sampleFromDistribution(results.summary);
+                    const risk = Math.random();
+                    const time = Math.random() * 4; // 4 years
+
+                    // Position in 3D space (value, risk, time)
+                    positions[i * 3] = (value / results.summary.mean - 1) * 2; // Normalize around mean
+                    positions[i * 3 + 1] = (risk - 0.5) * 2;
+                    positions[i * 3 + 2] = (time - 2) * 0.5;
+
+                    // Color based on value (red = low, yellow = medium, green = high)
+                    const normalizedValue = Math.min(1, Math.max(0, value / (results.summary.mean * 1.5)));
+                    colors[i * 3] = normalizedValue < 0.5 ? 1 : 2 - 2 * normalizedValue; // Red component
+                    colors[i * 3 + 1] = normalizedValue < 0.5 ? 2 * normalizedValue : 1; // Green component
+                    colors[i * 3 + 2] = 0.2; // Blue component
+                }
+
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+                const material = new THREE.PointsMaterial({
+                    size: 0.05,
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.6
+                });
+
+                const points = new THREE.Points(geometry, material);
+                this.scene.add(points);
+
+                // Add axis labels (simplified)
+                this.addAxisLabels();
+            }
+
+            addAxisLabels() {
+                // Add simple axis lines
+                const axisGeometry = new THREE.BufferGeometry();
+                const axisPositions = new Float32Array([
+                    -2, 0, 0,  2, 0, 0, // X axis
+                    0, -2, 0,  0, 2, 0, // Y axis
+                    0, 0, -2,  0, 0, 2  // Z axis
+                ]);
+                axisGeometry.setAttribute('position', new THREE.BufferAttribute(axisPositions, 3));
+
+                const axisMaterial = new THREE.LineBasicMaterial({ color: 0x444444 });
+                const axisLines = new THREE.LineSegments(axisGeometry, axisMaterial);
+                this.scene.add(axisLines);
+            }
+
+            animate3D() {
+                requestAnimationFrame(() => this.animate3D());
+
+                // Rotate the scene
+                if (this.scene.children.length > 0) {
+                    this.scene.children[0].rotation.y += 0.005;
+                    this.scene.children[0].rotation.x += 0.002;
+                }
+
+                this.renderer.render(this.scene, this.camera);
+            }
+
+            // Utility functions
+            animateProgress(progressBar, duration) {
+                let start = 0;
+                const increment = 100 / (duration / 50); // Update every 50ms
+
+                const timer = setInterval(() => {
+                    start += increment;
+                    progressBar.style.width = Math.min(start, 100) + '%';
+
+                    if (start >= 100) {
+                        clearInterval(timer);
+                    }
+                }, 50);
+            }
+
+            sampleFromDistribution(summary) {
+                // Simple normal approximation for sampling
+                const mean = summary.mean;
+                const std = summary.standardDeviation;
+                return this.sampleNormal(mean, std);
+            }
+
+            sampleNormal(mean, std) {
+                // Box-Muller transformation
+                const u1 = Math.random();
+                const u2 = Math.random();
+                const z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+                return mean + std * z0;
+            }
+
+            createHistogram(values, bins) {
+                const min = Math.min(...values);
+                const max = Math.max(...values);
+                const binWidth = (max - min) / bins;
+
+                const histogram = new Array(bins).fill(0);
+                const labels = [];
+
+                for (let i = 0; i < bins; i++) {
+                    labels.push(`$${Math.round(min + i * binWidth).toLocaleString()}`);
+                }
+
+                values.forEach(value => {
+                    const binIndex = Math.min(Math.floor((value - min) / binWidth), bins - 1);
+                    histogram[binIndex]++;
+                });
+
+                // Normalize to probability density
+                const total = values.length;
+                const data = histogram.map(count => count / total / binWidth);
+
+                return { labels, data };
+            }
+
+            calculateRiskRating(riskMetrics) {
+                const riskScore = riskMetrics.riskAdjustedReturn;
+                const probLoss = riskMetrics.probabilityOfLoss;
+
+                if (riskScore > 2.0 && probLoss < 0.15) return 'Low Risk';
+                if (riskScore > 1.5 && probLoss < 0.25) return 'Moderate Risk';
+                return 'High Risk';
+            }
+
+            getRiskClass(rating) {
+                switch (rating) {
+                    case 'Low Risk': return 'risk-low';
+                    case 'Moderate Risk': return 'risk-moderate';
+                    default: return 'risk-high';
+                }
+            }
+
+            generateStrategyRecommendation(results) {
+                const cv = results.summary.standardDeviation / results.summary.mean;
+                const probLoss = results.riskMetrics.probabilityOfLoss;
+
+                if (cv < 0.30 && probLoss < 0.15) {
+                    return 'Conservative: Focus on brand consistency and long-term partnerships.';
+                } else if (cv < 0.50 && probLoss < 0.30) {
+                    return 'Balanced: Diversify across multiple deal types while maximizing performance.';
+                } else {
+                    return 'Aggressive: High-reward strategy with downside protection recommended.';
+                }
+            }
+
+            calculateSkewness(results) {
+                // Simplified skewness calculation
+                const summary = results.summary;
+                return (summary.mean - summary.median) / summary.standardDeviation;
+            }
+
+            calculateKurtosis(results) {
+                // Simplified kurtosis approximation
+                const summary = results.summary;
+                const iqr = summary.percentiles[75] - summary.percentiles[25];
+                return (summary.percentiles[95] - summary.percentiles[5]) / (2.91 * iqr);
+            }
+
+            quickEstimate() {
+                // Provide quick estimate without full Monte Carlo simulation
+                const athleteData = this.getAthleteData();
+                const baseValue = this.engine.calculateBaseNILValue(athleteData);
+
+                document.getElementById('expectedValue').textContent = `~$${Math.round(baseValue).toLocaleString()}`;
+                document.getElementById('confidenceInterval').textContent = 'Run full simulation for confidence intervals';
+            }
+        }
+
+        // Initialize calculator when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new NILUncertaintyCalculator();
+        });
+    </script>
+</body>
+</html>

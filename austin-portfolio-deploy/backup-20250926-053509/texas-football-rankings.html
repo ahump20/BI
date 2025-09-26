@@ -1,0 +1,681 @@
+<html><head></head><body>   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texas Football Rankings™ | Blaze Intelligence - The Dave Campbell of Data Analytics</title>
+    <meta name="description" content="Official Texas football rankings powered by championship-level analytics. Weekly rankings, upset predictions, and championship pathways for all Texas high school programs.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    
+    <!-- Font Preloads -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=Roboto+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --cardinal-blue: #9BCBEB;
+            --dark-navy: #0A192F;
+            --light-navy: #112240;
+            --slate: #8892B0;
+            --light-slate: #CCD6F6;
+            --white: #E6F1FF;
+            --success: #64FFDA;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background: var(--dark-navy);
+            color: var(--slate);
+            line-height: 1.6;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .nav-logo {
+            color: var(--light-slate);
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-link {
+            color: var(--slate);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover {
+            color: var(--burnt-orange);
+        }
+        
+        .hero-section {
+            padding: 120px 50px 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--light-navy) 100%);
+        }
+        
+        .tagline {
+            color: var(--burnt-orange);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--light-slate);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        .highlight {
+            color: var(--burnt-orange);
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--slate);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .rankings-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+        
+        .classification-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--slate);
+            color: var(--slate);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .tab-button.active {
+            background: var(--burnt-orange);
+            border-color: var(--burnt-orange);
+            color: white;
+        }
+        
+        .tab-button:hover {
+            border-color: var(--burnt-orange);
+            color: var(--burnt-orange);
+        }
+        
+        .rankings-section {
+            margin: 3rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: var(--light-slate);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-subtitle {
+            color: var(--slate);
+            font-size: 1.1rem;
+        }
+        
+        .rankings-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .rankings-main {
+            background: rgba(17, 34, 64, 0.8);
+            border: 1px solid var(--slate);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .ranking-item {
+            display: grid;
+            grid-template-columns: 60px 1fr 100px 120px;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(136, 146, 176, 0.2);
+            transition: var(--transition);
+        }
+        
+        .ranking-item:hover {
+            background: rgba(191, 87, 0, 0.1);
+        }
+        
+        .rank-number {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            text-align: center;
+        }
+        
+        .team-info h3 {
+            color: var(--light-slate);
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .team-info p {
+            color: var(--slate);
+            font-size: 0.9rem;
+        }
+        
+        .team-record {
+            color: var(--success);
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .championship-prob {
+            text-align: center;
+        }
+        
+        .prob-percentage {
+            color: var(--cardinal-blue);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .prob-label {
+            color: var(--slate);
+            font-size: 0.8rem;
+        }
+        
+        .rankings-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .sidebar-card {
+            background: rgba(17, 34, 64, 0.8);
+            border: 1px solid var(--slate);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .sidebar-title {
+            color: var(--light-slate);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .upset-alert {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: rgba(191, 87, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+        }
+        
+        .upset-teams {
+            color: var(--light-slate);
+            font-size: 0.9rem;
+        }
+        
+        .upset-confidence {
+            color: var(--burnt-orange);
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        
+        .movement-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(136, 146, 176, 0.1);
+        }
+        
+        .movement-team {
+            color: var(--light-slate);
+            font-size: 0.9rem;
+        }
+        
+        .movement-change {
+            font-weight: 700;
+        }
+        
+        .movement-up {
+            color: var(--success);
+        }
+        
+        .movement-down {
+            color: #ff6b6b;
+        }
+        
+        .update-info {
+            background: rgba(17, 34, 64, 0.8);
+            border: 1px solid var(--burnt-orange);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .update-title {
+            color: var(--burnt-orange);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--burnt-orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--slate);
+            color: var(--slate);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--slate);
+            color: var(--dark-navy);
+        }
+        
+        @media (max-width: 768px) {
+            .rankings-container {
+                padding: 0 20px;
+            }
+            
+            .rankings-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ranking-item {
+                grid-template-columns: 40px 1fr 80px;
+            }
+            
+            .championship-prob {
+                display: none;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .classification-tabs {
+                gap: 0.5rem;
+            }
+            
+            .tab-button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="/" class="nav-logo">Blaze Intelligence</a>
+            <ul class="nav-links">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/texas-football-intelligence" class="nav-link">Intelligence</a></li>
+                <li><a href="/friday-night-lights" class="nav-link">Community</a></li>
+                <li><a href="/#partnerships" class="nav-link">Partnerships</a></li>
+                <li><a href="/#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div data-aos="fade-up">
+            <div class="tagline">🏆 TEXAS FOOTBALL RANKINGS™</div>
+            <h1>The <span class="highlight">Dave Campbell Standard</span> of Analytics</h1>
+            <p class="hero-description">
+                Building on 65+ years of Texas football legacy, our championship-level rankings combine editorial excellence with cutting-edge analytics. The definitive authority on Texas high school football excellence.
+            </p>
+        </div>
+    </section>
+
+    <!-- Rankings Container -->
+    <div class="rankings-container">
+        <!-- Classification Tabs -->
+        <div class="classification-tabs" data-aos="fade-up">
+            <button class="tab-button active" data-classification="6a-d1">6A Division I</button>
+            <button class="tab-button" data-classification="6a-d2">6A Division II</button>
+            <button class="tab-button" data-classification="5a-d1">5A Division I</button>
+            <button class="tab-button" data-classification="5a-d2">5A Division II</button>
+            <button class="tab-button" data-classification="4a-d1">4A Division I</button>
+            <button class="tab-button" data-classification="4a-d2">4A Division II</button>
+        </div>
+
+        <!-- Rankings Section -->
+        <section class="rankings-section" data-aos="fade-up">
+            <div class="section-header">
+                <h2 class="section-title">Week 12 Texas Football Power Rankings</h2>
+                <p class="section-subtitle">Championship pathway analytics powered by Friday Night Lights intelligence</p>
+            </div>
+
+            <div class="rankings-grid">
+                <!-- Main Rankings -->
+                <div class="rankings-main">
+                    <div id="rankings-content">
+                        <!-- 6A Division I Rankings -->
+                        <div class="ranking-item">
+                            <div class="rank-number">1</div>
+                            <div class="team-info">
+                                <h3>North Shore Mustangs</h3>
+                                <p>District 21-6A • Houston</p>
+                            </div>
+                            <div class="team-record">11-0</div>
+                            <div class="championship-prob">
+                                <div class="prob-percentage">24.7%</div>
+                                <div class="prob-label">Championship</div>
+                            </div>
+                        </div>
+
+                        <div class="ranking-item">
+                            <div class="rank-number">2</div>
+                            <div class="team-info">
+                                <h3>Westlake Chaparrals</h3>
+                                <p>District 25-6A • Austin</p>
+                            </div>
+                            <div class="team-record">10-1</div>
+                            <div class="championship-prob">
+                                <div class="prob-percentage">19.3%</div>
+                                <div class="prob-label">Championship</div>
+                            </div>
+                        </div>
+
+                        <div class="ranking-item">
+                            <div class="rank-number">3</div>
+                            <div class="team-info">
+                                <h3>Katy Tigers</h3>
+                                <p>District 19-6A • Katy</p>
+                            </div>
+                            <div class="team-record">10-1</div>
+                            <div class="championship-prob">
+                                <div class="prob-percentage">16.8%</div>
+                                <div class="prob-label">Championship</div>
+                            </div>
+                        </div>
+
+                        <div class="ranking-item">
+                            <div class="rank-number">4</div>
+                            <div class="team-info">
+                                <h3>Duncanville Panthers</h3>
+                                <p>District 8-6A • Dallas</p>
+                            </div>
+                            <div class="team-record">9-2</div>
+                            <div class="championship-prob">
+                                <div class="prob-percentage">14.2%</div>
+                                <div class="prob-label">Championship</div>
+                            </div>
+                        </div>
+
+                        <div class="ranking-item">
+                            <div class="rank-number">5</div>
+                            <div class="team-info">
+                                <h3>Allen Eagles</h3>
+                                <p>District 5-6A • Allen</p>
+                            </div>
+                            <div class="team-record">9-2</div>
+                            <div class="championship-prob">
+                                <div class="prob-percentage">11.7%</div>
+                                <div class="prob-label">Championship</div>
+                            </div>
+                        </div>
+
+                        <div class="ranking-item">
+                            <div class="rank-number">6</div>
+                            <div class="team-info">
+                                <h3>Atascocita Eagles</h3>
+                                <p>District 21-6A • Humble</p>
+                            </div>
+                            <div class="team-record">9-2</div>
+                            <div class="championship-prob">
+                                <div class="prob-percentage">8.9%</div>
+                                <div class="prob-label">Championship</div>
+                            </div>
+                        </div>
+
+                        <div class="ranking-item">
+                            <div class="rank-number">7</div>
+                            <div class="team-info">
+                                <h3>DeSoto Eagles</h3>
+                                <p>District 11-6A • DeSoto</p>
+                            </div>
+                            <div class="team-record">8-3</div>
+                            <div class="championship-prob">
+                                <div class="prob-percentage">6.4%</div>
+                                <div class="prob-label">Championship</div>
+                            </div>
+                        </div>
+
+                        <div class="ranking-item">
+                            <div class="rank-number">8</div>
+                            <div class="team-info">
+                                <h3>Southlake Carroll Dragons</h3>
+                                <p>District 4-6A • Southlake</p>
+                            </div>
+                            <div class="team-record">8-3</div>
+                            <div class="championship-prob">
+                                <div class="prob-percentage">5.1%</div>
+                                <div class="prob-label">Championship</div>
+                            </div>
+                        </div>
+
+                        <div class="ranking-item">
+                            <div class="rank-number">9</div>
+                            <div class="team-info">
+                                <h3>Humble Summer Creek Bulldogs</h3>
+                                <p>District 21-6A • Houston</p>
+                            </div>
+                            <div class="team-record">8-3</div>
+                            <div class="championship-prob">
+                                <div class="prob-percentage">4.2%</div>
+                                <div class="prob-label">Championship</div>
+                            </div>
+                        </div>
+
+                        <div class="ranking-item">
+                            <div class="rank-number">10</div>
+                            <div class="team-info">
+                                <h3>Lake Travis Cavaliers</h3>
+                                <p>District 25-6A • Austin</p>
+                            </div>
+                            <div class="team-record">7-4</div>
+                            <div class="championship-prob">
+                                <div class="prob-percentage">3.7%</div>
+                                <div class="prob-label">Championship</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="rankings-sidebar">
+                    <!-- Upset Alerts -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">🚨 Upset Alerts</h3>
+                        <div class="upset-alert">
+                            <div class="upset-teams">Highland Park vs. Jesuit</div>
+                            <div class="upset-confidence">68%</div>
+                        </div>
+                        <div class="upset-alert">
+                            <div class="upset-teams">Aledo vs. Denton Ryan</div>
+                            <div class="upset-confidence">58%</div>
+                        </div>
+                        <div class="upset-alert">
+                            <div class="upset-teams">Cedar Park vs. Leander</div>
+                            <div class="upset-confidence">54%</div>
+                        </div>
+                    </div>
+
+                    <!-- Weekly Movers -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">📈 Weekly Movers</h3>
+                        <div class="movement-item">
+                            <div class="movement-team">Westlake</div>
+                            <div class="movement-change movement-up">+2</div>
+                        </div>
+                        <div class="movement-item">
+                            <div class="movement-team">Katy</div>
+                            <div class="movement-change movement-up">+1</div>
+                        </div>
+                        <div class="movement-item">
+                            <div class="movement-team">Allen</div>
+                            <div class="movement-change movement-down">-1</div>
+                        </div>
+                        <div class="movement-item">
+                            <div class="movement-team">Southlake Carroll</div>
+                            <div class="movement-change movement-down">-2</div>
+                        </div>
+                    </div>
+
+                    <!-- Championship Tracker -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">🏆 AT&amp;T Stadium Tracker</h3>
+                        <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 1rem;">
+                            Programs with the highest probability of reaching the state championship game.
+                        </p>
+                        <div class="movement-item">
+                            <div class="movement-team">North Shore</div>
+                            <div class="prob-percentage">24.7%</div>
+                        </div>
+                        <div class="movement-item">
+                            <div class="movement-team">Westlake</div>
+                            <div class="prob-percentage">19.3%</div>
+                        </div>
+                        <div class="movement-item">
+                            <div class="movement-team">Katy</div>
+                            <div class="prob-percentage">16.8%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Update Information -->
+        <div class="update-info" data-aos="fade-up">
+            <div class="update-title">Rankings Updated Every Tuesday</div>
+            <p style="color: var(--slate); margin-bottom: 1rem;">
+                In the heart of Texas football country, our championship-level analytics honor tradition while embracing innovation. Rankings reflect the latest Friday Night Lights results and championship pathway analysis.
+            </p>
+            <a href="/texas-football-intelligence" class="btn">
+                <i class="fas fa-chart-line"></i> Full Analytics Platform
+            </a>
+            <a href="/friday-night-lights" class="btn btn-secondary">
+                <i class="fas fa-users"></i> Join Community
+            </a>
+        </div>
+    </div>
+
+    <!-- AOS JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Here you would typically load different rankings data
+                // For now, we'll just update the title
+                const classification = this.textContent;
+                document.querySelector('.section-title').textContent = `Week 12 ${classification} Power Rankings`;
+            });
+        });
+    </script>
+
+</body></html>

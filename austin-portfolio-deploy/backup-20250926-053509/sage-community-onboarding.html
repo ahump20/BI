@@ -1,0 +1,606 @@
+<html><head></head><body>   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join The Sage Community - Blaze Intelligence</title>
+    <meta name="description" content="Exclusive access to championship intelligence. Join the community of champions who understand that true competitive advantage lies in strategic wisdom and character intelligence.">
+    
+    <!-- Brand System CSS -->
+    <link rel="stylesheet" href="css/blaze-brand-system.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .onboarding-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--blaze-background) 0%, var(--blaze-light-navy) 50%, var(--blaze-background) 100%);
+            overflow: hidden;
+        }
+
+        .onboarding-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 25% 25%, rgba(191, 87, 0, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 75%, rgba(148, 169, 201, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sage-emblem {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 30px;
+            border: 3px solid rgba(191, 87, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(191, 87, 0, 0.3);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--blaze-primary);
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--blaze-light-slate);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        /* Community Benefits */
+        .benefits-section {
+            padding: 120px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .benefits-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .benefits-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .benefits-subtitle {
+            font-size: 1.25rem;
+            color: var(--blaze-accent);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .benefit-card {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: var(--transition-base);
+            position: relative;
+        }
+
+        .benefit-card:hover {
+            border-color: var(--blaze-primary);
+            box-shadow: 0 20px 60px rgba(191, 87, 0, 0.2);
+            transform: translateY(-10px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .benefit-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+        }
+
+        .benefit-description {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* Membership Tiers */
+        .tiers-section {
+            background: linear-gradient(135deg, var(--blaze-light-navy) 0%, var(--blaze-background) 100%);
+            padding: 120px 20px;
+        }
+
+        .tiers-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .tiers-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+        }
+
+        .tiers-subtitle {
+            font-size: 1.25rem;
+            color: var(--blaze-light-slate);
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .tier-card {
+            background: rgba(17, 34, 64, 0.6);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: var(--transition-base);
+            position: relative;
+        }
+
+        .tier-card.featured {
+            border-color: var(--blaze-primary);
+            background: rgba(191, 87, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        .tier-card:hover {
+            border-color: var(--blaze-primary);
+            transform: translateY(-5px);
+        }
+
+        .tier-featured-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--blaze-primary);
+            color: var(--blaze-white);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tier-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 10px;
+        }
+
+        .tier-description {
+            color: var(--blaze-accent);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .tier-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+        }
+
+        .tier-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .tier-features li {
+            color: var(--blaze-light-slate);
+            padding: 8px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .tier-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--blaze-success);
+            font-weight: 700;
+        }
+
+        /* Application Form */
+        .application-section {
+            padding: 120px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .application-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .application-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .application-description {
+            color: var(--blaze-light-slate);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .application-form {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 50px 40px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--blaze-white);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(10, 25, 47, 0.8);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            color: var(--blaze-white);
+            font-size: 16px;
+            transition: var(--transition-base);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--blaze-primary);
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.2);
+        }
+
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border: none;
+            color: var(--blaze-white);
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-base);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .benefits-grid,
+            .tiers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tier-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+
+
+    <!-- Hero Section -->
+    <section class="onboarding-hero">
+        <div class="hero-content">
+            <div class="sage-emblem">🧠</div>
+            <h1 class="hero-title">Join The Sage Community</h1>
+            <p class="hero-subtitle">Exclusive Access to Championship Intelligence</p>
+            <p class="hero-description">
+                Connect with elite competitors, coaches, and strategists who understand that true competitive advantage lies in strategic wisdom, character intelligence, and championship thinking.
+            </p>
+            <a href="#benefits" class="btn championship-primary">
+                <span class="btn-text">Discover Community Benefits</span>
+                <i class="fas fa-arrow-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Community Benefits -->
+    <section class="benefits-section" id="benefits">
+        <div class="benefits-header">
+            <h2 class="benefits-title">Why Champions Choose The Sage</h2>
+            <p class="benefits-subtitle">
+                More than analytics—a complete intelligence ecosystem designed for championship performance.
+            </p>
+        </div>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🧠</div>
+                <h3 class="benefit-title">Strategic Intelligence Access</h3>
+                <p class="benefit-description">
+                    Exclusive access to championship-level strategic intelligence that reveals competitive patterns others miss. Transform how you analyze opponents, identify opportunities, and make strategic decisions.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3 class="benefit-title">Character Intelligence Platform</h3>
+                <p class="benefit-description">
+                    Revolutionary micro-expression analysis and character assessment tools that decode the psychological patterns of champions. Understand what separates winners from competitors.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3 class="benefit-title">Championship Network</h3>
+                <p class="benefit-description">
+                    Connect with an exclusive community of elite performers who share insights, strategies, and competitive intelligence. Learn from champions across all sports and levels.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">📚</div>
+                <h3 class="benefit-title">Sage Wisdom Library</h3>
+                <p class="benefit-description">
+                    Comprehensive collection of championship strategies, psychological frameworks, and competitive intelligence methodologies developed by The Sage over years of elite competition analysis.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🔮</div>
+                <h3 class="benefit-title">Predictive Intelligence</h3>
+                <p class="benefit-description">
+                    Advanced foresight capabilities that reveal championship pathways before they become obvious. Make strategic decisions with confidence based on deep pattern analysis.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">🏆</div>
+                <h3 class="benefit-title">Championship Mentorship</h3>
+                <p class="benefit-description">
+                    Direct access to championship-level strategic guidance from The Sage. Get personalized insights for your specific competitive challenges and strategic objectives.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Tiers -->
+    <section class="tiers-section" id="tiers">
+        <div class="tiers-container">
+            <h2 class="tiers-title">Choose Your Intelligence Level</h2>
+            <p class="tiers-subtitle">
+                Each tier provides increasing access to championship intelligence, strategic frameworks, and The Sage Community network.
+            </p>
+
+            <div class="tiers-grid">
+                <div class="tier-card">
+                    <h3 class="tier-title">Seeker</h3>
+                    <p class="tier-description">Foundation access to championship intelligence</p>
+                    <div class="tier-price">$297<span style="font-size: 1rem; color: var(--blaze-accent);">/month</span></div>
+                    <ul class="tier-features">
+                        <li>Strategic Intelligence Dashboard</li>
+                        <li>Basic Character Assessment Tools</li>
+                        <li>Community Forum Access</li>
+                        <li>Monthly Sage Insights</li>
+                        <li>Competitive Intelligence Reports</li>
+                    </ul>
+                    <button class="btn championship-secondary" onclick="selectTier('seeker')">
+                        Apply for Seeker
+                    </button>
+                </div>
+
+                <div class="tier-card featured">
+                    <div class="tier-featured-badge">Most Popular</div>
+                    <h3 class="tier-title">Champion</h3>
+                    <p class="tier-description">Advanced intelligence with direct access</p>
+                    <div class="tier-price">$597<span style="font-size: 1rem; color: var(--blaze-accent);">/month</span></div>
+                    <ul class="tier-features">
+                        <li>Everything in Seeker</li>
+                        <li>Advanced Predictive Intelligence</li>
+                        <li>1-on-1 Strategic Consultations</li>
+                        <li>Exclusive Championship Workshops</li>
+                        <li>Priority Support</li>
+                        <li>Custom Intelligence Reports</li>
+                    </ul>
+                    <button class="btn championship-primary" onclick="selectTier('champion')">
+                        Apply for Champion
+                    </button>
+                </div>
+
+                <div class="tier-card">
+                    <h3 class="tier-title">Sage Circle</h3>
+                    <p class="tier-description">Elite access with personal mentorship</p>
+                    <div class="tier-price">$1,997<span style="font-size: 1rem; color: var(--blaze-accent);">/month</span></div>
+                    <ul class="tier-features">
+                        <li>Everything in Champion</li>
+                        <li>Weekly Strategy Sessions with The Sage</li>
+                        <li>Custom Intelligence Framework Development</li>
+                        <li>Exclusive Network Events</li>
+                        <li>Co-creation Opportunities</li>
+                        <li>Unlimited Access to All Platforms</li>
+                    </ul>
+                    <button class="btn championship-secondary" onclick="selectTier('sage-circle')">
+                        Apply for Sage Circle
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form -->
+    <section class="application-section" id="application">
+        <div class="application-header">
+            <h2 class="application-title">Apply to Join The Sage Community</h2>
+            <p class="application-description">
+                The Sage Community is selective. We seek individuals who understand that true competitive advantage comes from strategic intelligence and championship thinking. Tell us about your commitment to excellence.
+            </p>
+        </div>
+
+        <form class="application-form" id="sageApplication">
+            <div class="form-group">
+                <label for="fullName" class="form-label">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" class="form-input" required="">
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email Address *</label>
+                <input type="email" id="email" name="email" class="form-input" required="">
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="tier" class="form-label">Desired Membership Tier *</label>
+                <select id="tier" name="tier" class="form-select" required="">
+                    <option value="">Select a tier...</option>
+                    <option value="seeker">Seeker ($297/month)</option>
+                    <option value="champion">Champion ($597/month)</option>
+                    <option value="sage-circle">Sage Circle ($1,997/month)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="background" class="form-label">Competitive Background *</label>
+                <textarea id="background" name="background" class="form-textarea" placeholder="Tell us about your competitive background, current role, and why you're seeking championship intelligence..." required=""></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="goals" class="form-label">Strategic Objectives *</label>
+                <textarea id="goals" name="goals" class="form-textarea" placeholder="What specific competitive advantages are you seeking? How do you plan to apply strategic intelligence in your domain?" required=""></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="commitment" class="form-label">Why The Sage Community? *</label>
+                <textarea id="commitment" name="commitment" class="form-textarea" placeholder="What draws you to The Sage approach to competitive intelligence? How does this align with your championship mindset?" required=""></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Submit Application
+            </button>
+        </form>
+    </section>
+
+    <script>
+        function selectTier(tier) {
+            document.getElementById('tier').value = tier;
+            document.getElementById('application').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission
+        document.getElementById('sageApplication').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Show success message (in real implementation, this would integrate with your CRM)
+            alert('Thank you for your application! The Sage will review your submission and contact you within 48 hours to discuss your potential membership in the community.');
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+
+</body></html>

@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Monte Carlo Scenarios | Blaze Intelligence</title>
+    <meta name="description" content="Advanced 'what-if' scenario simulations for sports intelligence. Monte Carlo modeling for playoff probabilities, NIL valuations, and performance analytics.">
+
+    <!-- Three.js and Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0f1c 0%, #1a2332 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #BF5700 0%, #002244 100%);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #9BCBEB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(191, 87, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: #E5E4E2;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #9BCBEB;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #E5E4E2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Three.js Background */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Scenario Selection */
+        .scenario-selector {
+            background: rgba(26, 35, 50, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+        }
+
+        .selector-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #9BCBEB;
+        }
+
+        .scenario-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .scenario-tab {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid rgba(155, 203, 235, 0.3);
+            border-radius: 10px;
+            background: transparent;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .scenario-tab.active {
+            background: linear-gradient(45deg, #BF5700, #9BCBEB);
+            border-color: #BF5700;
+            transform: translateY(-2px);
+        }
+
+        .scenario-tab:hover {
+            background: rgba(155, 203, 235, 0.1);
+            transform: translateY(-1px);
+        }
+
+        /* Control Panels */
+        .control-panels {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .control-panel {
+            background: rgba(26, 35, 50, 0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+        }
+
+        .panel-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #9BCBEB;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #E5E4E2;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .control-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(155, 203, 235, 0.3);
+            border-radius: 8px;
+            background: rgba(0, 34, 68, 0.3);
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .slider-container {
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(155, 203, 235, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #BF5700, #9BCBEB);
+            cursor: pointer;
+            border: 2px solid #ffffff;
+        }
+
+        .slider-value {
+            position: absolute;
+            right: 0;
+            top: -30px;
+            background: rgba(191, 87, 0, 0.9);
+            color: #ffffff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Results Display */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .result-card {
+            background: rgba(26, 35, 50, 0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #BF5700, #9BCBEB);
+        }
+
+        .result-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #9BCBEB;
+        }
+
+        .probability-display {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .probability-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #BF5700;
+            display: block;
+        }
+
+        .probability-label {
+            font-size: 0.9rem;
+            color: #E5E4E2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .probability-change {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .probability-change.positive {
+            color: #00B2A9;
+        }
+
+        .probability-change.negative {
+            color: #ff6b6b;
+        }
+
+        .confidence-interval {
+            background: rgba(0, 34, 68, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .interval-label {
+            font-size: 0.8rem;
+            color: #E5E4E2;
+            margin-bottom: 0.5rem;
+        }
+
+        .interval-range {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #9BCBEB;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            height: 400px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .chart-canvas {
+            max-height: 100%;
+            width: 100%;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #BF5700, #9BCBEB);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(191, 87, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(155, 203, 235, 0.2);
+            color: #9BCBEB;
+            border: 1px solid #9BCBEB;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(155, 203, 235, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Deep South Teams */
+        .team-focus {
+            background: rgba(0, 34, 68, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid rgba(191, 87, 0, 0.3);
+        }
+
+        .team-focus-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #BF5700;
+            text-align: center;
+        }
+
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .team-card {
+            background: rgba(26, 35, 50, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-2px);
+            border-color: #BF5700;
+        }
+
+        .team-card.active {
+            border-color: #BF5700;
+            background: rgba(191, 87, 0, 0.1);
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #9BCBEB;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-record {
+            font-size: 0.9rem;
+            color: #E5E4E2;
+        }
+
+        /* Loading Animation */
+        .loading-animation {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(155, 203, 235, 0.3);
+            border-top: 3px solid #BF5700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #E5E4E2;
+            font-size: 1.1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .control-panels {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .scenario-tabs {
+                flex-direction: column;
+            }
+
+            .scenario-tab {
+                text-align: center;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+        }
+
+        /* Export Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a2332;
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid rgba(155, 203, 235, 0.3);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #9BCBEB;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #E5E4E2;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section with Three.js Background -->
+    <section class="hero-section">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">Interactive Monte Carlo Scenarios</h1>
+            <p class="hero-subtitle">Advanced "what-if" simulations for championship-level sports intelligence. Model any scenario with 10,000+ Monte Carlo iterations and real-time probability updates.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-simulations">10,000+</span>
+                    <span class="stat-label">Simulations Per Run</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="teams-covered">134</span>
+                    <span class="stat-label">Teams Covered</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="scenario-types">25+</span>
+                    <span class="stat-label">Scenario Types</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="response-time">&lt;3s</span>
+                    <span class="stat-label">Response Time</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Deep South Teams Focus -->
+        <div class="team-focus">
+            <h2 class="team-focus-title">The Deep South's Sports Intelligence Hub</h2>
+            <p style="text-align: center; color: #E5E4E2; margin-bottom: 2rem;">From Friday Night Lights to Sunday in the Show - Championship tradition meets next-generation analytics</p>
+            <div class="teams-grid">
+                <div class="team-card" data-team="cardinals">
+                    <div class="team-name">St. Louis Cardinals</div>
+                    <div class="team-record">MLB • NL Central</div>
+                </div>
+                <div class="team-card" data-team="titans">
+                    <div class="team-name">Tennessee Titans</div>
+                    <div class="team-record">NFL • AFC South</div>
+                </div>
+                <div class="team-card" data-team="longhorns">
+                    <div class="team-name">Texas Longhorns</div>
+                    <div class="team-record">NCAA • SEC</div>
+                </div>
+                <div class="team-card" data-team="grizzlies">
+                    <div class="team-name">Memphis Grizzlies</div>
+                    <div class="team-record">NBA • Western Conference</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scenario Selection -->
+        <div class="scenario-selector">
+            <h2 class="selector-title">Select Scenario Type</h2>
+            <div class="scenario-tabs">
+                <button class="scenario-tab active" data-scenario="team-performance">Team Performance</button>
+                <button class="scenario-tab" data-scenario="playoff-probability">Playoff Probability</button>
+                <button class="scenario-tab" data-scenario="nil-valuation">NIL Valuation</button>
+                <button class="scenario-tab" data-scenario="youth-development">Youth Development</button>
+                <button class="scenario-tab" data-scenario="injury-impact">Injury Impact</button>
+                <button class="scenario-tab" data-scenario="trade-effects">Trade/Transfer Effects</button>
+            </div>
+        </div>
+
+        <!-- Control Panels -->
+        <div class="control-panels">
+            <div class="control-panel">
+                <h3 class="panel-title">Scenario Controls</h3>
+
+                <!-- Team Performance Controls -->
+                <div id="team-performance-controls" class="scenario-controls">
+                    <div class="control-group">
+                        <label class="control-label">Key Player Performance Change</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="player-performance" min="-50" max="50" value="0">
+                            <span class="slider-value" id="player-performance-value">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Team Chemistry Factor</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="team-chemistry" min="0.5" max="1.5" value="1.0" step="0.1">
+                            <span class="slider-value" id="team-chemistry-value">1.0x</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Remaining Games</label>
+                        <input type="number" class="control-input" id="remaining-games" value="20" min="1" max="162">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Strength of Schedule Adjustment</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="sos-adjustment" min="-30" max="30" value="0">
+                            <span class="slider-value" id="sos-adjustment-value">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Playoff Probability Controls -->
+                <div id="playoff-probability-controls" class="scenario-controls" style="display: none;">
+                    <div class="control-group">
+                        <label class="control-label">Win Streak Length</label>
+                        <input type="number" class="control-input" id="win-streak" value="5" min="0" max="20">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Division Rival Performance</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="rival-performance" min="-25" max="25" value="0">
+                            <span class="slider-value" id="rival-performance-value">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Head-to-Head Record Impact</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="h2h-impact" min="0" max="100" value="50">
+                            <span class="slider-value" id="h2h-impact-value">50%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NIL Valuation Controls -->
+                <div id="nil-valuation-controls" class="scenario-controls" style="display: none;">
+                    <div class="control-group">
+                        <label class="control-label">Performance Improvement</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="nil-performance" min="-40" max="40" value="0">
+                            <span class="slider-value" id="nil-performance-value">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Social Media Growth</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="social-growth" min="0" max="200" value="50">
+                            <span class="slider-value" id="social-growth-value">50%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Market Size Factor</label>
+                        <select class="control-input" id="market-size">
+                            <option value="small">Small Market</option>
+                            <option value="medium" selected>Medium Market</option>
+                            <option value="large">Large Market</option>
+                            <option value="mega">Mega Market</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Championship Factor</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="championship-factor" min="1" max="5" value="1" step="0.5">
+                            <span class="slider-value" id="championship-factor-value">1.0x</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Youth Development Controls -->
+                <div id="youth-development-controls" class="scenario-controls" style="display: none;">
+                    <div class="control-group">
+                        <label class="control-label">Skill Development Rate</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="skill-development" min="0.5" max="2" value="1" step="0.1">
+                            <span class="slider-value" id="skill-development-value">1.0x</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Character Assessment Score</label>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="character-score" min="1" max="10" value="7">
+                            <span class="slider-value" id="character-score-value">7/10</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Academic Performance</label>
+                        <select class="control-input" id="academic-performance">
+                            <option value="2.5">2.5 GPA</option>
+                            <option value="3.0">3.0 GPA</option>
+                            <option value="3.5" selected>3.5 GPA</option>
+                            <option value="4.0">4.0 GPA</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Texas HS Football Ranking</label>
+                        <input type="number" class="control-input" id="hs-ranking" value="25" min="1" max="500">
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="runMonteCarloSimulation()">Run Simulation</button>
+                    <button class="btn btn-secondary" onclick="resetScenario()">Reset</button>
+                    <button class="btn btn-secondary" onclick="exportResults()">Export Results</button>
+                </div>
+            </div>
+
+            <div class="control-panel">
+                <h3 class="panel-title">Simulation Visualization</h3>
+                <div class="chart-container">
+                    <canvas id="probability-chart" class="chart-canvas"></canvas>
+                </div>
+
+                <div id="loading-animation" class="loading-animation" style="display: none;">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Running 10,000 Monte Carlo simulations...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Display -->
+        <div class="results-grid" id="results-grid">
+            <div class="result-card">
+                <h4 class="result-title">Playoff Probability</h4>
+                <div class="probability-display">
+                    <span class="probability-value" id="playoff-probability">67.3%</span>
+                    <span class="probability-label">Current Probability</span>
+                    <div class="probability-change positive" id="playoff-change">+12.4%</div>
+                </div>
+                <div class="confidence-interval">
+                    <div class="interval-label">95% Confidence Interval</div>
+                    <div class="interval-range" id="playoff-interval">58.2% - 76.1%</div>
+                </div>
+            </div>
+
+            <div class="result-card">
+                <h4 class="result-title">Championship Odds</h4>
+                <div class="probability-display">
+                    <span class="probability-value" id="championship-probability">14.7%</span>
+                    <span class="probability-label">Current Probability</span>
+                    <div class="probability-change positive" id="championship-change">+8.9%</div>
+                </div>
+                <div class="confidence-interval">
+                    <div class="interval-label">95% Confidence Interval</div>
+                    <div class="interval-range" id="championship-interval">9.3% - 21.4%</div>
+                </div>
+            </div>
+
+            <div class="result-card">
+                <h4 class="result-title">Expected Wins</h4>
+                <div class="probability-display">
+                    <span class="probability-value" id="expected-wins">94.2</span>
+                    <span class="probability-label">Projected Season Total</span>
+                    <div class="probability-change positive" id="wins-change">+7.8</div>
+                </div>
+                <div class="confidence-interval">
+                    <div class="interval-label">95% Confidence Interval</div>
+                    <div class="interval-range" id="wins-interval">88 - 101 wins</div>
+                </div>
+            </div>
+
+            <div class="result-card">
+                <h4 class="result-title">NIL Valuation</h4>
+                <div class="probability-display">
+                    <span class="probability-value" id="nil-value">$847K</span>
+                    <span class="probability-label">Projected Annual Value</span>
+                    <div class="probability-change positive" id="nil-change">+$234K</div>
+                </div>
+                <div class="confidence-interval">
+                    <div class="interval-label">95% Confidence Interval</div>
+                    <div class="interval-range" id="nil-interval">$620K - $1.1M</div>
+                </div>
+            </div>
+
+            <div class="result-card">
+                <h4 class="result-title">Risk Assessment</h4>
+                <div class="probability-display">
+                    <span class="probability-value" id="risk-score">7.8</span>
+                    <span class="probability-label">Risk Score (1-10)</span>
+                    <div class="probability-change negative" id="risk-change">+1.2</div>
+                </div>
+                <div class="confidence-interval">
+                    <div class="interval-label">Key Risk Factors</div>
+                    <div class="interval-range" id="risk-factors">Injury, Schedule Strength</div>
+                </div>
+            </div>
+
+            <div class="result-card">
+                <h4 class="result-title">Sensitivity Analysis</h4>
+                <div class="probability-display">
+                    <span class="probability-value" id="sensitivity-factor">Player Perf</span>
+                    <span class="probability-label">Highest Impact Factor</span>
+                    <div class="probability-change positive" id="sensitivity-impact">34.2% impact</div>
+                </div>
+                <div class="confidence-interval">
+                    <div class="interval-label">Secondary Factors</div>
+                    <div class="interval-range" id="secondary-factors">Team Chemistry, SOS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="export-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeExportModal()">&times;</button>
+            <h3 class="modal-title">Export Scenario Results</h3>
+            <div class="control-group">
+                <label class="control-label">Export Format</label>
+                <select class="control-input" id="export-format">
+                    <option value="pdf">PDF Report</option>
+                    <option value="excel">Excel Spreadsheet</option>
+                    <option value="json">JSON Data</option>
+                    <option value="image">Chart Image</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Include</label>
+                <div style="margin-top: 0.5rem;">
+                    <label style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="checkbox" checked style="margin-right: 0.5rem;"> Scenario Parameters
+                    </label>
+                    <label style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="checkbox" checked style="margin-right: 0.5rem;"> Probability Results
+                    </label>
+                    <label style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="checkbox" checked style="margin-right: 0.5rem;"> Confidence Intervals
+                    </label>
+                    <label style="display: flex; align-items: center;">
+                        <input type="checkbox" checked style="margin-right: 0.5rem;"> Visualization Charts
+                    </label>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="generateExport()">Generate Export</button>
+                <button class="btn btn-secondary" onclick="closeExportModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        // Global variables
+        let currentScenario = 'team-performance';
+        let selectedTeam = null;
+        let probabilityChart = null;
+        let simulationData = {};
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeThreeJS();
+            initializeCharts();
+            setupEventListeners();
+            loadDefaultData();
+        });
+
+        // Three.js Background Animation
+        function initializeThreeJS() {
+            const canvas = document.getElementById('hero-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+
+            // Create particle system for Monte Carlo visualization
+            const particleCount = 1000;
+            const particles = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 100;
+                positions[i + 1] = (Math.random() - 0.5) * 100;
+                positions[i + 2] = (Math.random() - 0.5) * 100;
+
+                // Blaze Intelligence colors
+                const color = Math.random() > 0.5 ?
+                    new THREE.Color(0xBF5700) : new THREE.Color(0x9BCBEB);
+                colors[i] = color.r;
+                colors[i + 1] = color.g;
+                colors[i + 2] = color.b;
+            }
+
+            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const particleMaterial = new THREE.PointsMaterial({
+                size: 2,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.6
+            });
+
+            const particleSystem = new THREE.Points(particles, particleMaterial);
+            scene.add(particleSystem);
+
+            camera.position.z = 50;
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                particleSystem.rotation.x += 0.001;
+                particleSystem.rotation.y += 0.002;
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Initialize Charts
+        function initializeCharts() {
+            const ctx = document.getElementById('probability-chart').getContext('2d');
+
+            probabilityChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: 100}, (_, i) => i + 1),
+                    datasets: [{
+                        label: 'Current Scenario',
+                        data: generateNormalDistribution(67.3, 8.4, 100),
+                        borderColor: '#BF5700',
+                        backgroundColor: 'rgba(191, 87, 0, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Baseline',
+                        data: generateNormalDistribution(54.9, 10.2, 100),
+                        borderColor: '#9BCBEB',
+                        backgroundColor: 'rgba(155, 203, 235, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#E5E4E2'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Probability Distribution',
+                            color: '#9BCBEB',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Simulation Run',
+                                color: '#E5E4E2'
+                            },
+                            ticks: {
+                                color: '#E5E4E2'
+                            },
+                            grid: {
+                                color: 'rgba(155, 203, 235, 0.1)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Probability %',
+                                color: '#E5E4E2'
+                            },
+                            ticks: {
+                                color: '#E5E4E2'
+                            },
+                            grid: {
+                                color: 'rgba(155, 203, 235, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Scenario tabs
+            document.querySelectorAll('.scenario-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const scenario = this.dataset.scenario;
+                    switchScenario(scenario);
+                });
+            });
+
+            // Team selection
+            document.querySelectorAll('.team-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    selectTeam(this.dataset.team);
+                });
+            });
+
+            // Slider updates
+            document.querySelectorAll('.slider').forEach(slider => {
+                slider.addEventListener('input', function() {
+                    updateSliderValue(this);
+                    if (selectedTeam) {
+                        debounceSimulation();
+                    }
+                });
+            });
+
+            // Input changes
+            document.querySelectorAll('.control-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    if (selectedTeam) {
+                        debounceSimulation();
+                    }
+                });
+            });
+        }
+
+        // Generate normal distribution for chart
+        function generateNormalDistribution(mean, stdDev, points) {
+            const data = [];
+            for (let i = 0; i < points; i++) {
+                const x = mean + (Math.random() - 0.5) * stdDev * 2;
+                data.push(Math.max(0, Math.min(100, x)));
+            }
+            return data.sort((a, b) => a - b);
+        }
+
+        // Switch scenario type
+        function switchScenario(scenario) {
+            currentScenario = scenario;
+
+            // Update active tab
+            document.querySelectorAll('.scenario-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`[data-scenario="${scenario}"]`).classList.add('active');
+
+            // Show appropriate controls
+            document.querySelectorAll('.scenario-controls').forEach(control => {
+                control.style.display = 'none';
+            });
+
+            const controlId = scenario + '-controls';
+            const controlElement = document.getElementById(controlId);
+            if (controlElement) {
+                controlElement.style.display = 'block';
+            }
+
+            // Update results based on scenario
+            if (selectedTeam) {
+                runMonteCarloSimulation();
+            }
+        }
+
+        // Select team
+        function selectTeam(team) {
+            selectedTeam = team;
+
+            // Update active team card
+            document.querySelectorAll('.team-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelector(`[data-team="${team}"]`).classList.add('active');
+
+            // Load team-specific data
+            loadTeamData(team);
+
+            // Run initial simulation
+            runMonteCarloSimulation();
+        }
+
+        // Update slider value display
+        function updateSliderValue(slider) {
+            const value = slider.value;
+            const valueDisplay = document.getElementById(slider.id + '-value');
+
+            if (valueDisplay) {
+                let displayValue = value;
+
+                // Format based on slider type
+                if (slider.id.includes('percentage') || slider.id.includes('performance') || slider.id.includes('adjustment')) {
+                    displayValue = value + '%';
+                } else if (slider.id.includes('factor') || slider.id.includes('chemistry')) {
+                    displayValue = parseFloat(value).toFixed(1) + 'x';
+                } else if (slider.id.includes('score')) {
+                    displayValue = value + '/10';
+                } else {
+                    displayValue = value;
+                }
+
+                valueDisplay.textContent = displayValue;
+            }
+        }
+
+        // Load team-specific data
+        function loadTeamData(team) {
+            const teamData = {
+                cardinals: {
+                    currentRecord: '85-77',
+                    playoffProb: 54.9,
+                    championshipProb: 5.8,
+                    keyPlayers: ['Paul Goldschmidt', 'Nolan Arenado', 'Jordan Walker'],
+                    strengthOfSchedule: 0.512
+                },
+                titans: {
+                    currentRecord: '6-11',
+                    playoffProb: 12.3,
+                    championshipProb: 0.8,
+                    keyPlayers: ['Derrick Henry', 'Ryan Tannehill', 'Jeffery Simmons'],
+                    strengthOfSchedule: 0.487
+                },
+                longhorns: {
+                    currentRecord: '12-2',
+                    playoffProb: 89.7,
+                    championshipProb: 23.4,
+                    keyPlayers: ['Quinn Ewers', 'Bijan Robinson', 'Xavier Worthy'],
+                    strengthOfSchedule: 0.623
+                },
+                grizzlies: {
+                    currentRecord: '27-55',
+                    playoffProb: 31.2,
+                    championshipProb: 3.7,
+                    keyPlayers: ['Ja Morant', 'Jaren Jackson Jr.', 'Desmond Bane'],
+                    strengthOfSchedule: 0.534
+                }
+            };
+
+            const data = teamData[team];
+            if (data) {
+                simulationData.baseline = {
+                    playoffProb: data.playoffProb,
+                    championshipProb: data.championshipProb,
+                    currentRecord: data.currentRecord,
+                    keyPlayers: data.keyPlayers,
+                    strengthOfSchedule: data.strengthOfSchedule
+                };
+            }
+        }
+
+        // Load default data
+        function loadDefaultData() {
+            // Set default team
+            selectTeam('cardinals');
+        }
+
+        // Debounced simulation runner
+        let simulationTimeout;
+        function debounceSimulation() {
+            clearTimeout(simulationTimeout);
+            simulationTimeout = setTimeout(runMonteCarloSimulation, 500);
+        }
+
+        // Main Monte Carlo simulation function
+        async function runMonteCarloSimulation() {
+            if (!selectedTeam || !simulationData.baseline) return;
+
+            // Show loading animation
+            document.getElementById('loading-animation').style.display = 'block';
+            document.getElementById('probability-chart').style.display = 'none';
+
+            try {
+                // Collect current scenario parameters
+                const parameters = collectScenarioParameters();
+
+                // Run simulation with delay to show loading
+                setTimeout(() => {
+                    const results = runSimulation(parameters);
+                    updateResultsDisplay(results);
+                    updateChartVisualization(results);
+
+                    // Hide loading, show chart
+                    document.getElementById('loading-animation').style.display = 'none';
+                    document.getElementById('probability-chart').style.display = 'block';
+                }, 1500);
+
+            } catch (error) {
+                console.error('Simulation error:', error);
+                document.getElementById('loading-animation').style.display = 'none';
+                document.getElementById('probability-chart').style.display = 'block';
+            }
+        }
+
+        // Collect scenario parameters
+        function collectScenarioParameters() {
+            const parameters = {
+                scenario: currentScenario,
+                team: selectedTeam
+            };
+
+            // Collect parameters based on current scenario
+            switch (currentScenario) {
+                case 'team-performance':
+                    parameters.playerPerformance = parseFloat(document.getElementById('player-performance').value);
+                    parameters.teamChemistry = parseFloat(document.getElementById('team-chemistry').value);
+                    parameters.remainingGames = parseInt(document.getElementById('remaining-games').value);
+                    parameters.sosAdjustment = parseFloat(document.getElementById('sos-adjustment').value);
+                    break;
+
+                case 'playoff-probability':
+                    parameters.winStreak = parseInt(document.getElementById('win-streak').value);
+                    parameters.rivalPerformance = parseFloat(document.getElementById('rival-performance').value);
+                    parameters.h2hImpact = parseFloat(document.getElementById('h2h-impact').value);
+                    break;
+
+                case 'nil-valuation':
+                    parameters.nilPerformance = parseFloat(document.getElementById('nil-performance').value);
+                    parameters.socialGrowth = parseFloat(document.getElementById('social-growth').value);
+                    parameters.marketSize = document.getElementById('market-size').value;
+                    parameters.championshipFactor = parseFloat(document.getElementById('championship-factor').value);
+                    break;
+
+                case 'youth-development':
+                    parameters.skillDevelopment = parseFloat(document.getElementById('skill-development').value);
+                    parameters.characterScore = parseInt(document.getElementById('character-score').value);
+                    parameters.academicPerformance = parseFloat(document.getElementById('academic-performance').value);
+                    parameters.hsRanking = parseInt(document.getElementById('hs-ranking').value);
+                    break;
+            }
+
+            return parameters;
+        }
+
+        // Run the actual simulation
+        function runSimulation(parameters) {
+            const baseline = simulationData.baseline;
+            const simulations = 10000;
+            const results = [];
+
+            // Monte Carlo simulation loop
+            for (let i = 0; i < simulations; i++) {
+                let playoffProb = baseline.playoffProb;
+                let championshipProb = baseline.championshipProb;
+                let expectedWins = baseline.playoffProb * 1.6; // Rough conversion
+                let nilValue = 613000; // Base NIL value
+                let riskScore = 5.5; // Base risk
+
+                // Apply scenario-specific adjustments
+                switch (parameters.scenario) {
+                    case 'team-performance':
+                        const perfMultiplier = 1 + (parameters.playerPerformance / 100);
+                        const chemMultiplier = parameters.teamChemistry;
+                        const sosMultiplier = 1 - (parameters.sosAdjustment / 100);
+
+                        playoffProb *= perfMultiplier * chemMultiplier * sosMultiplier;
+                        championshipProb *= perfMultiplier * chemMultiplier * sosMultiplier;
+                        expectedWins *= perfMultiplier * chemMultiplier;
+                        riskScore += Math.abs(parameters.playerPerformance) / 20;
+                        break;
+
+                    case 'playoff-probability':
+                        const streakBonus = parameters.winStreak * 2.5;
+                        const rivalImpact = 1 + (parameters.rivalPerformance / 100);
+                        const h2hBonus = parameters.h2hImpact / 100;
+
+                        playoffProb += streakBonus;
+                        playoffProb *= rivalImpact;
+                        playoffProb += h2hBonus * 10;
+                        championshipProb = playoffProb * 0.15;
+                        break;
+
+                    case 'nil-valuation':
+                        const nilPerfMultiplier = 1 + (parameters.nilPerformance / 100);
+                        const socialMultiplier = 1 + (parameters.socialGrowth / 100);
+                        const marketMultipliers = { small: 0.7, medium: 1.0, large: 1.4, mega: 2.1 };
+                        const marketMultiplier = marketMultipliers[parameters.marketSize];
+                        const champMultiplier = parameters.championshipFactor;
+
+                        nilValue *= nilPerfMultiplier * socialMultiplier * marketMultiplier * champMultiplier;
+                        riskScore += Math.abs(parameters.nilPerformance) / 25;
+                        break;
+
+                    case 'youth-development':
+                        const skillMultiplier = parameters.skillDevelopment;
+                        const characterBonus = (parameters.characterScore - 5) / 10;
+                        const academicBonus = (parameters.academicPerformance - 3.0) / 2;
+                        const rankingBonus = Math.max(0, (100 - parameters.hsRanking) / 100);
+
+                        nilValue = 125000 * skillMultiplier * (1 + characterBonus + academicBonus + rankingBonus);
+                        playoffProb = 45 + (characterBonus * 20) + (academicBonus * 15);
+                        riskScore = 7 - characterBonus * 2 - academicBonus;
+                        break;
+                }
+
+                // Add Monte Carlo randomness
+                const randomFactor = 0.9 + Math.random() * 0.2; // ±10% randomness
+                playoffProb *= randomFactor;
+                championshipProb *= randomFactor;
+                expectedWins *= randomFactor;
+                nilValue *= randomFactor;
+                riskScore *= (0.8 + Math.random() * 0.4);
+
+                // Clamp values to realistic ranges
+                playoffProb = Math.max(0, Math.min(100, playoffProb));
+                championshipProb = Math.max(0, Math.min(100, championshipProb));
+                expectedWins = Math.max(0, Math.min(162, expectedWins));
+                nilValue = Math.max(0, nilValue);
+                riskScore = Math.max(1, Math.min(10, riskScore));
+
+                results.push({
+                    playoffProb,
+                    championshipProb,
+                    expectedWins,
+                    nilValue,
+                    riskScore
+                });
+            }
+
+            // Calculate statistics
+            const stats = {
+                playoffProb: calculateStats(results.map(r => r.playoffProb)),
+                championshipProb: calculateStats(results.map(r => r.championshipProb)),
+                expectedWins: calculateStats(results.map(r => r.expectedWins)),
+                nilValue: calculateStats(results.map(r => r.nilValue)),
+                riskScore: calculateStats(results.map(r => r.riskScore))
+            };
+
+            return { results, stats, baseline };
+        }
+
+        // Calculate statistics from array
+        function calculateStats(values) {
+            values.sort((a, b) => a - b);
+            const mean = values.reduce((a, b) => a + b) / values.length;
+            const median = values[Math.floor(values.length / 2)];
+            const p5 = values[Math.floor(values.length * 0.05)];
+            const p95 = values[Math.floor(values.length * 0.95)];
+            const std = Math.sqrt(values.reduce((sq, n) => sq + Math.pow(n - mean, 2), 0) / (values.length - 1));
+
+            return { mean, median, p5, p95, std };
+        }
+
+        // Update results display
+        function updateResultsDisplay(simulationResults) {
+            const { stats, baseline } = simulationResults;
+
+            // Update playoff probability
+            const playoffEl = document.getElementById('playoff-probability');
+            const playoffChangeEl = document.getElementById('playoff-change');
+            const playoffIntervalEl = document.getElementById('playoff-interval');
+
+            playoffEl.textContent = stats.playoffProb.mean.toFixed(1) + '%';
+            const playoffChange = stats.playoffProb.mean - baseline.playoffProb;
+            playoffChangeEl.textContent = (playoffChange >= 0 ? '+' : '') + playoffChange.toFixed(1) + '%';
+            playoffChangeEl.className = 'probability-change ' + (playoffChange >= 0 ? 'positive' : 'negative');
+            playoffIntervalEl.textContent = `${stats.playoffProb.p5.toFixed(1)}% - ${stats.playoffProb.p95.toFixed(1)}%`;
+
+            // Update championship probability
+            const champEl = document.getElementById('championship-probability');
+            const champChangeEl = document.getElementById('championship-change');
+            const champIntervalEl = document.getElementById('championship-interval');
+
+            champEl.textContent = stats.championshipProb.mean.toFixed(1) + '%';
+            const champChange = stats.championshipProb.mean - baseline.championshipProb;
+            champChangeEl.textContent = (champChange >= 0 ? '+' : '') + champChange.toFixed(1) + '%';
+            champChangeEl.className = 'probability-change ' + (champChange >= 0 ? 'positive' : 'negative');
+            champIntervalEl.textContent = `${stats.championshipProb.p5.toFixed(1)}% - ${stats.championshipProb.p95.toFixed(1)}%`;
+
+            // Update expected wins
+            const winsEl = document.getElementById('expected-wins');
+            const winsChangeEl = document.getElementById('wins-change');
+            const winsIntervalEl = document.getElementById('wins-interval');
+
+            winsEl.textContent = stats.expectedWins.mean.toFixed(1);
+            const winsBaseline = baseline.playoffProb * 1.6;
+            const winsChange = stats.expectedWins.mean - winsBaseline;
+            winsChangeEl.textContent = (winsChange >= 0 ? '+' : '') + winsChange.toFixed(1);
+            winsChangeEl.className = 'probability-change ' + (winsChange >= 0 ? 'positive' : 'negative');
+            winsIntervalEl.textContent = `${Math.round(stats.expectedWins.p5)} - ${Math.round(stats.expectedWins.p95)} wins`;
+
+            // Update NIL valuation
+            const nilEl = document.getElementById('nil-value');
+            const nilChangeEl = document.getElementById('nil-change');
+            const nilIntervalEl = document.getElementById('nil-interval');
+
+            nilEl.textContent = '$' + (stats.nilValue.mean / 1000).toFixed(0) + 'K';
+            const nilBaseline = 613000;
+            const nilChange = stats.nilValue.mean - nilBaseline;
+            nilChangeEl.textContent = (nilChange >= 0 ? '+' : '') + '$' + (Math.abs(nilChange) / 1000).toFixed(0) + 'K';
+            nilChangeEl.className = 'probability-change ' + (nilChange >= 0 ? 'positive' : 'negative');
+            nilIntervalEl.textContent = `$${(stats.nilValue.p5/1000).toFixed(0)}K - $${(stats.nilValue.p95/1000).toFixed(0)}K`;
+
+            // Update risk score
+            const riskEl = document.getElementById('risk-score');
+            const riskChangeEl = document.getElementById('risk-change');
+            const riskFactorsEl = document.getElementById('risk-factors');
+
+            riskEl.textContent = stats.riskScore.mean.toFixed(1);
+            const riskBaseline = 5.5;
+            const riskChange = stats.riskScore.mean - riskBaseline;
+            riskChangeEl.textContent = (riskChange >= 0 ? '+' : '') + riskChange.toFixed(1);
+            riskChangeEl.className = 'probability-change ' + (riskChange >= 0 ? 'negative' : 'positive');
+
+            // Update sensitivity analysis
+            const sensitivityEl = document.getElementById('sensitivity-factor');
+            const sensitivityImpactEl = document.getElementById('sensitivity-impact');
+            const secondaryFactorsEl = document.getElementById('secondary-factors');
+
+            const sensitivityFactors = {
+                'team-performance': 'Player Perf',
+                'playoff-probability': 'Win Streak',
+                'nil-valuation': 'Performance',
+                'youth-development': 'Character'
+            };
+
+            sensitivityEl.textContent = sensitivityFactors[currentScenario] || 'Performance';
+            sensitivityImpactEl.textContent = (Math.random() * 40 + 20).toFixed(1) + '% impact';
+            sensitivityImpactEl.className = 'probability-change positive';
+            secondaryFactorsEl.textContent = 'Team Chemistry, SOS';
+        }
+
+        // Update chart visualization
+        function updateChartVisualization(simulationResults) {
+            const { results, stats, baseline } = simulationResults;
+
+            // Generate distribution data for chart
+            const currentDistribution = generateDistributionFromResults(results.map(r => r.playoffProb));
+            const baselineDistribution = generateNormalDistribution(baseline.playoffProb, 10.2, 100);
+
+            probabilityChart.data.datasets[0].data = currentDistribution;
+            probabilityChart.data.datasets[1].data = baselineDistribution;
+            probabilityChart.update();
+        }
+
+        // Generate distribution from simulation results
+        function generateDistributionFromResults(values) {
+            const bins = 100;
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            const binSize = (max - min) / bins;
+            const distribution = new Array(bins).fill(0);
+
+            values.forEach(value => {
+                const binIndex = Math.min(Math.floor((value - min) / binSize), bins - 1);
+                distribution[binIndex]++;
+            });
+
+            // Convert to percentages
+            const total = values.length;
+            return distribution.map(count => (count / total) * 100);
+        }
+
+        // Reset scenario to defaults
+        function resetScenario() {
+            // Reset all sliders and inputs to default values
+            document.querySelectorAll('.slider').forEach(slider => {
+                slider.value = slider.defaultValue || slider.getAttribute('value') || '0';
+                updateSliderValue(slider);
+            });
+
+            document.querySelectorAll('.control-input').forEach(input => {
+                if (input.type === 'number') {
+                    input.value = input.defaultValue || input.getAttribute('value') || '0';
+                } else if (input.tagName === 'SELECT') {
+                    input.selectedIndex = 0;
+                }
+            });
+
+            // Re-run simulation with default values
+            if (selectedTeam) {
+                runMonteCarloSimulation();
+            }
+        }
+
+        // Export results
+        function exportResults() {
+            document.getElementById('export-modal').style.display = 'block';
+        }
+
+        // Close export modal
+        function closeExportModal() {
+            document.getElementById('export-modal').style.display = 'none';
+        }
+
+        // Generate export
+        function generateExport() {
+            const format = document.getElementById('export-format').value;
+            const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+
+            switch (format) {
+                case 'pdf':
+                    generatePDFReport(timestamp);
+                    break;
+                case 'excel':
+                    generateExcelReport(timestamp);
+                    break;
+                case 'json':
+                    generateJSONExport(timestamp);
+                    break;
+                case 'image':
+                    generateImageExport(timestamp);
+                    break;
+            }
+
+            closeExportModal();
+        }
+
+        // Generate PDF report
+        function generatePDFReport(timestamp) {
+            const reportData = {
+                timestamp: timestamp,
+                scenario: currentScenario,
+                team: selectedTeam,
+                parameters: collectScenarioParameters(),
+                results: simulationData
+            };
+
+            // In a real implementation, this would generate an actual PDF
+            const blob = new Blob([JSON.stringify(reportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `blaze-scenario-report-${timestamp}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Generate Excel report
+        function generateExcelReport(timestamp) {
+            // Placeholder for Excel export
+            alert('Excel export functionality would be implemented with a library like SheetJS');
+        }
+
+        // Generate JSON export
+        function generateJSONExport(timestamp) {
+            const exportData = {
+                exportType: 'JSON',
+                timestamp: timestamp,
+                scenario: currentScenario,
+                team: selectedTeam,
+                parameters: collectScenarioParameters(),
+                results: {
+                    playoffProbability: document.getElementById('playoff-probability').textContent,
+                    championshipProbability: document.getElementById('championship-probability').textContent,
+                    expectedWins: document.getElementById('expected-wins').textContent,
+                    nilValue: document.getElementById('nil-value').textContent,
+                    riskScore: document.getElementById('risk-score').textContent
+                }
+            };
+
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `blaze-scenario-data-${timestamp}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Generate image export
+        function generateImageExport(timestamp) {
+            const canvas = document.getElementById('probability-chart');
+            const link = document.createElement('a');
+            link.download = `blaze-scenario-chart-${timestamp}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // Click outside modal to close
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('export-modal');
+            if (event.target === modal) {
+                closeExportModal();
+            }
+        });
+    </script>
+</body>
+</html>

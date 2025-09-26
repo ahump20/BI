@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Components Test</title>
+
+    <!-- React 18 -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <style>
+        body {
+            background: #0a0a0f;
+            color: #fff;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 20px;
+        }
+        #test-root {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .test-card {
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.05);
+        }
+        .status-ok { color: #4ade80; }
+        .status-error { color: #f87171; }
+    </style>
+</head>
+<body>
+    <div id="test-root">
+        <h1>React Components Test</h1>
+    </div>
+
+    <script>
+        // Wait for React to load
+        function initReactComponents() {
+            const React = window.React;
+            const ReactDOM = window.ReactDOM;
+
+            if (!React || !ReactDOM) {
+                console.error('React not loaded!');
+                document.getElementById('test-root').innerHTML += '<p class="status-error">React failed to load!</p>';
+                return;
+            }
+
+            console.log('React version:', React.version);
+
+            // Simple test component
+            const TestComponent = () => {
+                const [count, setCount] = React.useState(0);
+                const [data, setData] = React.useState(null);
+                const [loading, setLoading] = React.useState(false);
+
+                React.useEffect(() => {
+                    // Mock data instead of real API call
+                    setLoading(true);
+                    setTimeout(() => {
+                        setData({
+                            teams: ['Cardinals', 'Titans', 'Grizzlies', 'Longhorns'],
+                            status: 'Live data simulation active'
+                        });
+                        setLoading(false);
+                    }, 1000);
+                }, []);
+
+                return React.createElement('div', {className: 'test-card'},
+                    React.createElement('h2', null, '✅ React is Working!'),
+                    React.createElement('p', {className: 'status-ok'}, 'React version: ' + React.version),
+                    React.createElement('button', {
+                        onClick: () => setCount(count + 1),
+                        style: {
+                            padding: '8px 16px',
+                            background: '#BF5700',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            marginTop: '10px'
+                        }
+                    }, 'Click Count: ' + count),
+                    React.createElement('div', {style: {marginTop: '20px'}},
+                        loading ? 'Loading data...' :
+                        data ? React.createElement('div', null,
+                            React.createElement('h3', null, 'Mock Sports Data:'),
+                            React.createElement('p', null, 'Status: ' + data.status),
+                            React.createElement('ul', null,
+                                data.teams.map(team =>
+                                    React.createElement('li', {key: team}, team)
+                                )
+                            )
+                        ) : null
+                    )
+                );
+            };
+
+            // Mount the component
+            const root = ReactDOM.createRoot(document.getElementById('test-root'));
+            root.render(React.createElement(TestComponent));
+        }
+
+        // Check if React is loaded
+        if (window.React && window.ReactDOM) {
+            initReactComponents();
+        } else {
+            // Wait for React to load
+            let attempts = 0;
+            const checkReact = setInterval(() => {
+                attempts++;
+                if (window.React && window.ReactDOM) {
+                    clearInterval(checkReact);
+                    initReactComponents();
+                } else if (attempts > 20) {
+                    clearInterval(checkReact);
+                    console.error('React failed to load after 20 attempts');
+                    document.getElementById('test-root').innerHTML += '<p class="status-error">React failed to load!</p>';
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>

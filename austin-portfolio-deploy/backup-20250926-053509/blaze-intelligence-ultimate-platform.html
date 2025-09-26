@@ -1,0 +1,2540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Next-Gen Sports Analytics Platform</title>
+    <meta name="description" content="Revolutionary sports intelligence platform combining AI, real-time data, and predictive analytics">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tensorflow@4.10.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    
+    <style>
+        :root {
+            --blaze-orange: #FF6B00;
+            --blaze-gold: #FFD700;
+            --blaze-dark: #0A0A0F;
+            --blaze-darker: #050508;
+            --blaze-panel: rgba(20, 20, 30, 0.95);
+            --blaze-border: rgba(255, 107, 0, 0.2);
+            --blaze-success: #00FF88;
+            --blaze-warning: #FFB800;
+            --blaze-error: #FF3366;
+            --blaze-info: #00D4FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+            background: var(--blaze-darker);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Loading Screen */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--blaze-darker);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(255, 107, 0, 0.1);
+            border-top-color: var(--blaze-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-size: 18px;
+            color: var(--blaze-gold);
+            font-weight: 600;
+        }
+
+        .loading-progress {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 107, 0, 0.1);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .loading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blaze-orange), var(--blaze-gold));
+            animation: loadProgress 2s ease-in-out;
+        }
+
+        @keyframes loadProgress {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Hero Canvas */
+        #heroCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Navigation */
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--blaze-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blaze-orange), var(--blaze-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            color: var(--blaze-gold);
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--blaze-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .nav-status {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--blaze-success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+
+        /* Main Container */
+        .main-container {
+            position: relative;
+            min-height: 100vh;
+            padding-top: 70px;
+            z-index: 1;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .dashboard-header {
+            margin-bottom: 30px;
+        }
+
+        .dashboard-title {
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blaze-orange), var(--blaze-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 16px;
+        }
+
+        .dashboard-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--blaze-orange), var(--blaze-gold));
+            border: none;
+            border-radius: 8px;
+            color: var(--blaze-dark);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease;
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
+        }
+
+        .action-btn.secondary {
+            background: transparent;
+            border: 1px solid var(--blaze-border);
+            color: var(--blaze-gold);
+        }
+
+        /* Widget System */
+        .widget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .widget {
+            background: var(--blaze-panel);
+            border: 1px solid var(--blaze-border);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .widget::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--blaze-orange), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .widget:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(255, 107, 0, 0.1);
+        }
+
+        .widget.wide {
+            grid-column: span 2;
+        }
+
+        .widget.tall {
+            grid-row: span 2;
+        }
+
+        .widget.featured {
+            grid-column: span 3;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.05), rgba(255, 215, 0, 0.05));
+        }
+
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .widget-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--blaze-gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .widget-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--blaze-orange), var(--blaze-gold));
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .widget-badge {
+            padding: 4px 10px;
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--blaze-success);
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .widget-content {
+            position: relative;
+        }
+
+        /* Metrics Display */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .metric-card {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: scale(1.02);
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blaze-orange), var(--blaze-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .metric-change {
+            font-size: 13px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .metric-change.positive {
+            color: var(--blaze-success);
+        }
+
+        .metric-change.negative {
+            color: var(--blaze-error);
+        }
+
+        /* Chart Containers */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .chart-container.large {
+            height: 400px;
+        }
+
+        /* Live Feed */
+        .live-feed {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+        }
+
+        .feed-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: rgba(255, 107, 0, 0.05);
+            border-left: 3px solid var(--blaze-orange);
+            border-radius: 6px;
+            font-size: 13px;
+            animation: slideInLeft 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes slideInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .feed-timestamp {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+        .feed-content {
+            flex: 1;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .feed-badge {
+            padding: 2px 8px;
+            background: rgba(255, 107, 0, 0.2);
+            color: var(--blaze-gold);
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 20px;
+        }
+
+        .data-table thead {
+            background: rgba(255, 107, 0, 0.05);
+        }
+
+        .data-table th {
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--blaze-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--blaze-border);
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .data-table tr:hover {
+            background: rgba(255, 107, 0, 0.03);
+        }
+
+        /* Progress Bars */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blaze-orange), var(--blaze-gold));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmerProgress 2s infinite;
+        }
+
+        @keyframes shimmerProgress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Modal System */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 5000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--blaze-panel);
+            border: 1px solid var(--blaze-border);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--blaze-border);
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blaze-orange), var(--blaze-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 107, 0, 0.2);
+            color: var(--blaze-gold);
+            transform: rotate(90deg);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab:hover {
+            color: var(--blaze-gold);
+        }
+
+        .tab.active {
+            color: var(--blaze-gold);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--blaze-gold);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--blaze-orange);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 40px;
+        }
+
+        /* Switch Toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+
+        .switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .switch-slider {
+            background: var(--blaze-orange);
+        }
+
+        input:checked + .switch-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Notification System */
+        .notifications {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            z-index: 6000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .notification {
+            padding: 15px 20px;
+            background: var(--blaze-panel);
+            border: 1px solid var(--blaze-border);
+            border-radius: 12px;
+            min-width: 300px;
+            animation: slideInRight 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .notification.success {
+            border-color: var(--blaze-success);
+        }
+
+        .notification.error {
+            border-color: var(--blaze-error);
+        }
+
+        .notification.warning {
+            border-color: var(--blaze-warning);
+        }
+
+        .notification-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .notification.success .notification-icon {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--blaze-success);
+        }
+
+        .notification.error .notification-icon {
+            background: rgba(255, 51, 102, 0.2);
+            color: var(--blaze-error);
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .notification-message {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Video Container */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        #videoElement {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #poseCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Heatmap */
+        .heatmap-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Code Editor */
+        .code-editor {
+            background: #1e1e2e;
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .code-line-number {
+            color: rgba(255, 255, 255, 0.3);
+            margin-right: 20px;
+            user-select: none;
+            min-width: 30px;
+        }
+
+        .code-content {
+            color: #e1e4e8;
+        }
+
+        .code-keyword {
+            color: #ff6b00;
+        }
+
+        .code-string {
+            color: #00ff88;
+        }
+
+        .code-comment {
+            color: rgba(255, 255, 255, 0.4);
+            font-style: italic;
+        }
+
+        /* Terminal */
+        .terminal {
+            background: #0c0c0f;
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .terminal-line {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .terminal-prompt {
+            color: var(--blaze-gold);
+        }
+
+        .terminal-command {
+            color: var(--blaze-success);
+        }
+
+        .terminal-output {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: var(--blaze-gold);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .widget.featured {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navigation {
+                padding: 0 20px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .dashboard-container {
+                padding: 20px;
+            }
+
+            .widget-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .widget.wide,
+            .widget.featured {
+                grid-column: span 1;
+            }
+
+            .modal-content {
+                padding: 20px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .navigation,
+            .action-btn,
+            .modal {
+                display: none;
+            }
+
+            .widget {
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 107, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 107, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-text">Initializing Blaze Intelligence</div>
+        <div class="loading-progress">
+            <div class="loading-progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- Hero Canvas -->
+    <canvas id="heroCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-logo">
+            🔥 Blaze Intelligence
+        </div>
+        <div class="nav-menu">
+            <a href="#dashboard" class="nav-item">Dashboard</a>
+            <a href="#analytics" class="nav-item">Analytics</a>
+            <a href="#vision" class="nav-item">Vision AI</a>
+            <a href="#pipelines" class="nav-item">Data Pipelines</a>
+            <a href="#clients" class="nav-item">Clients</a>
+            <a href="#api" class="nav-item">API</a>
+        </div>
+        <div class="nav-status">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Live</span>
+            </div>
+            <div class="status-indicator">
+                <span id="currentTime">--:--:--</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="dashboard-container">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Command Center</h1>
+                <p class="dashboard-subtitle">Real-time sports intelligence and analytics platform</p>
+                <div class="dashboard-actions">
+                    <button class="action-btn" onclick="BlazeApp.launchAnalysis()">
+                        🚀 Launch Analysis
+                    </button>
+                    <button class="action-btn secondary" onclick="BlazeApp.connectDataSources()">
+                        🔗 Connect Sources
+                    </button>
+                    <button class="action-btn secondary" onclick="BlazeApp.exportReport()">
+                        📊 Export Report
+                    </button>
+                    <button class="action-btn secondary" onclick="BlazeApp.openSettings()">
+                        ⚙️ Settings
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Dashboard Grid -->
+            <div class="widget-grid">
+                <!-- Real-Time Data Pipeline Status -->
+                <div class="widget featured">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <div class="widget-icon">📡</div>
+                            Real-Time Data Pipeline
+                        </div>
+                        <div class="widget-badge">ACTIVE</div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="metric-grid">
+                            <div class="metric-card">
+                                <div class="metric-label">ESPN API</div>
+                                <div class="metric-value" id="espnStatus">Connected</div>
+                                <div class="metric-change positive">
+                                    <span>↑</span> 2.3ms latency
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Stats API</div>
+                                <div class="metric-value" id="statsStatus">Active</div>
+                                <div class="metric-change positive">
+                                    <span>↑</span> 99.9% uptime
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">WebSocket</div>
+                                <div class="metric-value" id="wsStatus">Live</div>
+                                <div class="metric-change positive">
+                                    <span>↑</span> 847 conn/s
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Data Points</div>
+                                <div class="metric-value" id="dataPoints">2.8M+</div>
+                                <div class="metric-change positive">
+                                    <span>↑</span> +147K/hour
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container large">
+                            <canvas id="pipelineChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vision AI Analysis -->
+                <div class="widget wide">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <div class="widget-icon">👁️</div>
+                            Vision AI Engine
+                        </div>
+                        <div class="widget-badge">PROCESSING</div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="video-container">
+                            <video id="videoElement" autoplay muted></video>
+                            <canvas id="poseCanvas"></canvas>
+                            <div class="video-controls">
+                                <button class="action-btn" onclick="BlazeApp.startCapture()">Start Capture</button>
+                                <button class="action-btn secondary" onclick="BlazeApp.stopCapture()">Stop</button>
+                                <button class="action-btn secondary" onclick="BlazeApp.analyzeFrame()">Analyze</button>
+                            </div>
+                        </div>
+                        <div class="metric-grid" style="margin-top: 20px;">
+                            <div class="metric-card">
+                                <div class="metric-label">Biomechanics</div>
+                                <div class="metric-value" id="biomechanicsScore">--</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Micro-Expression</div>
+                                <div class="metric-value" id="microExpression">--</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Character/Grit</div>
+                                <div class="metric-value" id="gritScore">--</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Frame Rate</div>
+                                <div class="metric-value" id="frameRate">240fps</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pattern Recognition -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <div class="widget-icon">🧠</div>
+                            Pattern Recognition
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="heatmap-container" id="patternHeatmap"></div>
+                        <div class="progress-bar" style="margin-top: 20px;">
+                            <div class="progress-fill" id="patternProgress" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-grid" style="margin-top: 20px;">
+                            <div class="metric-card">
+                                <div class="metric-label">Patterns Found</div>
+                                <div class="metric-value" id="patternsFound">0</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Confidence</div>
+                                <div class="metric-value" id="patternConfidence">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Activity Feed -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <div class="widget-icon">📊</div>
+                            Live Activity Feed
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="live-feed" id="activityFeed">
+                            <!-- Feed items will be added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Performance -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <div class="widget-icon">⚡</div>
+                            API Performance
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="chart-container">
+                            <canvas id="apiChart"></canvas>
+                        </div>
+                        <table class="data-table" style="margin-top: 20px;">
+                            <thead>
+                                <tr>
+                                    <th>Endpoint</th>
+                                    <th>Latency</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="apiTable">
+                                <tr>
+                                    <td>/api/analytics</td>
+                                    <td>23ms</td>
+                                    <td style="color: var(--blaze-success)">✓</td>
+                                </tr>
+                                <tr>
+                                    <td>/api/vision</td>
+                                    <td>87ms</td>
+                                    <td style="color: var(--blaze-success)">✓</td>
+                                </tr>
+                                <tr>
+                                    <td>/api/predictions</td>
+                                    <td>45ms</td>
+                                    <td style="color: var(--blaze-success)">✓</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Revenue Tracker -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <div class="widget-icon">💰</div>
+                            Revenue Operations
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="metric-grid">
+                            <div class="metric-card">
+                                <div class="metric-label">MRR</div>
+                                <div class="metric-value" id="mrr">$0</div>
+                                <div class="metric-change positive">
+                                    <span>↑</span> +0%
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">ARR</div>
+                                <div class="metric-value" id="arr">$0</div>
+                                <div class="metric-change positive">
+                                    <span>↑</span> +0%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terminal -->
+                <div class="widget wide">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <div class="widget-icon">💻</div>
+                            System Terminal
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="terminal" id="terminal">
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">blaze@intelligence:~$</span>
+                                <span class="terminal-command">system.initialize()</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-output">✓ Core systems online</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-output">✓ Neural networks loaded</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-output">✓ Data pipelines active</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">blaze@intelligence:~$</span>
+                                <span class="terminal-cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Editor -->
+                <div class="widget wide">
+                    <div class="widget-header">
+                        <div class="widget-title">
+                            <div class="widget-icon">📝</div>
+                            API Integration Code
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="code-editor">
+                            <div class="code-line">
+                                <span class="code-line-number">1</span>
+                                <span class="code-content">
+                                    <span class="code-keyword">const</span> blazeAPI = <span class="code-keyword">new</span> BlazeIntelligence({
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="code-line-number">2</span>
+                                <span class="code-content">
+                                    &nbsp;&nbsp;apiKey: <span class="code-string">'your-api-key'</span>,
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="code-line-number">3</span>
+                                <span class="code-content">
+                                    &nbsp;&nbsp;endpoint: <span class="code-string">'https://api.blaze-intelligence.com'</span>,
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="code-line-number">4</span>
+                                <span class="code-content">
+                                    &nbsp;&nbsp;realtime: <span class="code-keyword">true</span>
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="code-line-number">5</span>
+                                <span class="code-content">});</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="code-line-number">6</span>
+                                <span class="code-content"></span>
+                            </div>
+                            <div class="code-line">
+                                <span class="code-line-number">7</span>
+                                <span class="code-content">
+                                    <span class="code-comment">// Subscribe to real-time sports data</span>
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="code-line-number">8</span>
+                                <span class="code-content">
+                                    blazeAPI.subscribe(<span class="code-string">'mlb'</span>, (data) => {
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="code-line-number">9</span>
+                                <span class="code-content">
+                                    &nbsp;&nbsp;console.log(<span class="code-string">'Live MLB data:'</span>, data);
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="code-line-number">10</span>
+                                <span class="code-content">});</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Container -->
+    <div class="notifications" id="notifications"></div>
+
+    <!-- Modal -->
+    <div class="modal" id="mainModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Modal Title</h2>
+                <button class="modal-close" onclick="BlazeApp.closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Script -->
+    <script type="text/babel">
+        // Main Blaze Intelligence Application
+        class BlazeIntelligence {
+            constructor() {
+                this.initialized = false;
+                this.dataStreams = new Map();
+                this.charts = {};
+                this.websocket = null;
+                this.videoStream = null;
+                this.pose = null;
+                this.patterns = [];
+                this.notifications = [];
+                this.apiEndpoints = [
+                    'https://api.blaze-intelligence.com',
+                    'https://blaze-intelligence.ahump20.workers.dev',
+                    'https://blaze-api-worker.humphrey-austin20.workers.dev'
+                ];
+                this.init();
+            }
+
+            async init() {
+                console.log('🔥 Initializing Blaze Intelligence Platform...');
+                
+                // Initialize Three.js background
+                this.initThreeJS();
+                
+                // Initialize charts
+                this.initCharts();
+                
+                // Initialize real-time features
+                this.initRealTime();
+                
+                // Initialize Vision AI
+                this.initVisionAI();
+                
+                // Start data streams
+                this.startDataStreams();
+                
+                // Initialize UI interactions
+                this.initUI();
+                
+                // Hide loading screen
+                setTimeout(() => {
+                    const loadingScreen = document.getElementById('loadingScreen');
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                    this.initialized = true;
+                    this.showNotification('success', 'System Ready', 'All systems initialized successfully');
+                }, 2000);
+            }
+
+            initThreeJS() {
+                const canvas = document.getElementById('heroCanvas');
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+                
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(window.devicePixelRatio);
+
+                // Create particle field
+                const particlesGeometry = new THREE.BufferGeometry();
+                const particlesCount = 3000;
+                const posArray = new Float32Array(particlesCount * 3);
+                const colorsArray = new Float32Array(particlesCount * 3);
+
+                for (let i = 0; i < particlesCount * 3; i += 3) {
+                    posArray[i] = (Math.random() - 0.5) * 100;
+                    posArray[i + 1] = (Math.random() - 0.5) * 100;
+                    posArray[i + 2] = (Math.random() - 0.5) * 100;
+                    
+                    const color = new THREE.Color();
+                    color.setHSL(Math.random() * 0.1 + 0.05, 1, 0.5);
+                    colorsArray[i] = color.r;
+                    colorsArray[i + 1] = color.g;
+                    colorsArray[i + 2] = color.b;
+                }
+
+                particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+                particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
+
+                const particlesMaterial = new THREE.PointsMaterial({
+                    size: 0.5,
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.8,
+                    blending: THREE.AdditiveBlending
+                });
+
+                const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+                scene.add(particlesMesh);
+
+                // Create connection lines
+                const linesGeometry = new THREE.BufferGeometry();
+                const linesPositions = new Float32Array(600);
+                
+                for (let i = 0; i < 600; i++) {
+                    linesPositions[i] = (Math.random() - 0.5) * 100;
+                }
+                
+                linesGeometry.setAttribute('position', new THREE.BufferAttribute(linesPositions, 3));
+                const linesMaterial = new THREE.LineBasicMaterial({
+                    color: 0xff6b00,
+                    opacity: 0.2,
+                    transparent: true
+                });
+                
+                const lines = new THREE.LineSegments(linesGeometry, linesMaterial);
+                scene.add(lines);
+
+                camera.position.z = 30;
+
+                // Animation
+                const animate = () => {
+                    requestAnimationFrame(animate);
+                    
+                    particlesMesh.rotation.x += 0.0003;
+                    particlesMesh.rotation.y += 0.0005;
+                    lines.rotation.x -= 0.0002;
+                    lines.rotation.y -= 0.0003;
+                    
+                    renderer.render(scene, camera);
+                };
+
+                animate();
+
+                // Handle resize
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+
+                this.three = { scene, camera, renderer, particlesMesh, lines };
+            }
+
+            initCharts() {
+                // Pipeline Chart
+                const pipelineCtx = document.getElementById('pipelineChart')?.getContext('2d');
+                if (pipelineCtx) {
+                    this.charts.pipeline = new Chart(pipelineCtx, {
+                        type: 'line',
+                        data: {
+                            labels: this.generateTimeLabels(20),
+                            datasets: [{
+                                label: 'Data Throughput (MB/s)',
+                                data: this.generateRandomData(20, 100, 200),
+                                borderColor: '#FF6B00',
+                                backgroundColor: 'rgba(255, 107, 0, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }, {
+                                label: 'API Requests/s',
+                                data: this.generateRandomData(20, 500, 1000),
+                                borderColor: '#FFD700',
+                                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: {
+                                intersect: false,
+                                mode: 'index'
+                            },
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    labels: { color: '#fff' }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    ticks: { color: '#fff' }
+                                },
+                                x: {
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    ticks: { color: '#fff' }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // API Performance Chart
+                const apiCtx = document.getElementById('apiChart')?.getContext('2d');
+                if (apiCtx) {
+                    this.charts.api = new Chart(apiCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Analytics', 'Vision', 'Predictions', 'Reports', 'Webhooks'],
+                            datasets: [{
+                                label: 'Response Time (ms)',
+                                data: [23, 87, 45, 56, 12],
+                                backgroundColor: [
+                                    'rgba(255, 107, 0, 0.6)',
+                                    'rgba(255, 215, 0, 0.6)',
+                                    'rgba(0, 255, 136, 0.6)',
+                                    'rgba(0, 212, 255, 0.6)',
+                                    'rgba(255, 107, 0, 0.6)'
+                                ],
+                                borderColor: [
+                                    '#FF6B00',
+                                    '#FFD700',
+                                    '#00FF88',
+                                    '#00D4FF',
+                                    '#FF6B00'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    ticks: { color: '#fff' }
+                                },
+                                x: {
+                                    grid: { display: false },
+                                    ticks: { color: '#fff' }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Revenue Chart
+                const revenueCtx = document.getElementById('revenueChart')?.getContext('2d');
+                if (revenueCtx) {
+                    this.charts.revenue = new Chart(revenueCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                            datasets: [{
+                                label: 'Monthly Revenue',
+                                data: [12000, 19000, 25000, 32000, 41000, 47850],
+                                borderColor: '#00FF88',
+                                backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    ticks: { 
+                                        color: '#fff',
+                                        callback: function(value) {
+                                            return '$' + value.toLocaleString();
+                                        }
+                                    }
+                                },
+                                x: {
+                                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                    ticks: { color: '#fff' }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            initRealTime() {
+                // Update clock
+                setInterval(() => {
+                    const now = new Date();
+                    document.getElementById('currentTime').textContent = 
+                        now.toLocaleTimeString('en-US', { hour12: false });
+                }, 1000);
+
+                // Simulate WebSocket connection
+                this.connectWebSocket();
+
+                // Start activity feed
+                this.startActivityFeed();
+
+                // Update metrics
+                this.updateMetrics();
+            }
+
+            connectWebSocket() {
+                // Simulate WebSocket for demo
+                console.log('Connecting to WebSocket...');
+                
+                // In production, this would be:
+                // this.websocket = new WebSocket('wss://api.blaze-intelligence.com/ws');
+                
+                // Simulate connection
+                setTimeout(() => {
+                    console.log('WebSocket connected');
+                    document.querySelector('.status-dot').style.background = '#00FF88';
+                }, 1000);
+            }
+
+            startActivityFeed() {
+                const feed = document.getElementById('activityFeed');
+                const activities = [
+                    'Pattern recognition completed for MLB dataset',
+                    'Vision AI processing frame batch #2847',
+                    'API request from client dashboard',
+                    'Data pipeline sync completed',
+                    'New prediction model deployed',
+                    'Character assessment algorithm updated',
+                    'Biomechanics analysis for player #23',
+                    'Revenue milestone reached: $47,850 MRR',
+                    'Real-time stream connected: ESPN API',
+                    'Performance optimization completed'
+                ];
+
+                const addActivity = () => {
+                    const activity = activities[Math.floor(Math.random() * activities.length)];
+                    const timestamp = new Date().toLocaleTimeString('en-US', { hour12: false });
+                    
+                    const item = document.createElement('div');
+                    item.className = 'feed-item';
+                    item.innerHTML = `
+                        <span class="feed-timestamp">${timestamp}</span>
+                        <span class="feed-content">${activity}</span>
+                        <span class="feed-badge">LIVE</span>
+                    `;
+                    
+                    feed.insertBefore(item, feed.firstChild);
+                    
+                    // Keep only last 10 items
+                    while (feed.children.length > 10) {
+                        feed.removeChild(feed.lastChild);
+                    }
+                };
+
+                // Add initial activities
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => addActivity(), i * 200);
+                }
+
+                // Continue adding activities
+                setInterval(addActivity, 5000);
+            }
+
+            updateMetrics() {
+                // Update data points
+                const updateDataPoints = () => {
+                    const current = parseInt(document.getElementById('dataPoints').textContent.replace(/[^\d]/g, ''));
+                    const increment = Math.floor(Math.random() * 10000 + 5000);
+                    const newValue = current + increment;
+                    document.getElementById('dataPoints').textContent = 
+                        (newValue / 1000000).toFixed(1) + 'M+';
+                };
+
+                // Update pattern recognition
+                const updatePatterns = () => {
+                    const patterns = Math.floor(Math.random() * 50 + 100);
+                    const confidence = Math.floor(Math.random() * 10 + 85);
+                    
+                    document.getElementById('patternsFound').textContent = patterns;
+                    document.getElementById('patternConfidence').textContent = confidence + '%';
+                    document.getElementById('patternProgress').style.width = confidence + '%';
+                };
+
+                // Update revenue
+                const updateRevenue = () => {
+                    const mrr = 47850 + Math.floor(Math.random() * 5000);
+                    const arr = mrr * 12;
+                    
+                    document.getElementById('mrr').textContent = '$' + mrr.toLocaleString();
+                    document.getElementById('arr').textContent = '$' + arr.toLocaleString();
+                };
+
+                // Initial updates
+                updateDataPoints();
+                updatePatterns();
+                updateRevenue();
+
+                // Continue updating
+                setInterval(updateDataPoints, 10000);
+                setInterval(updatePatterns, 7000);
+                setInterval(updateRevenue, 30000);
+
+                // Update charts
+                setInterval(() => {
+                    this.updateChartData();
+                }, 3000);
+            }
+
+            updateChartData() {
+                // Update pipeline chart
+                if (this.charts.pipeline) {
+                    this.charts.pipeline.data.datasets[0].data.shift();
+                    this.charts.pipeline.data.datasets[0].data.push(
+                        Math.floor(Math.random() * 100 + 100)
+                    );
+                    this.charts.pipeline.data.datasets[1].data.shift();
+                    this.charts.pipeline.data.datasets[1].data.push(
+                        Math.floor(Math.random() * 500 + 500)
+                    );
+                    this.charts.pipeline.data.labels.shift();
+                    this.charts.pipeline.data.labels.push(
+                        new Date().toLocaleTimeString('en-US', { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                        })
+                    );
+                    this.charts.pipeline.update('none');
+                }
+
+                // Update API chart
+                if (this.charts.api) {
+                    this.charts.api.data.datasets[0].data = 
+                        this.charts.api.data.datasets[0].data.map(() => 
+                            Math.floor(Math.random() * 50 + 10)
+                        );
+                    this.charts.api.update('none');
+                }
+            }
+
+            async initVisionAI() {
+                // Initialize MediaPipe Pose
+                if (typeof Pose !== 'undefined') {
+                    this.pose = new Pose({
+                        locateFile: (file) => {
+                            return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+                        }
+                    });
+
+                    this.pose.setOptions({
+                        modelComplexity: 1,
+                        smoothLandmarks: true,
+                        enableSegmentation: false,
+                        smoothSegmentation: false,
+                        minDetectionConfidence: 0.5,
+                        minTrackingConfidence: 0.5
+                    });
+
+                    this.pose.onResults(this.onPoseResults.bind(this));
+                }
+
+                // Create pattern heatmap
+                this.createPatternHeatmap();
+            }
+
+            createPatternHeatmap() {
+                const container = document.getElementById('patternHeatmap');
+                if (!container) return;
+
+                const width = container.offsetWidth;
+                const height = container.offsetHeight;
+
+                const svg = d3.select(container)
+                    .append('svg')
+                    .attr('width', width)
+                    .attr('height', height);
+
+                // Generate heatmap data
+                const data = [];
+                for (let i = 0; i < 10; i++) {
+                    for (let j = 0; j < 15; j++) {
+                        data.push({
+                            x: j,
+                            y: i,
+                            value: Math.random() * 100
+                        });
+                    }
+                }
+
+                const xScale = d3.scaleBand()
+                    .domain(d3.range(15))
+                    .range([0, width]);
+
+                const yScale = d3.scaleBand()
+                    .domain(d3.range(10))
+                    .range([0, height]);
+
+                const colorScale = d3.scaleSequential()
+                    .interpolator(d3.interpolateOrRd)
+                    .domain([0, 100]);
+
+                svg.selectAll('rect')
+                    .data(data)
+                    .enter()
+                    .append('rect')
+                    .attr('x', d => xScale(d.x))
+                    .attr('y', d => yScale(d.y))
+                    .attr('width', xScale.bandwidth())
+                    .attr('height', yScale.bandwidth())
+                    .attr('fill', d => colorScale(d.value))
+                    .attr('opacity', 0)
+                    .transition()
+                    .duration(1000)
+                    .delay((d, i) => i * 5)
+                    .attr('opacity', 0.8);
+
+                // Update heatmap periodically
+                setInterval(() => {
+                    const newData = data.map(d => ({
+                        ...d,
+                        value: Math.max(0, Math.min(100, d.value + (Math.random() - 0.5) * 20))
+                    }));
+
+                    svg.selectAll('rect')
+                        .data(newData)
+                        .transition()
+                        .duration(500)
+                        .attr('fill', d => colorScale(d.value));
+                }, 2000);
+            }
+
+            async startCapture() {
+                try {
+                    const video = document.getElementById('videoElement');
+                    const stream = await navigator.mediaDevices.getUserMedia({ 
+                        video: { 
+                            width: 1280, 
+                            height: 720,
+                            frameRate: 30
+                        } 
+                    });
+                    
+                    video.srcObject = stream;
+                    this.videoStream = stream;
+                    
+                    // Start pose detection
+                    if (this.pose && this.camera) {
+                        this.camera.start();
+                    }
+                    
+                    this.showNotification('success', 'Camera Started', 'Vision AI capture initiated');
+                    
+                    // Update UI
+                    document.getElementById('biomechanicsScore').textContent = 'Analyzing...';
+                    document.getElementById('microExpression').textContent = 'Scanning...';
+                    document.getElementById('gritScore').textContent = 'Processing...';
+                    
+                    // Simulate analysis
+                    setTimeout(() => {
+                        document.getElementById('biomechanicsScore').textContent = '94.2%';
+                        document.getElementById('microExpression').textContent = 'Confident';
+                        document.getElementById('gritScore').textContent = '87.5%';
+                    }, 3000);
+                } catch (error) {
+                    console.error('Error accessing camera:', error);
+                    this.showNotification('error', 'Camera Error', 'Unable to access camera');
+                }
+            }
+
+            stopCapture() {
+                if (this.videoStream) {
+                    this.videoStream.getTracks().forEach(track => track.stop());
+                    this.videoStream = null;
+                    document.getElementById('videoElement').srcObject = null;
+                    
+                    this.showNotification('info', 'Camera Stopped', 'Vision AI capture ended');
+                    
+                    // Reset UI
+                    document.getElementById('biomechanicsScore').textContent = '--';
+                    document.getElementById('microExpression').textContent = '--';
+                    document.getElementById('gritScore').textContent = '--';
+                }
+            }
+
+            analyzeFrame() {
+                if (!this.videoStream) {
+                    this.showNotification('warning', 'No Video', 'Please start camera first');
+                    return;
+                }
+
+                const video = document.getElementById('videoElement');
+                const canvas = document.getElementById('poseCanvas');
+                const ctx = canvas.getContext('2d');
+                
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                
+                // Capture frame
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // Simulate analysis
+                this.showNotification('info', 'Analyzing', 'Processing frame for patterns...');
+                
+                setTimeout(() => {
+                    // Draw some analysis overlays
+                    ctx.strokeStyle = '#FF6B00';
+                    ctx.lineWidth = 2;
+                    
+                    // Draw detection boxes
+                    for (let i = 0; i < 3; i++) {
+                        const x = Math.random() * canvas.width * 0.6 + canvas.width * 0.2;
+                        const y = Math.random() * canvas.height * 0.6 + canvas.height * 0.2;
+                        const w = Math.random() * 100 + 50;
+                        const h = Math.random() * 100 + 50;
+                        
+                        ctx.strokeRect(x, y, w, h);
+                        
+                        // Add label
+                        ctx.fillStyle = '#FFD700';
+                        ctx.font = '12px sans-serif';
+                        ctx.fillText(`Pattern ${i + 1}`, x, y - 5);
+                    }
+                    
+                    this.showNotification('success', 'Analysis Complete', 'Patterns identified successfully');
+                }, 2000);
+            }
+
+            onPoseResults(results) {
+                const canvas = document.getElementById('poseCanvas');
+                const ctx = canvas.getContext('2d');
+                
+                ctx.save();
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                if (results.poseLandmarks) {
+                    // Draw connections
+                    drawConnectors(ctx, results.poseLandmarks, POSE_CONNECTIONS, {
+                        color: '#FF6B00',
+                        lineWidth: 2
+                    });
+                    
+                    // Draw landmarks
+                    drawLandmarks(ctx, results.poseLandmarks, {
+                        color: '#FFD700',
+                        lineWidth: 1,
+                        radius: 3
+                    });
+                }
+                
+                ctx.restore();
+            }
+
+            startDataStreams() {
+                // Simulate data streams
+                this.dataStreams.set('espn', {
+                    status: 'connected',
+                    latency: 2.3,
+                    throughput: 0
+                });
+                
+                this.dataStreams.set('stats', {
+                    status: 'active',
+                    latency: 4.7,
+                    throughput: 0
+                });
+                
+                // Update stream metrics
+                setInterval(() => {
+                    this.dataStreams.forEach((stream, key) => {
+                        stream.throughput = Math.random() * 1000 + 500;
+                        stream.latency = Math.random() * 10 + 1;
+                    });
+                }, 3000);
+            }
+
+            initUI() {
+                // Terminal input
+                const terminal = document.getElementById('terminal');
+                if (terminal) {
+                    terminal.addEventListener('click', () => {
+                        const lastLine = terminal.querySelector('.terminal-line:last-child');
+                        if (lastLine) {
+                            const cursor = lastLine.querySelector('.terminal-cursor');
+                            if (cursor) {
+                                cursor.style.display = 'inline-block';
+                            }
+                        }
+                    });
+
+                    // Simulate terminal commands
+                    document.addEventListener('keypress', (e) => {
+                        if (document.activeElement === terminal || terminal.contains(document.activeElement)) {
+                            // Handle terminal input
+                            this.handleTerminalInput(e);
+                        }
+                    });
+                }
+
+                // Add smooth scrolling
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                });
+            }
+
+            handleTerminalInput(event) {
+                // Simple terminal simulation
+                if (event.key === 'Enter') {
+                    const terminal = document.getElementById('terminal');
+                    const newLine = document.createElement('div');
+                    newLine.className = 'terminal-line';
+                    newLine.innerHTML = `
+                        <span class="terminal-output">Command executed successfully</span>
+                    `;
+                    terminal.insertBefore(newLine, terminal.lastElementChild);
+                    
+                    // Add new prompt
+                    const promptLine = document.createElement('div');
+                    promptLine.className = 'terminal-line';
+                    promptLine.innerHTML = `
+                        <span class="terminal-prompt">blaze@intelligence:~$</span>
+                        <span class="terminal-cursor"></span>
+                    `;
+                    terminal.appendChild(promptLine);
+                    
+                    // Scroll to bottom
+                    terminal.scrollTop = terminal.scrollHeight;
+                }
+            }
+
+            // Public Methods
+            launchAnalysis() {
+                this.showModal('Launching Analysis', `
+                    <div class="tabs">
+                        <button class="tab active" onclick="BlazeApp.switchTab(event, 'realtime')">Real-Time</button>
+                        <button class="tab" onclick="BlazeApp.switchTab(event, 'historical')">Historical</button>
+                        <button class="tab" onclick="BlazeApp.switchTab(event, 'predictive')">Predictive</button>
+                    </div>
+                    
+                    <div id="realtime" class="tab-content active">
+                        <h3>Real-Time Analysis</h3>
+                        <div class="metric-grid" style="margin-top: 20px;">
+                            <div class="metric-card">
+                                <div class="metric-label">Processing</div>
+                                <div class="metric-value">2.8M pts/s</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Latency</div>
+                                <div class="metric-value"><100ms</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Accuracy</div>
+                                <div class="metric-value">94.6%</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Streams</div>
+                                <div class="metric-value">47 Active</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar" style="margin-top: 20px;">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="historical" class="tab-content">
+                        <h3>Historical Analysis</h3>
+                        <p>Access to 5+ years of sports data...</p>
+                    </div>
+                    
+                    <div id="predictive" class="tab-content">
+                        <h3>Predictive Analysis</h3>
+                        <p>AI-powered predictions with 94.6% accuracy...</p>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <button class="action-btn" onclick="BlazeApp.runAnalysis()">Run Analysis</button>
+                        <button class="action-btn secondary" onclick="BlazeApp.closeModal()">Cancel</button>
+                    </div>
+                `);
+            }
+
+            connectDataSources() {
+                this.showModal('Connect Data Sources', `
+                    <div class="form-group">
+                        <label class="form-label">Select Data Source</label>
+                        <select class="form-input form-select">
+                            <option>ESPN API</option>
+                            <option>Stats Inc.</option>
+                            <option>MLB Stats API</option>
+                            <option>NFL Data</option>
+                            <option>NBA Stats</option>
+                            <option>NCAA Data</option>
+                            <option>Perfect Game</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">API Key</label>
+                        <input type="password" class="form-input" placeholder="Enter your API key">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Webhook URL (Optional)</label>
+                        <input type="url" class="form-input" placeholder="https://your-webhook.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" style="display: flex; align-items: center; gap: 10px;">
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                            Enable real-time streaming
+                        </label>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <button class="action-btn" onclick="BlazeApp.saveDataSource()">Connect</button>
+                        <button class="action-btn secondary" onclick="BlazeApp.closeModal()">Cancel</button>
+                    </div>
+                `);
+            }
+
+            exportReport() {
+                this.showModal('Export Report', `
+                    <div class="form-group">
+                        <label class="form-label">Report Type</label>
+                        <select class="form-input form-select">
+                            <option>Executive Summary</option>
+                            <option>Technical Analysis</option>
+                            <option>Performance Metrics</option>
+                            <option>Financial Report</option>
+                            <option>Custom Report</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Date Range</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <input type="date" class="form-input">
+                            <input type="date" class="form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Format</label>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="action-btn secondary">PDF</button>
+                            <button class="action-btn secondary">Excel</button>
+                            <button class="action-btn secondary">JSON</button>
+                            <button class="action-btn secondary">CSV</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Include Sections</label>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" checked> Analytics Dashboard
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" checked> Pattern Recognition
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" checked> Vision AI Results
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox"> Raw Data
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <button class="action-btn" onclick="BlazeApp.generateReport()">Generate Report</button>
+                        <button class="action-btn secondary" onclick="BlazeApp.closeModal()">Cancel</button>
+                    </div>
+                `);
+            }
+
+            openSettings() {
+                this.showModal('Settings', `
+                    <div class="tabs">
+                        <button class="tab active" onclick="BlazeApp.switchTab(event, 'general')">General</button>
+                        <button class="tab" onclick="BlazeApp.switchTab(event, 'api')">API</button>
+                        <button class="tab" onclick="BlazeApp.switchTab(event, 'notifications')">Notifications</button>
+                        <button class="tab" onclick="BlazeApp.switchTab(event, 'security')">Security</button>
+                    </div>
+                    
+                    <div id="general" class="tab-content active">
+                        <h3>General Settings</h3>
+                        <div class="form-group">
+                            <label class="form-label">Organization Name</label>
+                            <input type="text" class="form-input" value="Blaze Intelligence">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Time Zone</label>
+                            <select class="form-input form-select">
+                                <option>Central Time (CT)</option>
+                                <option>Eastern Time (ET)</option>
+                                <option>Pacific Time (PT)</option>
+                                <option>Mountain Time (MT)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="api" class="tab-content">
+                        <h3>API Configuration</h3>
+                        <div class="form-group">
+                            <label class="form-label">API Endpoint</label>
+                            <input type="url" class="form-input" value="https://api.blaze-intelligence.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">API Key</label>
+                            <input type="password" class="form-input" placeholder="sk-...">
+                        </div>
+                    </div>
+                    
+                    <div id="notifications" class="tab-content">
+                        <h3>Notification Preferences</h3>
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                                System Alerts
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="switch-slider"></span>
+                                </label>
+                                Pattern Detection
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px;">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="switch-slider"></span>
+                                </label>
+                                Revenue Updates
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="security" class="tab-content">
+                        <h3>Security Settings</h3>
+                        <div class="form-group">
+                            <label class="form-label">Two-Factor Authentication</label>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <button class="action-btn" onclick="BlazeApp.saveSettings()">Save Settings</button>
+                        <button class="action-btn secondary" onclick="BlazeApp.closeModal()">Cancel</button>
+                    </div>
+                `);
+            }
+
+            runAnalysis() {
+                this.closeModal();
+                this.showNotification('info', 'Analysis Started', 'Processing data streams...');
+                
+                setTimeout(() => {
+                    this.showNotification('success', 'Analysis Complete', '1,247 patterns identified');
+                }, 3000);
+            }
+
+            saveDataSource() {
+                this.closeModal();
+                this.showNotification('success', 'Connected', 'Data source connected successfully');
+            }
+
+            generateReport() {
+                this.closeModal();
+                this.showNotification('info', 'Generating', 'Creating report...');
+                
+                setTimeout(() => {
+                    this.showNotification('success', 'Report Ready', 'Download will start automatically');
+                    // In production, trigger actual download
+                }, 2000);
+            }
+
+            saveSettings() {
+                this.closeModal();
+                this.showNotification('success', 'Settings Saved', 'Your preferences have been updated');
+            }
+
+            switchTab(event, tabName) {
+                // Hide all tab content
+                const tabContents = document.querySelectorAll('.tab-content');
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+
+                // Remove active class from all tabs
+                const tabs = document.querySelectorAll('.tab');
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                });
+
+                // Show selected tab content
+                document.getElementById(tabName).classList.add('active');
+                event.target.classList.add('active');
+            }
+
+            showModal(title, content) {
+                const modal = document.getElementById('mainModal');
+                document.getElementById('modalTitle').textContent = title;
+                document.getElementById('modalBody').innerHTML = content;
+                modal.classList.add('active');
+            }
+
+            closeModal() {
+                document.getElementById('mainModal').classList.remove('active');
+            }
+
+            showNotification(type, title, message) {
+                const container = document.getElementById('notifications');
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                
+                const icons = {
+                    success: '✓',
+                    error: '✕',
+                    warning: '⚠',
+                    info: 'ℹ'
+                };
+                
+                notification.innerHTML = `
+                    <div class="notification-icon">${icons[type]}</div>
+                    <div class="notification-content">
+                        <div class="notification-title">${title}</div>
+                        <div class="notification-message">${message}</div>
+                    </div>
+                `;
+                
+                container.appendChild(notification);
+                
+                // Auto remove after 5 seconds
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => {
+                        container.removeChild(notification);
+                    }, 300);
+                }, 5000);
+            }
+
+            // Utility Methods
+            generateTimeLabels(count) {
+                const labels = [];
+                const now = new Date();
+                for (let i = count - 1; i >= 0; i--) {
+                    const time = new Date(now - i * 60000);
+                    labels.push(time.toLocaleTimeString('en-US', { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                    }));
+                }
+                return labels;
+            }
+
+            generateRandomData(count, min, max) {
+                return Array.from({ length: count }, () => 
+                    Math.floor(Math.random() * (max - min) + min)
+                );
+            }
+        }
+
+        // Initialize Application
+        const BlazeApp = new BlazeIntelligence();
+        window.BlazeApp = BlazeApp;
+
+        // Export for global access
+        window.BlazeIntelligence = BlazeIntelligence;
+    </script>
+</body>
+</html>

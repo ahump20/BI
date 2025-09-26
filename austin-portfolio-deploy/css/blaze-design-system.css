@@ -1,0 +1,487 @@
+/**
+ * ============================================
+ * BLAZE SPORTS INTEL DESIGN SYSTEM
+ * Championship-Level Sports Analytics Platform
+ * Deep South Sports Authority
+ * ============================================
+ * Version: 2.0.0
+ * Author: Austin Humphrey
+ * License: Proprietary
+ * ============================================
+ */
+
+/* ============================================
+ * DESIGN TOKENS - FOUNDATION
+ * ============================================ */
+
+:root {
+  /* ========== COLOR SYSTEM ========== */
+
+  /* Brand Primary - Texas Heritage */
+  --bsi-burnt-orange-50: #FFF4E6;
+  --bsi-burnt-orange-100: #FFE4C4;
+  --bsi-burnt-orange-200: #FFCC99;
+  --bsi-burnt-orange-300: #FFB066;
+  --bsi-burnt-orange-400: #FF9333;
+  --bsi-burnt-orange-500: #FF7700;
+  --bsi-burnt-orange-600: #BF5700; /* PRIMARY */
+  --bsi-burnt-orange-700: #994500;
+  --bsi-burnt-orange-800: #733400;
+  --bsi-burnt-orange-900: #4D2300;
+
+  /* Brand Secondary - Southern Gold */
+  --bsi-gold-50: #FFFBEB;
+  --bsi-gold-100: #FFF3C4;
+  --bsi-gold-200: #FFE588;
+  --bsi-gold-300: #FFD54F;
+  --bsi-gold-400: #FFC947;
+  --bsi-gold-500: #FDB913; /* ACCENT */
+  --bsi-gold-600: #F59E0B;
+  --bsi-gold-700: #D97706;
+  --bsi-gold-800: #B45309;
+  --bsi-gold-900: #92400E;
+
+  /* Sport-Specific Accents */
+  --bsi-baseball-diamond: #6B8E23;
+  --bsi-baseball-dirt: #8B7355;
+  --bsi-football-grass: #228B22;
+  --bsi-football-field: #355E3B;
+  --bsi-basketball-court: #E25822;
+  --bsi-basketball-hardwood: #8B4513;
+  --bsi-track-surface: #DC143C;
+  --bsi-track-lane: #FFD700;
+
+  /* Team Colors - Championship Teams */
+  --bsi-cardinals-red: #C41E3A;
+  --bsi-cardinals-navy: #0C2340;
+  --bsi-titans-navy: #002244;
+  --bsi-titans-powder: #4B92DB;
+  --bsi-longhorns-orange: #FF6600;
+  --bsi-longhorns-white: #FFFFFF;
+  --bsi-grizzlies-blue: #5D76A9;
+  --bsi-grizzlies-gold: #FDB927;
+
+  /* Semantic Colors */
+  --bsi-success-50: #F0FDF4;
+  --bsi-success-500: #00C851;
+  --bsi-success-700: #15803D;
+  --bsi-success-900: #14532D;
+
+  --bsi-warning-50: #FFFBEB;
+  --bsi-warning-500: #FFB81C;
+  --bsi-warning-700: #D97706;
+  --bsi-warning-900: #451A03;
+
+  --bsi-danger-50: #FEF2F2;
+  --bsi-danger-500: #FF3547;
+  --bsi-danger-700: #DC2626;
+  --bsi-danger-900: #7F1D1D;
+
+  --bsi-info-50: #F0F9FF;
+  --bsi-info-500: #33B5E5;
+  --bsi-info-700: #0369A1;
+  --bsi-info-900: #0C4A6E;
+
+  /* ========== TYPOGRAPHY SYSTEM ========== */
+
+  /* Font Families */
+  --bsi-font-display: 'Bebas Neue', 'Oswald', system-ui, sans-serif;
+  --bsi-font-heading: 'Oswald', 'Inter', system-ui, sans-serif;
+  --bsi-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --bsi-font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+  --bsi-font-accent: 'Teko', 'Bebas Neue', sans-serif;
+
+  /* Font Sizes - Modular Scale (1.25) */
+  --bsi-font-xs: 0.64rem;    /* 10.24px */
+  --bsi-font-sm: 0.8rem;     /* 12.8px */
+  --bsi-font-base: 1rem;     /* 16px */
+  --bsi-font-md: 1.25rem;    /* 20px */
+  --bsi-font-lg: 1.563rem;   /* 25px */
+  --bsi-font-xl: 1.953rem;   /* 31.25px */
+  --bsi-font-2xl: 2.441rem;  /* 39px */
+  --bsi-font-3xl: 3.052rem;  /* 48.8px */
+  --bsi-font-4xl: 3.815rem;  /* 61px */
+  --bsi-font-5xl: 4.768rem;  /* 76.3px */
+  --bsi-font-6xl: 5.96rem;   /* 95.4px */
+
+  /* Font Weights */
+  --bsi-font-thin: 300;
+  --bsi-font-normal: 400;
+  --bsi-font-medium: 500;
+  --bsi-font-semibold: 600;
+  --bsi-font-bold: 700;
+  --bsi-font-extrabold: 800;
+  --bsi-font-black: 900;
+
+  /* Line Heights */
+  --bsi-leading-none: 1;
+  --bsi-leading-tight: 1.25;
+  --bsi-leading-snug: 1.375;
+  --bsi-leading-normal: 1.5;
+  --bsi-leading-relaxed: 1.625;
+  --bsi-leading-loose: 2;
+
+  /* Letter Spacing */
+  --bsi-tracking-tighter: -0.05em;
+  --bsi-tracking-tight: -0.025em;
+  --bsi-tracking-normal: 0;
+  --bsi-tracking-wide: 0.025em;
+  --bsi-tracking-wider: 0.05em;
+  --bsi-tracking-widest: 0.1em;
+
+  /* ========== SPACING SYSTEM ========== */
+
+  /* Base: 8px grid */
+  --bsi-space-0: 0;
+  --bsi-space-1: 0.25rem;   /* 4px */
+  --bsi-space-2: 0.5rem;    /* 8px */
+  --bsi-space-3: 0.75rem;   /* 12px */
+  --bsi-space-4: 1rem;      /* 16px */
+  --bsi-space-5: 1.25rem;   /* 20px */
+  --bsi-space-6: 1.5rem;    /* 24px */
+  --bsi-space-8: 2rem;      /* 32px */
+  --bsi-space-10: 2.5rem;   /* 40px */
+  --bsi-space-12: 3rem;     /* 48px */
+  --bsi-space-16: 4rem;     /* 64px */
+  --bsi-space-20: 5rem;     /* 80px */
+  --bsi-space-24: 6rem;     /* 96px */
+  --bsi-space-32: 8rem;     /* 128px */
+
+  /* ========== MOTION SYSTEM ========== */
+
+  /* Duration */
+  --bsi-duration-instant: 100ms;
+  --bsi-duration-fast: 200ms;
+  --bsi-duration-normal: 300ms;
+  --bsi-duration-slow: 500ms;
+  --bsi-duration-slower: 700ms;
+
+  /* Easing Functions */
+  --bsi-ease-linear: linear;
+  --bsi-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --bsi-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --bsi-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --bsi-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Sport-Specific Animations */
+  --bsi-motion-pitch: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  --bsi-motion-swing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --bsi-motion-snap: cubic-bezier(0.77, 0, 0.175, 1);
+  --bsi-motion-tackle: cubic-bezier(0.87, 0, 0.13, 1);
+  --bsi-motion-shot: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --bsi-motion-sprint: cubic-bezier(0.33, 0, 0.67, 1);
+
+  /* ========== SHADOWS & ELEVATION ========== */
+
+  --bsi-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --bsi-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --bsi-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --bsi-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --bsi-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --bsi-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* Glow Effects */
+  --bsi-glow-orange: 0 0 20px rgba(191, 87, 0, 0.5);
+  --bsi-glow-orange-intense: 0 0 40px rgba(191, 87, 0, 0.8);
+  --bsi-glow-gold: 0 0 20px rgba(253, 185, 19, 0.5);
+  --bsi-glow-success: 0 0 20px rgba(0, 200, 81, 0.5);
+  --bsi-glow-danger: 0 0 20px rgba(255, 53, 71, 0.5);
+
+  /* ========== BORDERS & RADIUS ========== */
+
+  --bsi-border-width-thin: 1px;
+  --bsi-border-width-base: 2px;
+  --bsi-border-width-thick: 4px;
+
+  --bsi-radius-none: 0;
+  --bsi-radius-sm: 0.25rem;   /* 4px */
+  --bsi-radius-base: 0.5rem;  /* 8px */
+  --bsi-radius-md: 0.75rem;   /* 12px */
+  --bsi-radius-lg: 1rem;      /* 16px */
+  --bsi-radius-xl: 1.5rem;    /* 24px */
+  --bsi-radius-2xl: 2rem;     /* 32px */
+  --bsi-radius-full: 9999px;
+
+  /* ========== Z-INDEX LAYERS ========== */
+
+  --bsi-z-deep: -999;
+  --bsi-z-base: 0;
+  --bsi-z-dropdown: 100;
+  --bsi-z-sticky: 200;
+  --bsi-z-overlay: 300;
+  --bsi-z-modal: 400;
+  --bsi-z-popover: 500;
+  --bsi-z-tooltip: 600;
+  --bsi-z-notification: 700;
+  --bsi-z-top: 999;
+
+  /* ========== BREAKPOINTS (for reference) ========== */
+
+  --bsi-screen-xs: 475px;
+  --bsi-screen-sm: 640px;
+  --bsi-screen-md: 768px;
+  --bsi-screen-lg: 1024px;
+  --bsi-screen-xl: 1280px;
+  --bsi-screen-2xl: 1536px;
+}
+
+/* ============================================
+ * DARK THEME TOKENS
+ * ============================================ */
+
+[data-theme="dark"] {
+  /* Background Layers */
+  --bsi-bg-primary: #0A0A0F;
+  --bsi-bg-secondary: #111116;
+  --bsi-bg-tertiary: #1A1A21;
+  --bsi-bg-elevated: #232330;
+  --bsi-bg-overlay: rgba(0, 0, 0, 0.7);
+
+  /* Surface Colors */
+  --bsi-surface-base: rgba(255, 255, 255, 0.05);
+  --bsi-surface-raised: rgba(255, 255, 255, 0.08);
+  --bsi-surface-overlay: rgba(255, 255, 255, 0.12);
+  --bsi-surface-highlight: rgba(191, 87, 0, 0.1);
+
+  /* Text Colors */
+  --bsi-text-primary: rgba(255, 255, 255, 1);
+  --bsi-text-secondary: rgba(255, 255, 255, 0.87);
+  --bsi-text-tertiary: rgba(255, 255, 255, 0.65);
+  --bsi-text-quaternary: rgba(255, 255, 255, 0.45);
+  --bsi-text-disabled: rgba(255, 255, 255, 0.25);
+
+  /* Border Colors */
+  --bsi-border-base: rgba(255, 255, 255, 0.08);
+  --bsi-border-raised: rgba(255, 255, 255, 0.12);
+  --bsi-border-accent: rgba(191, 87, 0, 0.5);
+}
+
+/* ============================================
+ * LIGHT THEME TOKENS (if needed)
+ * ============================================ */
+
+[data-theme="light"] {
+  /* Background Layers */
+  --bsi-bg-primary: #FFFFFF;
+  --bsi-bg-secondary: #FAFAFA;
+  --bsi-bg-tertiary: #F5F5F5;
+  --bsi-bg-elevated: #FFFFFF;
+  --bsi-bg-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Surface Colors */
+  --bsi-surface-base: rgba(0, 0, 0, 0.03);
+  --bsi-surface-raised: rgba(0, 0, 0, 0.05);
+  --bsi-surface-overlay: rgba(0, 0, 0, 0.08);
+  --bsi-surface-highlight: rgba(191, 87, 0, 0.05);
+
+  /* Text Colors */
+  --bsi-text-primary: rgba(0, 0, 0, 0.95);
+  --bsi-text-secondary: rgba(0, 0, 0, 0.87);
+  --bsi-text-tertiary: rgba(0, 0, 0, 0.65);
+  --bsi-text-quaternary: rgba(0, 0, 0, 0.45);
+  --bsi-text-disabled: rgba(0, 0, 0, 0.25);
+
+  /* Border Colors */
+  --bsi-border-base: rgba(0, 0, 0, 0.08);
+  --bsi-border-raised: rgba(0, 0, 0, 0.12);
+  --bsi-border-accent: rgba(191, 87, 0, 0.3);
+}
+
+/* ============================================
+ * UTILITY CLASSES
+ * ============================================ */
+
+/* Accessibility */
+.bsi-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.bsi-focus-visible:focus-visible {
+  outline: 2px solid var(--bsi-burnt-orange-500);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --bsi-text-primary: #FFFFFF;
+    --bsi-text-secondary: #F0F0F0;
+    --bsi-border-base: #FFFFFF;
+    --bsi-bg-primary: #000000;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .bsi-no-print {
+    display: none !important;
+  }
+
+  .bsi-break-before {
+    break-before: page;
+  }
+
+  .bsi-break-after {
+    break-after: page;
+  }
+
+  .bsi-break-inside {
+    break-inside: avoid;
+  }
+}
+
+/* ============================================
+ * COMPONENT UTILITIES
+ * ============================================ */
+
+/* Glass Morphism */
+.bsi-glass {
+  background: var(--bsi-surface-base);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--bsi-border-base);
+}
+
+.bsi-glass-raised {
+  background: var(--bsi-surface-raised);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid var(--bsi-border-raised);
+}
+
+/* Championship Gradients */
+.bsi-gradient-championship {
+  background: linear-gradient(135deg,
+    var(--bsi-gold-500) 0%,
+    var(--bsi-gold-400) 50%,
+    var(--bsi-gold-600) 100%);
+}
+
+.bsi-gradient-texas {
+  background: linear-gradient(135deg,
+    var(--bsi-burnt-orange-600) 0%,
+    var(--bsi-longhorns-orange) 100%);
+}
+
+.bsi-gradient-deep-south {
+  background: linear-gradient(135deg,
+    var(--bsi-burnt-orange-600) 0%,
+    var(--bsi-gold-500) 33%,
+    var(--bsi-cardinals-red) 66%,
+    var(--bsi-titans-navy) 100%);
+}
+
+/* Text Gradients */
+.bsi-text-gradient {
+  background: linear-gradient(135deg,
+    var(--bsi-burnt-orange-500) 0%,
+    var(--bsi-gold-500) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Sport-Specific Themes */
+.bsi-theme-baseball {
+  --bsi-accent: var(--bsi-baseball-diamond);
+  --bsi-surface: var(--bsi-baseball-dirt);
+}
+
+.bsi-theme-football {
+  --bsi-accent: var(--bsi-football-grass);
+  --bsi-surface: var(--bsi-football-field);
+}
+
+.bsi-theme-basketball {
+  --bsi-accent: var(--bsi-basketball-court);
+  --bsi-surface: var(--bsi-basketball-hardwood);
+}
+
+.bsi-theme-track {
+  --bsi-accent: var(--bsi-track-surface);
+  --bsi-surface: var(--bsi-track-lane);
+}
+
+/* Team Themes */
+.bsi-theme-cardinals {
+  --bsi-primary: var(--bsi-cardinals-red);
+  --bsi-secondary: var(--bsi-cardinals-navy);
+}
+
+.bsi-theme-titans {
+  --bsi-primary: var(--bsi-titans-navy);
+  --bsi-secondary: var(--bsi-titans-powder);
+}
+
+.bsi-theme-longhorns {
+  --bsi-primary: var(--bsi-longhorns-orange);
+  --bsi-secondary: var(--bsi-longhorns-white);
+}
+
+.bsi-theme-grizzlies {
+  --bsi-primary: var(--bsi-grizzlies-blue);
+  --bsi-secondary: var(--bsi-grizzlies-gold);
+}
+
+/* Performance Optimizations */
+.bsi-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.bsi-no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.bsi-smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Loading States */
+@keyframes bsi-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes bsi-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bsi-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-25%); }
+}
+
+.bsi-animate-pulse {
+  animation: bsi-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.bsi-animate-spin {
+  animation: bsi-spin 1s linear infinite;
+}
+
+.bsi-animate-bounce {
+  animation: bsi-bounce 1s infinite;
+}

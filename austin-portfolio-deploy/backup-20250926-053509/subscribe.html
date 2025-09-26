@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scout Subscription Plans - Blaze Intelligence</title>
+    <meta name="description" content="Choose your professional scouting plan and access championship-level insights and analytics tools.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --sec-crimson: #9B2222;
+            --cardinal-blue: #9BCBEB;
+            --deep-teal: #00B2A9;
+            --mississippi-white: #F8F8FF;
+            --texas-navy: #002244;
+            --louisiana-bayou: #1B4332;
+            --friday-lights: #FFD700;
+            --stadium-black: #0A0A0A;
+            --font-headline: 'Bebas Neue', 'Oswald', sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(180deg, var(--stadium-black) 0%, var(--texas-navy) 50%, var(--louisiana-bayou) 100%);
+            color: var(--mississippi-white);
+            min-height: 100vh;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--burnt-orange);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .main-content {
+            margin-top: 100px;
+            padding: 3rem 2rem;
+        }
+
+        .subscribe-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .subscribe-title {
+            font-family: var(--font-headline);
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: var(--burnt-orange);
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .subscribe-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: var(--cardinal-blue);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .toggle-label {
+            color: var(--mississippi-white);
+            font-weight: 600;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: rgba(155, 203, 235, 0.3);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--deep-teal);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: linear-gradient(145deg, rgba(191, 87, 0, 0.05), rgba(0, 34, 68, 0.15));
+            border: 2px solid rgba(155, 203, 235, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--burnt-orange);
+            background: linear-gradient(145deg, rgba(191, 87, 0, 0.15), rgba(0, 34, 68, 0.2));
+        }
+
+        .pricing-card.popular::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .plan-name {
+            font-family: var(--font-headline);
+            font-size: 2rem;
+            color: var(--mississippi-white);
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .plan-price {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .price-amount {
+            font-family: var(--font-headline);
+            font-size: 3rem;
+            color: var(--burnt-orange);
+            font-weight: 900;
+        }
+
+        .price-period {
+            color: var(--cardinal-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .price-description {
+            color: var(--cardinal-blue);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1rem 0;
+            color: var(--mississippi-white);
+        }
+
+        .plan-features .feature-icon {
+            color: var(--deep-teal);
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        .plan-features .feature-unavailable {
+            color: var(--cardinal-blue);
+            opacity: 0.6;
+        }
+
+        .plan-features .feature-unavailable .feature-icon {
+            color: var(--sec-crimson);
+        }
+
+        .subscribe-button {
+            width: 100%;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .subscribe-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(191, 87, 0, 0.4);
+        }
+
+        .subscribe-button.secondary {
+            background: linear-gradient(135deg, var(--deep-teal), var(--cardinal-blue));
+        }
+
+        .subscribe-button.secondary:hover {
+            box-shadow: 0 10px 25px rgba(0, 178, 169, 0.4);
+        }
+
+        .enterprise-section {
+            text-align: center;
+            margin: 4rem auto;
+            max-width: 800px;
+            background: linear-gradient(135deg, rgba(155, 34, 34, 0.1), rgba(0, 178, 169, 0.05));
+            border: 2px solid var(--sec-crimson);
+            border-radius: 20px;
+            padding: 3rem;
+        }
+
+        .enterprise-title {
+            font-family: var(--font-headline);
+            font-size: 2.5rem;
+            color: var(--friday-lights);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .enterprise-description {
+            color: var(--cardinal-blue);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .contact-button {
+            background: linear-gradient(135deg, var(--friday-lights), var(--burnt-orange));
+            color: var(--stadium-black);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .back-home {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            color: var(--burnt-orange);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--burnt-orange);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .back-home:hover {
+            background: var(--burnt-orange);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .pricing-card {
+                padding: 2rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">BLAZE INTELLIGENCE</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="subscribe-header">
+            <h1 class="subscribe-title">SCOUT SUBSCRIPTIONS</h1>
+            <p class="subscribe-subtitle">Choose Your Professional Plan</p>
+
+            <div class="pricing-toggle">
+                <span class="toggle-label">Monthly</span>
+                <div class="toggle-switch" id="pricing-toggle">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="toggle-label">Annual <span style="color: var(--deep-teal);">(Save 20%)</span></span>
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Scout Basic -->
+            <div class="pricing-card">
+                <h2 class="plan-name">SCOUT BASIC</h2>
+                <div class="plan-price">
+                    <span class="price-amount" data-monthly="$49" data-annual="$39">$49</span>
+                    <span class="price-period">/month</span>
+                    <div class="price-description">Perfect for individual scouts</div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check feature-icon"></i> Basic player analytics</li>
+                    <li><i class="fas fa-check feature-icon"></i> High school coverage</li>
+                    <li><i class="fas fa-check feature-icon"></i> Standard reports</li>
+                    <li><i class="fas fa-check feature-icon"></i> Email support</li>
+                    <li class="feature-unavailable"><i class="fas fa-times feature-icon"></i> Video analysis</li>
+                    <li class="feature-unavailable"><i class="fas fa-times feature-icon"></i> Advanced metrics</li>
+                    <li class="feature-unavailable"><i class="fas fa-times feature-icon"></i> Custom reports</li>
+                </ul>
+                <a href="/signup?plan=basic" class="subscribe-button secondary">
+                    <i class="fas fa-rocket"></i> Start Basic
+                </a>
+            </div>
+
+            <!-- Scout Pro -->
+            <div class="pricing-card popular">
+                <h2 class="plan-name">SCOUT PRO</h2>
+                <div class="plan-price">
+                    <span class="price-amount" data-monthly="$99" data-annual="$79">$99</span>
+                    <span class="price-period">/month</span>
+                    <div class="price-description">Most popular for professional scouts</div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check feature-icon"></i> Advanced player analytics</li>
+                    <li><i class="fas fa-check feature-icon"></i> College & high school coverage</li>
+                    <li><i class="fas fa-check feature-icon"></i> Video analysis tools</li>
+                    <li><i class="fas fa-check feature-icon"></i> Custom reports</li>
+                    <li><i class="fas fa-check feature-icon"></i> Priority support</li>
+                    <li><i class="fas fa-check feature-icon"></i> API access</li>
+                    <li class="feature-unavailable"><i class="fas fa-times feature-icon"></i> White-label reports</li>
+                </ul>
+                <a href="/signup?plan=pro" class="subscribe-button">
+                    <i class="fas fa-crown"></i> Go Pro
+                </a>
+            </div>
+
+            <!-- Scout Elite -->
+            <div class="pricing-card">
+                <h2 class="plan-name">SCOUT ELITE</h2>
+                <div class="plan-price">
+                    <span class="price-amount" data-monthly="$199" data-annual="$159">$199</span>
+                    <span class="price-period">/month</span>
+                    <div class="price-description">For professional organizations</div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check feature-icon"></i> Complete analytics suite</li>
+                    <li><i class="fas fa-check feature-icon"></i> All levels coverage</li>
+                    <li><i class="fas fa-check feature-icon"></i> AI-powered insights</li>
+                    <li><i class="fas fa-check feature-icon"></i> White-label reports</li>
+                    <li><i class="fas fa-check feature-icon"></i> Dedicated support</li>
+                    <li><i class="fas fa-check feature-icon"></i> Team collaboration tools</li>
+                    <li><i class="fas fa-check feature-icon"></i> Custom integrations</li>
+                </ul>
+                <a href="/signup?plan=elite" class="subscribe-button">
+                    <i class="fas fa-diamond"></i> Go Elite
+                </a>
+            </div>
+        </div>
+
+        <div class="enterprise-section">
+            <h2 class="enterprise-title">ENTERPRISE</h2>
+            <p class="enterprise-description">
+                Need a custom solution for your professional organization?
+                Our enterprise plans include custom analytics, dedicated infrastructure,
+                and 24/7 support for teams, leagues, and media companies.
+            </p>
+            <a href="/contact" class="contact-button">
+                <i class="fas fa-handshake"></i> Contact Sales
+            </a>
+        </div>
+    </main>
+
+    <a href="/" class="back-home">
+        <i class="fas fa-home"></i> Back to Home
+    </a>
+
+    <script>
+        // Pricing toggle functionality
+        const pricingToggle = document.getElementById('pricing-toggle');
+        const priceAmounts = document.querySelectorAll('.price-amount');
+        let isAnnual = false;
+
+        pricingToggle.addEventListener('click', function() {
+            isAnnual = !isAnnual;
+
+            if (isAnnual) {
+                pricingToggle.classList.add('active');
+            } else {
+                pricingToggle.classList.remove('active');
+            }
+
+            // Update all price displays
+            priceAmounts.forEach(priceEl => {
+                const monthlyPrice = priceEl.dataset.monthly;
+                const annualPrice = priceEl.dataset.annual;
+
+                if (isAnnual) {
+                    priceEl.textContent = annualPrice;
+                } else {
+                    priceEl.textContent = monthlyPrice;
+                }
+            });
+        });
+
+        // Add smooth scroll to navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Track subscription button clicks
+        document.querySelectorAll('.subscribe-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Add analytics tracking here if needed
+                console.log('Subscription clicked:', this.href);
+            });
+        });
+    </script>
+</body>
+</html>

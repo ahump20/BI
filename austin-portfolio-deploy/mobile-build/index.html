@@ -907,13 +907,170 @@ animation: none;
 </div>
 </div>
 <script type="module">
-// Import Three.js and dependencies
-import * as THREE from 'https://cdn.skypack.dev/three@0.145.0';
-import { EffectComposer } from 'https://cdn.skypack.dev/three@0.145.0/examples/jsm/postprocessing/EffectComposer';
-import { RenderPass } from 'https://cdn.skypack.dev/three@0.145.0/examples/jsm/postprocessing/RenderPass';
-import { UnrealBloomPass } from 'https://cdn.skypack.dev/three@0.145.0/examples/jsm/postprocessing/UnrealBloomPass';
-import { SSAOPass } from 'https://cdn.skypack.dev/three@0.145.0/examples/jsm/postprocessing/SSAOPass';
-import { SMAAPass } from 'https://cdn.skypack.dev/three@0.145.0/examples/jsm/postprocessing/SMAAPass';
+// Import Three.js and dependencies with fallback handling
+let THREE, EffectComposer, RenderPass, UnrealBloomPass, SSAOPass, SMAAPass;
+
+async function loadThreeJS() {
+    try {
+        // Try primary CDN
+        const modules = await Promise.all([
+            import('https://unpkg.com/three@0.150.1/build/three.module.js'),
+            import('https://unpkg.com/three@0.150.1/examples/jsm/postprocessing/EffectComposer.js').catch(() => null),
+            import('https://unpkg.com/three@0.150.1/examples/jsm/postprocessing/RenderPass.js').catch(() => null),
+            import('https://unpkg.com/three@0.150.1/examples/jsm/postprocessing/UnrealBloomPass.js').catch(() => null),
+            import('https://unpkg.com/three@0.150.1/examples/jsm/postprocessing/SSAOPass.js').catch(() => null),
+            import('https://unpkg.com/three@0.150.1/examples/jsm/postprocessing/SMAAPass.js').catch(() => null)
+        ]);
+
+        THREE = modules[0];
+        EffectComposer = modules[1]?.EffectComposer;
+        RenderPass = modules[2]?.RenderPass;
+        UnrealBloomPass = modules[3]?.UnrealBloomPass;
+        SSAOPass = modules[4]?.SSAOPass;
+        SMAAPass = modules[5]?.SMAAPass;
+
+        console.log('Three.js loaded successfully from unpkg');
+        return true;
+    } catch (error) {
+        console.warn('Primary CDN failed, trying jsdelivr:', error);
+        try {
+            // Fallback to jsdelivr CDN
+            const modules = await Promise.all([
+                import('https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js'),
+                import('https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/postprocessing/EffectComposer.js').catch(() => null),
+                import('https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/postprocessing/RenderPass.js').catch(() => null),
+                import('https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/postprocessing/UnrealBloomPass.js').catch(() => null),
+                import('https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/postprocessing/SSAOPass.js').catch(() => null),
+                import('https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/postprocessing/SMAAPass.js').catch(() => null)
+            ]);
+
+            THREE = modules[0];
+            EffectComposer = modules[1]?.EffectComposer;
+            RenderPass = modules[2]?.RenderPass;
+            UnrealBloomPass = modules[3]?.UnrealBloomPass;
+            SSAOPass = modules[4]?.SSAOPass;
+            SMAAPass = modules[5]?.SMAAPass;
+
+            console.log('Three.js loaded successfully from jsdelivr');
+            return true;
+        } catch (fallbackError) {
+            console.error('All CDN sources failed:', fallbackError);
+            return false;
+        }
+    }
+}
+
+// Simple fallback graphics engine without Three.js
+class SimpleFallbackEngine {
+    constructor(container) {
+        this.container = container;
+        this.initializeFallback();
+    }
+
+    initializeFallback() {
+        // Create a simple animated canvas fallback
+        const canvas = document.createElement('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.display = 'block';
+
+        this.container.innerHTML = '';
+        this.container.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        let animationId;
+        let time = 0;
+
+        const animate = () => {
+            time += 0.02;
+
+            // Clear canvas
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw animated background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#1a0000');
+            gradient.addColorStop(0.5, '#002244');
+            gradient.addColorStop(1, '#000000');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw animated stadium field
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const fieldWidth = Math.min(canvas.width * 0.8, 400);
+            const fieldHeight = Math.min(canvas.height * 0.6, 240);
+
+            // Field background
+            ctx.fillStyle = '#2d5016';
+            ctx.fillRect(centerX - fieldWidth/2, centerY - fieldHeight/2, fieldWidth, fieldHeight);
+
+            // Yard lines
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.lineWidth = 2;
+            for (let i = 0; i <= 10; i++) {
+                const x = centerX - fieldWidth/2 + (i * fieldWidth/10);
+                ctx.beginPath();
+                ctx.moveTo(x, centerY - fieldHeight/2);
+                ctx.lineTo(x, centerY + fieldHeight/2);
+                ctx.stroke();
+            }
+
+            // Animated stadium lights
+            for (let i = 0; i < 4; i++) {
+                const angle = (i * Math.PI / 2) + time;
+                const lightX = centerX + Math.cos(angle) * (fieldWidth * 0.8);
+                const lightY = centerY + Math.sin(angle) * (fieldHeight * 0.8);
+                const intensity = 0.5 + 0.3 * Math.sin(time * 2 + i);
+
+                const lightGradient = ctx.createRadialGradient(lightX, lightY, 0, lightX, lightY, 50);
+                lightGradient.addColorStop(0, `rgba(255, 215, 0, ${intensity})`);
+                lightGradient.addColorStop(1, 'rgba(255, 215, 0, 0)');
+                ctx.fillStyle = lightGradient;
+                ctx.fillRect(lightX - 50, lightY - 50, 100, 100);
+            }
+
+            // Draw title
+            ctx.fillStyle = '#BF5700';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🏈 BLAZE SPORTS INTEL', centerX, 80);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = '16px Arial';
+            ctx.fillText('Championship Mode Active', centerX, 110);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.font = '12px Arial';
+            ctx.fillText('Simplified graphics - 3D engine unavailable', centerX, canvas.height - 30);
+
+            animationId = requestAnimationFrame(animate);
+        };
+
+        animate();
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        this.showNotification = (title, subtitle) => {
+            console.log(`${title}: ${subtitle}`);
+        };
+
+        // Hide loading screen
+        setTimeout(() => {
+            const loadingOverlay = document.getElementById('mobileLoadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('hidden');
+            }
+        }, 1000);
+    }
+}
 /**
 * BLAZE SPORTS INTEL - MOBILE ULTRA GRAPHICS ENGINE
 * Championship-grade 3D graphics optimized for mobile devices
@@ -925,6 +1082,7 @@ this.container = container;
 this.scene = new THREE.Scene();
 this.clock = new THREE.Clock();
 this.isInitialized = false;
+this.initializationError = null;
 // Mobile-specific performance tracking
 this.performanceMetrics = {
 fps: 60,
@@ -963,15 +1121,148 @@ particleCount: 25000, // Reduced for mobile
 maxLights: 6,
 shadowMapSize: 1024
 };
-// Initialize all systems
+// Initialize asynchronously to prevent loading screen freeze
+this.initializeAsync().catch(error => {
+console.error('Graphics engine initialization failed:', error);
+this.handleInitializationFailure(error);
+});
+}
+
+async initializeAsync() {
+try {
+// Step 1: Mobile Detection
+this.updateLoadingStatus('Checking device capabilities...', 10);
+await this.delay(100);
 this.initMobileDetection();
-this.initRenderer();
+
+// Step 2: WebGL Renderer
+this.updateLoadingStatus('Initializing WebGL renderer...', 25);
+await this.delay(200);
+await this.initRendererAsync();
+
+// Step 3: Camera System
+this.updateLoadingStatus('Setting up camera system...', 40);
+await this.delay(100);
 this.initCamera();
+
+// Step 4: Lighting System
+this.updateLoadingStatus('Configuring stadium lighting...', 55);
+await this.delay(150);
 this.initLighting();
+
+// Step 5: Post-processing
+this.updateLoadingStatus('Loading post-processing effects...', 70);
+await this.delay(200);
 this.initPostProcessing();
+
+// Step 6: Stadium Scene
+this.updateLoadingStatus('Building championship stadium...', 85);
+await this.delay(300);
 this.initStadiumScene();
+
+// Step 7: Touch Controls
+this.updateLoadingStatus('Enabling touch controls...', 95);
+await this.delay(100);
 this.initTouchControls();
 this.initPerformanceMonitoring();
+
+// Step 8: Complete
+this.updateLoadingStatus('Starting championship experience...', 100);
+await this.delay(200);
+
+this.isInitialized = true;
+this.startRenderLoop();
+this.hideLoadingScreen();
+} catch (error) {
+throw error;
+}
+}
+
+delay(ms) {
+return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+updateLoadingStatus(text, progress) {
+const loadingText = document.getElementById('loadingText');
+const loadingBar = document.getElementById('loadingProgressBar');
+if (loadingText) loadingText.textContent = text;
+if (loadingBar) loadingBar.style.width = Math.max(25, progress) + '%'; // Start at 25% since Three.js is already loaded
+}
+
+hideLoadingScreen() {
+const loadingOverlay = document.getElementById('mobileLoadingOverlay');
+if (loadingOverlay) {
+setTimeout(() => {
+loadingOverlay.classList.add('hidden');
+}, 500);
+}
+}
+
+handleInitializationFailure(error) {
+this.initializationError = error;
+const loadingText = document.getElementById('loadingText');
+const loadingBar = document.getElementById('loadingProgressBar');
+
+if (loadingText) {
+loadingText.textContent = 'Initialization failed - Activating fallback mode...';
+loadingText.style.color = '#ff4444';
+}
+if (loadingBar) {
+loadingBar.style.background = '#ff4444';
+}
+
+// Try fallback initialization
+setTimeout(() => {
+this.initializeFallbackMode();
+}, 1000);
+}
+
+initializeFallbackMode() {
+try {
+// Minimal 2D fallback with basic functionality
+this.container.innerHTML = `
+<div style="
+width: 100%; height: 100%;
+background: linear-gradient(135deg, #000000 0%, #1a0000 50%, #002244 100%);
+display: flex; flex-direction: column;
+align-items: center; justify-content: center;
+color: white; text-align: center;
+font-family: 'Inter', sans-serif;
+">
+<h2 style="font-size: 24px; margin-bottom: 20px; color: #BF5700;">🏈 BLAZE SPORTS INTEL</h2>
+<p style="font-size: 16px; margin-bottom: 30px; opacity: 0.8;">Championship Mode Active</p>
+<div style="
+width: 300px; height: 200px;
+background: rgba(255, 255, 255, 0.1);
+border: 2px solid #BF5700;
+border-radius: 12px;
+display: flex; align-items: center; justify-content: center;
+font-size: 48px; color: #BF5700;
+animation: pulse 2s infinite;
+">🏟️</div>
+<p style="font-size: 14px; margin-top: 20px; opacity: 0.6;">3D graphics unavailable - contact support</p>
+<style>
+@keyframes pulse {
+0% { transform: scale(1); }
+50% { transform: scale(1.05); }
+100% { transform: scale(1); }
+}
+</style>
+</div>
+`;
+
+this.hideLoadingScreen();
+this.showNotification('⚠️ Fallback Mode', '3D graphics unavailable, using simplified interface');
+console.warn('Graphics engine failed, running in fallback mode:', this.initializationError);
+} catch (fallbackError) {
+console.error('Even fallback mode failed:', fallbackError);
+this.container.innerHTML = '<div style="padding: 20px; color: #ff4444; text-align: center;">Graphics system unavailable. Please refresh or contact support.</div>';
+this.hideLoadingScreen();
+}
+}
+
+startRenderLoop() {
+if (!this.isInitialized) return;
 // Start render loop
 this.animate();
 }
@@ -1010,18 +1301,43 @@ this.showNotification('🔋 Battery Saver', 'Quality reduced to save power');
 }
 }
 }
-initRenderer() {
-// Mobile-optimized WebGL renderer
+async initRendererAsync() {
+try {
+// Check WebGL support first
+if (!this.checkWebGLSupport()) {
+throw new Error('WebGL not supported on this device');
+}
+
+// Mobile-optimized WebGL renderer with error handling
 const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-this.renderer = new THREE.WebGLRenderer({
+const rendererOptions = {
 antialias: false, // Use SMAA for better mobile performance
 alpha: false,
 powerPreference: this.isMobile ? "default" : "high-performance",
 stencil: false,
 depth: true,
 logarithmicDepthBuffer: !this.isMobile, // Disable on mobile
-preserveDrawingBuffer: false
-});
+preserveDrawingBuffer: false,
+failIfMajorPerformanceCaveat: false // Allow fallback
+};
+
+this.renderer = new THREE.WebGLRenderer(rendererOptions);
+
+// Validate WebGL context
+const gl = this.renderer.getContext();
+if (!gl) {
+throw new Error('Failed to get WebGL context');
+}
+
+// Test basic WebGL operations
+try {
+gl.getParameter(gl.VERSION);
+gl.getParameter(gl.VENDOR);
+gl.getParameter(gl.RENDERER);
+} catch (glError) {
+throw new Error('WebGL context validation failed: ' + glError.message);
+}
+
 this.renderer.setSize(window.innerWidth, window.innerHeight);
 this.renderer.setPixelRatio(pixelRatio);
 this.renderer.shadowMap.enabled = this.renderSettings.shadowsEnabled;
@@ -1033,6 +1349,33 @@ this.renderer.outputColorSpace = THREE.SRGBColorSpace;
 this.renderer.info.autoReset = false;
 this.renderer.physicallyCorrectLights = true;
 this.container.appendChild(this.renderer.domElement);
+
+console.log('WebGL renderer initialized successfully');
+console.log('WebGL Version:', gl.getParameter(gl.VERSION));
+console.log('WebGL Vendor:', gl.getParameter(gl.VENDOR));
+console.log('WebGL Renderer:', gl.getParameter(gl.RENDERER));
+} catch (error) {
+console.error('Renderer initialization failed:', error);
+throw new Error('Failed to initialize WebGL renderer: ' + error.message);
+}
+}
+
+checkWebGLSupport() {
+try {
+const canvas = document.createElement('canvas');
+const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+if (!gl) {
+console.warn('WebGL not available, checking WebGL2...');
+const gl2 = canvas.getContext('webgl2');
+if (!gl2) {
+return false;
+}
+return true;
+}
+return true;
+} catch (e) {
+return false;
+}
 }
 initCamera() {
 const aspect = window.innerWidth / window.innerHeight;
@@ -1105,13 +1448,22 @@ this.scene.add(cone);
 });
 }
 initPostProcessing() {
+try {
+// Validate required components
+if (!EffectComposer || !RenderPass) {
+throw new Error('Post-processing components not available');
+}
+
 // Mobile-optimized post-processing pipeline
 this.composer = new EffectComposer(this.renderer);
 // Main render pass
 const renderPass = new RenderPass(this.scene, this.camera);
 this.composer.addPass(renderPass);
-// Conditional SSAO for mobile performance
+
+// Conditional SSAO for mobile performance with error handling
 if (this.renderSettings.ssaoEnabled && !this.performanceMetrics.isLowPowerMode) {
+try {
+if (SSAOPass) {
 this.ssaoPass = new SSAOPass(
 this.scene,
 this.camera,
@@ -1122,9 +1474,21 @@ this.ssaoPass.kernelRadius = this.isMobile ? 8 : 16;
 this.ssaoPass.minDistance = 0.008;
 this.ssaoPass.maxDistance = 0.08;
 this.composer.addPass(this.ssaoPass);
+console.log('SSAO pass initialized');
+} else {
+console.warn('SSAO not available, skipping');
+this.renderSettings.ssaoEnabled = false;
 }
-// Optimized bloom effect
+} catch (ssaoError) {
+console.warn('SSAO initialization failed:', ssaoError);
+this.renderSettings.ssaoEnabled = false;
+}
+}
+
+// Optimized bloom effect with error handling
 if (this.renderSettings.bloomEnabled) {
+try {
+if (UnrealBloomPass) {
 this.bloomPass = new UnrealBloomPass(
 new THREE.Vector2(window.innerWidth, window.innerHeight),
 1.2, // Reduced strength for mobile
@@ -1132,13 +1496,43 @@ new THREE.Vector2(window.innerWidth, window.innerHeight),
 0.88 // Higher threshold
 );
 this.composer.addPass(this.bloomPass);
+console.log('Bloom pass initialized');
+} else {
+console.warn('Bloom pass not available, skipping');
+this.renderSettings.bloomEnabled = false;
 }
-// SMAA for mobile-friendly anti-aliasing
+} catch (bloomError) {
+console.warn('Bloom initialization failed:', bloomError);
+this.renderSettings.bloomEnabled = false;
+}
+}
+
+// SMAA for mobile-friendly anti-aliasing with error handling
+try {
+if (SMAAPass) {
 this.smaaPass = new SMAAPass(
 window.innerWidth * this.renderer.getPixelRatio(),
 window.innerHeight * this.renderer.getPixelRatio()
 );
 this.composer.addPass(this.smaaPass);
+console.log('SMAA pass initialized');
+} else {
+console.warn('SMAA not available, using basic rendering');
+}
+} catch (smaaError) {
+console.warn('SMAA initialization failed:', smaaError);
+// Continue without SMAA
+}
+
+console.log('Post-processing pipeline initialized successfully');
+} catch (error) {
+console.error('Post-processing initialization failed:', error);
+// Fallback to basic rendering
+this.composer = null;
+this.renderSettings.ssaoEnabled = false;
+this.renderSettings.bloomEnabled = false;
+throw new Error('Post-processing setup failed: ' + error.message);
+}
 }
 initStadiumScene() {
 // Create stadium with mobile-optimized geometry
@@ -1460,15 +1854,25 @@ navigator.vibrate([100, 50, 100, 50, 200]);
 }
 }
 showNotification(title, subtitle = '') {
+try {
 const notification = document.getElementById('mobileNotification');
 const titleEl = document.getElementById('notificationText');
 const subtitleEl = document.getElementById('notificationSubtext');
+
+if (!notification || !titleEl || !subtitleEl) {
+console.warn('Notification elements not found');
+return;
+}
+
 titleEl.textContent = title;
 subtitleEl.textContent = subtitle;
 notification.classList.add('show');
 setTimeout(() => {
 notification.classList.remove('show');
 }, 3000);
+} catch (error) {
+console.error('Notification display error:', error);
+}
 }
 handleResize() {
 const width = window.innerWidth;
@@ -1486,11 +1890,19 @@ this.smaaPass.setSize(width * this.renderer.getPixelRatio(), height * this.rende
 }
 }
 animate() {
+// Only continue animation if properly initialized
+if (!this.isInitialized || this.initializationError) {
+return;
+}
+
+try {
 requestAnimationFrame(() => this.animate());
 const delta = this.clock.getDelta();
 const elapsed = this.clock.getElapsedTime();
-// Update camera
-if (this.cameraControls.autoRotate) {
+
+// Update camera with error handling
+try {
+if (this.cameraControls.autoRotate && this.cameraPath) {
 this.cameraControls.cameraProgress += delta * 0.015;
 if (this.cameraControls.cameraProgress > 1) {
 this.cameraControls.cameraProgress = 0;
@@ -1506,8 +1918,13 @@ this.camera.position.z = radius * Math.cos(this.cameraControls.rotation.y) * Mat
 this.camera.position.y = 150 + radius * Math.sin(this.cameraControls.rotation.x);
 this.camera.lookAt(0, 30, 0);
 }
-// Animate crowd
-if (this.crowd) {
+} catch (cameraError) {
+console.warn('Camera update error:', cameraError);
+}
+
+// Animate crowd with error handling
+try {
+if (this.crowd && this.crowd.geometry && this.crowd.geometry.attributes.position) {
 const positions = this.crowd.geometry.attributes.position.array;
 for (let i = 1; i < positions.length; i += 3) {
 const originalY = 20 + (i / 3) % 160;
@@ -1515,14 +1932,52 @@ positions[i] = originalY + Math.sin(elapsed * 1.5 + i * 0.002) * 3;
 }
 this.crowd.geometry.attributes.position.needsUpdate = true;
 }
-// Stadium light animation
+} catch (crowdError) {
+console.warn('Crowd animation error:', crowdError);
+}
+
+// Stadium light animation with error handling
+try {
+if (this.stadiumLights && this.stadiumLights.length > 0) {
 this.stadiumLights.forEach((light, index) => {
+if (light && typeof light.intensity !== 'undefined') {
 light.intensity = 300000 + Math.sin(elapsed * 0.5 + index) * 30000;
+}
 });
+}
+} catch (lightError) {
+console.warn('Light animation error:', lightError);
+}
+
 // Reset renderer info for next frame
+if (this.renderer && this.renderer.info) {
 this.renderer.info.reset();
-// Render
+}
+
+// Render with fallback handling
+try {
+if (this.composer) {
 this.composer.render(delta);
+} else if (this.renderer) {
+// Fallback to basic rendering if post-processing failed
+this.renderer.render(this.scene, this.camera);
+} else {
+throw new Error('No renderer available');
+}
+} catch (renderError) {
+console.error('Render error:', renderError);
+this.handleRenderFailure(renderError);
+}
+} catch (animationError) {
+console.error('Animation loop error:', animationError);
+this.handleRenderFailure(animationError);
+}
+}
+
+handleRenderFailure(error) {
+console.error('Render failure, stopping animation loop:', error);
+this.isInitialized = false;
+this.showNotification('⚠️ Render Error', 'Graphics rendering failed - try refreshing');
 }
 getPerformanceStats() {
 return this.performanceMetrics;
@@ -1533,51 +1988,107 @@ let mobileGraphicsEngine;
 let isControlsVisible = false;
 let isPerformanceVisible = false;
 let loadingProgress = 0;
-// Loading sequence
-function initializeApp() {
+// Enhanced loading sequence with error handling
+async function initializeApp() {
 const loadingOverlay = document.getElementById('mobileLoadingOverlay');
 const loadingText = document.getElementById('loadingText');
 const loadingBar = document.getElementById('loadingProgressBar');
-const loadingSteps = [
-{ text: 'Checking device capabilities...', duration: 500 },
-{ text: 'Initializing WebGL renderer...', duration: 800 },
-{ text: 'Loading stadium geometry...', duration: 600 },
-{ text: 'Setting up lighting system...', duration: 400 },
-{ text: 'Optimizing for mobile...', duration: 700 },
-{ text: 'Starting championship experience...', duration: 300 }
-];
-let currentStep = 0;
-function processLoadingStep() {
-if (currentStep >= loadingSteps.length) {
-// Initialize graphics engine
-const container = document.getElementById('mobile-canvas-container');
+
 try {
-mobileGraphicsEngine = new MobileBlazeGraphicsEngine(container);
-// Hide loading screen
-setTimeout(() => {
-loadingOverlay.classList.add('hidden');
-}, 500);
-} catch (error) {
-console.error('Failed to initialize mobile graphics engine:', error);
-loadingText.textContent = 'Initialization failed - Please refresh';
+// Step 1: Load Three.js library
+loadingText.textContent = 'Loading Three.js graphics engine...';
+loadingBar.style.width = '5%';
+
+const threeLoaded = await loadThreeJS();
+if (!threeLoaded) {
+console.warn('Three.js failed to load, using fallback graphics');
+loadingText.textContent = 'Initializing fallback graphics...';
+loadingBar.style.width = '90%';
+const container = document.getElementById('mobile-canvas-container');
+if (!container) {
+throw new Error('Canvas container not found');
 }
+mobileGraphicsEngine = new SimpleFallbackEngine(container);
+console.log('Fallback graphics engine initialized');
 return;
 }
-const step = loadingSteps[currentStep];
-loadingText.textContent = step.text;
-loadingProgress = ((currentStep + 1) / loadingSteps.length) * 100;
-loadingBar.style.width = loadingProgress + '%';
-setTimeout(() => {
-currentStep++;
-processLoadingStep();
-}, step.duration);
+
+// Step 2: Initialize graphics engine with async loading
+const container = document.getElementById('mobile-canvas-container');
+if (!container) {
+throw new Error('Canvas container not found');
 }
-processLoadingStep();
+
+// Pre-flight checks
+loadingText.textContent = 'Performing pre-flight checks...';
+loadingBar.style.width = '15%';
+
+// Check for Three.js availability
+if (!THREE) {
+throw new Error('Three.js library not loaded');
+}
+
+// Check for required Three.js components
+if (!THREE.WebGLRenderer || !THREE.Scene || !THREE.PerspectiveCamera) {
+throw new Error('Required Three.js components missing');
+}
+
+loadingText.textContent = 'Three.js validation complete...';
+loadingBar.style.width = '25%';
+
+// Initialize graphics engine (handles its own loading progress)
+mobileGraphicsEngine = new MobileBlazeGraphicsEngine(container);
+
+// The graphics engine will handle loading progress and hiding the screen
+console.log('Graphics engine initialization started successfully');
+} catch (error) {
+console.error('App initialization failed:', error);
+handleInitializationError(error, loadingText, loadingBar, loadingOverlay);
+}
+}
+
+function handleInitializationError(error, loadingText, loadingBar, loadingOverlay) {
+loadingText.textContent = `Error: ${error.message}`;
+loadingText.style.color = '#ff4444';
+loadingBar.style.background = '#ff4444';
+loadingBar.style.width = '100%';
+
+// Show error details and recovery options
+setTimeout(() => {
+loadingText.innerHTML = `
+<div style="text-align: center; padding: 20px;">
+<h3 style="color: #ff4444; margin-bottom: 15px;">⚠️ Initialization Failed</h3>
+<p style="margin-bottom: 10px; font-size: 12px;">${error.message}</p>
+<p style="font-size: 11px; opacity: 0.8; margin-bottom: 20px;">This may be due to:</p>
+<ul style="font-size: 10px; opacity: 0.7; text-align: left; max-width: 280px; margin: 0 auto 20px;">
+<li>WebGL not supported on this device</li>
+<li>Graphics drivers need updating</li>
+<li>Insufficient device memory</li>
+<li>Network connectivity issues</li>
+</ul>
+<button onclick="location.reload()" style="
+background: #BF5700; color: white; border: none;
+padding: 12px 24px; border-radius: 8px;
+font-size: 12px; font-weight: 600;
+cursor: pointer; text-transform: uppercase;
+">Try Again</button>
+</div>
+`;
+}, 1000);
+
+// Auto-reload after 10 seconds
+setTimeout(() => {
+location.reload();
+}, 10000);
 }
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
-// Start initialization
-setTimeout(initializeApp, 500);
+// Start initialization with slight delay for DOM readiness
+setTimeout(() => {
+initializeApp().catch(error => {
+console.error('Failed to start app initialization:', error);
+});
+}, 500);
 // Header controls
 document.getElementById('performanceToggle').addEventListener('click', () => {
 isPerformanceVisible = !isPerformanceVisible;
