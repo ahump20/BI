@@ -59,15 +59,21 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- Blaze Sports Intel Design System -->
-    <link rel="stylesheet" href="/css/blaze-design-system.css">
-    <link rel="stylesheet" href="/css/blaze-components.css">
-    <link rel="stylesheet" href="/css/design-tokens.min.css">
+    <!-- Blaze Intelligence Design System - Complete Championship Platform -->
+    <link rel="stylesheet" href="/assets/blaze-design-system.css">
+    <script src="/assets/threejs-graphics-standards.js" defer></script>
+    <script src="/assets/figma-integration.js" defer></script>
 
     <!-- Championship Dashboard Assets -->
     <script src="/js/championship-data-engine.js"></script>
     <script src="/js/championship-monte-carlo-visualizer.js"></script>
     <script src="/js/championship-scenario-simulator.js"></script>
+
+    <!-- Advanced 3D Graphics Engine -->
+    <script type="module" src="/js/blaze-ultimate-3d-graphics-engine.js"></script>
+    <script type="module" src="/js/websocket-manager.js"></script>
+    <script type="module" src="/js/blaze-championship-shaders.js"></script>
+    <script type="module" src="/js/blaze-webxr-integration.js"></script>
 
     <style>
         /* ==================== CSS VARIABLES & THEME ==================== */
@@ -4738,6 +4744,12 @@
         <!-- Live Championship Dashboard -->
         <script src="/js/blaze-championship-dashboard.js" defer></script>
 
+        <!-- Live Sports Data Integration Hub -->
+        <script src="/js/live-sports-data-dashboard.js" defer></script>
+
+        <!-- Real-time WebSocket Manager -->
+        <script src="/js/blaze-websocket-manager.js" defer></script>
+
     </body>
 <!-- BSI PAD LINE 1: reserved for future components -->
 <!-- BSI PAD LINE 2: reserved for future components -->
@@ -6034,8 +6046,116 @@
 <!-- BSI PAD LINE 1293: reserved for future components -->
 <!-- BSI PAD LINE 1294: reserved for future components -->
 <!-- BSI PAD LINE 1295: reserved for future components -->
-<!-- BSI PAD LINE 1296: reserved for future components -->
-<!-- BSI PAD LINE 1297: reserved for future components -->
-<!-- BSI PAD LINE 1298: reserved for future components -->
-<!-- BSI PAD LINE 1299: reserved for future components -->
+<!-- ==================== ENTERPRISE MONITORING & ANALYTICS ==================== -->
+
+<!-- Enterprise Monitoring Dashboard -->
+<script src="/monitoring-dashboard.js" type="module"></script>
+
+<!-- Real-time Analytics & Error Tracking -->
+<script src="/analytics-tracking.js" type="module"></script>
+
+<!-- Service Worker Registration for PWA -->
+<script>
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                console.log('🔥 Blaze Sports Intel SW registered:', registration.scope);
+
+                // Check for updates
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // New version available
+                            if (confirm('New version available! Update now?')) {
+                                window.location.reload();
+                            }
+                        }
+                    });
+                });
+            })
+            .catch((error) => {
+                console.error('SW registration failed:', error);
+            });
+    });
+}
+</script>
+
+<!-- Enterprise Performance Monitoring -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Track initial page load performance
+    if ('performance' in window) {
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const navigation = performance.getEntriesByType('navigation')[0];
+                if (navigation && window.blazeAnalytics) {
+                    window.blazeAnalytics.trackPerformanceMetric('page_load_complete', {
+                        totalTime: navigation.loadEventEnd - navigation.navigationStart,
+                        domReady: navigation.domContentLoadedEventEnd - navigation.navigationStart,
+                        firstByte: navigation.responseStart - navigation.navigationStart
+                    });
+                }
+            }, 1000);
+        });
+    }
+
+    // Track championship feature usage
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.monte-carlo-dashboard') && window.blazeAnalytics) {
+            window.blazeAnalytics.trackMonteCarloEvent('interaction', {
+                element: e.target.tagName.toLowerCase(),
+                action: 'click'
+            });
+        }
+    });
+
+    console.log('🏆 Blaze Sports Intel Enterprise Analytics initialized');
+
+    // Initialize Advanced 3D Graphics Engine
+    if (window.BlazeUltimate3D) {
+        window.BlazeUltimate3D.initialize({
+            targetFPS: 60,
+            maxDataLatency: 50,
+            enablePostProcessing: true,
+            enableVR: true,
+            enableAR: true
+        }).then(() => {
+            console.log('🎮 Ultimate 3D Graphics Engine initialized successfully');
+
+            // Initialize real-time data integration if available
+            if (window.WebSocketManager) {
+                console.log('🔗 Real-time data integration active');
+            }
+
+            // Setup automatic sport switching based on time/season
+            const autoSwitchSports = () => {
+                const month = new Date().getMonth() + 1;
+                let sport = 'baseball';
+
+                if (month >= 9 && month <= 2) sport = 'football';
+                else if (month >= 11 && month <= 4) sport = 'basketball';
+                else if (month >= 3 && month <= 6) sport = 'track';
+
+                window.BlazeUltimate3D.switchSport(sport);
+                console.log(`🏟️ Auto-switched to ${sport} visualization`);
+            };
+
+            autoSwitchSports();
+
+            // Switch sports every 30 seconds for demo purposes
+            setInterval(() => {
+                const sports = ['baseball', 'football', 'basketball', 'track'];
+                const randomSport = sports[Math.floor(Math.random() * sports.length)];
+                window.BlazeUltimate3D.switchSport(randomSport);
+            }, 30000);
+
+        }).catch(error => {
+            console.warn('⚠️ 3D Graphics Engine fallback mode:', error);
+        });
+    }
+});
+</script>
+
 </html>
