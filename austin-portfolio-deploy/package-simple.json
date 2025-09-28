@@ -1,0 +1,20 @@
+{
+  "name": "blaze-intelligence-simple",
+  "version": "1.0.0",
+  "description": "Simple interface, sophisticated backend",
+  "main": "simple-blaze-server.js",
+  "scripts": {
+    "start": "node simple-blaze-server.js",
+    "dev": "nodemon simple-blaze-server.js"
+  },
+  "dependencies": {
+    "@cloudflare/workerd-darwin-arm64": "^1.20250924.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "wrangler": "^4.40.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

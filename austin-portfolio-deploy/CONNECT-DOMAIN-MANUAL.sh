@@ -1,0 +1,42 @@
+#!/bin/bash
+
+echo "🚀 MANUAL DOMAIN CONNECTION GUIDE FOR blazesportsintel.com"
+echo "========================================================="
+echo ""
+echo "Your site is READY at: https://blazesportsintel.pages.dev ✅"
+echo ""
+echo "To connect blazesportsintel.com, follow these steps:"
+echo ""
+echo "📋 MANUAL STEPS:"
+echo "1. Opening Cloudflare Dashboard..."
+osascript -e 'tell application "Google Chrome"
+    activate
+    open location "https://dash.cloudflare.com/?to=/:account/pages/view/blazesportsintel/settings/domains"
+end tell'
+
+echo ""
+echo "2. In the Dashboard that just opened:"
+echo "   a) Click 'Custom domains' tab if not already there"
+echo "   b) Click 'Set up a custom domain'"
+echo "   c) Enter: blazesportsintel.com"
+echo "   d) Click 'Continue'"
+echo "   e) It will verify DNS (should auto-complete since domain is on Cloudflare)"
+echo "   f) Click 'Activate domain'"
+echo ""
+echo "3. Repeat for www subdomain:"
+echo "   a) Click 'Set up a custom domain' again"
+echo "   b) Enter: www.blazesportsintel.com"
+echo "   c) Follow same activation process"
+echo ""
+echo "⏰ DNS propagation takes 2-5 minutes"
+echo ""
+echo "🎯 Once complete:"
+echo "   - https://blazesportsintel.com will show your site"
+echo "   - https://www.blazesportsintel.com will also work"
+echo ""
+echo "📧 Custom email configured: austin@blazesportsintel.com"
+echo ""
+echo "Press Enter to open the Dashboard..."
+read
+
+echo "Dashboard opened! Follow the steps above to connect your domain."

@@ -1,40 +1,5 @@
-# Blaze Intelligence - Unified Sports Authority Platform
-# The Deep South Sports Authority - Texas Football & SEC Analytics
+# Redirect www to non-www
+https://www.blazesportsintel.com/* https://blazesportsintel.com/:splat 301!
 
-# Primary domain redirects
-https://blaze-intelligence.netlify.app/* https://blaze-intelligence.com/:splat 301!
-https://blazesportsintel.com/* https://blaze-intelligence.com/:splat 301!
-
-# Main sections - Texas Football Authority & SEC Analytics
-/texas-football    /texas-football-authority.html    200
-/sec              /sec-command.html                   200
-/perfect-game     /perfect-game.html                  200
-/recruiting       /recruiting-hq.html                 200
-
-# NIL section
-/sec-nil          /sec-nil.html                       200
-/sec-nil-analytics /sec-nil-analytics.html            200
-/nil-calculator   /nil-calculator.html                200
-/pricing          /nil-calculator.html                200
-
-# Blaze Intelligence Platform Routes
-/video-intelligence /blaze-vision-intelligence-command-center.html 200
-/command-center /blaze-vision-intelligence-command-center.html 200
-/vision-ai /blaze-vision-intelligence-command-center.html 200
-/ai-symphony /blaze-ai-symphony.html 200
-/analytics /analytics-dashboard.html 200
-/demo /analytics-dashboard.html 200
-
-# Team-specific intelligence dashboards
-/cardinals /cardinals-intelligence.html 200
-/titans /titans-intelligence.html 200
-/grizzlies /grizzlies-intelligence.html 200
-/orioles /orioles-executive-championship.html 200
-/baltimore /baltimore-intelligence.html 200
-
-# Legacy redirects
-/platform         /index.html                         301
-/dashboard        /texas-football-authority.html      301
-
-# API endpoints (if using Netlify Functions)
-/api/*            /.netlify/functions/:splat          200
+# Handle SPA routing
+/*    /index.html   200

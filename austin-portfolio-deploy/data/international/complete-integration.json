@@ -1,0 +1,54 @@
+{
+  "timestamp": "2025-09-25T21:18:37.817Z",
+  "system": "INTERNATIONAL_PROSPECTS_PIPELINE",
+  "regions": {
+    "latin_america": {
+      "countries": [
+        "DOM",
+        "VEN",
+        "CUB",
+        "MEX",
+        "PAN",
+        "COL",
+        "NIC"
+      ],
+      "academies": 45,
+      "prospects_annual": 1200,
+      "mlb_pipeline": true
+    },
+    "asia_pacific": {
+      "countries": [
+        "JPN",
+        "KOR",
+        "TWN",
+        "AUS"
+      ],
+      "professional_leagues": [
+        "NPB",
+        "KBO",
+        "CPBL",
+        "ABL"
+      ],
+      "prospects_annual": 300,
+      "posting_system_tracking": true
+    },
+    "europe_africa": {
+      "countries": [
+        "NED",
+        "ITA",
+        "GER",
+        "SAF"
+      ],
+      "development_programs": 12,
+      "prospects_annual": 80,
+      "emerging_markets": true
+    }
+  },
+  "integration_features": {
+    "visa_status_tracking": true,
+    "development_academy_monitoring": true,
+    "professional_league_statistics": true,
+    "signing_period_alerts": true,
+    "cultural_adaptation_metrics": true
+  }
+}

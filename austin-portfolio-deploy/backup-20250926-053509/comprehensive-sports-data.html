@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Sports Data Hub | Blaze Intelligence</title>
+    <meta name="description" content="Real-time sports data for Texas HS football, Perfect Game baseball, NCAA, NFL, MLB with official source links.">
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --deep-navy: #002244;
+            --cardinal-red: #C41E3A;
+            --grizzly-teal: #00B2A9;
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(30, 41, 59, 0.3);
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--burnt-orange), #D16600);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 48px;
+            margin: 0 0 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .sport-section {
+            margin-bottom: 60px;
+        }
+
+        .sport-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--burnt-orange);
+        }
+
+        .sport-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--burnt-orange), #D16600);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 32px;
+            margin: 0;
+            color: #fff;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .data-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .data-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(191, 87, 0, 0.2);
+            border-color: var(--burnt-orange);
+        }
+
+        .team-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--burnt-orange);
+        }
+
+        .team-record {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 15px;
+        }
+
+        .source-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .source-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.2), rgba(209, 102, 0, 0.2));
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(191, 87, 0, 0.3);
+        }
+
+        .source-link:hover {
+            background: linear-gradient(135deg, var(--burnt-orange), #D16600);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(191, 87, 0, 0.3);
+        }
+
+        .standings-table {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .standings-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .standings-table th {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.3), rgba(209, 102, 0, 0.3));
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            border-bottom: 2px solid var(--burnt-orange);
+        }
+
+        .standings-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+        }
+
+        .standings-table tr:hover {
+            background: rgba(191, 87, 0, 0.1);
+        }
+
+        .update-notice {
+            background: linear-gradient(135deg, rgba(0, 178, 169, 0.2), rgba(0, 178, 169, 0.1));
+            border: 1px solid var(--grizzly-teal);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .update-notice .icon {
+            font-size: 24px;
+        }
+
+        .section-description {
+            color: #9ca3af;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .quick-nav {
+            background: var(--card-bg);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        .quick-nav h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--burnt-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-link {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.2), rgba(209, 102, 0, 0.2));
+            padding: 8px 16px;
+            border-radius: 6px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(191, 87, 0, 0.3);
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(135deg, var(--burnt-orange), #D16600);
+            transform: translateY(-1px);
+        }
+
+        .last-updated {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+            font-size: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔥 Blaze Intelligence Sports Data Hub</h1>
+        <div class="subtitle">Comprehensive Coverage from Youth to Professional</div>
+    </div>
+
+    <div class="container">
+        <div class="update-notice">
+            <span class="icon">🔄</span>
+            <div>
+                <strong>Live Data Updates</strong><br>
+                Last refreshed: September 22, 2025 at 9:34 PM • Data sourced from official league sites
+            </div>
+        </div>
+
+        <div class="quick-nav">
+            <h3>Quick Navigation</h3>
+            <div class="nav-links">
+                <a href="#texas-hs" class="nav-link">🏈 Texas HS Football</a>
+                <a href="#perfect-game" class="nav-link">⚾ Perfect Game Baseball</a>
+                <a href="#ncaa-football" class="nav-link">🏈 NCAA Football</a>
+                <a href="#nfl" class="nav-link">🏈 NFL</a>
+                <a href="#mlb" class="nav-link">⚾ MLB</a>
+                <a href="#college-baseball" class="nav-link">⚾ College Baseball</a>
+            </div>
+        </div>
+
+        <!-- Texas High School Football -->
+        <section id="texas-hs" class="sport-section">
+            <div class="sport-header">
+                <div class="sport-icon">🏈</div>
+                <h2>Texas High School Football</h2>
+            </div>
+            <p class="section-description">
+                Texas Football Rankings (Dave Campbell's Style) • Week 4, 2025 Season • Friday Night Lights coverage
+            </p>
+
+            <div class="standings-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Team</th>
+                            <th>Record</th>
+                            <th>Classification</th>
+                            <th>Official Sources</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1</td>
+                            <td><strong>Southlake Carroll Dragons</strong></td>
+                            <td>4-0</td>
+                            <td>6A Division 1</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.texasfootball.com/rankings/" target="_blank" class="source-link">
+                                        📊 Dave Campbell's
+                                    </a>
+                                    <a href="https://www.maxpreps.com/tx/southlake/southlake-carroll-dragons/football/" target="_blank" class="source-link">
+                                        📈 MaxPreps
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#7</td>
+                            <td><strong>Austin Westlake Chaparrals</strong></td>
+                            <td>3-1</td>
+                            <td>6A Division 1</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.texasfootball.com/rankings/" target="_blank" class="source-link">
+                                        📊 Dave Campbell's
+                                    </a>
+                                    <a href="https://www.maxpreps.com/tx/austin/westlake-chaparrals/football/" target="_blank" class="source-link">
+                                        📈 MaxPreps
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#14</td>
+                            <td><strong>Galena Park North Shore Mustangs</strong></td>
+                            <td>2-1</td>
+                            <td>6A Division 1</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.texasfootball.com/rankings/" target="_blank" class="source-link">
+                                        📊 Dave Campbell's
+                                    </a>
+                                    <a href="https://www.maxpreps.com/tx/houston/north-shore-mustangs/football/" target="_blank" class="source-link">
+                                        📈 MaxPreps
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Top 10</td>
+                            <td><strong>North Crowley Panthers</strong></td>
+                            <td>3-0</td>
+                            <td>6A Division 1</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.texasfootball.com/" target="_blank" class="source-link">
+                                        📊 Dave Campbell's
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Top 10</td>
+                            <td><strong>Duncanville Panthers</strong></td>
+                            <td>1-1</td>
+                            <td>6A Division 1</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.texasfootball.com/" target="_blank" class="source-link">
+                                        📊 Dave Campbell's
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="source-links">
+                <a href="/texas-hs-football.html" class="source-link">
+                    🔥 Complete Texas HS Football Hub
+                </a>
+                <a href="https://www.texasfootball.com/" target="_blank" class="source-link">
+                    🌟 Dave Campbell's Texas Football Official Site
+                </a>
+                <a href="https://www.uiltexas.org/football" target="_blank" class="source-link">
+                    🏆 UIL Texas Football
+                </a>
+                <a href="https://www.texasfootball.com/rankings/" target="_blank" class="source-link">
+                    📊 Complete Rankings
+                </a>
+            </div>
+        </section>
+
+        <!-- Perfect Game Baseball -->
+        <section id="perfect-game" class="sport-section">
+            <div class="sport-header">
+                <div class="sport-icon">⚾</div>
+                <h2>Perfect Game Baseball - Texas Region</h2>
+            </div>
+            <p class="section-description">
+                Elite youth baseball tournaments • 14u-18u Texas regional coverage • Nation's premier scouting service
+            </p>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="team-name">2025 Texas Championships</div>
+                    <div class="team-record">15U Texas Championship • July 17-20, 2025 • Grapevine, TX</div>
+                    <div class="source-links">
+                        <a href="https://www.perfectgame.org/Events/Default.aspx?event=108752" target="_blank" class="source-link">
+                            📅 Tournament Details
+                        </a>
+                        <a href="https://www.perfectgame.org/Schedule/FeaturedGroups.aspx?PrtID=270" target="_blank" class="source-link">
+                            🌟 Texas Events
+                        </a>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div class="team-name">Houston Super Regional</div>
+                    <div class="team-record">1,000+ teams • March 2025 • Season Kickoff Event</div>
+                    <div class="source-links">
+                        <a href="https://www.perfectgame.org/events/Default.aspx?event=97338" target="_blank" class="source-link">
+                            📅 Event Info
+                        </a>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div class="team-name">Texas State Championships</div>
+                    <div class="team-record">12U Major • Multiple Age Divisions</div>
+                    <div class="source-links">
+                        <a href="https://www.perfectgame.org/events/Default.aspx?event=103803" target="_blank" class="source-link">
+                            🏆 Championship Info
+                        </a>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div class="team-name">Texas Showcase Circuit</div>
+                    <div class="team-record">Elite Player Development • College Exposure</div>
+                    <div class="source-links">
+                        <a href="https://www.perfectgame.org/Tournaments/" target="_blank" class="source-link">
+                            ⚾ All Tournaments
+                        </a>
+                        <a href="https://www.perfectgame.org/Schedule/" target="_blank" class="source-link">
+                            📅 Full Schedule
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="source-links" style="margin-top: 20px;">
+                <a href="/perfect-game-texas.html" class="source-link">
+                    🔥 Complete Perfect Game Texas Hub
+                </a>
+                <a href="https://www.perfectgame.org/" target="_blank" class="source-link">
+                    ⚾ Perfect Game Official
+                </a>
+                <a href="https://www.perfectgame.org/Rankings/" target="_blank" class="source-link">
+                    📊 Player Rankings
+                </a>
+                <a href="https://www.perfectgame.org/Tournaments/" target="_blank" class="source-link">
+                    🏆 Tournament Schedule
+                </a>
+            </div>
+        </section>
+
+        <!-- NCAA Football -->
+        <section id="ncaa-football" class="sport-section">
+            <div class="sport-header">
+                <div class="sport-icon">🏈</div>
+                <h2>NCAA Football - Power 5 & Group of 5</h2>
+            </div>
+            <p class="section-description">
+                AP Top 25 Rankings • Week 5, 2025 Season • Complete D1 FBS Coverage
+            </p>
+
+            <div class="standings-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>AP Rank</th>
+                            <th>Team</th>
+                            <th>Record</th>
+                            <th>Conference</th>
+                            <th>Official Sources</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1</td>
+                            <td><strong>Ohio State Buckeyes</strong></td>
+                            <td>4-0</td>
+                            <td>Big Ten</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.espn.com/college-football/team/_/id/194/ohio-state-buckeyes" target="_blank" class="source-link">
+                                        📊 ESPN
+                                    </a>
+                                    <a href="https://ohiostatebuckeyes.com/sports/m-footbl/" target="_blank" class="source-link">
+                                        🌰 Official Site
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#2</td>
+                            <td><strong>Miami Hurricanes</strong></td>
+                            <td>4-0</td>
+                            <td>ACC</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.espn.com/college-football/team/_/id/2390/miami-hurricanes" target="_blank" class="source-link">
+                                        📊 ESPN
+                                    </a>
+                                    <a href="https://miamihurricanes.com/sports/football/" target="_blank" class="source-link">
+                                        🌀 Official Site
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#7</td>
+                            <td><strong>Oklahoma Sooners</strong></td>
+                            <td>4-0</td>
+                            <td>SEC</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://247sports.com/college/oklahoma/" target="_blank" class="source-link">
+                                        📈 247Sports
+                                    </a>
+                                    <a href="https://www.rivals.com/team/oklahoma-52" target="_blank" class="source-link">
+                                        🎯 Rivals
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#8</td>
+                            <td><strong>Texas Longhorns</strong></td>
+                            <td>3-1</td>
+                            <td>SEC</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://texaslonghorns.com/sports/football/" target="_blank" class="source-link">
+                                        🤘 Official Site
+                                    </a>
+                                    <a href="https://www.orangebloods.com/" target="_blank" class="source-link">
+                                        🍊 OrangeBloods
+                                    </a>
+                                    <a href="https://247sports.com/college/texas/" target="_blank" class="source-link">
+                                        📈 247Sports
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#9</td>
+                            <td><strong>Texas A&M Aggies</strong></td>
+                            <td>4-0</td>
+                            <td>SEC</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://12thman.com/sports/football" target="_blank" class="source-link">
+                                        👍 Official Site
+                                    </a>
+                                    <a href="https://247sports.com/college/texas-am/" target="_blank" class="source-link">
+                                        📈 247Sports
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="source-links">
+                <a href="/teams/ncaa-football/sec/" class="source-link">
+                    🔥 SEC Teams (16)
+                </a>
+                <a href="/teams/ncaa-football/big-ten/" class="source-link">
+                    🔥 Big Ten Teams (18)
+                </a>
+                <a href="/teams/ncaa-football/big-12/" class="source-link">
+                    🔥 Big 12 Teams (16)
+                </a>
+                <a href="/teams/ncaa-football/acc/" class="source-link">
+                    🔥 ACC Teams (17)
+                </a>
+                <a href="/teams/ncaa-football/aac/" class="source-link">
+                    🔥 AAC Teams (14)
+                </a>
+                <a href="/teams/ncaa-football/mountain-west/" class="source-link">
+                    🔥 Mountain West Teams (12)
+                </a>
+                <a href="/teams/ncaa-football/sun-belt/" class="source-link">
+                    🔥 Sun Belt Teams (14)
+                </a>
+                <a href="/teams/ncaa-football/mac/" class="source-link">
+                    🔥 MAC Teams (12)
+                </a>
+                <a href="/teams/ncaa-football/conference-usa/" class="source-link">
+                    🔥 C-USA Teams (10)
+                </a>
+                <a href="https://www.ncaa.com/rankings/football/fbs/associated-press" target="_blank" class="source-link">
+                    🏆 AP Poll Official
+                </a>
+                <a href="https://www.espn.com/college-football/rankings" target="_blank" class="source-link">
+                    📊 ESPN Rankings
+                </a>
+                <a href="https://247sports.com/Season/2025-Football/CompositeTeamRankings/" target="_blank" class="source-link">
+                    🎯 247Sports Composite
+                </a>
+                <a href="https://www.rivals.com/" target="_blank" class="source-link">
+                    ⭐ Rivals Rankings
+                </a>
+            </div>
+        </section>
+
+        <!-- NFL -->
+        <section id="nfl" class="sport-section">
+            <div class="sport-header">
+                <div class="sport-icon">🏈</div>
+                <h2>NFL - Week 3, 2025 Season</h2>
+            </div>
+            <p class="section-description">
+                All 32 franchises • Complete rosters and standings • Through September 22, 2025
+            </p>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="team-name">Tennessee Titans</div>
+                    <div class="team-record">0-3 • AFC South</div>
+                    <div class="source-links">
+                        <a href="https://www.nfl.com/teams/tennessee-titans/" target="_blank" class="source-link">
+                            🏈 NFL.com
+                        </a>
+                        <a href="https://www.espn.com/nfl/team/_/name/ten/tennessee-titans" target="_blank" class="source-link">
+                            📊 ESPN
+                        </a>
+                        <a href="https://www.tennesseetitans.com/" target="_blank" class="source-link">
+                            ⚔️ Official Site
+                        </a>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div class="team-name">Dallas Cowboys</div>
+                    <div class="team-record">2-1 • NFC East</div>
+                    <div class="source-links">
+                        <a href="https://www.nfl.com/teams/dallas-cowboys/" target="_blank" class="source-link">
+                            🏈 NFL.com
+                        </a>
+                        <a href="https://www.dallascowboys.com/" target="_blank" class="source-link">
+                            ⭐ Official Site
+                        </a>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div class="team-name">Houston Texans</div>
+                    <div class="team-record">2-1 • AFC South</div>
+                    <div class="source-links">
+                        <a href="https://www.nfl.com/teams/houston-texans/" target="_blank" class="source-link">
+                            🏈 NFL.com
+                        </a>
+                        <a href="https://www.houstontexans.com/" target="_blank" class="source-link">
+                            🐂 Official Site
+                        </a>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div class="team-name">New Orleans Saints</div>
+                    <div class="team-record">2-1 • NFC South</div>
+                    <div class="source-links">
+                        <a href="https://www.nfl.com/teams/new-orleans-saints/" target="_blank" class="source-link">
+                            🏈 NFL.com
+                        </a>
+                        <a href="https://www.neworleanssaints.com/" target="_blank" class="source-link">
+                            ⚜️ Official Site
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="source-links" style="margin-top: 20px;">
+                <a href="/teams/nfl/afc-north/" class="source-link">
+                    🔥 AFC North (4)
+                </a>
+                <a href="/teams/nfl/afc-south/" class="source-link">
+                    🔥 AFC South (4)
+                </a>
+                <a href="/teams/nfl/afc-east/" class="source-link">
+                    🔥 AFC East (4)
+                </a>
+                <a href="/teams/nfl/afc-west/" class="source-link">
+                    🔥 AFC West (4)
+                </a>
+                <a href="/teams/nfl/nfc-north/" class="source-link">
+                    🔥 NFC North (4)
+                </a>
+                <a href="/teams/nfl/nfc-south/" class="source-link">
+                    🔥 NFC South (4)
+                </a>
+                <a href="/teams/nfl/nfc-east/" class="source-link">
+                    🔥 NFC East (4)
+                </a>
+                <a href="/teams/nfl/nfc-west/" class="source-link">
+                    🔥 NFC West (4)
+                </a>
+                <a href="https://www.nfl.com/standings/" target="_blank" class="source-link">
+                    📊 NFL Standings
+                </a>
+                <a href="https://www.pro-football-reference.com/" target="_blank" class="source-link">
+                    📈 Pro Football Reference
+                </a>
+                <a href="https://www.espn.com/nfl/standings" target="_blank" class="source-link">
+                    📺 ESPN NFL
+                </a>
+                <a href="https://www.nfl.com/teams/" target="_blank" class="source-link">
+                    🏈 All 32 Teams
+                </a>
+            </div>
+        </section>
+
+        <!-- MLB -->
+        <section id="mlb" class="sport-section">
+            <div class="sport-header">
+                <div class="sport-icon">⚾</div>
+                <h2>MLB - September 22, 2025</h2>
+            </div>
+            <p class="section-description">
+                Final week of regular season • Wild Card races • All 30 teams
+            </p>
+
+            <div class="standings-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th>Record</th>
+                            <th>Status</th>
+                            <th>Division/WC</th>
+                            <th>Official Sources</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>St. Louis Cardinals</strong></td>
+                            <td>76-80</td>
+                            <td>4 GB Wild Card</td>
+                            <td>NL Central</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.mlb.com/cardinals" target="_blank" class="source-link">
+                                        ⚾ MLB.com
+                                    </a>
+                                    <a href="https://www.baseball-reference.com/teams/STL/2025.shtml" target="_blank" class="source-link">
+                                        📊 Baseball Ref
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Houston Astros</strong></td>
+                            <td>81-75</td>
+                            <td>Tied for WC3</td>
+                            <td>AL West</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.mlb.com/astros" target="_blank" class="source-link">
+                                        ⚾ MLB.com
+                                    </a>
+                                    <a href="https://www.baseball-reference.com/teams/HOU/2025.shtml" target="_blank" class="source-link">
+                                        📊 Baseball Ref
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Texas Rangers</strong></td>
+                            <td>72-84</td>
+                            <td>Eliminated</td>
+                            <td>AL West</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.mlb.com/rangers" target="_blank" class="source-link">
+                                        ⚾ MLB.com
+                                    </a>
+                                    <a href="https://www.baseball-reference.com/teams/TEX/2025.shtml" target="_blank" class="source-link">
+                                        📊 Baseball Ref
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cincinnati Reds</strong></td>
+                            <td>80-76</td>
+                            <td>NL WC3</td>
+                            <td>NL Central</td>
+                            <td>
+                                <div class="source-links">
+                                    <a href="https://www.mlb.com/reds" target="_blank" class="source-link">
+                                        ⚾ MLB.com
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="source-links">
+                <a href="/teams/mlb/al-east/" class="source-link">
+                    🔥 AL East (5)
+                </a>
+                <a href="/teams/mlb/al-central/" class="source-link">
+                    🔥 AL Central (5)
+                </a>
+                <a href="/teams/mlb/al-west/" class="source-link">
+                    🔥 AL West (5)
+                </a>
+                <a href="/teams/mlb/nl-east/" class="source-link">
+                    🔥 NL East (5)
+                </a>
+                <a href="/teams/mlb/nl-central/" class="source-link">
+                    🔥 NL Central (5)
+                </a>
+                <a href="/teams/mlb/nl-west/" class="source-link">
+                    🔥 NL West (5)
+                </a>
+                <a href="https://www.mlb.com/standings" target="_blank" class="source-link">
+                    📊 MLB Standings
+                </a>
+                <a href="https://www.baseball-reference.com/" target="_blank" class="source-link">
+                    📈 Baseball Reference
+                </a>
+                <a href="https://www.mlb.com/scores" target="_blank" class="source-link">
+                    ⚾ Live Scores
+                </a>
+                <a href="https://www.espn.com/mlb/standings" target="_blank" class="source-link">
+                    📺 ESPN MLB
+                </a>
+            </div>
+        </section>
+
+        <!-- College Baseball -->
+        <section id="college-baseball" class="sport-section">
+            <div class="sport-header">
+                <div class="sport-icon">⚾</div>
+                <h2>College Baseball - Power 5 & Group of 5</h2>
+            </div>
+            <p class="section-description">
+                Fall 2025 Season • D1 Baseball Coverage • SEC, Big 12, ACC, Big Ten, Pac-12
+            </p>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="team-name">Texas Longhorns</div>
+                    <div class="team-record">SEC • 2025 Fall Ball</div>
+                    <div class="source-links">
+                        <a href="https://texassports.com/sports/baseball" target="_blank" class="source-link">
+                            🤘 Official Site
+                        </a>
+                        <a href="https://d1baseball.com/team/texas/" target="_blank" class="source-link">
+                            ⚾ D1Baseball
+                        </a>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div class="team-name">Texas A&M Aggies</div>
+                    <div class="team-record">SEC • 2025 Fall Ball</div>
+                    <div class="source-links">
+                        <a href="https://12thman.com/sports/baseball" target="_blank" class="source-link">
+                            👍 Official Site
+                        </a>
+                        <a href="https://d1baseball.com/team/texas-am/" target="_blank" class="source-link">
+                            ⚾ D1Baseball
+                        </a>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div class="team-name">LSU Tigers</div>
+                    <div class="team-record">SEC • 2025 Fall Ball</div>
+                    <div class="source-links">
+                        <a href="https://lsusports.net/sports/baseball" target="_blank" class="source-link">
+                            🐯 Official Site
+                        </a>
+                        <a href="https://d1baseball.com/team/lsu/" target="_blank" class="source-link">
+                            ⚾ D1Baseball
+                        </a>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div class="team-name">Arkansas Razorbacks</div>
+                    <div class="team-record">SEC • 2025 Fall Ball</div>
+                    <div class="source-links">
+                        <a href="https://arkansasrazorbacks.com/sports/baseball/" target="_blank" class="source-link">
+                            🐗 Official Site
+                        </a>
+                        <a href="https://d1baseball.com/team/arkansas/" target="_blank" class="source-link">
+                            ⚾ D1Baseball
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="source-links" style="margin-top: 20px;">
+                <a href="/teams/college-baseball/sec/" class="source-link">
+                    🔥 SEC Baseball (16)
+                </a>
+                <a href="/teams/college-baseball/big-12/" class="source-link">
+                    🔥 Big 12 Baseball (14)
+                </a>
+                <a href="/teams/college-baseball/acc/" class="source-link">
+                    🔥 ACC Baseball (15)
+                </a>
+                <a href="/teams/college-baseball/big-ten/" class="source-link">
+                    🔥 Big Ten Baseball (17)
+                </a>
+                <a href="/teams/college-baseball/aac/" class="source-link">
+                    🔥 AAC Baseball (9)
+                </a>
+                <a href="/teams/college-baseball/sun-belt/" class="source-link">
+                    🔥 Sun Belt Baseball (13)
+                </a>
+                <a href="/teams/college-baseball/conference-usa/" class="source-link">
+                    🔥 C-USA Baseball (9)
+                </a>
+                <a href="/teams/college-baseball/texas-programs/" class="source-link">
+                    🔥 Texas Programs (11)
+                </a>
+                <a href="https://d1baseball.com/" target="_blank" class="source-link">
+                    ⚾ D1Baseball
+                </a>
+                <a href="https://www.ncaa.com/sports/baseball/d1" target="_blank" class="source-link">
+                    🏆 NCAA Baseball
+                </a>
+                <a href="https://www.baseballamerica.com/college/" target="_blank" class="source-link">
+                    📰 Baseball America
+                </a>
+            </div>
+        </section>
+
+        <div class="last-updated">
+            <strong>Data Integrity Statement</strong><br>
+            All statistics and standings sourced from official league websites and verified sources<br>
+            Last comprehensive update: September 22, 2025 | Next scheduled update: September 23, 2025<br>
+            <br>
+            <a href="/methods-and-definitions.html" style="color: var(--burnt-orange); text-decoration: none;">
+                📊 View Methods & Definitions
+            </a>
+        </div>
+    </div>
+
+    <!-- Smart Links Component -->
+    <script src="/js/components/smart-links.js"></script>
+</body>
+</html>

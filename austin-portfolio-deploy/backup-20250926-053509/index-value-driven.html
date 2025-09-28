@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Deep South Sports Intelligence Platform</title>
+    <meta name="description" content="From Friday Night Lights to Sunday in the Show - Advanced analytics, recruiting intelligence, and predictive modeling for Texas, SEC, and Deep South athletics">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+            background: radial-gradient(circle at center, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-badge {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 50%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #a0a0a0;
+            max-width: 800px;
+            line-height: 1.5;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #BF5700, #FF8C00, #FFD700);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(191, 87, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .value-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-metric {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .metric-label {
+            color: #808080;
+            font-size: 0.875rem;
+        }
+
+        .metric-value {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-left: auto;
+        }
+
+        .live-demo-section {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 1400px;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .demo-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .interactive-tool {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-badge {
+            background: linear-gradient(135deg, #00B2A9 0%, #00D4AA 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-label {
+            color: #a0a0a0;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .input-field {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #BF5700;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        select.input-field {
+            cursor: pointer;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(191, 87, 0, 0.4);
+        }
+
+        .result-display {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border: 2px solid #BF5700;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            color: #a0a0a0;
+            font-size: 1rem;
+        }
+
+        .features-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+
+        .feature-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, transparent 100%);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #FFD700;
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .feature-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .feature-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #808080;
+            margin-top: 0.25rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.2) 0%, transparent 100%);
+            border-radius: 20px;
+            margin: 3rem auto;
+            max-width: 1000px;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-subtitle {
+            color: #b0b0b0;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #BF5700;
+            border: 2px solid #BF5700;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(191, 87, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .value-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .feature-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-badge">🔥 THE DEEP SOUTH SPORTS AUTHORITY</div>
+        <h1 class="hero-title">Blaze Intelligence</h1>
+        <p class="hero-subtitle">From Friday Night Lights to Sunday in the Show<br>Advanced Analytics & Predictive Intelligence for Texas, SEC, and Deep South Athletics</p>
+
+        <div class="value-grid">
+            <div class="value-card">
+                <div class="value-icon">📊</div>
+                <h3 class="value-title">Predictive Game Models</h3>
+                <p class="value-description">Machine learning models trained on 5+ years of play-by-play data predicting game outcomes with proprietary algorithms</p>
+                <div class="value-metric">
+                    <span class="metric-label">Win Probability Accuracy</span>
+                    <span class="metric-value">73.2%</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">Over/Under Success</span>
+                    <span class="metric-value">68.5%</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">Data Points Analyzed</span>
+                    <span class="metric-value">2.8M+</span>
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🎯</div>
+                <h3 class="value-title">Recruiting Pipeline Intel</h3>
+                <p class="value-description">Track prospects from Perfect Game youth baseball through high school football to college commitment and NFL/MLB draft</p>
+                <div class="value-metric">
+                    <span class="metric-label">Texas HS Players Tracked</span>
+                    <span class="metric-value">12,000+</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">SEC Commit Analysis</span>
+                    <span class="metric-value">3,500+</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">NIL Valuations</span>
+                    <span class="metric-value">Live</span>
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🎥</div>
+                <h3 class="value-title">Vision AI Film Study</h3>
+                <p class="value-description">Computer vision analyzing game film for biomechanics, formation tendencies, and micro-expression character assessment</p>
+                <div class="value-metric">
+                    <span class="metric-label">Frames Processed/Sec</span>
+                    <span class="metric-value">60 FPS</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">Biomechanical Points</span>
+                    <span class="metric-value">33 Tracked</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">Response Time</span>
+                    <span class="metric-value"><100ms</span>
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">⚡</div>
+                <h3 class="value-title">Live Performance Index</h3>
+                <p class="value-description">Real-time player performance scoring combining traditional stats, advanced metrics, and situational context</p>
+                <div class="value-metric">
+                    <span class="metric-label">Update Frequency</span>
+                    <span class="metric-value">Every Play</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">Factors Analyzed</span>
+                    <span class="metric-value">47 Variables</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">Historical Comps</span>
+                    <span class="metric-value">10 Years</span>
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🏆</div>
+                <h3 class="value-title">Championship Analytics</h3>
+                <p class="value-description">Deep dive analytics on what separates champions from contenders across all levels of competition</p>
+                <div class="value-metric">
+                    <span class="metric-label">Championships Analyzed</span>
+                    <span class="metric-value">500+</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">Key Indicators</span>
+                    <span class="metric-value">23 Metrics</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">Pattern Recognition</span>
+                    <span class="metric-value">ML-Powered</span>
+                </div>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🌟</div>
+                <h3 class="value-title">Texas Friday Nights</h3>
+                <p class="value-description">Comprehensive Texas high school football coverage with rankings, predictions, and recruitment projections</p>
+                <div class="value-metric">
+                    <span class="metric-label">Teams Covered</span>
+                    <span class="metric-value">1,200+ TX</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">Weekly Rankings</span>
+                    <span class="metric-value">All Classes</span>
+                </div>
+                <div class="value-metric">
+                    <span class="metric-label">Recruit Projections</span>
+                    <span class="metric-value">P5 & G5</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="live-demo-section">
+        <div class="demo-header">
+            <h2 class="demo-title">Interactive Intelligence Tools</h2>
+            <p style="color: #a0a0a0; font-size: 1.1rem;">Experience our analytics engine with these live demos</p>
+        </div>
+
+        <div class="interactive-tool">
+            <div class="tool-header">
+                <h3 class="tool-title">NIL Valuation Calculator</h3>
+                <span class="tool-badge">LIVE DEMO</span>
+            </div>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">Sport</label>
+                    <select class="input-field" id="nil-sport">
+                        <option value="football">Football</option>
+                        <option value="basketball">Basketball</option>
+                        <option value="baseball">Baseball</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Position</label>
+                    <select class="input-field" id="nil-position">
+                        <option value="qb">QB</option>
+                        <option value="rb">RB</option>
+                        <option value="wr">WR</option>
+                        <option value="ol">OL</option>
+                        <option value="dl">DL</option>
+                        <option value="lb">LB</option>
+                        <option value="db">DB</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Social Media Followers</label>
+                    <input type="number" class="input-field" id="nil-followers" placeholder="10000" value="10000">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Performance Rating (1-100)</label>
+                    <input type="number" class="input-field" id="nil-rating" placeholder="85" value="85" min="1" max="100">
+                </div>
+            </div>
+            <button class="calculate-btn" onclick="calculateNIL()">Calculate NIL Value</button>
+            <div class="result-display" id="nil-result" style="display: none;">
+                <div class="result-value">$0</div>
+                <div class="result-label">Estimated Annual NIL Value</div>
+            </div>
+        </div>
+
+        <div class="interactive-tool">
+            <div class="tool-header">
+                <h3 class="tool-title">Game Prediction Engine</h3>
+                <span class="tool-badge">ML POWERED</span>
+            </div>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">Home Team</label>
+                    <select class="input-field" id="pred-home">
+                        <option value="texas">Texas Longhorns</option>
+                        <option value="alabama">Alabama</option>
+                        <option value="georgia">Georgia</option>
+                        <option value="lsu">LSU</option>
+                        <option value="texasam">Texas A&M</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Away Team</label>
+                    <select class="input-field" id="pred-away">
+                        <option value="oklahoma">Oklahoma</option>
+                        <option value="auburn">Auburn</option>
+                        <option value="florida">Florida</option>
+                        <option value="tennessee">Tennessee</option>
+                        <option value="arkansas">Arkansas</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Weather</label>
+                    <select class="input-field" id="pred-weather">
+                        <option value="clear">Clear</option>
+                        <option value="rain">Rain</option>
+                        <option value="cold">Cold (<40°F)</option>
+                        <option value="hot">Hot (>90°F)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Time</label>
+                    <select class="input-field" id="pred-time">
+                        <option value="day">Day Game</option>
+                        <option value="night">Night Game</option>
+                        <option value="primetime">Prime Time</option>
+                    </select>
+                </div>
+            </div>
+            <button class="calculate-btn" onclick="predictGame()">Run Prediction</button>
+            <div class="result-display" id="pred-result" style="display: none;">
+                <div class="result-value">--</div>
+                <div class="result-label">Win Probability & Predicted Score</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="features-section">
+        <div class="feature-showcase">
+            <div class="feature-card">
+                <span class="feature-tag">EXCLUSIVE</span>
+                <div class="feature-content">
+                    <h3 class="feature-title">Perfect Game to Pros Pipeline</h3>
+                    <p class="feature-description">
+                        Track baseball prospects from 12U Perfect Game tournaments through high school, college, and into professional baseball. Our system identifies talent early and projects career trajectories.
+                    </p>
+                </div>
+                <div class="feature-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">847</div>
+                        <div class="stat-label">MLB Draftees Tracked</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">12.3%</div>
+                        <div class="stat-label">Draft Prediction Rate</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">25K+</div>
+                        <div class="stat-label">Youth Players</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">8 Years</div>
+                        <div class="stat-label">Historical Data</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-tag">AI POWERED</span>
+                <div class="feature-content">
+                    <h3 class="feature-title">Formation Recognition AI</h3>
+                    <p class="feature-description">
+                        Computer vision system that identifies offensive and defensive formations in real-time, predicts play calls with 71% accuracy, and provides instant tendency analysis for coaching staff.
+                    </p>
+                </div>
+                <div class="feature-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">0.3s</div>
+                        <div class="stat-label">Recognition Time</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">142</div>
+                        <div class="stat-label">Formations Mapped</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">71%</div>
+                        <div class="stat-label">Play Prediction</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">4K</div>
+                        <div class="stat-label">Video Support</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-tag">REGIONAL FOCUS</span>
+                <div class="feature-content">
+                    <h3 class="feature-title">SEC & Big 12 Dominance</h3>
+                    <p class="feature-description">
+                        Deep expertise in SEC and Big 12 football with proprietary metrics for conference play, rivalry game adjustments, and regional recruiting advantages that national services miss.
+                    </p>
+                </div>
+                <div class="feature-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">28</div>
+                        <div class="stat-label">Teams Covered</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Games Analyzed</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">15K</div>
+                        <div class="stat-label">Recruits Tracked</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">Daily</div>
+                        <div class="stat-label">Updates</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <h2 class="cta-title">Ready to Dominate with Data?</h2>
+        <p class="cta-subtitle">Join coaches, scouts, and programs using Blaze Intelligence to gain the competitive edge</p>
+        <div class="cta-buttons">
+            <a href="#" class="cta-button cta-primary">Start Free Trial</a>
+            <a href="#" class="cta-button cta-secondary">Schedule Demo</a>
+        </div>
+    </div>
+
+    <script>
+        function calculateNIL() {
+            const sport = document.getElementById('nil-sport').value;
+            const position = document.getElementById('nil-position').value;
+            const followers = parseInt(document.getElementById('nil-followers').value) || 0;
+            const rating = parseInt(document.getElementById('nil-rating').value) || 0;
+
+            // Simplified NIL calculation model
+            let baseValue = 5000;
+            const sportMultipliers = {
+                'football': 2.5,
+                'basketball': 2.0,
+                'baseball': 1.5
+            };
+
+            const positionMultipliers = {
+                'qb': 3.0,
+                'rb': 2.0,
+                'wr': 2.2,
+                'ol': 1.5,
+                'dl': 1.8,
+                'lb': 1.7,
+                'db': 1.6
+            };
+
+            let nilValue = baseValue;
+            nilValue *= (sportMultipliers[sport] || 1);
+            nilValue *= (positionMultipliers[position] || 1);
+            nilValue *= (1 + (followers / 50000)); // Follower impact
+            nilValue *= (rating / 50); // Performance impact
+
+            // Add some variance to make it feel more real
+            nilValue = Math.round(nilValue * (0.9 + Math.random() * 0.2));
+
+            const resultDiv = document.getElementById('nil-result');
+            resultDiv.style.display = 'block';
+            resultDiv.querySelector('.result-value').textContent =
+                '$' + nilValue.toLocaleString();
+        }
+
+        function predictGame() {
+            const home = document.getElementById('pred-home').value;
+            const away = document.getElementById('pred-away').value;
+            const weather = document.getElementById('pred-weather').value;
+            const time = document.getElementById('pred-time').value;
+
+            // Simplified prediction model
+            const teamRatings = {
+                'texas': 92,
+                'alabama': 95,
+                'georgia': 94,
+                'lsu': 88,
+                'texasam': 86,
+                'oklahoma': 87,
+                'auburn': 83,
+                'florida': 84,
+                'tennessee': 85,
+                'arkansas': 80
+            };
+
+            let homeRating = teamRatings[home] || 80;
+            let awayRating = teamRatings[away] || 80;
+
+            // Home field advantage
+            homeRating += 3;
+
+            // Weather adjustments
+            if (weather === 'rain') {
+                // Favor running teams slightly
+                homeRating -= 1;
+                awayRating -= 1;
+            }
+
+            // Calculate win probability
+            const ratingDiff = homeRating - awayRating;
+            const winProb = 50 + (ratingDiff * 2.5);
+            const boundedProb = Math.max(5, Math.min(95, winProb));
+
+            // Predict score based on ratings
+            const totalPoints = 45 + (Math.random() * 20);
+            const homeScore = Math.round(totalPoints * (homeRating / (homeRating + awayRating)) + (ratingDiff * 0.3));
+            const awayScore = Math.round(totalPoints - homeScore);
+
+            const resultDiv = document.getElementById('pred-result');
+            resultDiv.style.display = 'block';
+
+            const homeTeamName = document.querySelector(`#pred-home option[value="${home}"]`).textContent;
+            const awayTeamName = document.querySelector(`#pred-away option[value="${away}"]`).textContent;
+
+            resultDiv.querySelector('.result-value').textContent =
+                `${boundedProb.toFixed(1)}% ${homeTeamName}`;
+            resultDiv.querySelector('.result-label').textContent =
+                `Predicted: ${homeTeamName} ${homeScore} - ${awayScore} ${awayTeamName}`;
+        }
+
+        // Add subtle animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.value-card, .feature-card, .interactive-tool').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

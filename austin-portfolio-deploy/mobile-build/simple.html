@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#BF5700">
+    <title>Blaze Sports Intel - Mobile Championship Experience</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --blaze-primary: #BF5700;
+            --blaze-secondary: #9BCBEB;
+            --blaze-dark: #002244;
+            --blaze-accent: #00B2A9;
+            --blaze-success: #00ff88;
+            --blaze-warning: #ffaa00;
+            --blaze-danger: #ff4444;
+            --blaze-black: #000000;
+            --blaze-white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, var(--blaze-black) 0%, #1a0000 50%, var(--blaze-dark) 100%);
+            color: var(--blaze-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Header */
+        .mobile-header {
+            position: fixed;
+            top: env(safe-area-inset-top);
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--blaze-primary), #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blaze-white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .header-btn:hover, .header-btn.active {
+            background: var(--blaze-primary);
+            border-color: var(--blaze-primary);
+            transform: scale(1.05);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            margin-bottom: 70px;
+            padding: 20px;
+            min-height: calc(100vh - 150px);
+        }
+
+        .stadium-canvas {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 50%, #002244 100%);
+            border-radius: 16px;
+            border: 2px solid var(--blaze-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stadium-field {
+            width: 90%;
+            height: 70%;
+            background: #2d5016;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .field-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .yard-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+            left: 0;
+        }
+
+        .stadium-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--blaze-primary);
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .stadium-subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--blaze-primary);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--blaze-primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Teams Section */
+        .teams-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--blaze-primary), var(--blaze-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--blaze-primary);
+            box-shadow: 0 8px 32px rgba(191, 87, 0, 0.2);
+        }
+
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .team-logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--blaze-primary), #ff6600);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            font-size: 18px;
+        }
+
+        .team-info h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .team-conference {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .team-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .team-stat {
+            text-align: center;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .team-stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--blaze-secondary);
+            margin-bottom: 4px;
+        }
+
+        .team-stat-label {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: env(safe-area-inset-bottom);
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            padding: 0 20px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            min-width: 60px;
+        }
+
+        .nav-item.active {
+            color: var(--blaze-primary);
+            background: rgba(191, 87, 0, 0.1);
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .fade-in-up:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in-up:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in-up:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in-up:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: calc(env(safe-area-inset-top) + 80px);
+            left: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--blaze-success);
+            border-radius: 12px;
+            padding: 16px;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1500;
+            opacity: 0;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .notification-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--blaze-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blaze-black);
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .notification-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--blaze-white);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .teams-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="mobile-header">
+        <div class="logo">🔥 BLAZE SPORTS INTEL</div>
+        <div class="header-controls">
+            <button class="header-btn" id="refreshBtn" title="Refresh Data">🔄</button>
+            <button class="header-btn" id="fullscreenBtn" title="Fullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Stadium Visualization -->
+        <div class="stadium-canvas fade-in-up">
+            <div class="stadium-field">
+                <div class="field-lines">
+                    <div class="yard-line" style="top: 10%;"></div>
+                    <div class="yard-line" style="top: 30%;"></div>
+                    <div class="yard-line" style="top: 50%;"></div>
+                    <div class="yard-line" style="top: 70%;"></div>
+                    <div class="yard-line" style="top: 90%;"></div>
+                </div>
+            </div>
+            <div class="stadium-title">🏈 CHAMPIONSHIP STADIUM</div>
+            <div class="stadium-subtitle">Deep South Sports Authority</div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card fade-in-up">
+                <div class="stat-value" id="activePlayers">1,247</div>
+                <div class="stat-label">Active Players</div>
+            </div>
+            <div class="stat-card fade-in-up">
+                <div class="stat-value" id="liveGames">8</div>
+                <div class="stat-label">Live Games</div>
+            </div>
+            <div class="stat-card fade-in-up">
+                <div class="stat-value" id="dataPoints">2.8M+</div>
+                <div class="stat-label">Data Points</div>
+            </div>
+        </div>
+
+        <!-- Teams Section -->
+        <div class="teams-section fade-in-up">
+            <h2 class="section-title">Championship Teams</h2>
+            <div class="teams-grid" id="teamsContainer">
+                <!-- Teams will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active" data-tab="stadium">
+            <div class="nav-icon">🏟️</div>
+            <div>Stadium</div>
+        </div>
+        <div class="nav-item" data-tab="teams">
+            <div class="nav-icon">🏈</div>
+            <div>Teams</div>
+        </div>
+        <div class="nav-item" data-tab="scores">
+            <div class="nav-icon">📊</div>
+            <div>Scores</div>
+        </div>
+        <div class="nav-item" data-tab="stats">
+            <div class="nav-icon">📈</div>
+            <div>Stats</div>
+        </div>
+    </nav>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <div class="notification-icon">🏈</div>
+            <div class="notification-text" id="notificationText">Welcome to Championship Mode!</div>
+        </div>
+    </div>
+
+    <script>
+        // Blaze Sports Intelligence Simple Mobile App
+        class SimpleBlazeApp {
+            constructor() {
+                this.teams = [
+                    {
+                        id: 'stl',
+                        name: 'St. Louis Cardinals',
+                        logo: 'STL',
+                        league: 'MLB',
+                        conference: 'NL Central',
+                        record: '92-70',
+                        stats: { avg: '.285', era: '3.86', hr: '198' }
+                    },
+                    {
+                        id: 'ten',
+                        name: 'Tennessee Titans',
+                        logo: 'TEN',
+                        league: 'NFL',
+                        conference: 'AFC South',
+                        record: '9-8',
+                        stats: { ppg: '22.4', ypg: '356', def: '18th' }
+                    },
+                    {
+                        id: 'mem',
+                        name: 'Memphis Grizzlies',
+                        logo: 'MEM',
+                        league: 'NBA',
+                        conference: 'Western',
+                        record: '51-31',
+                        stats: { ppg: '115.6', rpg: '55.4', apg: '27.8' }
+                    },
+                    {
+                        id: 'tex',
+                        name: 'Texas Longhorns',
+                        logo: 'TEX',
+                        league: 'NCAA',
+                        conference: 'Big 12',
+                        record: '12-2',
+                        stats: { ppg: '42.8', ypg: '489', def: '3rd' }
+                    }
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.loadTeams();
+                this.setupEventListeners();
+                this.showNotification('⚡ Championship Mode Active');
+                this.startLiveUpdates();
+            }
+
+            loadTeams() {
+                const container = document.getElementById('teamsContainer');
+                container.innerHTML = this.teams.map((team, index) => `
+                    <div class="team-card fade-in-up" style="animation-delay: ${index * 0.1}s" onclick="app.selectTeam('${team.id}')">
+                        <div class="team-header">
+                            <div class="team-logo">${team.logo}</div>
+                            <div class="team-info">
+                                <h3>${team.name}</h3>
+                                <div class="team-conference">${team.league} • ${team.conference}</div>
+                            </div>
+                        </div>
+                        <div class="team-stats">
+                            ${Object.entries(team.stats).map(([key, value]) => `
+                                <div class="team-stat">
+                                    <div class="team-stat-value">${value}</div>
+                                    <div class="team-stat-label">${key.toUpperCase()}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            setupEventListeners() {
+                // Header buttons
+                document.getElementById('refreshBtn').addEventListener('click', () => {
+                    this.refreshData();
+                });
+
+                document.getElementById('fullscreenBtn').addEventListener('click', () => {
+                    this.toggleFullscreen();
+                });
+
+                // Navigation
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                        e.currentTarget.classList.add('active');
+                        const tab = e.currentTarget.dataset.tab;
+                        this.switchTab(tab);
+                    });
+                });
+
+                // Prevent zoom on double tap
+                let lastTouchEnd = 0;
+                document.addEventListener('touchend', (e) => {
+                    const now = Date.now();
+                    if (now - lastTouchEnd <= 300) {
+                        e.preventDefault();
+                    }
+                    lastTouchEnd = now;
+                }, false);
+            }
+
+            selectTeam(teamId) {
+                const team = this.teams.find(t => t.id === teamId);
+                if (team) {
+                    this.showNotification(`🎯 ${team.name} Selected`);
+                    // Add team-specific functionality here
+                }
+            }
+
+            switchTab(tab) {
+                this.showNotification(`📍 Switched to ${tab.charAt(0).toUpperCase() + tab.slice(1)}`);
+                // Add tab-specific functionality here
+            }
+
+            refreshData() {
+                // Simulate data refresh
+                this.showNotification('🔄 Data Refreshed');
+                this.updateStats();
+            }
+
+            updateStats() {
+                // Simulate live stat updates
+                const activePlayers = document.getElementById('activePlayers');
+                const liveGames = document.getElementById('liveGames');
+
+                activePlayers.textContent = (1247 + Math.floor(Math.random() * 100)).toLocaleString();
+                liveGames.textContent = Math.floor(Math.random() * 12) + 4;
+            }
+
+            toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().then(() => {
+                        this.showNotification('📺 Fullscreen Enabled');
+                    });
+                } else {
+                    document.exitFullscreen().then(() => {
+                        this.showNotification('📱 Fullscreen Disabled');
+                    });
+                }
+            }
+
+            startLiveUpdates() {
+                // Update stats every 30 seconds
+                setInterval(() => {
+                    this.updateStats();
+                }, 30000);
+            }
+
+            showNotification(message, duration = 3000) {
+                const notification = document.getElementById('notification');
+                const text = document.getElementById('notificationText');
+
+                text.textContent = message;
+                notification.classList.add('show');
+
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, duration);
+            }
+        }
+
+        // Initialize app when DOM is ready
+        let app;
+        document.addEventListener('DOMContentLoaded', () => {
+            app = new SimpleBlazeApp();
+            console.log('🔥 Blaze Sports Intel Mobile App Ready');
+        });
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(() => {
+                    console.log('Service worker registration failed - continuing without offline support');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

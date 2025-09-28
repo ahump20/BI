@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence - Client Portal</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #BF5700;
+            --primary-light: #FF7A00;
+            --dark: #0A0A0F;
+            --darker: #050507;
+            --light: #F8F9FA;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --success: #00FF88;
+            --danger: #FF3366;
+            --warning: #FFB81C;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0A0A0F 0%, #1A1A2E 50%, #16213E 100%);
+            color: var(--light);
+            min-height: 100vh;
+        }
+
+        /* Portal Layout */
+        .portal-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--glass);
+            border-right: 1px solid var(--glass-border);
+            padding: 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-light);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .user-info {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-org {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .user-tier {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--primary);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: rgba(191, 87, 0, 0.2);
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 3rem;
+            overflow-y: auto;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-progress {
+            margin-top: 1rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transition: width 0.3s;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* API Keys Section */
+        .section {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .btn {
+            padding: 0.625rem 1.25rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .api-keys-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .api-key-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .key-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .key-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .key-name {
+            font-weight: 500;
+        }
+
+        .key-value {
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .key-hidden {
+            filter: blur(4px);
+            user-select: none;
+        }
+
+        .key-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Usage Chart */
+        .usage-chart {
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: end;
+            gap: 0.5rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--primary), var(--primary-light));
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .chart-bar:hover {
+            opacity: 0.8;
+        }
+
+        .chart-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .chart-bar:hover::after {
+            opacity: 1;
+        }
+
+        /* Billing Section */
+        .billing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .billing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .billing-card-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .billing-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .billing-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .billing-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        .billing-value {
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--darker);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .tab:hover {
+            color: white;
+        }
+
+        .tab.active {
+            color: white;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                🔥 Blaze Intelligence
+            </div>
+            
+            <div class="user-info">
+                <div class="user-name" id="userName">John Demo</div>
+                <div class="user-org" id="userOrg">Demo Sports Team</div>
+                <span class="user-tier" id="userTier">PRO</span>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#dashboard" class="nav-link active" data-page="dashboard">
+                            <span class="nav-icon">📊</span>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#api-keys" class="nav-link" data-page="api-keys">
+                            <span class="nav-icon">🔑</span>
+                            API Keys
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#usage" class="nav-link" data-page="usage">
+                            <span class="nav-icon">📈</span>
+                            Usage & Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#billing" class="nav-link" data-page="billing">
+                            <span class="nav-icon">💳</span>
+                            Billing & Plan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#teams" class="nav-link" data-page="teams">
+                            <span class="nav-icon">👥</span>
+                            Team Management
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#integrations" class="nav-link" data-page="integrations">
+                            <span class="nav-icon">🔗</span>
+                            Integrations
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#documentation" class="nav-link" data-page="documentation">
+                            <span class="nav-icon">📚</span>
+                            Documentation
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" class="nav-link" data-page="settings">
+                            <span class="nav-icon">⚙️</span>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="tab-content active">
+                <div class="page-header">
+                    <h1 class="page-title">Dashboard</h1>
+                    <p class="page-subtitle">Welcome back! Here's your overview.</p>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">API Calls Today</div>
+                        <div class="stat-value">2,847</div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 28.47%"></div>
+                            </div>
+                            <div class="progress-label">
+                                <span>28.47%</span>
+                                <span>10,000 limit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">HAV-F Calculations</div>
+                        <div class="stat-value">423</div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 42.3%"></div>
+                            </div>
+                            <div class="progress-label">
+                                <span>42.3%</span>
+                                <span>1,000 limit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Vision AI Analyses</div>
+                        <div class="stat-value">18</div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 36%"></div>
+                            </div>
+                            <div class="progress-label">
+                                <span>36%</span>
+                                <span>50 limit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Active Teams</div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                            <div class="progress-label">
+                                <span>3 of 5</span>
+                                <span>teams</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Recent Activity</h2>
+                    </div>
+                    <div class="usage-chart">
+                        <div class="chart-bar" style="height: 60%" data-value="2,847"></div>
+                        <div class="chart-bar" style="height: 80%" data-value="3,521"></div>
+                        <div class="chart-bar" style="height: 45%" data-value="1,923"></div>
+                        <div class="chart-bar" style="height: 70%" data-value="3,102"></div>
+                        <div class="chart-bar" style="height: 90%" data-value="4,231"></div>
+                        <div class="chart-bar" style="height: 55%" data-value="2,344"></div>
+                        <div class="chart-bar" style="height: 65%" data-value="2,847"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Keys Page -->
+            <div id="api-keys" class="tab-content">
+                <div class="page-header">
+                    <h1 class="page-title">API Keys</h1>
+                    <p class="page-subtitle">Manage your API keys for accessing Blaze Intelligence services.</p>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Your API Keys</h2>
+                        <button class="btn btn-primary" onclick="showCreateKeyModal()">
+                            + Create New Key
+                        </button>
+                    </div>
+
+                    <div class="api-keys-list">
+                        <div class="api-key-item">
+                            <span class="key-status"></span>
+                            <div class="key-info">
+                                <div class="key-name">Production Key</div>
+                                <div class="key-value">
+                                    <span class="key-hidden" id="key1">sk_live_4242424242424242424242</span>
+                                    <button onclick="toggleKeyVisibility('key1')">👁️</button>
+                                    <button onclick="copyKey('key1')">📋</button>
+                                </div>
+                            </div>
+                            <div class="key-stats">
+                                <span>Created: Jan 15, 2024</span>
+                                <span>Last used: 2 min ago</span>
+                            </div>
+                            <button class="btn btn-danger" onclick="revokeKey('key1')">Revoke</button>
+                        </div>
+
+                        <div class="api-key-item">
+                            <span class="key-status"></span>
+                            <div class="key-info">
+                                <div class="key-name">Development Key</div>
+                                <div class="key-value">
+                                    <span class="key-hidden" id="key2">sk_test_1234567890123456789012</span>
+                                    <button onclick="toggleKeyVisibility('key2')">👁️</button>
+                                    <button onclick="copyKey('key2')">📋</button>
+                                </div>
+                            </div>
+                            <div class="key-stats">
+                                <span>Created: Jan 10, 2024</span>
+                                <span>Last used: 1 hour ago</span>
+                            </div>
+                            <button class="btn btn-danger" onclick="revokeKey('key2')">Revoke</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">Webhook Endpoints</h2>
+                    <div class="api-keys-list">
+                        <div class="api-key-item">
+                            <span class="key-status"></span>
+                            <div class="key-info">
+                                <div class="key-name">https://yourapp.com/webhook/blaze</div>
+                                <div class="key-value">Events: readiness.updated, havf.calculated</div>
+                            </div>
+                            <div class="key-stats">
+                                <span>Active</span>
+                                <span>247 deliveries today</span>
+                            </div>
+                            <button class="btn btn-secondary">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage Page -->
+            <div id="usage" class="tab-content">
+                <div class="page-header">
+                    <h1 class="page-title">Usage & Analytics</h1>
+                    <p class="page-subtitle">Track your API usage and system analytics.</p>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active">Today</button>
+                    <button class="tab">This Week</button>
+                    <button class="tab">This Month</button>
+                    <button class="tab">Custom Range</button>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total API Calls</div>
+                        <div class="stat-value">45,892</div>
+                        <div class="stat-progress">
+                            <div class="progress-label">
+                                <span>↑ 12% from last month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Average Response Time</div>
+                        <div class="stat-value">47ms</div>
+                        <div class="stat-progress">
+                            <div class="progress-label">
+                                <span>↓ 8% improvement</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Success Rate</div>
+                        <div class="stat-value">99.97%</div>
+                        <div class="stat-progress">
+                            <div class="progress-label">
+                                <span>Excellent performance</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Data Points Processed</div>
+                        <div class="stat-value">2.3M</div>
+                        <div class="stat-progress">
+                            <div class="progress-label">
+                                <span>This billing cycle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing Page -->
+            <div id="billing" class="tab-content">
+                <div class="page-header">
+                    <h1 class="page-title">Billing & Plan</h1>
+                    <p class="page-subtitle">Manage your subscription and payment methods.</p>
+                </div>
+
+                <div class="billing-cards">
+                    <div class="billing-card">
+                        <h3 class="billing-card-title">Current Plan</h3>
+                        <div class="billing-details">
+                            <div class="billing-row">
+                                <span class="billing-label">Plan</span>
+                                <span class="billing-value">Professional</span>
+                            </div>
+                            <div class="billing-row">
+                                <span class="billing-label">Price</span>
+                                <span class="billing-value">$499/month</span>
+                            </div>
+                            <div class="billing-row">
+                                <span class="billing-label">Next billing</span>
+                                <span class="billing-value">Feb 15, 2024</span>
+                            </div>
+                            <div class="billing-row">
+                                <span class="billing-label">Status</span>
+                                <span class="billing-value" style="color: var(--success)">Active</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                            Upgrade to Enterprise
+                        </button>
+                    </div>
+
+                    <div class="billing-card">
+                        <h3 class="billing-card-title">Payment Method</h3>
+                        <div class="billing-details">
+                            <div class="billing-row">
+                                <span class="billing-label">Card</span>
+                                <span class="billing-value">•••• 4242</span>
+                            </div>
+                            <div class="billing-row">
+                                <span class="billing-label">Expires</span>
+                                <span class="billing-value">12/25</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">
+                            Update Payment Method
+                        </button>
+                    </div>
+
+                    <div class="billing-card">
+                        <h3 class="billing-card-title">Billing History</h3>
+                        <div class="billing-details">
+                            <div class="billing-row">
+                                <span class="billing-label">Jan 15, 2024</span>
+                                <span class="billing-value">$499.00</span>
+                            </div>
+                            <div class="billing-row">
+                                <span class="billing-label">Dec 15, 2023</span>
+                                <span class="billing-value">$499.00</span>
+                            </div>
+                            <div class="billing-row">
+                                <span class="billing-label">Nov 15, 2023</span>
+                                <span class="billing-value">$499.00</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">
+                            Download Invoices
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create API Key Modal -->
+    <div id="createKeyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Create New API Key</h2>
+            </div>
+            <form id="createKeyForm">
+                <div class="form-group">
+                    <label class="form-label">Key Name</label>
+                    <input type="text" class="form-input" placeholder="e.g., Production Server" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Permissions</label>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label><input type="checkbox" checked> Read Access</label>
+                        <label><input type="checkbox" checked> Write Access</label>
+                        <label><input type="checkbox"> Delete Access</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Rate Limit (requests/hour)</label>
+                    <input type="number" class="form-input" value="1000" min="100" max="10000">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="hideCreateKeyModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Key</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.dataset.page;
+                showPage(page);
+                
+                // Update active state
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        function showPage(pageId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // API Key Management
+        function showCreateKeyModal() {
+            document.getElementById('createKeyModal').classList.add('active');
+        }
+
+        function hideCreateKeyModal() {
+            document.getElementById('createKeyModal').classList.remove('active');
+        }
+
+        function toggleKeyVisibility(keyId) {
+            const keyElement = document.getElementById(keyId);
+            keyElement.classList.toggle('key-hidden');
+        }
+
+        function copyKey(keyId) {
+            const keyElement = document.getElementById(keyId);
+            const key = keyElement.textContent;
+            navigator.clipboard.writeText(key);
+            
+            // Show feedback
+            const originalText = keyElement.textContent;
+            keyElement.textContent = 'Copied!';
+            setTimeout(() => {
+                keyElement.textContent = originalText;
+            }, 2000);
+        }
+
+        function revokeKey(keyId) {
+            if (confirm('Are you sure you want to revoke this API key? This action cannot be undone.')) {
+                // API call to revoke key
+                console.log(`Revoking key: ${keyId}`);
+                
+                // Remove from UI
+                event.target.closest('.api-key-item').remove();
+            }
+        }
+
+        // Form submission
+        document.getElementById('createKeyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Create API key
+            const response = await fetch('/api/keys/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify({
+                    name: e.target[0].value,
+                    permissions: {
+                        read: e.target[1].checked,
+                        write: e.target[2].checked,
+                        delete: e.target[3].checked
+                    },
+                    rateLimit: parseInt(e.target[4].value)
+                })
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                console.log('New API key created:', data);
+                hideCreateKeyModal();
+                location.reload(); // Refresh to show new key
+            }
+        });
+
+        // Load user data
+        async function loadUserData() {
+            try {
+                const response = await fetch('/api/user', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const user = await response.json();
+                    document.getElementById('userName').textContent = user.name;
+                    document.getElementById('userOrg').textContent = user.organization;
+                    document.getElementById('userTier').textContent = user.tier.toUpperCase();
+                }
+            } catch (error) {
+                console.error('Failed to load user data:', error);
+            }
+        }
+
+        // Initialize
+        loadUserData();
+
+        // Tabs
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

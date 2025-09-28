@@ -1,0 +1,634 @@
+/**
+ * ============================================
+ * BLAZE SPORTS INTEL - COMPONENT LIBRARY
+ * Championship Sports Analytics Components
+ * ============================================
+ */
+
+/* ============================================
+ * SPORT-SPECIFIC COMPONENTS
+ * ============================================ */
+
+/* Baseball Diamond Component */
+.bsi-baseball-diamond {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg,
+    var(--bsi-baseball-diamond) 0%,
+    var(--bsi-baseball-diamond) 49%,
+    var(--bsi-baseball-dirt) 51%,
+    var(--bsi-baseball-dirt) 100%);
+  border-radius: var(--bsi-radius-md);
+  box-shadow: var(--bsi-shadow-lg);
+}
+
+.bsi-baseball-base {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: white;
+  border: 2px solid var(--bsi-baseball-dirt);
+  transform: rotate(-45deg);
+}
+
+.bsi-baseball-base.first { top: 50%; right: -7.5px; }
+.bsi-baseball-base.second { top: -7.5px; left: 50%; }
+.bsi-baseball-base.third { top: 50%; left: -7.5px; }
+.bsi-baseball-base.home { bottom: -7.5px; left: 50%; }
+
+/* Strike Zone Heatmap */
+.bsi-strike-zone {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  background: var(--bsi-surface-base);
+  border: 2px solid var(--bsi-border-raised);
+  border-radius: var(--bsi-radius-md);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1px;
+  padding: var(--bsi-space-2);
+}
+
+.bsi-zone-cell {
+  background: var(--bsi-surface-raised);
+  border-radius: var(--bsi-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--bsi-font-mono);
+  font-size: var(--bsi-font-sm);
+  color: var(--bsi-text-tertiary);
+  transition: all var(--bsi-duration-fast);
+}
+
+.bsi-zone-cell[data-heat="low"] { background: rgba(0, 200, 81, 0.2); }
+.bsi-zone-cell[data-heat="medium"] { background: rgba(253, 185, 19, 0.3); }
+.bsi-zone-cell[data-heat="high"] { background: rgba(255, 53, 71, 0.4); }
+
+/* Football Field Position */
+.bsi-football-field {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 120px;
+  background: linear-gradient(90deg,
+    var(--bsi-football-field) 0%,
+    var(--bsi-football-grass) 10%,
+    var(--bsi-football-field) 20%,
+    var(--bsi-football-grass) 30%,
+    var(--bsi-football-field) 40%,
+    var(--bsi-football-grass) 50%,
+    var(--bsi-football-field) 60%,
+    var(--bsi-football-grass) 70%,
+    var(--bsi-football-field) 80%,
+    var(--bsi-football-grass) 90%,
+    var(--bsi-football-field) 100%);
+  border: 3px solid white;
+  border-radius: var(--bsi-radius-md);
+  overflow: hidden;
+  box-shadow: var(--bsi-shadow-xl);
+}
+
+.bsi-yard-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: white;
+  opacity: 0.8;
+}
+
+.bsi-yard-line::after {
+  content: attr(data-yard);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--bsi-text-secondary);
+  font-size: var(--bsi-font-xs);
+  font-weight: var(--bsi-font-bold);
+}
+
+/* Basketball Court Shot Chart */
+.bsi-basketball-court {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  background: var(--bsi-basketball-hardwood);
+  border: 4px solid var(--bsi-basketball-court);
+  border-radius: var(--bsi-radius-lg);
+  overflow: hidden;
+}
+
+.bsi-three-point-arc {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 140px;
+  border: 2px solid white;
+  border-bottom: none;
+  border-radius: 140px 140px 0 0;
+}
+
+.bsi-paint-area {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid white;
+  border-bottom: none;
+}
+
+.bsi-shot-marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all var(--bsi-duration-fast);
+}
+
+.bsi-shot-marker[data-made="true"] {
+  background: var(--bsi-success-500);
+  box-shadow: 0 0 10px rgba(0, 200, 81, 0.5);
+}
+
+.bsi-shot-marker[data-made="false"] {
+  background: var(--bsi-danger-500);
+  box-shadow: 0 0 10px rgba(255, 53, 71, 0.5);
+}
+
+/* Track & Field Lanes */
+.bsi-track-lanes {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: var(--bsi-track-surface);
+  border-radius: 100px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: var(--bsi-space-2);
+}
+
+.bsi-lane {
+  flex: 1;
+  background: transparent;
+  border-bottom: 2px solid white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--bsi-space-4);
+}
+
+.bsi-lane:last-child {
+  border-bottom: none;
+}
+
+.bsi-lane-number {
+  position: absolute;
+  left: var(--bsi-space-2);
+  font-family: var(--bsi-font-display);
+  font-size: var(--bsi-font-lg);
+  color: white;
+  font-weight: var(--bsi-font-bold);
+}
+
+.bsi-runner-position {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: var(--bsi-gold-500);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--bsi-font-sm);
+  font-weight: var(--bsi-font-bold);
+  color: var(--bsi-bg-primary);
+  transition: left var(--bsi-duration-normal) var(--bsi-motion-sprint);
+}
+
+/* ============================================
+ * DATA VISUALIZATION COMPONENTS
+ * ============================================ */
+
+/* Live Score Ticker */
+.bsi-score-ticker {
+  display: flex;
+  align-items: center;
+  gap: var(--bsi-space-4);
+  padding: var(--bsi-space-3) var(--bsi-space-4);
+  background: var(--bsi-surface-raised);
+  border-radius: var(--bsi-radius-lg);
+  border: 1px solid var(--bsi-border-raised);
+  position: relative;
+  overflow: hidden;
+}
+
+.bsi-score-ticker::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--bsi-gradient-championship);
+}
+
+.bsi-team-score {
+  display: flex;
+  align-items: center;
+  gap: var(--bsi-space-2);
+}
+
+.bsi-team-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--bsi-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--bsi-font-display);
+  font-size: var(--bsi-font-lg);
+  font-weight: var(--bsi-font-bold);
+}
+
+.bsi-team-logo.cardinals {
+  background: var(--bsi-cardinals-red);
+  color: white;
+}
+
+.bsi-team-logo.titans {
+  background: var(--bsi-titans-navy);
+  color: var(--bsi-titans-powder);
+}
+
+.bsi-team-logo.longhorns {
+  background: var(--bsi-longhorns-orange);
+  color: white;
+}
+
+.bsi-team-logo.grizzlies {
+  background: var(--bsi-grizzlies-blue);
+  color: var(--bsi-grizzlies-gold);
+}
+
+.bsi-score-value {
+  font-family: var(--bsi-font-display);
+  font-size: var(--bsi-font-2xl);
+  font-weight: var(--bsi-font-black);
+  color: var(--bsi-text-primary);
+}
+
+.bsi-score-separator {
+  font-size: var(--bsi-font-xl);
+  color: var(--bsi-text-quaternary);
+}
+
+/* Player Stat Card */
+.bsi-player-card {
+  background: var(--bsi-surface-base);
+  border: 1px solid var(--bsi-border-base);
+  border-radius: var(--bsi-radius-xl);
+  padding: var(--bsi-space-4);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--bsi-duration-normal);
+}
+
+.bsi-player-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--bsi-shadow-xl);
+  border-color: var(--bsi-burnt-orange-500);
+}
+
+.bsi-player-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--bsi-space-3);
+  margin-bottom: var(--bsi-space-4);
+}
+
+.bsi-player-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--bsi-radius-full);
+  background: var(--bsi-gradient-texas);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--bsi-font-display);
+  font-size: var(--bsi-font-xl);
+  color: white;
+}
+
+.bsi-player-info {
+  flex: 1;
+}
+
+.bsi-player-name {
+  font-size: var(--bsi-font-lg);
+  font-weight: var(--bsi-font-bold);
+  color: var(--bsi-text-primary);
+  margin-bottom: var(--bsi-space-1);
+}
+
+.bsi-player-position {
+  font-size: var(--bsi-font-sm);
+  color: var(--bsi-burnt-orange-500);
+  font-weight: var(--bsi-font-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--bsi-tracking-wide);
+}
+
+.bsi-player-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--bsi-space-3);
+}
+
+.bsi-stat-item {
+  text-align: center;
+  padding: var(--bsi-space-2);
+  background: var(--bsi-surface-raised);
+  border-radius: var(--bsi-radius-md);
+}
+
+.bsi-stat-value {
+  font-family: var(--bsi-font-display);
+  font-size: var(--bsi-font-xl);
+  font-weight: var(--bsi-font-bold);
+  color: var(--bsi-gold-500);
+}
+
+.bsi-stat-label {
+  font-size: var(--bsi-font-xs);
+  color: var(--bsi-text-quaternary);
+  text-transform: uppercase;
+  letter-spacing: var(--bsi-tracking-wider);
+  margin-top: var(--bsi-space-1);
+}
+
+/* Championship Badge */
+.bsi-championship-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bsi-space-2);
+  padding: var(--bsi-space-2) var(--bsi-space-3);
+  background: var(--bsi-gradient-championship);
+  border-radius: var(--bsi-radius-full);
+  font-weight: var(--bsi-font-bold);
+  color: var(--bsi-bg-primary);
+  font-size: var(--bsi-font-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--bsi-tracking-wide);
+  box-shadow: var(--bsi-glow-gold);
+  position: relative;
+  overflow: hidden;
+}
+
+.bsi-championship-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: bsi-shine 3s infinite;
+}
+
+@keyframes bsi-shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ============================================
+ * INTERACTIVE COMPONENTS
+ * ============================================ */
+
+/* Toggle Switch - Sport Mode */
+.bsi-sport-toggle {
+  display: inline-flex;
+  background: var(--bsi-surface-raised);
+  border: 1px solid var(--bsi-border-raised);
+  border-radius: var(--bsi-radius-full);
+  padding: var(--bsi-space-1);
+  gap: var(--bsi-space-1);
+}
+
+.bsi-toggle-option {
+  padding: var(--bsi-space-2) var(--bsi-space-3);
+  border-radius: var(--bsi-radius-full);
+  font-size: var(--bsi-font-sm);
+  font-weight: var(--bsi-font-semibold);
+  color: var(--bsi-text-tertiary);
+  cursor: pointer;
+  transition: all var(--bsi-duration-fast);
+  background: transparent;
+  border: none;
+}
+
+.bsi-toggle-option:hover {
+  color: var(--bsi-text-secondary);
+}
+
+.bsi-toggle-option.active {
+  background: var(--bsi-burnt-orange-600);
+  color: white;
+  box-shadow: var(--bsi-glow-orange);
+}
+
+/* Performance Meter */
+.bsi-performance-meter {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.bsi-meter-track {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border: 4px solid var(--bsi-surface-raised);
+  border-bottom: none;
+  border-radius: 100px 100px 0 0;
+}
+
+.bsi-meter-fill {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  height: 80%;
+  background: var(--bsi-gradient-championship);
+  transform-origin: bottom center;
+  transition: transform var(--bsi-duration-slow) var(--bsi-ease-in-out);
+  box-shadow: var(--bsi-glow-gold);
+}
+
+.bsi-meter-labels {
+  position: absolute;
+  bottom: -25px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--bsi-space-2);
+}
+
+.bsi-meter-label {
+  font-size: var(--bsi-font-xs);
+  color: var(--bsi-text-quaternary);
+  font-weight: var(--bsi-font-semibold);
+}
+
+/* Loading Skeleton */
+.bsi-skeleton {
+  background: linear-gradient(90deg,
+    var(--bsi-surface-base) 25%,
+    var(--bsi-surface-raised) 50%,
+    var(--bsi-surface-base) 75%);
+  background-size: 200% 100%;
+  animation: bsi-skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: var(--bsi-radius-md);
+}
+
+@keyframes bsi-skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.bsi-skeleton-text {
+  height: var(--bsi-space-4);
+  margin-bottom: var(--bsi-space-2);
+}
+
+.bsi-skeleton-title {
+  height: var(--bsi-space-6);
+  width: 60%;
+  margin-bottom: var(--bsi-space-3);
+}
+
+.bsi-skeleton-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--bsi-radius-full);
+}
+
+/* ============================================
+ * ACCESSIBILITY COMPONENTS
+ * ============================================ */
+
+/* Focus Indicators */
+.bsi-focus-ring {
+  position: relative;
+}
+
+.bsi-focus-ring:focus-visible::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--bsi-burnt-orange-500);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Skip Links */
+.bsi-skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--bsi-burnt-orange-600);
+  color: white;
+  padding: var(--bsi-space-2) var(--bsi-space-4);
+  border-radius: var(--bsi-radius-md);
+  text-decoration: none;
+  font-weight: var(--bsi-font-semibold);
+  z-index: var(--bsi-z-top);
+  transition: top var(--bsi-duration-fast);
+}
+
+.bsi-skip-link:focus {
+  top: var(--bsi-space-2);
+}
+
+/* Aria Live Region */
+.bsi-live-region {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.bsi-live-region[aria-live="polite"] {
+  /* Announces changes when convenient */
+}
+
+.bsi-live-region[aria-live="assertive"] {
+  /* Announces changes immediately */
+}
+
+/* ============================================
+ * RESPONSIVE UTILITIES
+ * ============================================ */
+
+/* Mobile-First Responsive Grid */
+.bsi-grid {
+  display: grid;
+  gap: var(--bsi-space-4);
+}
+
+.bsi-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+
+@media (min-width: 640px) {
+  .sm\:bsi-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 768px) {
+  .md\:bsi-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .lg\:bsi-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Container */
+.bsi-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--bsi-space-4);
+}
+
+@media (min-width: 640px) {
+  .bsi-container { max-width: 640px; }
+}
+
+@media (min-width: 768px) {
+  .bsi-container { max-width: 768px; }
+}
+
+@media (min-width: 1024px) {
+  .bsi-container { max-width: 1024px; }
+}
+
+@media (min-width: 1280px) {
+  .bsi-container { max-width: 1280px; }
+}
+
+@media (min-width: 1536px) {
+  .bsi-container { max-width: 1536px; }
+}

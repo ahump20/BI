@@ -1,0 +1,65 @@
+{
+  "name": "blazesportsintel-data-repository",
+  "version": "1.0.0",
+  "description": "Unified sports data repository for Blaze Intelligence - Deep South sports authority",
+  "type": "module",
+  "main": "src/index.js",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "start": "node apps/api/src/index.js",
+    "start:dev": "nodemon apps/api/src/index.js",
+    "test": "npm run test --workspaces",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "data:ingest": "node packages/pipeline/src/ingest.js",
+    "data:validate": "node packages/pipeline/src/validate.js",
+    "data:refresh": "node packages/pipeline/src/refresh.js",
+    "deploy": "wrangler pages deploy dist --project-name blazesportsintel",
+    "deploy:staging": "wrangler pages deploy dist --project-name blazesportsintel-staging",
+    "workers:deploy": "npm run deploy --workspace=apps/workers",
+    "db:migrate": "node packages/schema/src/migrate.js",
+    "health-check": "node packages/monitoring/src/health.js"
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20240925.0",
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "redis": "^4.7.0",
+    "winston": "^3.14.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "eslint": "^9.10.0",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2",
+    "wrangler": "^3.78.8"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "sports",
+    "data",
+    "analytics",
+    "texas",
+    "sec",
+    "deep-south",
+    "football",
+    "baseball",
+    "recruiting"
+  ],
+  "author": "Austin Humphrey <ahump20@outlook.com>",
+  "license": "MIT"
+}

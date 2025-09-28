@@ -1,0 +1,529 @@
+{
+  "timestamp": "2025-09-25T21:18:37.817Z",
+  "league": "NFL",
+  "total_teams": 32,
+  "conferences": [
+    "AFC",
+    "NFC"
+  ],
+  "divisions": 8,
+  "teams": [
+    {
+      "team_code": "BUF",
+      "league": "NFL",
+      "readiness_score": 90,
+      "championship_moments": 16,
+      "tactical_advantage": 93,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.3091532300115327,
+        "hidden_yardage_per_drive": -6.3449393273316845,
+        "red_zone_efficiency": 0.50790427807532,
+        "defensive_pressure_rating": 81
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "MIA",
+      "league": "NFL",
+      "readiness_score": 60,
+      "championship_moments": 16,
+      "tactical_advantage": 97,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.5139023215418022,
+        "hidden_yardage_per_drive": 1.861608660569697,
+        "red_zone_efficiency": 0.46524076315297713,
+        "defensive_pressure_rating": 76
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "NE",
+      "league": "NFL",
+      "readiness_score": 62,
+      "championship_moments": 15,
+      "tactical_advantage": 91,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.9557680805928646,
+        "hidden_yardage_per_drive": -8.508148063674188,
+        "red_zone_efficiency": 0.3991473324626986,
+        "defensive_pressure_rating": 68
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "NYJ",
+      "league": "NFL",
+      "readiness_score": 86,
+      "championship_moments": 7,
+      "tactical_advantage": 65,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.4801358548505472,
+        "hidden_yardage_per_drive": 5.157641978267854,
+        "red_zone_efficiency": 0.4241562879096583,
+        "defensive_pressure_rating": 64
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "BAL",
+      "league": "NFL",
+      "readiness_score": 81,
+      "championship_moments": 15,
+      "tactical_advantage": 88,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.8483480894520541,
+        "hidden_yardage_per_drive": 5.0934472325051985,
+        "red_zone_efficiency": 0.2305522128482833,
+        "defensive_pressure_rating": 77
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "CIN",
+      "league": "NFL",
+      "readiness_score": 88,
+      "championship_moments": 18,
+      "tactical_advantage": 98,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.5655395396413632,
+        "hidden_yardage_per_drive": 1.0110997295812574,
+        "red_zone_efficiency": 0.5708887046563815,
+        "defensive_pressure_rating": 81
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "CLE",
+      "league": "NFL",
+      "readiness_score": 89,
+      "championship_moments": 20,
+      "tactical_advantage": 96,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.9272022442636674,
+        "hidden_yardage_per_drive": -5.851843473610923,
+        "red_zone_efficiency": 0.4162654517381197,
+        "defensive_pressure_rating": 92
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "PIT",
+      "league": "NFL",
+      "readiness_score": 63,
+      "championship_moments": 9,
+      "tactical_advantage": 78,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.656534199871694,
+        "hidden_yardage_per_drive": -2.551508025062126,
+        "red_zone_efficiency": 0.5647219902974889,
+        "defensive_pressure_rating": 85
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "HOU",
+      "league": "NFL",
+      "readiness_score": 79,
+      "championship_moments": 15,
+      "tactical_advantage": 51,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.25850890065793175,
+        "hidden_yardage_per_drive": -1.2027727618555986,
+        "red_zone_efficiency": 0.80010723992865,
+        "defensive_pressure_rating": 64
+      },
+      "deep_south_priority": true,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "IND",
+      "league": "NFL",
+      "readiness_score": 63,
+      "championship_moments": 26,
+      "tactical_advantage": 73,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.572384031522482,
+        "hidden_yardage_per_drive": -1.0401708469813897,
+        "red_zone_efficiency": 0.8157584895337746,
+        "defensive_pressure_rating": 97
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "JAX",
+      "league": "NFL",
+      "readiness_score": 82,
+      "championship_moments": 16,
+      "tactical_advantage": 50,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.5601914913721815,
+        "hidden_yardage_per_drive": -3.7458380304811767,
+        "red_zone_efficiency": 0.09086856625493134,
+        "defensive_pressure_rating": 63
+      },
+      "deep_south_priority": true,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "TEN",
+      "league": "NFL",
+      "readiness_score": 77,
+      "championship_moments": 5,
+      "tactical_advantage": 86,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.22255095794103186,
+        "hidden_yardage_per_drive": 2.4693916058999186,
+        "red_zone_efficiency": 0.6748285347774268,
+        "defensive_pressure_rating": 84
+      },
+      "deep_south_priority": true,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "DEN",
+      "league": "NFL",
+      "readiness_score": 58,
+      "championship_moments": 10,
+      "tactical_advantage": 65,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.33033724085973204,
+        "hidden_yardage_per_drive": 9.300692107239882,
+        "red_zone_efficiency": 0.17966932728250962,
+        "defensive_pressure_rating": 81
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "KC",
+      "league": "NFL",
+      "readiness_score": 93,
+      "championship_moments": 6,
+      "tactical_advantage": 94,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.40252292870751893,
+        "hidden_yardage_per_drive": 9.497385288351282,
+        "red_zone_efficiency": 0.3865340931390382,
+        "defensive_pressure_rating": 84
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "LV",
+      "league": "NFL",
+      "readiness_score": 82,
+      "championship_moments": 26,
+      "tactical_advantage": 44,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.24677310203810565,
+        "hidden_yardage_per_drive": -1.2094719180808244,
+        "red_zone_efficiency": 0.23382740675233937,
+        "defensive_pressure_rating": 74
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "LAC",
+      "league": "NFL",
+      "readiness_score": 89,
+      "championship_moments": 14,
+      "tactical_advantage": 57,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.20167770644420724,
+        "hidden_yardage_per_drive": -9.799650998723962,
+        "red_zone_efficiency": 0.7892005421321495,
+        "defensive_pressure_rating": 80
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "DAL",
+      "league": "NFL",
+      "readiness_score": 75,
+      "championship_moments": 22,
+      "tactical_advantage": 96,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.004511095875231463,
+        "hidden_yardage_per_drive": -6.3958977473799905,
+        "red_zone_efficiency": 0.9649772458049561,
+        "defensive_pressure_rating": 75
+      },
+      "deep_south_priority": true,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "NYG",
+      "league": "NFL",
+      "readiness_score": 76,
+      "championship_moments": 29,
+      "tactical_advantage": 92,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.3410400275207248,
+        "hidden_yardage_per_drive": 1.3322482532098547,
+        "red_zone_efficiency": 0.8516112697556497,
+        "defensive_pressure_rating": 81
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "PHI",
+      "league": "NFL",
+      "readiness_score": 74,
+      "championship_moments": 6,
+      "tactical_advantage": 72,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.7353036218440865,
+        "hidden_yardage_per_drive": -9.956754856722467,
+        "red_zone_efficiency": 0.7820789164532274,
+        "defensive_pressure_rating": 67
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "WAS",
+      "league": "NFL",
+      "readiness_score": 92,
+      "championship_moments": 19,
+      "tactical_advantage": 87,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.6368746209005538,
+        "hidden_yardage_per_drive": -4.042317771809203,
+        "red_zone_efficiency": 0.07109844567437507,
+        "defensive_pressure_rating": 75
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "CHI",
+      "league": "NFL",
+      "readiness_score": 66,
+      "championship_moments": 29,
+      "tactical_advantage": 43,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.5411618031469869,
+        "hidden_yardage_per_drive": 8.581177831774944,
+        "red_zone_efficiency": 0.7240379890534421,
+        "defensive_pressure_rating": 61
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "DET",
+      "league": "NFL",
+      "readiness_score": 62,
+      "championship_moments": 10,
+      "tactical_advantage": 52,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.2036029700906854,
+        "hidden_yardage_per_drive": -4.2719531066702165,
+        "red_zone_efficiency": 0.9610264949934713,
+        "defensive_pressure_rating": 78
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "GB",
+      "league": "NFL",
+      "readiness_score": 70,
+      "championship_moments": 27,
+      "tactical_advantage": 85,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.21427430711525464,
+        "hidden_yardage_per_drive": -4.58771781256059,
+        "red_zone_efficiency": 0.6093212256093423,
+        "defensive_pressure_rating": 78
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "MIN",
+      "league": "NFL",
+      "readiness_score": 61,
+      "championship_moments": 13,
+      "tactical_advantage": 60,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.5135715174781521,
+        "hidden_yardage_per_drive": 3.1870576580072054,
+        "red_zone_efficiency": 0.7872832874877942,
+        "defensive_pressure_rating": 71
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "ATL",
+      "league": "NFL",
+      "readiness_score": 93,
+      "championship_moments": 26,
+      "tactical_advantage": 77,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.44676654144531613,
+        "hidden_yardage_per_drive": -9.492710178669327,
+        "red_zone_efficiency": 0.23666707087079275,
+        "defensive_pressure_rating": 68
+      },
+      "deep_south_priority": true,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "CAR",
+      "league": "NFL",
+      "readiness_score": 87,
+      "championship_moments": 16,
+      "tactical_advantage": 74,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.13819809725446142,
+        "hidden_yardage_per_drive": 2.0615855366606297,
+        "red_zone_efficiency": 0.7039942803006669,
+        "defensive_pressure_rating": 96
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "NO",
+      "league": "NFL",
+      "readiness_score": 66,
+      "championship_moments": 10,
+      "tactical_advantage": 42,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.08595594394997996,
+        "hidden_yardage_per_drive": -9.238796848840849,
+        "red_zone_efficiency": 0.5297208540809839,
+        "defensive_pressure_rating": 71
+      },
+      "deep_south_priority": true,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "TB",
+      "league": "NFL",
+      "readiness_score": 56,
+      "championship_moments": 10,
+      "tactical_advantage": 84,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.8405349433850835,
+        "hidden_yardage_per_drive": 9.804719441101376,
+        "red_zone_efficiency": 0.09204938879304025,
+        "defensive_pressure_rating": 69
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "ARI",
+      "league": "NFL",
+      "readiness_score": 74,
+      "championship_moments": 13,
+      "tactical_advantage": 83,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.2838737172497441,
+        "hidden_yardage_per_drive": 1.4410839983477697,
+        "red_zone_efficiency": 0.3664677771911189,
+        "defensive_pressure_rating": 78
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "LA",
+      "league": "NFL",
+      "readiness_score": 65,
+      "championship_moments": 18,
+      "tactical_advantage": 86,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.9425492478748425,
+        "hidden_yardage_per_drive": -9.089315197819756,
+        "red_zone_efficiency": 0.6589255716206444,
+        "defensive_pressure_rating": 85
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "SEA",
+      "league": "NFL",
+      "readiness_score": 85,
+      "championship_moments": 22,
+      "tactical_advantage": 74,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.20600426880054012,
+        "hidden_yardage_per_drive": 6.27842733706909,
+        "red_zone_efficiency": 0.9515531172384817,
+        "defensive_pressure_rating": 95
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "SF",
+      "league": "NFL",
+      "readiness_score": 86,
+      "championship_moments": 11,
+      "tactical_advantage": 94,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "pressure_to_sack_rate": 0.6878750512266485,
+        "hidden_yardage_per_drive": 5.124526038995212,
+        "red_zone_efficiency": 0.5597490066631206,
+        "defensive_pressure_rating": 96
+      },
+      "deep_south_priority": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    }
+  ],
+  "analytics": {
+    "pressure_to_sack_modeling": true,
+    "hidden_yardage_tracking": true,
+    "red_zone_optimization": true
+  }
+}

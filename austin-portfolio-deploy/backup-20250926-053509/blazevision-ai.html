@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlazeVision AI | Blaze Intelligence Deep South Sports Authority</title>
+    <meta name="description" content="Championship-grade sports performance analysis with AI-powered biomechanics for Texas and SEC athletes">
+
+    <!-- Core Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1675469404/pose.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1640029074/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            /* Blaze Intelligence Brand Colors */
+            --texas-burnt-orange: #BF5700;
+            --championship-gold: #FFD700;
+            --longhorn-bronze: #D2691E;
+            --midnight-black: #0A0A0A;
+            --steel-gray: #1A1A1A;
+            --ghost-white: #FAFAFA;
+            --ice-blue: #E3F2FD;
+            --success-green: #39FF14;
+            --warning-amber: #FFA726;
+            --glass-white: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(191, 87, 0, 0.3);
+            --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.8);
+            --shadow-glow: 0 0 100px rgba(191, 87, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--midnight-black);
+            color: var(--ghost-white);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Atmospheric Background */
+        .atmosphere {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(191, 87, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(210, 105, 30, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 30%);
+            animation: atmosphereShift 20s ease-in-out infinite;
+        }
+
+        @keyframes atmosphereShift {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Noise Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            z-index: 2;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+        }
+
+        /* Authentication Notice */
+        .auth-notice {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(191, 87, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 12px 20px;
+            z-index: 1001;
+            font-size: 14px;
+            font-weight: 500;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Elite Header */
+        .elite-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.7) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            animation: headerReveal 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes headerReveal {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .brand-mark {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-container {
+            width: 48px;
+            height: 48px;
+            position: relative;
+        }
+
+        .logo-flame {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            animation: flameGlow 3s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(191, 87, 0, 0.5);
+        }
+
+        @keyframes flameGlow {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(191, 87, 0, 0.5);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+                transform: scale(1.05);
+            }
+        }
+
+        .brand-text h1 {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .brand-text .tagline {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 2px;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: var(--championship-gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(191, 87, 0, 0.2);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .texas-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--championship-gold);
+        }
+
+        .texas-star {
+            font-size: 16px;
+            animation: starPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes starPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        /* Neural Status */
+        .neural-status {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .status-module {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .neural-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .neural-indicator.standby {
+            background: var(--warning-amber);
+            animation: neuralPulse 2s ease-in-out infinite;
+        }
+
+        .neural-indicator.active {
+            background: var(--success-green);
+            animation: neuralPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes neuralPulse {
+            0%, 100% {
+                box-shadow: 0 0 20px currentColor;
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 30px currentColor;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Main Content */
+        .main-stage {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            padding-top: 88px;
+        }
+
+        .stage-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 32px;
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: calc(100vh - 88px);
+        }
+
+        /* Vision Display */
+        .vision-workspace {
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: var(--shadow-deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .workspace-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .workspace-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ghost-white);
+        }
+
+        .engagement-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .control-btn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            color: var(--championship-gold);
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            background: rgba(191, 87, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .control-btn.active {
+            background: var(--texas-burnt-orange);
+            color: white;
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.5);
+        }
+
+        .vision-display {
+            position: relative;
+            height: 500px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--midnight-black);
+            border: 2px solid rgba(191, 87, 0, 0.2);
+        }
+
+        .vision-display.scanning {
+            border-color: var(--success-green);
+            animation: scanline 4s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { border-color: rgba(57, 255, 20, 0.3); }
+            50% { border-color: rgba(57, 255, 20, 1); }
+            100% { border-color: rgba(57, 255, 20, 0.3); }
+        }
+
+        #videoElement, #poseCanvas, #threeDCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #poseCanvas {
+            z-index: 2;
+        }
+
+        .status-overlay {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+        }
+
+        .status-badge {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .live-indicator {
+            color: var(--success-green);
+            animation: livePulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Command Sidebar */
+        .command-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .control-panel {
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: var(--shadow-deep);
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .panel-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .panel-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ghost-white);
+        }
+
+        .protocol-selector select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 12px;
+            color: var(--ghost-white);
+            font-size: 14px;
+            font-weight: 500;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .protocol-selector select:focus {
+            outline: none;
+            border-color: var(--texas-burnt-orange);
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.3);
+        }
+
+        /* Metrics Display */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .metric-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--championship-gold);
+            margin-bottom: 4px;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Coaching Feed */
+        .coaching-feed {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .coaching-message {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--ghost-white);
+            position: relative;
+        }
+
+        .coaching-message::before {
+            content: "💡";
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 16px;
+        }
+
+        .coaching-message .message-content {
+            margin-left: 32px;
+            font-weight: 500;
+        }
+
+        /* Texas Sports Badge */
+        .texas-sports-badge {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        .badge-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .badge-text {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--championship-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(191, 87, 0, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        /* Loading Screen */
+        .initiation-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--midnight-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .initiation-content {
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .initiation-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 32px;
+            position: relative;
+        }
+
+        .logo-pulse {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            animation: initiationPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes initiationPulse {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                box-shadow: 0 0 60px rgba(191, 87, 0, 0.5);
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+                box-shadow: 0 0 80px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        .initiation-text {
+            font-size: 20px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--texas-burnt-orange), var(--longhorn-bronze), var(--championship-gold));
+            animation: loadProgress 2s ease-out;
+        }
+
+        @keyframes loadProgress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-out {
+            opacity: 0 !important;
+        }
+
+        /* Responsive Excellence */
+        @media (max-width: 1400px) {
+            .stage-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .command-sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 16px 20px;
+            }
+
+            .neural-status {
+                display: none;
+            }
+
+            .stage-layout {
+                padding: 20px;
+            }
+
+            .command-sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .vision-display {
+                height: 400px;
+            }
+
+            .auth-notice {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                right: 10px;
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            .back-button {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(191, 87, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(191, 87, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Atmospheric Effects -->
+    <div class="atmosphere"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- Authentication Notice -->
+    <div class="auth-notice">
+        🔒 Authenticated: Blaze Intelligence Platform Access
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="initiationScreen" class="initiation-screen">
+        <div class="initiation-content">
+            <div class="initiation-logo">
+                <div class="logo-pulse">🔥</div>
+            </div>
+            <div class="initiation-text">Initializing Texas Sports Intelligence</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elite Header -->
+    <header class="elite-header">
+        <div class="header-content">
+            <div class="brand-mark">
+                <div class="logo-container">
+                    <div class="logo-flame">🔥</div>
+                </div>
+                <div class="brand-text">
+                    <h1>BlazeVision AI</h1>
+                    <p class="tagline">Blaze Intelligence • Deep South Sports Authority</p>
+                </div>
+            </div>
+            <div class="texas-badge">
+                <span class="texas-star">⭐</span>
+                Texas • SEC • Championship Grade
+            </div>
+            <div class="neural-status">
+                <a href="/" class="back-button">
+                    ← Back to Dashboard
+                </a>
+                <div class="status-module">
+                    <div class="neural-indicator standby" id="aiIndicator"></div>
+                    <span id="systemStatus">AI Ready</span>
+                </div>
+                <div class="status-module">
+                    <span id="fps">0 FPS</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Stage -->
+    <main class="main-stage">
+        <div class="stage-layout">
+            <!-- Vision Workspace -->
+            <div class="vision-workspace">
+                <div class="workspace-header">
+                    <div class="workspace-title">Championship Performance Chamber</div>
+                    <div class="engagement-controls">
+                        <button class="control-btn" id="engageBtn" title="Engage Vision System">🎯</button>
+                        <button class="control-btn" id="pauseBtn" title="Pause Analysis">⏸️</button>
+                        <button class="control-btn" id="recordBtn" title="Record Session">⏺️</button>
+                        <button class="control-btn" id="settingsBtn" title="Settings">⚙️</button>
+                    </div>
+                </div>
+
+                <div class="vision-display" id="visionDisplay">
+                    <video id="videoElement" autoplay muted playsinline></video>
+                    <canvas id="poseCanvas"></canvas>
+                    <canvas id="threeDCanvas" style="display: none;"></canvas>
+
+                    <div class="status-overlay">
+                        <div class="status-badge">
+                            <div class="live-indicator">● LIVE</div>
+                        </div>
+                        <div class="status-badge" id="protocolBadge">
+                            TEXAS HITTING POWER
+                        </div>
+                        <div class="status-badge" id="fpsBadge">
+                            0 FPS
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Command Sidebar -->
+            <div class="command-sidebar">
+                <!-- Protocol Selection -->
+                <div class="control-panel">
+                    <div class="panel-header">
+                        <div class="panel-icon">🎯</div>
+                        <div class="panel-title">Training Protocol</div>
+                    </div>
+                    <div class="protocol-selector">
+                        <select id="protocolSelect">
+                            <option value="texas_hitting_power">🏟️ Texas Power Hitting</option>
+                            <option value="longhorn_pitching">⚡ Longhorn Velocity Program</option>
+                            <option value="sec_qb_mechanics">🎯 SEC Quarterback Fundamentals</option>
+                            <option value="deep_south_catching">🥎 Deep South Catching Mechanics</option>
+                            <option value="texas_sprint_start">🏃 Texas Sprint Explosion</option>
+                            <option value="championship_throwing">💪 Championship Throwing Motion</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="control-panel">
+                    <div class="panel-header">
+                        <div class="panel-icon">📊</div>
+                        <div class="panel-title">Live Metrics</div>
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <div class="metric-value" id="formScore">100</div>
+                            <div class="metric-label">Form Score</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value" id="powerIndex">0</div>
+                            <div class="metric-label">Power Index</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value" id="velocityMph">0</div>
+                            <div class="metric-label">Velocity</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value" id="stabilityScore">100</div>
+                            <div class="metric-label">Stability</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coaching Intelligence -->
+                <div class="control-panel">
+                    <div class="panel-header">
+                        <div class="panel-icon">🧠</div>
+                        <div class="panel-title">Texas Coaching Intelligence</div>
+                    </div>
+                    <div class="coaching-feed" id="coachingFeed">
+                        <div class="coaching-message">
+                            <div class="message-content">
+                                Ready to unlock championship performance. Select your protocol and engage the vision system.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Texas Sports Badge -->
+                <div class="texas-sports-badge">
+                    <span class="badge-icon">🏆</span>
+                    <div class="badge-text">Deep South Sports Authority</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Enhanced Texas Sports Intelligence System
+        // From Friday Night Lights to Sunday in the Show
+
+        class BlazeVisionTexasIntelligence {
+            constructor() {
+                // Core Systems
+                this.videoElement = document.getElementById('videoElement');
+                this.poseCanvas = document.getElementById('poseCanvas');
+                this.poseCtx = this.poseCanvas.getContext('2d');
+                this.threeDCanvas = document.getElementById('threeDCanvas');
+
+                // Initialize canvas dimensions
+                this.setupCanvasDimensions();
+
+                // System State
+                this.isEngaged = false;
+                this.isPaused = false;
+                this.isRecording = false;
+                this.currentProtocol = 'texas_hitting_power';
+                this.recordedFrames = [];
+                this.sessionStartTime = null;
+
+                // MediaPipe
+                this.pose = null;
+                this.camera = null;
+
+                // Three.js Scene (for advanced 3D analysis)
+                this.scene = null;
+                this.renderer = null;
+                this.camera3D = null;
+
+                // Performance Metrics
+                this.metrics = {
+                    formScore: 100,
+                    repCount: 0,
+                    velocity: 0,
+                    power: 0,
+                    rom: 0,
+                    stability: 100,
+                    tempo: 0,
+                    confidence: 0,
+                    hipRotation: 0,
+                    shoulderTilt: 0,
+                    weightTransfer: 0
+                };
+
+                // Movement Analysis
+                this.movementPhase = 'ready';
+                this.previousLandmarks = null;
+                this.landmarkHistory = [];
+                this.maxHistoryLength = 30;
+
+                // FPS Tracking
+                this.frameCount = 0;
+                this.lastFrameTime = performance.now();
+                this.fps = 0;
+
+                // Charts
+                this.charts = {};
+
+                // Texas Sports Protocols Database
+                this.texasProtocols = {
+                    texas_hitting_power: {
+                        name: "Texas Power Hitting",
+                        description: "Build the swing that conquers Friday Night Lights",
+                        narrative: "From Dave Campbell's scouts to major league dreams - perfect the Texas swing",
+                        phases: ["stance", "load", "stride", "rotation", "contact", "follow-through"],
+                        keyPoints: [11, 12, 13, 14, 15, 16, 23, 24, 25, 26], // shoulders, arms, hips, knees
+                        idealMetrics: {
+                            hipRotation: { min: 45, max: 90, optimal: 70 },
+                            shoulderTilt: { min: 5, max: 25, optimal: 15 },
+                            weightTransfer: { min: 60, max: 90, optimal: 75 },
+                            batSpeed: { min: 60, max: 85, optimal: 75 }
+                        },
+                        coaching: [
+                            "Start with that Texas stance - balanced, athletic, ready to explode.",
+                            "Feel the ground through your spikes. Power starts from the earth up.",
+                            "Your hips lead the dance. Let them fire first, everything else follows.",
+                            "Keep that head steady through contact. Trust your hands to find the barrel.",
+                            "Finish strong like you're hitting it out of Minute Maid Park."
+                        ]
+                    },
+                    longhorn_pitching: {
+                        name: "Longhorn Velocity Program",
+                        description: "Throw like a Texas legend",
+                        narrative: "From Disch-Falk Field to the Show - master the Texas arm",
+                        phases: ["windup", "stride", "arm-cocking", "acceleration", "deceleration", "follow-through"],
+                        keyPoints: [11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27, 28],
+                        idealMetrics: {
+                            strideLength: { min: 75, max: 90, optimal: 85 },
+                            hipShoulder: { min: 30, max: 50, optimal: 40 },
+                            elbowHeight: { min: 80, max: 100, optimal: 90 },
+                            leadLegBlock: { min: 160, max: 180, optimal: 175 }
+                        },
+                        coaching: [
+                            "That's Longhorn leverage - stride long and land with intent.",
+                            "Create that hip-shoulder separation like a Texas tornado.",
+                            "High elbow position protects your arm for the long season.",
+                            "Block that front side hard. Convert momentum to rotation.",
+                            "Follow through toward home plate. Finish like a champion."
+                        ]
+                    },
+                    sec_qb_mechanics: {
+                        name: "SEC Quarterback Fundamentals",
+                        description: "Command the pocket with SEC precision",
+                        narrative: "From high school Friday nights to SEC Saturdays - master the quarterback craft",
+                        phases: ["setup", "read", "step", "throw", "follow-through"],
+                        keyPoints: [11, 12, 13, 14, 15, 16, 23, 24],
+                        idealMetrics: {
+                            pocketPresence: { min: 80, max: 100, optimal: 95 },
+                            footwork: { min: 85, max: 100, optimal: 92 },
+                            armSlot: { min: 75, max: 90, optimal: 82 },
+                            release: { min: 88, max: 100, optimal: 95 }
+                        },
+                        coaching: [
+                            "Feel the pocket. Plant those feet with SEC confidence.",
+                            "Eyes downfield, mind calm. Read the defense like a chess master.",
+                            "Step into your throw. Generate power from the ground up.",
+                            "Release with conviction. Trust your arm and your receivers.",
+                            "Follow through with authority. That's how champions finish."
+                        ]
+                    },
+                    deep_south_catching: {
+                        name: "Deep South Catching Mechanics",
+                        description: "Secure every ball with championship hands",
+                        narrative: "From Texas high school to SEC glory - master the art of catching",
+                        phases: ["ready", "track", "extend", "secure", "tuck"],
+                        keyPoints: [15, 16, 19, 20, 11, 12],
+                        idealMetrics: {
+                            handPosition: { min: 85, max: 100, optimal: 95 },
+                            tracking: { min: 80, max: 100, optimal: 90 },
+                            security: { min: 90, max: 100, optimal: 98 }
+                        },
+                        coaching: [
+                            "Track it all the way into your hands. Never take your eyes off.",
+                            "Soft hands, strong finish. Catch and secure in one motion.",
+                            "Get your body behind the ball. Make yourself a big target.",
+                            "Tuck it high and tight. Protect that rock like it's gold."
+                        ]
+                    },
+                    texas_sprint_start: {
+                        name: "Texas Sprint Explosion",
+                        description: "First step advantage in every race",
+                        narrative: "From Texas track meets to state championships - explosive starts",
+                        phases: ["set", "drive", "acceleration", "transition"],
+                        keyPoints: [11, 12, 23, 24, 25, 26, 27, 28],
+                        idealMetrics: {
+                            reactionTime: { min: 0.1, max: 0.15, optimal: 0.12 },
+                            driveAngle: { min: 40, max: 50, optimal: 45 },
+                            stepFrequency: { min: 4.5, max: 5.2, optimal: 4.8 }
+                        },
+                        coaching: [
+                            "Coiled and ready. Every muscle prepared to explode.",
+                            "Drive those arms. Power comes from the entire body.",
+                            "Stay low in your drive phase. Build speed gradually.",
+                            "Smooth transition to upright. Don't rush the lift."
+                        ]
+                    },
+                    championship_throwing: {
+                        name: "Championship Throwing Motion",
+                        description: "Perfect the throw that wins championships",
+                        narrative: "From Texas diamonds to championship games - master every throw",
+                        phases: ["setup", "load", "stride", "release", "follow-through"],
+                        keyPoints: [11, 12, 13, 14, 15, 16, 23, 24],
+                        idealMetrics: {
+                            armPath: { min: 85, max: 100, optimal: 92 },
+                            footwork: { min: 80, max: 100, optimal: 88 },
+                            accuracy: { min: 85, max: 100, optimal: 95 }
+                        },
+                        coaching: [
+                            "Step behind your throw. Get your body into it.",
+                            "High elbow, clean arm path. Protect that shoulder.",
+                            "Follow through across your body. Finish the throw.",
+                            "Every throw matters. Make each one championship-worthy."
+                        ]
+                    }
+                };
+
+                // Initialize the system
+                this.initializeSystem();
+            }
+
+            async initializeSystem() {
+                console.log("🔥 Initializing BlazeVision Texas Intelligence...");
+
+                // Setup UI handlers
+                this.setupUIHandlers();
+
+                // Initialize MediaPipe
+                await this.initializeMediaPipe();
+
+                // Setup Three.js for advanced visualization
+                this.initializeThreeJS();
+
+                // Start the main loop
+                this.startAnalysisLoop();
+
+                // Hide loading screen
+                setTimeout(() => {
+                    document.getElementById('initiationScreen').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('initiationScreen').style.display = 'none';
+                    }, 800);
+                }, 2000);
+
+                console.log("🏆 BlazeVision Texas Intelligence ready for championship analysis!");
+            }
+
+            setupCanvasDimensions() {
+                const resizeCanvases = () => {
+                    const display = document.getElementById('visionDisplay');
+                    const rect = display.getBoundingClientRect();
+
+                    [this.poseCanvas, this.threeDCanvas].forEach(canvas => {
+                        canvas.width = rect.width;
+                        canvas.height = rect.height;
+                    });
+                };
+
+                resizeCanvases();
+                window.addEventListener('resize', resizeCanvases);
+            }
+
+            setupUIHandlers() {
+                // Engagement Controls
+                document.getElementById('engageBtn').addEventListener('click', () => this.toggleEngagement());
+                document.getElementById('pauseBtn').addEventListener('click', () => this.togglePause());
+                document.getElementById('recordBtn').addEventListener('click', () => this.toggleRecording());
+
+                // Protocol Selection
+                document.getElementById('protocolSelect').addEventListener('change', (e) => {
+                    this.switchProtocol(e.target.value);
+                });
+
+                // Initialize with default protocol
+                this.switchProtocol(this.currentProtocol);
+            }
+
+            async initializeMediaPipe() {
+                try {
+                    this.pose = new Pose({
+                        locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.5.1675469404/${file}`
+                    });
+
+                    this.pose.setOptions({
+                        modelComplexity: 2,
+                        smoothLandmarks: true,
+                        enableSegmentation: false,
+                        smoothSegmentation: false,
+                        minDetectionConfidence: 0.7,
+                        minTrackingConfidence: 0.7
+                    });
+
+                    this.pose.onResults((results) => this.processResults(results));
+
+                    console.log("✅ MediaPipe Pose initialized successfully");
+                } catch (error) {
+                    console.error("❌ MediaPipe initialization failed:", error);
+                    this.addCoachingMessage("System initialization failed. Please refresh and try again.");
+                }
+            }
+
+            initializeThreeJS() {
+                // Three.js scene for advanced 3D visualization
+                this.scene = new THREE.Scene();
+                this.camera3D = new THREE.PerspectiveCamera(75, this.threeDCanvas.width / this.threeDCanvas.height, 0.1, 1000);
+                this.renderer = new THREE.WebGLRenderer({ canvas: this.threeDCanvas, alpha: true });
+                this.renderer.setSize(this.threeDCanvas.width, this.threeDCanvas.height);
+
+                // Basic lighting
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+                this.scene.add(ambientLight);
+
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(0, 1, 1);
+                this.scene.add(directionalLight);
+
+                this.camera3D.position.z = 5;
+
+                console.log("✅ Three.js 3D visualization ready");
+            }
+
+            async toggleEngagement() {
+                if (!this.isEngaged) {
+                    await this.startCamera();
+                    this.isEngaged = true;
+                    document.getElementById('engageBtn').classList.add('active');
+                    document.getElementById('aiIndicator').className = 'neural-indicator active';
+                    document.getElementById('systemStatus').textContent = 'AI Analyzing';
+                    document.getElementById('visionDisplay').classList.add('scanning');
+
+                    this.addCoachingMessage(`🎯 BlazeVision engaged! ${this.texasProtocols[this.currentProtocol].name} protocol active.`);
+                } else {
+                    this.stopCamera();
+                    this.isEngaged = false;
+                    document.getElementById('engageBtn').classList.remove('active');
+                    document.getElementById('aiIndicator').className = 'neural-indicator standby';
+                    document.getElementById('systemStatus').textContent = 'AI Ready';
+                    document.getElementById('visionDisplay').classList.remove('scanning');
+
+                    this.addCoachingMessage("🔥 Analysis paused. Ready when you are, champion.");
+                }
+            }
+
+            async startCamera() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        video: {
+                            width: { ideal: 1280 },
+                            height: { ideal: 720 },
+                            facingMode: 'user'
+                        }
+                    });
+
+                    this.videoElement.srcObject = stream;
+
+                    this.camera = new Camera(this.videoElement, {
+                        onFrame: async () => {
+                            if (this.isEngaged && !this.isPaused) {
+                                await this.pose.send({ image: this.videoElement });
+                            }
+                        }
+                    });
+
+                    await this.camera.start();
+                    console.log("✅ Camera started successfully");
+
+                } catch (error) {
+                    console.error("❌ Camera access failed:", error);
+                    this.addCoachingMessage("Camera access denied. Please check permissions and try again.");
+                }
+            }
+
+            stopCamera() {
+                if (this.camera) {
+                    this.camera.stop();
+                }
+
+                if (this.videoElement.srcObject) {
+                    const tracks = this.videoElement.srcObject.getTracks();
+                    tracks.forEach(track => track.stop());
+                    this.videoElement.srcObject = null;
+                }
+            }
+
+            processResults(results) {
+                if (!results.poseLandmarks) return;
+
+                this.clearCanvas();
+
+                // Draw video frame
+                this.poseCtx.drawImage(this.videoElement, 0, 0, this.poseCanvas.width, this.poseCanvas.height);
+
+                // Draw pose overlay
+                this.drawTexasSkeleton(results.poseLandmarks);
+
+                // Analyze movement
+                this.analyzeMovement(results.poseLandmarks);
+
+                // Update metrics display
+                this.updateMetricsDisplay();
+
+                // Update FPS
+                this.updateFPS();
+
+                // Store for next frame comparison
+                this.previousLandmarks = results.poseLandmarks;
+
+                // Store in history for trend analysis
+                this.landmarkHistory.push(results.poseLandmarks);
+                if (this.landmarkHistory.length > this.maxHistoryLength) {
+                    this.landmarkHistory.shift();
+                }
+            }
+
+            clearCanvas() {
+                this.poseCtx.clearRect(0, 0, this.poseCanvas.width, this.poseCanvas.height);
+            }
+
+            drawTexasSkeleton(landmarks) {
+                const connections = Pose.POSE_CONNECTIONS;
+                const protocol = this.texasProtocols[this.currentProtocol];
+
+                // Draw connections with Blaze Intelligence coloring
+                connections.forEach(([start, end]) => {
+                    const startLm = landmarks[start];
+                    const endLm = landmarks[end];
+
+                    if (startLm.visibility > 0.5 && endLm.visibility > 0.5) {
+                        const startX = startLm.x * this.poseCanvas.width;
+                        const startY = startLm.y * this.poseCanvas.height;
+                        const endX = endLm.x * this.poseCanvas.width;
+                        const endY = endLm.y * this.poseCanvas.height;
+
+                        // Create gradient based on form score
+                        const gradient = this.poseCtx.createLinearGradient(startX, startY, endX, endY);
+
+                        if (this.metrics.formScore > 90) {
+                            gradient.addColorStop(0, '#39FF14'); // Success green
+                            gradient.addColorStop(1, '#FFD700'); // Championship gold
+                        } else if (this.metrics.formScore > 70) {
+                            gradient.addColorStop(0, '#FFD700'); // Championship gold
+                            gradient.addColorStop(1, '#BF5700'); // Texas burnt orange
+                        } else {
+                            gradient.addColorStop(0, '#BF5700'); // Texas burnt orange
+                            gradient.addColorStop(1, '#D2691E'); // Longhorn bronze
+                        }
+
+                        this.poseCtx.strokeStyle = gradient;
+                        this.poseCtx.lineWidth = protocol.keyPoints.includes(start) || protocol.keyPoints.includes(end) ? 6 : 3;
+                        this.poseCtx.beginPath();
+                        this.poseCtx.moveTo(startX, startY);
+                        this.poseCtx.lineTo(endX, endY);
+                        this.poseCtx.stroke();
+                    }
+                });
+
+                // Draw key points with Texas emphasis
+                protocol.keyPoints.forEach(idx => {
+                    const landmark = landmarks[idx];
+                    if (landmark.visibility > 0.5) {
+                        const x = landmark.x * this.poseCanvas.width;
+                        const y = landmark.y * this.poseCanvas.height;
+
+                        // Outer glow - Texas burnt orange
+                        this.poseCtx.beginPath();
+                        this.poseCtx.arc(x, y, 12, 0, 2 * Math.PI);
+                        this.poseCtx.fillStyle = 'rgba(191, 87, 0, 0.3)';
+                        this.poseCtx.fill();
+
+                        // Inner point - Championship gold
+                        this.poseCtx.beginPath();
+                        this.poseCtx.arc(x, y, 6, 0, 2 * Math.PI);
+                        this.poseCtx.fillStyle = '#FFD700';
+                        this.poseCtx.fill();
+
+                        // Core - White
+                        this.poseCtx.beginPath();
+                        this.poseCtx.arc(x, y, 3, 0, 2 * Math.PI);
+                        this.poseCtx.fillStyle = '#FFFFFF';
+                        this.poseCtx.fill();
+                    }
+                });
+            }
+
+            analyzeMovement(landmarks) {
+                const protocol = this.texasProtocols[this.currentProtocol];
+
+                // Calculate basic metrics
+                this.calculateFormScore(landmarks);
+                this.calculatePowerMetrics(landmarks);
+                this.calculateStability(landmarks);
+
+                // Protocol-specific analysis
+                if (this.currentProtocol === 'texas_hitting_power') {
+                    this.analyzeHittingMechanics(landmarks);
+                } else if (this.currentProtocol === 'longhorn_pitching') {
+                    this.analyzePitchingMechanics(landmarks);
+                } else if (this.currentProtocol === 'sec_qb_mechanics') {
+                    this.analyzeQBMechanics(landmarks);
+                }
+
+                // Provide coaching feedback
+                this.generateCoachingFeedback();
+            }
+
+            calculateFormScore(landmarks) {
+                // Basic form score calculation
+                let score = 100;
+                const protocol = this.texasProtocols[this.currentProtocol];
+
+                // Check key point visibility and positioning
+                let visibleKeyPoints = 0;
+                protocol.keyPoints.forEach(idx => {
+                    if (landmarks[idx] && landmarks[idx].visibility > 0.7) {
+                        visibleKeyPoints++;
+                    } else {
+                        score -= 5; // Penalty for missing key points
+                    }
+                });
+
+                // Balance and symmetry check
+                if (landmarks[11] && landmarks[12]) { // shoulders
+                    const shoulderLevel = Math.abs(landmarks[11].y - landmarks[12].y);
+                    if (shoulderLevel > 0.05) score -= 10;
+                }
+
+                this.metrics.formScore = Math.max(0, Math.min(100, score));
+            }
+
+            calculatePowerMetrics(landmarks) {
+                // Simple power calculation based on movement velocity
+                if (this.previousLandmarks && landmarks[15] && landmarks[16]) { // wrists
+                    const leftWrist = landmarks[15];
+                    const rightWrist = landmarks[16];
+                    const prevLeftWrist = this.previousLandmarks[15];
+                    const prevRightWrist = this.previousLandmarks[16];
+
+                    if (prevLeftWrist && prevRightWrist) {
+                        const leftVel = Math.sqrt(
+                            Math.pow((leftWrist.x - prevLeftWrist.x) * this.poseCanvas.width, 2) +
+                            Math.pow((leftWrist.y - prevLeftWrist.y) * this.poseCanvas.height, 2)
+                        );
+
+                        const rightVel = Math.sqrt(
+                            Math.pow((rightWrist.x - prevRightWrist.x) * this.poseCanvas.width, 2) +
+                            Math.pow((rightWrist.y - prevRightWrist.y) * this.poseCanvas.height, 2)
+                        );
+
+                        this.metrics.velocity = Math.round((leftVel + rightVel) / 2);
+                        this.metrics.power = Math.min(100, this.metrics.velocity * 2);
+                    }
+                }
+            }
+
+            calculateStability(landmarks) {
+                // Balance and stability metrics
+                let stability = 100;
+
+                if (landmarks[27] && landmarks[28]) { // ankles
+                    const ankleDistance = Math.abs(landmarks[27].x - landmarks[28].x);
+                    if (ankleDistance < 0.1) stability -= 15; // Too narrow
+                    if (ankleDistance > 0.4) stability -= 15; // Too wide
+                }
+
+                this.metrics.stability = Math.max(0, Math.min(100, stability));
+            }
+
+            analyzeHittingMechanics(landmarks) {
+                // Texas hitting-specific analysis
+                if (landmarks[11] && landmarks[12] && landmarks[23] && landmarks[24]) {
+                    // Hip rotation calculation
+                    const hipAngle = this.calculateAngle(landmarks[11], landmarks[23], landmarks[24]);
+                    this.metrics.hipRotation = Math.round(hipAngle);
+
+                    // Shoulder tilt
+                    const shoulderTilt = Math.abs(landmarks[11].y - landmarks[12].y) * 100;
+                    this.metrics.shoulderTilt = Math.round(shoulderTilt);
+
+                    // Weight transfer (simplified)
+                    if (landmarks[27] && landmarks[28]) {
+                        const weightShift = Math.abs(landmarks[27].y - landmarks[28].y) * 100;
+                        this.metrics.weightTransfer = Math.min(100, weightShift * 3);
+                    }
+                }
+            }
+
+            analyzePitchingMechanics(landmarks) {
+                // Longhorn pitching analysis
+                console.log("Analyzing pitching mechanics...");
+            }
+
+            analyzeQBMechanics(landmarks) {
+                // SEC quarterback analysis
+                console.log("Analyzing QB mechanics...");
+            }
+
+            calculateAngle(point1, point2, point3) {
+                // Calculate angle between three points
+                const radians = Math.atan2(point3.y - point2.y, point3.x - point2.x) -
+                               Math.atan2(point1.y - point2.y, point1.x - point2.x);
+                let angle = Math.abs(radians * 180.0 / Math.PI);
+                if (angle > 180.0) angle = 360 - angle;
+                return angle;
+            }
+
+            generateCoachingFeedback() {
+                const protocol = this.texasProtocols[this.currentProtocol];
+                const coaching = protocol.coaching;
+
+                // Smart coaching based on metrics
+                if (this.metrics.formScore < 70) {
+                    this.addCoachingMessage(coaching[Math.floor(Math.random() * coaching.length)]);
+                }
+
+                // Protocol-specific coaching
+                if (this.currentProtocol === 'texas_hitting_power' && this.metrics.hipRotation < 45) {
+                    this.addCoachingMessage("🔥 Fire those hips! Lead with rotation, let the hands follow.");
+                }
+            }
+
+            updateMetricsDisplay() {
+                document.getElementById('formScore').textContent = this.metrics.formScore;
+                document.getElementById('powerIndex').textContent = this.metrics.power;
+                document.getElementById('velocityMph').textContent = this.metrics.velocity;
+                document.getElementById('stabilityScore').textContent = this.metrics.stability;
+            }
+
+            updateFPS() {
+                this.frameCount++;
+                const now = performance.now();
+                if (now - this.lastFrameTime >= 1000) {
+                    this.fps = Math.round(this.frameCount * 1000 / (now - this.lastFrameTime));
+                    document.getElementById('fps').textContent = `${this.fps} FPS`;
+                    document.getElementById('fpsBadge').textContent = `${this.fps} FPS`;
+                    this.frameCount = 0;
+                    this.lastFrameTime = now;
+                }
+            }
+
+            switchProtocol(protocolKey) {
+                this.currentProtocol = protocolKey;
+                const protocol = this.texasProtocols[protocolKey];
+
+                document.getElementById('protocolBadge').textContent = protocol.name.toUpperCase();
+
+                this.addCoachingMessage(`🎯 Switched to ${protocol.name}. ${protocol.description}`);
+                this.addCoachingMessage(protocol.narrative);
+            }
+
+            addCoachingMessage(message) {
+                const feed = document.getElementById('coachingFeed');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'coaching-message';
+                messageDiv.innerHTML = `
+                    <div class="message-content">${message}</div>
+                `;
+
+                feed.insertBefore(messageDiv, feed.firstChild);
+
+                // Keep only last 5 messages
+                while (feed.children.length > 5) {
+                    feed.removeChild(feed.lastChild);
+                }
+            }
+
+            togglePause() {
+                this.isPaused = !this.isPaused;
+                const btn = document.getElementById('pauseBtn');
+
+                if (this.isPaused) {
+                    btn.classList.add('active');
+                    btn.innerHTML = '▶️';
+                    this.addCoachingMessage("⏸️ Analysis paused. Take your time, champion.");
+                } else {
+                    btn.classList.remove('active');
+                    btn.innerHTML = '⏸️';
+                    this.addCoachingMessage("▶️ Analysis resumed. Let's see that championship form!");
+                }
+            }
+
+            toggleRecording() {
+                this.isRecording = !this.isRecording;
+                const btn = document.getElementById('recordBtn');
+
+                if (this.isRecording) {
+                    btn.classList.add('active');
+                    this.sessionStartTime = Date.now();
+                    this.addCoachingMessage("🎥 Recording session started. Show me what Texas champions are made of!");
+                } else {
+                    btn.classList.remove('active');
+                    this.addCoachingMessage("✅ Session recorded. Ready for analysis and review.");
+                }
+            }
+
+            startAnalysisLoop() {
+                // Main analysis loop for continuous monitoring
+                const loop = () => {
+                    if (this.isEngaged && !this.isPaused) {
+                        // Continuous analysis tasks would go here
+                    }
+                    requestAnimationFrame(loop);
+                };
+                loop();
+            }
+        }
+
+        // Initialize the system when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            window.blazeVisionTexas = new BlazeVisionTexasIntelligence();
+
+            // Initialize with welcome message
+            setTimeout(() => {
+                if (window.blazeVisionTexas) {
+                    window.blazeVisionTexas.addCoachingMessage(
+                        "🏆 Welcome to BlazeVision AI - where Texas legends perfect their craft through championship-grade analysis."
+                    );
+                }
+            }, 3000);
+        });
+
+        // Handle page unload
+        window.addEventListener('beforeunload', () => {
+            if (window.blazeVisionTexas) {
+                window.blazeVisionTexas.stopCamera();
+                console.log("🔥 BlazeVision Texas Intelligence shutdown complete");
+            }
+        });
+    </script>
+</body>
+</html>

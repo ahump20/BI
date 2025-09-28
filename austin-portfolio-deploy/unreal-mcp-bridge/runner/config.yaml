@@ -1,0 +1,18 @@
+# runner/config.yaml
+api_base: "https://YOUR_WORKER_SUBDOMAIN.workers.dev"
+runner_key: "REPLACE_WITH_RUNNER_KEY"    # same as Cloudflare secret RUNNER_KEY
+poll_interval_sec: 3
+
+# S3-compatible R2 config (runner uploads directly)
+r2:
+  account_id: "REPLACE"
+  access_key_id: "REPLACE"
+  secret_access_key: "REPLACE"
+  bucket: "bsi-media"
+  public_base: "https://cdn.blazesportsintel.com"  # your CDN base; assets are served as {public_base}/{r2_key}
+
+# Unreal MCP local bridge
+unreal_mcp:
+  host: "127.0.0.1"
+  port: 55557
+  # For production, use a proper client that speaks MCP to unreal_mcp_server.py

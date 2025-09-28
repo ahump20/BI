@@ -1,0 +1,6 @@
+name = "blazesportsintel"
+compatibility_date = "2024-09-26"
+pages_build_output_dir = "."
+
+# Explicitly disable all Workers and Functions
+# This ensures only static files are served

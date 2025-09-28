@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Sports Intel - Design System Test</title>
+
+    <!-- Design System Tokens -->
+    <link rel="stylesheet" href="dist/css/design-tokens.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- React -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            background-color: var(--color-primary-900);
+            color: var(--color-primary-50);
+            font-family: var(--type-fonts-body);
+            margin: 0;
+            padding: var(--space-8);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--type-fonts-display);
+        }
+
+        .test-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-8) 0;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+            margin: var(--space-6) 0;
+        }
+
+        .test-card {
+            background: var(--color-primary-800);
+            padding: var(--space-6);
+            border-radius: var(--space-3);
+            border: 1px solid var(--color-primary-700);
+        }
+
+        .color-swatch {
+            width: 100%;
+            height: 80px;
+            border-radius: var(--space-2);
+            margin-bottom: var(--space-2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.05);
+        }
+
+        #react-components-test {
+            margin-top: var(--space-8);
+            padding: var(--space-8);
+            background: var(--color-primary-800);
+            border-radius: var(--space-4);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-section">
+        <h1 style="color: var(--color-blaze-primary); font-size: var(--type-scale-5xl);">
+            🔥 Blaze Sports Intel Design System
+        </h1>
+        <p style="color: var(--color-primary-300); font-size: var(--type-scale-lg);">
+            Testing integration of design tokens with existing functionality
+        </p>
+
+        <!-- Color Palette Test -->
+        <h2 style="color: var(--color-blaze-accent); margin-top: var(--space-10);">
+            Color Palette
+        </h2>
+
+        <h3>Brand Colors</h3>
+        <div class="test-grid">
+            <div class="test-card">
+                <div class="color-swatch" style="background: var(--color-blaze-primary);">
+                    Blaze Primary
+                </div>
+                <code>--color-blaze-primary</code>
+            </div>
+            <div class="test-card">
+                <div class="color-swatch" style="background: var(--color-blaze-accent);">
+                    Blaze Accent
+                </div>
+                <code>--color-blaze-accent</code>
+            </div>
+            <div class="test-card">
+                <div class="color-swatch" style="background: var(--color-authority-texasBurnt);">
+                    Texas Burnt
+                </div>
+                <code>--color-authority-texasBurnt</code>
+            </div>
+        </div>
+
+        <h3>Sport-Specific Colors</h3>
+        <div class="test-grid">
+            <div class="test-card sport-baseball">
+                <h4>⚾ Baseball</h4>
+                <div class="color-swatch" style="background: var(--color-sports-baseball-diamond);">
+                    Diamond
+                </div>
+                <div class="color-swatch" style="background: var(--color-sports-baseball-grass);">
+                    Grass
+                </div>
+            </div>
+            <div class="test-card sport-football">
+                <h4>🏈 Football</h4>
+                <div class="color-swatch" style="background: var(--color-sports-football-field);">
+                    Field
+                </div>
+                <div class="color-swatch" style="background: var(--color-sports-football-endzone);">
+                    Endzone
+                </div>
+            </div>
+            <div class="test-card sport-basketball">
+                <h4>🏀 Basketball</h4>
+                <div class="color-swatch" style="background: var(--color-sports-basketball-court);">
+                    Court
+                </div>
+                <div class="color-swatch" style="background: var(--color-sports-basketball-paint);">
+                    Paint
+                </div>
+            </div>
+            <div class="test-card sport-track">
+                <h4>🏃 Track & Field</h4>
+                <div class="color-swatch" style="background: var(--color-sports-track-track);">
+                    Track
+                </div>
+                <div class="color-swatch" style="background: var(--color-sports-track-field);">
+                    Field
+                </div>
+            </div>
+        </div>
+
+        <!-- Typography Test -->
+        <h2 style="color: var(--color-blaze-accent); margin-top: var(--space-10);">
+            Typography
+        </h2>
+        <div class="test-grid">
+            <div class="test-card">
+                <h3 style="font-family: 'Bebas Neue', sans-serif;">Display Font</h3>
+                <p style="font-family: 'Bebas Neue', sans-serif; font-size: var(--type-scale-3xl);">
+                    CHAMPIONSHIP INTELLIGENCE
+                </p>
+            </div>
+            <div class="test-card">
+                <h3 style="font-family: 'Inter', sans-serif;">Body Font</h3>
+                <p style="font-family: 'Inter', sans-serif;">
+                    The Deep South Sports Authority delivering elite analytics for professional teams.
+                </p>
+            </div>
+            <div class="test-card">
+                <h3 style="font-family: 'Roboto Mono', monospace;">Mono Font</h3>
+                <p style="font-family: 'Roboto Mono', monospace;">
+                    AVG: .312 | HR: 28 | RBI: 95
+                </p>
+            </div>
+        </div>
+
+        <!-- Button Styles Test -->
+        <h2 style="color: var(--color-blaze-accent); margin-top: var(--space-10);">
+            Button Variants
+        </h2>
+        <div style="display: flex; gap: var(--space-4); flex-wrap: wrap;">
+            <button class="blaze-btn blaze-btn-primary">Primary Action</button>
+            <button class="blaze-btn blaze-btn-baseball">⚾ Baseball</button>
+            <button class="blaze-btn blaze-btn-football">🏈 Football</button>
+            <button class="blaze-btn blaze-btn-basketball">🏀 Basketball</button>
+            <button class="blaze-btn blaze-btn-track">🏃 Track & Field</button>
+        </div>
+
+        <!-- React Components Test -->
+        <h2 style="color: var(--color-blaze-accent); margin-top: var(--space-10);">
+            React Components Integration
+        </h2>
+        <div id="react-components-test"></div>
+
+        <!-- Spacing Test -->
+        <h2 style="color: var(--color-blaze-accent); margin-top: var(--space-10);">
+            Spacing System
+        </h2>
+        <div class="test-grid">
+            <div class="test-card">
+                <h4>Base Spacing Units</h4>
+                <div style="display: flex; gap: var(--space-2); align-items: flex-end;">
+                    <div style="width: 20px; height: calc(var(--space-1) * 4); background: var(--color-blaze-primary); opacity: 0.8;"></div>
+                    <div style="width: 20px; height: calc(var(--space-2) * 4); background: var(--color-blaze-primary); opacity: 0.8;"></div>
+                    <div style="width: 20px; height: calc(var(--space-3) * 4); background: var(--color-blaze-primary); opacity: 0.8;"></div>
+                    <div style="width: 20px; height: calc(var(--space-4) * 4); background: var(--color-blaze-primary); opacity: 0.8;"></div>
+                    <div style="width: 20px; height: calc(var(--space-5) * 4); background: var(--color-blaze-primary); opacity: 0.8;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animation Test -->
+        <h2 style="color: var(--color-blaze-accent); margin-top: var(--space-10);">
+            Animations
+        </h2>
+        <div class="test-grid">
+            <div class="test-card blaze-fade-in">
+                <h4>Fade In Animation</h4>
+                <p>This card fades in smoothly</p>
+            </div>
+            <div class="test-card blaze-slide-in" style="animation-delay: 0.2s;">
+                <h4>Slide In Animation</h4>
+                <p>This card slides in from the left</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function TestComponent() {
+            const [sport, setSport] = useState('baseball');
+            const [loading, setLoading] = useState(false);
+
+            const sportColors = {
+                baseball: 'var(--color-sports-baseball-diamond)',
+                football: 'var(--color-sports-football-field)',
+                basketball: 'var(--color-sports-basketball-court)',
+                track: 'var(--color-sports-track-track)'
+            };
+
+            const handleLoadData = () => {
+                setLoading(true);
+                setTimeout(() => setLoading(false), 2000);
+            };
+
+            return (
+                <div style={{
+                    padding: 'var(--space-6)',
+                    background: 'var(--color-primary-800)',
+                    borderRadius: 'var(--space-3)',
+                    border: `2px solid ${sportColors[sport]}`
+                }}>
+                    <h3 style={{ color: sportColors[sport] }}>
+                        React Component Test
+                    </h3>
+
+                    <div style={{ marginBottom: 'var(--space-4)' }}>
+                        <label style={{ marginRight: 'var(--space-2)' }}>Select Sport:</label>
+                        <select
+                            value={sport}
+                            onChange={(e) => setSport(e.target.value)}
+                            style={{
+                                padding: 'var(--space-2)',
+                                background: 'var(--color-primary-700)',
+                                color: 'var(--color-primary-50)',
+                                border: '1px solid var(--color-primary-600)',
+                                borderRadius: 'var(--space-1)'
+                            }}
+                        >
+                            <option value="baseball">⚾ Baseball</option>
+                            <option value="football">🏈 Football</option>
+                            <option value="basketball">🏀 Basketball</option>
+                            <option value="track">🏃 Track & Field</option>
+                        </select>
+                    </div>
+
+                    <button
+                        onClick={handleLoadData}
+                        disabled={loading}
+                        className={`blaze-btn blaze-btn-${sport}`}
+                        style={{ marginTop: 'var(--space-3)' }}
+                    >
+                        {loading ? '⏳ Loading...' : '🔄 Load Analytics'}
+                    </button>
+
+                    {!loading && (
+                        <div style={{
+                            marginTop: 'var(--space-4)',
+                            padding: 'var(--space-3)',
+                            background: 'var(--color-primary-700)',
+                            borderRadius: 'var(--space-2)'
+                        }}>
+                            <p style={{ margin: 0 }}>
+                                ✅ Design system integration successful!
+                            </p>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Mount the React component
+        const container = document.getElementById('react-components-test');
+        const root = ReactDOM.createRoot(container);
+        root.render(<TestComponent />);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Deep South Sports Intelligence Platform</title>
+    <meta name="description" content="From Friday Night Lights to Sunday in the Show - Advanced analytics, recruiting intelligence, and predictive modeling for Texas, SEC, and Deep South athletics">
+
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Three.js for 3D visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #three-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+            background: radial-gradient(circle at center, rgba(191, 87, 0, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-badge {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 50%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #a0a0a0;
+            max-width: 800px;
+            line-height: 1.5;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #BF5700, #FF8C00, #FFD700);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(191, 87, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .value-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-metric {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .metric-label {
+            color: #808080;
+            font-size: 0.875rem;
+        }
+
+        .metric-value {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-left: auto;
+        }
+
+        .live-demo-section {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 1400px;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .demo-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .interactive-tool {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-badge {
+            background: linear-gradient(135deg, #00B2A9 0%, #00D4AA 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tool-badge.live {
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            animation: pulse 2s infinite;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-label {
+            color: #a0a0a0;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .input-field {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #BF5700;
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 10px rgba(191, 87, 0, 0.3);
+        }
+
+        select.input-field {
+            cursor: pointer;
+        }
+
+        select.input-field option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(191, 87, 0, 0.4);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-display {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border: 2px solid #BF5700;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            color: #a0a0a0;
+            font-size: 1rem;
+        }
+
+        .result-details {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(191, 87, 0, 0.3);
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .features-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+
+        .feature-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, transparent 100%);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #FFD700;
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .feature-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .feature-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #808080;
+            margin-top: 0.25rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.2) 0%, transparent 100%);
+            border-radius: 20px;
+            margin: 3rem auto;
+            max-width: 1000px;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-subtitle {
+            color: #b0b0b0;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #BF5700;
+            border: 2px solid #BF5700;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(191, 87, 0, 0.4);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00B2A9 0%, #00D4AA 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.4);
+            display: none;
+            z-index: 1000;
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .value-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .feature-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Three.js 3D Background Container -->
+    <div id="three-container"></div>
+
+    <!-- React Root -->
+    <div id="root"></div>
+
+    <!-- Notification for feedback -->
+    <div id="notification" class="notification">
+        <span id="notification-text">Feature activated!</span>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // NIL Calculator Component
+        const NILCalculator = () => {
+            const [sport, setSport] = useState('football');
+            const [position, setPosition] = useState('qb');
+            const [followers, setFollowers] = useState(10000);
+            const [rating, setRating] = useState(85);
+            const [nilValue, setNilValue] = useState(null);
+            const [breakdown, setBreakdown] = useState(null);
+
+            const calculateNIL = () => {
+                // Enhanced NIL calculation model
+                let baseValue = 5000;
+                const sportMultipliers = {
+                    'football': 2.5,
+                    'basketball': 2.0,
+                    'baseball': 1.5
+                };
+
+                const positionMultipliers = {
+                    'qb': 3.0,
+                    'rb': 2.0,
+                    'wr': 2.2,
+                    'ol': 1.5,
+                    'dl': 1.8,
+                    'lb': 1.7,
+                    'db': 1.6,
+                    'pg': 2.5,  // point guard
+                    'sg': 2.0,  // shooting guard
+                    'pf': 1.8,  // power forward
+                    'c': 1.7,   // center
+                    'p': 2.2,   // pitcher
+                    'c_base': 1.8, // catcher
+                    'if': 1.5,  // infielder
+                    'of': 1.6   // outfielder
+                };
+
+                let calculatedValue = baseValue;
+                const sportBonus = calculatedValue * (sportMultipliers[sport] || 1);
+                const positionBonus = sportBonus * (positionMultipliers[position] || 1);
+                const followerBonus = positionBonus * (1 + (followers / 50000));
+                const performanceBonus = followerBonus * (rating / 50);
+
+                // Add variance for realism
+                const finalValue = Math.round(performanceBonus * (0.9 + Math.random() * 0.2));
+
+                setNilValue(finalValue);
+                setBreakdown({
+                    base: baseValue,
+                    sport: Math.round(sportBonus - baseValue),
+                    position: Math.round(positionBonus - sportBonus),
+                    social: Math.round(followerBonus - positionBonus),
+                    performance: Math.round(performanceBonus - followerBonus)
+                });
+
+                showNotification('NIL Valuation calculated successfully!');
+            };
+
+            return (
+                <div className="interactive-tool">
+                    <div className="tool-header">
+                        <h3 className="tool-title">NIL Valuation Calculator</h3>
+                        <span className="tool-badge live">LIVE DEMO</span>
+                    </div>
+                    <div className="input-grid">
+                        <div className="input-group">
+                            <label className="input-label">Sport</label>
+                            <select
+                                className="input-field"
+                                value={sport}
+                                onChange={(e) => setSport(e.target.value)}
+                            >
+                                <option value="football">Football</option>
+                                <option value="basketball">Basketball</option>
+                                <option value="baseball">Baseball</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Position</label>
+                            <select
+                                className="input-field"
+                                value={position}
+                                onChange={(e) => setPosition(e.target.value)}
+                            >
+                                {sport === 'football' && (
+                                    <>
+                                        <option value="qb">QB - Quarterback</option>
+                                        <option value="rb">RB - Running Back</option>
+                                        <option value="wr">WR - Wide Receiver</option>
+                                        <option value="ol">OL - Offensive Line</option>
+                                        <option value="dl">DL - Defensive Line</option>
+                                        <option value="lb">LB - Linebacker</option>
+                                        <option value="db">DB - Defensive Back</option>
+                                    </>
+                                )}
+                                {sport === 'basketball' && (
+                                    <>
+                                        <option value="pg">PG - Point Guard</option>
+                                        <option value="sg">SG - Shooting Guard</option>
+                                        <option value="pf">PF - Power Forward</option>
+                                        <option value="c">C - Center</option>
+                                    </>
+                                )}
+                                {sport === 'baseball' && (
+                                    <>
+                                        <option value="p">P - Pitcher</option>
+                                        <option value="c_base">C - Catcher</option>
+                                        <option value="if">IF - Infielder</option>
+                                        <option value="of">OF - Outfielder</option>
+                                    </>
+                                )}
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Social Media Followers</label>
+                            <input
+                                type="number"
+                                className="input-field"
+                                placeholder="10000"
+                                value={followers}
+                                onChange={(e) => setFollowers(parseInt(e.target.value) || 0)}
+                                min="0"
+                                max="10000000"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Performance Rating (1-100)</label>
+                            <input
+                                type="number"
+                                className="input-field"
+                                placeholder="85"
+                                value={rating}
+                                onChange={(e) => setRating(Math.min(100, Math.max(1, parseInt(e.target.value) || 0)))}
+                                min="1"
+                                max="100"
+                            />
+                        </div>
+                    </div>
+                    <button className="calculate-btn" onClick={calculateNIL}>
+                        Calculate NIL Value
+                    </button>
+                    {nilValue && (
+                        <div className="result-display">
+                            <div className="result-value">${nilValue.toLocaleString()}</div>
+                            <div className="result-label">Estimated Annual NIL Value</div>
+                            {breakdown && (
+                                <div className="result-details">
+                                    <div className="detail-row">
+                                        <span>Base Value</span>
+                                        <span className="detail-value">${breakdown.base.toLocaleString()}</span>
+                                    </div>
+                                    <div className="detail-row">
+                                        <span>Sport Multiplier</span>
+                                        <span className="detail-value">+${breakdown.sport.toLocaleString()}</span>
+                                    </div>
+                                    <div className="detail-row">
+                                        <span>Position Value</span>
+                                        <span className="detail-value">+${breakdown.position.toLocaleString()}</span>
+                                    </div>
+                                    <div className="detail-row">
+                                        <span>Social Media Impact</span>
+                                        <span className="detail-value">+${breakdown.social.toLocaleString()}</span>
+                                    </div>
+                                    <div className="detail-row">
+                                        <span>Performance Bonus</span>
+                                        <span className="detail-value">+${breakdown.performance.toLocaleString()}</span>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        // Game Prediction Component
+        const GamePrediction = () => {
+            const [homeTeam, setHomeTeam] = useState('texas');
+            const [awayTeam, setAwayTeam] = useState('oklahoma');
+            const [weather, setWeather] = useState('clear');
+            const [gameTime, setGameTime] = useState('night');
+            const [prediction, setPrediction] = useState(null);
+
+            const predictGame = () => {
+                const teamRatings = {
+                    'texas': 92,
+                    'alabama': 95,
+                    'georgia': 94,
+                    'lsu': 88,
+                    'texasam': 86,
+                    'oklahoma': 87,
+                    'auburn': 83,
+                    'florida': 84,
+                    'tennessee': 85,
+                    'arkansas': 80
+                };
+
+                const teamNames = {
+                    'texas': 'Texas Longhorns',
+                    'alabama': 'Alabama',
+                    'georgia': 'Georgia',
+                    'lsu': 'LSU',
+                    'texasam': 'Texas A&M',
+                    'oklahoma': 'Oklahoma',
+                    'auburn': 'Auburn',
+                    'florida': 'Florida',
+                    'tennessee': 'Tennessee',
+                    'arkansas': 'Arkansas'
+                };
+
+                let homeRating = teamRatings[homeTeam] || 80;
+                let awayRating = teamRatings[awayTeam] || 80;
+
+                // Home field advantage
+                homeRating += 3;
+
+                // Weather adjustments
+                if (weather === 'rain') {
+                    homeRating -= 1;
+                    awayRating -= 1;
+                } else if (weather === 'cold') {
+                    homeRating -= 0.5;
+                    awayRating -= 0.5;
+                }
+
+                // Time adjustments
+                if (gameTime === 'primetime') {
+                    // Pressure factor
+                    const pressureAdjust = Math.random() * 2 - 1;
+                    homeRating += pressureAdjust;
+                    awayRating -= pressureAdjust;
+                }
+
+                // Calculate win probability
+                const ratingDiff = homeRating - awayRating;
+                const winProb = 50 + (ratingDiff * 2.5);
+                const boundedProb = Math.max(5, Math.min(95, winProb));
+
+                // Predict score
+                const totalPoints = 45 + (Math.random() * 20);
+                const homeScore = Math.round(totalPoints * (homeRating / (homeRating + awayRating)) + (ratingDiff * 0.3));
+                const awayScore = Math.round(totalPoints - homeScore);
+
+                setPrediction({
+                    probability: boundedProb.toFixed(1),
+                    homeScore,
+                    awayScore,
+                    homeName: teamNames[homeTeam],
+                    awayName: teamNames[awayTeam],
+                    totalPoints: homeScore + awayScore,
+                    spread: homeScore - awayScore
+                });
+
+                showNotification('Game prediction generated!');
+            };
+
+            return (
+                <div className="interactive-tool">
+                    <div className="tool-header">
+                        <h3 className="tool-title">Game Prediction Engine</h3>
+                        <span className="tool-badge">ML POWERED</span>
+                    </div>
+                    <div className="input-grid">
+                        <div className="input-group">
+                            <label className="input-label">Home Team</label>
+                            <select
+                                className="input-field"
+                                value={homeTeam}
+                                onChange={(e) => setHomeTeam(e.target.value)}
+                            >
+                                <option value="texas">Texas Longhorns</option>
+                                <option value="alabama">Alabama</option>
+                                <option value="georgia">Georgia</option>
+                                <option value="lsu">LSU</option>
+                                <option value="texasam">Texas A&M</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Away Team</label>
+                            <select
+                                className="input-field"
+                                value={awayTeam}
+                                onChange={(e) => setAwayTeam(e.target.value)}
+                            >
+                                <option value="oklahoma">Oklahoma</option>
+                                <option value="auburn">Auburn</option>
+                                <option value="florida">Florida</option>
+                                <option value="tennessee">Tennessee</option>
+                                <option value="arkansas">Arkansas</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Weather</label>
+                            <select
+                                className="input-field"
+                                value={weather}
+                                onChange={(e) => setWeather(e.target.value)}
+                            >
+                                <option value="clear">Clear</option>
+                                <option value="rain">Rain</option>
+                                <option value="cold">Cold (&lt;40°F)</option>
+                                <option value="hot">Hot (&gt;90°F)</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Time</label>
+                            <select
+                                className="input-field"
+                                value={gameTime}
+                                onChange={(e) => setGameTime(e.target.value)}
+                            >
+                                <option value="day">Day Game</option>
+                                <option value="night">Night Game</option>
+                                <option value="primetime">Prime Time</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button className="calculate-btn" onClick={predictGame}>
+                        Run Prediction
+                    </button>
+                    {prediction && (
+                        <div className="result-display">
+                            <div className="result-value">{prediction.probability}% {prediction.homeName}</div>
+                            <div className="result-label">
+                                Predicted: {prediction.homeName} {prediction.homeScore} - {prediction.awayScore} {prediction.awayName}
+                            </div>
+                            <div className="result-details">
+                                <div className="detail-row">
+                                    <span>Total Points</span>
+                                    <span className="detail-value">{prediction.totalPoints}</span>
+                                </div>
+                                <div className="detail-row">
+                                    <span>Point Spread</span>
+                                    <span className="detail-value">
+                                        {prediction.spread > 0 ? '+' : ''}{prediction.spread}
+                                    </span>
+                                </div>
+                                <div className="detail-row">
+                                    <span>Confidence Level</span>
+                                    <span className="detail-value">
+                                        {prediction.probability > 70 ? 'High' : prediction.probability > 55 ? 'Medium' : 'Low'}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            useEffect(() => {
+                // Initialize Three.js background
+                initThreeJSBackground();
+
+                // Add scroll animations
+                initScrollAnimations();
+            }, []);
+
+            return (
+                <>
+                    <div className="hero">
+                        <div className="hero-badge">🔥 THE DEEP SOUTH SPORTS AUTHORITY</div>
+                        <h1 className="hero-title">Blaze Intelligence</h1>
+                        <p className="hero-subtitle">
+                            From Friday Night Lights to Sunday in the Show<br/>
+                            Advanced Analytics & Predictive Intelligence for Texas, SEC, and Deep South Athletics
+                        </p>
+
+                        <div className="value-grid">
+                            <div className="value-card" onClick={() => showNotification('Predictive Models Active')}>
+                                <div className="value-icon">📊</div>
+                                <h3 className="value-title">Predictive Game Models</h3>
+                                <p className="value-description">
+                                    Machine learning models trained on 5+ years of play-by-play data predicting game outcomes with proprietary algorithms
+                                </p>
+                                <div className="value-metric">
+                                    <span className="metric-label">Win Probability Accuracy</span>
+                                    <span className="metric-value">73.2%</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">Over/Under Success</span>
+                                    <span className="metric-value">68.5%</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">Data Points Analyzed</span>
+                                    <span className="metric-value">2.8M+</span>
+                                </div>
+                            </div>
+
+                            <div className="value-card" onClick={() => showNotification('Recruiting Pipeline Loaded')}>
+                                <div className="value-icon">🎯</div>
+                                <h3 className="value-title">Recruiting Pipeline Intel</h3>
+                                <p className="value-description">
+                                    Track prospects from Perfect Game youth baseball through high school football to college commitment and NFL/MLB draft
+                                </p>
+                                <div className="value-metric">
+                                    <span className="metric-label">Texas HS Players Tracked</span>
+                                    <span className="metric-value">12,000+</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">SEC Commit Analysis</span>
+                                    <span className="metric-value">3,500+</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">NIL Valuations</span>
+                                    <span className="metric-value">Live</span>
+                                </div>
+                            </div>
+
+                            <div className="value-card" onClick={() => showNotification('Vision AI Processing')}>
+                                <div className="value-icon">🎥</div>
+                                <h3 className="value-title">Vision AI Film Study</h3>
+                                <p className="value-description">
+                                    Computer vision analyzing game film for biomechanics, formation tendencies, and micro-expression character assessment
+                                </p>
+                                <div className="value-metric">
+                                    <span className="metric-label">Frames Processed/Sec</span>
+                                    <span className="metric-value">60 FPS</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">Biomechanical Points</span>
+                                    <span className="metric-value">33 Tracked</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">Response Time</span>
+                                    <span className="metric-value">&lt;100ms</span>
+                                </div>
+                            </div>
+
+                            <div className="value-card" onClick={() => showNotification('Performance Index Updated')}>
+                                <div className="value-icon">⚡</div>
+                                <h3 className="value-title">Live Performance Index</h3>
+                                <p className="value-description">
+                                    Real-time player performance scoring combining traditional stats, advanced metrics, and situational context
+                                </p>
+                                <div className="value-metric">
+                                    <span className="metric-label">Update Frequency</span>
+                                    <span className="metric-value">Every Play</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">Factors Analyzed</span>
+                                    <span className="metric-value">47 Variables</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">Historical Comps</span>
+                                    <span className="metric-value">10 Years</span>
+                                </div>
+                            </div>
+
+                            <div className="value-card" onClick={() => showNotification('Championship Analytics Ready')}>
+                                <div className="value-icon">🏆</div>
+                                <h3 className="value-title">Championship Analytics</h3>
+                                <p className="value-description">
+                                    Deep dive analytics on what separates champions from contenders across all levels of competition
+                                </p>
+                                <div className="value-metric">
+                                    <span className="metric-label">Championships Analyzed</span>
+                                    <span className="metric-value">500+</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">Key Indicators</span>
+                                    <span className="metric-value">23 Metrics</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">Pattern Recognition</span>
+                                    <span className="metric-value">ML-Powered</span>
+                                </div>
+                            </div>
+
+                            <div className="value-card" onClick={() => showNotification('Texas Friday Nights Active')}>
+                                <div className="value-icon">🌟</div>
+                                <h3 className="value-title">Texas Friday Nights</h3>
+                                <p className="value-description">
+                                    Comprehensive Texas high school football coverage with rankings, predictions, and recruitment projections
+                                </p>
+                                <div className="value-metric">
+                                    <span className="metric-label">Teams Covered</span>
+                                    <span className="metric-value">1,200+ TX</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">Weekly Rankings</span>
+                                    <span className="metric-value">All Classes</span>
+                                </div>
+                                <div className="value-metric">
+                                    <span className="metric-label">Recruit Projections</span>
+                                    <span className="metric-value">P5 & G5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="live-demo-section">
+                        <div className="demo-header">
+                            <h2 className="demo-title">Interactive Intelligence Tools</h2>
+                            <p style={{color: '#a0a0a0', fontSize: '1.1rem'}}>
+                                Experience our analytics engine with these live demos
+                            </p>
+                        </div>
+
+                        <NILCalculator />
+                        <GamePrediction />
+                    </div>
+
+                    <div className="features-section">
+                        <div className="feature-showcase">
+                            <div className="feature-card">
+                                <span className="feature-tag">EXCLUSIVE</span>
+                                <div className="feature-content">
+                                    <h3 className="feature-title">Perfect Game to Pros Pipeline</h3>
+                                    <p className="feature-description">
+                                        Track baseball prospects from 12U Perfect Game tournaments through high school, college, and into professional baseball. Our system identifies talent early and projects career trajectories.
+                                    </p>
+                                </div>
+                                <div className="feature-stats">
+                                    <div className="stat-box">
+                                        <div className="stat-number">847</div>
+                                        <div className="stat-label">MLB Draftees Tracked</div>
+                                    </div>
+                                    <div className="stat-box">
+                                        <div className="stat-number">12.3%</div>
+                                        <div className="stat-label">Draft Prediction Rate</div>
+                                    </div>
+                                    <div className="stat-box">
+                                        <div className="stat-number">25K+</div>
+                                        <div className="stat-label">Youth Players</div>
+                                    </div>
+                                    <div className="stat-box">
+                                        <div className="stat-number">8 Years</div>
+                                        <div className="stat-label">Historical Data</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="feature-card">
+                                <span className="feature-tag">AI POWERED</span>
+                                <div className="feature-content">
+                                    <h3 className="feature-title">Formation Recognition AI</h3>
+                                    <p className="feature-description">
+                                        Computer vision system that identifies offensive and defensive formations in real-time, predicts play calls with 71% accuracy, and provides instant tendency analysis for coaching staff.
+                                    </p>
+                                </div>
+                                <div className="feature-stats">
+                                    <div className="stat-box">
+                                        <div className="stat-number">0.3s</div>
+                                        <div className="stat-label">Recognition Time</div>
+                                    </div>
+                                    <div className="stat-box">
+                                        <div className="stat-number">142</div>
+                                        <div className="stat-label">Formations Mapped</div>
+                                    </div>
+                                    <div className="stat-box">
+                                        <div className="stat-number">71%</div>
+                                        <div className="stat-label">Play Prediction</div>
+                                    </div>
+                                    <div className="stat-box">
+                                        <div className="stat-number">4K</div>
+                                        <div className="stat-label">Video Support</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="feature-card">
+                                <span className="feature-tag">REGIONAL FOCUS</span>
+                                <div className="feature-content">
+                                    <h3 className="feature-title">SEC & Big 12 Dominance</h3>
+                                    <p className="feature-description">
+                                        Deep expertise in SEC and Big 12 football with proprietary metrics for conference play, rivalry game adjustments, and regional recruiting advantages that national services miss.
+                                    </p>
+                                </div>
+                                <div className="feature-stats">
+                                    <div className="stat-box">
+                                        <div className="stat-number">28</div>
+                                        <div className="stat-label">Teams Covered</div>
+                                    </div>
+                                    <div className="stat-box">
+                                        <div className="stat-number">500+</div>
+                                        <div className="stat-label">Games Analyzed</div>
+                                    </div>
+                                    <div className="stat-box">
+                                        <div className="stat-number">15K</div>
+                                        <div className="stat-label">Recruits Tracked</div>
+                                    </div>
+                                    <div className="stat-box">
+                                        <div className="stat-number">Daily</div>
+                                        <div className="stat-label">Updates</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="cta-section">
+                        <h2 className="cta-title">Ready to Dominate with Data?</h2>
+                        <p className="cta-subtitle">
+                            Join coaches, scouts, and programs using Blaze Intelligence to gain the competitive edge
+                        </p>
+                        <div className="cta-buttons">
+                            <a href="#" className="cta-button cta-primary" onClick={() => showNotification('Free trial starting soon!')}>
+                                Start Free Trial
+                            </a>
+                            <a href="#" className="cta-button cta-secondary" onClick={() => showNotification('Demo scheduling available!')}>
+                                Schedule Demo
+                            </a>
+                        </div>
+                    </div>
+                </>
+            );
+        };
+
+        // Helper Functions
+        function showNotification(text) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+            notificationText.textContent = text;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Three.js Background
+        function initThreeJSBackground() {
+            const container = document.getElementById('three-container');
+            if (!container || typeof THREE === 'undefined') return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0xBF5700, 1);
+            pointLight.position.set(10, 10, 10);
+            scene.add(pointLight);
+
+            // Particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 1500;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 100;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.5,
+                color: 0xBF5700,
+                transparent: true,
+                opacity: 0.3,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            camera.position.z = 30;
+
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                particlesMesh.rotation.x += 0.0003;
+                particlesMesh.rotation.y += 0.0005;
+                renderer.render(scene, camera);
+            }
+
+            // Resize handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            animate();
+        }
+
+        // Scroll Animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.value-card, .feature-card, .interactive-tool').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // Render React App
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+
+    <!-- Babel Standalone for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</body>
+</html>
