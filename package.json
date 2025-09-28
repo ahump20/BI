@@ -22,7 +22,7 @@
     "backup": "node scripts/backup-system.js",
     "ingest-data": "node scripts/data-ingestion.js",
     "test-ai": "node scripts/multi_ai_integration.js --test",
-    "test-biometric": "node tests/biometric-test.js", 
+    "test-biometric": "node tests/biometric-test.js",
     "test-integration": "node tests/integration-test-suite.js",
     "generate-reports": "node reporting/generate-reports.js",
     "github-analyze": "node scripts/github-analyzer.js",
@@ -39,8 +39,24 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "chart.js": "^4.5.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
     "hono": "^4.9.8",
+    "jsonwebtoken": "^9.0.2",
+    "three": "^0.180.0"
+  },
+  "keywords": [
+    "sports",
+    "analytics",
+    "ai",
     "cloudflare",
     "workers",
     "api",
-    "authentication",
+    "authentication"
+  ],
+  "author": "Blaze Intelligence",
+  "license": "MIT"
+}
