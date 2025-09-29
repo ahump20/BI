@@ -7,7 +7,7 @@ CREATE EXTENSION IF NOT EXISTS "pg_trgm";
 CREATE EXTENSION IF NOT EXISTS "btree_gin";
 
 -- Enable Row Level Security
-ALTER DATABASE blaze_intelligence SET row_security = on;
+ALTER SYSTEM SET row_security = on;
 
 -- Teams table
 CREATE TABLE IF NOT EXISTS teams (
