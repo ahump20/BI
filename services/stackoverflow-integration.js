@@ -33,7 +33,7 @@ class StackOverflowIntegration {
   async init() {
     console.log('🔧 Stack Overflow Integration initialized');
     
-    // Create tags if they don't exist (requires moderator privileges)
+    // Check if required tags exist. Tag creation requires community moderation and cannot be performed via API calls.
     if (this.apiKey) {
       await this.ensureTagsExist();
     }
