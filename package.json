@@ -38,6 +38,8 @@
     "dev": "netlify dev"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.9.0",
+    "axios": "^1.6.0",
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.5.0",
     "cors": "^2.8.5",
@@ -46,6 +48,8 @@
     "helmet": "^8.1.0",
     "hono": "^4.9.8",
     "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.0",
+    "redis": "^4.6.0",
     "three": "^0.180.0"
   },
   "keywords": [

@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Blaze Team Schema",
+  "type": "object",
+  "required": ["team_id", "name", "sport"],
+  "properties": {
+    "team_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,5}-[A-Z]{2,4}$",
+      "description": "Unique team identifier (e.g., MLB-STL, NCAA-TEX)"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Official team name"
+    },
+    "sport": {
+      "type": "string",
+      "enum": ["MLB", "NFL", "NBA", "NCAA-FB", "NCAA-BB", "HS-FB", "HS-BB"],
+      "description": "Sport classification"
+    },
+    "league": {
+      "type": ["string", "null"],
+      "maxLength": 50,
+      "description": "League or division name"
+    },
+    "division": {
+      "type": ["string", "null"],
+      "maxLength": 50,
+      "description": "Division within league"
+    },
+    "readiness_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Current team readiness score"
+    },
+    "readiness_components": {
+      "type": ["object", "null"],
+      "properties": {
+        "recent_performance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "player_availability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "matchup_history": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "momentum": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "rest_factor": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "additionalProperties": false,
+      "description": "Breakdown of readiness components"
+    },
+    "roster_stats": {
+      "type": ["object", "null"],
+      "properties": {
+        "total_players": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "avg_havf": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "injured_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "star_players": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "description": "Aggregated roster statistics"
+    },
+    "venue": {
+      "type": ["object", "null"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "city": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "state": {
+          "type": "string",
+          "maxLength": 2
+        },
+        "capacity": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "description": "Home venue information"
+    },
+    "social_media": {
+      "type": ["object", "null"],
+      "properties": {
+        "twitter_handle": {
+          "type": ["string", "null"],
+          "pattern": "^@[A-Za-z0-9_]+$"
+        },
+        "instagram_handle": {
+          "type": ["string", "null"],
+          "pattern": "^@[A-Za-z0-9_.]+$"
+        },
+        "facebook_page": {
+          "type": ["string", "null"],
+          "format": "uri"
+        },
+        "official_website": {
+          "type": ["string", "null"],
+          "format": "uri"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Social media and web presence"
+    },
+    "coaching_staff": {
+      "type": ["object", "null"],
+      "properties": {
+        "head_coach": {
+          "type": ["string", "null"],
+          "maxLength": 100
+        },
+        "coordinator_offense": {
+          "type": ["string", "null"],
+          "maxLength": 100
+        },
+        "coordinator_defense": {
+          "type": ["string", "null"],
+          "maxLength": 100
+        },
+        "staff_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false,
+      "description": "Coaching staff information"
+    },
+    "season_record": {
+      "type": ["object", "null"],
+      "properties": {
+        "wins": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "losses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ties": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "win_percentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "streak": {
+          "type": "string",
+          "pattern": "^[WL][0-9]+$"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Current season record"
+    },
+    "readiness_updated_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Last readiness calculation timestamp"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Record creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    }
+  },
+  "additionalProperties": false
+}

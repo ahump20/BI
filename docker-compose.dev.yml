@@ -1,0 +1,48 @@
+# Development override for hot-reloading and debugging
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+version: '3.8'
+
+services:
+  blaze-app:
+    build:
+      target: build-deps
+    command: ["npm", "run", "dev"]
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - ./logs:/app/logs
+    environment:
+      - NODE_ENV=development
+      - DEBUG=blaze:*
+    ports:
+      - "8000:8000"
+      - "9229:9229"  # Node.js debugger
+
+  # Disable production services in dev
+  nginx:
+    profiles:
+      - disabled
+
+  # Enable hot-reload for analytics worker
+  analytics-worker:
+    command: ["python3", "-u", "scripts/analytics_worker.py"]
+    volumes:
+      - .:/app
+      - ./logs:/app/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DEBUG=true
+
+  # Development database with seed data
+  postgres:
+    environment:
+      - POSTGRES_DB=blaze_intelligence_dev
+    volumes:
+      - postgres-dev-data:/var/lib/postgresql/data
+      - ./schemas/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      - ./data/seed:/docker-entrypoint-initdb.d/02-seed:ro
+
+volumes:
+  postgres-dev-data:
+    driver: local
