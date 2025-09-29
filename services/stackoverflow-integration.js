@@ -444,7 +444,8 @@ Please provide more specific details about your use case for a more targeted ans
       );
       return (result.rows?.length || result.length) > 0;
     } catch (error) {
-      // Table might not exist yet
+      // Any database error (e.g., missing table, connection issue, etc.)
+      console.error('Database error in checkExistingResponse:', error);
       return false;
     }
   }
