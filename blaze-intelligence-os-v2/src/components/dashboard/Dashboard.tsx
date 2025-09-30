@@ -8,6 +8,7 @@ import { PredictionsPanel } from './PredictionsPanel';
 import { DataIngestion } from './DataIngestion';
 import { NILCalculator } from './NILCalculator';
 import { PerformanceChart } from './PerformanceChart';
+import { DomainIntegrator } from './DomainIntegrator';
 
 export default function Dashboard() {
   const { selectedLeague, selectedTeam } = useBlazeContext();
@@ -19,7 +20,8 @@ export default function Dashboard() {
     { id: 'predictions', label: 'Predictions', icon: '🎯' },
     { id: 'vision', label: 'Vision AI', icon: '👁️' },
     { id: 'nil', label: 'NIL Calculator', icon: '💰' },
-    { id: 'data', label: 'Data Sources', icon: '📡' }
+    { id: 'data', label: 'Data Sources', icon: '📡' },
+    { id: 'domains', label: 'Domains', icon: '🌐' }
   ];
 
   return (
@@ -66,6 +68,7 @@ export default function Dashboard() {
         {activeTab === 'vision' && <VisionAIPanel />}
         {activeTab === 'nil' && <NILCalculator />}
         {activeTab === 'data' && <DataIngestion />}
+        {activeTab === 'domains' && <DomainIntegrator />}
       </div>
 
       {/* Footer Stats Bar */}
