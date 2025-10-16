@@ -35,7 +35,9 @@
     "merge-to-main": "npm run catch-branches-execute",
     "deploy:contact": "wrangler deploy contact-form.js --config ../wrangler-contact-api.toml --env production",
     "deploy:auth": "wrangler deploy auth.js --config ../wrangler-auth-api.toml --env production",
-    "dev": "netlify dev"
+    "dev": "netlify dev",
+    "optimize": "node scripts/optimize-performance.js",
+    "lighthouse": "lighthouse http://localhost:8000 --output html --output-path ./reports/lighthouse-report.html"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.9.0",
