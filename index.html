@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="author" content="Austin Humphrey">
+    <meta name="robots" content="index, follow">
     <title>🔥 Blaze Sports Intel | Deep South Sports Authority - Championship Intelligence Platform</title>
     <meta name="description" content="Elite championship analytics platform delivering data-driven intelligence for MLB, NFL, NBA, and NCAA. Professional scouting, performance metrics, and strategic insights from the Deep South Sports Authority.">
     <meta name="keywords" content="sports analytics, championship intelligence, Deep South sports, Texas athletics, baseball analytics, football analytics, basketball analytics, track and field, MLB scouting, NFL strategy, NBA metrics, NCAA recruiting, Austin Humphrey, Blaze Sports Intel">
@@ -39,25 +41,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
-    <!-- External Libraries -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- External Libraries - Async loading for performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     
-    <!-- Three.js & Dependencies -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <!-- Three.js & Dependencies - Deferred loading -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" onerror="console.warn('Three.js failed to load')"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js" onerror="console.warn('GSAP failed to load')"></script>
     
-    <!-- React -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- React - Deferred loading -->
+    <script defer crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js" onerror="console.warn('React failed to load')"></script>
+    <script defer crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" onerror="console.warn('React DOM failed to load')"></script>
     
-    <!-- Charts & Visualization -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <!-- Charts & Visualization - Deferred loading -->
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js" onerror="console.warn('Chart.js failed to load')"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/d3@7" onerror="console.warn('D3 failed to load')"></script>
     
-    <!-- AOS Animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- AOS Animations - Async loading -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js" onerror="console.warn('AOS failed to load')"></script>
     
     <style>
         /* ==================== CSS VARIABLES & THEME ==================== */
@@ -204,6 +207,41 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: var(--blaze-primary-light);
+        }
+
+        /* ==================== ACCESSIBILITY ==================== */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--blaze-primary);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 10000;
+            border-radius: 0 0 4px 0;
+            font-weight: 600;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Improved focus indicators */
+        *:focus-visible {
+            outline: 3px solid var(--blaze-accent);
+            outline-offset: 2px;
+        }
+
+        /* Better touch targets for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            button,
+            a,
+            input[type="button"],
+            input[type="submit"] {
+                min-height: 44px;
+                min-width: 44px;
+            }
         }
 
         /* ==================== ANIMATED BACKGROUND SYSTEM ==================== */
@@ -2162,13 +2200,16 @@
     </style>
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Animated Background Elements -->
-    <div class="bg-gradient-animated"></div>
-    <div class="bg-pattern-overlay"></div>
-    <canvas id="particle-field"></canvas>
+    <div class="bg-gradient-animated" aria-hidden="true"></div>
+    <div class="bg-pattern-overlay" aria-hidden="true"></div>
+    <canvas id="particle-field" aria-hidden="true"></canvas>
 
     <!-- Navigation Header -->
-    <nav class="nav-header" id="nav">
+    <nav class="nav-header" id="nav" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <a href="/" class="nav-brand">
                 <div class="nav-logo">BSI</div>
@@ -2202,6 +2243,7 @@
     </nav>
 
     <!-- Hero Section -->
+    <main id="main-content">
     <section class="hero" id="hero">
         <video class="hero-bg-video" autoplay muted loop playsinline>
             <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-baseball-field-9523/1080p.mp4" type="video/mp4">
@@ -2601,7 +2643,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    </main>
+
+    <footer class="footer" role="contentinfo">
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
@@ -2701,13 +2745,17 @@
 
     <!-- JavaScript -->
     <script>
-        // Initialize AOS
+        // Initialize AOS - with error handling
         document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({
-                duration: 1000,
-                once: true,
-                offset: 100
-            });
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 1000,
+                    once: true,
+                    offset: 100
+                });
+            } else {
+                console.warn('AOS library not loaded - animations disabled');
+            }
         });
 
         // Navigation scroll effect
@@ -2743,10 +2791,16 @@
             });
         });
 
-        // Three.js Particle System
+        // Three.js Particle System - with error handling
         function initParticleSystem() {
             const canvas = document.getElementById('particle-field');
             if (!canvas) return;
+            
+            // Check if THREE.js is loaded
+            if (typeof THREE === 'undefined') {
+                console.warn('THREE.js not loaded - particle system disabled');
+                return;
+            }
 
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -2820,12 +2874,25 @@
             });
         }
 
-        initParticleSystem();
+        // Initialize particle system when THREE.js is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(initParticleSystem, 100);
+            });
+        } else {
+            setTimeout(initParticleSystem, 100);
+        }
 
         // Hero 3D Canvas
         function initHero3D() {
             const canvas = document.getElementById('hero-3d-canvas');
             if (!canvas) return;
+            
+            // Check if THREE.js is loaded
+            if (typeof THREE === 'undefined') {
+                console.warn('THREE.js not loaded - 3D hero disabled');
+                return;
+            }
 
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
@@ -2875,7 +2942,14 @@
             animate();
         }
 
-        initHero3D();
+        // Initialize hero 3D when THREE.js is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(initHero3D, 100);
+            });
+        } else {
+            setTimeout(initHero3D, 100);
+        }
 
         // Live Ticker Data
         const tickerItems = [

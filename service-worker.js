@@ -1,48 +1,32 @@
-// Blaze Intelligence PWA Service Worker
+// Blaze Sports Intel PWA Service Worker
 // Provides offline capability, caching, and performance optimization
 
-const CACHE_NAME = 'blaze-intelligence-v2.0.0';
-const RUNTIME_CACHE = 'blaze-runtime-v1';
-const API_CACHE = 'blaze-api-v1';
+const CACHE_NAME = 'blaze-sports-intel-v4.0.0';
+const RUNTIME_CACHE = 'blaze-runtime-v2';
+const API_CACHE = 'blaze-api-v2';
 
 // Core assets to cache for offline
 const STATIC_ASSETS = [
     '/',
-    '/coach',
-    '/dashboard',
-    '/pricing',
-    '/public/css/blaze-styles.css',
-    '/public/css/dashboard.css',
-    '/public/css/neural-coach.css',
-    '/public/css/neural-coach-enhanced.css',
-    '/public/js/neural-coach.js',
-    '/public/js/neural-coach-enhanced.js',
-    '/public/js/neural-network-bg.js',
-    '/public/js/enhanced-three-hero.js',
-    '/public/js/enhanced-sports-data.js',
-    '/public/js/intelligence-demo.js',
-    '/public/assets/logo.png',
-    '/public/assets/favicon.png',
-    'https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap'
+    '/index.html',
+    '/manifest.json',
+    '/assets/icon.svg',
+    '/assets/icon-192.png',
+    '/assets/icon-512.png'
+];
+
+// API endpoints that can be cached
+const API_ENDPOINTS = [
+    '/api/',
+    '/data/'
 ];
 
 // Demo data for offline fallback
 const DEMO_DATA = {
-    '/api/coach/analysis': {
+    '/api/status': {
         status: 'offline',
         mode: 'demo',
-        data: {
-            confidence: 78,
-            engagement: 85,
-            stress: 'Moderate',
-            posture: 'Good',
-            message: 'Using cached demo data - offline mode'
-        }
-    },
-    '/api/sports/mlb': {
-        status: 'offline',
-        teams: ['Cardinals', 'Yankees', 'Dodgers'],
-        message: 'Cached MLB data'
+        message: 'Using cached demo data - offline mode'
     }
 };
 
