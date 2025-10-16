@@ -4,6 +4,29 @@
  * Integrates SportsRadar, Baseball Reference, Pro Football Focus, and more
  */
 
+const resolveEnvVar = (key, fallback) => {
+    if (typeof window !== 'undefined') {
+        const browserEnvSources = [
+            window.BlazeEnv,
+            window.__ENV__,
+            window.__CONFIG__,
+            window.BlazeAPIConfig && window.BlazeAPIConfig.envOverrides
+        ];
+
+        for (const source of browserEnvSources) {
+            if (source && typeof source === 'object' && source[key]) {
+                return source[key];
+            }
+        }
+    }
+
+    if (typeof process !== 'undefined' && process.env && process.env[key]) {
+        return process.env[key];
+    }
+
+    return fallback;
+};
+
 class SportsDataHub {
     constructor() {
         this.dataSources = {
@@ -98,10 +121,9 @@ class SportsDataHub {
     async loadApiKeys() {
         try {
             // Try to load from environment or localStorage
-            this.dataSources.sportsRadar.apiKey = 
-                localStorage.getItem('SPORTRADAR_API_KEY') || 
-                process.env?.SPORTRADAR_API_KEY || 
-                'demo_key'; // Fallback for demo
+            this.dataSources.sportsRadar.apiKey =
+                localStorage.getItem('SPORTRADAR_API_KEY') ||
+                resolveEnvVar('SPORTRADAR_API_KEY', 'demo_key'); // Fallback for demo
         } catch (error) {
             console.warn('API keys not configured, using demo mode');
         }
