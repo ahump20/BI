@@ -39,25 +39,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     
-    <!-- External Libraries -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- External Libraries - Async loading for performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     
-    <!-- Three.js & Dependencies -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <!-- Three.js & Dependencies - Deferred loading -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" onerror="console.warn('Three.js failed to load')"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js" onerror="console.warn('GSAP failed to load')"></script>
     
-    <!-- React -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- React - Deferred loading -->
+    <script defer crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js" onerror="console.warn('React failed to load')"></script>
+    <script defer crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" onerror="console.warn('React DOM failed to load')"></script>
     
-    <!-- Charts & Visualization -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <!-- Charts & Visualization - Deferred loading -->
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js" onerror="console.warn('Chart.js failed to load')"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/d3@7" onerror="console.warn('D3 failed to load')"></script>
     
-    <!-- AOS Animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- AOS Animations - Async loading -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js" onerror="console.warn('AOS failed to load')"></script>
     
     <style>
         /* ==================== CSS VARIABLES & THEME ==================== */
@@ -2701,13 +2702,17 @@
 
     <!-- JavaScript -->
     <script>
-        // Initialize AOS
+        // Initialize AOS - with error handling
         document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({
-                duration: 1000,
-                once: true,
-                offset: 100
-            });
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 1000,
+                    once: true,
+                    offset: 100
+                });
+            } else {
+                console.warn('AOS library not loaded - animations disabled');
+            }
         });
 
         // Navigation scroll effect
@@ -2743,10 +2748,16 @@
             });
         });
 
-        // Three.js Particle System
+        // Three.js Particle System - with error handling
         function initParticleSystem() {
             const canvas = document.getElementById('particle-field');
             if (!canvas) return;
+            
+            // Check if THREE.js is loaded
+            if (typeof THREE === 'undefined') {
+                console.warn('THREE.js not loaded - particle system disabled');
+                return;
+            }
 
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -2820,12 +2831,25 @@
             });
         }
 
-        initParticleSystem();
+        // Initialize particle system when THREE.js is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(initParticleSystem, 100);
+            });
+        } else {
+            setTimeout(initParticleSystem, 100);
+        }
 
         // Hero 3D Canvas
         function initHero3D() {
             const canvas = document.getElementById('hero-3d-canvas');
             if (!canvas) return;
+            
+            // Check if THREE.js is loaded
+            if (typeof THREE === 'undefined') {
+                console.warn('THREE.js not loaded - 3D hero disabled');
+                return;
+            }
 
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
@@ -2875,7 +2899,14 @@
             animate();
         }
 
-        initHero3D();
+        // Initialize hero 3D when THREE.js is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(initHero3D, 100);
+            });
+        } else {
+            setTimeout(initHero3D, 100);
+        }
 
         // Live Ticker Data
         const tickerItems = [
