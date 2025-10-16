@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="author" content="Austin Humphrey">
+    <meta name="robots" content="index, follow">
     <title>🔥 Blaze Sports Intel | Deep South Sports Authority - Championship Intelligence Platform</title>
     <meta name="description" content="Elite championship analytics platform delivering data-driven intelligence for MLB, NFL, NBA, and NCAA. Professional scouting, performance metrics, and strategic insights from the Deep South Sports Authority.">
     <meta name="keywords" content="sports analytics, championship intelligence, Deep South sports, Texas athletics, baseball analytics, football analytics, basketball analytics, track and field, MLB scouting, NFL strategy, NBA metrics, NCAA recruiting, Austin Humphrey, Blaze Sports Intel">
@@ -205,6 +207,41 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: var(--blaze-primary-light);
+        }
+
+        /* ==================== ACCESSIBILITY ==================== */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--blaze-primary);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 10000;
+            border-radius: 0 0 4px 0;
+            font-weight: 600;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Improved focus indicators */
+        *:focus-visible {
+            outline: 3px solid var(--blaze-accent);
+            outline-offset: 2px;
+        }
+
+        /* Better touch targets for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            button,
+            a,
+            input[type="button"],
+            input[type="submit"] {
+                min-height: 44px;
+                min-width: 44px;
+            }
         }
 
         /* ==================== ANIMATED BACKGROUND SYSTEM ==================== */
@@ -2163,13 +2200,16 @@
     </style>
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Animated Background Elements -->
-    <div class="bg-gradient-animated"></div>
-    <div class="bg-pattern-overlay"></div>
-    <canvas id="particle-field"></canvas>
+    <div class="bg-gradient-animated" aria-hidden="true"></div>
+    <div class="bg-pattern-overlay" aria-hidden="true"></div>
+    <canvas id="particle-field" aria-hidden="true"></canvas>
 
     <!-- Navigation Header -->
-    <nav class="nav-header" id="nav">
+    <nav class="nav-header" id="nav" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <a href="/" class="nav-brand">
                 <div class="nav-logo">BSI</div>
@@ -2203,6 +2243,7 @@
     </nav>
 
     <!-- Hero Section -->
+    <main id="main-content">
     <section class="hero" id="hero">
         <video class="hero-bg-video" autoplay muted loop playsinline>
             <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-a-baseball-field-9523/1080p.mp4" type="video/mp4">
@@ -2602,7 +2643,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    </main>
+
+    <footer class="footer" role="contentinfo">
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-brand">
