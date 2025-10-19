@@ -1,0 +1,725 @@
+<html><head></head><body>   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Partnerships - The Sage Intelligence Network</title>
+    <meta name="description" content="Build championship-level partnerships with The Sage Intelligence Network. Exclusive collaboration opportunities for organizations that understand strategic intelligence creates competitive advantage.">
+    
+    <!-- Brand System CSS -->
+    <link rel="stylesheet" href="css/blaze-brand-system.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-primary);
+            background: var(--blaze-background);
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .partnerships-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--blaze-background) 0%, var(--blaze-light-navy) 50%, var(--blaze-background) 100%);
+            overflow: hidden;
+        }
+
+        .partnerships-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(191, 87, 0, 0.2) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(148, 169, 201, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .partnership-emblem {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto 40px;
+            border: 4px solid rgba(191, 87, 0, 0.3);
+            box-shadow: 0 25px 80px rgba(191, 87, 0, 0.4);
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--blaze-white);
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--blaze-primary);
+            margin-bottom: 35px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-description {
+            font-size: 1.4rem;
+            color: var(--blaze-light-slate);
+            max-width: 900px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+
+        /* Partnership Tiers */
+        .tiers-section {
+            padding: 120px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .tiers-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .tiers-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--blaze-white);
+            margin-bottom: 25px;
+        }
+
+        .tiers-subtitle {
+            font-size: 1.3rem;
+            color: var(--blaze-accent);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .tier-card {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            transition: var(--transition-base);
+            position: relative;
+        }
+
+        .tier-card.premium {
+            border-color: var(--blaze-primary);
+            background: rgba(191, 87, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        .tier-card:hover {
+            border-color: var(--blaze-primary);
+            box-shadow: 0 25px 80px rgba(191, 87, 0, 0.25);
+            transform: translateY(-10px);
+        }
+
+        .tier-premium-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            color: var(--blaze-white);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tier-icon {
+            font-size: 4rem;
+            color: var(--blaze-primary);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .tier-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 15px;
+        }
+
+        .tier-tagline {
+            color: var(--blaze-accent);
+            font-size: 1rem;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .tier-description {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .tier-benefits {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .tier-benefits li {
+            color: var(--blaze-light-slate);
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tier-benefits li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--blaze-primary);
+            font-size: 1.2rem;
+        }
+
+        /* Success Stories */
+        .success-section {
+            background: linear-gradient(135deg, var(--blaze-light-navy) 0%, var(--blaze-background) 100%);
+            padding: 120px 20px;
+        }
+
+        .success-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .success-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .success-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+        }
+
+        .success-subtitle {
+            font-size: 1.25rem;
+            color: var(--blaze-light-slate);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .success-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .success-card {
+            background: rgba(17, 34, 64, 0.6);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: var(--transition-base);
+        }
+
+        .success-card:hover {
+            border-color: var(--blaze-primary);
+            transform: translateY(-5px);
+        }
+
+        .success-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--blaze-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--blaze-white);
+            margin-bottom: 25px;
+        }
+
+        .success-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 10px;
+        }
+
+        .success-type {
+            color: var(--blaze-accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .success-description {
+            color: var(--blaze-light-slate);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .success-result {
+            background: rgba(191, 87, 0, 0.1);
+            border-left: 4px solid var(--blaze-primary);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--blaze-accent);
+        }
+
+        /* Partnership Application */
+        .application-section {
+            padding: 120px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .application-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .application-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--blaze-white);
+            margin-bottom: 20px;
+        }
+
+        .application-description {
+            color: var(--blaze-light-slate);
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .application-form {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 60px 50px;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+        }
+
+        .form-section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--blaze-primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--blaze-white);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(10, 25, 47, 0.8);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            color: var(--blaze-white);
+            font-size: 16px;
+            transition: var(--transition-base);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--blaze-primary);
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.2);
+        }
+
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--blaze-primary) 0%, var(--blaze-secondary) 100%);
+            border: none;
+            color: var(--blaze-white);
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-base);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(191, 87, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .tiers-grid,
+            .success-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tier-card.premium {
+                transform: none;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+
+    <!-- Hero Section -->
+    <section class="partnerships-hero">
+        <div class="hero-content">
+            <div class="partnership-emblem">🤝</div>
+            <h1 class="hero-title">Strategic Partnership Network</h1>
+            <p class="hero-subtitle">The Dave Campbell Model for Championship Collaboration</p>
+            <p class="hero-description">
+                Join the exclusive network of organizations that understand strategic intelligence creates sustainable competitive advantage. Building championship-level partnerships that transform industries and elevate performance.
+            </p>
+            <div class="cta-buttons">
+                <a href="#tiers" class="btn championship-primary">
+                    <span class="btn-text">Explore Partnership Tiers</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="#application" class="btn championship-secondary">
+                    <span class="btn-text">Apply for Partnership</span>
+                    <i class="fas fa-handshake"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Tiers -->
+    <section class="tiers-section" id="tiers">
+        <div class="tiers-header">
+            <h2 class="tiers-title">Partnership Excellence Tiers</h2>
+            <p class="tiers-subtitle">
+                Strategic collaboration opportunities designed for organizations that recognize the competitive advantage of championship intelligence and authority positioning.
+            </p>
+        </div>
+
+        <div class="tiers-grid">
+            <div class="tier-card">
+                <div class="tier-icon">🎯</div>
+                <h3 class="tier-title">Strategic Alliance</h3>
+                <p class="tier-tagline">"Building Competitive Intelligence Together"</p>
+                <p class="tier-description">
+                    Foundation-level partnership for organizations seeking to integrate strategic intelligence principles into their competitive framework. Perfect for emerging programs and developing organizations.
+                </p>
+                <ul class="tier-benefits">
+                    <li>Access to Sage Intelligence Framework methodology</li>
+                    <li>Quarterly strategic intelligence reports</li>
+                    <li>Partner community network access</li>
+                    <li>Co-branded educational content opportunities</li>
+                    <li>Priority consultation scheduling</li>
+                    <li>Strategic intelligence training workshops</li>
+                </ul>
+                <button class="btn championship-secondary" onclick="selectTier('strategic-alliance')">
+                    Explore Strategic Alliance
+                </button>
+            </div>
+
+            <div class="tier-card premium">
+                <div class="tier-premium-badge">Championship Level</div>
+                <div class="tier-icon">🏆</div>
+                <h3 class="tier-title">Championship Partnership</h3>
+                <p class="tier-tagline">"The Dave Campbell Authority Model"</p>
+                <p class="tier-description">
+                    Elite collaboration for established organizations ready to become authority figures in their domain. Comprehensive strategic intelligence integration with exclusive access to The Sage Network.
+                </p>
+                <ul class="tier-benefits">
+                    <li>Everything in Strategic Alliance</li>
+                    <li>Custom strategic intelligence platform development</li>
+                    <li>Exclusive thought leadership collaboration</li>
+                    <li>Joint championship intelligence research projects</li>
+                    <li>Authority positioning and market leadership support</li>
+                    <li>Direct access to The Sage strategic council</li>
+                    <li>Co-creation of proprietary intelligence frameworks</li>
+                    <li>Priority partnership in new ventures</li>
+                </ul>
+                <button class="btn championship-primary" onclick="selectTier('championship-partnership')">
+                    Apply for Championship Partnership
+                </button>
+            </div>
+
+            <div class="tier-card">
+                <div class="tier-icon">💎</div>
+                <h3 class="tier-title">Sage Circle</h3>
+                <p class="tier-tagline">"Exclusive Strategic Intelligence Council"</p>
+                <p class="tier-description">
+                    Ultra-exclusive partnership tier for industry leaders who shape competitive landscapes. Join The Sage Circle and help define the future of strategic intelligence across sports and performance domains.
+                </p>
+                <ul class="tier-benefits">
+                    <li>Everything in Championship Partnership</li>
+                    <li>Sage Circle board membership</li>
+                    <li>Strategic input on Blaze Intelligence direction</li>
+                    <li>Exclusive access to unreleased intelligence frameworks</li>
+                    <li>Joint venture and acquisition opportunities</li>
+                    <li>Global strategic intelligence summit hosting</li>
+                    <li>Custom intelligence platform licensing rights</li>
+                    <li>Industry influence and thought leadership positioning</li>
+                </ul>
+                <button class="btn championship-secondary" onclick="selectTier('sage-circle')">
+                    Inquire About Sage Circle
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="success-section">
+        <div class="success-container">
+            <div class="success-header">
+                <h2 class="success-title">Partnership Success Stories</h2>
+                <p class="success-subtitle">
+                    Organizations that have transformed their competitive positioning through strategic intelligence partnerships with The Sage Network.
+                </p>
+            </div>
+
+            <div class="success-grid">
+                <div class="success-card">
+                    <div class="success-logo">🏈</div>
+                    <h3 class="success-name">Elite Texas Program</h3>
+                    <p class="success-type">High School Football • Championship Partnership</p>
+                    <p class="success-description">
+                        Implemented comprehensive strategic intelligence framework for recruitment, game planning, and character assessment. Transformed from district competitor to state championship contender.
+                    </p>
+                    <div class="success-result">
+                        "The Sage Framework helped us identify championship-level character in recruits that other programs missed. Our strategic intelligence advantage led directly to our state championship run." - Head Coach
+                    </div>
+                </div>
+
+                <div class="success-card">
+                    <div class="success-logo">⚾</div>
+                    <h3 class="success-name">Premier Baseball Academy</h3>
+                    <p class="success-type">Youth Baseball Development • Strategic Alliance</p>
+                    <p class="success-description">
+                        Integrated character intelligence platform for player development and Perfect Game showcase preparation. Enhanced scout communication and strategic positioning of athletes.
+                    </p>
+                    <div class="success-result">
+                        "Our players now understand not just how to perform, but how to demonstrate championship character. College scouts consistently comment on our players' strategic intelligence." - Academy Director
+                    </div>
+                </div>
+
+                <div class="success-card">
+                    <div class="success-logo">🏀</div>
+                    <h3 class="success-name">Championship Basketball Program</h3>
+                    <p class="success-type">College Basketball • Championship Partnership</p>
+                    <p class="success-description">
+                        Deployed advanced predictive intelligence for recruitment and game strategy. Micro-expression analysis for high-pressure performance assessment and team chemistry evaluation.
+                    </p>
+                    <div class="success-result">
+                        "The character intelligence platform helped us identify the intangibles that separate championship players from talented athletes. Our tournament success speaks for itself." - Program Director
+                    </div>
+                </div>
+
+                <div class="success-card">
+                    <div class="success-logo">🎯</div>
+                    <h3 class="success-name">Strategic Consulting Firm</h3>
+                    <p class="success-type">Business Intelligence • Sage Circle</p>
+                    <p class="success-description">
+                        Leveraged Sage Framework methodology for executive assessment and strategic decision-making. Integrated sports intelligence principles into corporate competitive analysis.
+                    </p>
+                    <div class="success-result">
+                        "The sports intelligence approach to character assessment transformed our executive consulting practice. We now identify leadership potential with championship-level precision." - Managing Partner
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Application -->
+    <section class="application-section" id="application">
+        <div class="application-header">
+            <h2 class="application-title">Partnership Application</h2>
+            <p class="application-description">
+                The Sage Network seeks strategic partners who understand that competitive advantage comes from wisdom, character intelligence, and strategic foresight. Tell us about your championship vision.
+            </p>
+        </div>
+
+        <form class="application-form" id="partnershipApplication">
+            <div class="form-section">
+                <h3 class="form-section-title">Organization Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="orgName" class="form-label">Organization Name *</label>
+                        <input type="text" id="orgName" name="orgName" class="form-input" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="industry" class="form-label">Industry/Domain *</label>
+                        <select id="industry" name="industry" class="form-select" required="">
+                            <option value="">Select industry...</option>
+                            <option value="high-school-football">High School Football</option>
+                            <option value="youth-baseball">Youth Baseball</option>
+                            <option value="college-sports">College Sports</option>
+                            <option value="professional-sports">Professional Sports</option>
+                            <option value="sports-technology">Sports Technology</option>
+                            <option value="consulting">Strategic Consulting</option>
+                            <option value="education">Education/Training</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contactName" class="form-label">Primary Contact *</label>
+                        <input type="text" id="contactName" name="contactName" class="form-input" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactTitle" class="form-label">Title/Position *</label>
+                        <input type="text" id="contactTitle" name="contactTitle" class="form-input" required="">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-input" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="form-section-title">Partnership Interest</h3>
+                <div class="form-group">
+                    <label for="partnershipTier" class="form-label">Desired Partnership Tier *</label>
+                    <select id="partnershipTier" name="partnershipTier" class="form-select" required="">
+                        <option value="">Select partnership tier...</option>
+                        <option value="strategic-alliance">Strategic Alliance</option>
+                        <option value="championship-partnership">Championship Partnership</option>
+                        <option value="sage-circle">Sage Circle</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="organizationBackground" class="form-label">Organization Background &amp; Achievements *</label>
+                    <textarea id="organizationBackground" name="organizationBackground" class="form-textarea" placeholder="Tell us about your organization's background, current market position, and key achievements..." required=""></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="strategicObjectives" class="form-label">Strategic Objectives *</label>
+                    <textarea id="strategicObjectives" name="strategicObjectives" class="form-textarea" placeholder="What are your strategic objectives for this partnership? How do you envision leveraging strategic intelligence for competitive advantage?" required=""></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="competitiveAdvantage" class="form-label">Competitive Advantage Vision *</label>
+                    <textarea id="competitiveAdvantage" name="competitiveAdvantage" class="form-textarea" placeholder="How does your organization currently create competitive advantage? What role do you see strategic intelligence playing in your future success?" required=""></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="sageAlignment" class="form-label">Alignment with The Sage Approach *</label>
+                    <textarea id="sageAlignment" name="sageAlignment" class="form-textarea" placeholder="Why is The Sage Network the right strategic partner for your organization? How does our authority-driven, wisdom-focused approach align with your values?" required=""></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Submit Partnership Application
+            </button>
+        </form>
+    </section>
+
+    <script>
+        function selectTier(tier) {
+            document.getElementById('partnershipTier').value = tier;
+            document.getElementById('application').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission
+        document.getElementById('partnershipApplication').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Show success message (in real implementation, this would integrate with your CRM)
+            alert('Thank you for your partnership application! The Sage Strategic Council will review your submission and contact you within 72 hours to discuss potential collaboration opportunities.');
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+
+</body></html>

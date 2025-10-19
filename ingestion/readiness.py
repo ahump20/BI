@@ -8,7 +8,7 @@ import json
 import os
 import sys
 import argparse
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Any, Optional
 from statistics import mean
 
@@ -67,7 +67,7 @@ def categorize_player_status(readiness_score: Optional[float]) -> str:
 
 def generate_readiness_report(all_data: Dict[str, Any], focus_teams: List[str] = None) -> Dict[str, Any]:
     """Generate comprehensive readiness report"""
-    now_iso = datetime.utcnow().isoformat() + 'Z'
+    now_iso = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
     
     teams_data = []
     players_data = []

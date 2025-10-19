@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Blaze Intelligence - Unified Mobile Platform</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/recharts@2.5.0/dist/Recharts.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+    <style>
+        /* Mobile-First Styles */
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        
+        /* Prevent zoom on iOS */
+        input, select, textarea { font-size: 16px; }
+        
+        /* Touch-friendly interactions */
+        .touch-target { min-height: 44px; min-width: 44px; }
+        
+        /* Custom scrollbar for mobile */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 2px; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,255,255,0.5); border-radius: 2px; }
+        
+        /* Animations */
+        @keyframes pulse-glow { 
+            0%, 100% { opacity: 0.6; box-shadow: 0 0 20px rgba(0,255,255,0.3); } 
+            50% { opacity: 1; box-shadow: 0 0 30px rgba(0,255,255,0.6); } 
+        }
+        .pulse-glow { animation: pulse-glow 2s infinite; }
+        
+        @keyframes slide-up { 
+            from { transform: translateY(100%); opacity: 0; } 
+            to { transform: translateY(0); opacity: 1; } 
+        }
+        .slide-up { animation: slide-up 0.3s ease-out; }
+        
+        /* Glass morphism effects */
+        .glass { 
+            background: rgba(17, 24, 39, 0.8); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .glass-light {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        
+        /* Gradient backgrounds */
+        .bg-blaze-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #0f172a 100%);
+        }
+        
+        .bg-cyan-gradient {
+            background: linear-gradient(45deg, #06b6d4, #0891b2, #0e7490);
+        }
+        
+        /* Mobile navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        /* Readiness gauge styles */
+        .readiness-gauge {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        
+        .readiness-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        /* 3D Scene container */
+        .three-scene {
+            width: 100%;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        /* Responsive grid */
+        .grid-responsive {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 1fr;
+        }
+        
+        @media (min-width: 768px) {
+            .grid-responsive {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .grid-responsive {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* Action buttons */
+        .action-btn {
+            background: linear-gradient(45deg, #06b6d4, #0891b2);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+        }
+        
+        .action-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Status indicators */
+        .status-online { color: #10b981; }
+        .status-warning { color: #f59e0b; }
+        .status-critical { color: #ef4444; }
+        
+        /* Loading animations */
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-top: 2px solid #00ffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Haptic feedback simulation */
+        .haptic:active {
+            transform: scale(0.98);
+            transition: transform 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useReducer, useRef, useMemo, useCallback } = React;
+const { motion, AnimatePresence } = Motion;
+const { LineChart, Line, BarChart, Bar, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, 
+        CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } = Recharts;
+
+/** =============================================================
+ * BLAZE INTELLIGENCE - UNIFIED MOBILE PLATFORM
+ * 
+ * A comprehensive mobile-first platform combining:
+ * - Real-time Champion Readiness Engine
+ * - 3D Blaze Core Visualization  
+ * - AI-Powered Pattern Recognition
+ * - Multi-Sport Analytics Dashboard
+ * - Integrated Team Management
+ * - Performance Optimization Tools
+ * - Memory Workbench & Knowledge Graph
+ * - Third-party Service Integrations
+ * ============================================================= */
+
+// ============== CORE CONFIGURATION ==============
+
+const DIMENSIONS = [
+    { key: "clutch", label: "Clutch Gene", icon: "⚡", color: "#ef4444" },
+    { key: "killer", label: "Killer Instinct", icon: "🎯", color: "#f59e0b" },
+    { key: "flow", label: "Flow State", icon: "🌊", color: "#3b82f6" },
+    { key: "fortress", label: "Mental Fortress", icon: "🛡️", color: "#10b981" },
+    { key: "predator", label: "Predator Mindset", icon: "🦅", color: "#8b5cf6" },
+    { key: "aura", label: "Champion Aura", icon: "✨", color: "#ec4899" },
+    { key: "winner", label: "Winner DNA", icon: "🏆", color: "#f59e0b" },
+    { key: "beast", label: "Beast Mode", icon: "💪", color: "#ef4444" }
+];
+
+const TEAMS = [
+    { id: "cardinals", name: "St. Louis Cardinals", sport: "MLB", color: "#c41e3a", logo: "⚾" },
+    { id: "titans", name: "Tennessee Titans", sport: "NFL", color: "#0c2340", logo: "🏈" },
+    { id: "longhorns", name: "Texas Longhorns", sport: "NCAA", color: "#bf5700", logo: "🤘" },
+    { id: "grizzlies", name: "Memphis Grizzlies", sport: "NBA", color: "#5d76a9", logo: "🐻" }
+];
+
+const WEIGHT_PRESETS = {
+    Clutch: { clutch: 1.6, killer: 1.2, flow: 1.1, fortress: 1.3, predator: 1.0, aura: 1.0, winner: 1.4, beast: 1.1 },
+    Consistency: { clutch: 1.1, killer: 1.0, flow: 1.3, fortress: 1.5, predator: 1.0, aura: 1.1, winner: 1.4, beast: 1.0 },
+    Aggression: { clutch: 1.2, killer: 1.6, flow: 1.0, fortress: 1.0, predator: 1.5, aura: 1.0, winner: 1.1, beast: 1.6 }
+};
+
+const BASELINES = {
+    cardinals: { clutch: 60, killer: 58, flow: 61, fortress: 63, predator: 57, aura: 60, winner: 62, beast: 59 },
+    titans: { clutch: 62, killer: 64, flow: 58, fortress: 61, predator: 66, aura: 60, winner: 61, beast: 67 },
+    longhorns: { clutch: 65, killer: 60, flow: 66, fortress: 62, predator: 63, aura: 64, winner: 68, beast: 62 },
+    grizzlies: { clutch: 64, killer: 62, flow: 63, fortress: 66, predator: 61, aura: 65, winner: 64, beast: 65 }
+};
+
+// ============== UTILITY FUNCTIONS ==============
+
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const sigmoid = (x) => 1 / (1 + Math.exp(-x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const mulberry32 = (seed) => {
+    let t = seed >>> 0;
+    return function() {
+        t += 0x6D2B79F5;
+        let r = Math.imul(t ^ (t >>> 15), 1 | t);
+        r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+        return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+};
+
+function humanBytes(n) {
+    if (n < 1000) return `${n} B`;
+    if (n < 1_000_000) return `${(n/1000).toFixed(1)} kB`;
+    if (n < 1_000_000_000) return `${(n/1_000_000).toFixed(1)} MB`;
+    return `${(n/1_000_000_000).toFixed(1)} GB`;
+}
+
+// ============== CORE ALGORITHMS ==============
+
+function decodeDimensions(signals, base, scenario) {
+    const { hr, hrv, gsr, emg, focus, anxiety, confidence } = signals;
+    const pres = scenario.pressure / 100;
+    const fat = scenario.fatigue / 100;
+    const mom = scenario.momentum / 100;
+    
+    return {
+        clutch: clamp(base.clutch + 0.3 * focus + 0.25 * confidence - 0.2 * anxiety + 25 * pres - 10 * fat, 0, 100),
+        killer: clamp(base.killer + 0.35 * emg + 0.15 * confidence + 15 * pres - 5 * fat, 0, 100),
+        flow: clamp(base.flow + 0.4 * hrv - 0.2 * hr + 0.2 * focus - 0.1 * anxiety + 10 * mom, 0, 100),
+        fortress: clamp(base.fortress + 0.45 * hrv - 0.25 * gsr - 0.1 * hr + 0.15 * confidence - 0.1 * fat + 10 * pres, 0, 100),
+        predator: clamp(base.predator + 0.4 * emg + 0.2 * gsr + 0.15 * pres - 0.05 * hrv, 0, 100),
+        aura: clamp(base.aura + 0.25 * confidence + 0.15 * (hrv / 2) + 8 * mom - 6 * fat, 0, 100),
+        winner: clamp(base.winner + 0.2 * confidence + 0.15 * focus + 0.1 * hrv + 6 * mom + 8 * pres, 0, 100),
+        beast: clamp(base.beast + 0.45 * emg + 0.2 * hr + 0.15 * gsr + 0.1 * pres - 0.15 * fat, 0, 100)
+    };
+}
+
+function calculateReadiness(dims, weights) {
+    const entries = DIMENSIONS.map(d => ({
+        key: d.key,
+        w: weights[d.key] ?? 1,
+        v: dims[d.key] ?? 50
+    }));
+    
+    const totalW = entries.reduce((s, x) => s + x.w, 0) || 1;
+    const lin = entries.reduce((s, x) => s + x.w * (x.v - 50), 0) / totalW;
+    const readiness = clamp(100 * sigmoid(lin / 12), 0, 100);
+    
+    const contrib = entries.map(x => ({ 
+        key: x.key, 
+        value: x.w * (x.v - 50) / totalW 
+    }));
+    
+    return { readiness, contrib };
+}
+
+// ============== STATE MANAGEMENT ==============
+
+const initialState = {
+    // Core state
+    team: TEAMS[0].id,
+    playerName: "Elite Athlete",
+    seed: Date.now(),
+    preset: "Clutch",
+    weights: { ...WEIGHT_PRESETS.Clutch },
+    baselines: { ...BASELINES.cardinals },
+    scenario: {
+        pressure: 40,
+        fatigue: 20,
+        momentum: 50,
+        context: "Championship Quarter",
+        quarter: 4,
+        scoreDiff: -3,
+        home: true
+    },
+    streams: {
+        t: [],
+        readiness: [],
+        hr: [],
+        hrv: [],
+        gsr: [],
+        emg: [],
+        focus: [],
+        anxiety: [],
+        confidence: [],
+        dims: null,
+        contrib: []
+    },
+    running: true,
+    tick: 0,
+    speed: 1,
+    
+    // UI state
+    activeTab: "dashboard",
+    sidebarOpen: false,
+    notifications: [],
+    
+    // Analytics
+    analytics: {
+        peakReadiness: 0,
+        avgReadiness: 0,
+        totalSessions: 0,
+        criticalMoments: [],
+        sessionDuration: 0
+    },
+    
+    // Integrations
+    integrations: {
+        cloudSync: false,
+        notifications: true,
+        hapticFeedback: true,
+        darkMode: true
+    }
+};
+
+function reducer(state, action) {
+    switch (action.type) {
+        case "SET_TEAM": {
+            const baselines = { ...BASELINES[action.team] };
+            return { 
+                ...state, 
+                team: action.team, 
+                baselines,
+                seed: Date.now(),
+                streams: {
+                    t: [], readiness: [], hr: [], hrv: [], gsr: [], emg: [],
+                    focus: [], anxiety: [], confidence: [], dims: null, contrib: []
+                },
+                tick: 0
+            };
+        }
+        
+        case "SET_PLAYER":
+            return { ...state, playerName: action.name };
+            
+        case "SET_PRESET": {
+            const preset = action.preset;
+            return { ...state, preset, weights: { ...WEIGHT_PRESETS[preset] } };
+        }
+        
+        case "SET_WEIGHT":
+            return { ...state, weights: { ...state.weights, [action.key]: action.value } };
+            
+        case "SET_SCENARIO":
+            return { ...state, scenario: { ...state.scenario, ...action.patch } };
+            
+        case "TOGGLE_RUNNING":
+            return { ...state, running: !state.running };
+            
+        case "SET_SPEED":
+            return { ...state, speed: action.speed };
+            
+        case "SET_TAB":
+            return { ...state, activeTab: action.tab };
+            
+        case "TOGGLE_SIDEBAR":
+            return { ...state, sidebarOpen: !state.sidebarOpen };
+            
+        case "RESET":
+            return { 
+                ...state, 
+                streams: {
+                    t: [], readiness: [], hr: [], hrv: [], gsr: [], emg: [],
+                    focus: [], anxiety: [], confidence: [], dims: null, contrib: []
+                },
+                tick: 0 
+            };
+            
+        case "TICK": {
+            const newStreams = updateStreams(state);
+            const analytics = updateAnalytics(state, newStreams);
+            return { ...state, streams: newStreams, tick: state.tick + 1, analytics };
+        }
+        
+        case "ADD_NOTIFICATION":
+            return { 
+                ...state, 
+                notifications: [action.notification, ...state.notifications].slice(0, 5) 
+            };
+            
+        case "CLEAR_NOTIFICATIONS":
+            return { ...state, notifications: [] };
+            
+        case "UPDATE_INTEGRATION":
+            return { 
+                ...state, 
+                integrations: { ...state.integrations, [action.key]: action.value }
+            };
+            
+        default:
+            return state;
+    }
+}
+
+function updateStreams(state) {
+    const { streams, tick, scenario, baselines, weights } = state;
+    const ns = JSON.parse(JSON.stringify(streams));
+    const t = tick + 1;
+    const N = 180;
+    
+    const push = (arr, v) => {
+        arr.push(v);
+        if (arr.length > N) arr.shift();
+    };
+    
+    const rand = mulberry32(state.seed + t);
+    const noise = () => (rand() - 0.5) * 2;
+    
+    const fat = scenario.fatigue / 100;
+    const pres = scenario.pressure / 100;
+    const mom = scenario.momentum / 100;
+    
+    // Biometric simulation
+    const hr = clamp(70 + 60 * pres + 40 * fat + 10 * Math.sin(t / 7) + noise() * 5, 55, 200);
+    const hrv = clamp(80 - 35 * pres - 20 * fat + 10 * Math.cos(t / 5) + noise() * 3, 15, 120);
+    const gsr = clamp(0.3 + 1.2 * pres + 0.6 * fat + noise() * 0.2, 0.2, 2.5);
+    const emg = clamp(20 + 50 * pres + 40 * mom + 5 * Math.sin(t / 3) + noise() * 8, 5, 100);
+    
+    // Psychological metrics
+    const focus = clamp(55 + 25 * mom - 15 * fat + 20 * pres + 10 * Math.sin(t / 9) + noise() * 6, 0, 100);
+    const anxiety = clamp(20 + 60 * pres + 10 * fat + 10 * Math.sin(t / 6) + noise() * 10, 0, 100);
+    const confidence = clamp(50 + 20 * mom - 10 * fat + 5 * Math.cos(t / 4) + noise() * 8, 0, 100);
+    
+    // Calculate dimensions
+    const dims = decodeDimensions({ hr, hrv, gsr, emg, focus, anxiety, confidence }, baselines, scenario);
+    const { readiness, contrib } = calculateReadiness(dims, weights);
+    
+    push(ns.t, t);
+    push(ns.hr, Math.round(hr));
+    push(ns.hrv, Math.round(hrv));
+    push(ns.gsr, +gsr.toFixed(2));
+    push(ns.emg, Math.round(emg));
+    push(ns.focus, Math.round(focus));
+    push(ns.anxiety, Math.round(anxiety));
+    push(ns.confidence, Math.round(confidence));
+    push(ns.readiness, Math.round(readiness));
+    ns.dims = dims;
+    ns.contrib = contrib;
+    
+    return ns;
+}
+
+function updateAnalytics(state, streams) {
+    const readiness = streams.readiness[streams.readiness.length - 1] || 0;
+    const analytics = { ...state.analytics };
+    
+    if (readiness > analytics.peakReadiness) {
+        analytics.peakReadiness = readiness;
+    }
+    
+    const sum = streams.readiness.reduce((a, b) => a + b, 0);
+    analytics.avgReadiness = streams.readiness.length > 0 ? sum / streams.readiness.length : 0;
+    analytics.sessionDuration = state.tick * 0.25; // seconds
+    
+    // Detect critical moments
+    if (readiness > 85 && state.scenario.pressure > 70) {
+        const lastCritical = analytics.criticalMoments[analytics.criticalMoments.length - 1];
+        const now = Date.now();
+        
+        if (!lastCritical || now - lastCritical.timestamp > 5000) {
+            analytics.criticalMoments = [...analytics.criticalMoments, {
+                timestamp: now,
+                readiness,
+                scenario: { ...state.scenario }
+            }].slice(-10);
+        }
+    }
+    
+    return analytics;
+}
+
+// ============== 3D BLAZE CORE COMPONENT ==============
+
+const BlazeCore = ({ flowState = 50, size = 300 }) => {
+    const mountRef = useRef(null);
+    const sceneRef = useRef(null);
+    
+    useEffect(() => {
+        if (!mountRef.current) return;
+        
+        const mount = mountRef.current;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, size / size, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        
+        renderer.setSize(size, size);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        mount.appendChild(renderer.domElement);
+        
+        camera.position.z = 5;
+        
+        // Core geometry
+        const geometry = new THREE.IcosahedronGeometry(1.5, 4);
+        const material = new THREE.MeshStandardMaterial({ 
+            color: 0x00ffff, 
+            emissive: 0x00ffff, 
+            emissiveIntensity: 0.3,
+            metalness: 0.8, 
+            roughness: 0.2, 
+            wireframe: true 
+        });
+        
+        const coreMesh = new THREE.Mesh(geometry, material);
+        scene.add(coreMesh);
+        
+        // Particle system
+        const particleCount = 1000;
+        const particlesGeometry = new THREE.BufferGeometry();
+        const posArray = new Float32Array(particleCount * 3);
+        
+        for (let i = 0; i < particleCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 8;
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particleMaterial = new THREE.PointsMaterial({ 
+            size: 0.02, 
+            color: 0x00ffff,
+            transparent: true,
+            opacity: 0.6 
+        });
+        
+        const particles = new THREE.Points(particlesGeometry, particleMaterial);
+        scene.add(particles);
+        
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0x00ffff, 0.8, 100);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
+        
+        sceneRef.current = { scene, renderer, camera, coreMesh, particles };
+        
+        const animate = () => {
+            if (!sceneRef.current) return;
+            
+            const { coreMesh, particles } = sceneRef.current;
+            const elapsedTime = Date.now() * 0.001;
+            
+            // Rotate based on flow state
+            const rotationSpeed = 0.1 + (flowState / 100) * 0.3;
+            coreMesh.rotation.y = elapsedTime * rotationSpeed;
+            coreMesh.rotation.x = elapsedTime * rotationSpeed * 0.5;
+            
+            // Pulse based on readiness
+            const scale = 1 + Math.sin(elapsedTime * 2) * 0.1 * (flowState / 100);
+            coreMesh.scale.setScalar(scale);
+            
+            particles.rotation.y = -elapsedTime * 0.05;
+            particles.rotation.x = elapsedTime * 0.02;
+            
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        };
+        
+        animate();
+        
+        return () => {
+            if (mount && renderer.domElement) {
+                mount.removeChild(renderer.domElement);
+            }
+            renderer.dispose();
+        };
+    }, [size]);
+    
+    useEffect(() => {
+        if (!sceneRef.current) return;
+        
+        const { coreMesh, particles } = sceneRef.current;
+        const intensity = flowState / 100;
+        
+        // Update material properties based on flow state
+        if (coreMesh.material) {
+            coreMesh.material.emissiveIntensity = 0.2 + intensity * 0.5;
+        }
+        
+        if (particles.material) {
+            particles.material.opacity = 0.4 + intensity * 0.4;
+        }
+    }, [flowState]);
+    
+    return <div ref={mountRef} className="three-scene" style={{ width: size, height: size }} />;
+};
+
+// ============== COMPONENTS ==============
+
+// Mobile Header
+const MobileHeader = ({ state, dispatch }) => {
+    const team = TEAMS.find(t => t.id === state.team);
+    
+    return (
+        <motion.header 
+            className="glass sticky top-0 z-40 px-4 py-3"
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+        >
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                    <motion.div 
+                        className="text-2xl"
+                        animate={{ rotate: state.running ? 360 : 0 }}
+                        transition={{ duration: 2, repeat: state.running ? Infinity : 0, ease: "linear" }}
+                    >
+                        🔥
+                    </motion.div>
+                    <div>
+                        <h1 className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                            Blaze Intelligence
+                        </h1>
+                        <p className="text-xs text-gray-400">Mobile Command Center</p>
+                    </div>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-cyan-400">
+                            {Math.round(calculateReadiness(state.streams.dims || state.baselines, state.weights).readiness)}
+                        </div>
+                        <div className="text-xs text-gray-400">READINESS</div>
+                    </div>
+                    
+                    <button 
+                        onClick={() => dispatch({ type: "TOGGLE_SIDEBAR" })}
+                        className="touch-target p-2 rounded-lg glass-light"
+                    >
+                        <div className="w-5 h-5 flex flex-col justify-center space-y-1">
+                            <div className="w-full h-0.5 bg-cyan-400"></div>
+                            <div className="w-full h-0.5 bg-cyan-400"></div>
+                            <div className="w-full h-0.5 bg-cyan-400"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </motion.header>
+    );
+};
+
+// Mobile Navigation
+const MobileNavigation = ({ activeTab, onTabChange }) => {
+    const tabs = [
+        { id: "dashboard", icon: "📊", label: "Dashboard" },
+        { id: "analytics", icon: "🧠", label: "Analytics" },
+        { id: "team", icon: "👥", label: "Team" },
+        { id: "settings", icon: "⚙️", label: "Settings" }
+    ];
+    
+    return (
+        <nav className="mobile-nav safe-area-inset-bottom">
+            <div className="flex justify-around py-2">
+                {tabs.map(tab => (
+                    <button
+                        key={tab.id}
+                        onClick={() => onTabChange(tab.id)}
+                        className={`touch-target flex flex-col items-center justify-center p-2 rounded-lg transition-all ${
+                            activeTab === tab.id 
+                                ? 'text-cyan-400 bg-cyan-400/20' 
+                                : 'text-gray-400 hover:text-white'
+                        }`}
+                    >
+                        <div className="text-xl mb-1">{tab.icon}</div>
+                        <div className="text-xs font-medium">{tab.label}</div>
+                    </button>
+                ))}
+            </div>
+        </nav>
+    );
+};
+
+// Readiness Gauge
+const ReadinessGauge = ({ value, size = 200 }) => {
+    const circumference = 2 * Math.PI * (size / 2 - 20);
+    const strokeDasharray = circumference;
+    const strokeDashoffset = circumference - (value / 100) * circumference;
+    
+    return (
+        <div className="readiness-gauge" style={{ width: size, height: size }}>
+            <svg width={size} height={size} className="transform -rotate-90">
+                {/* Background circle */}
+                <circle
+                    cx={size / 2}
+                    cy={size / 2}
+                    r={size / 2 - 20}
+                    stroke="rgba(255, 255, 255, 0.1)"
+                    strokeWidth="8"
+                    fill="transparent"
+                />
+                {/* Progress circle */}
+                <motion.circle
+                    cx={size / 2}
+                    cy={size / 2}
+                    r={size / 2 - 20}
+                    stroke="url(#readinessGradient)"
+                    strokeWidth="8"
+                    fill="transparent"
+                    strokeLinecap="round"
+                    strokeDasharray={strokeDasharray}
+                    strokeDashoffset={strokeDashoffset}
+                    initial={{ strokeDashoffset: circumference }}
+                    animate={{ strokeDashoffset }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                />
+                {/* Gradient definition */}
+                <defs>
+                    <linearGradient id="readinessGradient" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stopColor="#ef4444" />
+                        <stop offset="50%" stopColor="#f59e0b" />
+                        <stop offset="100%" stopColor="#10b981" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            
+            <div className="readiness-text">
+                <motion.div 
+                    className="text-4xl font-bold text-white"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    key={Math.floor(value)}
+                >
+                    {Math.round(value)}
+                </motion.div>
+                <div className="text-sm text-gray-400">READINESS</div>
+            </div>
+        </div>
+    );
+};
+
+// Dashboard Tab
+const DashboardTab = ({ state, dispatch }) => {
+    const { streams, analytics } = state;
+    const readiness = calculateReadiness(state.streams.dims || state.baselines, state.weights).readiness;
+    const flowState = state.streams.dims ? state.streams.dims.flow : 50;
+    
+    return (
+        <div className="space-y-6 pb-20">
+            {/* Hero Section */}
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                <div className="text-center mb-6">
+                    <h2 className="text-xl font-bold text-white mb-2">{state.playerName}</h2>
+                    <p className="text-gray-400">{TEAMS.find(t => t.id === state.team).name}</p>
+                </div>
+                
+                <div className="flex justify-center mb-6">
+                    <ReadinessGauge value={readiness} size={200} />
+                </div>
+                
+                <div className="grid grid-cols-3 gap-4">
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-green-400">{analytics.peakReadiness.toFixed(0)}</div>
+                        <div className="text-xs text-gray-400">Peak</div>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-blue-400">{analytics.avgReadiness.toFixed(0)}</div>
+                        <div className="text-xs text-gray-400">Average</div>
+                    </div>
+                    <div className="text-center">
+                        <div className="text-2xl font-bold text-purple-400">{analytics.criticalMoments.length}</div>
+                        <div className="text-xs text-gray-400">Critical</div>
+                    </div>
+                </div>
+            </motion.div>
+            
+            {/* 3D Blaze Core */}
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+            >
+                <h3 className="text-lg font-semibold text-white mb-4 text-center">Blaze Core</h3>
+                <div className="flex justify-center">
+                    <BlazeCore flowState={flowState} size={250} />
+                </div>
+                <p className="text-sm text-gray-400 text-center mt-4">
+                    Real-time visualization of Flow State: {flowState.toFixed(1)}%
+                </p>
+            </motion.div>
+            
+            {/* Quick Actions */}
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+            >
+                <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+                <div className="grid grid-cols-2 gap-4">
+                    <button 
+                        onClick={() => dispatch({ type: "TOGGLE_RUNNING" })}
+                        className={`action-btn haptic ${state.running ? 'bg-red-500' : 'bg-green-500'}`}
+                    >
+                        {state.running ? '⏸️ Pause' : '▶️ Start'}
+                    </button>
+                    <button 
+                        onClick={() => dispatch({ type: "RESET" })}
+                        className="action-btn haptic bg-gray-600"
+                    >
+                        🔄 Reset
+                    </button>
+                </div>
+            </motion.div>
+            
+            {/* Live Biometrics */}
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+            >
+                <h3 className="text-lg font-semibold text-white mb-4">Live Biometrics</h3>
+                <div className="grid grid-cols-2 gap-4">
+                    <BiometricCard 
+                        title="Heart Rate" 
+                        value={streams.hr?.[streams.hr.length - 1] || 0}
+                        unit="bpm"
+                        color="#ef4444"
+                    />
+                    <BiometricCard 
+                        title="HRV" 
+                        value={streams.hrv?.[streams.hrv.length - 1] || 0}
+                        unit="ms"
+                        color="#3b82f6"
+                    />
+                    <BiometricCard 
+                        title="Focus" 
+                        value={streams.focus?.[streams.focus.length - 1] || 0}
+                        unit="%"
+                        color="#10b981"
+                    />
+                    <BiometricCard 
+                        title="Confidence" 
+                        value={streams.confidence?.[streams.confidence.length - 1] || 0}
+                        unit="%"
+                        color="#f59e0b"
+                    />
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+// Biometric Card Component
+const BiometricCard = ({ title, value, unit, color }) => (
+    <div className="glass-light rounded-xl p-4">
+        <div className="text-xs text-gray-400 mb-1">{title}</div>
+        <div className="text-xl font-bold" style={{ color }}>
+            {value}{unit}
+        </div>
+    </div>
+);
+
+// Analytics Tab
+const AnalyticsTab = ({ state }) => {
+    const { streams } = state;
+    
+    return (
+        <div className="space-y-6 pb-20">
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                <h2 className="text-xl font-bold text-white mb-6">Performance Analytics</h2>
+                
+                {/* Dimensions Radar */}
+                <div className="mb-6">
+                    <h3 className="text-sm font-semibold text-gray-300 mb-3">Champion Dimensions</h3>
+                    <div className="h-64">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <RadarChart data={DIMENSIONS.map(d => ({
+                                subject: d.label,
+                                value: state.streams.dims?.[d.key] ?? state.baselines[d.key] ?? 50
+                            }))}>
+                                <PolarGrid stroke="rgba(255,255,255,0.1)" />
+                                <PolarAngleAxis dataKey="subject" tick={{ fontSize: 10, fill: '#9ca3af' }} />
+                                <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fontSize: 8, fill: '#6b7280' }} />
+                                <Radar
+                                    name="Dimensions"
+                                    dataKey="value"
+                                    stroke="#00ffff"
+                                    fill="#00ffff"
+                                    fillOpacity={0.2}
+                                    strokeWidth={2}
+                                />
+                            </RadarChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+                
+                {/* Readiness Timeline */}
+                <div>
+                    <h3 className="text-sm font-semibold text-gray-300 mb-3">Readiness Timeline</h3>
+                    <div className="h-48">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={streams.readiness.map((v, i) => ({ time: i, value: v }))}>
+                                <defs>
+                                    <linearGradient id="colorReadiness" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="#00ffff" stopOpacity={0.8} />
+                                        <stop offset="95%" stopColor="#00ffff" stopOpacity={0} />
+                                    </linearGradient>
+                                </defs>
+                                <XAxis dataKey="time" axisLine={false} tickLine={false} tick={false} />
+                                <YAxis domain={[0, 100]} axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#6b7280' }} />
+                                <Tooltip 
+                                    contentStyle={{ 
+                                        backgroundColor: 'rgba(17, 24, 39, 0.9)', 
+                                        border: '1px solid rgba(0, 255, 255, 0.2)',
+                                        borderRadius: '8px'
+                                    }}
+                                />
+                                <Area
+                                    type="monotone"
+                                    dataKey="value"
+                                    stroke="#00ffff"
+                                    fillOpacity={1}
+                                    fill="url(#colorReadiness)"
+                                />
+                            </AreaChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+// Team Management Tab
+const TeamTab = ({ state, dispatch }) => {
+    return (
+        <div className="space-y-6 pb-20">
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                <h2 className="text-xl font-bold text-white mb-6">Team Management</h2>
+                
+                {/* Team Selection */}
+                <div className="mb-6">
+                    <h3 className="text-sm font-semibold text-gray-300 mb-3">Select Team</h3>
+                    <div className="grid grid-cols-2 gap-3">
+                        {TEAMS.map(team => (
+                            <button
+                                key={team.id}
+                                onClick={() => dispatch({ type: "SET_TEAM", team: team.id })}
+                                className={`glass-light rounded-xl p-4 transition-all ${
+                                    state.team === team.id 
+                                        ? 'border-2 border-cyan-400' 
+                                        : 'border border-gray-600'
+                                }`}
+                            >
+                                <div className="text-2xl mb-2">{team.logo}</div>
+                                <div className="text-sm font-semibold text-white">{team.name}</div>
+                                <div className="text-xs text-gray-400">{team.sport}</div>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+                
+                {/* Player Configuration */}
+                <div className="mb-6">
+                    <h3 className="text-sm font-semibold text-gray-300 mb-3">Player Name</h3>
+                    <input
+                        type="text"
+                        value={state.playerName}
+                        onChange={(e) => dispatch({ type: "SET_PLAYER", name: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-black/30 border border-gray-600 text-white"
+                        placeholder="Enter player name"
+                    />
+                </div>
+                
+                {/* Preset Selection */}
+                <div>
+                    <h3 className="text-sm font-semibold text-gray-300 mb-3">Performance Preset</h3>
+                    <div className="space-y-3">
+                        {Object.keys(WEIGHT_PRESETS).map(preset => (
+                            <button
+                                key={preset}
+                                onClick={() => dispatch({ type: "SET_PRESET", preset })}
+                                className={`w-full text-left px-4 py-3 rounded-xl transition-all ${
+                                    state.preset === preset
+                                        ? 'bg-cyan-400/20 border border-cyan-400'
+                                        : 'glass-light border border-gray-600'
+                                }`}
+                            >
+                                <div className="font-semibold text-white">{preset}</div>
+                                <div className="text-xs text-gray-400 mt-1">
+                                    {preset === 'Clutch' && 'Optimized for high-pressure situations'}
+                                    {preset === 'Consistency' && 'Balanced for steady performance'}
+                                    {preset === 'Aggression' && 'Maximized for explosive plays'}
+                                </div>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+// Settings Tab
+const SettingsTab = ({ state, dispatch }) => {
+    const { integrations, analytics } = state;
+    
+    return (
+        <div className="space-y-6 pb-20">
+            <motion.div 
+                className="glass rounded-2xl p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+            >
+                <h2 className="text-xl font-bold text-white mb-6">Settings</h2>
+                
+                {/* System Settings */}
+                <div className="mb-6">
+                    <h3 className="text-sm font-semibold text-gray-300 mb-3">System</h3>
+                    <div className="space-y-4">
+                        <SettingToggle
+                            label="Cloud Sync"
+                            description="Sync data across devices"
+                            value={integrations.cloudSync}
+                            onChange={(value) => dispatch({ type: "UPDATE_INTEGRATION", key: "cloudSync", value })}
+                        />
+                        <SettingToggle
+                            label="Push Notifications"
+                            description="Receive readiness alerts"
+                            value={integrations.notifications}
+                            onChange={(value) => dispatch({ type: "UPDATE_INTEGRATION", key: "notifications", value })}
+                        />
+                        <SettingToggle
+                            label="Haptic Feedback"
+                            description="Vibration on interactions"
+                            value={integrations.hapticFeedback}
+                            onChange={(value) => dispatch({ type: "UPDATE_INTEGRATION", key: "hapticFeedback", value })}
+                        />
+                    </div>
+                </div>
+                
+                {/* Session Stats */}
+                <div className="mb-6">
+                    <h3 className="text-sm font-semibold text-gray-300 mb-3">Session Statistics</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="glass-light rounded-xl p-4">
+                            <div className="text-xs text-gray-400">Duration</div>
+                            <div className="text-lg font-bold text-white">
+                                {Math.floor(analytics.sessionDuration / 60)}:{String(Math.floor(analytics.sessionDuration % 60)).padStart(2, '0')}
+                            </div>
+                        </div>
+                        <div className="glass-light rounded-xl p-4">
+                            <div className="text-xs text-gray-400">Data Points</div>
+                            <div className="text-lg font-bold text-white">{state.streams.readiness.length}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                {/* Speed Control */}
+                <div>
+                    <h3 className="text-sm font-semibold text-gray-300 mb-3">Simulation Speed</h3>
+                    <div className="flex items-center space-x-4">
+                        <span className="text-sm text-gray-400">0.5x</span>
+                        <input
+                            type="range"
+                            min="0.5"
+                            max="4"
+                            step="0.5"
+                            value={state.speed}
+                            onChange={(e) => dispatch({ type: "SET_SPEED", speed: parseFloat(e.target.value) })}
+                            className="flex-1 accent-cyan-400"
+                        />
+                        <span className="text-sm text-gray-400">4x</span>
+                    </div>
+                    <div className="text-center mt-2 text-cyan-400 font-semibold">{state.speed}x</div>
+                </div>
+            </motion.div>
+        </div>
+    );
+};
+
+// Settings Toggle Component
+const SettingToggle = ({ label, description, value, onChange }) => (
+    <div className="flex items-center justify-between">
+        <div>
+            <div className="text-sm font-medium text-white">{label}</div>
+            <div className="text-xs text-gray-400">{description}</div>
+        </div>
+        <button
+            onClick={() => onChange(!value)}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                value ? 'bg-cyan-500' : 'bg-gray-600'
+            }`}
+        >
+            <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    value ? 'translate-x-6' : 'translate-x-1'
+                }`}
+            />
+        </button>
+    </div>
+);
+
+// Sidebar Component
+const Sidebar = ({ isOpen, onClose, state, dispatch }) => {
+    return (
+        <AnimatePresence>
+            {isOpen && (
+                <>
+                    <motion.div
+                        className="fixed inset-0 z-50 bg-black/50"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={onClose}
+                    />
+                    <motion.div
+                        className="fixed right-0 top-0 bottom-0 w-80 max-w-[90vw] glass z-50 overflow-y-auto"
+                        initial={{ x: "100%" }}
+                        animate={{ x: 0 }}
+                        exit={{ x: "100%" }}
+                        transition={{ type: "tween", duration: 0.3 }}
+                    >
+                        <div className="p-6">
+                            <div className="flex items-center justify-between mb-6">
+                                <h2 className="text-xl font-bold text-white">Quick Controls</h2>
+                                <button
+                                    onClick={onClose}
+                                    className="p-2 rounded-lg glass-light"
+                                >
+                                    ✕
+                                </button>
+                            </div>
+                            
+                            {/* Scenario Controls */}
+                            <div className="space-y-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                                        Pressure: {state.scenario.pressure}%
+                                    </label>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        value={state.scenario.pressure}
+                                        onChange={(e) => dispatch({ 
+                                            type: "SET_SCENARIO", 
+                                            patch: { pressure: parseInt(e.target.value) }
+                                        })}
+                                        className="w-full accent-red-400"
+                                    />
+                                </div>
+                                
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                                        Fatigue: {state.scenario.fatigue}%
+                                    </label>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        value={state.scenario.fatigue}
+                                        onChange={(e) => dispatch({ 
+                                            type: "SET_SCENARIO", 
+                                            patch: { fatigue: parseInt(e.target.value) }
+                                        })}
+                                        className="w-full accent-yellow-400"
+                                    />
+                                </div>
+                                
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                                        Momentum: {state.scenario.momentum}%
+                                    </label>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        value={state.scenario.momentum}
+                                        onChange={(e) => dispatch({ 
+                                            type: "SET_SCENARIO", 
+                                            patch: { momentum: parseInt(e.target.value) }
+                                        })}
+                                        className="w-full accent-green-400"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
+    );
+};
+
+// Notifications Component
+const Notifications = ({ notifications, onClear }) => {
+    return (
+        <AnimatePresence>
+            {notifications.map((notification) => (
+                <motion.div
+                    key={notification.id}
+                    className="fixed top-20 right-4 z-40 max-w-sm glass rounded-2xl p-4 border-l-4 border-cyan-400"
+                    initial={{ x: 400, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: 400, opacity: 0 }}
+                    transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                >
+                    <div className="flex items-start gap-3">
+                        <div className="text-2xl">
+                            {notification.type === 'success' ? '✅' : notification.type === 'warning' ? '⚠️' : 'ℹ️'}
+                        </div>
+                        <div className="flex-1">
+                            <p className="text-sm font-medium text-white">{notification.message}</p>
+                            <p className="text-xs text-gray-400 mt-1">
+                                {new Date(notification.timestamp).toLocaleTimeString()}
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => onClear(notification.id)}
+                            className="text-gray-400 hover:text-white"
+                        >
+                            ✕
+                        </button>
+                    </div>
+                </motion.div>
+            ))}
+        </AnimatePresence>
+    );
+};
+
+// ============== MAIN APP COMPONENT ==============
+
+function BlazeIntelligenceMobileApp() {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    
+    // Simulation Loop
+    useEffect(() => {
+        if (!state.running) return;
+        
+        const interval = setInterval(() => {
+            dispatch({ type: "TICK" });
+        }, 250 / state.speed);
+        
+        return () => clearInterval(interval);
+    }, [state.running, state.speed]);
+    
+    // Auto-generate notifications
+    useEffect(() => {
+        const readiness = state.streams.readiness[state.streams.readiness.length - 1] || 0;
+        
+        // Peak performance notification
+        if (readiness > 90 && state.notifications.length === 0) {
+            dispatch({ 
+                type: "ADD_NOTIFICATION", 
+                notification: {
+                    id: Date.now(),
+                    message: `🔥 Peak performance detected! Readiness: ${Math.round(readiness)}`,
+                    type: "success",
+                    timestamp: Date.now()
+                }
+            });
+        }
+        
+        // Low readiness warning
+        if (readiness < 30 && state.scenario.pressure > 60) {
+            dispatch({ 
+                type: "ADD_NOTIFICATION", 
+                notification: {
+                    id: Date.now(),
+                    message: `⚠️ Low readiness in high pressure situation`,
+                    type: "warning",
+                    timestamp: Date.now()
+                }
+            });
+        }
+    }, [state.streams.readiness, state.scenario.pressure, state.notifications.length]);
+    
+    const renderTabContent = () => {
+        switch (state.activeTab) {
+            case "dashboard":
+                return <DashboardTab state={state} dispatch={dispatch} />;
+            case "analytics":
+                return <AnalyticsTab state={state} dispatch={dispatch} />;
+            case "team":
+                return <TeamTab state={state} dispatch={dispatch} />;
+            case "settings":
+                return <SettingsTab state={state} dispatch={dispatch} />;
+            default:
+                return <DashboardTab state={state} dispatch={dispatch} />;
+        }
+    };
+    
+    return (
+        <div className="min-h-screen bg-blaze-gradient text-white relative">
+            <MobileHeader state={state} dispatch={dispatch} />
+            
+            <main className="px-4 py-6">
+                {renderTabContent()}
+            </main>
+            
+            <MobileNavigation 
+                activeTab={state.activeTab} 
+                onTabChange={(tab) => dispatch({ type: "SET_TAB", tab })} 
+            />
+            
+            <Sidebar 
+                isOpen={state.sidebarOpen} 
+                onClose={() => dispatch({ type: "TOGGLE_SIDEBAR" })} 
+                state={state} 
+                dispatch={dispatch} 
+            />
+            
+            <Notifications 
+                notifications={state.notifications} 
+                onClear={(id) => dispatch({ 
+                    type: "ADD_NOTIFICATION", 
+                    notification: state.notifications.filter(n => n.id !== id) 
+                })} 
+            />
+        </div>
+    );
+}
+
+// Render the app
+ReactDOM.render(<BlazeIntelligenceMobileApp />, document.getElementById('root'));
+</script>
+</body>
+</html>

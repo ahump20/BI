@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Blaze Game Schema",
+  "type": "object",
+  "required": ["game_id", "sport", "home_team_id", "away_team_id"],
+  "properties": {
+    "game_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9-]+$",
+      "description": "Unique game identifier"
+    },
+    "sport": {
+      "type": "string",
+      "enum": ["MLB", "NFL", "NBA", "NCAA-FB", "NCAA-BB", "HS-FB", "HS-BB"],
+      "description": "Sport classification"
+    },
+    "league": {
+      "type": ["string", "null"],
+      "maxLength": 50,
+      "description": "League or division"
+    },
+    "home_team_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,5}-[A-Z]{2,4}$",
+      "description": "Home team identifier"
+    },
+    "away_team_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,5}-[A-Z]{2,4}$",
+      "description": "Away team identifier"
+    },
+    "game_date": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "Scheduled game date and time"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["scheduled", "in_progress", "completed", "postponed", "cancelled"],
+      "default": "scheduled",
+      "description": "Current game status"
+    },
+    "home_score": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Home team final score"
+    },
+    "away_score": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Away team final score"
+    },
+    "game_type": {
+      "type": ["string", "null"],
+      "enum": ["regular", "playoff", "championship", "exhibition", "spring_training"],
+      "description": "Type of game"
+    },
+    "venue": {
+      "type": ["string", "null"],
+      "maxLength": 100,
+      "description": "Venue name"
+    },
+    "attendance": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Game attendance"
+    },
+    "weather_conditions": {
+      "type": ["object", "null"],
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "description": "Temperature in Fahrenheit"
+        },
+        "humidity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Humidity percentage"
+        },
+        "wind_speed": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Wind speed in MPH"
+        },
+        "wind_direction": {
+          "type": "string",
+          "pattern": "^(N|NE|E|SE|S|SW|W|NW)$",
+          "description": "Wind direction"
+        },
+        "conditions": {
+          "type": "string",
+          "enum": ["clear", "cloudy", "overcast", "rain", "snow", "fog"],
+          "description": "Weather conditions"
+        },
+        "is_dome": {
+          "type": "boolean",
+          "description": "Indoor/domed venue"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Weather conditions for outdoor games"
+    },
+    "win_probability_data": {
+      "type": ["object", "null"],
+      "properties": {
+        "pre_game": {
+          "type": "object",
+          "properties": {
+            "home_win_prob": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "away_win_prob": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        },
+        "live_updates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "home_win_prob": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "away_win_prob": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "leverage_index": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false,
+      "description": "Win probability calculations"
+    },
+    "key_moments": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "period": {
+            "type": "string",
+            "description": "Inning, quarter, period, etc."
+          },
+          "event_type": {
+            "type": "string",
+            "enum": ["score", "turnover", "injury", "ejection", "weather_delay", "momentum_shift"]
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "impact_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10,
+            "description": "Impact on game outcome (0-10)"
+          },
+          "players_involved": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["timestamp", "event_type", "description"]
+      },
+      "description": "Key game moments and turning points"
+    },
+    "broadcast_info": {
+      "type": ["object", "null"],
+      "properties": {
+        "tv_network": {
+          "type": ["string", "null"],
+          "description": "Television broadcast network"
+        },
+        "streaming_platform": {
+          "type": ["string", "null"],
+          "description": "Streaming platform"
+        },
+        "radio_station": {
+          "type": ["string", "null"],
+          "description": "Radio broadcast station"
+        },
+        "announcers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Broadcast announcers"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Broadcast and media information"
+    },
+    "betting_lines": {
+      "type": ["object", "null"],
+      "properties": {
+        "spread": {
+          "type": "number",
+          "description": "Point spread (positive for underdog)"
+        },
+        "over_under": {
+          "type": "number",
+          "description": "Over/under total points"
+        },
+        "moneyline_home": {
+          "type": "integer",
+          "description": "Home team moneyline odds"
+        },
+        "moneyline_away": {
+          "type": "integer",
+          "description": "Away team moneyline odds"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Pre-game betting information"
+    },
+    "analytics_data": {
+      "type": ["object", "null"],
+      "properties": {
+        "pace_of_play": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Game pace metric"
+        },
+        "efficiency_ratings": {
+          "type": "object",
+          "properties": {
+            "home_offense": {
+              "type": "number"
+            },
+            "home_defense": {
+              "type": "number"
+            },
+            "away_offense": {
+              "type": "number"
+            },
+            "away_defense": {
+              "type": "number"
+            }
+          }
+        },
+        "advanced_stats": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Sport-specific advanced statistics"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Advanced analytics and metrics"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Record creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    }
+  },
+  "additionalProperties": false
+}

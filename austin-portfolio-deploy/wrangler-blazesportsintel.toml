@@ -1,0 +1,73 @@
+name = "blazesportsintel"
+compatibility_date = "2024-09-25"
+pages_build_output_dir = "."
+
+# Production environment
+[env.production]
+name = "blazesportsintel"
+
+# R2 Storage bindings for media assets
+[[r2_buckets]]
+binding = "BLAZE_STORAGE"
+bucket_name = "blaze-intelligence-data"
+
+[[r2_buckets]]
+binding = "MEDIA_STORAGE"
+bucket_name = "blaze-media-assets"
+
+# KV Namespaces for caching
+[[kv_namespaces]]
+binding = "CACHE_KV"
+id = "championship_analytics_cache"
+preview_id = "championship_analytics_preview"
+
+# D1 Database for sports data
+[[d1_databases]]
+binding = "SPORTS_DB"
+database_name = "blaze-sports-data"
+database_id = "sports-data-production"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+API_VERSION = "2.0.0"
+SITE_URL = "https://blazesportsintel.com"
+CACHE_TTL_SECONDS = "300"
+ENABLE_CACHE = "true"
+CORS_ORIGINS = "https://blazesportsintel.com,https://www.blazesportsintel.com,https://blazesportsintel.pages.dev"
+ENABLE_3D_GRAPHICS = "true"
+MONTE_CARLO_ITERATIONS = "10000"
+LEAGUE_DATA_UPDATE_INTERVAL = "300"
+CHAMPIONSHIP_MODE = "true"
+
+# Site configuration
+[site]
+bucket = "./site"
+include = ["*"]
+exclude = ["node_modules", ".git", "*.md", ".*", "package*.json", "tsconfig.json", "*.ts"]
+
+# Build configuration for optimization
+[build]
+command = ""  # No build step needed since files are ready
+watch_paths = ["**/*.html", "**/*.js", "**/*.css", "data/**/*.json"]
+
+# Browser caching rules
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
+
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=300"

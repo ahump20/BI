@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#BF5700">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Blaze Intelligence">
+
+    <title>Blaze Intelligence Mobile - Championship Sports Analytics</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- iOS specific meta tags -->
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="apple-touch-icon" href="/images/icon-180x180.png">
+
+    <!-- Mobile optimized stylesheets -->
+    <link rel="preload" href="/css/blaze-mobile-enhancements.css" as="style">
+    <link rel="stylesheet" href="/css/blaze-mobile-enhancements.css">
+    <link rel="stylesheet" href="/css/blaze-professional.css">
+
+    <style>
+        /* Mobile-First Championship Platform Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            touch-action: manipulation;
+        }
+
+        /* Texas Heritage Color System */
+        :root {
+            --burnt-orange: #BF5700;
+            --cardinal-blue: #9BCBEB;
+            --championship-gold: #FFD700;
+            --deep-navy: #0a0e27;
+            --success-green: #28a745;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--burnt-orange);
+            padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            min-width: 60px;
+        }
+
+        .nav-item.active {
+            background: var(--burnt-orange);
+            color: #ffffff;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+            fill: currentColor;
+        }
+
+        /* Hero Section - Mobile Optimized */
+        .hero-section {
+            padding: 60px 20px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--burnt-orange) 0%, #d63384 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(45deg, #ffffff, var(--championship-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-container {
+            padding: 20px 16px 100px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(191, 87, 0, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 12px;
+            fill: var(--burnt-orange);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 16px;
+        }
+
+        /* Metrics Display */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .metric-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--championship-gold);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        /* Team Cards */
+        .teams-section {
+            margin-bottom: 24px;
+        }
+
+        .team-card {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--burnt-orange);
+        }
+
+        .team-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--burnt-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .team-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .team-stats {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* Live Indicator */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: var(--success-green);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Pull to Refresh */
+        .pull-to-refresh {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--burnt-orange);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .pull-to-refresh.visible {
+            top: 20px;
+        }
+
+        /* Action Buttons */
+        .action-button {
+            background: var(--burnt-orange);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .action-button:hover {
+            background: #a04a00;
+            transform: translateY(-1px);
+        }
+
+        /* Touch Feedback */
+        .touch-feedback {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .touch-feedback::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .touch-feedback:active::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 375px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .dashboard-container {
+                padding: 16px 12px 100px;
+            }
+
+            .dashboard-card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .hero-section {
+                padding: 40px 20px 30px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .dashboard-card {
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Pull to Refresh Indicator -->
+    <div class="pull-to-refresh" id="pullToRefresh">
+        ↓ Pull to refresh
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 class="hero-title">Championship Analytics</h1>
+        <p class="hero-subtitle">Mobile-first sports intelligence for coaches on the field</p>
+
+        <!-- Live Status -->
+        <div class="live-indicator">
+            <div class="live-dot"></div>
+            LIVE DATA
+        </div>
+    </section>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container" id="dashboardContainer">
+
+        <!-- Cardinals Card -->
+        <div class="dashboard-card touch-feedback" data-team="cardinals">
+            <div class="card-header">
+                <svg class="card-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                <div>
+                    <div class="card-title">St. Louis Cardinals</div>
+                    <div class="card-subtitle">MLB • National League Central</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-value">83-79</div>
+                    <div class="metric-label">Record</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">2nd</div>
+                    <div class="metric-label">Division</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">.512</div>
+                    <div class="metric-label">Win %</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">4.2</div>
+                    <div class="metric-label">ERA</div>
+                </div>
+            </div>
+
+            <button class="action-button">View Full Analytics</button>
+        </div>
+
+        <!-- Titans Card -->
+        <div class="dashboard-card touch-feedback" data-team="titans">
+            <div class="card-header">
+                <svg class="card-icon" viewBox="0 0 24 24">
+                    <path d="M18 9l-1.41-1.42L12 12.17 7.41 7.58 6 9l6 6 6-6zm0 6l-1.41-1.42L12 18.17l-4.59-4.59L6 15l6 6 6-6z"/>
+                </svg>
+                <div>
+                    <div class="card-title">Tennessee Titans</div>
+                    <div class="card-subtitle">NFL • AFC South</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-value">6-11</div>
+                    <div class="metric-label">Record</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">4th</div>
+                    <div class="metric-label">Division</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">18.8</div>
+                    <div class="metric-label">PPG</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">27.1</div>
+                    <div class="metric-label">PA/G</div>
+                </div>
+            </div>
+
+            <button class="action-button">View Full Analytics</button>
+        </div>
+
+        <!-- Longhorns Card -->
+        <div class="dashboard-card touch-feedback" data-team="longhorns">
+            <div class="card-header">
+                <svg class="card-icon" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <div>
+                    <div class="card-title">Texas Longhorns</div>
+                    <div class="card-subtitle">NCAA • Southeastern Conference</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-value">13-1</div>
+                    <div class="metric-label">Record</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">#7</div>
+                    <div class="metric-label">SEC Rank</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">31.4</div>
+                    <div class="metric-label">PPG</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">15.8</div>
+                    <div class="metric-label">PA/G</div>
+                </div>
+            </div>
+
+            <button class="action-button">View Full Analytics</button>
+        </div>
+
+        <!-- Grizzlies Card -->
+        <div class="dashboard-card touch-feedback" data-team="grizzlies">
+            <div class="card-header">
+                <svg class="card-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM8.5 16L12 13.5 15.5 16 12 18.5 8.5 16z"/>
+                </svg>
+                <div>
+                    <div class="card-title">Memphis Grizzlies</div>
+                    <div class="card-subtitle">NBA • Western Conference</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-value">23-11</div>
+                    <div class="metric-label">Record</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">2nd</div>
+                    <div class="metric-label">West</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">122.3</div>
+                    <div class="metric-label">PPG</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value">107.8</div>
+                    <div class="metric-label">PA/G</div>
+                </div>
+            </div>
+
+            <button class="action-button">View Full Analytics</button>
+        </div>
+
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <a href="#" class="nav-item active" data-section="dashboard">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+            </svg>
+            Dashboard
+        </a>
+
+        <a href="#" class="nav-item" data-section="analytics">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+            </svg>
+            Analytics
+        </a>
+
+        <a href="#" class="nav-item" data-section="nil">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+            </svg>
+            NIL
+        </a>
+
+        <a href="#" class="nav-item" data-section="recruiting">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-1 16H9V7h9v14z"/>
+            </svg>
+            Recruiting
+        </a>
+
+        <a href="#" class="nav-item" data-section="more">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+                <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+            More
+        </a>
+    </nav>
+
+    <!-- JavaScript for Mobile Interactions -->
+    <script>
+        // Mobile-first JavaScript with performance optimizations
+        const MobileChampionshipDashboard = {
+            init() {
+                this.setupTouchHandlers();
+                this.setupPullToRefresh();
+                this.setupNavigation();
+                this.loadLiveData();
+                this.setupServiceWorker();
+            },
+
+            // Touch interaction handlers
+            setupTouchHandlers() {
+                const cards = document.querySelectorAll('.touch-feedback');
+
+                cards.forEach(card => {
+                    card.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: true });
+                    card.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: true });
+                    card.addEventListener('click', this.handleCardClick.bind(this));
+                });
+            },
+
+            handleTouchStart(e) {
+                e.currentTarget.style.transform = 'scale(0.98)';
+                e.currentTarget.style.opacity = '0.8';
+            },
+
+            handleTouchEnd(e) {
+                setTimeout(() => {
+                    e.currentTarget.style.transform = '';
+                    e.currentTarget.style.opacity = '';
+                }, 150);
+            },
+
+            handleCardClick(e) {
+                const team = e.currentTarget.dataset.team;
+                if (team) {
+                    // Navigate to team-specific analytics
+                    window.location.href = `/${team}`;
+                }
+            },
+
+            // Pull to refresh functionality
+            setupPullToRefresh() {
+                let startY = 0;
+                let pullDistance = 0;
+                const refreshIndicator = document.getElementById('pullToRefresh');
+                const threshold = 80;
+
+                document.addEventListener('touchstart', (e) => {
+                    if (window.scrollY === 0) {
+                        startY = e.touches[0].clientY;
+                    }
+                }, { passive: true });
+
+                document.addEventListener('touchmove', (e) => {
+                    if (window.scrollY === 0 && startY > 0) {
+                        pullDistance = e.touches[0].clientY - startY;
+
+                        if (pullDistance > 0 && pullDistance < 150) {
+                            refreshIndicator.style.transform = `translateX(-50%) translateY(${pullDistance - 60}px)`;
+
+                            if (pullDistance > threshold) {
+                                refreshIndicator.textContent = '↑ Release to refresh';
+                                refreshIndicator.style.background = '#28a745';
+                            } else {
+                                refreshIndicator.textContent = '↓ Pull to refresh';
+                                refreshIndicator.style.background = 'var(--burnt-orange)';
+                            }
+                        }
+                    }
+                }, { passive: true });
+
+                document.addEventListener('touchend', () => {
+                    if (pullDistance > threshold) {
+                        this.refreshData();
+                    }
+
+                    // Reset
+                    refreshIndicator.style.transform = 'translateX(-50%) translateY(-60px)';
+                    startY = 0;
+                    pullDistance = 0;
+                }, { passive: true });
+            },
+
+            // Navigation handling
+            setupNavigation() {
+                const navItems = document.querySelectorAll('.nav-item');
+
+                navItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+
+                        // Remove active class from all items
+                        navItems.forEach(nav => nav.classList.remove('active'));
+
+                        // Add active class to clicked item
+                        item.classList.add('active');
+
+                        // Handle section navigation
+                        const section = item.dataset.section;
+                        this.navigateToSection(section);
+                    });
+                });
+            },
+
+            navigateToSection(section) {
+                // Implement smooth section navigation
+                switch (section) {
+                    case 'dashboard':
+                        // Already on dashboard
+                        break;
+                    case 'analytics':
+                        window.location.href = '/analytics';
+                        break;
+                    case 'nil':
+                        window.location.href = '/nil-calculator';
+                        break;
+                    case 'recruiting':
+                        window.location.href = '/recruiting';
+                        break;
+                    case 'more':
+                        this.showMoreMenu();
+                        break;
+                }
+            },
+
+            // Data loading and refreshing
+            loadLiveData() {
+                // Simulated live data updates
+                this.updateMetrics();
+
+                // Set up periodic updates every 30 seconds
+                setInterval(() => {
+                    this.updateMetrics();
+                }, 30000);
+            },
+
+            updateMetrics() {
+                // Simulate live data updates with small variations
+                const cards = document.querySelectorAll('.dashboard-card');
+
+                cards.forEach(card => {
+                    const metrics = card.querySelectorAll('.metric-value');
+
+                    metrics.forEach(metric => {
+                        // Add subtle animation to show live updates
+                        metric.style.animation = 'none';
+                        metric.offsetHeight; // Trigger reflow
+                        metric.style.animation = 'pulse 1s ease-in-out';
+                    });
+                });
+            },
+
+            refreshData() {
+                const refreshIndicator = document.getElementById('pullToRefresh');
+                refreshIndicator.textContent = '🔄 Refreshing...';
+                refreshIndicator.style.background = '#17a2b8';
+
+                // Simulate data refresh
+                setTimeout(() => {
+                    this.updateMetrics();
+                    refreshIndicator.textContent = '✓ Updated';
+                    refreshIndicator.style.background = '#28a745';
+
+                    setTimeout(() => {
+                        refreshIndicator.textContent = '↓ Pull to refresh';
+                        refreshIndicator.style.background = 'var(--burnt-orange)';
+                    }, 1500);
+                }, 1000);
+            },
+
+            // Service Worker for offline functionality
+            setupServiceWorker() {
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(registration => {
+                            console.log('ServiceWorker registered');
+                        })
+                        .catch(error => {
+                            console.log('ServiceWorker registration failed');
+                        });
+                }
+            },
+
+            showMoreMenu() {
+                // Show additional menu options
+                const moreOptions = [
+                    { name: 'Video Intelligence', url: '/video-intelligence' },
+                    { name: 'Character Assessment', url: '/character-assessment' },
+                    { name: 'Biomechanics', url: '/biomechanics' },
+                    { name: 'Settings', url: '/settings' }
+                ];
+
+                // Create simple menu overlay
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.8);
+                    z-index: 2000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                `;
+
+                const menu = document.createElement('div');
+                menu.style.cssText = `
+                    background: var(--deep-navy);
+                    border-radius: 16px;
+                    padding: 24px;
+                    max-width: 300px;
+                    width: 90%;
+                `;
+
+                moreOptions.forEach(option => {
+                    const button = document.createElement('a');
+                    button.href = option.url;
+                    button.textContent = option.name;
+                    button.style.cssText = `
+                        display: block;
+                        padding: 16px;
+                        text-decoration: none;
+                        color: white;
+                        border-bottom: 1px solid rgba(255,255,255,0.1);
+                        font-weight: 500;
+                    `;
+                    menu.appendChild(button);
+                });
+
+                const closeButton = document.createElement('button');
+                closeButton.textContent = 'Close';
+                closeButton.style.cssText = `
+                    width: 100%;
+                    padding: 16px;
+                    background: var(--burnt-orange);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    margin-top: 16px;
+                `;
+                closeButton.onclick = () => overlay.remove();
+
+                menu.appendChild(closeButton);
+                overlay.appendChild(menu);
+                document.body.appendChild(overlay);
+            }
+        };
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            MobileChampionshipDashboard.init();
+        });
+
+        // Handle device orientation changes
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            }, 100);
+        });
+
+    </script>
+</body>
+</html>

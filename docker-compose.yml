@@ -1,0 +1,195 @@
+# Blaze Intelligence Platform - Docker Compose Configuration
+# Complete development and production stack with analytics services
+
+version: '3.8'
+
+services:
+  # Main Blaze Intelligence Application
+  blaze-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=production
+      - PORT=8000
+      - DATABASE_URL=${NEON_DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      - CLOUDFLARE_ZONE_ID=${CLOUDFLARE_ZONE_ID}
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
+    volumes:
+      - ./data:/app/data:ro
+      - ./logs:/app/logs
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - blaze-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Redis Cache for Sports Data
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - blaze-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # PostgreSQL Database (fallback/local development)
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=blaze_intelligence
+      - POSTGRES_USER=${POSTGRES_USER:-blaze}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-blazepass}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./schemas/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - blaze-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-blaze}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Analytics Worker (Python-based)
+  analytics-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    command: ["python3", "scripts/analytics_worker.py"]
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=${NEON_DATABASE_URL}
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./data:/app/data:ro
+      - ./logs:/app/logs
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - blaze-network
+    restart: unless-stopped
+
+  # MCP Server for Cardinals Analytics
+  mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    command: ["node", "cardinals-analytics-server.js"]
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - MCP_PORT=3001
+      - DATABASE_URL=${NEON_DATABASE_URL}
+    volumes:
+      - ./data:/app/data:ro
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - blaze-network
+    restart: unless-stopped
+
+  # Nginx Reverse Proxy (Production)
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - nginx-logs:/var/log/nginx
+    depends_on:
+      - blaze-app
+    networks:
+      - blaze-network
+    restart: unless-stopped
+    profiles:
+      - production
+
+  # Monitoring (Prometheus + Grafana stack)
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    networks:
+      - blaze-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./config/grafana:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus
+    networks:
+      - blaze-network
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+networks:
+  blaze-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  redis-data:
+    driver: local
+  postgres-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  nginx-logs:
+    driver: local
+
+# Development override for hot-reloading
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up

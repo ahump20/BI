@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze Intelligence | Deep South Sports Intelligence Platform</title>
+    <meta name="description" content="Professional sports intelligence platform with advanced analytics for coaches, scouts, and programs">
+
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Three.js for 3D visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r158/three.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        #three-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .auth-logo h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 50%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-logo p {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #b0b0b0;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #BF5700;
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.3);
+        }
+
+        .form-input::placeholder {
+            color: #606060;
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .form-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.4);
+        }
+
+        .form-button:active {
+            transform: translateY(0);
+        }
+
+        .form-button.secondary {
+            background: transparent;
+            border: 2px solid #BF5700;
+            color: #BF5700;
+            margin-top: 0.5rem;
+        }
+
+        .form-link {
+            text-align: center;
+            margin-top: 2rem;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .form-link a {
+            color: #BF5700;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .form-link a:hover {
+            color: #FF8C00;
+        }
+
+        .onboarding-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .onboarding-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(191, 87, 0, 0.2);
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+        .progress-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(191, 87, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #606060;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.active {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            border-color: #BF5700;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .progress-step.completed {
+            background: #00B2A9;
+            border-color: #00B2A9;
+            color: white;
+        }
+
+        .onboarding-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .onboarding-description {
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option:hover {
+            background: rgba(0, 0, 0, 0.4);
+            border-color: rgba(191, 87, 0, 0.4);
+        }
+
+        .radio-option.selected {
+            background: rgba(191, 87, 0, 0.1);
+            border-color: #BF5700;
+        }
+
+        .radio-input {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            accent-color: #BF5700;
+        }
+
+        .radio-label {
+            flex: 1;
+        }
+
+        .radio-title {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .radio-desc {
+            color: #808080;
+            font-size: 0.875rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .dashboard-container {
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .dashboard-header {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-logo h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #BF5700;
+        }
+
+        .nav-link.active {
+            color: #FF8C00;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .dashboard-main {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .welcome-subtitle {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.2);
+        }
+
+        .stat-label {
+            color: #808080;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            color: #00B2A9;
+            font-size: 0.875rem;
+        }
+
+        .tools-section {
+            margin-top: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .error-message {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .success-message {
+            background: rgba(0, 178, 169, 0.1);
+            border: 1px solid rgba(0, 178, 169, 0.3);
+            color: #00B2A9;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Preserve existing styles for tools */
+        .hero {
+            min-height: auto;
+            padding: 2rem;
+        }
+
+        .hero-badge {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            width: 100%;
+            padding: 2rem 0;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(191, 87, 0, 0.6);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .value-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-metric {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .metric-label {
+            color: #808080;
+            font-size: 0.875rem;
+        }
+
+        .metric-value {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-left: auto;
+        }
+
+        .live-demo-section {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(191, 87, 0, 0.2);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .demo-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .interactive-tool {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-badge {
+            background: linear-gradient(135deg, #00B2A9 0%, #00D4AA 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tool-badge.live {
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            animation: pulse 2s infinite;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-label {
+            color: #a0a0a0;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .input-field {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #BF5700;
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 10px rgba(191, 87, 0, 0.3);
+        }
+
+        select.input-field {
+            cursor: pointer;
+        }
+
+        select.input-field option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #BF5700 0%, #FF8C00 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(191, 87, 0, 0.4);
+        }
+
+        .result-display {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+            border: 2px solid #BF5700;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #BF5700 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            color: #a0a0a0;
+            font-size: 1rem;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00B2A9 0%, #00D4AA 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 212, 170, 0.4);
+            display: none;
+            z-index: 1000;
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-nav {
+                display: none;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Three.js 3D Background Container -->
+    <div id="three-container"></div>
+
+    <!-- React Root -->
+    <div id="root"></div>
+
+    <!-- Notification for feedback -->
+    <div id="notification" class="notification">
+        <span id="notification-text">Feature activated!</span>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Auth Context
+        const AuthContext = React.createContext(null);
+
+        // Mock authentication service
+        const authService = {
+            login: async (email, password) => {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                if (email && password) {
+                    const user = {
+                        id: '1',
+                        email,
+                        name: email.split('@')[0],
+                        role: 'premium',
+                        onboarded: localStorage.getItem('onboarded') === 'true'
+                    };
+                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('token', 'mock-jwt-token');
+                    return { success: true, user };
+                }
+                return { success: false, error: 'Invalid credentials' };
+            },
+
+            signup: async (email, password, name) => {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                if (email && password && name) {
+                    const user = {
+                        id: '1',
+                        email,
+                        name,
+                        role: 'trial',
+                        onboarded: false
+                    };
+                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('token', 'mock-jwt-token');
+                    return { success: true, user };
+                }
+                return { success: false, error: 'Signup failed' };
+            },
+
+            logout: () => {
+                localStorage.removeItem('user');
+                localStorage.removeItem('token');
+                localStorage.removeItem('onboarded');
+            },
+
+            getCurrentUser: () => {
+                const userStr = localStorage.getItem('user');
+                return userStr ? JSON.parse(userStr) : null;
+            }
+        };
+
+        // Login Component
+        const LoginForm = ({ onSwitch }) => {
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('');
+            const [error, setError] = useState('');
+            const [loading, setLoading] = useState(false);
+            const { login } = React.useContext(AuthContext);
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setError('');
+                setLoading(true);
+
+                const result = await authService.login(email, password);
+
+                if (result.success) {
+                    login(result.user);
+                } else {
+                    setError(result.error || 'Login failed');
+                }
+
+                setLoading(false);
+            };
+
+            return (
+                <div className="auth-container">
+                    <div className="auth-card">
+                        <div className="auth-logo">
+                            <h1>Blaze Intelligence</h1>
+                            <p>Deep South Sports Authority</p>
+                        </div>
+
+                        {error && <div className="error-message">{error}</div>}
+
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label className="form-label">Email Address</label>
+                                <input
+                                    type="email"
+                                    className="form-input"
+                                    placeholder="coach@team.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">Password</label>
+                                <input
+                                    type="password"
+                                    className="form-input"
+                                    placeholder="••••••••"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <button type="submit" className="form-button" disabled={loading}>
+                                {loading ? 'Logging in...' : 'Login to Dashboard'}
+                            </button>
+                        </form>
+
+                        <div className="form-link">
+                            Don't have an account? <a href="#" onClick={(e) => { e.preventDefault(); onSwitch(); }}>Sign up</a>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Signup Component
+        const SignupForm = ({ onSwitch }) => {
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('');
+            const [name, setName] = useState('');
+            const [organization, setOrganization] = useState('');
+            const [error, setError] = useState('');
+            const [loading, setLoading] = useState(false);
+            const { login } = React.useContext(AuthContext);
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setError('');
+                setLoading(true);
+
+                const result = await authService.signup(email, password, name);
+
+                if (result.success) {
+                    login(result.user);
+                } else {
+                    setError(result.error || 'Signup failed');
+                }
+
+                setLoading(false);
+            };
+
+            return (
+                <div className="auth-container">
+                    <div className="auth-card">
+                        <div className="auth-logo">
+                            <h1>Blaze Intelligence</h1>
+                            <p>Start Your Free Trial</p>
+                        </div>
+
+                        {error && <div className="error-message">{error}</div>}
+
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label className="form-label">Full Name</label>
+                                <input
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="John Smith"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">Organization</label>
+                                <input
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Texas High School"
+                                    value={organization}
+                                    onChange={(e) => setOrganization(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">Email Address</label>
+                                <input
+                                    type="email"
+                                    className="form-input"
+                                    placeholder="coach@team.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label className="form-label">Password</label>
+                                <input
+                                    type="password"
+                                    className="form-input"
+                                    placeholder="Minimum 8 characters"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    minLength="8"
+                                    required
+                                />
+                            </div>
+
+                            <button type="submit" className="form-button" disabled={loading}>
+                                {loading ? 'Creating Account...' : 'Start Free Trial'}
+                            </button>
+                        </form>
+
+                        <div className="form-link">
+                            Already have an account? <a href="#" onClick={(e) => { e.preventDefault(); onSwitch(); }}>Login</a>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Onboarding Component
+        const OnboardingFlow = ({ onComplete }) => {
+            const [step, setStep] = useState(1);
+            const [data, setData] = useState({
+                role: '',
+                sports: [],
+                teamSize: '',
+                goals: []
+            });
+
+            const handleNext = () => {
+                if (step < 4) {
+                    setStep(step + 1);
+                } else {
+                    // Complete onboarding
+                    localStorage.setItem('onboarded', 'true');
+                    const user = authService.getCurrentUser();
+                    if (user) {
+                        user.onboarded = true;
+                        user.onboardingData = data;
+                        localStorage.setItem('user', JSON.stringify(user));
+                    }
+                    onComplete();
+                }
+            };
+
+            const handleBack = () => {
+                if (step > 1) {
+                    setStep(step - 1);
+                }
+            };
+
+            return (
+                <div className="onboarding-container">
+                    <div className="onboarding-card">
+                        <div className="progress-bar">
+                            {[1, 2, 3, 4].map(num => (
+                                <div
+                                    key={num}
+                                    className={`progress-step ${step === num ? 'active' : ''} ${step > num ? 'completed' : ''}`}
+                                >
+                                    {step > num ? '✓' : num}
+                                </div>
+                            ))}
+                        </div>
+
+                        {step === 1 && (
+                            <>
+                                <h2 className="onboarding-title">Welcome to Blaze Intelligence</h2>
+                                <p className="onboarding-description">
+                                    Let's get you set up with the perfect analytics tools for your program.
+                                    First, tell us about your role.
+                                </p>
+                                <div className="radio-group">
+                                    {['Head Coach', 'Assistant Coach', 'Scout', 'Athletic Director', 'Analyst'].map(role => (
+                                        <div
+                                            key={role}
+                                            className={`radio-option ${data.role === role ? 'selected' : ''}`}
+                                            onClick={() => setData({...data, role})}
+                                        >
+                                            <input
+                                                type="radio"
+                                                className="radio-input"
+                                                checked={data.role === role}
+                                                onChange={() => setData({...data, role})}
+                                            />
+                                            <div className="radio-label">
+                                                <div className="radio-title">{role}</div>
+                                                <div className="radio-desc">
+                                                    {role === 'Head Coach' && 'Lead program strategy and development'}
+                                                    {role === 'Assistant Coach' && 'Support coaching and player development'}
+                                                    {role === 'Scout' && 'Evaluate talent and opponents'}
+                                                    {role === 'Athletic Director' && 'Oversee athletic programs'}
+                                                    {role === 'Analyst' && 'Provide data-driven insights'}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                        {step === 2 && (
+                            <>
+                                <h2 className="onboarding-title">Which sports do you work with?</h2>
+                                <p className="onboarding-description">
+                                    Select all the sports you need analytics for. We'll customize your dashboard accordingly.
+                                </p>
+                                <div className="radio-group">
+                                    {['Football', 'Baseball', 'Basketball', 'Track & Field', 'Multiple Sports'].map(sport => (
+                                        <div
+                                            key={sport}
+                                            className={`radio-option ${data.sports.includes(sport) ? 'selected' : ''}`}
+                                            onClick={() => {
+                                                const sports = data.sports.includes(sport)
+                                                    ? data.sports.filter(s => s !== sport)
+                                                    : [...data.sports, sport];
+                                                setData({...data, sports});
+                                            }}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                className="radio-input"
+                                                checked={data.sports.includes(sport)}
+                                                onChange={() => {}}
+                                            />
+                                            <div className="radio-label">
+                                                <div className="radio-title">{sport}</div>
+                                                <div className="radio-desc">
+                                                    {sport === 'Football' && 'Advanced play calling and formation analysis'}
+                                                    {sport === 'Baseball' && 'Pitch tracking and player development'}
+                                                    {sport === 'Basketball' && 'Shot analytics and lineup optimization'}
+                                                    {sport === 'Track & Field' && 'Performance tracking and recruitment'}
+                                                    {sport === 'Multiple Sports' && 'Comprehensive multi-sport analytics'}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                        {step === 3 && (
+                            <>
+                                <h2 className="onboarding-title">Tell us about your program</h2>
+                                <p className="onboarding-description">
+                                    This helps us provide the right scale of analytics for your needs.
+                                </p>
+                                <div className="form-group">
+                                    <label className="form-label">Team Size</label>
+                                    <select
+                                        className="form-input"
+                                        value={data.teamSize}
+                                        onChange={(e) => setData({...data, teamSize: e.target.value})}
+                                    >
+                                        <option value="">Select team size</option>
+                                        <option value="small">1-25 athletes</option>
+                                        <option value="medium">26-50 athletes</option>
+                                        <option value="large">51-100 athletes</option>
+                                        <option value="xlarge">100+ athletes</option>
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Competition Level</label>
+                                    <div className="radio-group">
+                                        {['High School', 'College D1', 'College D2/D3', 'Professional', 'Youth/Club'].map(level => (
+                                            <div
+                                                key={level}
+                                                className={`radio-option ${data.level === level ? 'selected' : ''}`}
+                                                onClick={() => setData({...data, level})}
+                                            >
+                                                <input
+                                                    type="radio"
+                                                    className="radio-input"
+                                                    checked={data.level === level}
+                                                    onChange={() => setData({...data, level})}
+                                                />
+                                                <div className="radio-label">
+                                                    <div className="radio-title">{level}</div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {step === 4 && (
+                            <>
+                                <h2 className="onboarding-title">What are your primary goals?</h2>
+                                <p className="onboarding-description">
+                                    Select your top priorities so we can highlight the most relevant features.
+                                </p>
+                                <div className="radio-group">
+                                    {[
+                                        'Player Development & Performance',
+                                        'Recruiting & Scouting',
+                                        'Game Strategy & Preparation',
+                                        'NIL Valuation & Management',
+                                        'Championship Analytics'
+                                    ].map(goal => (
+                                        <div
+                                            key={goal}
+                                            className={`radio-option ${data.goals.includes(goal) ? 'selected' : ''}`}
+                                            onClick={() => {
+                                                const goals = data.goals.includes(goal)
+                                                    ? data.goals.filter(g => g !== goal)
+                                                    : [...data.goals, goal];
+                                                setData({...data, goals});
+                                            }}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                className="radio-input"
+                                                checked={data.goals.includes(goal)}
+                                                onChange={() => {}}
+                                            />
+                                            <div className="radio-label">
+                                                <div className="radio-title">{goal}</div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                        <div className="button-group">
+                            {step > 1 && (
+                                <button className="form-button secondary" onClick={handleBack}>
+                                    Back
+                                </button>
+                            )}
+                            <button className="form-button" onClick={handleNext}>
+                                {step === 4 ? 'Complete Setup' : 'Continue'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Dashboard Component (includes analytics tools)
+        const Dashboard = () => {
+            const { user, logout } = React.useContext(AuthContext);
+            const [activeSection, setActiveSection] = useState('overview');
+
+            return (
+                <div className="dashboard-container">
+                    <header className="dashboard-header">
+                        <div className="header-content">
+                            <div className="header-logo">
+                                <h2>Blaze Intelligence</h2>
+                            </div>
+                            <nav className="header-nav">
+                                <a
+                                    href="#"
+                                    className={`nav-link ${activeSection === 'overview' ? 'active' : ''}`}
+                                    onClick={(e) => { e.preventDefault(); setActiveSection('overview'); }}
+                                >
+                                    Overview
+                                </a>
+                                <a
+                                    href="#"
+                                    className={`nav-link ${activeSection === 'analytics' ? 'active' : ''}`}
+                                    onClick={(e) => { e.preventDefault(); setActiveSection('analytics'); }}
+                                >
+                                    Analytics Tools
+                                </a>
+                                <a
+                                    href="#"
+                                    className={`nav-link ${activeSection === 'reports' ? 'active' : ''}`}
+                                    onClick={(e) => { e.preventDefault(); setActiveSection('reports'); }}
+                                >
+                                    Reports
+                                </a>
+                                <a
+                                    href="#"
+                                    className={`nav-link ${activeSection === 'settings' ? 'active' : ''}`}
+                                    onClick={(e) => { e.preventDefault(); setActiveSection('settings'); }}
+                                >
+                                    Settings
+                                </a>
+                            </nav>
+                            <div className="user-menu">
+                                <div className="user-avatar">
+                                    {user?.name?.charAt(0).toUpperCase()}
+                                </div>
+                                <button className="form-button secondary" onClick={logout} style={{ padding: '0.5rem 1rem', marginTop: 0 }}>
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className="dashboard-main">
+                        {activeSection === 'overview' && (
+                            <>
+                                <div className="welcome-section">
+                                    <h1 className="welcome-title">Welcome back, {user?.name}!</h1>
+                                    <p className="welcome-subtitle">
+                                        Your Deep South Sports Intelligence Hub is ready for today's analysis
+                                    </p>
+                                </div>
+
+                                <div className="stats-grid">
+                                    <div className="stat-card">
+                                        <div className="stat-label">Teams Analyzed</div>
+                                        <div className="stat-value">47</div>
+                                        <div className="stat-change">+5 this week</div>
+                                    </div>
+                                    <div className="stat-card">
+                                        <div className="stat-label">Predictions Made</div>
+                                        <div className="stat-value">128</div>
+                                        <div className="stat-change">73.2% accuracy</div>
+                                    </div>
+                                    <div className="stat-card">
+                                        <div className="stat-label">NIL Valuations</div>
+                                        <div className="stat-value">235</div>
+                                        <div className="stat-change">$2.3M total value</div>
+                                    </div>
+                                    <div className="stat-card">
+                                        <div className="stat-label">Players Tracked</div>
+                                        <div className="stat-value">1,847</div>
+                                        <div className="stat-change">+89 recruits added</div>
+                                    </div>
+                                </div>
+
+                                <div className="tools-section">
+                                    <div className="section-header">
+                                        <h2 className="section-title">Quick Actions</h2>
+                                        <button
+                                            className="form-button"
+                                            style={{ width: 'auto', padding: '0.75rem 1.5rem' }}
+                                            onClick={() => setActiveSection('analytics')}
+                                        >
+                                            View All Tools
+                                        </button>
+                                    </div>
+
+                                    <div className="value-grid">
+                                        <div className="value-card" onClick={() => { setActiveSection('analytics'); showNotification('Opening NIL Calculator'); }}>
+                                            <div className="value-icon">💰</div>
+                                            <h3 className="value-title">NIL Valuation</h3>
+                                            <p className="value-description">
+                                                Calculate athlete valuations based on performance and social metrics
+                                            </p>
+                                        </div>
+                                        <div className="value-card" onClick={() => { setActiveSection('analytics'); showNotification('Opening Game Predictions'); }}>
+                                            <div className="value-icon">🎯</div>
+                                            <h3 className="value-title">Game Predictions</h3>
+                                            <p className="value-description">
+                                                ML-powered predictions with 73.2% historical accuracy
+                                            </p>
+                                        </div>
+                                        <div className="value-card" onClick={() => showNotification('Recruiting Pipeline Loading')}>
+                                            <div className="value-icon">📊</div>
+                                            <h3 className="value-title">Recruiting Pipeline</h3>
+                                            <p className="value-description">
+                                                Track prospects from youth leagues through professional draft
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {activeSection === 'analytics' && (
+                            <>
+                                <div className="hero">
+                                    <div className="hero-badge">🔥 THE DEEP SOUTH SPORTS AUTHORITY</div>
+                                    <h1 className="section-title" style={{ fontSize: '2rem', marginBottom: '2rem' }}>
+                                        Analytics Tools Suite
+                                    </h1>
+
+                                    <div className="live-demo-section">
+                                        <div className="demo-header">
+                                            <h2 className="demo-title">Interactive Intelligence Tools</h2>
+                                            <p style={{color: '#a0a0a0', fontSize: '1.1rem'}}>
+                                                Professional-grade analytics for your program
+                                            </p>
+                                        </div>
+
+                                        <NILCalculator />
+                                        <GamePrediction />
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {activeSection === 'reports' && (
+                            <div>
+                                <h2 className="section-title">Reports & Insights</h2>
+                                <p style={{ color: '#b0b0b0', marginBottom: '2rem' }}>
+                                    Comprehensive analytics reports and historical data analysis
+                                </p>
+                                <div className="stats-grid">
+                                    <div className="stat-card">
+                                        <div className="stat-label">Weekly Report</div>
+                                        <div className="stat-value">Ready</div>
+                                        <div className="stat-change">Download PDF</div>
+                                    </div>
+                                    <div className="stat-card">
+                                        <div className="stat-label">Season Overview</div>
+                                        <div className="stat-value">82%</div>
+                                        <div className="stat-change">Win rate improvement</div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeSection === 'settings' && (
+                            <div>
+                                <h2 className="section-title">Account Settings</h2>
+                                <div className="form-group">
+                                    <label className="form-label">Email</label>
+                                    <input type="email" className="form-input" value={user?.email} readOnly />
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Name</label>
+                                    <input type="text" className="form-input" value={user?.name} readOnly />
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Subscription</label>
+                                    <input type="text" className="form-input" value="Premium Trial" readOnly />
+                                </div>
+                            </div>
+                        )}
+                    </main>
+                </div>
+            );
+        };
+
+        // NIL Calculator Component (from previous implementation)
+        const NILCalculator = () => {
+            const [sport, setSport] = useState('football');
+            const [position, setPosition] = useState('qb');
+            const [followers, setFollowers] = useState(10000);
+            const [rating, setRating] = useState(85);
+            const [nilValue, setNilValue] = useState(null);
+            const [breakdown, setBreakdown] = useState(null);
+
+            const calculateNIL = () => {
+                let baseValue = 5000;
+                const sportMultipliers = {
+                    'football': 2.5,
+                    'basketball': 2.0,
+                    'baseball': 1.5
+                };
+
+                const positionMultipliers = {
+                    'qb': 3.0,
+                    'rb': 2.0,
+                    'wr': 2.2,
+                    'ol': 1.5,
+                    'dl': 1.8,
+                    'lb': 1.7,
+                    'db': 1.6,
+                    'pg': 2.5,
+                    'sg': 2.0,
+                    'pf': 1.8,
+                    'c': 1.7,
+                    'p': 2.2,
+                    'c_base': 1.8,
+                    'if': 1.5,
+                    'of': 1.6
+                };
+
+                let calculatedValue = baseValue;
+                const sportBonus = calculatedValue * (sportMultipliers[sport] || 1);
+                const positionBonus = sportBonus * (positionMultipliers[position] || 1);
+                const followerBonus = positionBonus * (1 + (followers / 50000));
+                const performanceBonus = followerBonus * (rating / 50);
+
+                const finalValue = Math.round(performanceBonus * (0.9 + Math.random() * 0.2));
+
+                setNilValue(finalValue);
+                setBreakdown({
+                    base: baseValue,
+                    sport: Math.round(sportBonus - baseValue),
+                    position: Math.round(positionBonus - sportBonus),
+                    social: Math.round(followerBonus - positionBonus),
+                    performance: Math.round(performanceBonus - followerBonus)
+                });
+
+                showNotification('NIL Valuation calculated successfully!');
+            };
+
+            return (
+                <div className="interactive-tool">
+                    <div className="tool-header">
+                        <h3 className="tool-title">NIL Valuation Calculator</h3>
+                        <span className="tool-badge live">LIVE DEMO</span>
+                    </div>
+                    <div className="input-grid">
+                        <div className="input-group">
+                            <label className="input-label">Sport</label>
+                            <select
+                                className="input-field"
+                                value={sport}
+                                onChange={(e) => setSport(e.target.value)}
+                            >
+                                <option value="football">Football</option>
+                                <option value="basketball">Basketball</option>
+                                <option value="baseball">Baseball</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Position</label>
+                            <select
+                                className="input-field"
+                                value={position}
+                                onChange={(e) => setPosition(e.target.value)}
+                            >
+                                {sport === 'football' && (
+                                    <>
+                                        <option value="qb">QB - Quarterback</option>
+                                        <option value="rb">RB - Running Back</option>
+                                        <option value="wr">WR - Wide Receiver</option>
+                                        <option value="ol">OL - Offensive Line</option>
+                                        <option value="dl">DL - Defensive Line</option>
+                                        <option value="lb">LB - Linebacker</option>
+                                        <option value="db">DB - Defensive Back</option>
+                                    </>
+                                )}
+                                {sport === 'basketball' && (
+                                    <>
+                                        <option value="pg">PG - Point Guard</option>
+                                        <option value="sg">SG - Shooting Guard</option>
+                                        <option value="pf">PF - Power Forward</option>
+                                        <option value="c">C - Center</option>
+                                    </>
+                                )}
+                                {sport === 'baseball' && (
+                                    <>
+                                        <option value="p">P - Pitcher</option>
+                                        <option value="c_base">C - Catcher</option>
+                                        <option value="if">IF - Infielder</option>
+                                        <option value="of">OF - Outfielder</option>
+                                    </>
+                                )}
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Social Media Followers</label>
+                            <input
+                                type="number"
+                                className="input-field"
+                                placeholder="10000"
+                                value={followers}
+                                onChange={(e) => setFollowers(parseInt(e.target.value) || 0)}
+                                min="0"
+                                max="10000000"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Performance Rating (1-100)</label>
+                            <input
+                                type="number"
+                                className="input-field"
+                                placeholder="85"
+                                value={rating}
+                                onChange={(e) => setRating(Math.min(100, Math.max(1, parseInt(e.target.value) || 0)))}
+                                min="1"
+                                max="100"
+                            />
+                        </div>
+                    </div>
+                    <button className="calculate-btn" onClick={calculateNIL}>
+                        Calculate NIL Value
+                    </button>
+                    {nilValue && (
+                        <div className="result-display">
+                            <div className="result-value">${nilValue.toLocaleString()}</div>
+                            <div className="result-label">Estimated Annual NIL Value</div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        // Game Prediction Component (from previous implementation)
+        const GamePrediction = () => {
+            const [homeTeam, setHomeTeam] = useState('texas');
+            const [awayTeam, setAwayTeam] = useState('oklahoma');
+            const [weather, setWeather] = useState('clear');
+            const [gameTime, setGameTime] = useState('night');
+            const [prediction, setPrediction] = useState(null);
+
+            const predictGame = () => {
+                const teamRatings = {
+                    'texas': 92,
+                    'alabama': 95,
+                    'georgia': 94,
+                    'lsu': 88,
+                    'texasam': 86,
+                    'oklahoma': 87,
+                    'auburn': 83,
+                    'florida': 84,
+                    'tennessee': 85,
+                    'arkansas': 80
+                };
+
+                const teamNames = {
+                    'texas': 'Texas Longhorns',
+                    'alabama': 'Alabama',
+                    'georgia': 'Georgia',
+                    'lsu': 'LSU',
+                    'texasam': 'Texas A&M',
+                    'oklahoma': 'Oklahoma',
+                    'auburn': 'Auburn',
+                    'florida': 'Florida',
+                    'tennessee': 'Tennessee',
+                    'arkansas': 'Arkansas'
+                };
+
+                let homeRating = teamRatings[homeTeam] || 80;
+                let awayRating = teamRatings[awayTeam] || 80;
+
+                homeRating += 3;
+
+                if (weather === 'rain') {
+                    homeRating -= 1;
+                    awayRating -= 1;
+                }
+
+                if (gameTime === 'primetime') {
+                    const pressureAdjust = Math.random() * 2 - 1;
+                    homeRating += pressureAdjust;
+                    awayRating -= pressureAdjust;
+                }
+
+                const ratingDiff = homeRating - awayRating;
+                const winProb = 50 + (ratingDiff * 2.5);
+                const boundedProb = Math.max(5, Math.min(95, winProb));
+
+                const totalPoints = 45 + (Math.random() * 20);
+                const homeScore = Math.round(totalPoints * (homeRating / (homeRating + awayRating)) + (ratingDiff * 0.3));
+                const awayScore = Math.round(totalPoints - homeScore);
+
+                setPrediction({
+                    probability: boundedProb.toFixed(1),
+                    homeScore,
+                    awayScore,
+                    homeName: teamNames[homeTeam],
+                    awayName: teamNames[awayTeam],
+                    totalPoints: homeScore + awayScore,
+                    spread: homeScore - awayScore
+                });
+
+                showNotification('Game prediction generated!');
+            };
+
+            return (
+                <div className="interactive-tool">
+                    <div className="tool-header">
+                        <h3 className="tool-title">Game Prediction Engine</h3>
+                        <span className="tool-badge">ML POWERED</span>
+                    </div>
+                    <div className="input-grid">
+                        <div className="input-group">
+                            <label className="input-label">Home Team</label>
+                            <select
+                                className="input-field"
+                                value={homeTeam}
+                                onChange={(e) => setHomeTeam(e.target.value)}
+                            >
+                                <option value="texas">Texas Longhorns</option>
+                                <option value="alabama">Alabama</option>
+                                <option value="georgia">Georgia</option>
+                                <option value="lsu">LSU</option>
+                                <option value="texasam">Texas A&M</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Away Team</label>
+                            <select
+                                className="input-field"
+                                value={awayTeam}
+                                onChange={(e) => setAwayTeam(e.target.value)}
+                            >
+                                <option value="oklahoma">Oklahoma</option>
+                                <option value="auburn">Auburn</option>
+                                <option value="florida">Florida</option>
+                                <option value="tennessee">Tennessee</option>
+                                <option value="arkansas">Arkansas</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Weather</label>
+                            <select
+                                className="input-field"
+                                value={weather}
+                                onChange={(e) => setWeather(e.target.value)}
+                            >
+                                <option value="clear">Clear</option>
+                                <option value="rain">Rain</option>
+                                <option value="cold">Cold (&lt;40°F)</option>
+                                <option value="hot">Hot (&gt;90°F)</option>
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label className="input-label">Time</label>
+                            <select
+                                className="input-field"
+                                value={gameTime}
+                                onChange={(e) => setGameTime(e.target.value)}
+                            >
+                                <option value="day">Day Game</option>
+                                <option value="night">Night Game</option>
+                                <option value="primetime">Prime Time</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button className="calculate-btn" onClick={predictGame}>
+                        Run Prediction
+                    </button>
+                    {prediction && (
+                        <div className="result-display">
+                            <div className="result-value">{prediction.probability}% {prediction.homeName}</div>
+                            <div className="result-label">
+                                Predicted: {prediction.homeName} {prediction.homeScore} - {prediction.awayScore} {prediction.awayName}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            const [user, setUser] = useState(authService.getCurrentUser());
+            const [authMode, setAuthMode] = useState('login');
+
+            const login = (userData) => {
+                setUser(userData);
+            };
+
+            const logout = () => {
+                authService.logout();
+                setUser(null);
+            };
+
+            useEffect(() => {
+                // Initialize Three.js background
+                initThreeJSBackground();
+            }, []);
+
+            return (
+                <AuthContext.Provider value={{ user, login, logout }}>
+                    {!user ? (
+                        authMode === 'login' ? (
+                            <LoginForm onSwitch={() => setAuthMode('signup')} />
+                        ) : (
+                            <SignupForm onSwitch={() => setAuthMode('login')} />
+                        )
+                    ) : !user.onboarded ? (
+                        <OnboardingFlow onComplete={() => {
+                            const updatedUser = authService.getCurrentUser();
+                            setUser(updatedUser);
+                        }} />
+                    ) : (
+                        <Dashboard />
+                    )}
+                </AuthContext.Provider>
+            );
+        };
+
+        // Helper Functions
+        function showNotification(text) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+            notificationText.textContent = text;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Three.js Background
+        function initThreeJSBackground() {
+            const container = document.getElementById('three-container');
+            if (!container || typeof THREE === 'undefined') return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0xBF5700, 1);
+            pointLight.position.set(10, 10, 10);
+            scene.add(pointLight);
+
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 1500;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 100;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.5,
+                color: 0xBF5700,
+                transparent: true,
+                opacity: 0.3,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+
+            camera.position.z = 30;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                particlesMesh.rotation.x += 0.0003;
+                particlesMesh.rotation.y += 0.0005;
+                renderer.render(scene, camera);
+            }
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            animate();
+        }
+
+        // Render React App
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+
+    <!-- Babel Standalone for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</body>
+</html>

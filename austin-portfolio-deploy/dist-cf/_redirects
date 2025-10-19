@@ -1,0 +1,56 @@
+# =====================================================================
+# BLAZE SPORTS INTEL - CLOUDFLARE PAGES REDIRECTS
+# =====================================================================
+# Championship-level routing and optimization
+# =====================================================================
+
+# ========================= PRIMARY DOMAIN REDIRECTS =================
+
+# Force HTTPS and canonical domain
+http://blaze-sports-intel.com/*  https://blaze-sports-intel.com/:splat  301!
+https://www.blaze-sports-intel.com/*  https://blaze-sports-intel.com/:splat  301!
+http://www.blaze-sports-intel.com/*  https://blaze-sports-intel.com/:splat  301!
+
+# Legacy domain redirects to new domain
+https://blaze-intelligence.netlify.app/* https://blazesportsintel.com/:splat 301!
+
+# Cloudflare R2 media asset proxying (videos, images)
+/media/* https://a12cb329d84130460eed99b816e4d0d3.r2.cloudflarestorage.com/blaze-media/:splat 200
+/videos/* https://a12cb329d84130460eed99b816e4d0d3.r2.cloudflarestorage.com/blaze-videos/:splat 200
+/images/* https://a12cb329d84130460eed99b816e4d0d3.r2.cloudflarestorage.com/blaze-images/:splat 200
+/assets/* https://a12cb329d84130460eed99b816e4d0d3.r2.cloudflarestorage.com/blaze-assets/:splat 200
+
+# Fragment-based navigation redirects
+/demo                    /analytics.html                           200
+/pricing                 /nil-calculator.html                      200
+/sec-nil                 /nil-calculator.html                      200
+/sec-nil-analytics       /nil-calculator.html                      200
+/start-training          /video-intelligence-upload.html          200
+/sports-intelligence     /championship-ai-analytics.html          200
+/contact                 /signup.html                              200
+
+# Enhanced platform redirects
+/neural-coach           /neural-coach.html                        200
+/babylon-demo           /babylon-championship-demo.html           200
+/character-assessment   /character-assessment-enhanced.html       200
+/biomechanics          /biomechanics-enhanced.html               200
+/perfect-game          /perfect-game-enhanced.html               200
+
+# API routes for real-time data
+/api/sports-data/*      /api/sports-data/:splat                   200
+/api/nil-calculator/*   /api/nil-calculator/:splat                200
+/api/cardinals/*        /api/cardinals/:splat                     200
+/api/analytics/*        /api/analytics/:splat                     200
+
+# Sports-specific dashboards
+/cardinals              /cardinals-intelligence-dashboard.html    200
+/titans                 /friday-night-intelligence.html          200
+/longhorns              /sec-football-enhanced.html               200
+/grizzlies              /grizzlies-nba-dashboard.html            200
+
+# Legacy redirects for brand consistency
+/amsi/*                 /                                         301!
+/apex-meta/*           /                                         301!
+
+# Catch-all for SPA routing
+/*                      /index.html                               200

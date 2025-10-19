@@ -1,0 +1,1063 @@
+<html><head></head><body>   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texas Football Authority - Blaze Intelligence</title>
+    <meta name="description" content="The definitive source for Texas high school football intelligence. UIL coverage, recruiting, rankings, and predictive analytics.">
+    
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --texas-orange: #BF5700;
+            --friday-lights: #FFD700;
+            --field-green: #1B3D1B;
+            --stadium-black: #0A0A0A;
+            --chalk-white: #FAFAFA;
+            --scoreboard-red: #DC143C;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--stadium-black) 0%, var(--field-green) 100%);
+            color: var(--chalk-white);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 1.5rem 5%;
+            border-bottom: 3px solid var(--texas-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--texas-orange);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .logo-subtitle {
+            font-size: 0.9rem;
+            color: var(--friday-lights);
+            font-style: italic;
+        }
+        
+        /* UIL Classifications */
+        .classifications {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .class-tab {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--texas-orange);
+            color: var(--chalk-white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .class-tab:hover, .class-tab.active {
+            background: var(--texas-orange);
+            color: white;
+        }
+        
+        /* Live Scoreboard */
+        .scoreboard-ticker {
+            background: var(--scoreboard-red);
+            padding: 0.75rem;
+            overflow: hidden;
+        }
+        
+        .scores-wrapper {
+            display: flex;
+            animation: scroll 40s linear infinite;
+            white-space: nowrap;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .score-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 2rem;
+            border-right: 2px solid rgba(255, 255, 255, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .score-item .team {
+            font-weight: 600;
+            margin: 0 0.5rem;
+        }
+        
+        .score-item .score {
+            color: var(--friday-lights);
+            font-weight: 700;
+        }
+        
+        /* Main Dashboard */
+        .dashboard {
+            padding: 3rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Rankings Section */
+        .rankings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .ranking-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .ranking-header {
+            background: linear-gradient(135deg, var(--texas-orange), var(--scoreboard-red));
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .ranking-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: white;
+        }
+        
+        .ranking-list {
+            padding: 1rem;
+        }
+        
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease;
+        }
+        
+        .rank-item:hover {
+            background: rgba(191, 87, 0, 0.1);
+        }
+        
+        .rank-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--friday-lights);
+            width: 40px;
+            text-align: center;
+        }
+        
+        .rank-team {
+            flex: 1;
+            margin-left: 1rem;
+        }
+        
+        .team-name {
+            font-weight: 600;
+            color: var(--chalk-white);
+            display: block;
+        }
+        
+        .team-record {
+            font-size: 0.85rem;
+            color: rgba(250, 250, 250, 0.7);
+        }
+        
+        .rank-stats {
+            text-align: right;
+        }
+        
+        .power-rating {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--texas-orange);
+        }
+        
+        /* Recruiting Tracker */
+        .recruiting-section {
+            background: rgba(27, 61, 27, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--texas-orange);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .recruits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .recruit-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .recruit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--friday-lights), var(--texas-orange));
+        }
+        
+        .recruit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+        
+        .recruit-stars {
+            color: var(--friday-lights);
+            margin-bottom: 0.5rem;
+        }
+        
+        .recruit-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--chalk-white);
+            margin-bottom: 0.3rem;
+        }
+        
+        .recruit-info {
+            font-size: 0.9rem;
+            color: rgba(250, 250, 250, 0.7);
+            margin-bottom: 0.5rem;
+        }
+        
+        .recruit-schools {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        
+        .school-badge {
+            padding: 0.25rem 0.5rem;
+            background: rgba(191, 87, 0, 0.2);
+            border: 1px solid var(--texas-orange);
+            border-radius: 3px;
+            font-size: 0.75rem;
+            color: var(--chalk-white);
+        }
+        
+        /* Game Predictions */
+        .predictions-section {
+            margin-bottom: 3rem;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+        
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .game-time {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--friday-lights);
+            font-weight: 600;
+        }
+        
+        .game-location {
+            font-size: 0.85rem;
+            color: rgba(250, 250, 250, 0.6);
+        }
+        
+        .matchup {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0;
+        }
+        
+        .team-box {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .team-box.favorite {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid var(--texas-orange);
+            border-radius: 5px;
+        }
+        
+        .team-name-game {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--chalk-white);
+            margin-bottom: 0.3rem;
+        }
+        
+        .team-record-game {
+            font-size: 0.85rem;
+            color: rgba(250, 250, 250, 0.7);
+        }
+        
+        .vs {
+            padding: 0 1rem;
+            color: var(--friday-lights);
+            font-weight: 700;
+        }
+        
+        .prediction-bar {
+            background: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        
+        .prediction-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--texas-orange), var(--friday-lights));
+            transition: width 1s ease;
+        }
+        
+        .prediction-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .win-probability {
+            color: var(--friday-lights);
+            font-weight: 700;
+        }
+        
+        /* Stats Dashboard */
+        .stats-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-icon {
+            font-size: 2rem;
+            color: var(--friday-lights);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--texas-orange);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(250, 250, 250, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+        
+        /* Playoff Bracket Preview */
+        .playoff-section {
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .bracket-preview {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .bracket-round {
+            text-align: center;
+        }
+        
+        .round-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            color: var(--friday-lights);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .bracket-teams {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            border-radius: 5px;
+            padding: 1rem;
+            min-width: 150px;
+        }
+        
+        .bracket-team {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .classifications {
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            
+            .rankings-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div>
+                    <div class="logo-title">🏈 Texas Football Authority</div>
+                    <div class="logo-subtitle">Powered by Blaze Intelligence</div>
+                </div>
+            </div>
+            <div class="classifications">
+                <button class="class-tab active">6A</button>
+                <button class="class-tab">5A</button>
+                <button class="class-tab">4A</button>
+                <button class="class-tab">3A</button>
+                <button class="class-tab">2A</button>
+                <button class="class-tab">1A</button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Live Scoreboard -->
+    <div class="scoreboard-ticker">
+        <div class="scores-wrapper">
+            <div class="score-item">
+                <span>LIVE</span>
+                <span class="team">Westlake</span>
+                <span class="score">28</span>
+                <span>-</span>
+                <span class="score">21</span>
+                <span class="team">Lake Travis</span>
+                <span>Q3</span>
+            </div>
+            <div class="score-item">
+                <span>FINAL</span>
+                <span class="team">Southlake Carroll</span>
+                <span class="score">35</span>
+                <span>-</span>
+                <span class="score">14</span>
+                <span class="team">Keller</span>
+            </div>
+            <div class="score-item">
+                <span>LIVE</span>
+                <span class="team">Allen</span>
+                <span class="score">42</span>
+                <span>-</span>
+                <span class="score">38</span>
+                <span class="team">Prosper</span>
+                <span>Q4</span>
+            </div>
+            <div class="score-item">
+                <span>FINAL</span>
+                <span class="team">Duncanville</span>
+                <span class="score">49</span>
+                <span>-</span>
+                <span class="score">17</span>
+                <span class="team">DeSoto</span>
+            </div>
+            <div class="score-item">
+                <span>LIVE</span>
+                <span class="team">North Shore</span>
+                <span class="score">31</span>
+                <span>-</span>
+                <span class="score">28</span>
+                <span class="team">Atascocita</span>
+                <span>Q4</span>
+            </div>
+            <!-- Duplicate for infinite scroll -->
+            <div class="score-item">
+                <span>LIVE</span>
+                <span class="team">Westlake</span>
+                <span class="score">28</span>
+                <span>-</span>
+                <span class="score">21</span>
+                <span class="team">Lake Travis</span>
+                <span>Q3</span>
+            </div>
+            <div class="score-item">
+                <span>FINAL</span>
+                <span class="team">Southlake Carroll</span>
+                <span class="score">35</span>
+                <span>-</span>
+                <span class="score">14</span>
+                <span class="team">Keller</span>
+            </div>
+            <div class="score-item">
+                <span>LIVE</span>
+                <span class="team">Allen</span>
+                <span class="score">42</span>
+                <span>-</span>
+                <span class="score">38</span>
+                <span class="team">Prosper</span>
+                <span>Q4</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Dashboard -->
+    <main class="dashboard">
+        <!-- Stats Dashboard -->
+        <div class="stats-dashboard">
+            <div class="stat-box">
+                <i class="fas fa-school stat-icon"></i>
+                <span class="stat-value">1,247</span>
+                <span class="stat-label">Schools Tracked</span>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-users stat-icon"></i>
+                <span class="stat-value">15,420</span>
+                <span class="stat-label">Players Monitored</span>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-chart-line stat-icon"></i>
+                <span class="stat-value">94.6%</span>
+                <span class="stat-label">Prediction Accuracy</span>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-star stat-icon"></i>
+                <span class="stat-value">847</span>
+                <span class="stat-label">D1 Recruits</span>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-football-ball stat-icon"></i>
+                <span class="stat-value">3,241</span>
+                <span class="stat-label">Games Analyzed</span>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-trophy stat-icon"></i>
+                <span class="stat-value">12</span>
+                <span class="stat-label">State Champions</span>
+            </div>
+        </div>
+        
+        <!-- Rankings Grid -->
+        <div class="rankings-grid">
+            <!-- 6A Division I Rankings -->
+            <div class="ranking-card">
+                <div class="ranking-header">
+                    <h2 class="ranking-title">6A Division I - Top 10</h2>
+                </div>
+                <div class="ranking-list">
+                    <div class="rank-item">
+                        <span class="rank-number">1</span>
+                        <div class="rank-team">
+                            <span class="team-name">Duncanville</span>
+                            <span class="team-record">12-0 | District 11-6A</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">98.7</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">2</span>
+                        <div class="rank-team">
+                            <span class="team-name">North Shore</span>
+                            <span class="team-record">11-1 | District 21-6A</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">97.2</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">3</span>
+                        <div class="rank-team">
+                            <span class="team-name">Westlake</span>
+                            <span class="team-record">11-1 | District 26-6A</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">96.8</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">4</span>
+                        <div class="rank-team">
+                            <span class="team-name">Southlake Carroll</span>
+                            <span class="team-record">10-2 | District 4-6A</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">95.4</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">5</span>
+                        <div class="rank-team">
+                            <span class="team-name">Lake Travis</span>
+                            <span class="team-record">10-2 | District 26-6A</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">94.1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 6A Division II Rankings -->
+            <div class="ranking-card">
+                <div class="ranking-header">
+                    <h2 class="ranking-title">6A Division II - Top 10</h2>
+                </div>
+                <div class="ranking-list">
+                    <div class="rank-item">
+                        <span class="rank-number">1</span>
+                        <div class="rank-team">
+                            <span class="team-name">DeSoto</span>
+                            <span class="team-record">11-1 | District 11-6A</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">96.3</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">2</span>
+                        <div class="rank-team">
+                            <span class="team-name">Vandegrift</span>
+                            <span class="team-record">12-0 | District 25-6A</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">95.7</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">3</span>
+                        <div class="rank-team">
+                            <span class="team-name">Katy</span>
+                            <span class="team-record">10-2 | District 19-6A</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">94.9</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">4</span>
+                        <div class="rank-team">
+                            <span class="team-name">Cibolo Steele</span>
+                            <span class="team-record">11-1 | District 27-6A</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">93.5</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">5</span>
+                        <div class="rank-team">
+                            <span class="team-name">Prosper</span>
+                            <span class="team-record">9-3 | District 5-6A</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">92.8</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rising Programs -->
+            <div class="ranking-card">
+                <div class="ranking-header">
+                    <h2 class="ranking-title">Rising Programs</h2>
+                </div>
+                <div class="ranking-list">
+                    <div class="rank-item">
+                        <span class="rank-number">🔥</span>
+                        <div class="rank-team">
+                            <span class="team-name">Aledo</span>
+                            <span class="team-record">11-1 | 11x State Champs</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">+12.3</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">🔥</span>
+                        <div class="rank-team">
+                            <span class="team-name">Melissa</span>
+                            <span class="team-record">12-0 | Perfect Season</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">+10.7</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">🔥</span>
+                        <div class="rank-team">
+                            <span class="team-name">China Spring</span>
+                            <span class="team-record">11-1 | District Champs</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">+9.4</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">🔥</span>
+                        <div class="rank-team">
+                            <span class="team-name">Anna</span>
+                            <span class="team-record">10-2 | Playoff Bound</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">+8.9</span>
+                        </div>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-number">🔥</span>
+                        <div class="rank-team">
+                            <span class="team-name">Lovejoy</span>
+                            <span class="team-record">9-3 | Young Talent</span>
+                        </div>
+                        <div class="rank-stats">
+                            <span class="power-rating">+7.6</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recruiting Tracker -->
+        <div class="recruiting-section">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i>
+                Top 2026 Recruits - Texas Commits &amp; Targets
+            </h2>
+            <div class="recruits-grid">
+                <div class="recruit-card">
+                    <div class="recruit-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="recruit-name">Arch Manning</div>
+                    <div class="recruit-info">QB | 6'4" 215 | Isidore Newman (LA)</div>
+                    <div class="recruit-schools">
+                        <span class="school-badge">Texas</span>
+                        <span class="school-badge">Georgia</span>
+                        <span class="school-badge">Alabama</span>
+                    </div>
+                </div>
+                <div class="recruit-card">
+                    <div class="recruit-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="recruit-name">David Hicks Jr.</div>
+                    <div class="recruit-info">S | 6'1" 195 | Katy HS</div>
+                    <div class="recruit-schools">
+                        <span class="school-badge">Texas A&amp;M</span>
+                        <span class="school-badge">LSU</span>
+                        <span class="school-badge">Texas</span>
+                    </div>
+                </div>
+                <div class="recruit-card">
+                    <div class="recruit-stars">⭐⭐⭐⭐⭐</div>
+                    <div class="recruit-name">Dakorien Moore</div>
+                    <div class="recruit-info">WR | 5'11" 175 | Duncanville</div>
+                    <div class="recruit-schools">
+                        <span class="school-badge">Oregon</span>
+                        <span class="school-badge">Texas</span>
+                        <span class="school-badge">LSU</span>
+                    </div>
+                </div>
+                <div class="recruit-card">
+                    <div class="recruit-stars">⭐⭐⭐⭐</div>
+                    <div class="recruit-name">Jonah Williams</div>
+                    <div class="recruit-info">OT | 6'5" 300 | Allen HS</div>
+                    <div class="recruit-schools">
+                        <span class="school-badge">Texas</span>
+                        <span class="school-badge">Oklahoma</span>
+                        <span class="school-badge">A&amp;M</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Predictions -->
+        <div class="predictions-section">
+            <h2 class="section-title">
+                <i class="fas fa-chart-line"></i>
+                This Week's Key Matchups
+            </h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-header">
+                        <span class="game-time">Friday 7:30 PM</span>
+                        <span class="game-location">AT&amp;T Stadium</span>
+                    </div>
+                    <div class="matchup">
+                        <div class="team-box favorite">
+                            <div class="team-name-game">Duncanville</div>
+                            <div class="team-record-game">12-0</div>
+                        </div>
+                        <span class="vs">VS</span>
+                        <div class="team-box">
+                            <div class="team-name-game">DeSoto</div>
+                            <div class="team-record-game">11-1</div>
+                        </div>
+                    </div>
+                    <div class="prediction-bar">
+                        <div class="prediction-fill" style="width: 68%"></div>
+                    </div>
+                    <div class="prediction-text">
+                        <span>Duncanville</span>
+                        <span class="win-probability">68% Win Probability</span>
+                        <span>DeSoto 32%</span>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-header">
+                        <span class="game-time">Friday 7:00 PM</span>
+                        <span class="game-location">Chaparral Stadium</span>
+                    </div>
+                    <div class="matchup">
+                        <div class="team-box favorite">
+                            <div class="team-name-game">Westlake</div>
+                            <div class="team-record-game">11-1</div>
+                        </div>
+                        <span class="vs">VS</span>
+                        <div class="team-box">
+                            <div class="team-name-game">Lake Travis</div>
+                            <div class="team-record-game">10-2</div>
+                        </div>
+                    </div>
+                    <div class="prediction-bar">
+                        <div class="prediction-fill" style="width: 72%"></div>
+                    </div>
+                    <div class="prediction-text">
+                        <span>Westlake</span>
+                        <span class="win-probability">72% Win Probability</span>
+                        <span>Lake Travis 28%</span>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-header">
+                        <span class="game-time">Saturday 2:00 PM</span>
+                        <span class="game-location">NRG Stadium</span>
+                    </div>
+                    <div class="matchup">
+                        <div class="team-box favorite">
+                            <div class="team-name-game">North Shore</div>
+                            <div class="team-record-game">11-1</div>
+                        </div>
+                        <span class="vs">VS</span>
+                        <div class="team-box">
+                            <div class="team-name-game">Atascocita</div>
+                            <div class="team-record-game">10-2</div>
+                        </div>
+                    </div>
+                    <div class="prediction-bar">
+                        <div class="prediction-fill" style="width: 58%"></div>
+                    </div>
+                    <div class="prediction-text">
+                        <span>North Shore</span>
+                        <span class="win-probability">58% Win Probability</span>
+                        <span>Atascocita 42%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Playoff Bracket Preview -->
+        <div class="playoff-section">
+            <h2 class="section-title">
+                <i class="fas fa-trophy"></i>
+                UIL 6A Playoff Picture
+            </h2>
+            <div class="bracket-preview">
+                <div class="bracket-round">
+                    <div class="round-title">Bi-District</div>
+                    <div class="bracket-teams">
+                        <div class="bracket-team">64 Teams</div>
+                    </div>
+                </div>
+                <div class="bracket-round">
+                    <div class="round-title">Area</div>
+                    <div class="bracket-teams">
+                        <div class="bracket-team">32 Teams</div>
+                    </div>
+                </div>
+                <div class="bracket-round">
+                    <div class="round-title">Regional</div>
+                    <div class="bracket-teams">
+                        <div class="bracket-team">16 Teams</div>
+                    </div>
+                </div>
+                <div class="bracket-round">
+                    <div class="round-title">Quarterfinals</div>
+                    <div class="bracket-teams">
+                        <div class="bracket-team">8 Teams</div>
+                    </div>
+                </div>
+                <div class="bracket-round">
+                    <div class="round-title">Semifinals</div>
+                    <div class="bracket-teams">
+                        <div class="bracket-team">4 Teams</div>
+                    </div>
+                </div>
+                <div class="bracket-round">
+                    <div class="round-title">State Championship</div>
+                    <div class="bracket-teams">
+                        <div class="bracket-team">AT&amp;T Stadium</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        // Classification toggle
+        document.querySelectorAll('.class-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.class-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                // Here you would load different classification data
+            });
+        });
+        
+        // Animate stats on load
+        function animateValue(element, start, end, duration) {
+            const range = end - start;
+            const startTime = performance.now();
+            
+            function updateValue(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const value = Math.floor(progress * range + start);
+                
+                if (element.textContent.includes('%')) {
+                    element.textContent = value + '%';
+                } else if (element.textContent.includes(',')) {
+                    element.textContent = value.toLocaleString();
+                } else {
+                    element.textContent = value;
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateValue);
+                }
+            }
+            
+            requestAnimationFrame(updateValue);
+        }
+        
+        // Animate stats when visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statValues = entry.target.querySelectorAll('.stat-value');
+                    statValues.forEach(stat => {
+                        const value = stat.textContent;
+                        if (value.includes('%')) {
+                            animateValue(stat, 0, 94.6, 2000);
+                        } else if (value.includes(',')) {
+                            const num = parseInt(value.replace(',', ''));
+                            animateValue(stat, 0, num, 2000);
+                        } else {
+                            animateValue(stat, 0, parseInt(value), 2000);
+                        }
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        
+        const statsSection = document.querySelector('.stats-dashboard');
+        if (statsSection) observer.observe(statsSection);
+    </script>
+
+</body></html>

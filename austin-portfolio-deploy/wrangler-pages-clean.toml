@@ -1,0 +1,6 @@
+name = "blazesportsintel"
+compatibility_date = "2024-09-26"
+pages_build_output_dir = "."
+
+# Only Pages configuration - NO Worker settings
+# This ensures static site deployment only

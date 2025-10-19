@@ -1,0 +1,527 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEC Intelligence Dashboard - The Deep South Sports Authority | Blaze Intelligence</title>
+    <meta name="description" content="Live SEC football and baseball intelligence. Championship analytics, NIL marketplace data, and professional pipeline tracking.">
+    <meta name="keywords" content="SEC Football, SEC Baseball, NIL Analytics, College Sports, Deep South Sports, Championship Data">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&amp;family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;700&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js for Professional Background Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r168/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        body { 
+            background: #0a0a0a; 
+            color: #e2e8f0; 
+            font-family: 'Inter', sans-serif; 
+            margin: 0;
+            padding: 0;
+        }
+        .metric-card { 
+            background: rgba(30, 41, 59, 0.9); 
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(191, 87, 0, 0.2);
+        }
+        .sec-primary { color: #BF5700; }
+        .sec-secondary { color: #9BCBEB; }
+        .sec-crimson { color: #9B2222; }
+        .nil-gold { color: #FFD700; }
+    </style>
+</head>
+
+<body data-sport="sec-sports" data-organization="sec-conference">
+    <!-- Navigation -->
+    <nav class="bg-black/50 backdrop-blur-lg border-b border-slate-800 px-4 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="index.html" class="text-2xl font-bold text-cyan-400">BLAZE INTELLIGENCE</a>
+                <span class="text-slate-500">×</span>
+                <span class="text-xl font-bold sec-primary">SEC DASHBOARD</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="perfect-game.html" class="text-slate-300 hover:text-white">Perfect Game</a>
+                <a href="index.html" class="px-4 py-2 bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-700">
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-6xl font-black mb-6">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-900/20 to-red-900/20" style="background: linear-gradient(135deg, #BF5700, #9B2222); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    SEC DOMINANCE INTELLIGENCE
+                </span>
+            </h1>
+            <p class="text-2xl text-slate-300 mb-8">
+                Championship Analytics, NIL Marketplace Intelligence &amp; Professional Pipeline Data
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#football" class="px-8 py-4 bg-orange-600 text-white font-bold rounded-lg hover:bg-orange-700">
+                    🏈 SEC Football
+                </a>
+                <a href="#baseball" class="px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700">
+                    ⚾ SEC Baseball
+                </a>
+                <a href="#nil" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+                    💰 NIL Intelligence
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Metrics -->
+    <section class="max-w-7xl mx-auto px-4 py-12">
+        <div class="grid md:grid-cols-4 gap-6 mb-12">
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold sec-primary mb-2">13/18</div>
+                <div class="text-sm text-slate-400">National Championships</div>
+                <div class="text-xs text-slate-500">2006-2023 Dominance</div>
+            </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold text-green-400 mb-2">$728M</div>
+                <div class="text-sm text-slate-400">Conference Revenue</div>
+                <div class="text-xs text-slate-500">2023 Total</div>
+            </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold sec-secondary mb-2">60-70</div>
+                <div class="text-sm text-slate-400">Annual NFL Picks</div>
+                <div class="text-xs text-slate-500">30% of total draft</div>
+            </div>
+            <div class="metric-card p-6 rounded-lg text-center">
+                <div class="text-4xl font-bold sec-crimson mb-2">80-100</div>
+                <div class="text-sm text-slate-400">Annual MLB Picks</div>
+                <div class="text-xs text-slate-500">20-25% of total draft</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEC Football Excellence -->
+    <section id="football" class="bg-slate-900/50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                SEC FOOTBALL <span class="sec-primary">CHAMPIONSHIP ECOSYSTEM</span>
+            </h2>
+            
+            <div class="grid lg:grid-cols-3 gap-6 mb-12">
+                <div class="bg-gradient-to-r from-slate-800 to-slate-900 p-6 rounded-lg border border-orange-500/20">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-trophy text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Alabama Crimson Tide</h3>
+                            <p class="text-slate-400 text-sm">The Saban Dynasty</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">National Titles (2009+):</span>
+                            <span class="font-bold text-orange-400">6</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">NFL Draft Picks (3yr):</span>
+                            <span class="font-bold text-orange-400">42</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Recruiting Rank:</span>
+                            <span class="font-bold text-orange-400">#1 Avg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-slate-800 to-slate-900 p-6 rounded-lg border border-red-500/20">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-fire text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Georgia Bulldogs</h3>
+                            <p class="text-slate-400 text-sm">2021 Champions</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">National Title:</span>
+                            <span class="font-bold text-red-400">2021</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">NFL Draft Picks (3yr):</span>
+                            <span class="font-bold text-red-400">38</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Recruiting Rank:</span>
+                            <span class="font-bold text-red-400">#3 Avg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-slate-800 to-slate-900 p-6 rounded-lg border border-yellow-500/20">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-star text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">LSU Tigers</h3>
+                            <p class="text-slate-400 text-sm">2019 Perfect Season</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">National Title:</span>
+                            <span class="font-bold text-yellow-400">2019</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">NFL Draft Picks (3yr):</span>
+                            <span class="font-bold text-yellow-400">35</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-slate-400">Recruiting Rank:</span>
+                            <span class="font-bold text-yellow-400">#8 Avg</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEC Baseball Dominance -->
+    <section id="baseball" class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                SEC BASEBALL <span class="text-cyan-400">COLLEGE WORLD SERIES DOMINANCE</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+                <div class="metric-card p-4 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-cyan-400 mb-1">7/15</div>
+                    <div class="text-sm text-slate-400">CWS Titles</div>
+                    <div class="text-xs text-slate-500">Last 15 Years</div>
+                </div>
+                <div class="metric-card p-4 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-green-400 mb-1">8-12</div>
+                    <div class="text-sm text-slate-400">NCAA Teams</div>
+                    <div class="text-xs text-slate-500">Annual Average</div>
+                </div>
+                <div class="metric-card p-4 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-orange-400 mb-1">11.7</div>
+                    <div class="text-sm text-slate-400">Scholarships</div>
+                    <div class="text-xs text-slate-500">Per Program</div>
+                </div>
+                <div class="metric-card p-4 rounded-lg text-center">
+                    <div class="text-3xl font-bold text-red-400 mb-1">25-30%</div>
+                    <div class="text-sm text-slate-400">MLB Success</div>
+                    <div class="text-xs text-slate-500">Reach Double-A+</div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-4">🏆 Championship Programs</h3>
+                    
+                    <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-white">Vanderbilt Commodores</span>
+                            <span class="text-xs bg-cyan-500/20 px-2 py-1 rounded text-cyan-400">2014, 2019</span>
+                        </div>
+                        <div class="text-sm text-slate-400">Academic Excellence + Championship Culture</div>
+                        <div class="text-xs text-slate-500 mt-1">45 MLB Draft picks (last 5 years)</div>
+                    </div>
+
+                    <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-white">Mississippi State Bulldogs</span>
+                            <span class="text-xs bg-orange-500/20 px-2 py-1 rounded text-orange-400">2021</span>
+                        </div>
+                        <div class="text-sm text-slate-400">Pitching Development Specialists</div>
+                        <div class="text-xs text-slate-500 mt-1">38 MLB Draft picks (last 5 years)</div>
+                    </div>
+
+                    <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-white">Arkansas Razorbacks</span>
+                            <span class="text-xs bg-red-500/20 px-2 py-1 rounded text-red-400">2x Finals</span>
+                        </div>
+                        <div class="text-sm text-slate-400">CWS Finals 2018, 2019</div>
+                        <div class="text-xs text-slate-500 mt-1">42 MLB Draft picks (last 5 years)</div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-green-400 mb-4">📊 Development Pipeline</h3>
+                    
+                    <div class="bg-gradient-to-r from-green-500/20 to-blue-900/20 p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-2">Perfect Game → SEC → MLB Pipeline</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Ages 12-14:</span>
+                                <span class="text-green-400">Elite Travel Ball</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Ages 15-18:</span>
+                                <span class="text-green-400">Top 500 Rankings</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Ages 18-22:</span>
+                                <span class="text-green-400">SEC Development</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Professional:</span>
+                                <span class="text-green-400">MLB Success</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/50 p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-2">Position Development</h4>
+                        <div class="space-y-1 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Pitchers:</span>
+                                <span class="text-cyan-400">60% of draft picks</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Position Players:</span>
+                                <span class="text-cyan-400">40% of draft picks</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Development Time:</span>
+                                <span class="text-cyan-400">3-5 years to MLB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NIL Marketplace Intelligence -->
+    <section id="nil" class="bg-slate-900/50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                NIL MARKETPLACE <span class="nil-gold">ECONOMIC INTELLIGENCE</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+                <div class="metric-card p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold nil-gold mb-1">$1K-50K</div>
+                    <div class="text-sm text-slate-400">Starter Deals</div>
+                    <div class="text-xs text-slate-500">Average Range</div>
+                </div>
+                <div class="metric-card p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-green-400 mb-1">$2.8M</div>
+                    <div class="text-sm text-slate-400">Elite QB Max</div>
+                    <div class="text-xs text-slate-500">Top Tier Deals</div>
+                </div>
+                <div class="metric-card p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-red-400 mb-1">30-40%</div>
+                    <div class="text-sm text-slate-400">Portal Activity</div>
+                    <div class="text-xs text-slate-500">Annual Turnover</div>
+                </div>
+                <div class="metric-card p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-cyan-400 mb-1">$30M+</div>
+                    <div class="text-sm text-slate-400">Top Collective</div>
+                    <div class="text-xs text-slate-500">Annual Budget</div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold nil-gold mb-6">🔥 Live NIL Intelligence Feed</h3>
+                    
+                    <div class="space-y-3">
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-yellow-500/20">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-white">Texas A&amp;M "12th Man+" Network</h4>
+                                    <p class="text-sm text-slate-400">Largest recruiting class NIL package in history</p>
+                                </div>
+                                <span class="text-lg font-bold nil-gold">$30M+</span>
+                            </div>
+                            <div class="text-xs text-slate-500">Oil industry backing, coordinated booster network</div>
+                        </div>
+
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-red-500/20">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-white">Alabama "High Tide Traditions"</h4>
+                                    <p class="text-sm text-slate-400">85+ active athlete partnerships</p>
+                                </div>
+                                <span class="text-lg font-bold text-red-400">$15M</span>
+                            </div>
+                            <div class="text-xs text-slate-500">Championship bonus structure, performance incentives</div>
+                        </div>
+
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-green-500/20">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-white">Georgia "Bulldogs NIL"</h4>
+                                    <p class="text-sm text-slate-400">Atlanta business integration</p>
+                                </div>
+                                <span class="text-lg font-bold text-green-400">$12M</span>
+                            </div>
+                            <div class="text-xs text-slate-500">Corporate partnerships, championship-driven model</div>
+                        </div>
+
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-orange-500/20">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-white">LSU "Tiger Athletic Foundation"</h4>
+                                    <p class="text-sm text-slate-400">Louisiana business partnerships</p>
+                                </div>
+                                <span class="text-lg font-bold text-orange-400">$8M</span>
+                            </div>
+                            <div class="text-xs text-slate-500">Retention focus, community integration</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-cyan-400 mb-6">📈 Transfer Portal Analytics</h3>
+                    
+                    <div class="bg-gradient-to-r from-slate-800 to-slate-900 p-6 rounded-lg border border-slate-700 mb-6">
+                        <h4 class="font-bold text-white mb-4">Portal Activity Metrics</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Annual Entries:</span>
+                                <span class="font-bold text-cyan-400">3,000+</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Success Rate:</span>
+                                <span class="font-bold text-green-400">40-50%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">SEC Attraction:</span>
+                                <span class="font-bold text-orange-400">20-25%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Position Premium:</span>
+                                <span class="font-bold text-red-400">QB/OL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800/50 p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-3">🎯 Position-Specific NIL Values</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Elite Quarterbacks:</span>
+                                <span class="font-bold nil-gold">$500K-2.8M</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Offensive Line:</span>
+                                <span class="font-bold text-cyan-400">$50K-300K</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Skill Positions:</span>
+                                <span class="font-bold text-green-400">$25K-200K</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-400">Defense:</span>
+                                <span class="font-bold text-orange-400">$15K-150K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Pipeline -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">
+                PROFESSIONAL <span class="text-green-400">PIPELINE SUCCESS</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="metric-card p-6 rounded-lg">
+                    <div class="text-4xl font-bold text-orange-400 mb-2">$200M+</div>
+                    <div class="text-sm text-slate-400">Annual SEC Rookie Contracts</div>
+                    <div class="text-xs text-slate-500">NFL salary cap impact</div>
+                </div>
+                <div class="metric-card p-6 rounded-lg">
+                    <div class="text-4xl font-bold text-cyan-400 mb-2">3-5 Years</div>
+                    <div class="text-sm text-slate-400">Average MLB Development</div>
+                    <div class="text-xs text-slate-500">SEC to major league debut</div>
+                </div>
+                <div class="metric-card p-6 rounded-lg">
+                    <div class="text-4xl font-bold text-green-400 mb-2">15-20</div>
+                    <div class="text-sm text-slate-400">SEC First Round NFL</div>
+                    <div class="text-xs text-slate-500">Annual average</div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="perfect-game.html" class="px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700">
+                    🥇 Perfect Game Pipeline
+                </a>
+                <a href="index.html" class="px-8 py-4 bg-slate-700 text-white font-bold rounded-lg hover:bg-slate-600">
+                    🏠 Back to Main Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add loading animation for metrics
+        window.addEventListener('load', function() {
+            const metricNumbers = document.querySelectorAll('.text-4xl, .text-3xl, .text-2xl');
+            metricNumbers.forEach((metric, index) => {
+                metric.style.opacity = '0';
+                metric.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    metric.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    metric.style.opacity = '1';
+                    metric.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Add hover effects for cards
+        document.querySelectorAll('.metric-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+
+</body></html>

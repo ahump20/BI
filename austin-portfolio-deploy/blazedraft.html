@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlazeDraft - Coming Soon | Blaze Intelligence</title>
+    <meta name="description" content="BlazeDraft is the next-generation draft analysis platform. Currently in final development phases for Q2 2025 launch.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r168/three.min.js"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --sec-crimson: #9B2222;
+            --cardinal-blue: #9BCBEB;
+            --deep-teal: #00B2A9;
+            --mississippi-white: #F8F8FF;
+            --texas-navy: #002244;
+            --louisiana-bayou: #1B4332;
+            --friday-lights: #FFD700;
+            --stadium-black: #0A0A0A;
+            --font-headline: 'Bebas Neue', 'Oswald', sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-data: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(180deg, var(--stadium-black) 0%, var(--texas-navy) 50%, var(--louisiana-bayou) 100%);
+            color: var(--mississippi-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        #three-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--burnt-orange);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: var(--font-headline);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--burnt-orange);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 100px);
+        }
+
+        .coming-soon-container {
+            max-width: 1000px;
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(145deg, rgba(191, 87, 0, 0.1), rgba(0, 34, 68, 0.2));
+            border: 2px solid var(--burnt-orange);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .draft-logo {
+            font-size: 4rem;
+            color: var(--friday-lights);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .draft-title {
+            font-family: var(--font-headline);
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 900;
+            color: var(--burnt-orange);
+            letter-spacing: 6px;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .draft-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--cardinal-blue);
+            font-weight: 600;
+            margin-bottom: 3rem;
+            line-height: 1.4;
+        }
+
+        .phases-title {
+            font-family: var(--font-headline);
+            font-size: 2.5rem;
+            color: var(--mississippi-white);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
+        }
+
+        .phase-list {
+            list-style: none;
+            text-align: left;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .phase-item {
+            display: flex;
+            align-items: center;
+            background: rgba(248, 248, 255, 0.05);
+            margin: 1.5rem 0;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--burnt-orange);
+            transition: all 0.3s ease;
+        }
+
+        .phase-item:hover {
+            background: rgba(191, 87, 0, 0.1);
+            transform: translateX(10px);
+        }
+
+        .phase-status {
+            font-size: 2rem;
+            margin-right: 1.5rem;
+            min-width: 40px;
+        }
+
+        .phase-content {
+            flex: 1;
+        }
+
+        .phase-title {
+            font-family: var(--font-headline);
+            font-size: 1.4rem;
+            color: var(--mississippi-white);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-description {
+            color: var(--cardinal-blue);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .launch-timeline {
+            background: linear-gradient(135deg, rgba(155, 34, 34, 0.2), rgba(0, 178, 169, 0.1));
+            border: 2px solid var(--sec-crimson);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .timeline-title {
+            font-family: var(--font-headline);
+            font-size: 2rem;
+            color: var(--friday-lights);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .timeline-date {
+            font-family: var(--font-data);
+            font-size: 3rem;
+            color: var(--burnt-orange);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--cardinal-blue);
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .back-home {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-home:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(191, 87, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .coming-soon-container {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            .phase-item {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="three-background"></div>
+
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">BLAZE INTELLIGENCE</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="coming-soon-container">
+            <div class="draft-logo">
+                <i class="fas fa-chart-line"></i>
+            </div>
+
+            <h1 class="draft-title">BLAZEDRAFT</h1>
+
+            <p class="draft-subtitle">
+                BlazeDraft is currently in final development and testing phases.<br>
+                The most advanced draft analysis platform ever created.
+            </p>
+
+            <div class="development-phases">
+                <h2 class="phases-title">DEVELOPMENT PHASES</h2>
+                <ul class="phase-list">
+                    <li class="phase-item">
+                        <span class="phase-status">✅</span>
+                        <div class="phase-content">
+                            <h3 class="phase-title">Phase 1: Core Development</h3>
+                            <p class="phase-description">Algorithm development and testing completed</p>
+                        </div>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-status">🔧</span>
+                        <div class="phase-content">
+                            <h3 class="phase-title">Phase 2: Beta Testing</h3>
+                            <p class="phase-description">Internal testing and refinement in progress</p>
+                        </div>
+                    </li>
+                    <li class="phase-item">
+                        <span class="phase-status">📅</span>
+                        <div class="phase-content">
+                            <h3 class="phase-title">Phase 3: Public Launch</h3>
+                            <p class="phase-description">Full public release scheduled for Q2 2025</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="launch-timeline">
+                <h3 class="timeline-title">TARGET LAUNCH DATE</h3>
+                <div class="timeline-date">Q2 2025</div>
+                <p class="timeline-description">
+                    BlazeDraft will revolutionize draft analysis with AI-powered insights,
+                    predictive modeling, and comprehensive player evaluation tools.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <a href="/" class="back-home">
+        <i class="fas fa-home"></i> Back to Home
+    </a>
+
+    <script>
+        function initThreeBackground() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('three-background').appendChild(renderer.domElement);
+
+            const groups = [];
+            for (let g = 0; g < 10; g++) {
+                const group = new THREE.Group();
+                const points = [];
+
+                for (let i = 0; i < 20; i++) {
+                    points.push(new THREE.Vector3(
+                        (Math.random() - 0.5) * 15,
+                        (Math.random() - 0.5) * 15,
+                        (Math.random() - 0.5) * 15
+                    ));
+                }
+
+                const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                const material = new THREE.LineBasicMaterial({
+                    color: g % 2 === 0 ? 0xBF5700 : 0x9BCBEB,
+                    transparent: true,
+                    opacity: 0.4
+                });
+
+                const line = new THREE.Line(geometry, material);
+                group.add(line);
+
+                scene.add(group);
+                groups.push(group);
+            }
+
+            camera.position.z = 8;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                groups.forEach((group, index) => {
+                    group.rotation.x += 0.002 * (index % 3 + 1);
+                    group.rotation.y += 0.001 * (index % 2 + 1);
+                });
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        function initAnimations() {
+            gsap.from('.coming-soon-container', {
+                scale: 0.8,
+                opacity: 0,
+                duration: 1.5,
+                ease: 'back.out(1.7)'
+            });
+
+            gsap.from('.draft-title', {
+                y: 100,
+                opacity: 0,
+                duration: 1.2,
+                delay: 0.5,
+                ease: 'power3.out'
+            });
+
+            gsap.from('.phase-item', {
+                x: -100,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                delay: 1,
+                ease: 'power2.out'
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initThreeBackground();
+            initAnimations();
+        });
+    </script>
+</body>
+</html>
+    <title>BlazeDraft - Professional Scouting & Draft Intelligence | Blaze Intelligence</title>
+    <meta name="description" content="Where Tomorrow's Champions Are Found Today. Professional MLB & NFL draft scouting, Perfect Game analytics, Texas HS recruiting intelligence.">
+
+    <!-- Three.js for 3D Visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --burnt-orange: #BF5700;
+            --cardinal-blue: #9BCBEB;
+            --tennessee-deep: #002244;
+            --grizzly-teal: #00B2A9;
+            --platinum: #E5E4E2;
+            --graphite: #36454F;
+            --pearl: #FAFAFA;
+            --dark-bg: #0A0E1A;
+            --darker-bg: #060810;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark-bg);
+            color: var(--pearl);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(191, 87, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--pearl);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B00);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--grizzly-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--pearl);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--burnt-orange);
+        }
+
+        .btn-login {
+            padding: 0.5rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--burnt-orange);
+            color: var(--burnt-orange);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            background: var(--burnt-orange);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #draft-board-3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 14, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--cardinal-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--cardinal-blue);
+            margin-bottom: 2rem;
+        }
+
+        .draft-highlights {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .highlight-card {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+        }
+
+        .highlight-card h3 {
+            color: var(--burnt-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Main Features Grid */
+        .features-section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--burnt-orange);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1), rgba(0, 178, 169, 0.05));
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--burnt-orange);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--cardinal-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Scouting Tools */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .tool-item {
+            background: rgba(54, 69, 79, 0.2);
+            border: 1px solid rgba(155, 203, 235, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .tool-item:hover {
+            background: rgba(191, 87, 0, 0.1);
+            border-color: var(--burnt-orange);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Interactive Elements */
+        .interactive-section {
+            background: linear-gradient(135deg, var(--darker-bg), var(--dark-bg));
+            padding: 4rem 5%;
+            margin: 4rem 0;
+        }
+
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .interactive-card {
+            background: rgba(0, 34, 68, 0.3);
+            border: 2px solid var(--tennessee-deep);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--grizzly-teal));
+        }
+
+        /* Live Data Dashboard */
+        .data-dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .data-panel {
+            background: rgba(10, 14, 26, 0.8);
+            border: 1px solid rgba(191, 87, 0, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .data-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(191, 87, 0, 0.2);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #00FF00;
+            font-size: 0.9rem;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #00FF00;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.05), rgba(0, 34, 68, 0.05));
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--darker-bg);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--burnt-orange);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--burnt-orange);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--burnt-orange);
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--cardinal-blue);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            color: var(--platinum);
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--grizzly-teal);
+            margin-right: 0.5rem;
+        }
+
+        .btn-subscribe {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--burnt-orange), #FF6B00);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-subscribe:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            padding: 3rem 5%;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(191, 87, 0, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin: 0.5rem 0;
+        }
+
+        .footer-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--cardinal-blue);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(191, 87, 0, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--burnt-orange);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .data-dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .draft-highlights {
+                flex-direction: column;
+            }
+        }
+
+        /* Mock Draft Board */
+        .mock-draft-board {
+            background: rgba(10, 14, 26, 0.9);
+            border: 2px solid var(--burnt-orange);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .draft-round {
+            margin-bottom: 2rem;
+        }
+
+        .draft-round h4 {
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .draft-picks {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .draft-pick {
+            background: rgba(191, 87, 0, 0.1);
+            border: 1px solid rgba(191, 87, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .draft-pick:hover {
+            background: rgba(191, 87, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .pick-number {
+            color: var(--burnt-orange);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .player-name {
+            color: var(--pearl);
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .player-info {
+            color: var(--platinum);
+            font-size: 0.85rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: rgba(155, 203, 235, 0.1);
+            border: 1px solid rgba(155, 203, 235, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--cardinal-blue);
+        }
+
+        .stat-label {
+            color: var(--platinum);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="/" class="logo">
+                <div class="logo-icon">BD</div>
+                <div class="logo-text">BlazeDraft</div>
+            </a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Blaze Intelligence Home</a>
+                <a href="#mlb-draft" class="nav-link">MLB Draft</a>
+                <a href="#nfl-draft" class="nav-link">NFL Draft</a>
+                <a href="#perfect-game" class="nav-link">Perfect Game</a>
+                <a href="#texas-hs" class="nav-link">Texas HS</a>
+                <button class="btn-login">Scout Login</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="draft-board-3d"></canvas>
+        <div class="hero-content">
+            <h1>BlazeDraft</h1>
+            <p class="tagline">Where Tomorrow's Champions Are Found Today</p>
+            <div class="draft-highlights">
+                <div class="highlight-card">
+                    <h3>2025 MLB Draft</h3>
+                    <p>612 Players Tracked</p>
+                    <p style="color: var(--grizzly-teal);">Live Updates</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>2025 NFL Draft</h3>
+                    <p>450+ Prospects</p>
+                    <p style="color: var(--grizzly-teal);">7-Round Coverage</p>
+                </div>
+                <div class="highlight-card">
+                    <h3>Perfect Game</h3>
+                    <p>15,000+ Athletes</p>
+                    <p style="color: var(--grizzly-teal);">14U+ Tracking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Features -->
+    <section class="features-section">
+        <h2 class="section-title">Professional Scouting Intelligence</h2>
+
+        <div class="features-grid">
+            <div class="feature-card" id="mlb-draft">
+                <div class="feature-icon">⚾</div>
+                <h3>MLB Draft Central</h3>
+                <p>Complete 20-round coverage with bonus pool calculations, signability analysis, and international prospect integration. Track players from Perfect Game through the minors.</p>
+                <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="stat-box">
+                        <div class="stat-value">612</div>
+                        <div class="stat-label">Draft Eligible</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">94.6%</div>
+                        <div class="stat-label">Projection Accuracy</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" id="nfl-draft">
+                <div class="feature-icon">🏈</div>
+                <h3>NFL Draft War Room</h3>
+                <p>7-round mock drafts with trade scenarios, combine analytics, and position scarcity models. Texas football pipeline tracking from HS to pros.</p>
+                <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="stat-box">
+                        <div class="stat-value">256</div>
+                        <div class="stat-label">Draft Picks</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">32</div>
+                        <div class="stat-label">Team Profiles</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" id="perfect-game">
+                <div class="feature-icon">🌟</div>
+                <h3>Perfect Game Pipeline</h3>
+                <p>Youth to professional tracking system. Monitor showcase performances, tournament results, and development trajectories for 14U+ athletes.</p>
+                <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="stat-box">
+                        <div class="stat-value">15K+</div>
+                        <div class="stat-label">Athletes Tracked</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">500+</div>
+                        <div class="stat-label">Events Covered</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" id="texas-hs">
+                <div class="feature-icon">🤠</div>
+                <h3>Texas HS to College</h3>
+                <p>Complete Texas high school football recruiting coverage. Track commitments, evaluations, and NIL impact on recruitment decisions.</p>
+                <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="stat-box">
+                        <div class="stat-value">1,200+</div>
+                        <div class="stat-label">TX Recruits</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">6A-1A</div>
+                        <div class="stat-label">All Classifications</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌎</div>
+                <h3>International Scouting</h3>
+                <p>Latin American and Asian market coverage. Track Dominican Summer League, Mexican League, NPB, and KBO prospects.</p>
+                <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="stat-box">
+                        <div class="stat-value">2,500+</div>
+                        <div class="stat-label">Int'l Prospects</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">15</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>NIL & Draft Impact</h3>
+                <p>Analyze how NIL valuations affect draft decisions. Track college retention vs. pro declaration patterns.</p>
+                <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="stat-box">
+                        <div class="stat-value">$2.3M</div>
+                        <div class="stat-label">Avg NIL vs Draft</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">78%</div>
+                        <div class="stat-label">Decision Accuracy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scouting Tools Section -->
+        <h2 class="section-title">Advanced Scouting Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-item">
+                <div class="tool-icon">📊</div>
+                <h4>Player Comparison Engine</h4>
+                <p>Compare prospects across leagues and levels</p>
+            </div>
+            <div class="tool-item">
+                <div class="tool-icon">📈</div>
+                <h4>Statistical Projections</h4>
+                <p>ML-powered performance forecasting</p>
+            </div>
+            <div class="tool-item">
+                <div class="tool-icon">🎥</div>
+                <h4>Video Analysis</h4>
+                <p>Biomechanical breakdown & form assessment</p>
+            </div>
+            <div class="tool-item">
+                <div class="tool-icon">⚡</div>
+                <h4>Combine Analytics</h4>
+                <p>Speed, power, agility metrics analysis</p>
+            </div>
+            <div class="tool-item">
+                <div class="tool-icon">🧠</div>
+                <h4>Character Evaluation</h4>
+                <p>Micro-expression & leadership assessment</p>
+            </div>
+            <div class="tool-item">
+                <div class="tool-icon">🏥</div>
+                <h4>Injury Risk Model</h4>
+                <p>Predictive health & durability scoring</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Data Dashboard -->
+    <section class="features-section">
+        <h2 class="section-title">Real-Time Draft Intelligence</h2>
+        <div class="data-dashboard">
+            <div class="data-panel">
+                <div class="data-header">
+                    <h3>MLB Draft Tracker</h3>
+                    <div class="live-indicator">
+                        <div class="live-dot"></div>
+                        <span>LIVE</span>
+                    </div>
+                </div>
+                <div class="draft-round">
+                    <h4>Round 1 - Competitive Balance A</h4>
+                    <div class="draft-picks">
+                        <div class="draft-pick">
+                            <div class="pick-number">Pick 1.1</div>
+                            <div class="player-name">Jackson Hayes</div>
+                            <div class="player-info">SS • Texas HS • 6'2" 185lbs</div>
+                        </div>
+                        <div class="draft-pick">
+                            <div class="pick-number">Pick 1.2</div>
+                            <div class="player-name">Carlos Rodriguez</div>
+                            <div class="player-info">RHP • Miami • 95-98 mph</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data-panel">
+                <div class="data-header">
+                    <h3>NFL Mock Draft 1.0</h3>
+                    <div class="live-indicator">
+                        <div class="live-dot"></div>
+                        <span>UPDATING</span>
+                    </div>
+                </div>
+                <div class="draft-round">
+                    <h4>Round 1</h4>
+                    <div class="draft-picks">
+                        <div class="draft-pick">
+                            <div class="pick-number">1. Tennessee</div>
+                            <div class="player-name">Travis Hunter</div>
+                            <div class="player-info">CB/WR • Colorado • 6'1" 185</div>
+                        </div>
+                        <div class="draft-pick">
+                            <div class="pick-number">2. Cleveland</div>
+                            <div class="player-name">Shedeur Sanders</div>
+                            <div class="player-info">QB • Colorado • 6'2" 215</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Elements -->
+    <section class="interactive-section">
+        <h2 class="section-title" style="text-align: center; color: var(--cardinal-blue);">Interactive Draft Tools</h2>
+        <div class="interactive-grid">
+            <div class="interactive-card">
+                <h3>Mock Draft Simulator</h3>
+                <p>Create custom mock drafts with trade logic and team needs analysis</p>
+                <button class="btn-subscribe" style="margin-top: 1rem;">Launch Simulator</button>
+            </div>
+            <div class="interactive-card">
+                <h3>Trade Value Calculator</h3>
+                <p>Evaluate draft pick trades using historical value charts</p>
+                <button class="btn-subscribe" style="margin-top: 1rem;">Calculate Value</button>
+            </div>
+            <div class="interactive-card">
+                <h3>Custom Rankings</h3>
+                <p>Build your own big board with weighted criteria</p>
+                <button class="btn-subscribe" style="margin-top: 1rem;">Create Rankings</button>
+            </div>
+            <div class="interactive-card">
+                <h3>Scouting Reports</h3>
+                <p>Access detailed reports with video breakdowns</p>
+                <button class="btn-subscribe" style="margin-top: 1rem;">View Reports</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <h2 class="section-title">Choose Your Scouting Package</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Free Scout</h3>
+                <div class="price">$0<span>/month</span></div>
+                <ul class="features-list">
+                    <li>Basic rankings & news</li>
+                    <li>Top 100 prospects</li>
+                    <li>Weekly mock drafts</li>
+                    <li>Public scouting reports</li>
+                </ul>
+                <button class="btn-subscribe">Start Free</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <h3>Pro Scout</h3>
+                <div class="price">$99<span>/month</span></div>
+                <ul class="features-list">
+                    <li>Full scouting database</li>
+                    <li>Video analysis tools</li>
+                    <li>Statistical projections</li>
+                    <li>Custom mock drafts</li>
+                    <li>International coverage</li>
+                    <li>API access</li>
+                </ul>
+                <button class="btn-subscribe">Go Pro</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Scout Elite</h3>
+                <div class="price">$29<span>/month</span></div>
+                <ul class="features-list">
+                    <li>Complete scouting reports</li>
+                    <li>Advanced metrics</li>
+                    <li>Historical comparisons</li>
+                    <li>Trade calculator</li>
+                    <li>Email alerts</li>
+                </ul>
+                <button class="btn-subscribe">Upgrade Now</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Team/Organization</h3>
+                <div class="price">$499<span>/month</span></div>
+                <ul class="features-list">
+                    <li>Multi-user access</li>
+                    <li>Private draft rooms</li>
+                    <li>Custom branding</li>
+                    <li>Priority support</li>
+                    <li>Data export</li>
+                    <li>Dedicated account manager</li>
+                </ul>
+                <button class="btn-subscribe">Contact Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Data Sources</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Baseball America</a></li>
+                    <li><a href="#">Perfect Game</a></li>
+                    <li><a href="#">NFL.com</a></li>
+                    <li><a href="#">Dave Campbell's Texas Football</a></li>
+                    <li><a href="#">247Sports</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>BlazeDraft</h4>
+                <ul class="footer-links">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Pro Scouts</a></li>
+                    <li><a href="#">API Documentation</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Blaze Intelligence</h4>
+                <ul class="footer-links">
+                    <li><a href="/">Main Platform</a></li>
+                    <li><a href="/texas-football.html">Texas Football</a></li>
+                    <li><a href="/championship.html">Championship Dashboard</a></li>
+                    <li><a href="/nil-calculator.html">NIL Calculator</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <p>Professional scouting inquiries:</p>
+                <p style="color: var(--burnt-orange);">scouts@blazesportsintel.com</p>
+                <div class="social-links">
+                    <div class="social-icon">𝕏</div>
+                    <div class="social-icon">📧</div>
+                    <div class="social-icon">💼</div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(191, 87, 0, 0.2);">
+            <p>&copy; 2025 Blaze Intelligence. All rights reserved. | Texas-Inspired Innovation</p>
+        </div>
+    </footer>
+
+    <script>
+        // Three.js 3D Draft Board Visualization
+        function initDraftBoard3D() {
+            const canvas = document.getElementById('draft-board-3d');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 600, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+
+            renderer.setSize(window.innerWidth, 600);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // Create floating draft cards
+            const geometry = new THREE.BoxGeometry(1, 1.5, 0.1);
+            const cards = [];
+
+            for (let i = 0; i < 20; i++) {
+                const material = new THREE.MeshBasicMaterial({
+                    color: new THREE.Color().setHSL(0.05 + (i * 0.02), 0.7, 0.5),
+                    transparent: true,
+                    opacity: 0.8
+                });
+
+                const card = new THREE.Mesh(geometry, material);
+                card.position.x = (Math.random() - 0.5) * 20;
+                card.position.y = (Math.random() - 0.5) * 10;
+                card.position.z = (Math.random() - 0.5) * 10;
+                card.rotation.x = Math.random() * Math.PI;
+                card.rotation.y = Math.random() * Math.PI;
+
+                scene.add(card);
+                cards.push(card);
+            }
+
+            // Add lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+
+            const pointLight = new THREE.PointLight(0xBF5700, 1);
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
+
+            camera.position.z = 15;
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                cards.forEach((card, index) => {
+                    card.rotation.x += 0.001 * (index + 1);
+                    card.rotation.y += 0.002 * (index + 1);
+                    card.position.y += Math.sin(Date.now() * 0.001 + index) * 0.01;
+                });
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / 600;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, 600);
+            });
+        }
+
+        // Initialize 3D visualization
+        initDraftBoard3D();
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Interactive card animations
+        document.querySelectorAll('.feature-card, .interactive-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Simulate live data updates
+        function updateLiveData() {
+            const indicators = document.querySelectorAll('.live-indicator span');
+            indicators.forEach(indicator => {
+                if (indicator.textContent === 'LIVE') {
+                    // Keep it live
+                } else if (indicator.textContent === 'UPDATING') {
+                    setTimeout(() => {
+                        indicator.textContent = 'UPDATED';
+                        setTimeout(() => {
+                            indicator.textContent = 'UPDATING';
+                        }, 3000);
+                    }, 2000);
+                }
+            });
+        }
+
+        setInterval(updateLiveData, 5000);
+
+        // Add interactive hover effects to pricing cards
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('featured')) {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.borderColor = '#BF5700';
+                }
+            });
+
+            card.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('featured')) {
+                    this.style.transform = 'translateY(0)';
+                    this.style.borderColor = 'transparent';
+                }
+            });
+        });
+
+        // Mock draft simulator (placeholder functionality)
+        document.querySelectorAll('.btn-subscribe').forEach(button => {
+            button.addEventListener('click', function() {
+                const originalText = this.textContent;
+                this.textContent = 'Coming Soon...';
+                this.style.background = 'linear-gradient(135deg, #00B2A9, #9BCBEB)';
+
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = 'linear-gradient(135deg, #BF5700, #FF6B00)';
+                }, 2000);
+            });
+        });
+
+        // Add dynamic stats updates
+        function animateStats() {
+            document.querySelectorAll('.stat-value').forEach(stat => {
+                const value = stat.textContent;
+                if (value.includes('%')) {
+                    // Animate percentage
+                    const num = parseFloat(value);
+                    let current = 0;
+                    const increment = num / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= num) {
+                            current = num;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = current.toFixed(1) + '%';
+                    }, 20);
+                } else if (!isNaN(value.replace(/[^\d]/g, ''))) {
+                    // Animate numbers
+                    const num = parseInt(value.replace(/[^\d]/g, ''));
+                    let current = 0;
+                    const increment = num / 30;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= num) {
+                            current = num;
+                            clearInterval(timer);
+                        }
+                        if (value.includes('K+')) {
+                            stat.textContent = Math.floor(current) + 'K+';
+                        } else if (value.includes('+')) {
+                            stat.textContent = Math.floor(current) + '+';
+                        } else if (value.includes('$')) {
+                            stat.textContent = '$' + (current / 1000000).toFixed(1) + 'M';
+                        } else {
+                            stat.textContent = Math.floor(current);
+                        }
+                    }, 30);
+                }
+            });
+        }
+
+        // Trigger stats animation when visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.disconnect();
+                }
+            });
+        });
+
+        const firstStatBox = document.querySelector('.stat-box');
+        if (firstStatBox) {
+            observer.observe(firstStatBox);
+        }
+
+        // Add Texas pride animation
+        function addTexasPride() {
+            const texasCard = document.getElementById('texas-hs');
+            if (texasCard) {
+                setInterval(() => {
+                    texasCard.style.boxShadow = '0 0 30px rgba(191, 87, 0, 0.5)';
+                    setTimeout(() => {
+                        texasCard.style.boxShadow = 'none';
+                    }, 1000);
+                }, 5000);
+            }
+        }
+
+        addTexasPride();
+    </script>
+</body>
+</html>

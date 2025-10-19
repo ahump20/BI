@@ -1,0 +1,496 @@
+{
+  "timestamp": "2025-09-25T21:18:37.817Z",
+  "league": "NBA",
+  "total_teams": 30,
+  "conferences": [
+    "Eastern",
+    "Western"
+  ],
+  "teams": [
+    {
+      "team_code": "BOS",
+      "league": "NBA",
+      "readiness_score": 73,
+      "championship_moments": 12,
+      "tactical_advantage": 72,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "efficiency_rating": 114.06306617088765,
+        "fourth_quarter_surge": 0.3295967991140516,
+        "defensive_rebounding_dominance": 0.14646157860874998,
+        "fast_break_conversion": 0.492072945880321
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "BKN",
+      "league": "NBA",
+      "readiness_score": 65,
+      "championship_moments": 10,
+      "tactical_advantage": 98,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "efficiency_rating": 113.4657407815174,
+        "fourth_quarter_surge": 0.15717910003669822,
+        "defensive_rebounding_dominance": 0.4067258744017028,
+        "fast_break_conversion": 0.891262965295277
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "NYK",
+      "league": "NBA",
+      "readiness_score": 75,
+      "championship_moments": 8,
+      "tactical_advantage": 73,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "efficiency_rating": 108.24911858847912,
+        "fourth_quarter_surge": 0.943434545361107,
+        "defensive_rebounding_dominance": 0.8044878644304669,
+        "fast_break_conversion": 0.3603489847333581
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "PHI",
+      "league": "NBA",
+      "readiness_score": 88,
+      "championship_moments": 9,
+      "tactical_advantage": 73,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "efficiency_rating": 119.53627746225696,
+        "fourth_quarter_surge": 0.24057744461902497,
+        "defensive_rebounding_dominance": 0.7742751844644384,
+        "fast_break_conversion": 0.13290522697016316
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "TOR",
+      "league": "NBA",
+      "readiness_score": 62,
+      "championship_moments": 8,
+      "tactical_advantage": 51,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "efficiency_rating": 118.63235112152572,
+        "fourth_quarter_surge": 0.9687596009717392,
+        "defensive_rebounding_dominance": 0.31045739027641384,
+        "fast_break_conversion": 0.43909284801835824
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "CHI",
+      "league": "NBA",
+      "readiness_score": 80,
+      "championship_moments": 6,
+      "tactical_advantage": 84,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "efficiency_rating": 113.64756995294027,
+        "fourth_quarter_surge": 0.054452659586002206,
+        "defensive_rebounding_dominance": 0.560485383603794,
+        "fast_break_conversion": 0.7853837364924461
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "CLE",
+      "league": "NBA",
+      "readiness_score": 94,
+      "championship_moments": 24,
+      "tactical_advantage": 84,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "efficiency_rating": 107.46259387588024,
+        "fourth_quarter_surge": 0.3482398145092478,
+        "defensive_rebounding_dominance": 0.11962128814196116,
+        "fast_break_conversion": 0.46364011663629223
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "DET",
+      "league": "NBA",
+      "readiness_score": 55,
+      "championship_moments": 13,
+      "tactical_advantage": 73,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "efficiency_rating": 100.80806941518227,
+        "fourth_quarter_surge": 0.4405301687247467,
+        "defensive_rebounding_dominance": 0.3052960879698161,
+        "fast_break_conversion": 0.026736404851097628
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.817Z"
+    },
+    {
+      "team_code": "IND",
+      "league": "NBA",
+      "readiness_score": 67,
+      "championship_moments": 12,
+      "tactical_advantage": 62,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "efficiency_rating": 100.04147460945883,
+        "fourth_quarter_surge": 0.9936129404856928,
+        "defensive_rebounding_dominance": 0.6217475393498977,
+        "fast_break_conversion": 0.9853746430999417
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "MIL",
+      "league": "NBA",
+      "readiness_score": 62,
+      "championship_moments": 14,
+      "tactical_advantage": 68,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "efficiency_rating": 105.61259152872408,
+        "fourth_quarter_surge": 0.9996724291934835,
+        "defensive_rebounding_dominance": 0.5708365636525854,
+        "fast_break_conversion": 0.4349809896994885
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "ATL",
+      "league": "NBA",
+      "readiness_score": 58,
+      "championship_moments": 16,
+      "tactical_advantage": 66,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "efficiency_rating": 116.44273686598376,
+        "fourth_quarter_surge": 0.08213078330141577,
+        "defensive_rebounding_dominance": 0.27984374799915357,
+        "fast_break_conversion": 0.2690156802915278
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "CHA",
+      "league": "NBA",
+      "readiness_score": 83,
+      "championship_moments": 15,
+      "tactical_advantage": 59,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "efficiency_rating": 101.02699181396711,
+        "fourth_quarter_surge": 0.11208459509479707,
+        "defensive_rebounding_dominance": 0.1156791504645478,
+        "fast_break_conversion": 0.8803526016172059
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "MIA",
+      "league": "NBA",
+      "readiness_score": 81,
+      "championship_moments": 13,
+      "tactical_advantage": 68,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "efficiency_rating": 100.1350030270647,
+        "fourth_quarter_surge": 0.05459464303188799,
+        "defensive_rebounding_dominance": 0.024309759251356144,
+        "fast_break_conversion": 0.6726736612410109
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "ORL",
+      "league": "NBA",
+      "readiness_score": 69,
+      "championship_moments": 13,
+      "tactical_advantage": 98,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "efficiency_rating": 109.10060670130126,
+        "fourth_quarter_surge": 0.09538554626207651,
+        "defensive_rebounding_dominance": 0.8812226715963958,
+        "fast_break_conversion": 0.16135916891341795
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "WAS",
+      "league": "NBA",
+      "readiness_score": 94,
+      "championship_moments": 17,
+      "tactical_advantage": 73,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "efficiency_rating": 115.44514902402854,
+        "fourth_quarter_surge": 0.6528473907733381,
+        "defensive_rebounding_dominance": 0.36217656645022145,
+        "fast_break_conversion": 0.3952990316988061
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "DEN",
+      "league": "NBA",
+      "readiness_score": 62,
+      "championship_moments": 9,
+      "tactical_advantage": 63,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "efficiency_rating": 116.54382352574927,
+        "fourth_quarter_surge": 0.12326322451150418,
+        "defensive_rebounding_dominance": 0.8861968734150507,
+        "fast_break_conversion": 0.6735377690045525
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "MIN",
+      "league": "NBA",
+      "readiness_score": 91,
+      "championship_moments": 14,
+      "tactical_advantage": 83,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "efficiency_rating": 117.88408126598974,
+        "fourth_quarter_surge": 0.15292797541455894,
+        "defensive_rebounding_dominance": 0.9753607783888505,
+        "fast_break_conversion": 0.6117979595616287
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "OKC",
+      "league": "NBA",
+      "readiness_score": 92,
+      "championship_moments": 24,
+      "tactical_advantage": 67,
+      "performance_trend": "PEAK",
+      "advanced_metrics": {
+        "efficiency_rating": 103.08963907257265,
+        "fourth_quarter_surge": 0.16701567161866282,
+        "defensive_rebounding_dominance": 0.9434866890187101,
+        "fast_break_conversion": 0.04063627923926716
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "POR",
+      "league": "NBA",
+      "readiness_score": 97,
+      "championship_moments": 5,
+      "tactical_advantage": 77,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "efficiency_rating": 110.48568538818975,
+        "fourth_quarter_surge": 0.9781581477288144,
+        "defensive_rebounding_dominance": 0.1852803617682237,
+        "fast_break_conversion": 0.6906474110586798
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "UTA",
+      "league": "NBA",
+      "readiness_score": 66,
+      "championship_moments": 9,
+      "tactical_advantage": 96,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "efficiency_rating": 117.98936197500831,
+        "fourth_quarter_surge": 0.5806908839100187,
+        "defensive_rebounding_dominance": 0.28586855333780514,
+        "fast_break_conversion": 0.7253600825640236
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "GSW",
+      "league": "NBA",
+      "readiness_score": 81,
+      "championship_moments": 20,
+      "tactical_advantage": 71,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "efficiency_rating": 114.33451866709615,
+        "fourth_quarter_surge": 0.5746364711476264,
+        "defensive_rebounding_dominance": 0.4183441770595766,
+        "fast_break_conversion": 0.7066567302189395
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "LAC",
+      "league": "NBA",
+      "readiness_score": 91,
+      "championship_moments": 22,
+      "tactical_advantage": 95,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "efficiency_rating": 107.87731183364117,
+        "fourth_quarter_surge": 0.5861263806372785,
+        "defensive_rebounding_dominance": 0.20889327285566295,
+        "fast_break_conversion": 0.7931293735686042
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "LAL",
+      "league": "NBA",
+      "readiness_score": 56,
+      "championship_moments": 14,
+      "tactical_advantage": 97,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "efficiency_rating": 117.33356279335825,
+        "fourth_quarter_surge": 0.8274142792975279,
+        "defensive_rebounding_dominance": 0.023068791211950712,
+        "fast_break_conversion": 0.45625002820836147
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "PHX",
+      "league": "NBA",
+      "readiness_score": 97,
+      "championship_moments": 8,
+      "tactical_advantage": 57,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "efficiency_rating": 105.07144929746086,
+        "fourth_quarter_surge": 0.042202493613896275,
+        "defensive_rebounding_dominance": 0.10403756076625759,
+        "fast_break_conversion": 0.21926822155002834
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "SAC",
+      "league": "NBA",
+      "readiness_score": 98,
+      "championship_moments": 23,
+      "tactical_advantage": 90,
+      "performance_trend": "STABLE",
+      "advanced_metrics": {
+        "efficiency_rating": 110.5999589010046,
+        "fourth_quarter_surge": 0.23771762170095045,
+        "defensive_rebounding_dominance": 0.01751539066983665,
+        "fast_break_conversion": 0.6605952464673657
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "DAL",
+      "league": "NBA",
+      "readiness_score": 76,
+      "championship_moments": 8,
+      "tactical_advantage": 63,
+      "performance_trend": "EMERGING",
+      "advanced_metrics": {
+        "efficiency_rating": 113.75459782487566,
+        "fourth_quarter_surge": 0.3462008748230354,
+        "defensive_rebounding_dominance": 0.3175193937041243,
+        "fast_break_conversion": 0.6256980494469395
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "HOU",
+      "league": "NBA",
+      "readiness_score": 70,
+      "championship_moments": 15,
+      "tactical_advantage": 62,
+      "performance_trend": "VOLATILE",
+      "advanced_metrics": {
+        "efficiency_rating": 116.44101456271505,
+        "fourth_quarter_surge": 0.1187780429989247,
+        "defensive_rebounding_dominance": 0.813487900583016,
+        "fast_break_conversion": 0.36623234483979306
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "MEM",
+      "league": "NBA",
+      "readiness_score": 78,
+      "championship_moments": 9,
+      "tactical_advantage": 95,
+      "performance_trend": "PEAK",
+      "advanced_metrics": {
+        "efficiency_rating": 115.49568642519917,
+        "fourth_quarter_surge": 0.25221554765638454,
+        "defensive_rebounding_dominance": 0.5914225660640824,
+        "fast_break_conversion": 0.86785686475559
+      },
+      "grizzlies_model": true,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "NO",
+      "league": "NBA",
+      "readiness_score": 70,
+      "championship_moments": 9,
+      "tactical_advantage": 87,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "efficiency_rating": 116.97787550544157,
+        "fourth_quarter_surge": 0.27908117804428145,
+        "defensive_rebounding_dominance": 0.819135106900593,
+        "fast_break_conversion": 0.1544755330705072
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    },
+    {
+      "team_code": "SA",
+      "league": "NBA",
+      "readiness_score": 73,
+      "championship_moments": 13,
+      "tactical_advantage": 59,
+      "performance_trend": "ASCENDING",
+      "advanced_metrics": {
+        "efficiency_rating": 113.08209782648638,
+        "fourth_quarter_surge": 0.6833084941533383,
+        "defensive_rebounding_dominance": 0.7816960520633127,
+        "fast_break_conversion": 0.8159579886466415
+      },
+      "grizzlies_model": false,
+      "last_updated": "2025-09-25T21:18:37.818Z"
+    }
+  ],
+  "analytics": {
+    "efficiency_ratings": true,
+    "fourth_quarter_analysis": true,
+    "defensive_rebounding_tracking": true
+  }
+}

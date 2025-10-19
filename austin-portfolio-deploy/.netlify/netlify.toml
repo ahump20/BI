@@ -1,0 +1,123 @@
+functionsDirectory = "/Users/AustinHumphrey/austin-portfolio-deploy/netlify/functions"
+functionsDirectoryOrigin = "default"
+headersOrigin = "config"
+redirectsOrigin = "config"
+plugins = []
+
+[build]
+publish = "/Users/AustinHumphrey/austin-portfolio-deploy"
+publishOrigin = "config"
+commandOrigin = "ui"
+base = "/Users/AustinHumphrey/austin-portfolio-deploy"
+command = "npm run build"
+functions = "/Users/AustinHumphrey/austin-portfolio-deploy/netlify/functions"
+
+[build.environment]
+NODE_VERSION = "18"
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[functions]
+
+[functions."*"]
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+Access-Control-Allow-Origin = "*"
+Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+Access-Control-Allow-Headers = "Content-Type"
+
+[[headers]]
+for = "/*.js"
+
+[headers.values]
+Content-Type = "application/javascript; charset=utf-8"
+Cache-Control = "public, max-age=3600"
+
+[[headers]]
+for = "/*.css"
+
+[headers.values]
+Content-Type = "text/css; charset=utf-8"
+Cache-Control = "public, max-age=3600"
+
+[[headers]]
+for = "/*.json"
+
+[headers.values]
+Content-Type = "application/json; charset=utf-8"
+Cache-Control = "public, max-age=300"
+
+[[headers]]
+for = "/*.html"
+
+[headers.values]
+Content-Type = "text/html; charset=utf-8"
+Cache-Control = "public, max-age=300"
+X-Frame-Options = "SAMEORIGIN"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+for = "/images/*"
+
+[headers.values]
+Cache-Control = "public, max-age=86400"
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+X-XSS-Protection = "1; mode=block"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:;"
+
+[[redirects]]
+from = "https://www.blazesportsintel.com/*"
+to = "https://blazesportsintel.com/:splat"
+status = 301.0
+force = true
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]

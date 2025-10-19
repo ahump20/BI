@@ -1,0 +1,118 @@
+{
+  "name": "blaze-3d-sports-intelligence",
+  "version": "2.0.0",
+  "description": "Production-grade 3D Sports Intelligence Dashboards - Cardinals, Titans, Longhorns, Grizzlies",
+  "type": "module",
+  "private": true,
+  "homepage": "./",
+  "dependencies": {
+    "@react-three/fiber": "^8.15.19",
+    "@react-three/drei": "^9.88.17",
+    "@react-three/postprocessing": "^2.16.2",
+    "@react-three/rapier": "^1.2.1",
+    "@react-three/cannon": "^6.6.0",
+    "@react-three/a11y": "^3.0.0",
+    "three": "^0.158.0",
+    "three-stdlib": "^2.29.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.18.0",
+    "framer-motion": "^10.16.4",
+    "@types/three": "^0.158.3",
+    "chart.js": "^4.4.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-use-gesture": "^9.1.3",
+    "react-spring": "^9.7.3",
+    "zustand": "^4.4.6",
+    "leva": "^0.9.35",
+    "glsl-noise": "^0.0.0",
+    "postprocessing": "^6.35.0",
+    "draco3d": "^1.5.6",
+    "ktx-parse": "^0.4.5",
+    "meshoptimizer": "^0.20.0",
+    "lamina": "^1.1.23",
+    "maath": "^0.10.7",
+    "stats.js": "^0.17.0",
+    "troika-three-text": "^0.49.1",
+    "tunnelrat": "^2.1.1",
+    "suspend-react": "^0.1.3",
+    "@use-gesture/react": "^10.3.0",
+    "react-use-measure": "^2.1.1",
+    "react-merge-refs": "^2.0.2",
+    "utility-types": "^3.10.0",
+    "web-vitals": "^3.5.0",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.5.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && gh-pages -d build",
+    "analyze": "npm run build && npx bundle-analyzer build/static/js/*.js",
+    "3d-dev": "BROWSER=none npm start",
+    "perf": "npm run build && serve -s build -l 8000"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "react-scripts": "^5.0.1",
+    "gh-pages": "^6.1.0",
+    "serve": "^14.2.1",
+    "@types/react": "^18.2.39",
+    "@types/react-dom": "^18.2.17",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "3d",
+    "three.js",
+    "react-three-fiber",
+    "sports-analytics",
+    "cardinals",
+    "titans",
+    "longhorns",
+    "grizzlies",
+    "webgl",
+    "data-visualization",
+    "sports-intelligence",
+    "blaze-intelligence",
+    "deep-south-sports"
+  ],
+  "author": "Austin Humphrey <ahump20@outlook.com>",
+  "license": "MIT",
+  "performance": {
+    "budgets": [
+      {
+        "type": "initial",
+        "maximumWarning": "500kb",
+        "maximumError": "1mb"
+      },
+      {
+        "type": "anyComponentStyle",
+        "maximumWarning": "2kb",
+        "maximumError": "4kb"
+      }
+    ]
+  }
+}

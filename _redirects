@@ -1,13 +1,19 @@
-# Blaze Intelligence - Cloudflare Pages Redirects Configuration
-# Pattern Recognition Weaponized™
+# Blaze Intelligence - The Deep South Sports Authority
+# Texas Football & SEC Analytics Platform
 
-# Fix integrated platform redirect issue
-/integrated-platform.html /integrated-platform/ 200
-/integrated-platform /integrated-platform.html 200
+# Domain canonicalization
+https://blaze-intelligence.netlify.app/* https://blaze-intelligence.com/:splat 301!
+https://blazesportsintel.com/* https://blaze-intelligence.com/:splat 301!
 
-# Standard redirects for clean URLs
-/intelligence-os.html /intelligence-os 301
-/championship-os.html /championship-os 301
+# Main platform redirects
+/intelligence-os /blaze-intelligence-os-v2-live.html 200
+/championship-os /blaze-intelligence-ultimate-championship.html 200
+/integrated-platform /blaze-intelligence-ultimate-enhanced.html 200
+
+# Core sections
+/texas-football /texas-football-authority.html 200
+/sec /sec-command.html 200
+/analytics /analytics-dashboard.html 200
 
 # Root domain redirects
 /index /index.html 200

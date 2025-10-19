@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SEC Football Week 3 — Blaze Intelligence</title>
+    <meta name="description" content="Complete SEC Football Week 3 preview with live standings, scoring averages, and upcoming matchups across all 16 conference teams.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+    
+    <!-- Use shared brand styles and hero animation -->
+    <link rel="stylesheet" href="/assets/brand.css">
+    
+    <!-- Three.js for Hero Animation -->
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" class="logo-text">BLAZE INTELLIGENCE</a>
+                <div class="tagline">The Deep South Sports Authority</div>
+            </div>
+            
+            <div class="nav-links desktop-only">
+                <a href="/">Home</a>
+                <a href="index-unified-hub.html" style="color: #BF5700; font-weight: bold;">🚀 Unified Hub</a>
+                <a href="/perfect-game.html">🥇 PG Select</a>
+                <a href="/sec-football.html" class="active">🏈 SEC Football</a>
+                <a href="/scout-reports.html">📊 Scout Reports</a>
+                <a href="/contact.html">Contact</a>
+            </div>
+
+            <div class="nav-toggle mobile-only" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Authority Badge -->
+    <section class="hero-authority">
+        <div class="authority-badge">
+            <span class="badge-text">SEC Football Intelligence</span>
+            <div class="trust-logos">
+                <span>Week 3 Preview</span>
+                <span>•</span>
+                <span>16 Teams Tracked</span>
+            </div>
+        </div>
+        
+        <div class="hero-title">
+            <span class="small-text">From Tuscaloosa to College Station</span>
+            <span class="main-text">SEC Football Week 3</span>
+            <span class="sub-text">Live Standings • Scoring Analytics • Championship Insights</span>
+        </div>
+
+        <div class="hero-stats">
+            <div class="stat-card">
+                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">8</div>
+                <div style="color: var(--cardinal-blue);">Undefeated Teams</div>
+                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">2-0 Records</div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">117</div>
+                <div style="color: var(--cardinal-blue);">Points by Tennessee</div>
+                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">League Leader</div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size: 2.5rem; color: var(--burnt-orange); font-weight: 900; margin-bottom: 8px;">6.5</div>
+                <div style="color: var(--cardinal-blue);">Georgia PA/Game</div>
+                <div style="font-size: 0.8rem; color: #00ff88; margin-top: 4px;">Elite Defense</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Canvas Background -->
+    <canvas id="hero" style="width:100%;height:32vh;display:block;position:fixed;top:0;left:0;z-index:-1;"></canvas>
+
+    <div class="container">
+        <div class="perfect-game-header">
+            <div class="h1">SEC Football — Week 3 Preview</div>
+            <p class="perfect-game-subtitle">A complete look at every SEC program heading into Week 3 of the 2025 season. Records and basic offensive/defensive metrics are up to date as of September 12, 2025, with points for and against drawn from official NCAA standings and last week's scores from the SEC's official scoreboard.</p>
+        </div>
+
+        <!-- SEC Teams Grid -->
+        <div class="grid cols-3 elite-teams-grid">
+            <!-- Ole Miss -->
+            <div class="card">
+                <div class="h2">Ole Miss (2–0)</div>
+                <p class="p">Conf 1–0 | PF 93, PA 30 (46.5 PF/G, 15.0 PA/G). The Rebels outlasted Kentucky 30–23 last week. Next: vs. Arkansas, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">2-0 Record</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">46.5 PF/G</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs Arkansas</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tennessee -->
+            <div class="card">
+                <div class="h2">Tennessee (2–0)</div>
+                <p class="p">Conf 0–0 | PF 117, PA 43 (58.5 PF/G, 21.5 PA/G). Vols routed ETSU 72–17. Next: at Georgia, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">League Leading Offense</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">58.5 PF/G</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">at Georgia</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Arkansas -->
+            <div class="card">
+                <div class="h2">Arkansas (2–0)</div>
+                <p class="p">Conf 0–0 | PF 108, PA 21 (54.0 PF/G, 10.5 PA/G). Hogs handled Arkansas State 56–14. Next: at Ole Miss, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">54.0 PF/G</span>
+                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Strong Defense</span>
+                        <span style="background: rgba(12, 35, 64, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">at Ole Miss</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Missouri -->
+            <div class="card">
+                <div class="h2">Missouri (2–0)</div>
+                <p class="p">Conf 0–0 | PF 103, PA 37 (51.5 PF/G, 18.5 PA/G). Tigers topped Kansas 42–31. Next: vs. Louisiana Lafayette, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">High-Powered Offense</span>
+                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">51.5 PF/G</span>
+                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Dark Horse</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vanderbilt -->
+            <div class="card">
+                <div class="h2">Vanderbilt (2–0)</div>
+                <p class="p">Conf 0–0 | PF 89, PA 23 (44.5 PF/G, 11.5 PA/G). Dores defeated Virginia Tech 44–20. Next: at South Carolina, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Balanced Start</span>
+                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">44.5 PF/G</span>
+                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">at South Carolina</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Texas A&M -->
+            <div class="card">
+                <div class="h2">Texas A&amp;M (2–0)</div>
+                <p class="p">Conf 0–0 | PF 86, PA 46 (43.0 PF/G, 23.0 PA/G). Aggies blew past Utah State 44–22. Next: vs. Notre Dame, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">43.0 PF/G</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs Notre Dame</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Big Test</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Auburn -->
+            <div class="card">
+                <div class="h2">Auburn (2–0)</div>
+                <p class="p">Conf 0–0 | PF 80, PA 27 (40.0 PF/G, 13.5 PA/G). Tigers crushed Ball State 42–3. Next: vs. South Alabama, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Strong Defense</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">13.5 PA/G</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs South Alabama</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Georgia -->
+            <div class="card">
+                <div class="h2">Georgia (2–0)</div>
+                <p class="p">Conf 0–0 | PF 73, PA 13 (36.5 PF/G, 6.5 PA/G). Bulldogs beat Austin Peay 28–6. Next: vs. Tennessee, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Elite Defense</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">6.5 PA/G</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs Tennessee</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- South Carolina -->
+            <div class="card">
+                <div class="h2">South Carolina (2–0)</div>
+                <p class="p">Conf 0–0 | PF 62, PA 21 (31.0 PF/G, 10.5 PA/G). Gamecocks handled SC State 38–10. Next: vs. Vanderbilt, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Balanced Attack</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">31.0 PF/G</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs Vanderbilt</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oklahoma -->
+            <div class="card">
+                <div class="h2">Oklahoma (2–0)</div>
+                <p class="p">Conf 0–0 | PF 59, PA 16 (29.5 PF/G, 8.0 PA/G). Sooners upset Michigan 24–13. Next: vs. Temple, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Upset Win</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs Michigan</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">8.0 PA/G</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mississippi State -->
+            <div class="card">
+                <div class="h2">Mississippi State (2–0)</div>
+                <p class="p">Conf 0–0 | PF 58, PA 37 (29.0 PF/G, 18.5 PA/G). Bulldogs edged Arizona State 24–20. Next: vs. Alcorn State, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Close Win</span>
+                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">29.0 PF/G</span>
+                        <span style="background: rgba(93, 118, 169, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs Alcorn State</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LSU -->
+            <div class="card">
+                <div class="h2">LSU (2–0)</div>
+                <p class="p">Conf 0–0 | PF 40, PA 17 (20.0 PF/G, 8.5 PA/G). Tigers beat LA Tech 23–7. Next: at Florida, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Stifling Defense</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">8.5 PA/G</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">at Florida</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alabama -->
+            <div class="card">
+                <div class="h2">Alabama (1–1)</div>
+                <p class="p">Conf 0–0 | PF 90, PA 31 (45.0 PF/G, 15.5 PA/G). Tide blanked ULM 73–0 after falling to a ranked foe in Week 1. Next: vs. Wisconsin, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Bounce Back</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">45.0 PF/G</span>
+                        <span style="background: rgba(196, 30, 58, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs Wisconsin</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Florida -->
+            <div class="card">
+                <div class="h2">Florida (1–1)</div>
+                <p class="p">Conf 0–0 | PF 71, PA 18 (35.5 PF/G, 9.0 PA/G). Gators were upset by USF 18–16. Next: vs. LSU, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Upset Loss</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs USF</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs LSU</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kentucky -->
+            <div class="card">
+                <div class="h2">Kentucky (1–1)</div>
+                <p class="p">Conf 0–1 | PF 47, PA 46 (23.5 PF/G, 23.0 PA/G). Wildcats fell to Ole Miss 30–23. Next: vs. Eastern Michigan, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Searching</span>
+                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">23.5 PF/G</span>
+                        <span style="background: rgba(26, 101, 158, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs E. Michigan</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Texas -->
+            <div class="card">
+                <div class="h2">Texas (1–1)</div>
+                <p class="p">Conf 0–0 | PF 45, PA 21 (22.5 PF/G, 10.5 PA/G). Longhorns rebounded by beating San Jose St. 38–7. Next: vs. UTEP, Sep 13.</p>
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">Rebounded</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">22.5 PF/G</span>
+                        <span style="background: rgba(191, 87, 0, 0.2); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">vs UTEP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr style="border: 1px solid var(--glass-border); margin: 60px 0;">
+
+        <!-- Key Storylines Section -->
+        <div style="background: var(--glass-bg-dark); border: 1px solid var(--glass-border); border-radius: 16px; padding: 40px; margin: 40px 0;">
+            <div class="h2" style="color: var(--friday-lights); margin-bottom: 24px;">Key Storylines</div>
+            <p class="p">Half of the league sits at 2–0 with formidable scoring margins. Tennessee (117 points) leads the conference in offense, while Georgia and LSU boast stifling defenses (13 and 17 points allowed respectively). Arkansas vs. Ole Miss and Georgia vs. Tennessee headline Week 3 as the first major conference tests.</p>
+            <p class="p">Florida's upset loss to USF and Kentucky's loss to Ole Miss leave both programs searching for answers. Alabama and Texas bounced back from opening losses and now face tough non‑conference opponents Wisconsin and UTEP. Keep an eye on Missouri's high‑powered offense (51.5 PF/G) and Vanderbilt's balanced start as potential dark horses.</p>
+        </div>
+
+        <!-- Authority Statement -->
+        <section class="authority-proof">
+            <div class="container">
+                <div class="authority-statement">
+                    <div class="crown-large">👑</div>
+                    <h3>SEC Football Authority</h3>
+                    <p>From Tiger Stadium to Neyland Stadium, from the Plains to College Station, we provide comprehensive SEC football intelligence. Our data-driven analysis combines traditional scouting with advanced metrics to deliver unparalleled insights into the nation's premier football conference.</p>
+                </div>
+                
+                <!-- Call to Action -->
+                <div style="background: rgba(0, 0, 0, 0.5); border: 2px solid var(--burnt-orange); border-radius: 20px; padding: 48px; text-align: center; margin: 60px 0 0;">
+                    <div class="h2" style="color: var(--friday-lights); margin-bottom: 16px;">Access SEC Intelligence</div>
+                    <p style="font-size: 1.2rem; color: var(--cardinal-blue); margin-bottom: 32px; line-height: 1.6;">Join coaches, analysts, and fans who trust Blaze Intelligence for comprehensive SEC football coverage and analytics.</p>
+                    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <a href="/scout-reports.html" style="background: linear-gradient(135deg, var(--burnt-orange), var(--sec-crimson)); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">View Scout Reports</a>
+                        <a href="/contact.html" style="background: rgba(155, 203, 235, 0.1); color: var(--cardinal-blue); padding: 16px 32px; border: 2px solid var(--cardinal-blue); border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Contact Analysts</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Load Hero Animation -->
+    <script src="/assets/hero.js"></script>
+
+    <!-- Performance Tracking -->
+    <script>
+        // Track SEC Football page visits
+        if (typeof gtag !== 'undefined') {
+            gtag('config', 'GA_TRACKING_ID', {
+                page_title: 'SEC Football Week 3 Preview',
+                page_location: window.location.href
+            });
+        }
+
+        // Log page load for analytics
+        console.log('🏈 SEC Football Intelligence Loaded');
+        
+        // Add interactive effects to all cards
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+                this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Mobile navigation
+        document.getElementById('nav-toggle').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+
+</body></html>

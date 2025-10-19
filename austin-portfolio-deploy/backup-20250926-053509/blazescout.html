@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlazeScout Pro - Coming Soon | Blaze Intelligence</title>
+    <meta name="description" content="BlazeScout Pro - Professional sports analytics tool for championship-level insights. Coming Q2 2025.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/public/assets/images/BI-4_1757392449602.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r168/three.min.js"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --sec-crimson: #9B2222;
+            --cardinal-blue: #9BCBEB;
+            --deep-teal: #00B2A9;
+            --mississippi-white: #F8F8FF;
+            --texas-navy: #002244;
+            --friday-lights: #FFD700;
+            --stadium-black: #0A0A0A;
+
+            --font-headline: 'Bebas Neue', 'Oswald', sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-data: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(180deg, var(--stadium-black) 0%, var(--texas-navy) 50%);
+            color: var(--mississippi-white);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-section {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, rgba(155, 34, 34, 0.1) 100%);
+        }
+
+        .hero-section h1 {
+            font-family: var(--font-headline);
+            font-size: 3.5rem;
+            color: var(--burnt-orange);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: var(--cardinal-blue);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .coming-soon-notice, .tool-launch-notice, .company-info {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--burnt-orange);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .coming-soon-notice h2, .tool-launch-notice h2, .company-info h2 {
+            font-family: var(--font-headline);
+            font-size: 2rem;
+            color: var(--burnt-orange);
+            margin-bottom: 20px;
+        }
+
+        .features-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(155, 203, 235, 0.2);
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--friday-lights);
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            font-family: var(--font-headline);
+            color: var(--mississippi-white);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .launch-timeline {
+            display: grid;
+            gap: 20px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .phase {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--cardinal-blue);
+        }
+
+        .phase.completed {
+            border-left-color: #00ff88;
+        }
+
+        .phase.in-progress {
+            border-left-color: var(--friday-lights);
+        }
+
+        .contact-info, .mission-statement {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .contact-info h3, .mission-statement h3 {
+            color: var(--burnt-orange);
+            margin-bottom: 15px;
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--burnt-orange);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            background: var(--sec-crimson);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-preview {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav style="position: fixed; top: 0; width: 100%; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); z-index: 1000; padding: 1rem 2rem; border-bottom: 3px solid var(--burnt-orange);">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto;">
+            <a href="/" style="color: var(--burnt-orange); font-family: var(--font-headline); font-size: 1.5rem; text-decoration: none; font-weight: 700;">BLAZE INTELLIGENCE</a>
+            <a href="/" class="back-home" style="font-size: 0.9rem; padding: 8px 16px;">
+                <i class="fas fa-home"></i> Home
+            </a>
+        </div>
+    </nav>
+
+    
+        <div class="hero-section">
+          <div class="container">
+            <h1>BlazeScout Pro</h1>
+            <p>Professional sports analytics tool for championship-level insights.</p>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <div class="container">
+            <div class="tool-launch-notice">
+              <h2>🚀 Tool Launch Coming Soon</h2>
+              <p>BlazeScout Pro is currently in final development and testing phases.</p>
+              <div class="launch-timeline">
+                <div class="phase completed">
+                  <h3>✅ Phase 1: Core Development</h3>
+                  <p>Algorithm development and testing completed</p>
+                </div>
+                <div class="phase in-progress">
+                  <h3>🔧 Phase 2: Beta Testing</h3>
+                  <p>Internal testing and refinement in progress</p>
+                </div>
+                <div class="phase upcoming">
+                  <h3>📅 Phase 3: Public Launch</h3>
+                  <p>Full public release scheduled for Q2 2025</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <footer style="background: var(--stadium-black); padding: 40px 0; text-align: center; border-top: 2px solid var(--burnt-orange);">
+        <div class="container">
+            <p>&copy; 2025 Blaze Intelligence. All rights reserved.</p>
+            <p style="margin-top: 10px; color: var(--cardinal-blue);">The Deep South Sports Authority</p>
+        </div>
+    </footer>
+</body>
+</html>

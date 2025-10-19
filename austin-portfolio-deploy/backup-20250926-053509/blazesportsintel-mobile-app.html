@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Blaze Sports Intel Mobile | Deep South Sports Authority</title>
+
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Advanced Analytics CSS -->
+    <link rel="stylesheet" href="css/advanced-analytics.css">
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Blaze Intelligence Brand Colors */
+            --texas-burnt-orange: #BF5700;
+            --championship-gold: #FFD700;
+            --longhorn-bronze: #D2691E;
+            --midnight-black: #0A0A0A;
+            --steel-gray: #1A1A1A;
+            --ghost-white: #FAFAFA;
+            --success-green: #39FF14;
+            --warning-amber: #FFA726;
+            --glass-white: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(191, 87, 0, 0.3);
+            --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.8);
+            --gradient-primary: linear-gradient(135deg, #BF5700, #FFD700);
+            --gradient-night: linear-gradient(180deg, #0A0A0A, #1A1A1A);
+            --sec-purple: #4B0082;
+            --field-green: #228B22;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--midnight-black);
+            color: var(--ghost-white);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            touch-action: manipulation;
+        }
+
+        /* Typography System */
+        h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        h4 {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* App Container */
+        #app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: var(--gradient-night);
+        }
+
+        /* Premium Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--texas-burnt-orange);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gradient-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.4);
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: var(--ghost-white);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(191, 87, 0, 0.2);
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(30px);
+            z-index: 2000;
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-top: 80px;
+            border-right: 1px solid var(--glass-border);
+        }
+
+        .nav-menu.open {
+            left: 0;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 16px 24px;
+            color: var(--ghost-white);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(191, 87, 0, 0.2);
+            color: var(--championship-gold);
+        }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding-top: 80px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(180deg, rgba(191, 87, 0, 0.3) 0%, transparent 100%);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .hero-title {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 32px 20px;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* League Selector */
+        .league-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding: 0 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .league-selector::-webkit-scrollbar {
+            display: none;
+        }
+
+        .league-btn {
+            padding: 10px 16px;
+            background: var(--glass-white);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            color: var(--ghost-white);
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .league-btn:hover,
+        .league-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: var(--texas-burnt-orange);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(191, 87, 0, 0.3);
+        }
+
+        /* Team Cards */
+        .teams-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 0 20px;
+        }
+
+        .team-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .team-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--texas-burnt-orange);
+            box-shadow: var(--shadow-deep);
+        }
+
+        .team-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .team-logo {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: white;
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.4);
+        }
+
+        .team-info h3 {
+            color: var(--ghost-white);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .team-conference {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+
+        .team-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--championship-gold);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .team-action {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--texas-burnt-orange) 0%, var(--championship-gold) 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .team-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(191, 87, 0, 0.4);
+        }
+
+        /* Live Scores */
+        .live-games {
+            background: linear-gradient(135deg, rgba(75, 0, 130, 0.2) 0%, rgba(34, 139, 34, 0.2) 100%);
+            margin: 0 20px;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(75, 0, 130, 0.3);
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s;
+        }
+
+        .game-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .game-teams {
+            font-weight: 700;
+            color: var(--ghost-white);
+        }
+
+        .game-score {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--championship-gold);
+        }
+
+        .game-status {
+            font-size: 0.8rem;
+            color: var(--success-green);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Player Cards */
+        .player-spotlight {
+            padding: 32px 20px;
+            background: linear-gradient(135deg, rgba(191, 87, 0, 0.1) 0%, transparent 100%);
+        }
+
+        .player-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .player-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--texas-burnt-orange);
+            box-shadow: var(--shadow-deep);
+        }
+
+        .player-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .player-avatar {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 0 20px rgba(191, 87, 0, 0.4);
+        }
+
+        .player-info h4 {
+            color: var(--ghost-white);
+            margin-bottom: 4px;
+        }
+
+        .player-position {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+
+        .player-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        /* Analytics Charts */
+        .analytics-section {
+            padding: 32px 20px;
+        }
+
+        .chart-container {
+            background: var(--glass-white);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            height: 300px;
+            position: relative;
+        }
+
+        .chart-title {
+            color: var(--championship-gold);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            z-index: 1000;
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 12px;
+            min-width: 60px;
+        }
+
+        .bottom-nav-item.active,
+        .bottom-nav-item:hover {
+            color: var(--championship-gold);
+            background: rgba(191, 87, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .bottom-nav-icon {
+            font-size: 20px;
+        }
+
+        .bottom-nav-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--steel-gray);
+            color: var(--ghost-white);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 10000;
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 360px) {
+            .header-content {
+                padding: 12px 16px;
+            }
+
+            .teams-grid,
+            .section {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .team-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header" id="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🔥</div>
+                    <div class="logo-text">Blaze Sports Intel</div>
+                </div>
+                <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+                    ☰
+                </button>
+            </div>
+        </header>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu" id="navMenu">
+            <a href="#home" class="nav-item active" onclick="navigateTo('home')">🏠 Home</a>
+            <a href="#teams" class="nav-item" onclick="navigateTo('teams')">🏈 Teams</a>
+            <a href="#scores" class="nav-item" onclick="navigateTo('scores')">📊 Live Scores</a>
+            <a href="#players" class="nav-item" onclick="navigateTo('players')">⭐ Players</a>
+            <a href="#standings" class="nav-item" onclick="navigateTo('standings')">🏆 Standings</a>
+            <a href="#analytics" class="nav-item" onclick="navigateTo('analytics')">📈 Analytics</a>
+            <a href="#schedule" class="nav-item" onclick="navigateTo('schedule')">📅 Schedule</a>
+            <div style="margin-top: 40px; padding: 0 24px;">
+                <div style="color: var(--championship-gold); font-size: 0.8rem; font-weight: 700; margin-bottom: 12px;">DEEP SOUTH SPORTS AUTHORITY</div>
+                <div style="color: rgba(255,255,255,0.6); font-size: 0.75rem; line-height: 1.4;">
+                    From Friday Night Lights to Sunday in the Show
+                </div>
+            </div>
+        </nav>
+
+        <div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Hero Section -->
+            <section class="hero-section" id="home">
+                <h1 class="hero-title">Deep South Sports Authority</h1>
+                <h2 class="hero-subtitle">Championship Intelligence Platform</h2>
+                <p class="hero-description">
+                    Real-time sports intelligence for Texas • SEC • Deep South athletics from youth to professional levels
+                </p>
+            </section>
+
+            <!-- Live Scores Section -->
+            <section class="section" id="scores">
+                <div class="section-header">
+                    <h2 class="section-title">Live Action</h2>
+                    <p class="section-subtitle">Real-time championship battles</p>
+                </div>
+
+                <div class="league-selector">
+                    <button class="league-btn active" onclick="filterByLeague('all')">All</button>
+                    <button class="league-btn" onclick="filterByLeague('mlb')">MLB</button>
+                    <button class="league-btn" onclick="filterByLeague('nfl')">NFL</button>
+                    <button class="league-btn" onclick="filterByLeague('nba')">NBA</button>
+                    <button class="league-btn" onclick="filterByLeague('ncaa')">NCAA</button>
+                </div>
+
+                <div class="live-games" id="liveGamesContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Teams Section -->
+            <section class="section" id="teams">
+                <div class="section-header">
+                    <h2 class="section-title">Championship Programs</h2>
+                    <p class="section-subtitle">Elite teams across all leagues</p>
+                </div>
+
+                <div class="league-selector">
+                    <button class="league-btn active" onclick="loadTeams('all')">All</button>
+                    <button class="league-btn" onclick="loadTeams('mlb')">MLB</button>
+                    <button class="league-btn" onclick="loadTeams('nfl')">NFL</button>
+                    <button class="league-btn" onclick="loadTeams('nba')">NBA</button>
+                    <button class="league-btn" onclick="loadTeams('ncaa-football')">NCAA Football</button>
+                    <button class="league-btn" onclick="loadTeams('ncaa-baseball')">NCAA Baseball</button>
+                </div>
+
+                <div class="teams-grid" id="teamsContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Player Spotlight Section -->
+            <section class="player-spotlight" id="players">
+                <div class="section-header">
+                    <h2 class="section-title">Player Spotlight</h2>
+                    <p class="section-subtitle">Elite athletes defining excellence</p>
+                </div>
+
+                <div id="playersContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Standings Section -->
+            <section class="section" id="standings">
+                <div class="section-header">
+                    <h2 class="section-title">League Standings</h2>
+                    <p class="section-subtitle">Championship race rankings</p>
+                </div>
+
+                <div class="league-selector">
+                    <button class="league-btn active" onclick="loadStandings('mlb')">MLB</button>
+                    <button class="league-btn" onclick="loadStandings('nfl')">NFL</button>
+                    <button class="league-btn" onclick="loadStandings('nba')">NBA</button>
+                    <button class="league-btn" onclick="loadStandings('ncaa')">NCAA</button>
+                </div>
+
+                <div id="standingsContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section class="analytics-section" id="analytics">
+                <div class="section-header">
+                    <h2 class="section-title">Analytics Command Center</h2>
+                    <p class="section-subtitle">Data-driven championship insights</p>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">Performance Trends</div>
+                    <canvas id="performanceChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">League Comparison</div>
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Schedule Section -->
+            <section class="section" id="schedule">
+                <div class="section-header">
+                    <h2 class="section-title">Upcoming Games</h2>
+                    <p class="section-subtitle">Championship battles ahead</p>
+                </div>
+
+                <div class="league-selector">
+                    <button class="league-btn active" onclick="loadSchedule('all')">All</button>
+                    <button class="league-btn" onclick="loadSchedule('mlb')">MLB</button>
+                    <button class="league-btn" onclick="loadSchedule('nfl')">NFL</button>
+                    <button class="league-btn" onclick="loadSchedule('nba')">NBA</button>
+                    <button class="league-btn" onclick="loadSchedule('ncaa')">NCAA</button>
+                </div>
+
+                <div id="scheduleContainer">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="bottom-nav-item active" onclick="setActiveTab(this, 'home')">
+                <div class="bottom-nav-icon">🏠</div>
+                <span class="bottom-nav-label">Home</span>
+            </div>
+            <div class="bottom-nav-item" onclick="setActiveTab(this, 'teams')">
+                <div class="bottom-nav-icon">🏈</div>
+                <span class="bottom-nav-label">Teams</span>
+            </div>
+            <div class="bottom-nav-item" onclick="setActiveTab(this, 'scores')">
+                <div class="bottom-nav-icon">📊</div>
+                <span class="bottom-nav-label">Scores</span>
+            </div>
+            <div class="bottom-nav-item" onclick="setActiveTab(this, 'players')">
+                <div class="bottom-nav-icon">⭐</div>
+                <span class="bottom-nav-label">Players</span>
+            </div>
+            <div class="bottom-nav-item" onclick="setActiveTab(this, 'analytics')">
+                <div class="bottom-nav-icon">📈</div>
+                <span class="bottom-nav-label">Analytics</span>
+            </div>
+        </nav>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast">
+            <span id="toastMessage">Welcome to Blaze Sports Intel!</span>
+        </div>
+    </div>
+
+    <script>
+        // Blaze Sports Intelligence Mobile App Controller
+        class BlazeSportsApp {
+            constructor() {
+                this.currentSection = 'home';
+                this.activeLeague = 'all';
+                this.charts = {};
+                this.data = {
+                    teams: new Map(),
+                    scores: new Map(),
+                    players: new Map(),
+                    standings: new Map(),
+                    schedule: new Map()
+                };
+                this.initialize();
+            }
+
+            async initialize() {
+                this.showToast('🔥 Blaze Sports Intel Loading...');
+                await this.loadInitialData();
+                this.initializeCharts();
+                this.setupEventListeners();
+                this.showToast('⚡ Championship Intelligence Ready!');
+                console.log('🔥 Blaze Sports Intelligence Mobile App Ready');
+            }
+
+            async loadInitialData() {
+                // Load comprehensive sports data
+                await Promise.all([
+                    this.loadMLBData(),
+                    this.loadNFLData(),
+                    this.loadNBAData(),
+                    this.loadNCAAData(),
+                    this.loadLiveScores()
+                ]);
+            }
+
+            // =================
+            // DATA LOADING METHODS
+            // =================
+
+            async loadMLBData() {
+                // MLB Teams with comprehensive data
+                const mlbTeams = [
+                    // AL East
+                    { id: 'bal', name: 'Baltimore Orioles', logo: 'BAL', league: 'mlb', division: 'AL East', record: '101-61', wins: 101, losses: 61, avg: '.287', era: '3.86', rank: 1 },
+                    { id: 'tb', name: 'Tampa Bay Rays', logo: 'TB', league: 'mlb', division: 'AL East', record: '99-63', wins: 99, losses: 63, avg: '.259', era: '3.78', rank: 2 },
+                    { id: 'tor', name: 'Toronto Blue Jays', logo: 'TOR', league: 'mlb', division: 'AL East', record: '89-73', wins: 89, losses: 73, avg: '.267', era: '4.21', rank: 3 },
+                    { id: 'bos', name: 'Boston Red Sox', logo: 'BOS', league: 'mlb', division: 'AL East', record: '78-84', wins: 78, losses: 84, avg: '.245', era: '4.65', rank: 4 },
+                    { id: 'nyy', name: 'New York Yankees', logo: 'NYY', league: 'mlb', division: 'AL East', record: '82-80', wins: 82, losses: 80, avg: '.251', era: '4.32', rank: 5 },
+
+                    // AL Central
+                    { id: 'min', name: 'Minnesota Twins', logo: 'MIN', league: 'mlb', division: 'AL Central', record: '87-75', wins: 87, losses: 75, avg: '.271', era: '4.18', rank: 1 },
+                    { id: 'det', name: 'Detroit Tigers', logo: 'DET', league: 'mlb', division: 'AL Central', record: '78-84', wins: 78, losses: 84, avg: '.238', era: '4.51', rank: 2 },
+                    { id: 'cle', name: 'Cleveland Guardians', logo: 'CLE', league: 'mlb', division: 'AL Central', record: '76-86', wins: 76, losses: 86, avg: '.254', era: '4.43', rank: 3 },
+                    { id: 'cws', name: 'Chicago White Sox', logo: 'CWS', league: 'mlb', division: 'AL Central', record: '61-101', wins: 61, losses: 101, avg: '.221', era: '5.12', rank: 4 },
+                    { id: 'kc', name: 'Kansas City Royals', logo: 'KC', league: 'mlb', division: 'AL Central', record: '56-106', wins: 56, losses: 106, avg: '.239', era: '5.33', rank: 5 },
+
+                    // AL West
+                    { id: 'hou', name: 'Houston Astros', logo: 'HOU', league: 'mlb', division: 'AL West', record: '90-72', wins: 90, losses: 72, avg: '.268', era: '3.95', rank: 1 },
+                    { id: 'tex', name: 'Texas Rangers', logo: 'TEX', league: 'mlb', division: 'AL West', record: '90-72', wins: 90, losses: 72, avg: '.267', era: '4.22', rank: 2 },
+                    { id: 'sea', name: 'Seattle Mariners', logo: 'SEA', league: 'mlb', division: 'AL West', record: '88-74', wins: 88, losses: 74, avg: '.233', era: '3.44', rank: 3 },
+                    { id: 'laa', name: 'Los Angeles Angels', logo: 'LAA', league: 'mlb', division: 'AL West', record: '73-89', wins: 73, losses: 89, avg: '.248', era: '4.58', rank: 4 },
+                    { id: 'oak', name: 'Oakland Athletics', logo: 'OAK', league: 'mlb', division: 'AL West', record: '50-112', wins: 50, losses: 112, avg: '.217', era: '5.84', rank: 5 },
+
+                    // NL East
+                    { id: 'atl', name: 'Atlanta Braves', logo: 'ATL', league: 'mlb', division: 'NL East', record: '104-58', wins: 104, losses: 58, avg: '.285', era: '3.57', rank: 1 },
+                    { id: 'phi', name: 'Philadelphia Phillies', logo: 'PHI', league: 'mlb', division: 'NL East', record: '90-72', wins: 90, losses: 72, avg: '.277', era: '4.04', rank: 2 },
+                    { id: 'mia', name: 'Miami Marlins', logo: 'MIA', league: 'mlb', division: 'NL East', record: '84-78', wins: 84, losses: 78, avg: '.238', era: '4.15', rank: 3 },
+                    { id: 'nym', name: 'New York Mets', logo: 'NYM', league: 'mlb', division: 'NL East', record: '75-87', wins: 75, losses: 87, avg: '.244', era: '4.71', rank: 4 },
+                    { id: 'wsh', name: 'Washington Nationals', logo: 'WSH', league: 'mlb', division: 'NL East', record: '71-91', wins: 71, losses: 91, avg: '.257', era: '4.89', rank: 5 },
+
+                    // NL Central
+                    { id: 'mil', name: 'Milwaukee Brewers', logo: 'MIL', league: 'mlb', division: 'NL Central', record: '92-70', wins: 92, losses: 70, avg: '.254', era: '3.98', rank: 1 },
+                    { id: 'chc', name: 'Chicago Cubs', logo: 'CHC', league: 'mlb', division: 'NL Central', record: '83-79', wins: 83, losses: 79, avg: '.267', era: '4.21', rank: 2 },
+                    { id: 'cin', name: 'Cincinnati Reds', logo: 'CIN', league: 'mlb', division: 'NL Central', record: '82-80', wins: 82, losses: 80, avg: '.251', era: '4.56', rank: 3 },
+                    { id: 'stl', name: 'St. Louis Cardinals', logo: 'STL', league: 'mlb', division: 'NL Central', record: '71-91', wins: 71, losses: 91, avg: '.239', era: '4.73', rank: 4 },
+                    { id: 'pit', name: 'Pittsburgh Pirates', logo: 'PIT', league: 'mlb', division: 'NL Central', record: '76-86', wins: 76, losses: 86, avg: '.241', era: '4.91', rank: 5 },
+
+                    // NL West
+                    { id: 'lad', name: 'Los Angeles Dodgers', logo: 'LAD', league: 'mlb', division: 'NL West', record: '100-62', wins: 100, losses: 62, avg: '.279', era: '3.81', rank: 1 },
+                    { id: 'sd', name: 'San Diego Padres', logo: 'SD', league: 'mlb', division: 'NL West', record: '82-80', wins: 82, losses: 80, avg: '.240', era: '4.35', rank: 2 },
+                    { id: 'sf', name: 'San Francisco Giants', logo: 'SF', league: 'mlb', division: 'NL West', record: '79-83', wins: 79, losses: 83, avg: '.248', era: '4.21', rank: 3 },
+                    { id: 'ari', name: 'Arizona Diamondbacks', logo: 'ARI', league: 'mlb', division: 'NL West', record: '84-78', wins: 84, losses: 78, avg: '.267', era: '4.73', rank: 4 },
+                    { id: 'col', name: 'Colorado Rockies', logo: 'COL', league: 'mlb', division: 'NL West', record: '59-103', wins: 59, losses: 103, avg: '.245', era: '5.56', rank: 5 }
+                ];
+
+                mlbTeams.forEach(team => {
+                    this.data.teams.set(team.id, team);
+                });
+            }
+
+            async loadNFLData() {
+                // NFL Teams with comprehensive data - all 32 teams
+                const nflTeams = [
+                    // AFC East
+                    { id: 'buf', name: 'Buffalo Bills', logo: 'BUF', league: 'nfl', division: 'AFC East', record: '14-3', wins: 14, losses: 3, pointsFor: 482, pointsAgainst: 289, rank: 1 },
+                    { id: 'mia', name: 'Miami Dolphins', logo: 'MIA', league: 'nfl', division: 'AFC East', record: '11-6', wins: 11, losses: 6, pointsFor: 404, pointsAgainst: 364, rank: 2 },
+                    { id: 'ne', name: 'New England Patriots', logo: 'NE', league: 'nfl', division: 'AFC East', record: '8-9', wins: 8, losses: 9, pointsFor: 326, pointsAgainst: 387, rank: 3 },
+                    { id: 'nyj', name: 'New York Jets', logo: 'NYJ', league: 'nfl', division: 'AFC East', record: '7-10', wins: 7, losses: 10, pointsFor: 279, pointsAgainst: 371, rank: 4 },
+
+                    // AFC North
+                    { id: 'bal', name: 'Baltimore Ravens', logo: 'BAL', league: 'nfl', division: 'AFC North', record: '13-4', wins: 13, losses: 4, pointsFor: 456, pointsAgainst: 298, rank: 1 },
+                    { id: 'cin', name: 'Cincinnati Bengals', logo: 'CIN', league: 'nfl', division: 'AFC North', record: '9-8', wins: 9, losses: 8, pointsFor: 387, pointsAgainst: 376, rank: 2 },
+                    { id: 'cle', name: 'Cleveland Browns', logo: 'CLE', league: 'nfl', division: 'AFC North', record: '11-6', wins: 11, losses: 6, pointsFor: 386, pointsAgainst: 307, rank: 3 },
+                    { id: 'pit', name: 'Pittsburgh Steelers', logo: 'PIT', league: 'nfl', division: 'AFC North', record: '9-8', wins: 9, losses: 8, pointsFor: 321, pointsAgainst: 317, rank: 4 },
+
+                    // AFC South
+                    { id: 'jax', name: 'Jacksonville Jaguars', logo: 'JAX', league: 'nfl', division: 'AFC South', record: '9-8', wins: 9, losses: 8, pointsFor: 404, pointsAgainst: 379, rank: 1 },
+                    { id: 'ten', name: 'Tennessee Titans', logo: 'TEN', league: 'nfl', division: 'AFC South', record: '6-11', wins: 6, losses: 11, pointsFor: 329, pointsAgainst: 408, rank: 2 },
+                    { id: 'ind', name: 'Indianapolis Colts', logo: 'IND', league: 'nfl', division: 'AFC South', record: '9-8', wins: 9, losses: 8, pointsFor: 352, pointsAgainst: 365, rank: 3 },
+                    { id: 'hou', name: 'Houston Texans', logo: 'HOU', league: 'nfl', division: 'AFC South', record: '3-13-1', wins: 3, losses: 13, pointsFor: 289, pointsAgainst: 427, rank: 4 },
+
+                    // AFC West
+                    { id: 'kc', name: 'Kansas City Chiefs', logo: 'KC', league: 'nfl', division: 'AFC West', record: '14-3', wins: 14, losses: 3, pointsFor: 496, pointsAgainst: 319, rank: 1 },
+                    { id: 'lv', name: 'Las Vegas Raiders', logo: 'LV', league: 'nfl', division: 'AFC West', record: '6-11', wins: 6, losses: 11, pointsFor: 334, pointsAgainst: 399, rank: 2 },
+                    { id: 'lac', name: 'Los Angeles Chargers', logo: 'LAC', league: 'nfl', division: 'AFC West', record: '10-7', wins: 10, losses: 7, pointsFor: 384, pointsAgainst: 345, rank: 3 },
+                    { id: 'den', name: 'Denver Broncos', logo: 'DEN', league: 'nfl', division: 'AFC West', record: '8-9', wins: 8, losses: 9, pointsFor: 387, pointsAgainst: 359, rank: 4 },
+
+                    // NFC East
+                    { id: 'phi', name: 'Philadelphia Eagles', logo: 'PHI', league: 'nfl', division: 'NFC East', record: '14-3', wins: 14, losses: 3, pointsFor: 477, pointsAgainst: 344, rank: 1 },
+                    { id: 'dal', name: 'Dallas Cowboys', logo: 'DAL', league: 'nfl', division: 'NFC East', record: '12-5', wins: 12, losses: 5, pointsFor: 467, pointsAgainst: 342, rank: 2 },
+                    { id: 'nyg', name: 'New York Giants', logo: 'NYG', league: 'nfl', division: 'NFC East', record: '9-7-1', wins: 9, losses: 7, pointsFor: 365, pointsAgainst: 371, rank: 3 },
+                    { id: 'wsh', name: 'Washington Commanders', logo: 'WAS', league: 'nfl', division: 'NFC East', record: '8-8-1', wins: 8, losses: 8, pointsFor: 321, pointsAgainst: 343, rank: 4 },
+
+                    // NFC North
+                    { id: 'min', name: 'Minnesota Vikings', logo: 'MIN', league: 'nfl', division: 'NFC North', record: '13-4', wins: 13, losses: 4, pointsFor: 424, pointsAgainst: 427, rank: 1 },
+                    { id: 'det', name: 'Detroit Lions', logo: 'DET', league: 'nfl', division: 'NFC North', record: '9-8', wins: 9, losses: 8, pointsFor: 463, pointsAgainst: 393, rank: 2 },
+                    { id: 'gb', name: 'Green Bay Packers', logo: 'GB', league: 'nfl', division: 'NFC North', record: '8-9', wins: 8, losses: 9, pointsFor: 370, pointsAgainst: 371, rank: 3 },
+                    { id: 'chi', name: 'Chicago Bears', logo: 'CHI', league: 'nfl', division: 'NFC North', record: '3-14', wins: 3, losses: 14, pointsFor: 326, pointsAgainst: 459, rank: 4 },
+
+                    // NFC South
+                    { id: 'tb', name: 'Tampa Bay Buccaneers', logo: 'TB', league: 'nfl', division: 'NFC South', record: '8-9', wins: 8, losses: 9, pointsFor: 313, pointsAgainst: 324, rank: 1 },
+                    { id: 'car', name: 'Carolina Panthers', logo: 'CAR', league: 'nfl', division: 'NFC South', record: '7-10', wins: 7, losses: 10, pointsFor: 347, pointsAgainst: 392, rank: 2 },
+                    { id: 'atl', name: 'Atlanta Falcons', logo: 'ATL', league: 'nfl', division: 'NFC South', record: '7-10', wins: 7, losses: 10, pointsFor: 365, pointsAgainst: 378, rank: 3 },
+                    { id: 'no', name: 'New Orleans Saints', logo: 'NO', league: 'nfl', division: 'NFC South', record: '7-10', wins: 7, losses: 10, pointsFor: 330, pointsAgainst: 387, rank: 4 },
+
+                    // NFC West
+                    { id: 'sf', name: 'San Francisco 49ers', logo: 'SF', league: 'nfl', division: 'NFC West', record: '13-4', wins: 13, losses: 4, pointsFor: 505, pointsAgainst: 384, rank: 1 },
+                    { id: 'sea', name: 'Seattle Seahawks', logo: 'SEA', league: 'nfl', division: 'NFC West', record: '9-8', wins: 9, losses: 8, pointsFor: 407, pointsAgainst: 401, rank: 2 },
+                    { id: 'lar', name: 'Los Angeles Rams', logo: 'LAR', league: 'nfl', division: 'NFC West', record: '5-12', wins: 5, losses: 12, pointsFor: 273, pointsAgainst: 384, rank: 3 },
+                    { id: 'ari', name: 'Arizona Cardinals', logo: 'ARI', league: 'nfl', division: 'NFC West', record: '4-13', wins: 4, losses: 13, pointsFor: 326, pointsAgainst: 442, rank: 4 }
+                ];
+
+                nflTeams.forEach(team => {
+                    this.data.teams.set(team.id + '_nfl', team);
+                });
+            }
+
+            async loadNBAData() {
+                // NBA Teams with comprehensive data - all 30 teams
+                const nbaTeams = [
+                    // Eastern Conference - Atlantic
+                    { id: 'bos', name: 'Boston Celtics', logo: 'BOS', league: 'nba', division: 'Atlantic', record: '64-18', wins: 64, losses: 18, ppg: 120.6, opp_ppg: 109.2, rank: 1 },
+                    { id: 'phi', name: 'Philadelphia 76ers', logo: 'PHI', league: 'nba', division: 'Atlantic', record: '47-35', wins: 47, losses: 35, ppg: 114.4, opp_ppg: 112.4, rank: 2 },
+                    { id: 'nyk', name: 'New York Knicks', logo: 'NYK', league: 'nba', division: 'Atlantic', record: '50-32', wins: 50, losses: 32, ppg: 112.8, opp_ppg: 107.8, rank: 3 },
+                    { id: 'bkn', name: 'Brooklyn Nets', logo: 'BKN', league: 'nba', division: 'Atlantic', record: '32-50', wins: 32, losses: 50, ppg: 112.6, opp_ppg: 118.8, rank: 4 },
+                    { id: 'tor', name: 'Toronto Raptors', logo: 'TOR', league: 'nba', division: 'Atlantic', record: '25-57', wins: 25, losses: 57, ppg: 106.9, opp_ppg: 115.6, rank: 5 },
+
+                    // Eastern Conference - Central
+                    { id: 'mil', name: 'Milwaukee Bucks', logo: 'MIL', league: 'nba', division: 'Central', record: '49-33', wins: 49, losses: 33, ppg: 117.1, opp_ppg: 114.5, rank: 1 },
+                    { id: 'cle', name: 'Cleveland Cavaliers', logo: 'CLE', league: 'nba', division: 'Central', record: '51-31', wins: 51, losses: 31, ppg: 114.1, opp_ppg: 108.5, rank: 2 },
+                    { id: 'ind', name: 'Indiana Pacers', logo: 'IND', league: 'nba', division: 'Central', record: '47-35', wins: 47, losses: 35, ppg: 123.3, opp_ppg: 120.2, rank: 3 },
+                    { id: 'chi', name: 'Chicago Bulls', logo: 'CHI', league: 'nba', division: 'Central', record: '39-43', wins: 39, losses: 43, ppg: 108.4, opp_ppg: 113.4, rank: 4 },
+                    { id: 'det', name: 'Detroit Pistons', logo: 'DET', league: 'nba', division: 'Central', record: '14-68', wins: 14, losses: 68, ppg: 103.2, opp_ppg: 118.9, rank: 5 },
+
+                    // Eastern Conference - Southeast
+                    { id: 'mia', name: 'Miami Heat', logo: 'MIA', league: 'nba', division: 'Southeast', record: '46-36', wins: 46, losses: 36, ppg: 110.5, opp_ppg: 109.8, rank: 1 },
+                    { id: 'orl', name: 'Orlando Magic', logo: 'ORL', league: 'nba', division: 'Southeast', record: '47-35', wins: 47, losses: 35, ppg: 110.5, opp_ppg: 104.8, rank: 2 },
+                    { id: 'atl', name: 'Atlanta Hawks', logo: 'ATL', league: 'nba', division: 'Southeast', record: '36-46', wins: 36, losses: 46, ppg: 118.6, opp_ppg: 119.6, rank: 3 },
+                    { id: 'was', name: 'Washington Wizards', logo: 'WAS', league: 'nba', division: 'Southeast', record: '15-67', wins: 15, losses: 67, ppg: 113.4, opp_ppg: 124.2, rank: 4 },
+                    { id: 'cha', name: 'Charlotte Hornets', logo: 'CHA', league: 'nba', division: 'Southeast', record: '21-61', wins: 21, losses: 61, ppg: 108.9, opp_ppg: 119.8, rank: 5 },
+
+                    // Western Conference - Northwest
+                    { id: 'okc', name: 'Oklahoma City Thunder', logo: 'OKC', league: 'nba', division: 'Northwest', record: '57-25', wins: 57, losses: 25, ppg: 120.1, opp_ppg: 111.0, rank: 1 },
+                    { id: 'den', name: 'Denver Nuggets', logo: 'DEN', league: 'nba', division: 'Northwest', record: '57-25', wins: 57, losses: 25, ppg: 114.9, opp_ppg: 110.9, rank: 2 },
+                    { id: 'min', name: 'Minnesota Timberwolves', logo: 'MIN', league: 'nba', division: 'Northwest', record: '56-26', wins: 56, losses: 26, ppg: 109.5, opp_ppg: 106.5, rank: 3 },
+                    { id: 'por', name: 'Portland Trail Blazers', logo: 'POR', league: 'nba', division: 'Northwest', record: '21-61', wins: 21, losses: 61, ppg: 107.4, opp_ppg: 118.0, rank: 4 },
+                    { id: 'uta', name: 'Utah Jazz', logo: 'UTA', league: 'nba', division: 'Northwest', record: '31-51', wins: 31, losses: 51, ppg: 113.4, opp_ppg: 118.4, rank: 5 },
+
+                    // Western Conference - Pacific
+                    { id: 'lac', name: 'Los Angeles Clippers', logo: 'LAC', league: 'nba', division: 'Pacific', record: '52-30', wins: 52, losses: 30, ppg: 115.6, opp_ppg: 111.9, rank: 1 },
+                    { id: 'lal', name: 'Los Angeles Lakers', logo: 'LAL', league: 'nba', division: 'Pacific', record: '47-35', wins: 47, losses: 35, ppg: 114.8, opp_ppg: 113.9, rank: 2 },
+                    { id: 'sac', name: 'Sacramento Kings', logo: 'SAC', league: 'nba', division: 'Pacific', record: '46-36', wins: 46, losses: 36, ppg: 118.6, opp_ppg: 118.2, rank: 3 },
+                    { id: 'gsw', name: 'Golden State Warriors', logo: 'GSW', league: 'nba', division: 'Pacific', record: '46-36', wins: 46, losses: 36, ppg: 115.0, opp_ppg: 114.5, rank: 4 },
+                    { id: 'phx', name: 'Phoenix Suns', logo: 'PHX', league: 'nba', division: 'Pacific', record: '49-33', wins: 49, losses: 33, ppg: 113.4, opp_ppg: 109.0, rank: 5 },
+
+                    // Western Conference - Southwest
+                    { id: 'dal', name: 'Dallas Mavericks', logo: 'DAL', league: 'nba', division: 'Southwest', record: '50-32', wins: 50, losses: 32, ppg: 117.9, opp_ppg: 115.6, rank: 1 },
+                    { id: 'no', name: 'New Orleans Pelicans', logo: 'NO', league: 'nba', division: 'Southwest', record: '49-33', wins: 49, losses: 33, ppg: 112.3, opp_ppg: 112.4, rank: 2 },
+                    { id: 'mem', name: 'Memphis Grizzlies', logo: 'MEM', league: 'nba', division: 'Southwest', record: '27-55', wins: 27, losses: 55, ppg: 113.1, opp_ppg: 119.9, rank: 3 },
+                    { id: 'hou', name: 'Houston Rockets', logo: 'HOU', league: 'nba', division: 'Southwest', record: '41-41', wins: 41, losses: 41, ppg: 110.5, opp_ppg: 109.7, rank: 4 },
+                    { id: 'sa', name: 'San Antonio Spurs', logo: 'SA', league: 'nba', division: 'Southwest', record: '22-60', wins: 22, losses: 60, ppg: 111.6, opp_ppg: 118.8, rank: 5 }
+                ];
+
+                nbaTeams.forEach(team => {
+                    this.data.teams.set(team.id + '_nba', team);
+                });
+            }
+
+            async loadNCAAData() {
+                // NCAA Football Teams (Top 25 + Notable Programs)
+                const ncaaFootballTeams = [
+                    { id: 'uga', name: 'Georgia Bulldogs', logo: 'UGA', league: 'ncaa-football', conference: 'SEC', record: '15-0', wins: 15, losses: 0, ppg: 42.3, opp_ppg: 13.8, rank: 1 },
+                    { id: 'mich', name: 'Michigan Wolverines', logo: 'MICH', league: 'ncaa-football', conference: 'Big Ten', record: '15-0', wins: 15, losses: 0, ppg: 35.1, opp_ppg: 11.3, rank: 2 },
+                    { id: 'tcu', name: 'TCU Horned Frogs', logo: 'TCU', league: 'ncaa-football', conference: 'Big 12', record: '13-2', wins: 13, losses: 2, ppg: 40.8, opp_ppg: 29.6, rank: 3 },
+                    { id: 'tex', name: 'Texas Longhorns', logo: 'TEX', league: 'ncaa-football', conference: 'Big 12', record: '12-2', wins: 12, losses: 2, ppg: 42.8, opp_ppg: 18.2, rank: 4 },
+                    { id: 'ala', name: 'Alabama Crimson Tide', logo: 'ALA', league: 'ncaa-football', conference: 'SEC', record: '11-2', wins: 11, losses: 2, ppg: 35.6, opp_ppg: 20.1, rank: 5 },
+                    { id: 'tam', name: 'Texas A&M Aggies', logo: 'A&M', league: 'ncaa-football', conference: 'SEC', record: '10-3', wins: 10, losses: 3, ppg: 38.5, opp_ppg: 22.1, rank: 8 },
+                    { id: 'lsu', name: 'LSU Tigers', logo: 'LSU', league: 'ncaa-football', conference: 'SEC', record: '10-4', wins: 10, losses: 4, ppg: 33.2, opp_ppg: 24.6, rank: 12 },
+                    { id: 'ole', name: 'Ole Miss Rebels', logo: 'MISS', league: 'ncaa-football', conference: 'SEC', record: '11-2', wins: 11, losses: 2, ppg: 40.1, opp_ppg: 17.8, rank: 9 },
+                    { id: 'ark', name: 'Arkansas Razorbacks', logo: 'ARK', league: 'ncaa-football', conference: 'SEC', record: '7-6', wins: 7, losses: 6, ppg: 26.8, opp_ppg: 28.3, rank: 25 },
+                    { id: 'fla', name: 'Florida Gators', logo: 'FLA', league: 'ncaa-football', conference: 'SEC', record: '6-7', wins: 6, losses: 7, ppg: 24.8, opp_ppg: 25.1, rank: 'NR' },
+                    { id: 'ten', name: 'Tennessee Volunteers', logo: 'TENN', league: 'ncaa-football', conference: 'SEC', record: '11-2', wins: 11, losses: 2, ppg: 40.3, opp_ppg: 22.4, rank: 6 },
+                    { id: 'scar', name: 'South Carolina Gamecocks', logo: 'SC', league: 'ncaa-football', conference: 'SEC', record: '8-5', wins: 8, losses: 5, ppg: 31.2, opp_ppg: 23.8, rank: 20 },
+                    { id: 'kent', name: 'Kentucky Wildcats', logo: 'UK', league: 'ncaa-football', conference: 'SEC', record: '7-6', wins: 7, losses: 6, ppg: 24.6, opp_ppg: 23.1, rank: 'NR' },
+                    { id: 'miss', name: 'Mississippi State Bulldogs', logo: 'MSU', league: 'ncaa-football', conference: 'SEC', record: '9-4', wins: 9, losses: 4, ppg: 29.3, opp_ppg: 24.7, rank: 18 },
+                    { id: 'van', name: 'Vanderbilt Commodores', logo: 'VAN', league: 'ncaa-football', conference: 'SEC', record: '5-7', wins: 5, losses: 7, ppg: 23.4, opp_ppg: 32.1, rank: 'NR' },
+                    { id: 'aub', name: 'Auburn Tigers', logo: 'AUB', league: 'ncaa-football', conference: 'SEC', record: '5-7', wins: 5, losses: 7, ppg: 21.8, opp_ppg: 27.4, rank: 'NR' },
+                    { id: 'mou', name: 'Missouri Tigers', logo: 'MIZ', league: 'ncaa-football', conference: 'SEC', record: '6-7', wins: 6, losses: 7, ppg: 25.9, opp_ppg: 31.2, rank: 'NR' }
+                ];
+
+                ncaaFootballTeams.forEach(team => {
+                    this.data.teams.set(team.id + '_ncaa_fb', team);
+                });
+
+                // NCAA Baseball Teams (Top Programs)
+                const ncaaBaseballTeams = [
+                    { id: 'lsu', name: 'LSU Tigers', logo: 'LSU', league: 'ncaa-baseball', conference: 'SEC', record: '40-23', wins: 40, losses: 23, avg: '.287', era: '4.21', rank: 1 },
+                    { id: 'fla', name: 'Florida Gators', logo: 'FLA', league: 'ncaa-baseball', conference: 'SEC', record: '52-15', wins: 52, losses: 15, avg: '.304', era: '3.86', rank: 2 },
+                    { id: 'tex', name: 'Texas Longhorns', logo: 'TEX', league: 'ncaa-baseball', conference: 'Big 12', record: '50-15', wins: 50, losses: 15, avg: '.298', era: '3.92', rank: 3 },
+                    { id: 'stan', name: 'Stanford Cardinal', logo: 'STAN', league: 'ncaa-baseball', conference: 'Pac-12', record: '47-17', wins: 47, losses: 17, avg: '.289', era: '3.74', rank: 4 },
+                    { id: 'van', name: 'Vanderbilt Commodores', logo: 'VAN', league: 'ncaa-baseball', conference: 'SEC', record: '49-18', wins: 49, losses: 18, avg: '.292', era: '3.88', rank: 5 },
+                    { id: 'tam', name: 'Texas A&M Aggies', logo: 'A&M', league: 'ncaa-baseball', conference: 'SEC', record: '43-19', wins: 43, losses: 19, avg: '.281', era: '4.05', rank: 6 },
+                    { id: 'ole', name: 'Ole Miss Rebels', logo: 'MISS', league: 'ncaa-baseball', conference: 'SEC', record: '37-23', wins: 37, losses: 23, avg: '.276', era: '4.18', rank: 7 },
+                    { id: 'ark', name: 'Arkansas Razorbacks', logo: 'ARK', league: 'ncaa-baseball', conference: 'SEC', record: '44-20', wins: 44, losses: 20, avg: '.283', era: '3.97', rank: 8 },
+                    { id: 'uga', name: 'Georgia Bulldogs', logo: 'UGA', league: 'ncaa-baseball', conference: 'SEC', record: '35-26', wins: 35, losses: 26, avg: '.271', era: '4.32', rank: 12 },
+                    { id: 'aub', name: 'Auburn Tigers', logo: 'AUB', league: 'ncaa-baseball', conference: 'SEC', record: '38-25', wins: 38, losses: 25, avg: '.278', era: '4.15', rank: 15 }
+                ];
+
+                ncaaBaseballTeams.forEach(team => {
+                    this.data.teams.set(team.id + '_ncaa_bb', team);
+                });
+            }
+
+            async loadLiveScores() {
+                // Simulated live scores with realistic data
+                const liveScores = [
+                    // MLB Games
+                    { id: 'mlb_1', league: 'mlb', homeTeam: 'Cardinals', awayTeam: 'Brewers', homeScore: 7, awayScore: 4, inning: '9th', status: 'Final' },
+                    { id: 'mlb_2', league: 'mlb', homeTeam: 'Dodgers', awayTeam: 'Giants', homeScore: 3, awayScore: 2, inning: '7th', status: 'Live' },
+                    { id: 'mlb_3', league: 'mlb', homeTeam: 'Yankees', awayTeam: 'Red Sox', homeScore: 8, awayScore: 6, inning: '8th', status: 'Live' },
+                    { id: 'mlb_4', league: 'mlb', homeTeam: 'Astros', awayTeam: 'Rangers', homeScore: 5, awayScore: 3, inning: '6th', status: 'Live' },
+
+                    // NFL Games (Sunday)
+                    { id: 'nfl_1', league: 'nfl', homeTeam: 'Titans', awayTeam: 'Colts', homeScore: 21, awayScore: 14, quarter: '3rd', status: 'Live' },
+                    { id: 'nfl_2', league: 'nfl', homeTeam: 'Chiefs', awayTeam: 'Raiders', homeScore: 28, awayScore: 10, quarter: '4th', status: 'Live' },
+                    { id: 'nfl_3', league: 'nfl', homeTeam: 'Cowboys', awayTeam: 'Eagles', homeScore: 24, awayScore: 31, quarter: 'Final', status: 'Final' },
+
+                    // NBA Games
+                    { id: 'nba_1', league: 'nba', homeTeam: 'Grizzlies', awayTeam: 'Lakers', homeScore: 95, awayScore: 102, quarter: '4th', status: 'Live' },
+                    { id: 'nba_2', league: 'nba', homeTeam: 'Celtics', awayTeam: 'Heat', homeScore: 118, awayScore: 112, quarter: 'Final', status: 'Final' },
+
+                    // NCAA Games
+                    { id: 'ncaa_1', league: 'ncaa', homeTeam: 'Texas', awayTeam: 'Oklahoma', homeScore: 35, awayScore: 21, quarter: '4th', status: 'Live' },
+                    { id: 'ncaa_2', league: 'ncaa', homeTeam: 'Alabama', awayTeam: 'LSU', homeScore: 42, awayScore: 28, quarter: 'Final', status: 'Final' }
+                ];
+
+                liveScores.forEach(game => {
+                    this.data.scores.set(game.id, game);
+                });
+            }
+
+            // =================
+            // RENDERING METHODS
+            // =================
+
+            renderTeams(league = 'all') {
+                const container = document.getElementById('teamsContainer');
+                if (!container) return;
+
+                let teams = Array.from(this.data.teams.values());
+
+                if (league !== 'all') {
+                    teams = teams.filter(team => team.league === league);
+                }
+
+                if (teams.length === 0) {
+                    container.innerHTML = '<div class="text-center" style="padding: 40px; color: rgba(255,255,255,0.6);">No teams found for this league</div>';
+                    return;
+                }
+
+                const teamsHTML = teams.slice(0, 20).map(team => `
+                    <div class="team-card" onclick="showTeamDetails('${team.id}')">
+                        <div class="team-header">
+                            <div class="team-logo">${team.logo}</div>
+                            <div class="team-info">
+                                <h3>${team.name}</h3>
+                                <div class="team-conference">${team.league.toUpperCase()} • ${team.division || team.conference}</div>
+                            </div>
+                        </div>
+                        <div class="team-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">${team.record}</div>
+                                <div class="stat-label">Record</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${team.ppg || team.avg || team.pointsFor || 'N/A'}</div>
+                                <div class="stat-label">${team.league === 'mlb' ? 'AVG' : team.league === 'nfl' ? 'PF' : 'PPG'}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">${team.opp_ppg || team.era || team.pointsAgainst || 'N/A'}</div>
+                                <div class="stat-label">${team.league === 'mlb' ? 'ERA' : team.league === 'nfl' ? 'PA' : 'OPP'}</div>
+                            </div>
+                        </div>
+                        <button class="team-action">View Full Profile</button>
+                    </div>
+                `).join('');
+
+                container.innerHTML = teamsHTML;
+            }
+
+            renderLiveScores(league = 'all') {
+                const container = document.getElementById('liveGamesContainer');
+                if (!container) return;
+
+                let games = Array.from(this.data.scores.values());
+
+                if (league !== 'all') {
+                    games = games.filter(game => game.league === league);
+                }
+
+                if (games.length === 0) {
+                    container.innerHTML = '<div class="text-center" style="padding: 40px; color: rgba(255,255,255,0.6);">No live games available</div>';
+                    return;
+                }
+
+                const scoresHTML = games.map(game => `
+                    <div class="game-card" onclick="showGameDetails('${game.id}')">
+                        <div class="game-header">
+                            <div class="game-teams">${game.awayTeam} @ ${game.homeTeam}</div>
+                            <div class="game-status ${game.status.toLowerCase()}">${game.status}</div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="game-score">${game.awayScore} - ${game.homeScore}</div>
+                            <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem;">
+                                ${game.inning || game.quarter || ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                container.innerHTML = scoresHTML;
+            }
+
+            renderPlayers() {
+                const container = document.getElementById('playersContainer');
+                if (!container) return;
+
+                // Simulated elite players from different sports
+                const elitePlayers = [
+                    { name: 'Nolan Arenado', team: 'Cardinals', position: '3B', league: 'MLB', avg: '.293', hr: 26, rbi: 93 },
+                    { name: 'Derrick Henry', team: 'Titans', position: 'RB', league: 'NFL', yards: 1247, tds: 13, ypc: 4.2 },
+                    { name: 'Ja Morant', team: 'Grizzlies', position: 'PG', league: 'NBA', ppg: 25.1, apg: 8.1, rpg: 5.9 },
+                    { name: 'Quinn Ewers', team: 'Texas', position: 'QB', league: 'NCAA', comp: '67.8%', tds: 31, yards: 3479 },
+                    { name: 'Paul Skenes', team: 'LSU', position: 'P', league: 'NCAA', era: '1.69', so: 209, whip: 0.96 },
+                    { name: 'Caleb Williams', team: 'USC', position: 'QB', league: 'NCAA', comp: '68.5%', tds: 30, yards: 3633 }
+                ];
+
+                const playersHTML = elitePlayers.map(player => `
+                    <div class="player-card" onclick="showPlayerDetails('${player.name}')">
+                        <div class="player-header">
+                            <div class="player-avatar">${player.name.charAt(0)}</div>
+                            <div class="player-info">
+                                <h4>${player.name}</h4>
+                                <div class="player-position">${player.team} • ${player.position} • ${player.league}</div>
+                            </div>
+                        </div>
+                        <div class="player-stats-grid">
+                            ${Object.keys(player).filter(key => !['name', 'team', 'position', 'league'].includes(key)).slice(0, 4).map(stat => `
+                                <div class="stat-item">
+                                    <div class="stat-value">${player[stat]}</div>
+                                    <div class="stat-label">${stat.toUpperCase()}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+
+                container.innerHTML = playersHTML;
+            }
+
+            renderStandings(league = 'mlb') {
+                const container = document.getElementById('standingsContainer');
+                if (!container) return;
+
+                let teams = Array.from(this.data.teams.values()).filter(team => team.league === league);
+
+                if (teams.length === 0) {
+                    container.innerHTML = '<div class="text-center" style="padding: 40px; color: rgba(255,255,255,0.6);">No standings available</div>';
+                    return;
+                }
+
+                // Group by division
+                const divisions = {};
+                teams.forEach(team => {
+                    const division = team.division || team.conference || 'Unknown';
+                    if (!divisions[division]) divisions[division] = [];
+                    divisions[division].push(team);
+                });
+
+                // Sort teams within each division by rank
+                Object.keys(divisions).forEach(division => {
+                    divisions[division].sort((a, b) => a.rank - b.rank);
+                });
+
+                const standingsHTML = Object.keys(divisions).map(division => `
+                    <div class="chart-container">
+                        <div class="chart-title">${division}</div>
+                        <div style="padding: 20px;">
+                            ${divisions[division].map((team, index) => `
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer;" onclick="showTeamDetails('${team.id}')">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="color: var(--championship-gold); font-weight: 800; width: 20px;">${index + 1}</div>
+                                        <div style="width: 32px; height: 32px; background: var(--gradient-primary); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;">${team.logo}</div>
+                                        <div>
+                                            <div style="font-weight: 700; color: var(--ghost-white);">${team.name}</div>
+                                            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">${team.record}</div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <div style="color: var(--championship-gold); font-weight: 800;">${team.wins}-${team.losses}</div>
+                                        <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">W-L</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+
+                container.innerHTML = standingsHTML;
+            }
+
+            renderSchedule(league = 'all') {
+                const container = document.getElementById('scheduleContainer');
+                if (!container) return;
+
+                // Simulated upcoming games
+                const upcomingGames = [
+                    { date: '2025-09-26', time: '7:00 PM', homeTeam: 'Cardinals', awayTeam: 'Cubs', league: 'mlb', tv: 'FOX Sports' },
+                    { date: '2025-09-26', time: '12:00 PM', homeTeam: 'Titans', awayTeam: 'Jaguars', league: 'nfl', tv: 'CBS' },
+                    { date: '2025-09-26', time: '8:00 PM', homeTeam: 'Grizzlies', awayTeam: 'Warriors', league: 'nba', tv: 'TNT' },
+                    { date: '2025-09-27', time: '11:00 AM', homeTeam: 'Texas', awayTeam: 'TCU', league: 'ncaa', tv: 'ESPN' },
+                    { date: '2025-09-27', time: '2:30 PM', homeTeam: 'LSU', awayTeam: 'Alabama', league: 'ncaa', tv: 'CBS' },
+                    { date: '2025-09-27', time: '6:00 PM', homeTeam: 'Astros', awayTeam: 'Angels', league: 'mlb', tv: 'MLB Network' },
+                    { date: '2025-09-28', time: '7:30 PM', homeTeam: 'Lakers', awayTeam: 'Clippers', league: 'nba', tv: 'ESPN' }
+                ];
+
+                let filteredGames = league === 'all' ? upcomingGames : upcomingGames.filter(game => game.league === league);
+
+                const scheduleHTML = filteredGames.map(game => `
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-teams">${game.awayTeam} @ ${game.homeTeam}</div>
+                            <div style="color: var(--championship-gold); font-size: 0.85rem; font-weight: 700;">${game.league.toUpperCase()}</div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                            <div style="color: rgba(255,255,255,0.8);">${game.date} • ${game.time}</div>
+                            <div style="color: rgba(255,255,255,0.6); font-size: 0.8rem;">${game.tv}</div>
+                        </div>
+                    </div>
+                `).join('');
+
+                container.innerHTML = scheduleHTML || '<div class="text-center" style="padding: 40px; color: rgba(255,255,255,0.6);">No upcoming games</div>';
+            }
+
+            initializeCharts() {
+                // Performance Trends Chart
+                const performanceCtx = document.getElementById('performanceChart');
+                if (performanceCtx) {
+                    this.charts.performance = new Chart(performanceCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                            datasets: [{
+                                label: 'Cardinals',
+                                data: [78, 82, 85, 88, 91, 94],
+                                borderColor: '#BF5700',
+                                backgroundColor: 'rgba(191, 87, 0, 0.1)',
+                                tension: 0.4
+                            }, {
+                                label: 'Titans',
+                                data: [72, 75, 79, 82, 85, 87],
+                                borderColor: '#FFD700',
+                                backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                                tension: 0.4
+                            }, {
+                                label: 'Longhorns',
+                                data: [88, 90, 87, 92, 95, 97],
+                                borderColor: '#39FF14',
+                                backgroundColor: 'rgba(57, 255, 20, 0.1)',
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    labels: { color: '#FFD700' }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: false,
+                                    min: 60,
+                                    max: 100,
+                                    grid: { color: 'rgba(255,255,255,0.1)' },
+                                    ticks: { color: '#FFD700' }
+                                },
+                                x: {
+                                    grid: { color: 'rgba(255,255,255,0.1)' },
+                                    ticks: { color: '#FFD700' }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // League Comparison Chart
+                const comparisonCtx = document.getElementById('comparisonChart');
+                if (comparisonCtx) {
+                    this.charts.comparison = new Chart(comparisonCtx, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Offense', 'Defense', 'Special Teams', 'Depth', 'Coaching', 'Experience'],
+                            datasets: [{
+                                label: 'Texas Teams Avg',
+                                data: [85, 78, 82, 79, 88, 84],
+                                borderColor: '#BF5700',
+                                backgroundColor: 'rgba(191, 87, 0, 0.2)'
+                            }, {
+                                label: 'SEC Teams Avg',
+                                data: [88, 85, 79, 86, 90, 87],
+                                borderColor: '#4B0082',
+                                backgroundColor: 'rgba(75, 0, 130, 0.2)'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    labels: { color: '#FFD700' }
+                                }
+                            },
+                            scales: {
+                                r: {
+                                    beginAtZero: true,
+                                    max: 100,
+                                    grid: { color: 'rgba(255,255,255,0.2)' },
+                                    angleLines: { color: 'rgba(255,255,255,0.2)' },
+                                    ticks: { color: '#FFD700', backdropColor: 'transparent' }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // =================
+            // EVENT HANDLERS
+            // =================
+
+            setupEventListeners() {
+                // Initial data load
+                setTimeout(() => {
+                    this.loadTeams('all');
+                    this.filterByLeague('all');
+                    this.renderPlayers();
+                    this.loadStandings('mlb');
+                    this.loadSchedule('all');
+                }, 500);
+            }
+
+            // =================
+            // PUBLIC METHODS (called from HTML)
+            // =================
+
+            loadTeams(league) {
+                this.updateActiveButton('.teams-grid', league);
+                this.renderTeams(league);
+                this.showToast(`📊 ${league.toUpperCase()} teams loaded`);
+            }
+
+            filterByLeague(league) {
+                this.activeLeague = league;
+                this.updateActiveButton('.live-games', league);
+                this.renderLiveScores(league);
+                this.showToast(`🔥 ${league === 'all' ? 'All' : league.toUpperCase()} scores updated`);
+            }
+
+            loadStandings(league) {
+                this.updateActiveButton('#standings', league);
+                this.renderStandings(league);
+                this.showToast(`🏆 ${league.toUpperCase()} standings loaded`);
+            }
+
+            loadSchedule(league) {
+                this.updateActiveButton('#schedule', league);
+                this.renderSchedule(league);
+                this.showToast(`📅 ${league === 'all' ? 'All' : league.toUpperCase()} schedule loaded`);
+            }
+
+            updateActiveButton(parentSelector, activeValue) {
+                const parent = document.querySelector(parentSelector);
+                if (!parent) return;
+
+                const buttons = parent.parentElement.querySelectorAll('.league-btn');
+                buttons.forEach(btn => {
+                    btn.classList.toggle('active', btn.textContent.toLowerCase() === activeValue || (activeValue === 'all' && btn.textContent.toLowerCase() === 'all'));
+                });
+            }
+
+            showToast(message) {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toastMessage');
+                if (toast && toastMessage) {
+                    toastMessage.textContent = message;
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 2000);
+                }
+            }
+        }
+
+        // =================
+        // NAVIGATION FUNCTIONS
+        // =================
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const navOverlay = document.getElementById('navOverlay');
+            const menuToggle = document.getElementById('menuToggle');
+
+            navMenu.classList.toggle('open');
+            navOverlay.classList.toggle('active');
+            menuToggle.textContent = navMenu.classList.contains('open') ? '×' : '☰';
+        }
+
+        function navigateTo(section) {
+            app.currentSection = section;
+
+            // Update active nav item
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.toggle('active', item.getAttribute('href') === `#${section}`);
+            });
+
+            // Scroll to section
+            const element = document.getElementById(section);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Close menu on mobile
+            toggleMenu();
+
+            app.showToast(`⚡ Navigated to ${section.toUpperCase()}`);
+        }
+
+        function setActiveTab(element, section) {
+            // Update active bottom nav item
+            const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+            bottomNavItems.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+
+            // Navigate to section
+            if (section === 'more') {
+                toggleMenu();
+            } else {
+                const targetElement = document.getElementById(section);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+
+        // =================
+        // DETAIL VIEW FUNCTIONS
+        // =================
+
+        function showTeamDetails(teamId) {
+            const team = window.app.data.teams.get(teamId);
+            if (team) {
+                app.showToast(`📊 Loading ${team.name} details...`);
+                // In a real app, this would navigate to a detailed team page
+                console.log('Team details:', team);
+            }
+        }
+
+        function showGameDetails(gameId) {
+            const game = window.app.data.scores.get(gameId);
+            if (game) {
+                app.showToast(`🔥 Loading ${game.awayTeam} @ ${game.homeTeam} details...`);
+                // In a real app, this would show game details modal
+                console.log('Game details:', game);
+            }
+        }
+
+        function showPlayerDetails(playerName) {
+            app.showToast(`⭐ Loading ${playerName} profile...`);
+            // In a real app, this would navigate to player profile
+            console.log('Player details:', playerName);
+        }
+
+        // =================
+        // APP INITIALIZATION
+        // =================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.app = new BlazeSportsApp();
+
+            // Expose methods globally for HTML onclick handlers
+            window.loadTeams = (league) => app.loadTeams(league);
+            window.filterByLeague = (league) => app.filterByLeague(league);
+            window.loadStandings = (league) => app.loadStandings(league);
+            window.loadSchedule = (league) => app.loadSchedule(league);
+
+            console.log('🔥 Blaze Sports Intelligence Mobile App Ready');
+        });
+
+        // Load Advanced Sports Analytics
+        const script = document.createElement('script');
+        script.src = 'js/advanced-sports-analytics.js';
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>

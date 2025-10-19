@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Intelligence Dashboard | Blaze Intelligence</title>
+    <meta name="description" content="Real-time executive intelligence with live API metrics, neural consciousness controls, and championship-level analytics.">
+    
+    <!-- Enhanced Executive Styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --burnt-orange: #BF5700;
+            --sec-crimson: #9B2222;
+            --texas-sky-blue: #9BCBEB;
+            --friday-lights: #FFD700;
+            --stadium-black: #0A0A0A;
+            --executive-dark: #0b1326;
+            --executive-card: #111a31;
+            --executive-border: #233;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--executive-dark);
+            color: #e6e6e6;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Navigation */
+        .executive-nav {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--executive-border);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--burnt-orange), var(--texas-sky-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            text-decoration: none;
+            color: #e6e6e6;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover, .badge.active {
+            background: var(--burnt-orange);
+            color: white;
+            border-color: var(--burnt-orange);
+        }
+
+        /* Executive Container */
+        .executive-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .executive-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--friday-lights), var(--burnt-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .executive-subtitle {
+            font-size: 1.25rem;
+            color: var(--texas-sky-blue);
+            margin-bottom: 2rem;
+        }
+
+        /* Executive Cards Grid */
+        .executive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .executive-card {
+            background: var(--executive-card);
+            border: 1px solid var(--executive-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .executive-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--burnt-orange), var(--texas-sky-blue));
+        }
+
+        .executive-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--burnt-orange);
+            box-shadow: 0 10px 30px rgba(191, 87, 0, 0.3);
+        }
+
+        .card-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--texas-sky-blue);
+            margin-bottom: 1rem;
+        }
+
+        .card-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        /* Neural Control Panel */
+        .neural-control {
+            background: var(--executive-card);
+            border: 1px solid var(--executive-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .neural-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.75rem;
+            color: var(--friday-lights);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .neural-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .control-group {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--texas-sky-blue);
+        }
+
+        .control-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--executive-border);
+            outline: none;
+            -webkit-appearance: none;
+            margin-bottom: 1rem;
+        }
+
+        .control-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--burnt-orange);
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+        .control-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--burnt-orange);
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+        .neural-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .neural-stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(191, 87, 0, 0.1);
+            border-radius: 8px;
+            border: 1px solid var(--burnt-orange);
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--friday-lights);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Live Signals */
+        .signals-panel {
+            background: var(--executive-card);
+            border: 1px solid var(--executive-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .signals-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--texas-sky-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .signals-content {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            white-space: pre-wrap;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .status-online {
+            background: #00ff88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .status-warning {
+            background: var(--friday-lights);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .status-offline {
+            background: #ff6666;
+            box-shadow: 0 0 10px rgba(255, 102, 102, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .executive-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .executive-container {
+                padding: 1rem;
+            }
+
+            .executive-title {
+                font-size: 2rem;
+            }
+
+            .neural-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Navigation -->
+    <nav class="executive-nav">
+        <div class="brand">🔥 Blaze Intelligence</div>
+        <div class="nav-badges">
+            <a href="index-unified-hub.html" class="badge">🚀 Unified Hub</a>
+            <a href="enhanced-executive-dashboard.html" class="badge active">Executive</a>
+            <a href="market-intelligence-dashboard.html" class="badge">💰 Market Intel</a>
+            <a href="perfect-game.html" class="badge">⚾ Perfect Game</a>
+            <a href="sec-football.html" class="badge">🏈 SEC Football</a>
+            <a href="#" class="badge">📊 Live Analytics</a>
+            <a href="#" class="badge">🧠 AI Intelligence</a>
+            <a href="#" class="badge">📈 Status</a>
+        </div>
+    </nav>
+
+    <!-- Executive Container -->
+    <div class="executive-container">
+        <h1 class="executive-title">Executive Intelligence</h1>
+        <p class="executive-subtitle">Real-time insights for championship decision making. Track readiness, leverage, and risk to stay ahead.</p>
+
+        <!-- Executive Metrics Grid -->
+        <div class="executive-grid" id="executiveCards">
+            <!-- Cards will be populated by JavaScript -->
+        </div>
+
+        <!-- Neural Network Control System -->
+        <div class="neural-control">
+            <h2 class="neural-title">
+                <i class="fas fa-brain"></i>
+                Neural Consciousness Control
+            </h2>
+            <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem;">
+                Fine-tune the AI consciousness that powers Blaze Intelligence. Adjust neural sensitivity and prediction depth to explore how the model responds to different inputs.
+            </p>
+
+            <div class="neural-grid">
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Neural Sensitivity:</span>
+                        <span id="sensVal">75%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="75" class="control-slider" id="neuralSens" oninput="updateNeuralValue('sensVal', this.value)">
+
+                    <div class="control-label">
+                        <span>Prediction Depth:</span>
+                        <span id="depthVal">88%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="88" class="control-slider" id="predDepth" oninput="updateNeuralValue('depthVal', this.value)">
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>Processing Speed:</span>
+                        <span id="procVal">92%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="92" class="control-slider" id="procSpeed" oninput="updateNeuralValue('procVal', this.value)">
+
+                    <div class="control-label">
+                        <span>Pattern Recognition:</span>
+                        <span id="patVal">85%</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="85" class="control-slider" id="patRec" oninput="updateNeuralValue('patVal', this.value)">
+                </div>
+            </div>
+
+            <div class="neural-stats">
+                <div class="neural-stat">
+                    <div class="stat-value">25</div>
+                    <div class="stat-label">Active Neurons</div>
+                </div>
+                <div class="neural-stat">
+                    <div class="stat-value">15</div>
+                    <div class="stat-label">Synapses</div>
+                </div>
+                <div class="neural-stat">
+                    <div class="stat-value">94.6%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="neural-stat">
+                    <div class="stat-value">15ms</div>
+                    <div class="stat-label">Response Time</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Signals Panel -->
+        <div class="signals-panel">
+            <h2 class="signals-title">
+                <span class="status-indicator status-online"></span>
+                Recent Signals
+            </h2>
+            <div class="signals-content" id="liveSignals">Loading live intelligence...</div>
+        </div>
+    </div>
+
+    <script>
+        // Executive Dashboard Functions
+        async function loadExecutiveMetrics() {
+            const cards = document.getElementById('executiveCards');
+            
+            try {
+                // Try to fetch live data from API
+                const response = await fetch('/api/v2/metrics', {
+                    headers: { 'accept': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    const metrics = await response.json();
+                    
+                    const cardData = [
+                        {
+                            title: 'Readiness',
+                            value: (metrics?.cardinals?.readiness ?? 86.6).toFixed(1) + '%',
+                            description: 'System readiness for championship performance'
+                        },
+                        {
+                            title: 'Leverage',
+                            value: (metrics?.cardinals?.leverage ?? 2.85).toFixed(2),
+                            description: 'Strategic advantage multiplier'
+                        },
+                        {
+                            title: 'Risk Band',
+                            value: metrics?.cardinals?.risk_band ?? 'Balanced',
+                            description: 'Current risk assessment level'
+                        },
+                        {
+                            title: 'AI Consciousness',
+                            value: '87%',
+                            description: 'Neural network activity level'
+                        }
+                    ];
+                    
+                    renderCards(cardData);
+                    
+                    // Update signals
+                    const signals = metrics?.signals?.slice(0, 5)?.map(s => '• ' + s).join('\n') || 'System stable. All metrics nominal.';
+                    document.getElementById('liveSignals').textContent = signals;
+                    
+                } else {
+                    throw new Error('API not available');
+                }
+            } catch (error) {
+                // Fallback to demo data
+                const fallbackData = [
+                    {
+                        title: 'Readiness',
+                        value: '86.6%',
+                        description: 'System readiness for championship performance'
+                    },
+                    {
+                        title: 'Leverage',
+                        value: '2.85',
+                        description: 'Strategic advantage multiplier'
+                    },
+                    {
+                        title: 'Risk Band',
+                        value: 'Balanced',
+                        description: 'Current risk assessment level'
+                    },
+                    {
+                        title: 'AI Consciousness',
+                        value: '87%',
+                        description: 'Neural network activity level'
+                    }
+                ];
+                
+                renderCards(fallbackData);
+                
+                // Demo signals
+                const demoSignals = `• Cardinals readiness increased to 86.6% (+2.1%)
+• SEC championship probability models updated
+• Perfect Game tournament data synchronized
+• Texas high school analytics pipeline active
+• NIL market intelligence refreshed`;
+                
+                document.getElementById('liveSignals').textContent = demoSignals;
+            }
+        }
+
+        function renderCards(cardData) {
+            const cards = document.getElementById('executiveCards');
+            cards.innerHTML = cardData.map(card => `
+                <div class="executive-card">
+                    <div class="card-title">${card.title}</div>
+                    <div class="card-value">${card.value}</div>
+                    <div class="card-description">${card.description}</div>
+                </div>
+            `).join('');
+        }
+
+        function updateNeuralValue(elementId, value) {
+            document.getElementById(elementId).textContent = value + '%';
+            
+            // Simulate neural network response
+            if (elementId === 'sensVal') {
+                simulateNeuralUpdate('sensitivity', value);
+            }
+        }
+
+        function simulateNeuralUpdate(parameter, value) {
+            // Add visual feedback for neural adjustments
+            const signals = document.getElementById('liveSignals');
+            const currentTime = new Date().toLocaleTimeString();
+            const newSignal = `• [${currentTime}] Neural ${parameter} adjusted to ${value}%`;
+            
+            const currentContent = signals.textContent;
+            const lines = currentContent.split('\n');
+            lines.unshift(newSignal);
+            
+            // Keep only last 5 signals
+            if (lines.length > 5) {
+                lines.pop();
+            }
+            
+            signals.textContent = lines.join('\n');
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            loadExecutiveMetrics();
+            
+            // Refresh metrics every 30 seconds
+            setInterval(loadExecutiveMetrics, 30000);
+        });
+    </script>
+</body>
+</html>

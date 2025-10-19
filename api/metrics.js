@@ -59,8 +59,9 @@ async function getActiveSessions(env) {
 
 async function getAPICalls24h(env) {
   try {
-    if (env.ANALYTICS_CACHE) {
-      const cached = await env.ANALYTICS_CACHE.get('api_calls_24h');
+    const kv = env.ANALYTICS_CACHE || env.CACHE;
+    if (kv) {
+      const cached = await kv.get('api_calls_24h');
       return cached ? parseInt(cached) : 0;
     }
     return 'unavailable';
@@ -71,8 +72,9 @@ async function getAPICalls24h(env) {
 
 async function getDataFreshness(env) {
   try {
-    if (env.ANALYTICS_CACHE) {
-      const lastUpdate = await env.ANALYTICS_CACHE.get('last_data_update');
+    const kv = env.ANALYTICS_CACHE || env.CACHE;
+    if (kv) {
+      const lastUpdate = await kv.get('last_data_update');
       if (lastUpdate) {
         const age = Date.now() - new Date(lastUpdate).getTime();
         return Math.floor(age / (1000 * 60)); // Age in minutes
@@ -86,9 +88,10 @@ async function getDataFreshness(env) {
 
 async function getErrorRate(env) {
   try {
-    if (env.ANALYTICS_CACHE) {
-      const errors = await env.ANALYTICS_CACHE.get('error_count_24h');
-      const requests = await env.ANALYTICS_CACHE.get('request_count_24h');
+    const kv = env.ANALYTICS_CACHE || env.CACHE;
+    if (kv) {
+      const errors = await kv.get('error_count_24h');
+      const requests = await kv.get('request_count_24h');
       if (errors && requests) {
         return ((parseInt(errors) / parseInt(requests)) * 100).toFixed(2) + '%';
       }
@@ -113,8 +116,9 @@ async function getCardinalsLastUpdate(env) {
 
 async function getAPIResponseTimes(env) {
   try {
-    if (env.ANALYTICS_CACHE) {
-      const times = await env.ANALYTICS_CACHE.get('api_response_times');
+    const kv = env.ANALYTICS_CACHE || env.CACHE;
+    if (kv) {
+      const times = await kv.get('api_response_times');
       return times ? JSON.parse(times) : {};
     }
     return {};
@@ -125,8 +129,9 @@ async function getAPIResponseTimes(env) {
 
 async function getDataQualityScore(env) {
   try {
-    if (env.ANALYTICS_CACHE) {
-      const score = await env.ANALYTICS_CACHE.get('data_quality_score');
+    const kv = env.ANALYTICS_CACHE || env.CACHE;
+    if (kv) {
+      const score = await kv.get('data_quality_score');
       return score ? parseFloat(score) : 95.0;
     }
     return 95.0;
