@@ -41,13 +41,12 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            dist/
-            public/
-            *.html
-            *.js
-            *.css
-            _headers
-            _redirects
+            .
+            !.git
+            !.github
+            !node_modules
+            !.env*
+            !*.md
           retention-days: 1
 
   deploy:
@@ -56,6 +55,9 @@ jobs:
     needs: build
     # Only deploy on push to main/staging, not on PRs
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    
+    outputs:
+      deployment-url: ${{ steps.deploy.outputs.url }}
     
     environment:
       name: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
@@ -101,7 +103,7 @@ jobs:
       
       - name: Test deployment health
         run: |
-          URL="${{ needs.deploy.outputs.url }}"
+          URL="${{ needs.deploy.outputs.deployment-url }}"
           if [ -z "$URL" ]; then
             echo "⚠️  Deployment URL not available, skipping health check"
             exit 0

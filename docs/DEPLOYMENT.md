@@ -406,7 +406,7 @@ If you encounter issues not covered here:
 - [Cloudflare Pages Documentation](https://developers.cloudflare.com/pages/)
 - [Wrangler CLI Documentation](https://developers.cloudflare.com/workers/wrangler/)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [Main Deployment Guide](../DEPLOYMENT.md) - Alternative deployment methods
+- [Repository Root DEPLOYMENT.md](../DEPLOYMENT.md) - Alternative deployment methods (Netlify, Docker, etc.)
 
 ---
 
