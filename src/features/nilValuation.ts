@@ -423,7 +423,6 @@ function averageDefined(values: Array<number | null | undefined>): number | unde
 }
 
 // Utility functions imported from shared module
-function formatCurrency(value: number) {
   if (value >= 1_000_000) {
     return `${round(value / 1_000_000, 2)}M`;
   }
