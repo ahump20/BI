@@ -52,7 +52,9 @@
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.0",
     "redis": "^4.6.0",
-    "three": "^0.180.0"
+    "three": "^0.180.0",
+    "winston": "^3.18.3",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "keywords": [
     "sports",

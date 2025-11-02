@@ -20,7 +20,6 @@
 .env.development.local
 .env.test.local
 .env.production.local
-.env.example
 .mcp_env
 *.env
 
@@ -465,3 +464,4 @@ secrets.env
 # Platform-specific
 .vercel/
 wrangler.toml.local
+backups/
